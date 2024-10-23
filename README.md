@@ -1,7 +1,6 @@
 # Better code with Domain-Driven Design
 
-> 지속 가능하고 측정 가능한 코드로 성장하기 위해 인프라 자동화를 통합하여 선순환 구조로 운영합니다.
-
+## Tech Map
 ![](./.images/better-code-with-ddd..png)
 
 # Part 1. Domain-Driven Design
