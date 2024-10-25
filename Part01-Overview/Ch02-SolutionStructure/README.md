@@ -68,5 +68,7 @@
 - **이름**
   - {Corporation}: Corp
   - {Product}: Hello
-  - {Service}: Api, Master
+  - {Service}:
+    - Api
+    - Master
   - {UI}: 생략
