@@ -8,7 +8,7 @@
   │   │   ├───{Corporation}.{Product}.Framework
   │   │   └───{Corporation}.{Product}.Framework.Contracts
   │   └───Libraries
-  │       └───{Corporation}.{Product}.RabbitMQ
+  │       └───{Corporation}.{Product}.{Tech}                                    // 예. RabbitMQ, ...
   │
   │ # Backend 범주
   ├───Backend
@@ -44,18 +44,18 @@
               └───{Corporation}.{Product}.{UI}.Tests.Unit                       // Unit Test
 
 ```
-- 범주
+- **범주**
   - Abstraction: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
   - Backend
   - Frontend
-- 레이어
-  - 기술
+- **레이어**
+  - 기술 관심사
     - Adapter
-  - 비즈니스
+  - 비즈니스 관심사
     - Application: 비즈니스 흐름
     - Domain: 비즈니스 단위
-- 이름
-  - {Corporation}: 조직
+- **이름**
+  - {Corporation}: 회사
   - {Product}: 제품
   - {Service}: Backend 프로그램
   - {UI}: Frontend 프로그램
