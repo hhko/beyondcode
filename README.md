@@ -11,8 +11,12 @@
   - [ ] Ch 4. 테스트
   - [ ] Ch 5. 빌드
   - [ ] Ch 6. 배포
-- 전략 설계(※ 이미지 출처: [Strategic Design Explained](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*vJzxC1yeMtIKxuk-8Fj8YA.png))
-  ![](./.images/problemspace-and-solutionspace.png)
+
+<br/>
+
+- 전략 설계
+  ![](./.images/problemspace-and-solutionspace.png)  
+  ※ 이미지 출처: [Strategic Design Explained](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*vJzxC1yeMtIKxuk-8Fj8YA.png)
 
 <br/>
 
