@@ -1,11 +1,18 @@
 # Better code with Domain-Driven Design
 
-## Tech Map
+## 기술 맵
 ![](./.images/better-code-with-ddd..png)
 
-# Part 1. Domain-Driven Design
-![](./.images/problemspace-and-solutionspace.png)  
-※ 이미지 출처: [Strategic Design Explained](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*vJzxC1yeMtIKxuk-8Fj8YA.png)
+## 목차
+- **Part 1. 개요**
+  - [x] [Ch 1. 관심사의 분리](./Part01-Overview/Ch01-SoC/)
+  - [x] [Ch 2. 솔루션 구조](./Part01-Overview/Ch02-SolutionStructure/)
+  - [ ] Ch 3. 솔루션 설정
+  - [ ] Ch 4. 테스트
+  - [ ] Ch 5. 빌드
+  - [ ] Ch 6. 배포
+- 전략 설계(※ 이미지 출처: [Strategic Design Explained](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*vJzxC1yeMtIKxuk-8Fj8YA.png))
+  ![](./.images/problemspace-and-solutionspace.png)
 
 <br/>
 
