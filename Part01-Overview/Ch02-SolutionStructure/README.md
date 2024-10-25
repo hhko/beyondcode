@@ -1,5 +1,6 @@
 # 솔루션 구조
 
+## 솔루션 구조 템플릿
 ```shell
 {Product}.sln
   │ # Abstraction 범주: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
@@ -42,8 +43,8 @@
               ├───{Corporation}.{Product}.{UI}.Tests.Integration                // Integration 테스트
               ├───{Corporation}.{Product}.{UI}.Tests.Performance                // Performance 테스트
               └───{Corporation}.{Product}.{UI}.Tests.Unit                       // Unit Test
-
 ```
+
 - **범주**
   - Abstraction: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
   - Backend
@@ -61,8 +62,10 @@
   - {UI}: Frontend 프로그램
 
 
+## 솔루션 구조 예제
 ![](./.images/SolutionExplorer.png)
-- 예제
+
+- **이름**
   - {Corporation}: Corp
   - {Product}: Hello
   - {Service}: Api, Master
