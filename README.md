@@ -6,7 +6,7 @@
 ## 목차
 - **Part 1. 개요**
   - [x] [Ch 1. 관심사의 분리](./Part01-Overview/Ch01-SoC/)
-  - [ ] [Ch 2. 비즈니스 레이어 격리](./Part01-Overview/ch02-BizLayerIsolation/)
+  - [ ] [Ch 2. 비즈니스 레이어 격리](./Part01-Overview/Ch02-BizLayerIsolation/)
   - [x] [Ch 3. 솔루션 구조](./Part01-Overview/Ch03-SolutionStructure/)
   - [ ] Ch 4. 솔루션 설정
   - [ ] Ch 5. 테스트
