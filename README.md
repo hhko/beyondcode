@@ -5,20 +5,177 @@
 
 
 ## 목차
-- **Part 1. 개요**
-  - [x] [Ch 1. 관심사의 분리](./Part01-Overview/Ch01-SoC/)
-  - [ ] [Ch 2. 비즈니스 레이어 격리](./Part01-Overview/Ch02-BusinessLayerIsolation/)
-  - [x] [Ch 3. 솔루션 구조](./Part01-Overview/Ch03-SolutionStructure/)
-  - [ ] Ch 4. 솔루션 설정
-  - [ ] Ch 5. 테스트
-  - [ ] Ch 6. 빌드
-  - [ ] Ch 7. 배포
+- [x] [Ch 1. 아키텍처](#ch-1-아키텍처)
+- [x] [Ch 2. 관심사의 분리](#ch-2-관심사의-분리)
+- [ ] [Ch 3. 비즈니스 레이어 격리](#ch-3-비즈니스-레이어-격리)
+- [x] [Ch 4. 솔루션 구조](#ch-4-솔루션-구조)
+- [ ] Ch 5. 솔루션 설정
+- [ ] Ch 6. 테스트
+- [ ] Ch 7. 빌드
+- [ ] Ch 8. 배포
 
 <br/>
 
-- 전략 설계
-  ![](./.images/problemspace-and-solutionspace.png)  
-  ※ 이미지 출처: [Strategic Design Explained](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*vJzxC1yeMtIKxuk-8Fj8YA.png)
+# Ch 1. 아키텍처
+## 아키텍처 정의
+![](./.images/Architecture.png)
+
+## 아키텍처 범주
+![](./.images/Architecture.Category.png)
+
+```
+Application Architecture
+  ├─ Monolithic Architecture
+  ├─ Modular Monolithic Architecture
+  ├─ N-tier Architecture
+  └─ Microservices Architecture
+      ├─ Internal Architecture
+      │    └─ Layered Architecture
+      │         ├─ Hexagonal Architecture
+      │         ├─ Onion Architecture
+      │         ├─ Clean Architecture
+      │         └─ Vertical Slice Architecture
+      │
+      └─ External Architecture
+           └─ 외부 시스템 구성 아키텍처: 예. CNCF Landscape
+```
+- Microservices Architecture = Internal Architecture + External Architecture
+  ![](./.images/MicroservicesArchitecture.png)
+
+## 아키텍처 역사
+![](./.images/ArchitectureHistory.png)
+
+<br/>
+
+---
+
+<br/>
+
+# Ch 2. 관심사의 분리
+
+## 분리
+- **개발할 때**: 요구사항을 비즈니스와 기술 관심사로 분해합니다.
+- **운영할 때**: 로그를 비즈니스와 기술 관심사로 식별합니다.
+
+### 레이어
+- 분해하고 식별된 코드는 **레이어 단위**로 관리합니다.
+  - **기술 관심사**
+    - Adapter
+      - 입력: Known
+      - 출력
+        - Known
+        - Unknown: 부수 효과(Side Effects)
+  - **비즈니스 관심사**
+    - Application: 비즈니스 흐름
+    - Domain: 비즈니스 단위
+
+![](./.images/SoC.png)
+
+### 레이어 배치
+![](./.images/Layer.Alignment.png)
+
+<br/>
+
+---
+
+<br/>
+
+# Ch 3. 비즈니스 레이어 격리
+
+## 격리 전
+![](./.images/Layer.Isolation.Before.png)
+
+## 격리 후
+![](./.images/Layer.Isolation.After.png)
+- Strategy 패턴
+
+## 격리 고도화
+- TODO Mediator 패턴
+
+## 메시지 고도화
+- TODO Decorator 패턴
+
+<br/>
+
+---
+
+<br/>
+
+# Ch 4. 솔루션 구조
+- 예제 코드: [링크](./Ch04.SolutionStructure/)
+
+## 솔루션 구조 템플릿
+```shell
+{Product}.sln
+  │ # 범주 Abstraction: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
+  ├─Abstraction
+  │   ├─Frameworks
+  │   │   ├─{Corporation}.{Product}.Framework
+  │   │   └─{Corporation}.{Product}.Framework.Contracts
+  │   └─Libraries
+  │       └─{Corporation}.{Product}.{Tech}                                    // 예. RabbitMQ, ...
+  │
+  │ # 범주 Backend
+  ├─Backend
+  │   ├─{Service}
+  │   │   ├─Src
+  │   │   │   ├─{Corporation}.{Product}.{Service}                             // 호스트 프로젝트
+  │   │   │   ├─{Corporation}.{Product}.{Service}.Adapters.Infrastructure     // Adapter 레이어
+  │   │   │   ├─{Corporation}.{Product}.{Service}.Adapters.Persistence        // Adapter 레이어
+  │   │   │   ├─{Corporation}.{Product}.{Service}.Application                 // Application 레이어
+  │   │   │   └─{Corporation}.{Product}.{Service}.Domain                      // Domain 레이어
+  │   │   └─Tests
+  │   │       ├─{Corporation}.{Product}.{Service}.Tests.Integration           // Integration 테스트
+  │   │       ├─{Corporation}.{Product}.{Service}.Tests.Performance           // Performance 테스트
+  │   │       └─{Corporation}.{Product}.{Service}.Tests.Unit                  // Unit Test
+  │   ├─{Service}
+  │   │   ├─Src
+  │   │   └─Tests
+  │   └─Tests
+  │       └─{Corporation}.{Product}.Tests.E2E                                 // End to End 테스트
+  │
+  │ # 범주 Frontend
+  └─Frontend
+      └─{UI}
+          ├─Src
+          │   ├─{Corporation}.{Product}.{UI}                                  // 호스트 프로젝트
+          │   ├─{Corporation}.{Product}.{UI}.Adapters.Infrastructure          // Adapter 레이어
+          │   ├─{Corporation}.{Product}.{UI}.Adapters.Persistence             // Adapter 레이어
+          │   ├─{Corporation}.{Product}.{UI}.Application                      // Application 레이어
+          │   └─{Corporation}.{Product}.{UI}.Domain                           // Domain 레이어
+          └─Tests
+              ├─{Corporation}.{Product}.{UI}.Tests.Integration                // Integration 테스트
+              ├─{Corporation}.{Product}.{UI}.Tests.Performance                // Performance 테스트
+              └─{Corporation}.{Product}.{UI}.Tests.Unit                       // Unit Test
+```
+
+- **범주**
+  - Abstraction: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
+  - Backend
+  - Frontend
+- **레이어**
+  - 기술 관심사
+    - Adapter
+  - 비즈니스 관심사
+    - Application: 비즈니스 흐름
+    - Domain: 비즈니스 단위
+- **이름**
+  - {Corporation}: 회사
+  - {Product}: 제품
+  - {Service}: Backend 프로그램
+  - {UI}: Frontend 프로그램
+
+
+## 솔루션 구조 예
+![](./.images/SolutionExplorer.png)
+
+- **이름**
+  - {Corporation}: Corp
+  - {Product}: Hello
+  - {Service}:
+    - Api
+    - Master
+  - {UI}: 생략
 
 <br/>
 
