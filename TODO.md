@@ -60,3 +60,26 @@ Microsoft.CodeAnalysis.BannedApiAnalyzers
 
 - 패키지 버전 중앙화
   - https://devblogs.microsoft.com/dotnet/dotnet-upgrade-assistant-cpm-upgrade/
+
+<br/>
+
+- [API 게이트웨이, Domain-Driven Design example](https://github.com/draphyz/DDD)
+- [API 게이트웨이 패턴과 클라이언트-마이크로 서비스 간 직접 통신](https://learn.microsoft.com/ko-kr/dotnet/architecture/microservices/architect-microservice-container-applications/direct-client-to-microservice-communication-versus-the-api-gateway-pattern)
+- [Ocelot을 사용하여 API 게이트웨이 구현](https://learn.microsoft.com/ko-kr/dotnet/architecture/microservices/multi-container-microservice-net-applications/implement-api-gateways-with-ocelot)
+
+
+<br/>
+
+- Internal 패턴
+  - [ ] Option 패턴
+  - [ ] Strategy 패턴
+  - [ ] Mediator 패턴
+  - [ ] Decorator 패턴
+  - [ ] Repository 패턴
+  - [ ] UoW 패턴
+  - [ ] Retry 패턴
+  - [ ] Circuit Breaker 패턴
+- External 패턴
+  - [ ] API Gateway 패턴
+  - [ ] Cache
+  - [ ] Pub/Sub 패턴
