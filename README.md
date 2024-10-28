@@ -3,20 +3,24 @@
 ## 기술 맵
 ![](./.images/TechMap.png)
 
-
 ## 목차
-- [x] [Ch 1. 아키텍처](#ch-1-아키텍처)
-- [x] [Ch 2. 관심사의 분리](#ch-2-관심사의-분리)
-- [ ] [Ch 3. 비즈니스 레이어 격리](#ch-3-비즈니스-레이어-격리)
-- [x] [Ch 4. 솔루션 구조](#ch-4-솔루션-구조)
-- [ ] Ch 5. 솔루션 설정
-- [ ] Ch 6. 테스트
-- [ ] Ch 7. 빌드
-- [ ] Ch 8. 배포
+- Part 1. 관심사와 아키텍처
+  - [x] [Ch 01. 아키텍처](#ch-1-아키텍처)
+  - [x] [Ch 02. 관심사의 분리](#ch-2-관심사의-분리)
+  - [ ] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
+  - [ ] Ch 04. 레이어 테스트
+  - [ ] Ch 05. 레이어 격리 고도화
+- Part 2. 솔루션 구성
+  - [x] [Ch 06. 솔루션 구조](#ch-6-솔루션-구조)
+  - [ ] Ch 07. 솔루션 설정
+  - [ ] Ch 08. 테스트
+  - [ ] Ch 09. 빌드
+  - [ ] Ch 10. 배포
 
 <br/>
 
 # Ch 1. 아키텍처
+
 ## 아키텍처 정의
 ![](./.images/Architecture.png)
 
@@ -47,10 +51,6 @@ Application Architecture
 
 <br/>
 
----
-
-<br/>
-
 # Ch 2. 관심사의 분리
 
 ## 분리
@@ -76,11 +76,7 @@ Application Architecture
 
 <br/>
 
----
-
-<br/>
-
-# Ch 3. 비즈니스 레이어 격리
+# Ch 3. 레이어 격리
 
 ## 격리 전
 ![](./.images/Layer.Isolation.Before.png)
@@ -88,6 +84,18 @@ Application Architecture
 ## 격리 후
 ![](./.images/Layer.Isolation.After.png)
 - Strategy 패턴
+
+<br/>
+
+# Ch 4. 레이어 테스트
+
+![](./.images/Layer.Isolation.Test.png)
+- 단위 테스트
+- 통합 테스트
+
+<br/>
+
+# Ch 5. 레이어 격리 고도화
 
 ## 격리 고도화
 - TODO Mediator 패턴
@@ -97,12 +105,8 @@ Application Architecture
 
 <br/>
 
----
-
-<br/>
-
-# Ch 4. 솔루션 구조
-- 예제 코드: [링크](./Ch04.SolutionStructure/)
+# Ch 6. 솔루션 구조
+- 예제 코드: [링크](./Ch06.SolutionStructure/)
 
 ## 솔루션 구조 템플릿
 ```shell
