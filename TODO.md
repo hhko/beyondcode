@@ -71,14 +71,16 @@ Microsoft.CodeAnalysis.BannedApiAnalyzers
 <br/>
 
 - Internal 패턴
-  - [ ] Option 패턴
-  - [ ] Strategy 패턴
-  - [ ] Mediator 패턴
-  - [ ] Decorator 패턴
-  - [ ] Repository 패턴
+  - [x] Option 패턴
+  - [x] Strategy 패턴
+  - [x] Mediator 패턴
+  - [x] Decorator 패턴
+  - [x] CQRS 패턴
+  - [x] Repository 패턴
   - [ ] UoW 패턴
   - [ ] Retry 패턴
   - [ ] Circuit Breaker 패턴
+  - [ ] Saga 패턴
 - External 패턴
   - [ ] API Gateway 패턴
   - [ ] Cache

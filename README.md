@@ -100,8 +100,14 @@ Application Architecture
 ## 격리 고도화
 - TODO Mediator 패턴
 
+## 메시지 범주
+- TODO CQRS
+
 ## 메시지 고도화
 - TODO Decorator 패턴
+  - 로그
+  - 유효성 검사
+  - Command 트랜잭션
 
 <br/>
 
