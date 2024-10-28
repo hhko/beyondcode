@@ -55,3 +55,8 @@ Microsoft.CodeAnalysis.BannedApiAnalyzers
 - 전략 설계
   ![](./.images/problemspace-and-solutionspace.png)  
   ※ 이미지 출처: [Strategic Design Explained](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*vJzxC1yeMtIKxuk-8Fj8YA.png)
+
+<br/>
+
+- 패키지 버전 중앙화
+  - https://devblogs.microsoft.com/dotnet/dotnet-upgrade-assistant-cpm-upgrade/
