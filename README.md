@@ -100,16 +100,16 @@ Application Architecture
 ## 격리 고도화
 ![](./.images/Layer.Mediator.png)
 
-- Mediator은 컴파일 타임과 런타임 때 모두 호출자 정보를 숨길 수 있습니다.
-  | 패턴         | 컴파일 타임 | 런타임      |
-  | ---          | ---        | ---        |
-  | **Mediator** | Unknown    | _Unknown_  |
-  | **Strategy** | Unknown    | _Known_    |
+- Mediator은 컴파일 타임과 런타임 때 모두에서 호출자가 숨겨진 상태로 동작합니다.
+  | 구분            | Mediator | Strategy |
+  | ---            | ---       | ---      |
+  | **컴파일 타임** | Unknown   | Unknown  |
+  | **런타임**      | Unknown  | Known    |
 
 ## 메시지 고도화
 ![](./.images/Layer.Decorator.png)
 - Decorator 패턴: 입력 메시지에 대한 부가 기능을 추가합니다.
-  - 예. 메시지 처리 시작/종료 로그(수행 시간)
+  - 예. 메시지 처리 시간 로그
   - 예. 입력 메시지 유효성 검사
   - 예. Command 메시지일 때 트랜잭션 처리(CQRS 패턴)
 
