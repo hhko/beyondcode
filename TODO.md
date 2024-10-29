@@ -81,7 +81,10 @@ Microsoft.CodeAnalysis.BannedApiAnalyzers
   - [ ] Retry 패턴
   - [ ] Circuit Breaker 패턴
   - [ ] Saga 패턴
+  - [ ] Result 패턴
+  - [ ] Validation 패턴(Application Service)
 - External 패턴
   - [ ] API Gateway 패턴
+  - [ ] BFF(Backend For Frontend) 패턴
   - [ ] Cache
   - [ ] Pub/Sub 패턴
