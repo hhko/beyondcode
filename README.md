@@ -9,7 +9,7 @@
   - [x] [Ch 02. 관심사의 분리](#ch-2-관심사의-분리)
   - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
-  - [ ] Ch 05. 레이어 격리 고도화
+  - [x] [Ch 05. 레이어 격리 고도화](#ch-5-레이어-격리-고도화)
 - Part 2. 솔루션 구성
   - [x] [Ch 06. 솔루션 구조](#ch-6-솔루션-구조)
   - [ ] Ch 07. 솔루션 설정
@@ -61,10 +61,9 @@ Application Architecture
 - 분해하고 식별된 코드는 **레이어 단위**로 관리합니다.
   - **기술 관심사**
     - Adapter
-      - 입력: Known
-      - 출력
-        - Known
-        - Unknown: 부수 효과(Side Effects)
+      - Known 입력
+      - Known 출력
+      - Unknown 출력: 부수 효과(Side Effects)
   - **비즈니스 관심사**
     - Application: 비즈니스 흐름
     - Domain: 비즈니스 단위
@@ -80,6 +79,7 @@ Application Architecture
 
 ## 격리 전
 ![](./.images/Layer.Isolation.Before.png)
+![](2024-10-30-00-14-30.png)
 
 ## 격리 후
 ![](./.images/Layer.Isolation.After.png)
@@ -98,16 +98,15 @@ Application Architecture
 # Ch 5. 레이어 격리 고도화
 
 ## 격리 고도화
-- TODO Mediator 패턴
+![](./.images/Layer.Mediator.png)
 
-## 메시지 범주
-- TODO CQRS
+| 패턴         | 컴파일 타임 | 런타임      |
+| ---          | ---        | ---        |
+| **Mediator** | Unknown    | _Unknown_  |
+| **Strategy** | Unknown    | _Known_    |
 
 ## 메시지 고도화
-- TODO Decorator 패턴
-  - 로그
-  - 유효성 검사
-  - Command 트랜잭션
+![](./.images/Layer.Decorator.png)
 
 <br/>
 
