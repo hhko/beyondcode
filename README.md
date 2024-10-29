@@ -100,7 +100,7 @@ Application Architecture
 ## 격리 고도화
 ![](./.images/Layer.Mediator.png)
 
-- Mediator은 컴파일 타임과 런타임 때 모두에서 호출자가 숨겨진 상태로 동작합니다.
+- Mediator는 컴파일 타임과 런타임 모두에서 호출자 인스턴스가 드러나지 않게 메시지를 처리합니다
   | 구분            | Mediator | Strategy |
   | ---            | ---       | ---      |
   | **컴파일 타임** | Unknown   | Unknown  |
