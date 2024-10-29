@@ -10,9 +10,9 @@
   - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
   - [ ] Ch 05. 레이어 격리 고도화
-- Part 2. 솔루션 구성
+- Part 2. 솔루션
   - [x] [Ch 06. 솔루션 구조](#ch-6-솔루션-구조)
-  - [ ] Ch 07. 솔루션 설정
+  - [ ] [Ch 07. 솔루션 설정](#ch-7-솔루션-설정)
   - [ ] Ch 08. 테스트
   - [ ] Ch 09. 빌드
   - [ ] Ch 10. 배포
@@ -58,6 +58,8 @@ Application Architecture
 - **운영할 때**: 로그를 비즈니스와 기술 관심사로 식별합니다.
 
 ### 레이어
+![](./.images/SoC.png)
+
 - 분해하고 식별된 코드는 **레이어 단위**로 관리합니다.
   - **기술 관심사**
     - Adapter
@@ -68,8 +70,6 @@ Application Architecture
   - **비즈니스 관심사**
     - Application: 비즈니스 흐름
     - Domain: 비즈니스 단위
-
-![](./.images/SoC.png)
 
 ### 레이어 배치
 ![](./.images/Layer.Alignment.png)
@@ -166,6 +166,9 @@ Application Architecture
 - **레이어**
   - 기술 관심사
     - Adapter
+      - Adpaters.Infrastructure
+      - Adpaters.Persistence
+      - Adpaters.Presentation
   - 비즈니스 관심사
     - Application: 비즈니스 흐름
     - Domain: 비즈니스 단위
@@ -174,7 +177,6 @@ Application Architecture
   - {Product}: 제품
   - {Service}: Backend 프로그램
   - {UI}: Frontend 프로그램
-
 
 ## 솔루션 구조 예
 ![](./.images/SolutionExplorer.png)
@@ -186,6 +188,28 @@ Application Architecture
     - Api
     - Master
   - {UI}: 생략
+
+<br/>
+
+# Ch 7. 솔루션 설정
+
+## SDK 버전
+- TODO global.json
+
+## 빌드 설정 중앙화
+- TODO Directory.Build.prop
+- TODO ServerGarbageCollection
+
+## 패키지 버전 중앙화
+- TODO Directory.Package.prop
+
+## 코드 분석
+- 코드 스타일
+- 코드 품질
+
+## 컨테이너
+- TODO 이름 규칙
+- todo
 
 <br/>
 
