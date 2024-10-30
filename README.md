@@ -6,7 +6,7 @@
 ## 목차
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처](#ch-1-아키텍처)
-  - [x] [Ch 02. 관심사의 분리](#ch-2-관심사의-분리)
+  - [x] [Ch 02. 아키텍처 설계 원칙](#ch-2-아키텍처-설계-원칙)
   - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
   - [x] [Ch 05. 레이어 격리 고도화](#ch-5-레이어-격리-고도화)
@@ -16,8 +16,9 @@
   - [ ] Ch 08. 테스트
   - [ ] Ch 09. 빌드
   - [ ] Ch 10. 배포
-- Part 3. 전술 패턴
+- Part 3. Internal 전술 설계
   - TODO
+- Part 4. External 전술 설계
 
 <br/>
 
@@ -46,21 +47,21 @@ Application Architecture
            └─ 외부 시스템 구성 아키텍처: 예. CNCF Landscape
 ```
 - Microservices Architecture = Internal Architecture + External Architecture
-  ![](./.images/MicroservicesArchitecture.png)
+  ![](./.images/Architecture.Microservices.png)
 
 ## 아키텍처 역사
-![](./.images/ArchitectureHistory.png)
+![](./.images/Architecture.History.png)
 
 <br/>
 
-# Ch 2. 관심사의 분리
+# Ch 2. 아키텍처 설계 원칙
 
-## 분리
+## 관심사의 분리
 - **개발할 때**: 요구사항을 비즈니스와 기술 관심사로 분해합니다.
 - **운영할 때**: 로그를 비즈니스와 기술 관심사로 식별합니다.
 
 ### 레이어
-![](./.images/SoC.png)
+![](./.images/Layer.SoC.png)
 
 - 분해하고 식별된 코드는 **레이어 단위**로 관리합니다.
   - **기술 관심사**
@@ -92,8 +93,8 @@ Application Architecture
 # Ch 4. 레이어 테스트
 
 ![](./.images/Layer.Isolation.Test.png)
-- 단위 테스트
-- 통합 테스트
+- 단위 테스트: Biz. 관심사를 테스트합니다.
+- 통합 테스트: Tech. 관심사까지 포함된 Biz. 관심사를 테스트합니다.
 
 <br/>
 
@@ -102,7 +103,7 @@ Application Architecture
 ## 격리 고도화
 ![](./.images/Layer.Mediator.png)
 
-- Mediator는 컴파일 타임과 런타임 모두에서 호출자 인스턴스가 드러나지 않게 메시지를 처리합니다
+- Mediator 패턴은 Mediator을 통해 간접적으로 연결되므로 호출자 정보가 런타임에서도 숨겨져 있습니다.
   | 구분            | Mediator | Strategy |
   | ---            | ---       | ---      |
   | **컴파일 타임** | Unknown   | Unknown  |
@@ -110,10 +111,14 @@ Application Architecture
 
 ## 메시지 고도화
 ![](./.images/Layer.Decorator.png)
-- Decorator 패턴: 입력 메시지에 대한 부가 기능을 추가합니다.
+- Mediator 패턴은 Decorator 패턴과 조합하여 동적으로 새로운 메시지 기능을 추가할 수 있습니다.
   - 예. 메시지 처리 시간 로그
   - 예. 입력 메시지 유효성 검사
   - 예. Command 메시지일 때 트랜잭션 처리(CQRS 패턴)
+
+## 메시지 범주화
+![](./.images/Layer.CQRS.png)
+- Mediator 패턴은 CQRS 패턴과 조합하여 메시지를 Command와 Query 범주로 분류할 수 있습니다.
 
 <br/>
 
