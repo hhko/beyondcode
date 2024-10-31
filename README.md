@@ -6,7 +6,7 @@
 ## 목차
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처](#ch-1-아키텍처)
-  - [x] [Ch 02. 아키텍처 설계 원칙](#ch-2-아키텍처-설계-원칙)
+  - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
   - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
   - [x] [Ch 05. 레이어 격리 고도화](#ch-5-레이어-격리-고도화)
@@ -19,6 +19,9 @@
 - Part 3. Internal 전술 설계
   - TODO
 - Part 4. External 전술 설계
+  - TODO
+- Part 5. 전략 설계
+  - TODO
 
 <br/>
 
@@ -54,7 +57,16 @@ Application Architecture
 
 <br/>
 
-# Ch 2. 아키텍처 설계 원칙
+# Ch 2. 아키텍처 원칙
+> - [아키텍처 원칙](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles)
+>   - **Separation of concerns**
+>   - Encapsulation
+>   - Dependency inversion
+>   - Explicit dependencies
+>   - Single responsibility
+>   - Don't repeat yourself (DRY)
+>   - Persistence ignorance
+>   - Bounded contexts
 
 ## 관심사의 분리
 - **개발할 때**: 요구사항을 비즈니스와 기술 관심사로 분해합니다.
@@ -70,8 +82,8 @@ Application Architecture
       - Known 출력
       - Unknown 출력: 부수 효과(Side Effects)
   - **비즈니스 관심사**
-    - Application: 비즈니스 흐름
-    - Domain: 비즈니스 단위
+    - Application: 비즈니스 흐름(Biz. Flow)
+    - Domain: 비즈니스 단위(Biz. Unit)
 
 ### 레이어 배치
 ![](./.images/Layer.Alignment.png)
@@ -94,7 +106,7 @@ Application Architecture
 
 ![](./.images/Layer.Isolation.Test.png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
-- 통합 테스트: Tech. 관심사까지 포함된 Biz. 관심사를 테스트합니다.
+- 통합 테스트: Biz. 관심사를 Tech. 관심사까지 포함하여 테스트합니다.
 
 <br/>
 
@@ -119,6 +131,7 @@ Application Architecture
 ## 메시지 범주화
 ![](./.images/Layer.CQRS.png)
 - Mediator 패턴은 CQRS 패턴과 조합하여 메시지를 Command와 Query 범주로 분류할 수 있습니다.
+- TODO. Command vs. Query 시퀀스다이어그램
 
 <br/>
 
@@ -181,8 +194,8 @@ Application Architecture
       - Adpaters.Persistence
       - Adpaters.Presentation
   - 비즈니스 관심사
-    - Application: 비즈니스 흐름
-    - Domain: 비즈니스 단위
+    - Application: 비즈니스 흐름(Biz. Flow)
+    - Domain: 비즈니스 단위(Biz. Unit)
 - **이름**
   - {Corporation}: 회사
   - {Product}: 제품
