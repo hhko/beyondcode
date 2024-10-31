@@ -9,7 +9,8 @@
   - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
   - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
-  - [x] [Ch 05. 레이어 격리 고도화](#ch-5-레이어-격리-고도화)
+  - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
+  - [ ] Ch 06. 레이어 통합
 - Part 2. 솔루션
   - [x] [Ch 06. 솔루션 구조](#ch-6-솔루션-구조)
   - [ ] [Ch 07. 솔루션 설정](#ch-7-솔루션-설정)
@@ -60,13 +61,6 @@ Application Architecture
 # Ch 2. 아키텍처 원칙
 > - [아키텍처 원칙](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles)
 >   - **Separation of concerns**
->   - Encapsulation
->   - Dependency inversion
->   - Explicit dependencies
->   - Single responsibility
->   - Don't repeat yourself (DRY)
->   - Persistence ignorance
->   - Bounded contexts
 
 ## 관심사의 분리
 - **개발할 때**: 요구사항을 비즈니스와 기술 관심사로 분해합니다.
@@ -110,7 +104,7 @@ Application Architecture
 
 <br/>
 
-# Ch 5. 레이어 격리 고도화
+# Ch 5. 레이어 고도화
 
 ## 격리 고도화
 ![](./.images/Layer.Mediator.png)
@@ -132,6 +126,13 @@ Application Architecture
 ![](./.images/Layer.CQRS.png)
 - Mediator 패턴은 CQRS 패턴과 조합하여 메시지를 Command와 Query 범주로 분류할 수 있습니다.
 - TODO. Command vs. Query 시퀀스다이어그램
+
+| 구분 | Command | Query | 비고 |
+| ---  | --- | --- | --- |
+| DTO            | O  | X  | Query는 도메인 타입 생성 없이 바로 DTO 데이터을 반환합니다. |
+| Transaction    | O  | X  | Command만 데이터를 변경합니다.  |
+| SQL            | X  | O  | Query는 SQL을 사용하여 DTO 데이터을 바로 반환합니다.  |
+| SQL Complexity | ↓  | ↑  | Query는 Command에 비해 더 많은 Table을 대상으로 작업이 진행됩니다   |
 
 <br/>
 
