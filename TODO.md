@@ -83,6 +83,8 @@ Microsoft.CodeAnalysis.BannedApiAnalyzers
   - [ ] Saga 패턴
   - [ ] Result 패턴
   - [ ] Validation 패턴(Application Service)
+  - [ ] [REPR Pattern(Request-Endpoint-Response)](https://code-maze.com/aspnetcore-repr-request-endpoint-response-pattern/)
+  - [ ] Specification 패턴
 - External 패턴
   - [ ] API Gateway 패턴
   - [ ] BFF(Backend For Frontend) 패턴
