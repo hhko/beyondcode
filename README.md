@@ -1,4 +1,4 @@
-# Better code with Domain-Driven Design
+# _better_ **CODE** _with domain-driven design_
 
 ## 기술 맵
 ![](./.images/TechMap.png)
@@ -18,11 +18,11 @@
   - [ ] Ch 09. 빌드
   - [ ] Ch 10. 배포
 - Part 3. Internal 전술 설계
-  - TODO
+  - _TODO_
 - Part 4. External 전술 설계
-  - TODO
+  - _TODO_
 - Part 5. 전략 설계
-  - TODO
+  - _TODO_
 
 <br/>
 
@@ -66,7 +66,7 @@ Application Architecture
 - **개발할 때**: 요구사항을 비즈니스와 기술 관심사로 분해합니다.
 - **운영할 때**: 로그를 비즈니스와 기술 관심사로 식별합니다.
 
-### 레이어
+## 레이어
 ![](./.images/Layer.SoC.png)
 
 - 분해하고 식별된 코드는 **레이어 단위**로 관리합니다.
@@ -79,7 +79,7 @@ Application Architecture
     - Application: 비즈니스 흐름(Biz. Flow)
     - Domain: 비즈니스 단위(Biz. Unit)
 
-### 레이어 배치
+## 레이어 배치
 ![](./.images/Layer.Alignment.png)
 
 <br/>
@@ -124,15 +124,22 @@ Application Architecture
 
 ## 메시지 범주화
 ![](./.images/Layer.CQRS.png)
-- Mediator 패턴은 CQRS 패턴과 조합하여 메시지를 Command와 Query 범주로 분류할 수 있습니다.
-- TODO. Command vs. Query 시퀀스다이어그램
+- Mediator 패턴은 CQRS(Command and Query Responsibility Segregation) 패턴과 조합하여 메시지를 Command와 Query 범주로 분류할 수 있습니다.
 
-| 구분 | Command | Query | 비고 |
-| ---  | --- | --- | --- |
-| DTO            | O  | X  | Query는 도메인 타입 생성 없이 바로 DTO 데이터을 반환합니다. |
-| Transaction    | O  | X  | Command만 데이터를 변경합니다.  |
-| SQL            | X  | O  | Query는 SQL을 사용하여 DTO 데이터을 바로 반환합니다.  |
-| SQL Complexity | ↓  | ↑  | Query는 Command에 비해 더 많은 Table을 대상으로 작업이 진행됩니다   |
+## 메시지 흐름
+![](./.images/Layer.CQRS.Flow.png)
+
+| 구분 | Command | Query |
+| ---  | --- | --- |
+| DTO         | O  | X  |
+| Transaction | O  | X  |
+| SQL         | X  | O  |
+| SQL 복잡도   | ↓  | ↑  |
+
+- `DTO`: Query는 도메인 타입 생성 없이 바로 DTO 데이터을 반환합니다.
+- `Transaction`: Command만 데이터를 변경합니다.
+- `SQL`:  Query는 SQL을 사용하여 DTO 데이터을 바로 반환합니다.
+- `SQL 복잡도`: Query는 Command에 비해 더 많은 Table을 대상으로 작업이 진행됩니다.
 
 <br/>
 
@@ -147,8 +154,10 @@ Application Architecture
   │   ├─Frameworks
   │   │   ├─{Corporation}.{Product}.Framework
   │   │   └─{Corporation}.{Product}.Framework.Contracts
-  │   └─Libraries
-  │       └─{Corporation}.{Product}.{Tech}                                    // 예. RabbitMQ, ...
+  │   ├─Libraries
+  │   │   └─{Corporation}.{Product}.{Tech}                                    // 예. RabbitMQ, ...
+  │   └─Domains
+  │       └─{Corporation}.{Product}.Domain                                    // 공유 도메인, ...
   │
   │ # 범주 Backend
   ├─Backend
@@ -190,10 +199,9 @@ Application Architecture
   - Frontend
 - **레이어**
   - 기술 관심사
-    - Adapter
-      - Adpaters.Infrastructure
-      - Adpaters.Persistence
-      - Adpaters.Presentation
+    - Adapters.Infrastructure
+    - Adapters.Persistence
+    - Adapters.Presentation
   - 비즈니스 관심사
     - Application: 비즈니스 흐름(Biz. Flow)
     - Domain: 비즈니스 단위(Biz. Unit)
@@ -249,6 +257,9 @@ Application Architecture
 
 ## 클린 아키텍처 템플릿
 - [ ] [ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
+
+## DDD
+- [ ] [modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
 
 ## 테스트
 ### 아키텍처 테스트
