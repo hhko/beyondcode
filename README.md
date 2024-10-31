@@ -131,15 +131,14 @@ Application Architecture
 
 | 구분 | Command | Query |
 | ---  | --- | --- |
-| DTO         | O  | X  |
-| Transaction | O  | X  |
-| SQL         | X  | O  |
-| SQL 복잡도   | ↓  | ↑  |
+| 트랜잭션    | O  | X  |
+| 구현       | ORM  | SQL  |
+| DTO 변환   | O  | X  |
+| SQL 복잡도 | ↓  | ↑  |
 
-- `DTO`: Query는 도메인 타입 생성 없이 바로 DTO 데이터을 반환합니다.
-- `Transaction`: Command만 데이터를 변경합니다.
-- `SQL`:  Query는 SQL을 사용하여 DTO 데이터을 바로 반환합니다.
-- `SQL 복잡도`: Query는 Command에 비해 더 많은 Table을 대상으로 작업이 진행됩니다.
+- `트랜잭션`: Command은 데이터를 변경합니다.
+- `구현`:  Query는 성능 향상을 위해 SQL을 사용하여 DTO 데이터을 바로 반환합니다.
+- `SQL 복잡도`: Query는 Command에 비해 더 많은 Table 접근을 요구합니다.
 
 <br/>
 
