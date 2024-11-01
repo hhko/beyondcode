@@ -75,7 +75,7 @@ Microsoft.CodeAnalysis.BannedApiAnalyzers
   - [x] Strategy 패턴
   - [x] Mediator 패턴
   - [x] Decorator 패턴
-  - [x] CQRS 패턴
+  - [x] [CQRS 패턴](https://www.kamilgrzybek.com/blog/posts/simple-cqrs-implementation-raw-sql-ddd)
   - [x] Repository 패턴
   - [ ] UoW 패턴
   - [ ] Retry 패턴
@@ -85,8 +85,9 @@ Microsoft.CodeAnalysis.BannedApiAnalyzers
   - [ ] Validation 패턴(Application Service)
   - [ ] [REPR Pattern(Request-Endpoint-Response)](https://code-maze.com/aspnetcore-repr-request-endpoint-response-pattern/)
   - [ ] Specification 패턴
+  - [ ] [Outbox 패턴](https://www.kamilgrzybek.com/blog/posts/the-outbox-pattern)
 - External 패턴
-  - [ ] API Gateway 패턴
+  - [ ] API Gateway/Load Balancer 패턴
   - [ ] BFF(Backend For Frontend) 패턴
   - [ ] Cache
   - [ ] Pub/Sub 패턴
