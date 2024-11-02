@@ -5,28 +5,30 @@
 
 ## 목차
 - Part 1. 아키텍처
-  - [x] [Ch 01. 아키텍처](#ch-1-아키텍처)
+  - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
+- Part 2. Internal 아키텍처
   - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
   - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
   - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
   - [ ] Ch 06. 레이어 통합
-- Part 2. 솔루션
-  - [x] [Ch 06. 솔루션 구조](#ch-6-솔루션-구조)
-  - [ ] [Ch 07. 솔루션 설정](#ch-7-솔루션-설정)
-  - [ ] Ch 08. 테스트
-  - [ ] Ch 09. 빌드
-  - [ ] Ch 10. 배포
-- Part 3. Internal 전술 설계
+- Part 3. Internal 솔루션
+  - [x] [Ch 07. 솔루션 구조](#ch-7-솔루션-구조)
+  - [ ] [Ch 08. 솔루션 설정](#ch-8-솔루션-설정)
+  - [ ] Ch 09. 테스트
+  - [ ] Ch 10. 빌드
+  - [ ] Ch 11. 배포
+- Part 4. Internal 전술 설계
   - _TODO_
-- Part 4. External 전술 설계
+- Part 5. External 솔루션
+- Part 6. External 전술 설계
   - _TODO_
-- Part 5. 전략 설계
+- Part 7. 전략 설계
   - _TODO_
 
 <br/>
 
-# Ch 1. 아키텍처
+# Ch 1. 아키텍처 개요
 
 ## 아키텍처 정의
 ![](./.images/Architecture.png)
@@ -142,8 +144,8 @@ Application Architecture
 
 <br/>
 
-# Ch 6. 솔루션 구조
-- 예제 코드: [링크](./Ch06.SolutionStructure/)
+# Ch 7. 솔루션 구조
+- 예제 코드: [링크](./Ch07.SolutionStructure/)
 
 ## 솔루션 구조 템플릿
 ```shell
@@ -223,7 +225,7 @@ Application Architecture
 
 <br/>
 
-# Ch 7. 솔루션 설정
+# Ch 8. 솔루션 설정
 
 ## SDK 버전
 - TODO global.json
