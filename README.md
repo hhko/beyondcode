@@ -1,16 +1,18 @@
 # _better_ **CODE** _with domain-driven design_
 
-> 제 코드를 소개합니다.
+## 기술 맵
+![](./.images/TechMap.png)
+
+<br/>
 
 ## 목차
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
-  - [x] [Ch 02. 기술 맵](#ch-2-기술-맵)
-- Part 2. Internal 아키텍처
-  - [x] [Ch 03. 아키텍처 원칙](#ch-3-아키텍처-원칙)
-  - [x] [Ch 04. 레이어 격리](#ch-4-레이어-격리)
-  - [x] [Ch 05. 레이어 테스트](#ch-5-레이어-테스트)
-  - [x] [Ch 06. 레이어 고도화](#ch-6-레이어-고도화)
+  - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
+  - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
+  - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
+  - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
+  - [ ] Ch 06. 레이어 통합
 - Part 3. Internal 솔루션
   - [x] [Ch 07. 솔루션 구조](#ch-8-솔루션-구조)
   - [ ] [Ch 08. 솔루션 설정](#ch-9-솔루션-설정)
@@ -18,10 +20,9 @@
   - [ ] Ch 10. 빌드
   - [ ] Ch 11. 배포
 - Part 4. Internal 전술 설계
-- Part 5. External 아키텍처
-- Part 6. External 솔루션
-- Part 7. External 전술 설계
-- Part 8. 전략 설계
+- Part 5. External 솔루션
+- Part 6. External 전술 설계
+- Part 7. 전략 설계
 
 <br/>
 
@@ -70,18 +71,7 @@ Application Architecture
 
 <br/>
 
-## Ch 2. 기술 맵
-![](./.images/TechMap.png)
-
-<br/>
-
----
-
-<br/>
-
-# Part 2. Internal 아키텍처
-
-# Ch 3. 아키텍처 원칙
+# Ch 2. 아키텍처 원칙
 > - [아키텍처 원칙](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles)
 >   - **Separation of concerns**
 
@@ -107,7 +97,7 @@ Application Architecture
 
 <br/>
 
-# Ch 4. 레이어 격리
+# Ch 3. 레이어 격리
 
 ## 격리 전
 ![](./.images/Layer.Isolation.Before.png)
@@ -119,7 +109,7 @@ Application Architecture
 
 <br/>
 
-# Ch 5. 레이어 테스트
+# Ch 4. 레이어 테스트
 
 ![](./.images/Layer.Isolation.Test.png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
@@ -127,7 +117,7 @@ Application Architecture
 
 <br/>
 
-# Ch 6. 레이어 고도화
+# Ch 5. 레이어 고도화
 
 ## 격리 고도화
 ![](./.images/Layer.Mediator.png)
@@ -168,6 +158,11 @@ Application Architecture
 - `트랜잭션`: Command은 데이터를 변경하기 때문에 트랜잭셩이 필요합니다.
 - `구현`:  Query는 성능 향상을 위해 도메인 타임 변환 없이 SQL을 사용하여 DTO 데이터으로 바로 반환합니다.
 - `SQL 복잡도`: Query는 상대적으로 Command에 비해 더 많은 Table 접근을 요구합니다.
+
+<br/>
+
+# Ch 6. 레이어 통합
+- TODO
 
 <br/>
 
@@ -291,6 +286,7 @@ Application Architecture
 
 ## 클린 아키텍처 템플릿
 - [ ] [ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
+- [ ] [amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)
 
 ## DDD
 - [ ] [modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
