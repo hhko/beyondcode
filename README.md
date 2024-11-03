@@ -20,8 +20,8 @@
   - [ ] Ch 10. 빌드
   - [ ] Ch 11. 배포
 - Part 4. Internal 전술 설계
-  - [x] Ch 12. 전술 설계 패턴
-  - TODO
+  - [x] [Ch 12. 전술 설계 패턴](#ch-12-전술-설계-패턴)
+  - [ ] TODO
 - Part 5. External 솔루션
 - Part 6. External 전술 설계
 - Part 7. 전략 설계
