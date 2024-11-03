@@ -25,6 +25,8 @@
 
 ---
 
+<br/>
+
 # Part 1. 아키텍처
 
 # Ch 1. 아키텍처 개요
@@ -72,6 +74,8 @@ Application Architecture
 
 ---
 
+<br/>
+
 # Part 2. Internal 아키텍처
 
 # Ch 3. 아키텍처 원칙
@@ -116,7 +120,7 @@ Application Architecture
 
 ![](./.images/Layer.Isolation.Test.png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
-- 통합 테스트: Biz. 관심사를 Tech. 관심사까지 포함하여 테스트합니다.
+- 통합 테스트: Tech. 관심사까지 포함하여 Biz. 관심사를 테스트합니다.
 
 <br/>
 
@@ -125,15 +129,17 @@ Application Architecture
 ## 격리 고도화
 ![](./.images/Layer.Mediator.png)
 
-- Mediator 패턴은 Mediator을 통해 간접적으로 연결되므로 호출자 정보가 런타임에서도 숨겨져 있습니다.
+- Mediator 패턴은 메시지를 Mediator 객체를 통해 간접적으로 전달하여 런타임 때도 호출자의 정보가 숨겨집니다.
   | 구분            | Mediator | Strategy |
   | ---            | ---       | ---      |
   | **컴파일 타임** | Unknown   | Unknown  |
   | **런타임**      | Unknown  | Known    |
+  | **통신**        | 컴파일 타임과 런타임 모두 **간접**     | 컴파일 타임에만 **간접** |
+- Mediator 패턴은 메시지로 의사소통 방식을 추상화합니다.
 
 ## 메시지 고도화
 ![](./.images/Layer.Decorator.png)
-- Mediator 패턴은 Decorator 패턴과 조합하여 동적으로 새로운 메시지 기능을 추가할 수 있습니다.
+- Mediator 패턴은 Decorator 패턴과 조합하여 동적으로 메시지에 새 기능을 추가할 수 있습니다.
   - 예. 메시지 처리 시간 로그
   - 예. 입력 메시지 유효성 검사
   - 예. Command 메시지일 때 트랜잭션 처리(CQRS 패턴)
@@ -141,26 +147,30 @@ Application Architecture
 ## 메시지 범주화(CQRS)
 ![](./.images/Layer.CQRS.png)
 
-- Mediator 패턴은 CQRS(Command and Query Responsibility Segregation) 패턴과 조합하여 메시지를 Command와 Query 범주로 분류할 수 있습니다.
+- Mediator 패턴은 CQRS(Command and Query Responsibility Segregation) 패턴과 조합하여 메시지를 Command 메시지와 Query 메시지로 분류할 수 있습니다.
+  - Command 메시지: 데이터 변경(가변)
+  - Query 메시지: 데이터 불면(불변)
 
 ## 메시지 범주화(CQRS) 흐름
 ![](./.images/Layer.CQRS.Flow.png)
 ※ 출처: [Module Requests Processing via CQRS](https://github.com/kgrzybek/modular-monolith-with-ddd?tab=readme-ov-file#34-module-requests-processing-via-cqrs)  
 
-| 구분 | Command | Query |
-| ---  | --- | --- |
-| 트랜잭션    | O  | X  |
-| 구현       | ORM  | SQL  |
-| DTO 변환   | O  | X  |
-| SQL 복잡도 | ↓  | ↑  |
+| 구분       | Command  | Query      |
+| ---        | ---      | ---        |
+| 트랜잭션    | O(필요)  | X(불 필요)  |
+| 구현       | ORM      | SQL        |
+| DTO 변환   | O(필요)  | X(불 필요)  |
+| SQL 복잡도 | ↓(낮다)  | ↑(높다)     |
 
-- `트랜잭션`: Command은 데이터를 변경합니다.
-- `구현`:  Query는 성능 향상을 위해 SQL을 사용하여 DTO 데이터을 바로 반환합니다.
-- `SQL 복잡도`: Query는 Command에 비해 더 많은 Table 접근을 요구합니다.
+- `트랜잭션`: Command은 데이터를 변경하기 때문에 트랜잭셩이 필요합니다.
+- `구현`:  Query는 성능 향상을 위해 도메인 타임 변환 없이 SQL을 사용하여 DTO 데이터으로 바로 반환합니다.
+- `SQL 복잡도`: Query는 상대적으로 Command에 비해 더 많은 Table 접근을 요구합니다.
 
 <br/>
 
 ---
+
+<br/>
 
 # Part 3. Internal 솔루션
 
