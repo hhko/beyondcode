@@ -148,8 +148,8 @@ Application Architecture
 ![](./.images/Layer.CQRS.png)
 
 - Mediator 패턴은 CQRS(Command and Query Responsibility Segregation) 패턴과 조합하여 메시지를 Command 메시지와 Query 메시지로 분류할 수 있습니다.
-  - Command 메시지: 데이터 `CUD`(Create, Update, Delete: **데이터 가변**)
-  - Query 메시지: 데이터 `R`(Rea: **데이터 불변**)
+  - Command 메시지: 데이터 `CUD`(`Create, Update, Delete`: **데이터 가변**)
+  - Query 메시지: 데이터 `R`(`Read`: **데이터 불변**)
 
 ## 메시지 범주화(CQRS) 흐름
 ![](./.images/Layer.CQRS.Flow.png)
