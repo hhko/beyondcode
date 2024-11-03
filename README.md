@@ -304,6 +304,10 @@ Application Architecture
 
 <br/>
 
+---
+
+<br/>
+
 # 참고 자료
 - [ ] [SharedKernelSample](https://github.com/NimblePros/SharedKernelSample)
   - Domain과 Application 레이어 구현을 위한 기본 타입 기본 구현과 테스트 참고
