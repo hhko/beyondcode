@@ -228,16 +228,16 @@ Application Architecture
     - `T1`: Corporation
     - `T2`: Product
     - `T3`: Category
-    - `T4`: Layer
-    - `T5`: Sub-Layer
+    - `T4`: **Layer**
+    - `T5`: **Sub-Layer**
     - 예. `{Corporation}.{Product}.{Service}.Domain`
     - 예. `{Corporation}.{Product}.{Service}.Adapters.Infrastructure`
   - Test: `T1.T2.T3.T4.T5`
     - `T1`: Corporation
     - `T2`: Product
     - `T3`: Category
-    - `T4`: Tests
-    - `T5`: Test Pyramid
+    - `T4`: **Tests**
+    - `T5`: **Test Pyramid**
     - 예. `{Corporation}.{Product}.{Service}.Tests.Unit`
     - 예. `{Corporation}.{Product}.{Service}.Tests.Integration`
 - **Category**
