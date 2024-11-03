@@ -1,5 +1,7 @@
 # _better_ **CODE** _with domain-driven design_
 
+> 제 코드를 소개합니다.
+
 ## 목차
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
