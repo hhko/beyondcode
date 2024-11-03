@@ -54,7 +54,8 @@ Application Architecture
       │         ├─ Hexagonal Architecture
       │         ├─ Onion Architecture
       │         ├─ Clean Architecture
-      │         └─ Vertical Slice Architecture
+      │         ├─ Vertical Slice Architecture
+      │         └─ ...
       │
       └─ External Architecture
            └─ 외부 시스템 구성 아키텍처: 예. CNCF Landscape
