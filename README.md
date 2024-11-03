@@ -221,12 +221,28 @@ Application Architecture
               ├─{Corporation}.{Product}.{UI}.Tests.Performance                // Performance 테스트
               └─{Corporation}.{Product}.{UI}.Tests.Unit                       // Unit Test
 ```
-
-- **범주**
+- **Format**
+  - Src: `T1.T2.T3.T4.{T5}`
+    - `T1`: Corporation
+    - `T2`: Product
+    - `T3`: Category
+    - `T4`: Layer
+    - `T5`: Sub-Layer
+    - 예. `{Corporation}.{Product}.{Service}.Domain`
+    - 예. `{Corporation}.{Product}.{Service}.Adapters.Infrastructure`
+  - Test: `T1.T2.T3.T4.T5`
+    - `T1`: Corporation
+    - `T2`: Product
+    - `T3`: Category
+    - `T4`: Tests
+    - `T5`: Test Pyramid
+    - 예. `{Corporation}.{Product}.{Service}.Tests.Unit`
+    - 예. `{Corporation}.{Product}.{Service}.Tests.Integration`
+- **Category**
   - Abstraction: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
   - Backend
   - Frontend
-- **레이어**
+- **Layer**
   - 기술 관심사
     - Adapters.Infrastructure
     - Adapters.Persistence
@@ -234,11 +250,11 @@ Application Architecture
   - 비즈니스 관심사
     - Application: 비즈니스 흐름(Biz. Flow)
     - Domain: 비즈니스 단위(Biz. Unit)
-- **이름**
-  - {Corporation}: 회사
-  - {Product}: 제품
-  - {Service}: Backend 프로그램
-  - {UI}: Frontend 프로그램
+- **Test Pyramid**
+  - Unit
+  - Integration
+  - Performance
+  - E2E(End to End)
 
 ## 솔루션 구조 예
 ![](./.images/SolutionExplorer.png)
