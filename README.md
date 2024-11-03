@@ -1,6 +1,5 @@
 # _better_ **CODE** _with domain-driven design_
 
-
 ## 목차
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
@@ -10,13 +9,12 @@
   - [x] [Ch 04. 레이어 격리](#ch-4-레이어-격리)
   - [x] [Ch 05. 레이어 테스트](#ch-5-레이어-테스트)
   - [x] [Ch 06. 레이어 고도화](#ch-6-레이어-고도화)
-  - [ ] Ch 07. 레이어 통합
 - Part 3. Internal 솔루션
-  - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
-  - [ ] [Ch 09. 솔루션 설정](#ch-9-솔루션-설정)
-  - [ ] Ch 10. 테스트
-  - [ ] Ch 11. 빌드
-  - [ ] Ch 12. 배포
+  - [x] [Ch 07. 솔루션 구조](#ch-8-솔루션-구조)
+  - [ ] [Ch 08. 솔루션 설정](#ch-9-솔루션-설정)
+  - [ ] Ch 09. 테스트
+  - [ ] Ch 10. 빌드
+  - [ ] Ch 11. 배포
 - Part 4. Internal 전술 설계
 - Part 5. External 아키텍처
 - Part 6. External 솔루션
@@ -25,13 +23,21 @@
 
 <br/>
 
+---
+
+# Part 1. 아키텍처
+
 # Ch 1. 아키텍처 개요
 
 ## 아키텍처 정의
 ![](./.images/Architecture.png)
 
+※ 출처: [Making Architecture Matter, 소프트웨어 아키텍처의 중요성](https://www.youtube.com/watch?v=4E1BHTvhB7Y)
+
 ## 아키텍처 범주
 ![](./.images/Architecture.Category.png)
+
+※ 출처: [Making old applications new again](https://sellingsimplifiedinsights.com/asset/app-development/ASSET_co-modernization-whitepaper-inc0460201-122016kata-v1-en_1511772094768.pdf)
 
 ```
 Application Architecture
@@ -52,6 +58,8 @@ Application Architecture
 - Microservices Architecture = Internal Architecture + External Architecture
   ![](./.images/Architecture.Microservices.png)
 
+  ※ 출처: [DDD 및 CQRS 패턴을 사용하여 마이크로 서비스에서 비즈니스 복잡성 처리](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/)
+
 ## 아키텍처 역사
 ![](./.images/Architecture.History.png)
 
@@ -61,6 +69,10 @@ Application Architecture
 ![](./.images/TechMap.png)
 
 <br/>
+
+---
+
+# Part 2. Internal 아키텍처
 
 # Ch 3. 아키텍처 원칙
 > - [아키텍처 원칙](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles)
@@ -128,10 +140,12 @@ Application Architecture
 
 ## 메시지 범주화(CQRS)
 ![](./.images/Layer.CQRS.png)
+
 - Mediator 패턴은 CQRS(Command and Query Responsibility Segregation) 패턴과 조합하여 메시지를 Command와 Query 범주로 분류할 수 있습니다.
 
 ## 메시지 범주화(CQRS) 흐름
 ![](./.images/Layer.CQRS.Flow.png)
+※ 출처: [Module Requests Processing via CQRS](https://github.com/kgrzybek/modular-monolith-with-ddd?tab=readme-ov-file#34-module-requests-processing-via-cqrs)  
 
 | 구분 | Command | Query |
 | ---  | --- | --- |
@@ -146,7 +160,11 @@ Application Architecture
 
 <br/>
 
-# Ch 8. 솔루션 구조
+---
+
+# Part 3. Internal 솔루션
+
+# Ch 7. 솔루션 구조
 - 예제 코드: [링크](./Ch07.SolutionStructure/)
 
 ## 솔루션 구조 템플릿
@@ -227,7 +245,7 @@ Application Architecture
 
 <br/>
 
-# Ch 9. 솔루션 설정
+# Ch 8. 솔루션 설정
 
 ## SDK 버전
 - TODO global.json
