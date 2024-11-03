@@ -1,30 +1,27 @@
 # _better_ **CODE** _with domain-driven design_
 
-## 기술 맵
-![](./.images/TechMap.png)
 
 ## 목차
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
+  - [x] [Ch 02. 기술 맵](#ch-2-기술-맵)
 - Part 2. Internal 아키텍처
-  - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
-  - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
-  - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
-  - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
-  - [ ] Ch 06. 레이어 통합
+  - [x] [Ch 03. 아키텍처 원칙](#ch-3-아키텍처-원칙)
+  - [x] [Ch 04. 레이어 격리](#ch-4-레이어-격리)
+  - [x] [Ch 05. 레이어 테스트](#ch-5-레이어-테스트)
+  - [x] [Ch 06. 레이어 고도화](#ch-6-레이어-고도화)
+  - [ ] Ch 07. 레이어 통합
 - Part 3. Internal 솔루션
-  - [x] [Ch 07. 솔루션 구조](#ch-7-솔루션-구조)
-  - [ ] [Ch 08. 솔루션 설정](#ch-8-솔루션-설정)
-  - [ ] Ch 09. 테스트
-  - [ ] Ch 10. 빌드
-  - [ ] Ch 11. 배포
+  - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
+  - [ ] [Ch 09. 솔루션 설정](#ch-9-솔루션-설정)
+  - [ ] Ch 10. 테스트
+  - [ ] Ch 11. 빌드
+  - [ ] Ch 12. 배포
 - Part 4. Internal 전술 설계
-  - _TODO_
-- Part 5. External 솔루션
-- Part 6. External 전술 설계
-  - _TODO_
-- Part 7. 전략 설계
-  - _TODO_
+- Part 5. External 아키텍처
+- Part 6. External 솔루션
+- Part 7. External 전술 설계
+- Part 8. 전략 설계
 
 <br/>
 
@@ -60,7 +57,12 @@ Application Architecture
 
 <br/>
 
-# Ch 2. 아키텍처 원칙
+## Ch 2. 기술 맵
+![](./.images/TechMap.png)
+
+<br/>
+
+# Ch 3. 아키텍처 원칙
 > - [아키텍처 원칙](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles)
 >   - **Separation of concerns**
 
@@ -86,7 +88,7 @@ Application Architecture
 
 <br/>
 
-# Ch 3. 레이어 격리
+# Ch 4. 레이어 격리
 
 ## 격리 전
 ![](./.images/Layer.Isolation.Before.png)
@@ -98,7 +100,7 @@ Application Architecture
 
 <br/>
 
-# Ch 4. 레이어 테스트
+# Ch 5. 레이어 테스트
 
 ![](./.images/Layer.Isolation.Test.png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
@@ -106,7 +108,7 @@ Application Architecture
 
 <br/>
 
-# Ch 5. 레이어 고도화
+# Ch 6. 레이어 고도화
 
 ## 격리 고도화
 ![](./.images/Layer.Mediator.png)
@@ -124,11 +126,11 @@ Application Architecture
   - 예. 입력 메시지 유효성 검사
   - 예. Command 메시지일 때 트랜잭션 처리(CQRS 패턴)
 
-## 메시지 범주화
+## 메시지 범주화(CQRS)
 ![](./.images/Layer.CQRS.png)
 - Mediator 패턴은 CQRS(Command and Query Responsibility Segregation) 패턴과 조합하여 메시지를 Command와 Query 범주로 분류할 수 있습니다.
 
-## 메시지 흐름
+## 메시지 범주화(CQRS) 흐름
 ![](./.images/Layer.CQRS.Flow.png)
 
 | 구분 | Command | Query |
@@ -144,7 +146,7 @@ Application Architecture
 
 <br/>
 
-# Ch 7. 솔루션 구조
+# Ch 8. 솔루션 구조
 - 예제 코드: [링크](./Ch07.SolutionStructure/)
 
 ## 솔루션 구조 템플릿
@@ -225,7 +227,7 @@ Application Architecture
 
 <br/>
 
-# Ch 8. 솔루션 설정
+# Ch 9. 솔루션 설정
 
 ## SDK 버전
 - TODO global.json
