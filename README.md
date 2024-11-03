@@ -130,10 +130,10 @@ Application Architecture
 ![](./.images/Layer.Mediator.png)
 
 - Mediator 패턴은 메시지를 Mediator 객체를 통해 간접적으로 전달하여 런타임 때도 호출자의 정보가 숨겨집니다.
-  | 구분            | Mediator | Strategy |
-  | ---            | ---       | ---      |
-  | **컴파일 타임** | Unknown   | Unknown  |
-  | **런타임**      | Unknown  | Known    |
+  | 구분            | Mediator  패턴                       | Strategy  패턴          |
+  | ---            | ---                                  | ---                     |
+  | **컴파일 타임** | Unknown                              | Unknown                 |
+  | **런타임**      | Unknown                              | Known                   |
   | **통신**        | 컴파일 타임과 런타임 모두 **간접**     | 컴파일 타임에만 **간접** |
 - Mediator 패턴은 메시지로 의사소통 방식을 추상화합니다.
 
