@@ -22,9 +22,9 @@
 - Part 4. 관찰 가능성
   - [ ] Ch 12. Aspire 관찰 대시보드
   - [ ] Ch 13. OpenSearch 관찰 시스템
-  - [ ] TODO
+  - [ ] TODO(로그, 지표, 추적)
 - Part 5. Internal 전술 설계
-  - [x] [Ch 14. 전술 설계 패턴](#ch-12-전술-설계-패턴)
+  - [x] [Ch 14. 전술 설계 패턴](#ch-14-전술-설계-패턴)
   - [ ] TODO
 - Part 6. External 전술 설계
 - Part 7. 전략 설계
