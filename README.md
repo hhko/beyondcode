@@ -287,7 +287,7 @@ Application Architecture
 ## SDK 빌드 버전
 > - 예제 코드: [global-json](./Ch08.SolutionSettings/global.json)
 
-- [소스를 빌드하기 위한 SDK 버전을 `global.json` 파일로 지정할 수 있습니다.](https://learn.microsoft.com/en-us/dotnet/core/tools/global-json)
+- 소스를 빌드하기 위한 SDK 버전을 `global.json` 으로 지정합니다.
 
 ```shell
 # Host에 설치된 SDK 목록
@@ -299,16 +299,11 @@ dotnet new globaljson --sdk-version 8.0.100 --roll-forward latestFeature
 #   - 8.0.100 이상 8.0.1xx 버전(예: 8.0.103 또는 8.0.199)을 허용합니다.
 dotnet new globaljson --sdk-version 8.0.100 --roll-forward latestPatch
 
-# globaljson 파일이 없을 때는 Host에 설치된 최신 SDK 버전을 표시합니다.
+# SDK 빌드 버전 확인하기
 dotnet --version
-  8.0.400
-
-# globaljson 파일이 있을 때는 globaljson이 허용하는 Host에 설치된 최신 SDK 버전을 표시합니다.
-dotnet --version
-  8.0.110
 ```
 
-- 버전 형식: "[global.json 개요](https://learn.microsoft.com/ko-kr/dotnet/core/tools/global-json)", 지정된 버전에서부터 상위 버전(rollForward)
+- 버전 형식: "[global.json](https://learn.microsoft.com/ko-kr/dotnet/core/tools/global-json)"에 지정된 버전에서부터 상위 버전(rollForward) 범위를 지정합니다.
   ```
   x.y.znn
   ```
