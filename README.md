@@ -19,10 +19,13 @@
   - [ ] Ch 09. 테스트
   - [ ] Ch 10. 빌드
   - [ ] Ch 11. 배포
-- Part 4. Internal 전술 설계
-  - [x] [Ch 12. 전술 설계 패턴](#ch-12-전술-설계-패턴)
+- Part 4. 관찰 가능성
+  - [ ] Ch 12. Aspire 관찰 대시보드
+  - [ ] Ch 13. OpenSearch 관찰 시스템
   - [ ] TODO
-- Part 5. 관찰 가능성
+- Part 5. Internal 전술 설계
+  - [x] [Ch 14. 전술 설계 패턴](#ch-12-전술-설계-패턴)
+  - [ ] TODO
 - Part 6. External 전술 설계
 - Part 7. 전략 설계
 
@@ -273,12 +276,9 @@ Application Architecture
 ![](./.images/SolutionExplorer.png)
 
 - **이름**
-  - {Corporation}: Corp
-  - {Product}: Hello
-  - {Service}:
-    - Api
-    - Master
-  - {UI}: 생략
+  - `T1`: {Corporation} Corp
+  - `T2`: {Product} Hello
+  - `T3`: {Category} Api, Master
 
 <br/>
 
@@ -351,9 +351,25 @@ dotnet --version
 
 <br/>
 
-# Part 4. Internal 전술 설계
+# Part 4. 관찰 가능성
 
-# Ch 12. 전술 설계 패턴
+# Ch 12. Aspire 관찰 대시보드
+- TODO
+
+<br/>
+
+# Ch 13. OpenSearch 관찰 시스템
+- TODO
+
+<br/>
+
+---
+
+<br/>
+
+# Part 5. Internal 전술 설계
+
+# Ch 14. 전술 설계 패턴
 ![](./.images/TacticalDesign.Pattern.png)
 
 <br/>
