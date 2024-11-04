@@ -13,7 +13,7 @@
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
   - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
   - [ ] Ch 06. 레이어 통합
-- Part 3. Internal 솔루션
+- Part 3. 솔루션
   - [x] [Ch 07. 솔루션 구조](#ch-8-솔루션-구조)
   - [ ] [Ch 08. 솔루션 설정](#ch-9-솔루션-설정)
   - [ ] Ch 09. 테스트
@@ -22,7 +22,7 @@
 - Part 4. Internal 전술 설계
   - [x] [Ch 12. 전술 설계 패턴](#ch-12-전술-설계-패턴)
   - [ ] TODO
-- Part 5. External 솔루션
+- Part 5. 관찰 가능성
 - Part 6. External 전술 설계
 - Part 7. 전략 설계
 
@@ -74,8 +74,7 @@ Application Architecture
 <br/>
 
 # Ch 2. 아키텍처 원칙
-> - [아키텍처 원칙](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles)
->   - **Separation of concerns**
+> - [아키텍처 원칙](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles): **Separation of concerns**
 
 ## 관심사의 분리
 - **개발할 때**: 요구사항을 비즈니스와 기술 관심사로 분해합니다.
@@ -172,10 +171,10 @@ Application Architecture
 
 <br/>
 
-# Part 3. Internal 솔루션
+# Part 3. 솔루션
 
 # Ch 7. 솔루션 구조
-- 예제 코드: [링크](./Ch07.SolutionStructure/)
+> - 예제 코드: [링크](./Ch07.SolutionStructure/)
 
 ## 솔루션 구조 템플릿
 ```shell
@@ -224,22 +223,34 @@ Application Architecture
               └─{Corporation}.{Product}.{UI}.Tests.Unit                       // Unit Test
 ```
 - **Format**
-  - Src: `T1.T2.T3.T4.{T5}`
-    - `T1`: Corporation
-    - `T2`: Product
+  - Src: `{T1}.{T2}.T3.T4.{T5}`
+    - `{T1}`: Corporation
+    - `{T2}`: Product
     - `T3`: Category
     - `T4`: **Layer**
-    - `T5`: **Sub-Layer**
-    - 예. `{Corporation}.{Product}.{Service}.Domain`
+    - `{T5}`: **Sub-Layer**
+    - 예. `{Service}.Domain`: T1, T2, T5 생략일 때
+      - T3: Service
+      - T4: Domain
+    - 예. `{Corporation}.{Product}.{Service}.Domain`: T5 생략일 때
+      - T4: Domain
     - 예. `{Corporation}.{Product}.{Service}.Adapters.Infrastructure`
-  - Test: `T1.T2.T3.T4.T5`
-    - `T1`: Corporation
-    - `T2`: Product
+      - T4: Adapters
+      - T5: Infrastructure
+  - Test: `{T1}.{T2}.T3.T4.T5`
+    - `{T1}`: Corporation
+    - `{T2}`: Product
     - `T3`: Category
     - `T4`: **Tests**
     - `T5`: **Test Pyramid**
+    - 예. `{Service}.Tests.Unit`: T1, T2 생략일 때
+      - T3: Service
+      - T4: Tests
+      - T5: Unit
     - 예. `{Corporation}.{Product}.{Service}.Tests.Unit`
+      - T5: Unit
     - 예. `{Corporation}.{Product}.{Service}.Tests.Integration`
+      - T5: Integration
 - **Category**
   - Abstraction: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
   - Backend
@@ -273,8 +284,56 @@ Application Architecture
 
 # Ch 8. 솔루션 설정
 
-## SDK 버전
-- TODO global.json
+## SDK 빌드 버전
+> - 예제 코드: [global-json](./Ch08.SolutionSettings/global.json)
+
+- [소스를 빌드하기 위한 SDK 버전을 `global.json` 파일로 지정할 수 있습니다.](https://learn.microsoft.com/en-us/dotnet/core/tools/global-json)
+
+```shell
+# Host에 설치된 SDK 목록
+dotnet --list-sdks
+
+# globaljson 파일 만들기
+#   - 8.0.100 이상 8.0.xxx 버전(예: 8.0.303 또는 8.0.402)을 허용합니다.
+dotnet new globaljson --sdk-version 8.0.100 --roll-forward latestFeature
+#   - 8.0.100 이상 8.0.1xx 버전(예: 8.0.103 또는 8.0.199)을 허용합니다.
+dotnet new globaljson --sdk-version 8.0.100 --roll-forward latestPatch
+
+# globaljson 파일이 없을 때는 Host에 설치된 최신 SDK 버전을 표시합니다.
+dotnet --version
+  8.0.400
+
+# globaljson 파일이 있을 때는 globaljson이 허용하는 Host에 설치된 최신 SDK 버전을 표시합니다.
+dotnet --version
+  8.0.110
+```
+
+- 버전 형식: "[global.json 개요](https://learn.microsoft.com/ko-kr/dotnet/core/tools/global-json)", 지정된 버전에서부터 상위 버전(rollForward)
+  ```
+  x.y.znn
+  ```
+  - `x`: major
+  - `y`: minor
+  - `z`: feature, 0 ~ 9
+  - `n`: patch, 0 ~ 99
+- 에. `latestFeature`: 8.0.302 이전의 모든 SDK 버전을 허용하지 않으며 8.0.302 이상 8.0.xxx 버전(예: 8.0.303 또는 8.0.402)을 허용합니다.
+  ```json
+  {
+    "sdk": {
+      "version": "8.0.302",
+      "rollForward": "latestFeature"
+    }
+  }
+  ```
+- 예. `latestPatch`: 8.0.102 이전의 모든 SDK 버전을 허용하지 않으며 8.0.102 이상 8.0.1xx 버전(예: 8.0.103 또는 8.0.199)을 허용합니다.
+  ```json
+  {
+    "sdk": {
+      "version": "8.0.102",
+      "rollForward": "latestPatch"
+    }
+  }
+  ```
 
 ## 빌드 설정 중앙화
 - TODO Directory.Build.prop
