@@ -226,7 +226,7 @@ Application Architecture
               └─{Corporation}.{Product}.{UI}.Tests.Unit                       // Unit Test
 ```
 
-### 형식
+### 솔루션 구조 형식
 - Src: `{T1}.{T2}.T3.T4.{T5}`
   - `{T1}`: Corporation
   - `{T2}`: Product
@@ -256,7 +256,7 @@ Application Architecture
   - 예. `{Corporation}.{Product}.{Service}.Tests.Integration`
     - T5: Integration
 
-### 정의
+### 솔루션 구조 정의
 - `T1`: Corporation
 - `T2`: Product
 - `T3`: **Category**
