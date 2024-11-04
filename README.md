@@ -254,19 +254,22 @@ Application Architecture
       - T5: Unit
     - 예. `{Corporation}.{Product}.{Service}.Tests.Integration`
       - T5: Integration
-- **Category**
+- `T3`: **Category**
   - Abstraction: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
   - Backend
   - Frontend
-- **Layer**
+- `T4`: **Layer**
   - 기술 관심사
-    - Adapters.Infrastructure
-    - Adapters.Persistence
-    - Adapters.Presentation
+    - Adapter
   - 비즈니스 관심사
     - Application: 비즈니스 흐름(Biz. Flow)
     - Domain: 비즈니스 단위(Biz. Unit)
-- **Test Pyramid**
+- `T5`: **Sub-Layer**
+  - 기술 관심사
+    - Infrastructure
+    - Persistence
+    - Presentation
+- `T5`: **Test Pyramid**
   - Unit
   - Integration
   - Performance
