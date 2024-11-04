@@ -225,35 +225,40 @@ Application Architecture
               ├─{Corporation}.{Product}.{UI}.Tests.Performance                // Performance 테스트
               └─{Corporation}.{Product}.{UI}.Tests.Unit                       // Unit Test
 ```
-- **Format**
-  - Src: `{T1}.{T2}.T3.T4.{T5}`
-    - `{T1}`: Corporation
-    - `{T2}`: Product
-    - `T3`: Category
-    - `T4`: **Layer**
-    - `{T5}`: **Sub-Layer**
-    - 예. `{Service}.Domain`: T1, T2, T5 생략일 때
-      - T3: Service
-      - T4: Domain
-    - 예. `{Corporation}.{Product}.{Service}.Domain`: T5 생략일 때
-      - T4: Domain
-    - 예. `{Corporation}.{Product}.{Service}.Adapters.Infrastructure`
-      - T4: Adapters
-      - T5: Infrastructure
-  - Test: `{T1}.{T2}.T3.T4.T5`
-    - `{T1}`: Corporation
-    - `{T2}`: Product
-    - `T3`: Category
-    - `T4`: **Tests**
-    - `T5`: **Test Pyramid**
-    - 예. `{Service}.Tests.Unit`: T1, T2 생략일 때
-      - T3: Service
-      - T4: Tests
-      - T5: Unit
-    - 예. `{Corporation}.{Product}.{Service}.Tests.Unit`
-      - T5: Unit
-    - 예. `{Corporation}.{Product}.{Service}.Tests.Integration`
-      - T5: Integration
+
+### 형식
+- Src: `{T1}.{T2}.T3.T4.{T5}`
+  - `{T1}`: Corporation
+  - `{T2}`: Product
+  - `T3`: Category
+  - `T4`: **Layer**
+  - `{T5}`: **Sub-Layer**
+  - 예. `{Service}.Domain`: T1, T2, T5 생략일 때
+    - T3: Service
+    - T4: Domain
+  - 예. `{Corporation}.{Product}.{Service}.Domain`: T5 생략일 때
+    - T4: Domain
+  - 예. `{Corporation}.{Product}.{Service}.Adapters.Infrastructure`
+    - T4: Adapters
+    - T5: Infrastructure
+- Test: `{T1}.{T2}.T3.T4.T5`
+  - `{T1}`: Corporation
+  - `{T2}`: Product
+  - `T3`: Category
+  - `T4`: **Tests**
+  - `T5`: **Test Pyramid**
+  - 예. `{Service}.Tests.Unit`: T1, T2 생략일 때
+    - T3: Service
+    - T4: Tests
+    - T5: Unit
+  - 예. `{Corporation}.{Product}.{Service}.Tests.Unit`
+    - T5: Unit
+  - 예. `{Corporation}.{Product}.{Service}.Tests.Integration`
+    - T5: Integration
+
+### 정의
+- `T1`: Corporation
+- `T2`: Product
 - `T3`: **Category**
   - Abstraction: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
   - Backend
