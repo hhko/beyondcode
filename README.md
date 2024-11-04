@@ -174,7 +174,7 @@ Application Architecture
 # Part 3. 솔루션
 
 # Ch 7. 솔루션 구조
-> - 예제 코드: [링크](./Ch07.SolutionStructure/)
+> 예제 코드: [링크](./Ch07.SolutionStructure/)
 
 ## 솔루션 구조 템플릿
 ```shell
@@ -285,7 +285,7 @@ Application Architecture
 # Ch 8. 솔루션 설정
 
 ## SDK 빌드 버전
-> - 예제 코드: [global-json](./Ch08.SolutionSettings/global.json)
+> 예제 코드: [global-json](./Ch08.SolutionSettings/global.json)
 
 - 소스를 빌드하기 위한 SDK 버전을 `global.json` 으로 지정합니다.
 
