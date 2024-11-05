@@ -80,9 +80,9 @@ Application Architecture
 > - 아키텍처 원칙: [Separation of concerns](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns)
 
 ## 관심사의 분리
-![](./.images/Layer.SoC.Abstraction.png)
-
 - 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 Biz.와 Tech. 관심사 기준으로 동일해야 합니다.**
+
+![](./.images/Layer.SoC.Abstraction.png)
 
 - **개발 시** 요구사항을 비즈니스와 기술 관심사로 분해합니다.
 - **운영 시** 로그를 비즈니스와 기술 관심사로 식별합니다.
