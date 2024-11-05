@@ -77,24 +77,29 @@ Application Architecture
 <br/>
 
 # Ch 2. 아키텍처 원칙
-> - [아키텍처 원칙](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles): **Separation of concerns**
+> - 아키텍처 원칙: [Separation of concerns](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns)
 
 ## 관심사의 분리
-- **개발할 때**: 요구사항을 비즈니스와 기술 관심사로 분해합니다.
-- **운영할 때**: 로그를 비즈니스와 기술 관심사로 식별합니다.
+![](./.images/Layer.SoC.Abstraction.png)
+
+- 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 Biz.와 Tech. 관심사 기준으로 동일해야 합니다.**
+
+- **개발 시** 요구사항을 비즈니스와 기술 관심사로 분해합니다.
+- **운영 시** 로그를 비즈니스와 기술 관심사로 식별합니다.
 
 ## 레이어
+- 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 레이어 기준으로 동일해야 합니다.**
+
 ![](./.images/Layer.SoC.png)
 
-- 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 관심사(레이어) 기준으로 일관되어야 합니다.**
-  - **기술 관심사**
-    - Adapter
-      - Known 입력
-      - Known 출력
-      - Unknown 출력: 부수 효과(Side Effects)
-  - **비즈니스 관심사**
-    - Application: 비즈니스 흐름(Biz. Flow)
-    - Domain: 비즈니스 단위(Biz. Unit)
+- **기술 관심사**
+  - Adapter
+    - Known 입력
+    - Known 출력
+    - Unknown 출력: 부수 효과(Side Effects)
+- **비즈니스 관심사**
+  - Application: 비즈니스 흐름(Biz. Flow)
+  - Domain: 비즈니스 단위(Biz. Unit)
 
 ## 레이어 배치
 ![](./.images/Layer.Alignment.png)
