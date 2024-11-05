@@ -94,9 +94,9 @@ Application Architecture
 
 - **기술 관심사**
   - Adapter
-    - Known 입력
-    - Known 출력
-    - Unknown 출력: 부수 효과(Side Effects)
+    - `Known` 입력 Adapter
+    - `Known` 출력 Adapter
+    - `Unknown` 출력 Adapter: 부수 효과(Side Effects)
 - **비즈니스 관심사**
   - Application: 비즈니스 흐름(Biz. Flow)
   - Domain: 비즈니스 단위(Biz. Unit)
