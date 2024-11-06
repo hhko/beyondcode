@@ -186,112 +186,98 @@ Application Architecture
 
 ## 솔루션 구조 템플릿
 ```shell
-{Product}.sln
-  │ # 범주 Abstraction: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
+{T2}.sln
+  │ # 부수(Abstraction) 범주: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
   ├─Abstraction
   │   ├─Frameworks
-  │   │   ├─{Corporation}.{Product}.Framework
-  │   │   └─{Corporation}.{Product}.Framework.Contracts
+  │   │   ├─{T1}.{T2}.Framework
+  │   │   └─{T1}.{T2}.Framework.Contracts
   │   ├─Libraries
-  │   │   └─{Corporation}.{Product}.{Tech}                                    // 예. RabbitMQ, ...
+  │   │   └─{T1}.{T2}.[Tech]                                    // 예. RabbitMQ, ...
   │   └─Domains
-  │       └─{Corporation}.{Product}.Domain                                    // 공유 도메인, ...
+  │       └─{T1}.{T2}.[Domain]                                  // 공유 도메인, ...
   │
-  │ # 범주 Backend
+  │ # Backend 범주
   ├─Backend
-  │   ├─{Service}
+  │   ├─{T3}
   │   │   ├─Src
-  │   │   │   ├─{Corporation}.{Product}.{Service}                             // 호스트 프로젝트
-  │   │   │   ├─{Corporation}.{Product}.{Service}.Adapters.Infrastructure     // Adapter 레이어
-  │   │   │   ├─{Corporation}.{Product}.{Service}.Adapters.Persistence        // Adapter 레이어
-  │   │   │   ├─{Corporation}.{Product}.{Service}.Application                 // Application 레이어
-  │   │   │   └─{Corporation}.{Product}.{Service}.Domain                      // Domain 레이어
+  │   │   │   ├─{T1}.{T2}.{T3}                                  // 호스트 프로젝트
+  │   │   │   ├─{T1}.{T2}.{T3}.Adapters.Infrastructure          // Adapter 레이어
+  │   │   │   ├─{T1}.{T2}.{T3}.Adapters.Persistence             // Adapter 레이어
+  │   │   │   ├─{T1}.{T2}.{T3}.Application                      // Application 레이어
+  │   │   │   └─{T1}.{T2}.{T3}.Domain                           // Domain 레이어
   │   │   └─Tests
-  │   │       ├─{Corporation}.{Product}.{Service}.Tests.Integration           // Integration 테스트
-  │   │       ├─{Corporation}.{Product}.{Service}.Tests.Performance           // Performance 테스트
-  │   │       └─{Corporation}.{Product}.{Service}.Tests.Unit                  // Unit Test
-  │   ├─{Service}
+  │   │       ├─{T1}.{T2}.{T3}.Tests.Integration                // Integration 테스트
+  │   │       ├─{T1}.{T2}.{T3}.Tests.Performance                // Performance 테스트
+  │   │       └─{T1}.{T2}.{T3}.Tests.Unit                       // Unit Test
+  │   ├─{T3}
   │   │   ├─Src
   │   │   └─Tests
   │   └─Tests
-  │       └─{Corporation}.{Product}.Tests.E2E                                 // End to End 테스트
+  │       └─{T1}.{T2}.Tests.E2E                                 // End to End 테스트
   │
-  │ # 범주 Frontend
+  │ # Frontend 범주
   └─Frontend
-      └─{UI}
+      └─{T3}
           ├─Src
-          │   ├─{Corporation}.{Product}.{UI}                                  // 호스트 프로젝트
-          │   ├─{Corporation}.{Product}.{UI}.Adapters.Infrastructure          // Adapter 레이어
-          │   ├─{Corporation}.{Product}.{UI}.Adapters.Persistence             // Adapter 레이어
-          │   ├─{Corporation}.{Product}.{UI}.Application                      // Application 레이어
-          │   └─{Corporation}.{Product}.{UI}.Domain                           // Domain 레이어
+          │   ├─{T1}.{T2}.{T3}                                  // 호스트 프로젝트
+          │   ├─{T1}.{T2}.{T3}.Adapters.Infrastructure          // Adapter 레이어
+          │   ├─{T1}.{T2}.{T3}.Adapters.Persistence             // Adapter 레이어
+          │   ├─{T1}.{T2}.{T3}.Application                      // Application 레이어
+          │   └─{T1}.{T2}.{T3}.Domain                           // Domain 레이어
           └─Tests
-              ├─{Corporation}.{Product}.{UI}.Tests.Integration                // Integration 테스트
-              ├─{Corporation}.{Product}.{UI}.Tests.Performance                // Performance 테스트
-              └─{Corporation}.{Product}.{UI}.Tests.Unit                       // Unit Test
+              ├─{T1}.{T2}.{T3}.Tests.Integration                // Integration 테스트
+              ├─{T1}.{T2}.{T3}.Tests.Performance                // Performance 테스트
+              └─{T1}.{T2}.{T3}.Tests.Unit                       // Unit Test
 ```
 
 ### 솔루션 구조 형식
-- Src: `{T1}.{T2}.T3.T4.{T5}`
-  - `{T1}`: Corporation
-  - `{T2}`: Product
-  - `T3`: Category
-  - `T4`: **Layer**
-  - `{T5}`: **Sub-Layer**
-  - 예. `{Service}.Domain`: T1, T2, T5 생략일 때
-    - T3: Service
-    - T4: Domain
-  - 예. `{Corporation}.{Product}.{Service}.Domain`: T5 생략일 때
-    - T4: Domain
-  - 예. `{Corporation}.{Product}.{Service}.Adapters.Infrastructure`
-    - T4: Adapters
-    - T5: Infrastructure
-- Test: `{T1}.{T2}.T3.T4.T5`
-  - `{T1}`: Corporation
-  - `{T2}`: Product
-  - `T3`: Category
-  - `T4`: **Tests**
-  - `T5`: **Test Pyramid**
-  - 예. `{Service}.Tests.Unit`: T1, T2 생략일 때
-    - T3: Service
-    - T4: Tests
-    - T5: Unit
-  - 예. `{Corporation}.{Product}.{Service}.Tests.Unit`
-    - T5: Unit
-  - 예. `{Corporation}.{Product}.{Service}.Tests.Integration`
-    - T5: Integration
 
-### 솔루션 구조 정의
-- `T1`: Corporation
-- `T2`: Product
-- `T3`: **Category**
-  - Abstraction: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
-  - Backend
-  - Frontend
-- `T4`: **Layer**
+| Level  | Src             | Tests            |
+|------- |-------------    |--------------    |
+| `{T1}` | Corporation     | Corporation      |
+| `{T2}` | Product         | Product          |
+| `T3`   | Process         | Process          |
+| `T4`   | **Layers**      | Tests            |
+| `T5`   | **Sub-Layers**  | **Test Pyramid** |
+
+- Layers
   - 기술 관심사
     - Adapter
   - 비즈니스 관심사
     - Application: 비즈니스 흐름(Biz. Flow)
     - Domain: 비즈니스 단위(Biz. Unit)
-- `T5`: **Sub-Layer**
-  - 기술 관심사
-    - Infrastructure
-    - Persistence
-    - Presentation
-- `T5`: **Test Pyramid**
+- Sub-Layers: 기술 관심사
+  - Infrastructure
+  - Persistence
+  - Presentation
+- Test Pyramid
   - Unit
   - Integration
   - Performance
   - E2E(End to End)
 
-## 솔루션 구조 예
-![](./.images/SolutionExplorer.png)
+### 솔루션 구조 예제
+- Src 예제
+  - `Corporation`.`Product`.`Service`.`Adapters`.`Infrastructure`
+    - T1: Corporation
+    - T2: Product
+    - T3: Service
+    - T4: Adapters
+    - T5: Infrastructure
+  - `Corporation`.`Product`.`Service`.`Domain`: T5 생략일 때
+    - T4: Domain
+  - `Service`.`Adapters`.`Infrastructure`: T1, T2 생략일 때
+- Tests 예제
+  - 예. `Corporation`.`Product`.`Service`.`Tests`.`Unit`
+    - T1: Corporation
+    - T2: Product
+    - T3: Service
+    - T4: Tests
+    - T5: Unit
+  - 예. `Service`.`Tests`.`Unit`: T1, T2 생략일 때
 
-- **이름**
-  - `T1`: {Corporation} Corp
-  - `T2`: {Product} Hello
-  - `T3`: {Category} Api, Master
+![](./.images/SolutionExplorer.png)
 
 <br/>
 
