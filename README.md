@@ -1,4 +1,4 @@
-# _better_ **CODE** _with domain-driven design_
+# _better_ _**CODE**_ _with domain-driven design_
 
 ## 기술 맵
 ![](./.images/TechMap.png)
