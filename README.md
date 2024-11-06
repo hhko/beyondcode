@@ -20,8 +20,8 @@
   - [ ] Ch 10. 빌드
   - [ ] Ch 11. 배포
 - Part 4. 관찰 가능성
-  - [ ] Ch 12. Aspire 관찰 대시보드
-  - [ ] Ch 13. OpenSearch 관찰 시스템
+  - [ ] Ch 12. Aspire 대시보드
+  - [ ] Ch 13. OpenSearch 시스템
   - [ ] TODO(로그, 지표, 추적)
 - Part 5. Internal 전술 설계
   - [x] [Ch 14. 전술 설계 패턴](#ch-14-전술-설계-패턴)
@@ -266,7 +266,6 @@ Application Architecture
     - T4: Adapters
     - T5: Infrastructure
   - `Corporation`.`Product`.`Service`.`Domain`: T5 생략일 때
-    - T4: Domain
   - `Service`.`Adapters`.`Infrastructure`: T1, T2 생략일 때
 - Tests 예제
   - 예. `Corporation`.`Product`.`Service`.`Tests`.`Unit`
