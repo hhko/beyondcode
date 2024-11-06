@@ -351,12 +351,12 @@ dotnet --version
 
 # Part 4. 관찰 가능성
 
-# Ch 12. Aspire 관찰 대시보드
+# Ch 12. Aspire 대시보드
 - TODO
 
 <br/>
 
-# Ch 13. OpenSearch 관찰 시스템
+# Ch 13. OpenSearch 시스템
 - TODO
 
 <br/>
