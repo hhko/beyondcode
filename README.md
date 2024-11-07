@@ -77,15 +77,14 @@ Application Architecture
 <br/>
 
 # Ch 2. 아키텍처 원칙
-> - 아키텍처 원칙: [Separation of concerns](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns)
+> 아키텍처 원칙: [Separation of concerns](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns)
 
 ## 관심사의 분리
-- 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 Biz.와 Tech. 관심사 기준으로 동일해야 합니다.**
+- 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 Biz.와 Tech. 관심사 기준으로 같아야 합니다.**
+  - **개발 시** 요구사항을 비즈니스와 기술 관심사로 분해합니다.
+  - **운영 시** 로그를 비즈니스와 기술 관심사로 식별합니다.
 
 ![](./.images/Layer.SoC.Abstraction.png)
-
-- **개발 시** 요구사항을 비즈니스와 기술 관심사로 분해합니다.
-- **운영 시** 로그를 비즈니스와 기술 관심사로 식별합니다.
 
 ## 레이어
 - 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 레이어 기준으로 동일해야 합니다.**
@@ -131,13 +130,13 @@ Application Architecture
 ## 격리 고도화
 ![](./.images/Layer.Mediator.png)
 
-- Mediator 패턴은 메시지를 Mediator 객체를 통해 간접적으로 전달하여 런타임 때도 호출자의 정보가 숨겨집니다.
+- Mediator 패턴은 메시지를 Mediator 객체를 통해 간접적으로 전달하여 런타임 때도 호출자의 정보를 숨길 수 있습니다.
   | 구분                       | Mediator  패턴                       | Strategy  패턴          |
   | ---                        | ---                                  | ---                     |
   | 호출자 정보 **컴파일 타임**  | Unknown                              | Unknown                 |
   | 호출자 정보 **런타임**      | Unknown                              | Known                   |
   | **통신**                   | 컴파일 타임과 런타임 모두 **간접**     | 컴파일 타임에만 **간접** |
-- Mediator 패턴은 메시지로 의사소통 방식을 추상화합니다.
+- Mediator 패턴은 메시지로 의사소통 방식을 단순화합니다.
 
 ## 메시지 고도화
 ![](./.images/Layer.Decorator.png)

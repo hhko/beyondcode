@@ -91,3 +91,4 @@ Microsoft.CodeAnalysis.BannedApiAnalyzers
   - [ ] BFF(Backend For Frontend) 패턴
   - [ ] Cache
   - [ ] Pub/Sub 패턴
+  - [ ] 분산 락
