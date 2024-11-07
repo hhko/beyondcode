@@ -12,7 +12,7 @@
   - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
   - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
-  - [ ] Ch 06. 레이어 통합
+  - [x] [Ch 06. 레이어 통합](#ch-6-레이어-통합)
 - Part 3. 솔루션
   - [x] [Ch 07. 솔루션 구조](#ch-8-솔루션-구조)
   - [ ] [Ch 08. 솔루션 설정](#ch-9-솔루션-설정)
@@ -148,9 +148,9 @@ Application Architecture
 ## 메시지 범주화(CQRS)
 ![](./.images/Layer.CQRS.png)
 
-- Mediator 패턴은 CQRS(Command and Query Responsibility Segregation) 패턴과 조합하여 메시지를 Command 메시지와 Query 메시지로 분류할 수 있습니다.
-  - Command 메시지: 데이터 `CUD`(`Create, Update, Delete`: **데이터 가변**)
-  - Query 메시지: 데이터 `R`(`Read`: **데이터 불변**)
+- Mediator 패턴을 통해 데이터 쓰기를 위한 메시지(Command)와 데이터를 읽기 위한 메시지(Query)로 구분할 수 있습니다.
+  - Command 메시지: 데이터 가변(`CUD`:`Create, Update, Delete`)
+  - Query 메시지: 데이터 불변(`R`: `Read`)
 
 ## 메시지 범주화(CQRS) 흐름
 ![](./.images/Layer.CQRS.Flow.png)
@@ -163,14 +163,12 @@ Application Architecture
 | DTO 변환   | O(필요)  | X(불 필요)  |
 | SQL 복잡도 | ↓(낮다)  | ↑(높다)     |
 
-- `트랜잭션`: Command은 데이터를 변경하기 때문에 트랜잭셩이 필요합니다.
-- `구현`:  Query는 성능 향상을 위해 도메인 타임 변환 없이 SQL을 사용하여 DTO 데이터으로 바로 반환합니다.
-- `SQL 복잡도`: Query는 상대적으로 Command에 비해 더 많은 Table 접근을 요구합니다.
+- 데이터 읽기 위한 메시지 처리에서는 SQL 구문을 사용하여 DTO 데이터 변환 없이 데이터베이스 조회 결과를 바로 반환합니다.
 
 <br/>
 
 # Ch 6. 레이어 통합
-- TODO
+![](./.images/Layer.Integration.png)
 
 <br/>
 
@@ -379,6 +377,7 @@ dotnet --version
 - [ ] [SharedKernelSample](https://github.com/NimblePros/SharedKernelSample)
   - Domain과 Application 레이어 구현을 위한 기본 타입 기본 구현과 테스트 참고
 - [ ] [C#10 `record struct` Deep Dive & Performance Implications](https://nietras.com/2021/06/14/csharp-10-record-struct/)
+- [ ] [Hexagonal Architecture - What Is It? Why Should You Use It?](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture/)
 
 ## 클린 아키텍처 템플릿
 - [ ] [ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
