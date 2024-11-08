@@ -1,28 +1,30 @@
 # _better_ _**CODE**_ _with domain-driven design_
 
-## 기술 맵
+## Tech. Map
 ![](./.images/TechMap.png)
 
 <br/>
 
-## 목차
+## Table of Contents
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
   - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
   - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
   - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
-  - [x] [Ch 06. 레이어 통합](#ch-6-레이어-통합)
+  - [x] [Ch 06. 서비스 통합](#ch-6-서비스-통합)
 - Part 3. 솔루션
   - [x] [Ch 07. 솔루션 구조](#ch-8-솔루션-구조)
   - [ ] [Ch 08. 솔루션 설정](#ch-9-솔루션-설정)
-  - [ ] Ch 09. 테스트
-  - [ ] Ch 10. 빌드
-  - [ ] Ch 11. 배포
+  - [ ] [Ch 09. 솔루션 테스트](#ch-9-솔루션-테스트)
+  - [ ] [Ch 10. 솔루션 빌드](#ch-10-솔루션-빌드)
+  - [ ] [Ch 11. 솔루션 배포](#ch-11-솔루션-배포)
 - Part 4. 관찰 가능성
   - [ ] Ch 12. Aspire 대시보드
   - [ ] Ch 13. OpenSearch 시스템
-  - [ ] TODO(로그, 지표, 추적)
+  - [ ] TODO 로그
+  - [ ] TODO 추적
+  - [ ] TODO 지표
 - Part 5. Internal 전술 설계
   - [x] [Ch 14. 전술 설계 패턴](#ch-14-전술-설계-패턴)
   - [ ] TODO
@@ -99,6 +101,7 @@ Application Architecture
 - **기술 관심사**
   - Adapter
     - `Known` 입력 Adapter
+    - ~~`Unknown` 입력 Adapter~~
     - `Known` 출력 Adapter
     - `Unknown` 출력 Adapter: 부수 효과(Side Effects)
 
@@ -115,7 +118,7 @@ Application Architecture
 
 ## 격리 후
 ![](./.images/Layer.Isolation.After.png)
-- Strategy 패턴
+- 입출력 인터페이스를 이용하여 레이어를 격리합니다(Strategy 패턴)
 
 <br/>
 
@@ -132,13 +135,14 @@ Application Architecture
 ## 격리 고도화
 ![](./.images/Layer.Mediator.png)
 
-- Mediator 패턴은 메시지를 Mediator 객체를 통해 간접적으로 전달하여 런타임 때도 호출자의 정보를 숨길 수 있습니다.
-  | 구분                       | Mediator  패턴                       | Strategy  패턴          |
-  | ---                        | ---                                  | ---                     |
-  | 호출자 정보 **컴파일 타임**  | Unknown                              | Unknown                 |
-  | 호출자 정보 **런타임**      | Unknown                              | Known                   |
-  | **통신**                   | 컴파일 타임과 런타임 모두 **간접**     | 컴파일 타임에만 **간접** |
-- Mediator 패턴은 메시지로 의사소통 방식을 단순화합니다.
+- Mediator 패턴을 활용하여, 격리된 레이어 간의 소통을 위해 인터페이스의 입출력을 메시지 기반으로 단순화합니다.
+  - 메시지는 컴파일 타임과 런타임 모두에서 호출자와 수신자 정보를 숨길 수 있습니다(느슨한 결합).
+    | 구분             | Mediator  패턴  | Strategy  패턴 |
+    | ---              | ---            | ---            |
+    | **Compile-time** | Unknown        | Unknown        |
+    | **Runtime**      | Unknown        | Known          |
+  - 메시지는 런타임에 메시지에 부가 기능을 더 쉽게 추가할 수 있습니다(Decorator 패턴)
+  - 메시지는 입출력을 범주화할 수 있습니다(Command 메시지와 Query 메시지: CQRS 패턴).
 
 ## 메시지 고도화
 ![](./.images/Layer.Decorator.png)
@@ -169,8 +173,10 @@ Application Architecture
 
 <br/>
 
-# Ch 6. 레이어 통합
+# Ch 6. 서비스 통합
 ![](./.images/Layer.Integration.png)
+
+- 서비스 통합은 비즈니스 관심사와 분리하여 기술적 관심사(Adapter 레이어) 중심으로 구성할 수 있게 됩니다(Microservice 아키텍처 패턴).
 
 <br/>
 
@@ -340,7 +346,59 @@ dotnet --version
 
 ## 컨테이너
 - TODO 이름 규칙
-- todo
+- TODO Health Check
+- TODO 진단 도구
+
+<br/>
+
+---
+
+<br/>
+
+# Ch 9. 솔루션 테스트
+
+## 테스트
+- TODO 코드 커버리지
+- TODO Fake 데이터
+- TODO AutoFixture???
+
+## 컨테이너 테스트
+- TODO PostgreSQL
+- TODO RabbitMQ, ...
+
+## 통합 테스트
+- TODO WebApi
+- TODO RabbitMQ
+- TODO FileSystem(반복 작업)
+- TODO ...
+
+## 성능 테스트
+
+<br/>
+
+---
+
+<br/>
+
+# Ch 10. 솔루션 빌드
+- TODO 코드 커버리지
+- TODO 프로젝트 의존성 다이어그램
+- TODO 코드 정적 분석?
+- TODO EFCore 다이어그램
+- TODO 빌드 조건?
+  - 브랜치
+  - PR
+  - 대상 파일
+
+<br/>
+
+---
+
+<br/>
+
+# Ch 11. 솔루션 배포
+- TODO GitHub Release
+- TODO GitHub 컨테이너
 
 <br/>
 
