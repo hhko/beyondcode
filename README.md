@@ -74,6 +74,8 @@ Application Architecture
 ## 아키텍처 역사
 ![](./.images/Architecture.History.png)
 
+  ※ 출처: [The Grand Unified Theory of Clean Architecture and Test Pyramid ](https://www.youtube.com/watch?v=mzznsq4jCHY)
+
 <br/>
 
 # Ch 2. 아키텍처 원칙
