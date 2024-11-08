@@ -174,7 +174,7 @@ Application Architecture
 <br/>
 
 # Ch 6. 서비스 통합
-![](./.images/Layer.Integration.png)
+![](./.images/Service.Integration.png)
 
 - 서비스 통합은 비즈니스 관심사와 분리하여 기술적 관심사(Adapter 레이어) 중심으로 구성할 수 있게 됩니다(Microservice 아키텍처 패턴).
 
