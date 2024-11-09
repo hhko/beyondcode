@@ -301,6 +301,12 @@ Application Architecture
 # Host에 설치된 SDK 목록
 dotnet --list-sdks
 
+# 템플릿 확인
+dotnet new list | findstr nuget
+  템플릿 이름          약식 이름                       언어     태그
+  ------------------- -----------------------------  -------  -----------
+  global.json 파일     globaljson,global.json                  Config
+
 # globaljson 파일 생성
 #  - 8.0.100 이상 8.0.xxx 버전(예: 8.0.303 또는 8.0.402)을 허용합니다.
 dotnet new globaljson --sdk-version 8.0.100 --roll-forward latestFeature --force
@@ -350,11 +356,36 @@ dotnet --version
   ```
 
 ## 패키지 소스
+- `nuget.config` 파일은 솔루션 수준에서 패키지 소스을 관리합니다.
+  - 예제 코드: [nuget.config](./Ch09.SolutionSettings/nuget.config)
+
+```shell
+# 템플릿 확인
+dotnet new list | findstr nuget
+  템플릿 이름        약식 이름                      언어     태그
+  ---------------- -----------------------------  -------  ---------
+  NuGet 구성        nugetconfig,nuget.config               Config
+
+# 템플릿 생성
+dotnet new nuget.config
+```
+
+### 기본 패키지 소스
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <!--To inherit the global NuGet package sources remove the <clear/> line below -->
+    <clear />
+    <add key="nuget" value="https://api.nuget.org/v3/index.json" />
+  </packageSources>
+</configuration>
+```
+- 전역 설정에 지정된 기존 NuGet 패키지 소스 목록을 모두 제거 후에 새 패키지 저장소 `https://api.nuget.org/v3/index.json`을 지정합니다.
+
+## 패키지 속성 중앙화
+- `Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다.
 - TODO
-
-## 패키지 버전 중앙화
-`Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다
-
 
 ## 빌드 속성 중앙화
 - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
@@ -524,6 +555,7 @@ Directory.Build.props                                           // 전역 프로
 # Ch 12. 솔루션 배포
 - TODO GitHub Release
 - TODO GitHub 컨테이너
+- TODO 버전
 
 <br/>
 
