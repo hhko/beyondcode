@@ -13,20 +13,21 @@
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
   - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
   - [x] [Ch 06. 서비스 통합](#ch-6-서비스-통합)
+  - [ ] Ch 07. 아키텍처 비교
 - Part 3. 솔루션
-  - [x] [Ch 07. 솔루션 구조](#ch-8-솔루션-구조)
-  - [ ] [Ch 08. 솔루션 설정](#ch-9-솔루션-설정)
-  - [ ] [Ch 09. 솔루션 테스트](#ch-9-솔루션-테스트)
-  - [ ] [Ch 10. 솔루션 빌드](#ch-10-솔루션-빌드)
-  - [ ] [Ch 11. 솔루션 배포](#ch-11-솔루션-배포)
+  - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
+  - [ ] [Ch 09. 솔루션 설정](#ch-9-솔루션-설정)
+  - [ ] [Ch 10. 솔루션 테스트](#ch-10-솔루션-테스트)
+  - [ ] [Ch 11. 솔루션 빌드](#ch-11-솔루션-빌드)
+  - [ ] [Ch 12. 솔루션 배포](#ch-12-솔루션-배포)
 - Part 4. 관찰 가능성
-  - [ ] Ch 12. Aspire 대시보드
-  - [ ] Ch 13. OpenSearch 시스템
+  - [ ] Ch 13. Aspire 대시보드
+  - [ ] Ch 14. OpenSearch 시스템
   - [ ] TODO 로그
   - [ ] TODO 추적
   - [ ] TODO 지표
 - Part 5. Internal 전술 설계
-  - [x] [Ch 14. 전술 설계 패턴](#ch-14-전술-설계-패턴)
+  - [x] [Ch 15. 전술 설계 패턴](#ch-15-전술-설계-패턴)
   - [ ] TODO
 - Part 6. External 전술 설계
 - Part 7. 전략 설계
@@ -180,14 +181,18 @@ Application Architecture
 
 <br/>
 
+# Ch 07. 아키텍처 비교
+
+<br/>
+
 ---
 
 <br/>
 
 # Part 3. 솔루션
 
-# Ch 7. 솔루션 구조
-> 예제 코드: [링크](./Ch07.SolutionStructure/)
+# Ch 8. 솔루션 구조
+> 예제 코드: [링크](./Ch08.SolutionStructure/)
 
 ## 솔루션 구조 템플릿
 ```shell
@@ -242,7 +247,7 @@ Application Architecture
 |------- |-------------    |--------------    |
 | `{T1}` | Corporation     | Corporation      |
 | `{T2}` | Product         | Product          |
-| `T3`   | Process         | Process          |
+| `T3`   | Service 또는 UI  | Service 또는 UI  |
 | `T4`   | **Layers**      | Tests            |
 | `T5`   | **Sub-Layers**  | **Test Pyramid** |
 
@@ -267,7 +272,7 @@ Application Architecture
   - `Corporation`.`Product`.`Service`.`Adapters`.`Infrastructure`
     - T1: Corporation
     - T2: Product
-    - T3: Service
+    - T3: Service 또는 UI
     - T4: Adapters
     - T5: Infrastructure
   - `Corporation`.`Product`.`Service`.`Domain`: T5 생략일 때
@@ -276,7 +281,7 @@ Application Architecture
   - 예. `Corporation`.`Product`.`Service`.`Tests`.`Unit`
     - T1: Corporation
     - T2: Product
-    - T3: Service
+    - T3: Service 또는 UI
     - T4: Tests
     - T5: Unit
   - 예. `Service`.`Tests`.`Unit`: T1, T2 생략일 때
@@ -285,10 +290,11 @@ Application Architecture
 
 <br/>
 
-# Ch 8. 솔루션 설정
+# Ch 9. 솔루션 설정
 
 ## SDK 빌드 버전
-> 예제 코드: [global-json](./Ch08.SolutionSettings/global.json)
+
+> 예제 코드: [global-json](./Ch09.SolutionSettings/global.json)
 
 - 소스를 빌드하기 위한 SDK 버전을 `global.json` 으로 지정합니다.
 
@@ -348,11 +354,13 @@ dotnet --version
 - TODO
 
 ## 패키지 버전 중앙화
-- `Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다
-- TODO
+`Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다
 
-## 빌드 설정 중앙화
-- `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 설정을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
+
+## 빌드 속성 중앙화
+> - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
+> - 솔루션 빌드 속성: [Directory.Build.props](./Ch09.SolutionSettings\Directory.Build.props)
+> - 테스트 빌드 속성: [Directory.Build.props](./Ch09.SolutionSettings\Backend\Tests\Directory.Build.props)
 
 ```shell
 # 템플릿 확인
@@ -363,7 +371,23 @@ dotnet new buildprops
 ```
 
 ### Directory.Build.props
-- 전역 프로젝트 설정은 솔루션 폴더에 있는 Directory.Build.props 파일에 정의합니다.
+```shell
+{T2}.sln
+Directory.Build.props                                           // 전역 프로젝트 빌드 속성
+  │
+  ├─Backend
+  │   ├─{T3}
+  │   │   ├─Src
+  │   │   │   ├─{T1}.{T2}.{T3}
+  │   │   │   └─...
+  │   │   └─Tests
+  │   │       ├─Directory.Build.props                           // 테스트 프로젝트 빌드 속성
+  │   │       ├─{T1}.{T2}.{T3}.Tests.Integration
+  │   │       ├─{T1}.{T2}.{T3}.Tests.Performance
+  │   │       └─{T1}.{T2}.{T3}.Tests.Unit
+```
+
+- 전역 프로젝트 속성은 솔루션 폴더에 있는 `Directory.Build.props` 파일에 정의합니다.
   ```xml
   <Project>
     <PropertyGroup>
@@ -373,7 +397,7 @@ dotnet new buildprops
     </PropertyGroup>
   </Project>
   ```
-- 테스트 프로젝트의 추가적인 설정은 전역 프로젝트 설정 외에 Tests 폴더의 Directory.Build.props 파일에 정의합니다.
+- 테스트 프로젝트의 추가적인 속성은 전역 프로젝트 속성 외에 Tests 폴더의 `Directory.Build.props` 파일에 정의합니다.
   ```xml
   <Project>
     <!--
@@ -389,14 +413,14 @@ dotnet new buildprops
   </Project>
   ```
 
-### Directory.Build.props 적용 후
-- EXE 프로젝트 설정
+### 프로젝트 파일(Directory.Build.props 적용 후)
+- EXE 프로젝트 .csproj 파일
   ```xml
   <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
       <OutputType>Exe</OutputType>
       <!--
-      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 설정을 사용합니다.
+      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 속성을 사용합니다.
 
       <TargetFramework>net8.0</TargetFramework>
       <ImplicitUsings>enable</ImplicitUsings>
@@ -405,12 +429,12 @@ dotnet new buildprops
     </PropertyGroup>
   </Project>
   ```
-- ClassLibrary 프로젝트 설정
+- ClassLibrary 프로젝트 .csproj 파일
   ```xml
   <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
       <!--
-      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 설정을 사용합니다.
+      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 속성을 사용합니다.
 
       <TargetFramework>net8.0</TargetFramework>
       <ImplicitUsings>enable</ImplicitUsings>
@@ -419,18 +443,18 @@ dotnet new buildprops
     </PropertyGroup>
   </Project>
   ```
-- Test 프로젝트 설정
+- Test 프로젝트 .csproj 파일
   ```xml
   <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
       <!--
-      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 설정을 사용합니다.
+      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 속성을 사용합니다.
 
       <TargetFramework>net8.0</TargetFramework>
       <ImplicitUsings>enable</ImplicitUsings>
       <Nullable>enable</Nullable>
 
-      // Tests 폴더에 있는 Directory.Build.props 파일에 있는 설정을 사용합니다.
+      // Tests 폴더에 있는 Directory.Build.props 파일에 있는 속성을 사용합니다.
       <IsPackable>false</IsPackable>
       <IsTestProject>true</IsTestProject>
       -->
@@ -453,7 +477,7 @@ dotnet new buildprops
 
 <br/>
 
-# Ch 9. 솔루션 테스트
+# Ch 10. 솔루션 테스트
 
 ## 테스트
 - TODO 코드 커버리지
@@ -478,7 +502,7 @@ dotnet new buildprops
 
 <br/>
 
-# Ch 10. 솔루션 빌드
+# Ch 11. 솔루션 빌드
 - TODO 코드 커버리지
 - TODO 프로젝트 의존성 다이어그램
 - TODO 코드 정적 분석?
@@ -494,7 +518,7 @@ dotnet new buildprops
 
 <br/>
 
-# Ch 11. 솔루션 배포
+# Ch 12. 솔루션 배포
 - TODO GitHub Release
 - TODO GitHub 컨테이너
 
@@ -506,12 +530,12 @@ dotnet new buildprops
 
 # Part 4. 관찰 가능성
 
-# Ch 12. Aspire 대시보드
+# Ch 13. Aspire 대시보드
 - TODO
 
 <br/>
 
-# Ch 13. OpenSearch 시스템
+# Ch 14. OpenSearch 시스템
 - TODO
 
 <br/>
@@ -522,7 +546,7 @@ dotnet new buildprops
 
 # Part 5. Internal 전술 설계
 
-# Ch 14. 전술 설계 패턴
+# Ch 15. 전술 설계 패턴
 ![](./.images/TacticalDesign.Pattern.png)
 
 <br/>
@@ -552,7 +576,7 @@ dotnet new buildprops
 - [ ] [Enforcing Software Architecture With Architecture Tests](https://www.milanjovanovic.tech/blog/enforcing-software-architecture-with-architecture-tests)
 - [ ] [Shift Left With Architecture Testing in .NET](https://www.milanjovanovic.tech/blog/shift-left-with-architecture-testing-in-dotnet)
 
-## 설정
+## 속성
 ### 코드 분석
 - [ ] [Editorconfig In Visual Studio In 10 Minutes or Less](https://www.youtube.com/watch?v=CQW5b58mPdg&t)
   - editorconfig 탭 간격, 마지막 라인, 네임스페이 기본 값(컴파일러 수준)
