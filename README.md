@@ -294,10 +294,8 @@ Application Architecture
 # Ch 9. 솔루션 설정
 
 ## SDK 빌드 버전
-
-> 예제 코드: [global-json](./Ch09.SolutionSettings/global.json)
-
-- 소스를 빌드하기 위한 SDK 버전을 `global.json` 으로 지정합니다.
+- `global-json` 파일은 .NET 프로젝트에서 특정 .NET SDK 버전을 지정하여 일관된 개발 환경을 유지하기 위해 사용됩니다.
+  - 예제 코드: [global-json](./Ch09.SolutionSettings/global.json)
 
 ```shell
 # Host에 설치된 SDK 목록
@@ -315,7 +313,7 @@ dotnet new globaljson --sdk-version 8.0.100 --roll-forward disable --force
 dotnet --version
 ```
 
-- 버전 형식: "[global.json](https://learn.microsoft.com/ko-kr/dotnet/core/tools/global-json)"에 지정된 버전에서부터 상위 버전(rollForward) 범위를 지정합니다.
+- .NET SDK 버전 형식: "[global.json](https://learn.microsoft.com/ko-kr/dotnet/core/tools/global-json)"에 지정된 버전에서부터 상위 버전(rollForward) 범위를 지정합니다.
   ```
   x.y.znn
   ```
@@ -359,9 +357,9 @@ dotnet --version
 
 
 ## 빌드 속성 중앙화
-> - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
->   - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings\Directory.Build.props)
->   - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings\Backend\Tests\Directory.Build.props)
+- `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
+  - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings\Directory.Build.props)
+  - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings\Backend\Tests\Directory.Build.props)
 
 ```shell
 # 템플릿 확인
