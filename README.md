@@ -21,8 +21,8 @@
   - [ ] [Ch 11. 솔루션 빌드](#ch-11-솔루션-빌드)
   - [ ] [Ch 12. 솔루션 배포](#ch-12-솔루션-배포)
 - Part 4. 관찰 가능성
-  - [ ] Ch 13. Aspire 대시보드
-  - [ ] Ch 14. OpenSearch 시스템
+  - [ ] [Ch 13. Aspire 대시보드](#ch-13-aspire-대시보드)
+  - [ ] [Ch 14. OpenSearch 시스템](#ch-14-opensearch-시스템)
   - [ ] TODO 로그
   - [ ] TODO 추적
   - [ ] TODO 지표
@@ -182,6 +182,7 @@ Application Architecture
 <br/>
 
 # Ch 07. 아키텍처 비교
+- TODO
 
 <br/>
 
@@ -359,12 +360,15 @@ dotnet --version
 
 ## 빌드 속성 중앙화
 > - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
-> - 솔루션 빌드 속성: [Directory.Build.props](./Ch09.SolutionSettings\Directory.Build.props)
-> - 테스트 빌드 속성: [Directory.Build.props](./Ch09.SolutionSettings\Backend\Tests\Directory.Build.props)
+>   - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings\Directory.Build.props)
+>   - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings\Backend\Tests\Directory.Build.props)
 
 ```shell
 # 템플릿 확인
 dotnet new list | findstr props
+  템플릿 이름                            약식 이름     언어      태그
+  ------------------------------------  -----------  -------  ----------------
+  MSBuild Directory.Build.props 파일     buildprops            MSBuild/props
 
 # Directory.Build.props 기본 파일 생성
 dotnet new buildprops
@@ -387,7 +391,7 @@ Directory.Build.props                                           // 전역 프로
   │   │       └─{T1}.{T2}.{T3}.Tests.Unit
 ```
 
-- 전역 프로젝트 속성은 솔루션 폴더에 있는 `Directory.Build.props` 파일에 정의합니다.
+- 전역 프로젝트 빌드 속성: 전역 프로젝트 속성은 솔루션 폴더에 있는 `Directory.Build.props` 파일에 정의합니다.
   ```xml
   <Project>
     <PropertyGroup>
@@ -397,7 +401,7 @@ Directory.Build.props                                           // 전역 프로
     </PropertyGroup>
   </Project>
   ```
-- 테스트 프로젝트의 추가적인 속성은 전역 프로젝트 속성 외에 Tests 폴더의 `Directory.Build.props` 파일에 정의합니다.
+- 테스트 프로젝트 빌드 속성: 테스트 프로젝트의 추가적인 속성은 전역 프로젝트 속성 외에 Tests 폴더의 `Directory.Build.props` 파일에 정의합니다.
   ```xml
   <Project>
     <!--
@@ -495,6 +499,7 @@ Directory.Build.props                                           // 전역 프로
 - TODO ...
 
 ## 성능 테스트
+- TODO ...
 
 <br/>
 
