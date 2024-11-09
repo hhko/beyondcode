@@ -23,6 +23,8 @@ https://blog.ndepend.com/directory-build-props/
   - [ ] 파일 시스템(반복)
   - [ ] WebApi 서비스
   - [ ] RabbitMQ
+- [ ] Assembly.cs
+- [ ] 레이어 의존성 테스트
 - [x] 의존성(Strategy 패턴)
 - [x] .josn 옵션 패턴
 - [ ] Result/Error
