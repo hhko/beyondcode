@@ -296,13 +296,15 @@ Application Architecture
 # Host에 설치된 SDK 목록
 dotnet --list-sdks
 
-# globaljson 파일 만들기
-#   - 8.0.100 이상 8.0.xxx 버전(예: 8.0.303 또는 8.0.402)을 허용합니다.
-dotnet new globaljson --sdk-version 8.0.100 --roll-forward latestFeature
-#   - 8.0.100 이상 8.0.1xx 버전(예: 8.0.103 또는 8.0.199)을 허용합니다.
-dotnet new globaljson --sdk-version 8.0.100 --roll-forward latestPatch
+# globaljson 파일 생성
+#  - 8.0.100 이상 8.0.xxx 버전(예: 8.0.303 또는 8.0.402)을 허용합니다.
+dotnet new globaljson --sdk-version 8.0.100 --roll-forward latestFeature --force
+#  - 8.0.100 이상 8.0.1xx 버전(예: 8.0.103 또는 8.0.199)을 허용합니다.
+dotnet new globaljson --sdk-version 8.0.100 --roll-forward latestPatch --force
+#  - 8.0.100 지정된 버전만을 사용합니다.
+dotnet new globaljson --sdk-version 8.0.100 --roll-forward disable --force
 
-# SDK 빌드 버전 확인하기
+# SDK 빌드 버전 확인
 dotnet --version
 ```
 
@@ -332,17 +334,113 @@ dotnet --version
     }
   }
   ```
+- 예. `disable`: 8.0.102 지정된 SDK 버전만을 허용하빈다.
+  ```json
+  {
+    "sdk": {
+      "version": "8.0.102",
+      "rollForward": "disable"
+    }
+  }
+  ```
 
-## 빌드 설정 중앙화
-- TODO Directory.Build.prop
-- TODO ServerGarbageCollection
+## 패키지 소스
+- TODO
 
 ## 패키지 버전 중앙화
-- TODO Directory.Package.prop
+- `Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다
+- TODO
+
+## 빌드 설정 중앙화
+- `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 설정을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
+
+```shell
+# 템플릿 확인
+dotnet new list | findstr props
+
+# Directory.Build.props 기본 파일 생성
+dotnet new buildprops
+```
+
+### Directory.Build.props
+- 전역 프로젝트 설정은 솔루션 폴더에 있는 Directory.Build.props 파일에 정의합니다.
+  ```xml
+  <Project>
+    <PropertyGroup>
+      <TargetFramework>net8.0</TargetFramework>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+    </PropertyGroup>
+  </Project>
+  ```
+- 테스트 프로젝트의 추가적인 설정은 전역 프로젝트 설정 외에 Tests 폴더의 Directory.Build.props 파일에 정의합니다.
+  ```xml
+  <Project>
+    <!--
+      현재 파일의 위치에서 상위로 디렉터리를 거슬러 올라가면서 Directory.Build.props 파일을 찾고,
+      해당 파일이 발견되면 프로젝트에 포함시키는 역할을 합니다.
+    -->
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+    <PropertyGroup>
+      <IsPackable>false</IsPackable>
+      <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+  </Project>
+  ```
+
+### Directory.Build.props 적용 후
+- EXE 프로젝트 설정
+  ```xml
+  <Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+      <OutputType>Exe</OutputType>
+      <!--
+      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 설정을 사용합니다.
+
+      <TargetFramework>net8.0</TargetFramework>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+      -->
+    </PropertyGroup>
+  </Project>
+  ```
+- ClassLibrary 프로젝트 설정
+  ```xml
+  <Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+      <!--
+      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 설정을 사용합니다.
+
+      <TargetFramework>net8.0</TargetFramework>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+      -->
+    </PropertyGroup>
+  </Project>
+  ```
+- Test 프로젝트 설정
+  ```xml
+  <Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+      <!--
+      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 설정을 사용합니다.
+
+      <TargetFramework>net8.0</TargetFramework>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+
+      // Tests 폴더에 있는 Directory.Build.props 파일에 있는 설정을 사용합니다.
+      <IsPackable>false</IsPackable>
+      <IsTestProject>true</IsTestProject>
+      -->
+    </PropertyGroup>
+  </Project>
+  ```
 
 ## 코드 분석
-- 코드 스타일
-- 코드 품질
+- TODO 코드 스타일
+- TODO 코드 품질
 
 ## 컨테이너
 - TODO 이름 규칙

@@ -1,3 +1,22 @@
+```
+- 전역
+- 부분 변경
+- 부분 제외
+- 공통 설정
+  - ServerGarbageCollection
+- 확인: dotnet msbuild /pp
+
+폴더별 빌드 사용자 지정
+https://learn.microsoft.com/ko-kr/visualstudio/msbuild/customize-by-directory?view=vs-2022
+
+Directory.Build.props - Centralize your builds
+https://steven-giesel.com/blogPost/f3f46814-06c9-41b7-84fa-09ebb3305ed0
+
+
+Understand Directory.Build.props: Centralizing .NET Project Configurations
+https://blog.ndepend.com/directory-build-props/
+```
+
 # 패턴
 ## Internal 전술 설계 패턴
 - [ ] 서비스
