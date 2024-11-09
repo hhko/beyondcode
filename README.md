@@ -358,8 +358,8 @@ dotnet --version
 
 ## 빌드 속성 중앙화
 - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
-  - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings\Directory.Build.props)
-  - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings\Backend\Tests\Directory.Build.props)
+  - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings/Directory.Build.props)
+  - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings/Backend/Tests/Directory.Build.props)
 
 ```shell
 # 템플릿 확인
