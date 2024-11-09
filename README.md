@@ -17,12 +17,12 @@
 - Part 3. 솔루션
   - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
   - [ ] [Ch 09. 솔루션 설정](#ch-9-솔루션-설정)
-  - [ ] [Ch 10. 솔루션 테스트](#ch-10-솔루션-테스트)
-  - [ ] [Ch 11. 솔루션 빌드](#ch-11-솔루션-빌드)
-  - [ ] [Ch 12. 솔루션 배포](#ch-12-솔루션-배포)
+  - [ ] Ch 10. 솔루션 테스트
+  - [ ] Ch 11. 솔루션 빌드
+  - [ ] Ch 12. 솔루션 배포
 - Part 4. 관찰 가능성
-  - [ ] [Ch 13. Aspire 대시보드](#ch-13-aspire-대시보드)
-  - [ ] [Ch 14. OpenSearch 시스템](#ch-14-opensearch-시스템)
+  - [ ] Ch 13. Aspire 대시보드
+  - [ ] Ch 14. OpenSearch 시스템
   - [ ] TODO 로그
   - [ ] TODO 추적
   - [ ] TODO 지표
@@ -273,7 +273,7 @@ Application Architecture
   - `Corporation`.`Product`.`Service`.`Adapters`.`Infrastructure`
     - T1: Corporation
     - T2: Product
-    - T3: Service 또는 UI
+    - T3: Service
     - T4: Adapters
     - T5: Infrastructure
   - `Corporation`.`Product`.`Service`.`Domain`: T5 생략일 때
@@ -282,7 +282,7 @@ Application Architecture
   - 예. `Corporation`.`Product`.`Service`.`Tests`.`Unit`
     - T1: Corporation
     - T2: Product
-    - T3: Service 또는 UI
+    - T3: Service
     - T4: Tests
     - T5: Unit
   - 예. `Service`.`Tests`.`Unit`: T1, T2 생략일 때
@@ -293,12 +293,12 @@ Application Architecture
 
 # Ch 9. 솔루션 설정
 
-## SDK 빌드 버전
+## .NET SDK 빌드 버전
 - `global-json` 파일은 .NET 프로젝트에서 특정 .NET SDK 버전을 지정하여 일관된 개발 환경을 유지하기 위해 사용됩니다.
   - 예제 코드: [global-json](./Ch09.SolutionSettings/global.json)
 
 ```shell
-# Host에 설치된 SDK 목록
+# Host에 설치된 .NET SDK 목록
 dotnet --list-sdks
 
 # 템플릿 확인
@@ -315,7 +315,7 @@ dotnet new globaljson --sdk-version 8.0.100 --roll-forward latestPatch --force
 #  - 8.0.100 지정된 버전만을 사용합니다.
 dotnet new globaljson --sdk-version 8.0.100 --roll-forward disable --force
 
-# SDK 빌드 버전 확인
+# .NET SDK 빌드 버전 확인
 dotnet --version
 ```
 
@@ -327,7 +327,7 @@ dotnet --version
   - `y`: minor
   - `z`: feature, 0 ~ 9
   - `n`: patch, 0 ~ 99
-- 에. `latestFeature`: 8.0.302 이전의 모든 SDK 버전을 허용하지 않으며 8.0.302 이상 8.0.xxx 버전(예: 8.0.303 또는 8.0.402)을 허용합니다.
+- 에. `latestFeature`: 8.0.302 이전의 모든 .NET SDK 버전을 허용하지 않으며 8.0.302 이상 8.0.xxx 버전(예: 8.0.303 또는 8.0.402)을 허용합니다.
   ```json
   {
     "sdk": {
@@ -336,7 +336,7 @@ dotnet --version
     }
   }
   ```
-- 예. `latestPatch`: 8.0.102 이전의 모든 SDK 버전을 허용하지 않으며 8.0.102 이상 8.0.1xx 버전(예: 8.0.103 또는 8.0.199)을 허용합니다.
+- 예. `latestPatch`: 8.0.102 이전의 모든 .NET SDK 버전을 허용하지 않으며 8.0.102 이상 8.0.1xx 버전(예: 8.0.103 또는 8.0.199)을 허용합니다.
   ```json
   {
     "sdk": {
@@ -345,7 +345,7 @@ dotnet --version
     }
   }
   ```
-- 예. `disable`: 8.0.102 지정된 SDK 버전만을 허용하빈다.
+- 예. `disable`: 8.0.102 지정된 .NET SDK 버전만을 허용하빈다.
   ```json
   {
     "sdk": {
