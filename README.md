@@ -398,7 +398,11 @@ upgrade-assistant     0.5.820        upgrade-assistant
 ```
 
 ![](./.images/Directory.Package.props.concept.png)
+
+### 변경 전/후 프로젝트 파일
 ![](./.images/Directory.Package.props.csproj.png)
+
+### 변경 전/후 Directory.Package.props
 ![](./.images/Directory.Package.props.png)
 
 ## 빌드 속성 중앙화
