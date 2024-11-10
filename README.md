@@ -385,7 +385,21 @@ dotnet new nuget.config
 
 ## 패키지 속성 중앙화
 - `Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다.
-- TODO
+  - 예제 코드: [Directory.Packages.props](./Ch09.SolutionSettings/Directory.Packages.props)
+
+```shell
+dotnet tool install -g upgrade-assistant
+
+
+dotnet tool list -g
+패키지 ID             버전            명령
+------------------------------------------------------
+upgrade-assistant     0.5.820        upgrade-assistant
+```
+
+![](./.images/Directory.Package.props.concept.png)
+![](./.images/Directory.Package.props.csproj.png)
+![](./.images/Directory.Package.props.png)
 
 ## 빌드 속성 중앙화
 - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
