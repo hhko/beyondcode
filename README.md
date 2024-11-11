@@ -247,7 +247,7 @@ Application Architecture
 | Level  | Src             | Tests            |
 |------- |-------------    |--------------    |
 | `{T1}` | Corporation     | Corporation      |
-| `{T2}` | Product         | Product          |
+| `{T2}` | Solution        | Solution          |
 | `T3`   | Service 또는 UI  | Service 또는 UI  |
 | `T4`   | **Layers**      | Tests            |
 | `T5`   | **Sub-Layers**  | **Test Pyramid** |
@@ -269,17 +269,17 @@ Application Architecture
   - E2E(End to End)
 
 ### 솔루션 구조 예제
-- Src 예: `Corporation`.`Product`.`Service`.`Adapters`.`Infrastructure`
+- Src 예: `Corporation`.`Solution`.`Service`.`Adapters`.`Infrastructure`
     - T1: Corporation
-    - T2: Product
+    - T2: Solution
     - T3: Service
     - T4: Adapters
     - T5: Infrastructure
-- Src 예: `Corporation`.`Product`.`Service`.`Domain`: T5 생략일 때
+- Src 예: `Corporation`.`Solution`.`Service`.`Domain`: T5 생략일 때
 - Src 예:`Service`.`Adapters`.`Infrastructure`: T1, T2 생략일 때
-- Tests 예: `Corporation`.`Product`.`Service`.`Tests`.`Unit`
+- Tests 예: `Corporation`.`Solution`.`Service`.`Tests`.`Unit`
   - T1: Corporation
-  - T2: Product
+  - T2: Solution
   - T3: Service
   - T4: Tests
   - T5: Unit
