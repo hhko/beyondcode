@@ -23,10 +23,10 @@
 #   │   ├─Libraries
 #   │   │   └─{T1}.{T2}.[Tech]                                    // 예. RabbitMQ, ...
 #   │   └─Domains
-#   │   │   ├─Src
-#   │   │   │   └─{T1}.{T2}.Domain
-#   │   │   └─Tests
-#   │   │       └─{T1}.{T2}.Domain.Test.Unit                      // 공유 도메인
+#   │       ├─Src
+#   │       │   └─{T1}.{T2}.Domain
+#   │       └─Tests
+#   │           └─{T1}.{T2}.Domain.Test.Unit                      // 공유 도메인
 #   │
 #   │ # Backend 범주
 #   ├─Backend
@@ -207,6 +207,7 @@ function Add-ServiceReferences {
   # Abstraction References
   $frameworkPath = "${curDir}/Abstraction/Frameworks/Src/${T1_CORPORATION}.${T2_SOLUTION}.Framework"
   $domainPath = "${curDir}/Abstraction/Domains/Src/${T1_CORPORATION}.${T2_SOLUTION}.Domain"
+
   dotnet add "${basePath}.Application" reference $frameworkPath
   dotnet add "${basePath}.Application" reference $domainPath
   dotnet add "${basePath}.Domain"      reference "${frameworkPath}.Contracts"
