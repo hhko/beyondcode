@@ -1,3 +1,22 @@
+- Scalability
+- Load Balancing
+- Latency and Throughput
+- Caching
+- Consistency
+- Availability
+- Partitioning
+- Replication
+- Fault Tolerance
+- CAP Theorem
+- Database Indexing
+- Rate Limiting
+- Communication
+- Reverse proxy
+- Content delivery network
+- Performance
+- Streaming
+- Batch Processing
+
 ```
 - 전역
 - 부분 변경

@@ -115,7 +115,7 @@ Application Architecture
 
 ## 격리 전
 ![](./.images/Layer.Isolation.Before.png)
-![](2024-10-30-00-14-30.png)
+- 출력의 변화 영향을 입력까지 전파됩니다.
 
 ## 격리 후
 ![](./.images/Layer.Isolation.After.png)
@@ -201,12 +201,18 @@ Application Architecture
   │ # 부수(Abstraction) 범주: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
   ├─Abstraction
   │   ├─Frameworks
-  │   │   ├─{T1}.{T2}.Framework
-  │   │   └─{T1}.{T2}.Framework.Contracts
+  │   │   ├─Src
+  │   │   │   ├─{T1}.{T2}.Framework
+  │   │   │   └─{T1}.{T2}.Framework.Contracts
+  │   │   └─Tests
+  │   │       └─{T1}.{T2}.Framework.Test.Unit
   │   ├─Libraries
   │   │   └─{T1}.{T2}.[Tech]                                    // 예. RabbitMQ, ...
   │   └─Domains
-  │       └─{T1}.{T2}.[Domain]                                  // 공유 도메인, ...
+  │   │   ├─Src
+  │   │   │   └─{T1}.{T2}.Domain
+  │   │   └─Tests
+  │   │       └─{T1}.{T2}.Domain.Test.Unit                      // 공유 도메인
   │
   │ # Backend 범주
   ├─Backend
@@ -247,7 +253,7 @@ Application Architecture
 | Level  | Src             | Tests            |
 |------- |-------------    |--------------    |
 | `{T1}` | Corporation     | Corporation      |
-| `{T2}` | Product         | Product          |
+| `{T2}` | Solution        | Solution          |
 | `T3`   | Service 또는 UI  | Service 또는 UI  |
 | `T4`   | **Layers**      | Tests            |
 | `T5`   | **Sub-Layers**  | **Test Pyramid** |
@@ -269,23 +275,21 @@ Application Architecture
   - E2E(End to End)
 
 ### 솔루션 구조 예제
-- Src 예제
-  - `Corporation`.`Product`.`Service`.`Adapters`.`Infrastructure`
+- Src 예: `Corporation`.`Solution`.`Service`.`Adapters`.`Infrastructure`
     - T1: Corporation
-    - T2: Product
+    - T2: Solution
     - T3: Service
     - T4: Adapters
     - T5: Infrastructure
-  - `Corporation`.`Product`.`Service`.`Domain`: T5 생략일 때
-  - `Service`.`Adapters`.`Infrastructure`: T1, T2 생략일 때
-- Tests 예제
-  - 예. `Corporation`.`Product`.`Service`.`Tests`.`Unit`
-    - T1: Corporation
-    - T2: Product
-    - T3: Service
-    - T4: Tests
-    - T5: Unit
-  - 예. `Service`.`Tests`.`Unit`: T1, T2 생략일 때
+- Src 예: `Corporation`.`Solution`.`Service`.`Domain`: T5 생략일 때
+- Src 예:`Service`.`Adapters`.`Infrastructure`: T1, T2 생략일 때
+- Tests 예: `Corporation`.`Solution`.`Service`.`Tests`.`Unit`
+  - T1: Corporation
+  - T2: Solution
+  - T3: Service
+  - T4: Tests
+  - T5: Unit
+- Tests 예: `Service`.`Tests`.`Unit`: T1, T2 생략일 때
 
 ![](./.images/SolutionExplorer.png)
 
@@ -327,7 +331,9 @@ dotnet --version
   - `y`: minor
   - `z`: feature, 0 ~ 9
   - `n`: patch, 0 ~ 99
-- 에. `latestFeature`: 8.0.302 이전의 모든 .NET SDK 버전을 허용하지 않으며 8.0.302 이상 8.0.xxx 버전(예: 8.0.303 또는 8.0.402)을 허용합니다.
+
+### 빌드 버전 예제
+- `latestFeature` 예
   ```json
   {
     "sdk": {
@@ -336,7 +342,9 @@ dotnet --version
     }
   }
   ```
-- 예. `latestPatch`: 8.0.102 이전의 모든 .NET SDK 버전을 허용하지 않으며 8.0.102 이상 8.0.1xx 버전(예: 8.0.103 또는 8.0.199)을 허용합니다.
+  - 8.0.302 이전의 모든 .NET SDK 버전을 허용하지 않으며 8.0.302 이상 8.0.xxx 버전(예: 8.0.303 또는 8.0.402)을 허용합니다.
+
+- `latestPatch` 예
   ```json
   {
     "sdk": {
@@ -345,7 +353,8 @@ dotnet --version
     }
   }
   ```
-- 예. `disable`: 8.0.102 지정된 .NET SDK 버전만을 허용하빈다.
+  - 8.0.102 이전의 모든 .NET SDK 버전을 허용하지 않으며 8.0.102 이상 8.0.1xx 버전(예: 8.0.103 또는 8.0.199)을 허용합니다.
+- `disable` 예
   ```json
   {
     "sdk": {
@@ -354,6 +363,7 @@ dotnet --version
     }
   }
   ```
+  - 8.0.102 지정된 .NET SDK 버전만을 허용하빈다.
 
 ## 패키지 소스
 - `nuget.config` 파일은 솔루션 수준에서 패키지 소스을 관리합니다.
@@ -383,7 +393,7 @@ dotnet new nuget.config
 ```
 - 전역 설정에 지정된 기존 NuGet 패키지 소스 목록을 모두 제거 후에 새 패키지 저장소 `https://api.nuget.org/v3/index.json`을 지정합니다.
 
-## 패키지 속성 중앙화
+## 중앙 패키지 관리
 - `Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다.
   - 예제 코드: [Directory.Packages.props](./Ch09.SolutionSettings/Directory.Packages.props)
 
@@ -401,11 +411,13 @@ upgrade-assistant     0.5.820        upgrade-assistant
 
 ### 변경 전/후 프로젝트 파일
 ![](./.images/Directory.Package.props.csproj.png)
+- 프로젝트 파일에서 `PackageReference`의 `Version`을 제거 시킵니다.
 
 ### 변경 전/후 Directory.Package.props
 ![](./.images/Directory.Package.props.png)
+- 프로젝트 파일에서 제거된 `PackageReference`의 `Version` 값을 `PackageVersion`으로 추가하여 버전을 중앙에서 관리합니다.
 
-## 빌드 속성 중앙화
+## 중앙 빌드 관리
 - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
   - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings/Directory.Build.props)
   - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings/Backend/Tests/Directory.Build.props)
@@ -619,6 +631,9 @@ Directory.Build.props                                           // 전역 프로
 - [ ] [amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)
 
 ## DDD
+- [x] [DDD 그리고 MSA](https://www.youtube.com/watch?v=DOpt6IWU6LU)
+  [![](./.images/DDDandMSA.png)](https://www.youtube.com/watch?v=DOpt6IWU6LU)
+  - 주요 도서를 중심으로 도메인 주도 설계 역사를 이해할 수 있습니다.
 - [ ] [Moving IO to the edges of your app](https://www.youtube.com/watch?v=P1vES9AgfC4)  
   [![](https://img.youtube.com/vi/P1vES9AgfC4/0.jpg)](https://www.youtube.com/watch?v=P1vES9AgfC4)  
   - 아키텍처 관점에서 Pure Function과 Impure Function 배치의 중요성을 이해할 수 있습니다.

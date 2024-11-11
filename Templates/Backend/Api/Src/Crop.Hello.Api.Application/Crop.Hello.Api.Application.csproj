@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Crop.Hello.Api.Domain\Crop.Hello.Api.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\Abstraction\Frameworks\Src\Crop.Hello.Framework\Crop.Hello.Framework.csproj" />
+    <ProjectReference Include="..\..\..\..\Abstraction\Domains\Src\Crop.Hello.Domain\Crop.Hello.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
