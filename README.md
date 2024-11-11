@@ -291,7 +291,7 @@ Application Architecture
   - T5: Unit
 - Tests 예: `Service`.`Tests`.`Unit`: T1, T2 생략일 때
 
-![](./.images/SolutionExplorer.png)
+<img src=./.images/SolutionExplorer.png width=50%/>
 
 <br/>
 
