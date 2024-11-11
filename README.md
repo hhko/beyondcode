@@ -398,14 +398,19 @@ dotnet new nuget.config
   - 예제 코드: [Directory.Packages.props](./Ch09.SolutionSettings/Directory.Packages.props)
 
 ```shell
+# 도구 설치
 dotnet tool install -g upgrade-assistant
 
-
+# 도구 확인
 dotnet tool list -g
-패키지 ID             버전            명령
-------------------------------------------------------
-upgrade-assistant     0.5.820        upgrade-assistant
+  패키지 ID             버전            명령
+  ------------------------------------------------------
+  upgrade-assistant     0.5.820        upgrade-assistant
+
+# 중앙 패키지 파일 생성
+upgrade-assistant upgrade
 ```
+![](./.images/upgrade-assistant.png)
 
 ![](./.images/Directory.Package.props.concept.png)
 
