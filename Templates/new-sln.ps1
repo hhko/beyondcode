@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # .\new-sln.ps1 -t1 Crop -t2 Hello -t3s Master, Api
-=======
-# .\new-sln -t1 Corp -t2 Solution -t3s "Service1", "Service2"
->>>>>>> d4e79aae4c911930b5812ac9ead2389cd1844bcc
 #   - T1: Corporation
 #   - T2: Solution
 #   - T3S: Service    // Backend
