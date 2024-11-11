@@ -209,10 +209,10 @@ Application Architecture
   │   ├─Libraries
   │   │   └─{T1}.{T2}.[Tech]                                    // 예. RabbitMQ, ...
   │   └─Domains
-  │   │   ├─Src
-  │   │   │   └─{T1}.{T2}.Domain
-  │   │   └─Tests
-  │   │       └─{T1}.{T2}.Domain.Test.Unit                      // 공유 도메인
+  │       ├─Src
+  │       │   └─{T1}.{T2}.Domain
+  │       └─Tests
+  │           └─{T1}.{T2}.Domain.Test.Unit                      // 공유 도메인
   │
   │ # Backend 범주
   ├─Backend
