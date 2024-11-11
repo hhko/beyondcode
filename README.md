@@ -436,6 +436,8 @@ dotnet new list | findstr props
 
 # Directory.Build.props 기본 파일 생성
 dotnet new buildprops
+
+dotnet tool install --global Microsoft.VisualStudio.SlnGen.Tool --version 11.4.11
 ```
 
 ### Directory.Build.props
