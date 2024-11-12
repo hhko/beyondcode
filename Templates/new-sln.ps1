@@ -332,7 +332,7 @@ Write-Host
 Write-Host "Create Frontend" -ForegroundColor Blue
 New-Item "${curDir}/Frontend/.gitkeep" -ItemType File -Force | Out-Null
 
-# 4/5. 솔루션 빌드
+# 5/5. 솔루션 빌드
 Write-Host
 Write-Host "Building Solution" -ForegroundColor Blue
 dotnet sln "${curDir}/${T2_SOLUTION}.sln" add (ls -r ./**/*.csproj)
