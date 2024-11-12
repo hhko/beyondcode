@@ -284,15 +284,18 @@ Application Architecture
     - T3: Service
     - T4: Adapters
     - T5: Infrastructure
-- Src 예: `Corporation`.`Solution`.`Service`.`Domain`: T5 생략일 때
-- Src 예:`Service`.`Adapters`.`Infrastructure`: T1, T2 생략일 때
+- Src 예: `Corporation`.`Solution`.`Service`.`Domain`
+  - T5 생략일 때
+- Src 예:`Service`.`Adapters`.`Infrastructure`
+  - T1, T2 생략일 때
 - Tests 예: `Corporation`.`Solution`.`Service`.`Tests`.`Unit`
   - T1: Corporation
   - T2: Solution
   - T3: Service
   - T4: Tests
   - T5: Unit
-- Tests 예: `Service`.`Tests`.`Unit`: T1, T2 생략일 때
+- Tests 예: `Service`.`Tests`.`Unit`
+  - T1, T2 생략일 때
 
 <img src=./.images/SolutionExplorer.png width=50%/>
 
