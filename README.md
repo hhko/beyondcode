@@ -6,6 +6,9 @@
 <br/>
 
 ## Table of Contents
+- Part 0. 세미나
+  - [x] [내부 아키텍처 개요](./Ch00.Seminar/InternalArchitecture-Overview/)
+  - [ ] TODO
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
   - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
