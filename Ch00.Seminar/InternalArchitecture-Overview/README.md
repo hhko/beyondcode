@@ -1,14 +1,23 @@
 # 내부 아키텍처 개요
 
+## 목표
+- TODO
+
+<br/>
+
 ## 주요 키워드
 - 내부/외부 아키텍처
 - 관시삼의 분리
 - 레이어
 - 순수/불순 함수
 
+<br/>
+
 ## 아키텍처 정의
 ![](./../../.images/Architecture.png)
 - [소프트웨어 아키텍처의 중요성](https://www.youtube.com/watch?v=4E1BHTvhB7Y)
+
+<br/>
 
 ## 아키텍처 분류
 ![](./../../.images/Architecture.Category.png)
@@ -16,6 +25,8 @@
 
 - 외부 아키텍처(External Architecture): 프로세스 외부, **프로세스 배치**
 - 내부 아키텍처(Internal Architecture): 프로세스 내부, **레이어 배치**
+
+<br/>
 
 ## 아키텍처 원칙
 ![](./.images/Layer.png)
@@ -28,6 +39,8 @@
     - 비즈니스 단위: Domain
     - 비즈니스 흐름: Application
   - 기술 레이어: Adapter
+
+<br/>
 
 ## 아키텍처 트릴레마(trilemma)
 > 세 가지 선택지나 목표 중에서 오직 두 가지만 만족할 수 있고, 나머지 하나는 포기해야 하는 상황을 가리킵니다.  
@@ -97,6 +110,8 @@ public class AuditManager
     }
   }
 ```
+
+<br/>
 
 ## 솔루션 구성
 | Level  | Src             | Tests            |
@@ -170,6 +185,10 @@ public class AuditManager
   - `T3S`: Backend Service
   - `T3U`: Frontend UI
 
+### 프로젝트 의존성 다이어그램
+- TODO
+
+<br/>
 
 ## 레이어별 주요 목표
 > 주요 목표를 달성하기 위한 모든 부가 활동은 `Abstractions`으로 정의합니다.
@@ -211,3 +230,8 @@ Corp.Hello.Api.Adapters.Infrastructure
   └─...                   // 주요 코드: 기술, 무한
       ├─...
 ```
+
+<br/>
+
+## Q&A
+- TODO
