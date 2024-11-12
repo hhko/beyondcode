@@ -143,3 +143,82 @@ Microsoft.CodeAnalysis.BannedApiAnalyzers
 - [API 게이트웨이 패턴과 클라이언트-마이크로 서비스 간 직접 통신](https://learn.microsoft.com/ko-kr/dotnet/architecture/microservices/architect-microservice-container-applications/direct-client-to-microservice-communication-versus-the-api-gateway-pattern)
 - [Ocelot을 사용하여 API 게이트웨이 구현](https://learn.microsoft.com/ko-kr/dotnet/architecture/microservices/multi-container-microservice-net-applications/implement-api-gateways-with-ocelot)
 ```
+
+
+## 도커 컴포즈 arg 전달
+```shell
+# .env
+
+SERVICE_USER=hello
+SERVICE_USER_ID=1000
+
+# {T1}-{T2}       : 도커 컴포즈
+# {T1}.{T2}       : 볼륨, 네트워크
+# {T1}.{T2}.{T3}  : 서비스(services), 컨테이너(container_name), 호스트(hostname)
+# {T1}/{T2}/{T3}  : 이미지
+
+# docker-compose.yml
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+    env_file: .env
+    build:
+      context: .
+      args:
+        - SERVICE_USER=${SERVICE_USER}
+        - SERVICE_USER_ID=${SERVICE_USER_ID}
+      dockerfile: Services/Api/Src/Crop.Hello.Api/Dockerfile
+    logging: *logging-common
+    
+
+#Dockerfile
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+
+# 필수 패키지 설치
+#   - procps        : ps -ef
+#   - net-tools     : ifconfig
+#   - iputils-ping  : ping
+#   - curl          : curl
+#   - sudo          : sudo
+USER root
+RUN apt-get update \
+    && apt-get --no-install-recommends --no-install-suggests --yes --quiet install \
+            procps \
+            net-tools \
+            iputils-ping \
+            curl \
+            sudo \
+    && apt-get clean \
+    && apt-get --yes --quiet autoremove --purge \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+              /usr/share/doc/* /usr/share/groff/* /usr/share/info/* /usr/share/linda/* \
+              /usr/share/lintian/* /usr/share/locale/* /usr/share/man/*
+
+...
+
+FROM base AS final
+ARG SERVICE_USER
+ARG SERVICE_USER_ID
+
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+RUN addgroup --gid $SERVICE_USER_ID $SERVICE_USER \
+    && adduser --uid $SERVICE_USER_ID --gid $SERVICE_USER_ID --disabled-password --gecos "" $SERVICE_USER \
+    && chown -R $SERVICE_USER:$SERVICE_USER /app
+USER $SERVICE_USER
+
+ENTRYPOINT ["dotnet", "Corp.Hello.Api.dll"]
+
+LABEL solution=hello
+LABEL category=service
+```
+
+```
+sudo usermod -aG sudo {계정}
+id
+groups
+```

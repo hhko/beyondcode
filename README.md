@@ -636,6 +636,8 @@ Directory.Build.props                                           // 전역 프로
 ## 클린 아키텍처 템플릿
 - [ ] [ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
 - [ ] [amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)
+- [ ] [Sam.CleanArchitecture](https://github.com/samanazadi1996/Sam.CleanArchitecture)
+  - 개별 템플릿 만들기
 
 ## DDD
 - [x] [DDD 그리고 MSA](https://www.youtube.com/watch?v=DOpt6IWU6LU)
