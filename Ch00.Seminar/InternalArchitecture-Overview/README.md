@@ -159,7 +159,7 @@ public class AuditManager
               └─{T1}.{T2}.{T3}.Tests.Unit                       // Unit Test
 ```
 
-- 솔루션 구성 자동화: [new-sln.ps1 파일](./new-sln.ps1)
+- 솔루션 구성 자동화: [new-sln.ps1 파일](./../../Templates/new-sln.ps1)
 
 ```powershell
 .\new-sln -t1 Corp -t2 Hello -t3s Master, Api
