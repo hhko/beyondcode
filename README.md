@@ -255,7 +255,7 @@ Application Architecture
 | `{T1}` | Corporation     | Corporation      |
 | `{T2}` | Solution        | Solution          |
 | `T3`   | Service 또는 UI  | Service 또는 UI  |
-| `T4`   | **Layers**      | Tests            |
+| `T4`   | **Layers**      | **Tests**        |
 | `T5`   | **Sub-Layers**  | **Test Pyramid** |
 
 - Layers
