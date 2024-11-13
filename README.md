@@ -308,7 +308,7 @@ Application Architecture
 
 # Ch 9. 솔루션 설정
 
-## .NET SDK 빌드 버전
+## Ch 9.1 .NET SDK 빌드 버전
 - `global-json` 파일은 .NET 프로젝트에서 특정 .NET SDK 버전을 지정하여 일관된 개발 환경을 유지하기 위해 사용됩니다.
   - 예제 코드: [global-json](./Ch09.SolutionSettings/global.json)
 
@@ -376,7 +376,7 @@ dotnet --version
   ```
   - 8.0.102 지정된 .NET SDK 버전만을 허용하빈다.
 
-## 패키지 소스
+## Ch 9.2 패키지 소스
 - `nuget.config` 파일은 솔루션 수준에서 패키지 소스을 관리합니다.
   - 예제 코드: [nuget.config](./Ch09.SolutionSettings/nuget.config)
 
@@ -404,7 +404,7 @@ dotnet new nuget.config
 ```
 - 전역 설정에 지정된 기존 NuGet 패키지 소스 목록을 모두 제거 후에 새 패키지 저장소 `https://api.nuget.org/v3/index.json`을 지정합니다.
 
-## 중앙 패키지 관리
+## Ch 9.3 중앙 패키지 관리
 - `Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다.
   - 예제 코드: [Directory.Packages.props](./Ch09.SolutionSettings/Directory.Packages.props)
 
@@ -433,7 +433,7 @@ upgrade-assistant upgrade
 ![](./.images/Directory.Package.props.png)
 - 프로젝트 파일에서 제거된 `PackageReference`의 `Version` 값을 `PackageVersion`으로 추가하여 버전을 중앙에서 관리합니다.
 
-## 중앙 빌드 관리
+## Ch 9.4 중앙 빌드 관리
 - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
   - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings/Directory.Build.props)
   - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings/Backend/Tests/Directory.Build.props)
@@ -550,14 +550,19 @@ Directory.Build.props                                // 전역 프로젝트 빌�
   </Project>
   ```
 
-## 코드 분석
+## Ch 9.5 코드 분석
 - TODO 코드 스타일
 - TODO 코드 품질
 
-## 컨테이너
+## Ch 9.6 컨테이너
+- TODO Dockerfile 자동 생성
 - TODO 이름 규칙
+- TODO docker compose 솔루션 생성
 - TODO Health Check
 - TODO 진단 도구
+- TODO 버전
+  - 어셈블리
+  - 도커 이미지
 
 <br/>
 
