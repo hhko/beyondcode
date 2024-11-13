@@ -198,6 +198,11 @@ Application Architecture
 # Ch 8. 솔루션 구조
 > 예제 코드: [링크](./Ch08.SolutionStructure/)
 
+```shell
+.\new-sln.ps1 -t1 Crop -t2 Hello -t3s Master, Api
+```
+- new-sln.ps1 파일: [링크](./Templates/new-sln.ps1)
+
 ## 솔루션 구조 템플릿
 ```shell
 {T2}.sln
@@ -434,22 +439,26 @@ upgrade-assistant upgrade
   - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings/Backend/Tests/Directory.Build.props)
 
 ```shell
-# 템플릿 확인
-dotnet new list | findstr props
-  템플릿 이름                            약식 이름     언어      태그
-  ------------------------------------  -----------  -------  ----------------
-  MSBuild Directory.Build.props 파일     buildprops            MSBuild/props
+# 전체 공통 빌드 속성
+#   - 전체 프로젝트 대상 Directory.Build.props 파일 생성
+.\new-buildprops.ps1
 
-# Directory.Build.props 기본 파일 생성
-dotnet new buildprops
+# 테스트 공통 빌드 속성
+#   - .\Backend\Api\Tests\ 프로젝트 대상으로
+#   - 상위 `Directory.Build.props`을 Import한 Directory.Build.props 파일 생성
+.\new-buildprops.ps1 -t .\Backend\Api\Tests\ -i
 
-dotnet tool install --global Microsoft.VisualStudio.SlnGen.Tool --version 11.4.11
+# 테스트 공통 빌드 속성
+#   - .\Backend\Master\Tests\ 프로젝트 대상으로
+#   - 상위 `Directory.Build.props`을 Import한 Directory.Build.props 파일 생성
+.\new-buildprops.ps1 -t .\Backend\Master\Tests\ -i
 ```
+- new-buildprops.ps1 파일: [링크](./Templates/new-buildprops.ps1)
 
 ### Directory.Build.props
 ```shell
 {T2}.sln
-Directory.Build.props                                           // 전역 프로젝트 빌드 속성
+Directory.Build.props                                // 전역 프로젝트 빌드 속성
   │
   ├─Backend
   │   ├─{T3}
@@ -457,7 +466,7 @@ Directory.Build.props                                           // 전역 프로
   │   │   │   ├─{T1}.{T2}.{T3}
   │   │   │   └─...
   │   │   └─Tests
-  │   │       ├─Directory.Build.props                           // 테스트 프로젝트 빌드 속성
+  │   │       ├─Directory.Build.props                // 테스트 프로젝트 빌드 속성
   │   │       ├─{T1}.{T2}.{T3}.Tests.Integration
   │   │       ├─{T1}.{T2}.{T3}.Tests.Performance
   │   │       └─{T1}.{T2}.{T3}.Tests.Unit
@@ -466,11 +475,13 @@ Directory.Build.props                                           // 전역 프로
 - 전역 프로젝트 빌드 속성: 전역 프로젝트 속성은 솔루션 폴더에 있는 `Directory.Build.props` 파일에 정의합니다.
   ```xml
   <Project>
+
     <PropertyGroup>
       <TargetFramework>net8.0</TargetFramework>
       <ImplicitUsings>enable</ImplicitUsings>
       <Nullable>enable</Nullable>
     </PropertyGroup>
+
   </Project>
   ```
 - 테스트 프로젝트 빌드 속성: 테스트 프로젝트의 추가적인 속성은 전역 프로젝트 속성 외에 Tests 폴더의 `Directory.Build.props` 파일에 정의합니다.
@@ -486,6 +497,7 @@ Directory.Build.props                                           // 전역 프로
       <IsPackable>false</IsPackable>
       <IsTestProject>true</IsTestProject>
     </PropertyGroup>
+
   </Project>
   ```
 
@@ -666,3 +678,8 @@ Directory.Build.props                                           // 전역 프로
   - editorconfig 탭 간격, 마지막 라인, 네임스페이 기본 값(컴파일러 수준)
 - [ ] [How To Write Clean Code With The Help Of Static Code Analysis](https://www.youtube.com/watch?v=0nVT1gM4vPg)
   - Directory.Build.props 파일을 이용한 코드 분석 패키지 전역화, 코드 분석을 위한 빌드 설정
+
+## .NET
+- [ ] [.NET's hidden Garbage Collector - from 1.9GB to 85MB of memory?](https://www.youtube.com/watch?v=y7FTxAqExyU)
+
+
