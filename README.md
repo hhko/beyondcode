@@ -572,7 +572,9 @@ Directory.Build.props                                // 전역 프로젝트 빌�
 ## 테스트
 - TODO 코드 커버리지
 - TODO Fake 데이터
-- TODO AutoFixture???
+- TODO AutoFixture
+- TODO Snapshot
+- TODO ...
 
 ## 컨테이너 테스트
 - TODO PostgreSQL
@@ -581,7 +583,8 @@ Directory.Build.props                                // 전역 프로젝트 빌�
 ## 통합 테스트
 - TODO WebApi
 - TODO RabbitMQ
-- TODO FileSystem(반복 작업)
+- TODO FileSystem
+- TODO 반복 작업
 - TODO ...
 
 ## 성능 테스트
