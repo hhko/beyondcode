@@ -45,12 +45,12 @@
 
 # Ch 1. 아키텍처 개요
 
-## 아키텍처 정의
+## Ch 1.1 아키텍처 정의
 ![](./.images/Architecture.png)
 
 ※ 출처: [Making Architecture Matter, 소프트웨어 아키텍처의 중요성](https://www.youtube.com/watch?v=4E1BHTvhB7Y)
 
-## 아키텍처 범주
+## Ch 1.2 아키텍처 범주
 ![](./.images/Architecture.Category.png)
 
 ※ 출처: [Making old applications new again](https://sellingsimplifiedinsights.com/asset/app-development/ASSET_co-modernization-whitepaper-inc0460201-122016kata-v1-en_1511772094768.pdf)
@@ -77,7 +77,7 @@ Application Architecture
 
   ※ 출처: [DDD 및 CQRS 패턴을 사용하여 마이크로 서비스에서 비즈니스 복잡성 처리](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/)
 
-## 아키텍처 역사
+## Ch 1.3 아키텍처 역사
 ![](./.images/Architecture.History.png)
 
   ※ 출처: [The Grand Unified Theory of Clean Architecture and Test Pyramid ](https://www.youtube.com/watch?v=mzznsq4jCHY)
@@ -87,14 +87,14 @@ Application Architecture
 # Ch 2. 아키텍처 원칙
 > 아키텍처 원칙: [Separation of concerns](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns)
 
-## 관심사의 분리
+## Ch 2.1 관심사의 분리
 - 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 Biz.와 Tech. 관심사 기준으로 같아야 합니다.**
   - **개발 시** 요구사항을 비즈니스와 기술 관심사로 분해합니다.
   - **운영 시** 로그를 비즈니스와 기술 관심사로 식별합니다.
 
 ![](./.images/Layer.SoC.Abstraction.png)
 
-## 레이어
+## Ch 2.2 레이어
 - 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 레이어 기준으로 동일해야 합니다.**
 
 ![](./.images/Layer.SoC.png)
@@ -109,18 +109,18 @@ Application Architecture
     - `Known` 출력 Adapter
     - `Unknown` 출력 Adapter: 부수 효과(Side Effects)
 
-## 레이어 배치
+## Ch 2.3 레이어 배치
 ![](./.images/Layer.Alignment.png)
 
 <br/>
 
 # Ch 3. 레이어 격리
 
-## 격리 전
+## Ch 3.1 격리 전
 ![](./.images/Layer.Isolation.Before.png)
 - 출력의 변화 영향을 입력까지 전파됩니다.
 
-## 격리 후
+## Ch 3.2 격리 후
 ![](./.images/Layer.Isolation.After.png)
 - 입출력 인터페이스를 이용하여 레이어를 격리합니다(Strategy 패턴)
 
@@ -136,7 +136,7 @@ Application Architecture
 
 # Ch 5. 레이어 고도화
 
-## 격리 고도화
+## Ch 5.1 격리 고도화
 ![](./.images/Layer.Mediator.png)
 
 - Mediator 패턴을 활용하여, 격리된 레이어 간의 소통을 위해 인터페이스의 입출력을 메시지 기반으로 단순화합니다.
@@ -148,21 +148,21 @@ Application Architecture
   - 메시지는 런타임에 메시지에 부가 기능을 더 쉽게 추가할 수 있습니다(Decorator 패턴)
   - 메시지는 입출력을 범주화할 수 있습니다(Command 메시지와 Query 메시지: CQRS 패턴).
 
-## 메시지 고도화
+## Ch 5.2 메시지 고도화
 ![](./.images/Layer.Decorator.png)
 - Mediator 패턴은 Decorator 패턴과 조합하여 동적으로 메시지에 새 기능을 추가할 수 있습니다.
   - 예. 메시지 처리 시간 로그
   - 예. 입력 메시지 유효성 검사
   - 예. Command 메시지일 때 트랜잭션 처리(CQRS 패턴)
 
-## 메시지 범주화(CQRS)
+## Ch 5.3 메시지 범주화(CQRS)
 ![](./.images/Layer.CQRS.png)
 
 - Mediator 패턴을 통해 데이터 쓰기를 위한 메시지(Command)와 데이터를 읽기 위한 메시지(Query)로 구분할 수 있습니다.
   - Command 메시지: 데이터 가변(`CUD`:`Create, Update, Delete`)
   - Query 메시지: 데이터 불변(`R`: `Read`)
 
-## 메시지 범주화(CQRS) 흐름
+## Ch 5.4 메시지 범주화(CQRS) 흐름
 ![](./.images/Layer.CQRS.Flow.png)
 ※ 출처: [Module Requests Processing via CQRS](https://github.com/kgrzybek/modular-monolith-with-ddd?tab=readme-ov-file#34-module-requests-processing-via-cqrs)  
 
@@ -203,7 +203,7 @@ Application Architecture
 ```
 - new-sln.ps1 파일: [링크](./Templates/new-sln.ps1)
 
-## 솔루션 구조 템플릿
+## Ch 8.1 솔루션 구조 템플릿
 ```shell
 {T2}.sln
   │ # 부수(Abstraction) 범주: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
@@ -256,7 +256,7 @@ Application Architecture
               └─{T1}.{T2}.{T3}.Tests.Unit                       // Unit Test
 ```
 
-### 솔루션 구조 형식
+## Ch 8.2 솔루션 구조 형식
 
 | Level  | Src             | Tests            |
 |------- |-------------    |--------------    |
@@ -267,22 +267,21 @@ Application Architecture
 | `T5`   | **Sub-Layers**  | **Test Pyramid** |
 
 - Layers
-  - 기술 관심사
-    - Adapter
-  - 비즈니스 관심사
-    - Application: 비즈니스 흐름(Biz. Flow)
-    - Domain: 비즈니스 단위(Biz. Unit)
-- Sub-Layers: 기술 관심사
-  - Infrastructure
-  - Persistence
-  - Presentation
+  - Domain: 비즈니스 단위(Biz. Unit)
+  - Application: 비즈니스 흐름(Biz. Flow)
+  - Adapters: 기술 관심사
+    - Infrastructure
+    - Persistence
+    - Presentation
 - Test Pyramid
   - Unit
   - Integration
   - Performance
   - E2E(End to End)
 
-### 솔루션 구조 예제
+## Ch 8.3 솔루션 구조 예제
+<img src=./.images/SolutionExplorer.png width=50%/>
+
 - Src 예: `Corporation`.`Solution`.`Service`.`Adapters`.`Infrastructure`
     - T1: Corporation
     - T2: Solution
@@ -301,8 +300,6 @@ Application Architecture
   - T5: Unit
 - Tests 예: `Service`.`Tests`.`Unit`
   - T1, T2 생략일 때
-
-<img src=./.images/SolutionExplorer.png width=50%/>
 
 <br/>
 
@@ -391,7 +388,6 @@ dotnet new list | findstr nuget
 dotnet new nuget.config
 ```
 
-### 기본 패키지 소스
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
@@ -425,11 +421,11 @@ upgrade-assistant upgrade
 
 ![](./.images/Directory.Package.props.concept.png)
 
-### 변경 전/후 프로젝트 파일
+### Ch 9.3.1 변경 전/후 프로젝트 파일
 ![](./.images/Directory.Package.props.csproj.png)
 - 프로젝트 파일에서 `PackageReference`의 `Version`을 제거 시킵니다.
 
-### 변경 전/후 Directory.Package.props
+### Ch 9.3.2 변경 전/후 Directory.Package.props
 ![](./.images/Directory.Package.props.png)
 - 프로젝트 파일에서 제거된 `PackageReference`의 `Version` 값을 `PackageVersion`으로 추가하여 버전을 중앙에서 관리합니다.
 
@@ -455,7 +451,7 @@ upgrade-assistant upgrade
 ```
 - new-buildprops.ps1 파일: [링크](./Templates/new-buildprops.ps1)
 
-### Directory.Build.props
+### Ch 9.4.1 Directory.Build.props
 ```shell
 {T2}.sln
 Directory.Build.props                                // 전역 프로젝트 빌드 속성
@@ -501,7 +497,7 @@ Directory.Build.props                                // 전역 프로젝트 빌�
   </Project>
   ```
 
-### 프로젝트 파일(Directory.Build.props 적용 후)
+### Ch 9.4.2 프로젝트 파일(Directory.Build.props 적용 후)
 - EXE 프로젝트 .csproj 파일
   ```xml
   <Project Sdk="Microsoft.NET.Sdk">
