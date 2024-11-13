@@ -340,7 +340,7 @@ dotnet --version
   - `z`: feature, 0 ~ 9
   - `n`: patch, 0 ~ 99
 
-### 빌드 버전 예제
+### Ch 9.1.1 빌드 버전 예제
 - `latestFeature` 예
   ```json
   {
@@ -388,6 +388,7 @@ dotnet new list | findstr nuget
 dotnet new nuget.config
 ```
 
+### Ch 9.2.1 패키지 ㅅ스 예제
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
