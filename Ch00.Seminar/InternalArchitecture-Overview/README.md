@@ -1,7 +1,8 @@
 # 내부 아키텍처 개요
 
 ## 목표
-- TODO
+- 내부 아키텍처의 다양한 레이어와 그 역할을 이해한다.
+- 아키텍처 트릴레마(캡슐화, 순수성, 성능) 관점에서 각 설계 요소의 필요성과 트레이드오프를 파악한다.
 
 <br/>
 
@@ -122,6 +123,19 @@ public class AuditManager
 | `T4`   | **Layers**      | **Tests**        |
 | `T5`   | **Sub-Layers**  | **Test Pyramid** |
 
+- Layer
+  - Domain
+  - Application
+  - Adapter
+    - Infrastructure
+    - Persistence
+    - Presentation
+- Test Pyramid
+  - Unit Test
+  - Integration Test
+  - Performance Test
+  - End to End(E2E)
+
 ```
 {T2}.sln
   │ # 부수(Abstraction) 범주: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
@@ -207,6 +221,7 @@ Corp.Hello.Api.Domain
   ├─Abstractions          // 부가 코드: 의존성, ...
   │   ├─...
   │   └─Registrations     // 의존성 등록
+  │
   └─AggregateRoots        // 주요 코드: 비즈니스 단위, 유한
       ├─...
 
@@ -217,6 +232,7 @@ Corp.Hello.Api.Application
   ├─Abstractions          // 부가 코드: 의존성, ...
   │   ├─...
   │   └─Registrations     // 의존성 등록
+  │
   └─UseCases              // 주요 코드: 비즈니스 흐름, 유한
       ├─...
 
@@ -227,11 +243,19 @@ Corp.Hello.Api.Adapters.Infrastructure
   ├─Abstractions          // 부가 코드: 의존성, ...
   │   ├─...
   │   └─Registrations     // 의존성 등록
+  │
+  ├─...                   // 주요 코드: 기술, 무한
+  │   ├─...
   └─...                   // 주요 코드: 기술, 무한
       ├─...
+
 ```
 
 <br/>
+
+## Q&A
+- 내부 아키텍처를 주관하는 레이어는?  
+  ※ 주관 (主管, 어떤 일의 주가 되어 그 일을 책임지고 맡아 관리함)
 
 ## Q&A
 - TODO
