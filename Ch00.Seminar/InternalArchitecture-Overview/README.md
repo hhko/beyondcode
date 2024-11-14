@@ -257,5 +257,3 @@ Corp.Hello.Api.Adapters.Infrastructure
 - 내부 아키텍처를 주관하는 레이어는?  
   ※ 주관 (主管, 어떤 일의 주가 되어 그 일을 책임지고 맡아 관리함)
 
-## Q&A
-- TODO
