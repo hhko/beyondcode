@@ -30,7 +30,7 @@
 <br/>
 
 ## 아키텍처 원칙
-![](./.images/Layer.png)
+![](./../../.images/Architecture.Vs.png)
 
 - 관심사의 분리(Separation of concerns): 기술과 비즈니스를 분리한다.
   - 결정을 내리는 코드: 비즈니스(**순수 함수**: 숨은 입출력이 없는 함수)
