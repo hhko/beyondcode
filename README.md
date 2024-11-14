@@ -118,11 +118,11 @@ Application Architecture
 
 ## Ch 3.1 격리 전
 ![](./.images/Layer.Isolation.Before.png)
-- 출력의 변화 영향을 입력까지 전파됩니다.
+- 출력의 변화 영향이 입력까지 전파됩니다.
 
 ## Ch 3.2 격리 후
 ![](./.images/Layer.Isolation.After.png)
-- 입출력 인터페이스를 이용하여 레이어를 격리합니다(Strategy 패턴)
+- 입출력 인터페이스를 활용하여, 입출력 변화의 영향이 Operation 레이어에 전파되지 않도록 차단합니다(Strategy 패턴).
 
 <br/>
 
@@ -384,11 +384,11 @@ dotnet new list | findstr nuget
   ---------------- -----------------------------  -------  ---------
   NuGet 구성        nugetconfig,nuget.config               Config
 
-# 템플릿 생성
+# 템플릿 파일 생성
 dotnet new nuget.config
 ```
 
-### Ch 9.2.1 패키지 ㅅ스 예제
+### Ch 9.2.1 패키지 소스 예제
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
