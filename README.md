@@ -585,35 +585,32 @@ Directory.Build.props                                // 전역 프로젝트 빌�
 ## Ch 9.5 코드 분석
 
 ### Ch 9.5.1 코드 스타일("IDExxxx")
-- 빌드 에러
-  - [x] 네임스페이스 file_scoped
-  - [ ] 잘못된 네임스페이스
-  - [ ] 사용하지 않는 using 구문
-  - [ ] primary 생성자
-- 코드 템플릿
-  - [x] 네임스페이스 file_scoped
-  - [ ] internal sealed class
+![](./.images/csharp_style_namespace_declarations.png)
 
 ```shell
-# 코드 스타일: 네임스페이스
-#   - File Scoped 네임스페이스가 아닐 때
-# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161
+# 코드 스타일: File Scoped 네임스페이스가 아닐 때
 #   - IDE0160: Use block-scoped namespace
 #   - IDE0161: Use file-scoped namespace
 dotnet_diagnostic.IDE0161.severity = warning
 csharp_style_namespace_declarations = file_scoped:warning
-
-# 코드 스타일: primary 생성자
-#   - primary 생성자을 사용하지 않을 때
-# https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0290
-dotnet_diagnostic.IDE0290.severity = warning
-csharp_style_prefer_primary_constructors = true:warning
-
-# 코드 스타일: using 구문
-#   - 사용하지 않는 using 구문이 있을 때
-# https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0005?pivots=lang-csharp-vb
-dotnet_diagnostic.IDE0005.severity = warning
 ```
+
+- [x] [네임스페이스 file_scoped](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161)
+  ```ini
+  dotnet_diagnostic.IDE0161.severity = warning
+  csharp_style_namespace_declarations = file_scoped:warning
+  ```
+- [ ] 잘못된 네임스페이스
+- [ ] [사용하지 않는 using 구문](https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0005?pivots=lang-csharp-vb)
+  ```ini
+  dotnet_diagnostic.IDE0005.severity = warning
+  ```
+- [ ] [primary 생성자](https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0290)
+  ```ini
+  dotnet_diagnostic.IDE0290.severity = warning
+  csharp_style_prefer_primary_constructors = true:warning
+  ```
+- [ ] internal sealed class
 
 ```xml
 <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
