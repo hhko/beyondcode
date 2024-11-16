@@ -16,7 +16,7 @@
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
   - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
   - [x] [Ch 06. 서비스 통합](#ch-6-서비스-통합)
-  - [ ] Ch 07. 아키텍처 비교
+  - [x] [Ch 07. 아키텍처 비교](#ch-7-아키텍처-비교)
 - Part 3. 솔루션
   - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
   - [ ] [Ch 09. 솔루션 설정](#ch-9-솔루션-설정)
@@ -186,8 +186,35 @@ Application Architecture
 
 <br/>
 
-# Ch 07. 아키텍처 비교
-- TODO
+# Ch 7. 아키텍처 비교
+## Ch 7.1 Port 비교
+![](./.images/Architecture.Vs.Port.png)
+
+| Architecture | Hexagonal Architecture |
+| --- | --- |
+| Known Input/Output Port(Mediator Pattern)     | Port(Strategy Pattern) |
+| Unknown Input/Output Port(Strategy Pattern)   | Port(Strategy Pattern) |
+
+- 헥사고날 아키텍처에서는 외부 입출력을 명시적으로 구분하지 않지만, 우리는 Known과 Unknown 입출력을 구분하여 Port를 정의합니다.
+  - Known 입출력은 Mediator 패턴을 활용하여 메시지 기반으로 처리합니다.
+  - Unknown 입출력은 Strategy 패턴을 사용하여 인터페이스를 통해 처리합니다.
+
+## Ch 7.2 Adapter 비교
+![](./.images/Architecture.Vs.Adapter.png)
+
+- 헥사고날 아키텍처에서는 외부 입출력을 명시적으로 구분하지 않지만, 우리는 Known과 Unknown 입출력을 구분하여 Adapter을 정의합니다.
+  - Known 입출력은 Mediator 패턴을 활용하여 메시지 발신과 수신을 구현합니다.
+  - Unknown 입출력은 Strategy 패턴을 사용하여 인터페이스을 구현합니다.
+
+## Ch 7.3 Application 비교
+![](./.images/Architecture.Vs.Application.png)
+
+- Application은 모두 DDD 전술 설계 패턴에서 제시하는 Application Service를 중심으로 구현됩니다.
+
+## Ch 7.4 Domain 비교
+![](./.images/Architecture.Vs.Domain.png)
+
+- Domain은 모두 DDD 전술 설계 패턴에서 제시하는 Entity와 Value Object을 중심으로 구현됩니다.
 
 <br/>
 
