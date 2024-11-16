@@ -199,19 +199,25 @@ Application Architecture
   - Known 입출력은 Mediator 패턴을 활용하여 메시지 기반으로 처리합니다.
   - Unknown 입출력은 Strategy 패턴을 사용하여 인터페이스를 통해 처리합니다.
 
-## Ch 7.2 Adapter 비교
+## Ch 7.2 Message 비교
+![](./.images/Architecture.Vs.Message.png)
+
+- 데이터 쓰기를 위한 메시지(Command)와 데이터를 읽기 위한 메시지(Query)로 구분합니다.
+- 모든 메시지를 대상으로 부가 기능을 Decorator로 추가합니다.
+
+## Ch 7.3 Adapter 비교
 ![](./.images/Architecture.Vs.Adapter.png)
 
 - Known과 Unknown 외부 입출력을 명시적으로 구분하여 Adapter 위치를 배치합니다.
   - Known 입출력은 Mediator 패턴을 활용하여 메시지 발신과 수신을 구현합니다.
   - Unknown 입출력은 Strategy 패턴을 사용하여 인터페이스을 구현합니다.
 
-## Ch 7.3 Application 비교
+## Ch 7.4 Application 비교
 ![](./.images/Architecture.Vs.Application.png)
 
 - Application은 모두 DDD 전술 설계 패턴에서 제시하는 Application Service를 중심으로 구현됩니다.
 
-## Ch 7.4 Domain 비교
+## Ch 7.5 Domain 비교
 ![](./.images/Architecture.Vs.Domain.png)
 
 - Domain은 모두 DDD 전술 설계 패턴에서 제시하는 Entity와 Value Object을 중심으로 구현됩니다.
