@@ -195,14 +195,14 @@ Application Architecture
 | Known 입출력 Port   | Mediator 패턴  | Strategy 패턴      |
 | Unknown 입출력 Port | Strategy 패턴  | Strategy 패턴      |
 
-- 헥사고날 아키텍처에서는 외부 입출력을 명시적으로 구분하지 않지만, 우리는 Known과 Unknown 입출력을 구분하여 Port를 정의합니다.
+- 헥사고날 아키텍처에서는 Known과 Unknown 외부 입출력을 명시적으로 구분하지 않지만, 우리는 이를 구분하여 Port를 정의합니다..
   - Known 입출력은 Mediator 패턴을 활용하여 메시지 기반으로 처리합니다.
   - Unknown 입출력은 Strategy 패턴을 사용하여 인터페이스를 통해 처리합니다.
 
 ## Ch 7.2 Adapter 비교
 ![](./.images/Architecture.Vs.Adapter.png)
 
-- 헥사고날 아키텍처에서는 외부 입출력을 명시적으로 구분하지 않지만, 우리는 Known과 Unknown 입출력을 구분하여 Adapter을 정의합니다.
+- Known과 Unknown 외부 입출력을 명시적으로 구분하여 Adapter 위치를 배치합니다.
   - Known 입출력은 Mediator 패턴을 활용하여 메시지 발신과 수신을 구현합니다.
   - Unknown 입출력은 Strategy 패턴을 사용하여 인터페이스을 구현합니다.
 
