@@ -583,8 +583,53 @@ Directory.Build.props                                // 전역 프로젝트 빌�
   ```
 
 ## Ch 9.5 코드 분석
-- TODO 코드 스타일
+
+### Ch 9.5.1 코드 스타일("IDExxxx")
+- 빌드 에러
+  - [x] 네임스페이스 file_scoped
+  - [ ] 잘못된 네임스페이스
+  - [ ] 사용하지 않는 using 구문
+  - [ ] primary 생성자
+- 코드 템플릿
+  - [x] 네임스페이스 file_scoped
+  - [ ] internal sealed class
+
+```shell
+# 코드 스타일: 네임스페이스
+#   - File Scoped 네임스페이스가 아닐 때
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161
+#   - IDE0160: Use block-scoped namespace
+#   - IDE0161: Use file-scoped namespace
+dotnet_diagnostic.IDE0161.severity = warning
+csharp_style_namespace_declarations = file_scoped:warning
+
+# 코드 스타일: primary 생성자
+#   - primary 생성자을 사용하지 않을 때
+# https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0290
+dotnet_diagnostic.IDE0290.severity = warning
+csharp_style_prefer_primary_constructors = true:warning
+
+# 코드 스타일: using 구문
+#   - 사용하지 않는 using 구문이 있을 때
+# https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0005?pivots=lang-csharp-vb
+dotnet_diagnostic.IDE0005.severity = warning
+```
+
+```xml
+<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+```
+- `EnforceCodeStyleInBuild`: 명령줄 및 Visual Studio에서 빌드할 때 코드 스타일("IDExxxx") 분석을 사용하도록 설정할 수 있습니다.
+
+### Ch 9.5.2 코드 분석
+- TODO `AnalysisLevel`: latest
+- TODO `AnalysisMode`: All
+- TODO `CodeAnalysisTreatWarningsAsErrors`: true
 - TODO 코드 품질
+  - StyleCop.Analyzers
+  - SonarAnalyzer.CSharp
+- TODO 스레드 분석
+- todo clr 메모리 분석
 
 ## Ch 9.6 컨테이너
 - TODO Dockerfile 자동 생성

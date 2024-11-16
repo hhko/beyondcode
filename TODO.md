@@ -1,3 +1,9 @@
+csharp_style_namespace_declarations = file_scoped:error
+dotnet_diagnostic.IDE0161.severity = error
+
+Filescope
+internal sealed class ...
+
 - Scalability
 - Load Balancing
 - Latency and Throughput
@@ -76,10 +82,9 @@ https://blog.ndepend.com/directory-build-props/
 
 ```
 
-- SDK 버전 global.json
-- 빌드 설정 중앙화
+
+
   - ServerGarbageCollection
-- 패키지 버전 중앙화
 - 코드 정적 분석
   - 코드 스타일
   - 코드 품질?
@@ -112,8 +117,6 @@ https://blog.ndepend.com/directory-build-props/
 StyleCop.Analyzer
 SonarAlayzer.CSharp
 
-Direcory.Build.Props <-- 분석 패키지, 분석 설정
-
 스레드 분석
 clr 메모리 분석
 
@@ -132,10 +135,6 @@ Microsoft.CodeAnalysis.BannedApiAnalyzers
   ![](./.images/problemspace-and-solutionspace.png)  
   ※ 이미지 출처: [Strategic Design Explained](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*vJzxC1yeMtIKxuk-8Fj8YA.png)
 
-<br/>
-
-- 패키지 버전 중앙화
-  - https://devblogs.microsoft.com/dotnet/dotnet-upgrade-assistant-cpm-upgrade/
 
 <br/>
 
