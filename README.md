@@ -190,10 +190,10 @@ Application Architecture
 ## Ch 7.1 Port 비교
 ![](./.images/Architecture.Vs.Port.png)
 
-| Architecture | Hexagonal Architecture |
-| --- | --- |
-| Known Input/Output Port(Mediator Pattern)     | Port(Strategy Pattern) |
-| Unknown Input/Output Port(Strategy Pattern)   | Port(Strategy Pattern) |
+| 구분                | 아키텍처        | 헥사고날 아키텍처 |
+| ---                 | ---           | ---               |
+| Known 입출력 Port   | Mediator 패턴  | Strategy 패턴      |
+| Unknown 입출력 Port | Strategy 패턴  | Strategy 패턴      |
 
 - 헥사고날 아키텍처에서는 외부 입출력을 명시적으로 구분하지 않지만, 우리는 Known과 Unknown 입출력을 구분하여 Port를 정의합니다.
   - Known 입출력은 Mediator 패턴을 활용하여 메시지 기반으로 처리합니다.
