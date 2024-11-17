@@ -585,6 +585,8 @@ Directory.Build.props                                // 전역 프로젝트 빌�
 ## Ch 9.5 코드 분석
 
 ### Ch 9.5.1 코드 스타일("IDExxxx")
+- 코드 스타일 인덱스: [링크](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/#index)
+
 ![](./.images/csharp_style_namespace_declarations.png)
 
 ```shell
@@ -618,6 +620,7 @@ csharp_style_namespace_declarations = file_scoped:warning
 ```
 - `EnforceCodeStyleInBuild`: 명령줄 및 Visual Studio에서 빌드할 때 코드 스타일("IDExxxx") 분석을 사용하도록 설정할 수 있습니다.
 
+
 ### Ch 9.5.2 코드 분석
 - TODO `AnalysisLevel`: latest
 - TODO `AnalysisMode`: All
@@ -627,6 +630,18 @@ csharp_style_namespace_declarations = file_scoped:warning
   - SonarAnalyzer.CSharp
 - TODO 스레드 분석
 - todo clr 메모리 분석
+- https://swharden.com/blog/2023-03-05-dotnet-code-analysis/
+- https://swharden.com/blog/2023-03-07-treemapping/
+
+<br/>
+
+- https://github.com/cybermaxs/awesome-analyzers?tab=readme-ov-file
+  - https://www.meziantou.net/the-roslyn-analyzers-i-use.htm
+  - https://github.com/dotnet/roslynator
+  - Microsoft.CodeAnalysis.NetAnalyzers
+  - https://github.com/meziantou/Meziantou.Analyzer/tree/main
+  - https://github.com/code-cracker/code-cracker
+  - https://github.com/SonarSource/sonar-dotnet
 
 ## Ch 9.6 컨테이너
 - TODO Dockerfile 자동 생성
