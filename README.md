@@ -1,15 +1,13 @@
-# _better_ _**CODE**_ _with domain-driven design_
-
-## 개요
-### 기술 맵
+# 개요
+## 기술 맵
 ![](./.images/TechMap.png)
 
-### Internal 아키텍처
+## 내부 아키텍처
 ![](./.images/Architecture.Internal.png)
 
 <br/>
 
-## 목차
+# 목차
 - Part 0. 세미나
   - [x] [내부 아키텍처 개요](./Ch00.Seminar/InternalArchitecture-Overview/)
   - [ ] TODO
@@ -219,12 +217,12 @@ Application Architecture
 ## Ch 7.4 Application 비교
 ![](./.images/Architecture.Vs.Application.png)
 
-- Application은 모두 DDD 전술 설계 패턴에서 제시하는 Application Service를 중심으로 구현됩니다.
+- Application은 동일하게 모두 DDD 전술 설계 패턴에서 제시하는 Application Service 중심으로 구현됩니다.
 
 ## Ch 7.5 Domain 비교
 ![](./.images/Architecture.Vs.Domain.png)
 
-- Domain은 모두 DDD 전술 설계 패턴에서 제시하는 Entity와 Value Object을 중심으로 구현됩니다.
+- Domain은 동일하게 모두 DDD 전술 설계 패턴에서 제시하는 Entity와 Value Object 그리고 Domain Service을 중심으로 구현됩니다.
 
 <br/>
 
