@@ -1,11 +1,15 @@
 # _better_ _**CODE**_ _with domain-driven design_
 
-## Tech. Map
+## 개요
+### 기술 맵
 ![](./.images/TechMap.png)
+
+### Internal 아키텍처
+![](./.images/Architecture.Internal.png)
 
 <br/>
 
-## Table of Contents
+## 목차
 - Part 0. 세미나
   - [x] [내부 아키텍처 개요](./Ch00.Seminar/InternalArchitecture-Overview/)
   - [ ] TODO
@@ -315,7 +319,7 @@ Application Architecture
   - E2E(End to End)
 
 ## Ch 8.3 솔루션 구조 예제
-<img src=./.images/SolutionExplorer.png width=50%/>
+![]((./.images/SolutionExplorer.png)
 
 - Src 예: `Corporation`.`Solution`.`Service`.`Adapters`.`Infrastructure`
     - T1: Corporation
