@@ -321,7 +321,7 @@ Application Architecture
   - E2E(End to End)
 
 ## Ch 8.3 솔루션 구조 예제
-![]((./.images/SolutionExplorer.png)
+![](./.images/SolutionExplorer.png)
 
 - Src 예: `Corporation`.`Solution`.`Service`.`Adapters`.`Infrastructure`
     - T1: Corporation
