@@ -1,13 +1,13 @@
 # Internal 아키텍처 개요
 
 ## 목표
-- 내부 아키텍처의 다양한 레이어와 그 역할을 이해한다.
+- Internal 아키텍처의 다양한 레이어와 그 역할을 이해한다.
 - 아키텍처 트릴레마(캡슐화, 순수성, 성능) 관점에서 각 설계 요소의 필요성과 트레이드오프를 파악한다.
 
 <br/>
 
 ## 주요 키워드
-- 내부/외부 아키텍처
+- Internal/External 아키텍처
 - 관심사의 분리
 - 레이어
 - 순수/불순 함수
@@ -24,8 +24,8 @@
 ![](./../../.images/Architecture.Category.png)
 ![](./../../.images/Architecture.Microservices.png)
 
-- 외부 아키텍처(External Architecture): 프로세스 외부, **프로세스 배치**
-- 내부 아키텍처(Internal Architecture): 프로세스 내부, **레이어 배치**
+- External 아키텍처: 프로세스 외부, **서비스 배치**
+- Internal 아키텍처: 프로세스 내부, **레이어 배치**
 
 <br/>
 
@@ -254,6 +254,6 @@ Corp.Hello.Api.Adapters.Infrastructure
 <br/>
 
 ## Q&A
-- 내부 아키텍처를 주관하는 레이어는?  
+- Internal 아키텍처를 주관하는 레이어는?  
   ※ 주관 (主管, 어떤 일의 주가 되어 그 일을 책임지고 맡아 관리함)
 

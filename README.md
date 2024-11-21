@@ -4,12 +4,14 @@
 ## 기술 맵
 ![](./.images/TechMap.png)
 
-## Internal 아키텍처
+## Internal 아키텍처: 레이어 배치
+- Application 레이어(주 목표: Use Case)가 Internal 아키텍처를 주관(主管)합니다.
+
 ![](./.images/Architecture.Internal.png)
 
-## External 아키텍처
+## External 아키텍처: 서비스 배치
 TODO
- 
+
 <br/>
 
 # 목차
@@ -590,6 +592,11 @@ Directory.Build.props                                // 전역 프로젝트 빌�
   ```
 
 ## Ch 9.5 코드 분석
+
+```
+[*.{cs,vb}]
+dotnet_analyzer_diagnostic.category-Style.severity = none
+```
 
 ### Ch 9.5.1 코드 스타일("IDExxxx")
 - 코드 스타일 인덱스: [링크](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/#index)
