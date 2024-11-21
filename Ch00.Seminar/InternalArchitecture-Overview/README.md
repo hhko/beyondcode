@@ -1,4 +1,4 @@
-# 내부 아키텍처 개요
+# Internal 아키텍처 개요
 
 ## 목표
 - 내부 아키텍처의 다양한 레이어와 그 역할을 이해한다.
@@ -57,9 +57,9 @@
   - 불순 함수: 해당 결정에 따라 적용하는 코드
 
 ### 예제 코드 2.
-- [기본 코드](https://github.com/AcornPublishing/unit-testing/blob/main/Book/Chapter6/Listing7_/Before/ArchitectureBefore.cs)
-- [개선 1. 의존성 주입 코드](https://github.com/AcornPublishing/unit-testing/blob/main/Book/Chapter6/Listing7_/Mocks/ArchitectureMocks.cs)
-- [개선 2. 순수성 코드](https://github.com/AcornPublishing/unit-testing/blob/main/Book/Chapter6/Listing7_/Functional/ArchitectureFunctional.cs)
+- [기본 코드](https://github.com/AcornPublishing/unit-ing/blob/main/Book/Chapter6/Listing7_/Before/ArchitectureBefore.cs)
+- [개선 1. 의존성 주입 코드](https://github.com/AcornPublishing/unit-ing/blob/main/Book/Chapter6/Listing7_/Mocks/ArchitectureMocks.cs)
+- [개선 2. 순수성 코드](https://github.com/AcornPublishing/unit-ing/blob/main/Book/Chapter6/Listing7_/Functional/ArchitectureFunctional.cs)
 
 ```cs
 public class AuditManager
@@ -115,13 +115,13 @@ public class AuditManager
 <br/>
 
 ## 솔루션 구성
-| Level  | Src             | Tests            |
+| Level  | Src             | s            |
 |------- |-------------    |--------------    |
 | `T1`   | Corporation     | Corporation      |
 | `T2`   | Solution        | Solution         |
 | `T3`   | Service 또는 UI  | Service 또는 UI  |
-| `T4`   | **Layers**      | **Tests**        |
-| `T5`   | **Sub-Layers**  | **Test Pyramid** |
+| `T4`   | **Layers**      | **s**        |
+| `T5`   | **Sub-Layers**  | ** Pyramid** |
 
 - Layer
   - Domain
@@ -130,10 +130,10 @@ public class AuditManager
     - Infrastructure
     - Persistence
     - Presentation
-- Test Pyramid
-  - Unit Test
-  - Integration Test
-  - Performance Test
+-  Pyramid
+  - Unit 
+  - Integration 
+  - Performance 
   - End to End(E2E)
 
 ```
@@ -144,15 +144,15 @@ public class AuditManager
   │   │   ├─Src
   │   │   │   ├─{T1}.{T2}.Framework
   │   │   │   └─{T1}.{T2}.Framework.Contracts
-  │   │   └─Tests
-  │   │       └─{T1}.{T2}.Framework.Test.Unit
+  │   │   └─s
+  │   │       └─{T1}.{T2}.Framework.Tests.Unit
   │   ├─Libraries
   │   │   └─{T1}.{T2}.[Tech]                                    // 예. RabbitMQ, ...
   │   └─Domains
   │       ├─Src
   │       │   └─{T1}.{T2}.Domain
   │       └─Tests
-  │           └─{T1}.{T2}.Domain.Test.Unit                      // 공유 도메인
+  │           └─{T1}.{T2}.Domain.Tests.Unit                      // 공유 도메인
   │
   │ # Backend 범주
   ├─Backend
