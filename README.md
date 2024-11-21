@@ -1,17 +1,20 @@
-> more fun. with
+> more `fun.` with
 
 # 개요
 ## 기술 맵
 ![](./.images/TechMap.png)
 
-## 내부 아키텍처
+## Internal 아키텍처
 ![](./.images/Architecture.Internal.png)
 
+## External 아키텍처
+TODO
+ 
 <br/>
 
 # 목차
 - Part 0. 세미나
-  - [x] [내부 아키텍처 개요](./Ch00.Seminar/InternalArchitecture-Overview/)
+  - [x] [Internal 아키텍처 개요](./Ch00.Seminar/InternalArchitecture-Overview/)
   - [ ] TODO
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
