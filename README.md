@@ -594,8 +594,32 @@ Directory.Build.props                                // 전역 프로젝트 빌�
 ## Ch 9.5 코드 분석
 
 ```
+root = true
+
+# All files
+[*]
+indent_style = space
+
+# Xml files
+[*.xml]
+indent_size = 2
+
+# C# files
+[*.cs]
+
+#### Core EditorConfig Options ####
+
+# Indentation and spacing
+indent_size = 4
+tab_width = 4
+
+# New line preferences
+insert_final_newline = false
+
 [*.{cs,vb}]
 dotnet_analyzer_diagnostic.category-Style.severity = none
+
+dotnet_diagnostic.MA0053.severity = warning
 ```
 
 ### Ch 9.5.1 코드 스타일("IDExxxx")
@@ -616,6 +640,9 @@ csharp_style_namespace_declarations = file_scoped:warning
   dotnet_diagnostic.IDE0161.severity = warning
   csharp_style_namespace_declarations = file_scoped:warning
   ```
+- [x] sealed: CA1852,	MA0053
+  - CA only applies to internal types in assemblies that do not expose internal types and members and - by default - report types that inherit from [Exception] (https://learn.microsoft.com/en-us/dotnet/api/system.exception?WT.mc_id=DT-MVP-5003978), but cannot be configured to report types that define virtual members
+- [x] [Meziantou.Analyzer's rules: .editorconfig - all rules disabled](https://github.com/meziantou/Meziantou.Analyzer/tree/main/docs#editorconfig---all-rules-disabled)
 - [ ] 잘못된 네임스페이스
 - [ ] [사용하지 않는 using 구문](https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0005?pivots=lang-csharp-vb)
   ```ini
