@@ -221,3 +221,12 @@ sudo usermod -aG sudo {계정}
 id
 groups
 ```
+
+- DB 서비스
+  ```cs
+  private IServiceScopeFactory _serviceScopeFactory = serviceScopeFactory;
+  using var scope = _serviceScopeFactory.CreateScope();
+  var dbContext = scope.ServiceProvider.GetService<ApplicationDbContext>()!;
+  ```
+- 옵션 접근
+- 컨테이너 HealthCheck 
