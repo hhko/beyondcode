@@ -84,7 +84,7 @@ Application Architecture
 ## Ch 1.3 아키텍처 역사
 ![](./.images/Architecture.History.png)
 
-  ※ 출처: [The Grand Unified Theory of Clean Architecture and Test Pyramid ](https://www.youtube.com/watch?v=mzznsq4jCHY)
+  ※ 출처: [The Grand Unified Theory of Clean Architecture and  Pyramid ](https://www.youtube.com/watch?v=mzznsq4jCHY)
 
 <br/>
 
@@ -134,7 +134,7 @@ Application Architecture
 
 # Ch 4. 레이어 테스트
 
-![](./.images/Layer.Isolation.Test.png)
+![](./.images/Layer.Isolation..png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
 - 통합 테스트: Tech. 관심사까지 포함하여 Biz. 관심사를 테스트합니다.
 
@@ -251,15 +251,15 @@ Application Architecture
   │   │   ├─Src
   │   │   │   ├─{T1}.{T2}.Framework
   │   │   │   └─{T1}.{T2}.Framework.Contracts
-  │   │   └─Tests
-  │   │       └─{T1}.{T2}.Framework.Test.Unit
+  │   │   └─s
+  │   │       └─{T1}.{T2}.Framework.Tests.Unit
   │   ├─Libraries
   │   │   └─{T1}.{T2}.[Tech]                                    // 예. RabbitMQ, ...
   │   └─Domains
   │       ├─Src
   │       │   └─{T1}.{T2}.Domain
   │       └─Tests
-  │           └─{T1}.{T2}.Domain.Test.Unit                      // 공유 도메인
+  │           └─{T1}.{T2}.Domain.Tests.Unit                      // 공유 도메인
   │
   │ # Backend 범주
   ├─Backend
