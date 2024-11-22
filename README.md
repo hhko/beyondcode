@@ -139,7 +139,7 @@ Application Architecture
 
 # Ch 4. 레이어 테스트
 
-![](./.images/Layer.Isolation..png)
+![](./.images/Layer.Isolation.png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
 - 통합 테스트: Tech. 관심사까지 포함하여 Biz. 관심사를 테스트합니다.
 
