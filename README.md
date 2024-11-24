@@ -12,7 +12,7 @@
 
 ## External 아키텍처
 > 서비스 배치
-TODO
+- TODO
 
 <br/>
 
@@ -28,24 +28,25 @@ TODO
   - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
   - [x] [Ch 06. 서비스 통합](#ch-6-서비스-통합)
   - [x] [Ch 07. 아키텍처 비교](#ch-7-아키텍처-비교)
-- Part 3. 솔루션
+- Part 2. 솔루션
   - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
   - [x] [Ch 09. 솔루션 빌드 설정](#ch-9-솔루션-빌드-설정)
   - [ ] [Ch 10. 솔루션 코드 분석](#ch-10-솔루션-코드-분석)
   - [ ] Ch 11. 솔루션 테스트
   - [ ] Ch 12. 솔루션 빌드
   - [ ] Ch 13. 솔루션 배포
-- Part 4. 관찰 가능성
+- Part 3. 관찰 가능성
   - [ ] Ch 14. Aspire 대시보드
   - [ ] Ch 15. OpenSearch 시스템
   - [ ] TODO 로그
   - [ ] TODO 추적
   - [ ] TODO 지표
-- Part 5. Internal 전술 설계
+- Part 4. Internal 전술 설계
   - [x] [Ch 2x. 전술 설계 패턴](#ch-2x-전술-설계-패턴)
   - [ ] TODO
-- Part 6. External 전술 설계
-- Part 7. 전략 설계
+- Part 5. External 전술 설계
+- Part 6. 전략 설계
+- Part 7. 참고 자료
 
 <br/>
 
@@ -240,7 +241,7 @@ Application Architecture
 
 <br/>
 
-# Part 3. 솔루션
+# Part 2. 솔루션
 
 # Ch 8. 솔루션 구조
 > 예제 코드: [링크](./Ch08.SolutionStructure/)
@@ -640,20 +641,6 @@ dotnet new editorconfig
 ## Ch 10.2 코드 품질 분석
 
 
-## Ch 9.6 컨테이너
-- TODO Dockerfile 자동 생성
-- TODO 이름 규칙
-- TODO docker compose 솔루션 생성
-- TODO Health Check
-- TODO 진단 도구
-- TODO 버전
-  - 어셈블리
-  - 도커 이미지
-
-<br/>
-
----
-
 <br/>
 
 # Ch 11. 솔루션 테스트
@@ -681,10 +668,6 @@ dotnet new editorconfig
 
 <br/>
 
----
-
-<br/>
-
 # Ch 11. 솔루션 빌드
 - TODO 코드 커버리지
 - TODO 프로젝트 의존성 다이어그램
@@ -697,20 +680,26 @@ dotnet new editorconfig
 
 <br/>
 
----
-
-<br/>
-
 # Ch 12. 솔루션 배포
 - TODO GitHub Release
 - TODO GitHub Docker Image
 - TODO 버전
+- TODO Dockerfile 자동 생성
+- TODO 이름 규칙
+- TODO docker compose 솔루션 생성
+- TODO Health Check
+- TODO 진단 도구
+- TODO 버전
+  - 어셈블리
+  - 도커 이미지
 
 <br/>
 
 ---
 
-# Part 5. Internal 전술 설계
+<br/>
+
+# Part 4. Internal 전술 설계
 
 # Ch 2x. 전술 설계 패턴
 ![](./.images/TacticalDesign.Pattern.png)
@@ -721,7 +710,7 @@ dotnet new editorconfig
 
 <br/>
 
-# 참고 자료
+# Part 7. 참고 자료
 ## 아키텍처
 ### 클린 아키텍처 템플릿
 - [ ] [ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
