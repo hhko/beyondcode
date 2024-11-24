@@ -727,10 +727,10 @@ dotnet new editorconfig
   - Domain과 Application 레이어 구현을 위한 기본 타입 기본 구현과 테스트 참고
 
 ### DDD
-- [x] [DDD 그리고 MSA](https://www.youtube.com/watch?v=DOpt6IWU6LU)
+- [x] [DDD 그리고 MSA](https://www.youtube.com/watch?v=DOpt6IWU6LU)  
   [![](./.images/DDDandMSA.png)](https://www.youtube.com/watch?v=DOpt6IWU6LU)
   - 주요 도서를 중심으로 도메인 주도 설계 역사를 이해할 수 있습니다.
-- [ ] [Moving IO to the edges of your app](https://www.youtube.com/watch?v=P1vES9AgfC4)
+- [ ] [Moving IO to the edges of your app](https://www.youtube.com/watch?v=P1vES9AgfC4)  
   [![](https://img.youtube.com/vi/P1vES9AgfC4/0.jpg)](https://www.youtube.com/watch?v=P1vES9AgfC4)
   - 아키텍처 관점에서 Pure Function과 Impure Function 배치의 중요성을 이해할 수 있습니다.
 - [ ] [modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
