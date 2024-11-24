@@ -638,6 +638,7 @@ dotnet_analyzer_diagnostic.category-Style.severity = warning
 dotnet_diagnostic.IDE0040.severity = silent
 ```
 
+- 전역 설정
 - 기본 규칙
   - 네임스페이
   - public sealed
@@ -729,40 +730,55 @@ dotnet_diagnostic.IDE0040.severity = silent
 <br/>
 
 # 참고 자료
-- [ ] [SharedKernelSample](https://github.com/NimblePros/SharedKernelSample)
-  - Domain과 Application 레이어 구현을 위한 기본 타입 기본 구현과 테스트 참고
-- [ ] [C#10 `record struct` Deep Dive & Performance Implications](https://nietras.com/2021/06/14/csharp-10-record-struct/)
-- [ ] [Hexagonal Architecture - What Is It? Why Should You Use It?](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture/)
-
-## 클린 아키텍처 템플릿
+## 아키텍처
+### 클린 아키텍처 템플릿
 - [ ] [ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
 - [ ] [amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)
 - [ ] [Sam.CleanArchitecture](https://github.com/samanazadi1996/Sam.CleanArchitecture)
   - 개별 템플릿 만들기
+- [ ] [Clean-Architecture-Template](https://github.com/babaktaremi/Clean-Architecture-Template)
 
-## DDD
+### 아키텍처 이해
+- [ ] [Hexagonal Architecture - What Is It? Why Should You Use It?](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture/)
+- [ ] [CodeMaze | Clean Architecture in .NET](https://code-maze.com/dotnet-clean-architecture/)
+- [ ] [What are the Differences Between Onion Architecture and Clean Architecture in .NET?](https://code-maze.com/dotnet-differences-between-onion-architecture-and-clean-architecture/)
+- [ ] [SharedKernelSample](https://github.com/NimblePros/SharedKernelSample)
+  - Domain과 Application 레이어 구현을 위한 기본 타입 기본 구현과 테스트 참고
+
+### DDD
 - [x] [DDD 그리고 MSA](https://www.youtube.com/watch?v=DOpt6IWU6LU)
   [![](./.images/DDDandMSA.png)](https://www.youtube.com/watch?v=DOpt6IWU6LU)
   - 주요 도서를 중심으로 도메인 주도 설계 역사를 이해할 수 있습니다.
-- [ ] [Moving IO to the edges of your app](https://www.youtube.com/watch?v=P1vES9AgfC4)  
-  [![](https://img.youtube.com/vi/P1vES9AgfC4/0.jpg)](https://www.youtube.com/watch?v=P1vES9AgfC4)  
+- [ ] [Moving IO to the edges of your app](https://www.youtube.com/watch?v=P1vES9AgfC4)
+  [![](https://img.youtube.com/vi/P1vES9AgfC4/0.jpg)](https://www.youtube.com/watch?v=P1vES9AgfC4)
   - 아키텍처 관점에서 Pure Function과 Impure Function 배치의 중요성을 이해할 수 있습니다.
 - [ ] [modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
 - [ ] [함수형 도메인 주도 설계 구현](https://liftio.org/2021/files/jisoo-park-ppt.pdf)
+
+<br/>
 
 ## 테스트
 ### 아키텍처 테스트
 - [ ] [Enforcing Software Architecture With Architecture Tests](https://www.milanjovanovic.tech/blog/enforcing-software-architecture-with-architecture-tests)
 - [ ] [Shift Left With Architecture Testing in .NET](https://www.milanjovanovic.tech/blog/shift-left-with-architecture-testing-in-dotnet)
 
-## 속성
+### 성능 테스트
+- [ ] [Performance Testing of ASP.NET Core APIs With k6](https://code-maze.com/aspnetcore-performance-testing-with-k6/)
+
+<br/>
+
+## .NET
+### SDK
+- [ ] [.NET's hidden Garbage Collector - from 1.9GB to 85MB of memory?](https://www.youtube.com/watch?v=y7FTxAqExyU)
+- [ ] [C#10 `record struct` Deep Dive & Performance Implications](https://nietras.com/2021/06/14/csharp-10-record-struct/)
+
 ### 코드 분석
 - [ ] [Editorconfig In Visual Studio In 10 Minutes or Less](https://www.youtube.com/watch?v=CQW5b58mPdg&t)
   - editorconfig 탭 간격, 마지막 라인, 네임스페이 기본 값(컴파일러 수준)
 - [ ] [How To Write Clean Code With The Help Of Static Code Analysis](https://www.youtube.com/watch?v=0nVT1gM4vPg)
   - Directory.Build.props 파일을 이용한 코드 분석 패키지 전역화, 코드 분석을 위한 빌드 설정
 
-## .NET
-- [ ] [.NET's hidden Garbage Collector - from 1.9GB to 85MB of memory?](https://www.youtube.com/watch?v=y7FTxAqExyU)
+### 패키지
+- [ ] [Publish MediatR Notifications in Parallel](https://code-maze.com/mediatr-parallel-publishing-notifications/)
 
 
