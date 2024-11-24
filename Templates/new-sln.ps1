@@ -6,14 +6,14 @@
 
 # DONE
 #   - [x] Solution 생성
-#   - [x] Abstraction 생성
+#   - [x] Assets 생성
 #   - [x] Backend 생성
 # TODO
 #   - [ ] Frontend 생성
 
 # {T2}.sln
-#   │ # 부수(Abstraction) 범주: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
-#   ├─Abstraction
+#   │ # Assets 범주: 공윶 자원
+#   ├─Assets
 #   │   ├─Frameworks
 #   │   │   ├─Src
 #   │   │   │   ├─{T1}.{T2}.Framework
@@ -145,8 +145,8 @@ function Initialize-Solution {
   dotnet new nuget.config --force
 }
 
-function Create-AbstractionStructure {
-  $baseFrameworkPath = "${curDir}/Abstraction/Frameworks/Src/${T1_CORPORATION}.${T2_SOLUTION}.Framework"
+function Create-AssetsStructure {
+  $baseFrameworkPath = "${curDir}/Assets/Frameworks/Src/${T1_CORPORATION}.${T2_SOLUTION}.Framework"
 
   # Frameworks
   dotnet new classlib -o $baseFrameworkPath --force
@@ -154,20 +154,20 @@ function Create-AbstractionStructure {
   dotnet add $baseFrameworkPath reference "${baseFrameworkPath}.Contracts"
 
   # Frameworks Tests
-  $testBaseFrameworkPath = "${curDir}/Abstraction/Frameworks/Tests/${T1_CORPORATION}.${T2_SOLUTION}.Framework.Tests"
+  $testBaseFrameworkPath = "${curDir}/Assets/Frameworks/Tests/${T1_CORPORATION}.${T2_SOLUTION}.Framework.Tests"
   dotnet new xunit -o "${testBaseFrameworkPath}.Unit" --force
   dotnet add "${testBaseFrameworkPath}.Unit" reference $baseFrameworkPath
 
   # Libraries
-  New-Item "${curDir}/Abstraction/Libraries/.gitkeep" -ItemType File -Force | Out-Null
+  New-Item "${curDir}/Assets/Libraries/.gitkeep" -ItemType File -Force | Out-Null
 
   # Domains
-  $baseDomainPath = "${curDir}/Abstraction/Domains/Src/${T1_CORPORATION}.${T2_SOLUTION}.Domain"
+  $baseDomainPath = "${curDir}/Assets/Domains/Src/${T1_CORPORATION}.${T2_SOLUTION}.Domain"
   dotnet new classlib -o $baseDomainPath --force
   dotnet add $baseDomainPath reference "${baseFrameworkPath}.Contracts"
 
   # Domains Tests
-  $testBaseDomainPath = "${curDir}/Abstraction/Domains/Tests/${T1_CORPORATION}.${T2_SOLUTION}.Domain"
+  $testBaseDomainPath = "${curDir}/Assets/Domains/Tests/${T1_CORPORATION}.${T2_SOLUTION}.Domain"
   dotnet new xunit -o "${testBaseDomainPath}.Unit" --force
   dotnet add "${testBaseDomainPath}.Unit" reference $baseDomainPath
 }
@@ -204,9 +204,9 @@ function Add-ServiceReferences {
   dotnet add "${basePath}.Adapters.Persistence"    reference "${basePath}.Application"
   dotnet add "${basePath}.Application"             reference "${basePath}.Domain"
 
-  # Abstraction References
-  $frameworkPath = "${curDir}/Abstraction/Frameworks/Src/${T1_CORPORATION}.${T2_SOLUTION}.Framework"
-  $domainPath = "${curDir}/Abstraction/Domains/Src/${T1_CORPORATION}.${T2_SOLUTION}.Domain"
+  # Assets References
+  $frameworkPath = "${curDir}/Assets/Frameworks/Src/${T1_CORPORATION}.${T2_SOLUTION}.Framework"
+  $domainPath = "${curDir}/Assets/Domains/Src/${T1_CORPORATION}.${T2_SOLUTION}.Domain"
 
   dotnet add "${basePath}.Application" reference $frameworkPath
   dotnet add "${basePath}.Application" reference $domainPath
@@ -299,10 +299,10 @@ Write-Host
 Write-Host "Initialize Solution: ${T2_SOLUTION}" -ForegroundColor Blue
 Initialize-Solution -solutionName $T2_SOLUTION
 
-# 2/5. Abstraction 프로젝트 생성
+# 2/5. Asset 프로젝트 생성
 Write-Host
-Write-Host "Create Abstraction" -ForegroundColor Blue
-Create-AbstractionStructure
+Write-Host "Create Asset" -ForegroundColor Blue
+Create-AssetsStructure
 
 # 3/5. Backend 프로젝트 생성
 foreach ($service in $T3_SERVICES) {

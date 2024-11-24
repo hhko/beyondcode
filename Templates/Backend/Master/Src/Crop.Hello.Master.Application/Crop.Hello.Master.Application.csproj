@@ -2,8 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Crop.Hello.Master.Domain\Crop.Hello.Master.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\Abstraction\Frameworks\Src\Crop.Hello.Framework\Crop.Hello.Framework.csproj" />
-    <ProjectReference Include="..\..\..\..\Abstraction\Domains\Src\Crop.Hello.Domain\Crop.Hello.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\Assets\Frameworks\Src\Crop.Hello.Framework\Crop.Hello.Framework.csproj" />
+    <ProjectReference Include="..\..\..\..\Assets\Domains\Src\Crop.Hello.Domain\Crop.Hello.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

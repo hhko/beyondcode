@@ -4,12 +4,14 @@
 ## 기술 맵
 ![](./.images/TechMap.png)
 
-## Internal 아키텍처: 레이어 배치
+## Internal 아키텍처
+> 레이어 배치
 - Application 레이어(주 목표: Use Case)가 Internal 아키텍처를 주관(主管)합니다.
 
 ![](./.images/Architecture.Internal.png)
 
-## External 아키텍처: 서비스 배치
+## External 아키텍처
+> 서비스 배치
 TODO
 
 <br/>
@@ -250,13 +252,13 @@ Application Architecture
 ## Ch 8.1 솔루션 구조 템플릿
 ```shell
 {T2}.sln
-  │ # 부수(Abstraction) 범주: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
-  ├─Abstraction
+  │ # Asset 범주: 공유 자산
+  ├─Assets
   │   ├─Frameworks
   │   │   ├─Src
   │   │   │   ├─{T1}.{T2}.Framework
   │   │   │   └─{T1}.{T2}.Framework.Contracts
-  │   │   └─s
+  │   │   └─Tests
   │   │       └─{T1}.{T2}.Framework.Tests.Unit
   │   ├─Libraries
   │   │   └─{T1}.{T2}.[Tech]                                    // 예. RabbitMQ, ...
@@ -384,7 +386,6 @@ dotnet --version
   - `z`: feature, 0 ~ 9
   - `n`: patch, 0 ~ 99
 
-### Ch 9.1.1 빌드 버전 예제
 - `latestFeature` 예
   ```json
   {
@@ -432,7 +433,6 @@ dotnet new list | findstr nuget
 dotnet new nuget.config
 ```
 
-### Ch 9.2.1 패키지 소스 예제
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
@@ -466,13 +466,12 @@ upgrade-assistant upgrade
 
 ![](./.images/Directory.Package.props.concept.png)
 
-### Ch 9.3.1 변경 전/후 프로젝트 파일
-![](./.images/Directory.Package.props.csproj.png)
-- 프로젝트 파일에서 `PackageReference`의 `Version`을 제거 시킵니다.
-
-### Ch 9.3.2 변경 전/후 Directory.Package.props
-![](./.images/Directory.Package.props.png)
-- 프로젝트 파일에서 제거된 `PackageReference`의 `Version` 값을 `PackageVersion`으로 추가하여 버전을 중앙에서 관리합니다.
+- 프로젝트 파일 변경 전/후
+  ![](./.images/Directory.Package.props.csproj.png)
+  - 프로젝트 파일에서 `PackageReference`의 `Version`을 제거 시킵니다.
+- Directory.Package.props 변경 전/후
+  ![](./.images/Directory.Package.props.png)
+  - 프로젝트 파일에서 제거된 `PackageReference`의 `Version` 값을 `PackageVersion`으로 추가하여 버전을 중앙에서 관리합니다.
 
 ## Ch 9.4 중앙 빌드 관리
 - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
@@ -496,10 +495,9 @@ upgrade-assistant upgrade
 ```
 - new-buildprops.ps1 파일: [링크](./Templates/new-buildprops.ps1)
 
-### Ch 9.4.1 Directory.Build.props
 ```shell
 {T2}.sln
-Directory.Build.props                                // 전역 프로젝트 빌드 속성
+Directory.Build.props                                // 전역 프로젝트 공통 빌드 속성
   │
   ├─Backend
   │   ├─{T3}
@@ -507,13 +505,12 @@ Directory.Build.props                                // 전역 프로젝트 빌�
   │   │   │   ├─{T1}.{T2}.{T3}
   │   │   │   └─...
   │   │   └─Tests
-  │   │       ├─Directory.Build.props                // 테스트 프로젝트 빌드 속성
+  │   │       ├─Directory.Build.props                // 테스트 프로젝트 공통 빌드 속성
   │   │       ├─{T1}.{T2}.{T3}.Tests.Integration
   │   │       ├─{T1}.{T2}.{T3}.Tests.Performance
   │   │       └─{T1}.{T2}.{T3}.Tests.Unit
 ```
-
-- 전역 프로젝트 빌드 속성: 전역 프로젝트 속성은 솔루션 폴더에 있는 `Directory.Build.props` 파일에 정의합니다.
+- 전역 프로젝트 공통 빌드 속성: 솔루션 파일(.sln)과 같은 경로에 있는 `Directory.Build.props` 파일은 전체 공통 빌드 속성을 정의합니다.
   ```xml
   <Project>
 
@@ -525,7 +522,7 @@ Directory.Build.props                                // 전역 프로젝트 빌�
 
   </Project>
   ```
-- 테스트 프로젝트 빌드 속성: 테스트 프로젝트의 추가적인 속성은 전역 프로젝트 속성 외에 Tests 폴더의 `Directory.Build.props` 파일에 정의합니다.
+- 테스트 프로젝트 공통 빌드 속성: Tests 폴더에 있는 `Directory.Build.props` 파일은 Test 프로젝트 공통 빌드 속성을 정의합니다.
   ```xml
   <Project>
     <!--
@@ -541,55 +538,54 @@ Directory.Build.props                                // 전역 프로젝트 빌�
 
   </Project>
   ```
+- `Directory.Build.props` 적용 후
+  - EXE 프로젝트 .csproj 파일
+    ```xml
+    <Project Sdk="Microsoft.NET.Sdk">
+      <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <!--
+        // 솔루션 폴더에 있는 Directory.Build.props 빌드 속성을 사용합니다.
 
-### Ch 9.4.2 프로젝트 파일(Directory.Build.props 적용 후)
-- EXE 프로젝트 .csproj 파일
-  ```xml
-  <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-      <OutputType>Exe</OutputType>
-      <!--
-      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 속성을 사용합니다.
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        -->
+      </PropertyGroup>
+    </Project>
+    ```
+  - ClassLibrary 프로젝트 .csproj 파일
+    ```xml
+    <Project Sdk="Microsoft.NET.Sdk">
+      <PropertyGroup>
+        <!--
+        // 솔루션 폴더에 있는 Directory.Build.props 빌드 속성을 사용합니다.
 
-      <TargetFramework>net8.0</TargetFramework>
-      <ImplicitUsings>enable</ImplicitUsings>
-      <Nullable>enable</Nullable>
-      -->
-    </PropertyGroup>
-  </Project>
-  ```
-- ClassLibrary 프로젝트 .csproj 파일
-  ```xml
-  <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-      <!--
-      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 속성을 사용합니다.
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        -->
+      </PropertyGroup>
+    </Project>
+    ```
+  - Test 프로젝트 .csproj 파일
+    ```xml
+    <Project Sdk="Microsoft.NET.Sdk">
+      <PropertyGroup>
+        <!--
+        // 솔루션 폴더에 있는 Directory.Build.props 빌드 속성을 사용합니다.
 
-      <TargetFramework>net8.0</TargetFramework>
-      <ImplicitUsings>enable</ImplicitUsings>
-      <Nullable>enable</Nullable>
-      -->
-    </PropertyGroup>
-  </Project>
-  ```
-- Test 프로젝트 .csproj 파일
-  ```xml
-  <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-      <!--
-      // 솔루션 폴더에 있는 Directory.Build.props 파일에 있는 속성을 사용합니다.
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
 
-      <TargetFramework>net8.0</TargetFramework>
-      <ImplicitUsings>enable</ImplicitUsings>
-      <Nullable>enable</Nullable>
-
-      // Tests 폴더에 있는 Directory.Build.props 파일에 있는 속성을 사용합니다.
-      <IsPackable>false</IsPackable>
-      <IsTestProject>true</IsTestProject>
-      -->
-    </PropertyGroup>
-  </Project>
-  ```
+        // Tests 폴더에 있는 Directory.Build.props 빌드 속성을 사용합니다.
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+        -->
+      </PropertyGroup>
+    </Project>
+    ```
 
 ## Ch 9.5 코드 분석
 

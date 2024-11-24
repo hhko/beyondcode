@@ -230,3 +230,17 @@ groups
   ```
 - 옵션 접근
 - 컨테이너 HealthCheck 
+
+
+```
+  C:\Assets\Domains\Tests\Crop.Hello.Domain.Unit\Crop.Hello.Domain.Unit.csproj : warning NU1903: 'System.Net.Http' 4.3.0 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-7jgj-8wvc-jh57이(가) 있습니다.
+  C:\Assets\Domains\Tests\Crop.Hello.Domain.Unit\Crop.Hello.Domain.Unit.csproj : warning NU1903: 'System.Text.RegularExpressions' 4.3.0 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-cmhx-cq75-c4mj이(가) 있습니다.
+  C:\Assets\Frameworks\Tests\Crop.Hello.Framework.Tests.Unit\Crop.Hello.Framework.Tests.Unit.csproj : warning NU1903: 'System.Net.Http' 4.3.0 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-7jgj-8wvc-jh57이(가) 있습니다.
+  C:\Assets\Frameworks\Tests\Crop.Hello.Framework.Tests.Unit\Crop.Hello.Framework.Tests.Unit.csproj : warning NU1903: 'System.Text.RegularExpressions' 4.3.0 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-cmhx-cq75-c4mj이(가) 있습니다.
+Crop.Hello.Domain.Unit 2 경고와 함께 성공 (0.8초) → Assets\Domains\Tests\Crop.Hello.Domain.Unit\bin\Debug\net8.0\Crop.Hello.Domain.Unit.dll
+  C:\Assets\Domains\Tests\Crop.Hello.Domain.Unit\Crop.Hello.Domain.Unit.csproj : warning NU1903: 'System.Net.Http' 4.3.0 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-7jgj-8wvc-jh57이(가) 있습니다.
+  C:\Assets\Domains\Tests\Crop.Hello.Domain.Unit\Crop.Hello.Domain.Unit.csproj : warning NU1903: 'System.Text.RegularExpressions' 4.3.0 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-cmhx-cq75-c4mj이(가) 있습니다.
+Crop.Hello.Framework.Tests.Unit 2 경고와 함께 성공 (1.6초) → Assets\Frameworks\Tests\Crop.Hello.Framework.Tests.Unit\bin\Debug\net8.0\Crop.Hello.Framework.Tests.Unit.dll
+  C:\Assets\Frameworks\Tests\Crop.Hello.Framework.Tests.Unit\Crop.Hello.Framework.Tests.Unit.csproj : warning NU1903: 'System.Net.Http' 4.3.0 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-7jgj-8wvc-jh57이(가) 있습니다.
+  C:\Assets\Frameworks\Tests\Crop.Hello.Framework.Tests.Unit\Crop.Hello.Framework.Tests.Unit.csproj : warning NU1903: 'System.Text.RegularExpressions' 4.3.0 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-cmhx-cq75-c4mj이(가) 있습니다.
+```

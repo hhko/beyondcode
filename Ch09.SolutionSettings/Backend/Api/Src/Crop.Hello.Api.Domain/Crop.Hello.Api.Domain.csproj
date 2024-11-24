@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Abstraction\Frameworks\Src\Crop.Hello.Framework.Contracts\Crop.Hello.Framework.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\Assets\Frameworks\Src\Crop.Hello.Framework.Contracts\Crop.Hello.Framework.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR.Contracts" />
