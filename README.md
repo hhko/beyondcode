@@ -7,7 +7,6 @@
 ## Internal 아키텍처
 > 레이어 배치
 - Application 레이어가 Internal 아키텍처를 주관(主管)합니다.
-  - Application 레이어는 Use Case 구현이 주 목표입니다.
 
 ![](./.images/Architecture.Internal.png)
 
