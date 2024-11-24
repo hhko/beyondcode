@@ -446,7 +446,7 @@ dotnet new nuget.config
 ```
 - 전역 설정에 지정된 기존 NuGet 패키지 소스 목록을 모두 제거 후에 새 패키지 저장소 `https://api.nuget.org/v3/index.json`을 지정합니다.
 
-## Ch 9.3 중앙 패키지 관리
+## Ch 9.3 중앙 패키지 버전 관리
 - `Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다.
   - 예제 코드: [Directory.Packages.props](./Ch09.SolutionBuildSettings/Directory.Packages.props)
 
@@ -474,7 +474,7 @@ upgrade-assistant upgrade
   ![](./.images/Directory.Package.props.png)
   - 프로젝트 파일에서 제거된 `PackageReference`의 `Version` 값을 `PackageVersion`으로 추가하여 버전을 중앙에서 관리합니다.
 
-## Ch 9.4 중앙 빌드 관리
+## Ch 9.4 중앙 빌드 속성 관리
 - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
   - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionBuildSettings/Directory.Build.props)
   - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionBuildSettings/Backend/Tests/Directory.Build.props)
@@ -597,14 +597,25 @@ Directory.Build.props                                // 전역 프로젝트 공�
 
 ## Ch 10.1 코드 스타일 분석
 - [코드 스타일 규칙](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/)은 `IDExxxx` 규칙으로 정의합니다.
-- 코드 스타일 분석은 .NET 프로젝트 빌드에서 기본적으로 비활성화되어 있어, 명시적으로 활성화해야 합니다.
+- 코드 스타일 분석은 .NET 프로젝트 빌드 시 기본적으로 비활성화되어 있으므로, 이를 사용하려면 명시적으로 활성화해야 합니다.
   ```xml
   <PropertyGroup>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
-  ```
-  - `Directory.Build.props`에 정의하여 모든 프로젝트에서 코드 스타일 분석을 화성화 시킵니다.
-- 네임스페이 적용 예
+
+```shell
+# 템플릿 확인
+dotnet new list | findstr editor
+  템플릿 이름          약식 이름                       언어     태그
+  ------------------- -----------------------------  -------  ---------
+  EditorConfig 파일    editorconfig,.editorconfig              Config
+
+# 템플릿 파일 생성
+dotnet new editorconfig
+```
+
+- `.editorConfig` 파일을 이용하여 코드 스타일을 정의할 수 있습니다. `.editorConfig`은 Visual Studio 옵션 대화 상자에 지정된 코드 스타일보다 우선합니다.
+- [file_scoped 네임스페이]((https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161)) 코드 스타일 적용 예
   ```shell
   # 코드 스타일: File Scoped 네임스페이스가 아닐 때
   #   - IDE0160: Use block-scoped namespace
@@ -615,34 +626,15 @@ Directory.Build.props                                // 전역 프로젝트 공�
   # csharp_style_namespace_declarations = file_scoped
   csharp_style_namespace_declarations = file_scoped:warning
   ```
-  - [file_scoped](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161)
-
-```
-[*.{cs,vb}]
-# IDE0040: Accessibility modifiers required (escalated to a build warning)
-dotnet_diagnostic.IDE0040.severity = warning
-```
-```
-[*.{cs,vb}]
-# IDE0040: Accessibility modifiers required (escalated to a build warning)
-dotnet_style_require_accessibility_modifiers = always:warning
-```
-
-```
-[*.{cs,vb}]
-
-# Default severity for analyzer diagnostics with category 'Style' (escalated to build warnings)
-dotnet_analyzer_diagnostic.category-Style.severity = warning
-
-# IDE0040: Accessibility modifiers required (disabled on build)
-dotnet_diagnostic.IDE0040.severity = silent
-```
-
+  - dotnet_diagnostic.IDE0161.severity: 네임스페이스 규칙 활성화와 심각도 설정
+  - csharp_style_namespace_declarations: 네임스페이스 선언 스타일에 대한 기본 설정
 - 전역 설정
 - 기본 규칙
   - 네임스페이
   - public sealed
   - internal sealed
+  - 사용하지 않는 using 구문
+  - using 구문 순서
 
 
 ## Ch 10.2 코드 품질 분석
