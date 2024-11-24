@@ -30,18 +30,19 @@ TODO
   - [x] [Ch 07. 아키텍처 비교](#ch-7-아키텍처-비교)
 - Part 3. 솔루션
   - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
-  - [ ] [Ch 09. 솔루션 설정](#ch-9-솔루션-설정)
-  - [ ] Ch 10. 솔루션 테스트
-  - [ ] Ch 11. 솔루션 빌드
-  - [ ] Ch 12. 솔루션 배포
+  - [x] [Ch 09. 솔루션 빌드 설정](#ch-9-솔루션-빌드-설정)
+  - [ ] [Ch 10. 솔루션 코드 분석](#ch-10-솔루션-코드-분석)
+  - [ ] Ch 11. 솔루션 테스트
+  - [ ] Ch 12. 솔루션 빌드
+  - [ ] Ch 13. 솔루션 배포
 - Part 4. 관찰 가능성
-  - [ ] Ch 13. Aspire 대시보드
-  - [ ] Ch 14. OpenSearch 시스템
+  - [ ] Ch 14. Aspire 대시보드
+  - [ ] Ch 15. OpenSearch 시스템
   - [ ] TODO 로그
   - [ ] TODO 추적
   - [ ] TODO 지표
 - Part 5. Internal 전술 설계
-  - [x] [Ch 15. 전술 설계 패턴](#ch-15-전술-설계-패턴)
+  - [x] [Ch 2x. 전술 설계 패턴](#ch-2x-전술-설계-패턴)
   - [ ] TODO
 - Part 6. External 전술 설계
 - Part 7. 전략 설계
@@ -349,11 +350,11 @@ Application Architecture
 
 <br/>
 
-# Ch 9. 솔루션 설정
+# Ch 9. 솔루션 빌드 설정
 
 ## Ch 9.1 .NET SDK 빌드 버전
 - `global-json` 파일은 .NET 프로젝트에서 특정 .NET SDK 버전을 지정하여 일관된 개발 환경을 유지하기 위해 사용됩니다.
-  - 예제 코드: [global-json](./Ch09.SolutionSettings/global.json)
+  - 예제 코드: [global-json](./Ch09.SolutionBuildSettings/global.json)
 
 ```shell
 # Host에 설치된 .NET SDK 목록
@@ -420,7 +421,7 @@ dotnet --version
 
 ## Ch 9.2 패키지 소스
 - `nuget.config` 파일은 솔루션 수준에서 패키지 소스을 관리합니다.
-  - 예제 코드: [nuget.config](./Ch09.SolutionSettings/nuget.config)
+  - 예제 코드: [nuget.config](./Ch09.SolutionBuildSettings/nuget.config)
 
 ```shell
 # 템플릿 확인
@@ -447,7 +448,7 @@ dotnet new nuget.config
 
 ## Ch 9.3 중앙 패키지 관리
 - `Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다.
-  - 예제 코드: [Directory.Packages.props](./Ch09.SolutionSettings/Directory.Packages.props)
+  - 예제 코드: [Directory.Packages.props](./Ch09.SolutionBuildSettings/Directory.Packages.props)
 
 ```shell
 # 도구 설치
@@ -475,8 +476,8 @@ upgrade-assistant upgrade
 
 ## Ch 9.4 중앙 빌드 관리
 - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
-  - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings/Directory.Build.props)
-  - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionSettings/Backend/Tests/Directory.Build.props)
+  - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionBuildSettings/Directory.Build.props)
+  - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionBuildSettings/Backend/Tests/Directory.Build.props)
 
 ```shell
 # 전체 공통 빌드 속성
@@ -587,98 +588,64 @@ Directory.Build.props                                // 전역 프로젝트 공�
     </Project>
     ```
 
-## Ch 9.5 코드 분석
-
-```
-root = true
-
-# All files
-[*]
-indent_style = space
-
-# Xml files
-[*.xml]
-indent_size = 2
-
-# C# files
-[*.cs]
-
-#### Core EditorConfig Options ####
-
-# Indentation and spacing
-indent_size = 4
-tab_width = 4
-
-# New line preferences
-insert_final_newline = false
-
-[*.{cs,vb}]
-dotnet_analyzer_diagnostic.category-Style.severity = none
-
-dotnet_diagnostic.MA0053.severity = warning
-```
-
-### Ch 9.5.1 코드 스타일("IDExxxx")
-- 코드 스타일 인덱스: [링크](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/#index)
-
-![](./.images/csharp_style_namespace_declarations.png)
-
-```shell
-# 코드 스타일: File Scoped 네임스페이스가 아닐 때
-#   - IDE0160: Use block-scoped namespace
-#   - IDE0161: Use file-scoped namespace
-dotnet_diagnostic.IDE0161.severity = warning
-csharp_style_namespace_declarations = file_scoped:warning
-```
-
-- [x] [네임스페이스 file_scoped](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161)
-  ```ini
-  dotnet_diagnostic.IDE0161.severity = warning
-  csharp_style_namespace_declarations = file_scoped:warning
-  ```
-- [x] sealed: CA1852,	MA0053
-  - CA only applies to internal types in assemblies that do not expose internal types and members and - by default - report types that inherit from [Exception] (https://learn.microsoft.com/en-us/dotnet/api/system.exception?WT.mc_id=DT-MVP-5003978), but cannot be configured to report types that define virtual members
-- [x] [Meziantou.Analyzer's rules: .editorconfig - all rules disabled](https://github.com/meziantou/Meziantou.Analyzer/tree/main/docs#editorconfig---all-rules-disabled)
-- [ ] 잘못된 네임스페이스
-- [ ] [사용하지 않는 using 구문](https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0005?pivots=lang-csharp-vb)
-  ```ini
-  dotnet_diagnostic.IDE0005.severity = warning
-  ```
-- [ ] [primary 생성자](https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0290)
-  ```ini
-  dotnet_diagnostic.IDE0290.severity = warning
-  csharp_style_prefer_primary_constructors = true:warning
-  ```
-- [ ] internal sealed class
-
-```xml
-<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-```
-- `EnforceCodeStyleInBuild`: 명령줄 및 Visual Studio에서 빌드할 때 코드 스타일("IDExxxx") 분석을 사용하도록 설정할 수 있습니다.
-
-
-### Ch 9.5.2 코드 분석
-- TODO `AnalysisLevel`: latest
-- TODO `AnalysisMode`: All
-- TODO `CodeAnalysisTreatWarningsAsErrors`: true
-- TODO 코드 품질
-  - StyleCop.Analyzers
-  - SonarAnalyzer.CSharp
-- TODO 스레드 분석
-- todo clr 메모리 분석
-- https://swharden.com/blog/2023-03-05-dotnet-code-analysis/
-- https://swharden.com/blog/2023-03-07-treemapping/
+## Ch 9.5 버전 공유
+- TODO
 
 <br/>
 
-- https://github.com/cybermaxs/awesome-analyzers?tab=readme-ov-file
-  - https://www.meziantou.net/the-roslyn-analyzers-i-use.htm
-  - https://github.com/dotnet/roslynator
-  - Microsoft.CodeAnalysis.NetAnalyzers
-  - https://github.com/meziantou/Meziantou.Analyzer/tree/main
-  - https://github.com/code-cracker/code-cracker
-  - https://github.com/SonarSource/sonar-dotnet
+# Ch 10. 솔루션 코드 분석
+
+## Ch 10.1 코드 스타일 분석
+- [코드 스타일 규칙](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/)은 `IDExxxx` 규칙으로 정의합니다.
+- 코드 스타일 분석은 .NET 프로젝트 빌드에서 기본적으로 비활성화되어 있어, 명시적으로 활성화해야 합니다.
+  ```xml
+  <PropertyGroup>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+  ```
+  - `Directory.Build.props`에 정의하여 모든 프로젝트에서 코드 스타일 분석을 화성화 시킵니다.
+- 네임스페이 적용 예
+  ```shell
+  # 코드 스타일: File Scoped 네임스페이스가 아닐 때
+  #   - IDE0160: Use block-scoped namespace
+  #   - IDE0161: Use file-scoped namespace
+  dotnet_diagnostic.IDE0161.severity = warning
+
+  # csharp_style_namespace_declarations = block_scoped
+  # csharp_style_namespace_declarations = file_scoped
+  csharp_style_namespace_declarations = file_scoped:warning
+  ```
+  - [file_scoped](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161)
+
+```
+[*.{cs,vb}]
+# IDE0040: Accessibility modifiers required (escalated to a build warning)
+dotnet_diagnostic.IDE0040.severity = warning
+```
+```
+[*.{cs,vb}]
+# IDE0040: Accessibility modifiers required (escalated to a build warning)
+dotnet_style_require_accessibility_modifiers = always:warning
+```
+
+```
+[*.{cs,vb}]
+
+# Default severity for analyzer diagnostics with category 'Style' (escalated to build warnings)
+dotnet_analyzer_diagnostic.category-Style.severity = warning
+
+# IDE0040: Accessibility modifiers required (disabled on build)
+dotnet_diagnostic.IDE0040.severity = silent
+```
+
+- 기본 규칙
+  - 네임스페이
+  - public sealed
+  - internal sealed
+
+
+## Ch 10.2 코드 품질 분석
+
 
 ## Ch 9.6 컨테이너
 - TODO Dockerfile 자동 생성
@@ -696,27 +663,27 @@ csharp_style_namespace_declarations = file_scoped:warning
 
 <br/>
 
-# Ch 10. 솔루션 테스트
+# Ch 11. 솔루션 테스트
 
-## 테스트
+## Ch 11.1 테스트
 - TODO 코드 커버리지
 - TODO Fake 데이터
 - TODO AutoFixture
 - TODO Snapshot
 - TODO ...
 
-## 컨테이너 테스트
+## Ch 11.2 컨테이너 테스트
 - TODO PostgreSQL
 - TODO RabbitMQ, ...
 
-## 통합 테스트
+## Ch 11.3 통합 테스트
 - TODO WebApi
 - TODO RabbitMQ
 - TODO FileSystem
 - TODO 반복 작업
 - TODO ...
 
-## 성능 테스트
+## Ch 11.4 성능 테스트
 - TODO ...
 
 <br/>
@@ -743,34 +710,16 @@ csharp_style_namespace_declarations = file_scoped:warning
 
 # Ch 12. 솔루션 배포
 - TODO GitHub Release
-- TODO GitHub 컨테이너
+- TODO GitHub Docker Image
 - TODO 버전
 
 <br/>
 
 ---
 
-<br/>
-
-# Part 4. 관찰 가능성
-
-# Ch 13. Aspire 대시보드
-- TODO
-
-<br/>
-
-# Ch 14. OpenSearch 시스템
-- TODO
-
-<br/>
-
----
-
-<br/>
-
 # Part 5. Internal 전술 설계
 
-# Ch 15. 전술 설계 패턴
+# Ch 2x. 전술 설계 패턴
 ![](./.images/TacticalDesign.Pattern.png)
 
 <br/>

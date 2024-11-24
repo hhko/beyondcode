@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="JunitXml.TestLogger" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NetArchTest.Rules" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\Crop.Hello.Master.Adapters.Infrastructure\Crop.Hello.Master.Adapters.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Src\Crop.Hello.Master.Adapters.Persistence\Crop.Hello.Master.Adapters.Persistence.csproj" />
+    <ProjectReference Include="..\..\Src\Crop.Hello.Master.Application\Crop.Hello.Master.Application.csproj" />
+    <ProjectReference Include="..\..\Src\Crop.Hello.Master.Domain\Crop.Hello.Master.Domain.csproj" />
+  </ItemGroup>
+</Project>
+

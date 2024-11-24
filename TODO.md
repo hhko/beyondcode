@@ -1,3 +1,97 @@
+```
+```
+root = true
+
+# All files
+[*]
+indent_style = space
+
+# Xml files
+[*.xml]
+indent_size = 2
+
+# C# files
+[*.cs]
+
+#### Core EditorConfig Options ####
+
+# Indentation and spacing
+indent_size = 4
+tab_width = 4
+
+# New line preferences
+insert_final_newline = false
+
+[*.{cs,vb}]
+dotnet_analyzer_diagnostic.category-Style.severity = none
+
+dotnet_diagnostic.MA0053.severity = warning
+```
+
+### Ch 9.5.1 코드 스타일("IDExxxx")
+- 코드 스타일 인덱스: [링크](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/#index)
+
+![](./.images/csharp_style_namespace_declarations.png)
+
+```shell
+# 코드 스타일: File Scoped 네임스페이스가 아닐 때
+#   - IDE0160: Use block-scoped namespace
+#   - IDE0161: Use file-scoped namespace
+dotnet_diagnostic.IDE0161.severity = warning
+csharp_style_namespace_declarations = file_scoped:warning
+```
+
+- [x] [네임스페이스 file_scoped](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161)
+  ```ini
+  dotnet_diagnostic.IDE0161.severity = warning
+  csharp_style_namespace_declarations = file_scoped:warning
+  ```
+- [x] sealed: CA1852,	MA0053
+  - CA only applies to internal types in assemblies that do not expose internal types and members and - by default - report types that inherit from [Exception] (https://learn.microsoft.com/en-us/dotnet/api/system.exception?WT.mc_id=DT-MVP-5003978), but cannot be configured to report types that define virtual members
+- [x] [Meziantou.Analyzer's rules: .editorconfig - all rules disabled](https://github.com/meziantou/Meziantou.Analyzer/tree/main/docs#editorconfig---all-rules-disabled)
+- [ ] 잘못된 네임스페이스
+- [ ] [사용하지 않는 using 구문](https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0005?pivots=lang-csharp-vb)
+  ```ini
+  dotnet_diagnostic.IDE0005.severity = warning
+  ```
+- [ ] [primary 생성자](https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/style-rules/ide0290)
+  ```ini
+  dotnet_diagnostic.IDE0290.severity = warning
+  csharp_style_prefer_primary_constructors = true:warning
+  ```
+- [ ] internal sealed class
+
+```xml
+<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+```
+- `EnforceCodeStyleInBuild`: 명령줄 및 Visual Studio에서 빌드할 때 코드 스타일("IDExxxx") 분석을 사용하도록 설정할 수 있습니다.
+
+
+### Ch 9.5.2 코드 분석
+- TODO `AnalysisLevel`: latest
+- TODO `AnalysisMode`: All
+- TODO `CodeAnalysisTreatWarningsAsErrors`: true
+- TODO 코드 품질
+  - StyleCop.Analyzers
+  - SonarAnalyzer.CSharp
+- TODO 스레드 분석
+- todo clr 메모리 분석
+- https://swharden.com/blog/2023-03-05-dotnet-code-analysis/
+- https://swharden.com/blog/2023-03-07-treemapping/
+
+<br/>
+
+- https://github.com/cybermaxs/awesome-analyzers?tab=readme-ov-file
+  - https://www.meziantou.net/the-roslyn-analyzers-i-use.htm
+  - https://github.com/dotnet/roslynator
+  - Microsoft.CodeAnalysis.NetAnalyzers
+  - https://github.com/meziantou/Meziantou.Analyzer/tree/main
+  - https://github.com/code-cracker/code-cracker
+  - https://github.com/SonarSource/sonar-dotnet
+
+```
+
 csharp_style_namespace_declarations = file_scoped:error
 dotnet_diagnostic.IDE0161.severity = error
 
