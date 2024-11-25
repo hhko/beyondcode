@@ -726,6 +726,8 @@ dotnet new editorconfig
 - [ ] [Clean-Architecture-Template](https://github.com/babaktaremi/Clean-Architecture-Template)
 
 ### 아키텍처 이해
+- [ ] [Hexagonal Architecture (Alistair Cockburn)](https://www.youtube.com/watch?v=k0ykTxw7s0Y)
+  - [Hexagonal Architecture PDF](https://alistaircockburn.com/Hexagonal%20Budapest%2023-05-18.pdf)
 - [ ] [Hexagonal Architecture - What Is It? Why Should You Use It?](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture/)
 - [ ] [CodeMaze | Clean Architecture in .NET](https://code-maze.com/dotnet-clean-architecture/)
 - [ ] [What are the Differences Between Onion Architecture and Clean Architecture in .NET?](https://code-maze.com/dotnet-differences-between-onion-architecture-and-clean-architecture/)
