@@ -1,33 +1,33 @@
 > more `fun.` with
 
-# 개요
-## 기술 맵
+# Overview
+## Tech Map
 ![](./.images/TechMap.png)
 
-## Internal 아키텍처
+## Internal Architecture
 > 레이어 배치
 - Application 레이어가 Internal 아키텍처를 주관(主管)합니다.
 
 ![](./.images/Architecture.Internal.png)
 
-## External 아키텍처
+## External Architecture
 > 서비스 배치
 - TODO
 
 <br/>
 
-# 목차
-- Part 0. 세미나
-  - [x] [Internal 아키텍처 개요](./Ch00.Seminar/InternalArchitecture-Overview/)
+# Table of Contents
+- Part 0. Seminar
+  - [x] [Internal Architecture Overview](./Ch00.Seminar/InternalArchitecture-Overview/)
   - [ ] TODO
-- Part 1. 아키텍처
-  - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
-  - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
-  - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
-  - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
-  - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
-  - [x] [Ch 06. 서비스 통합](#ch-6-서비스-통합)
-  - [x] [Ch 07. 아키텍처 비교](#ch-7-아키텍처-비교)
+- Part 1. Architecture
+  - [x] [Ch 01. Architecture Overview](#ch-1-아키텍처-개요)
+  - [x] [Ch 02. Architectural principles](#ch-2-아키텍처-원칙)
+  - [x] [Ch 03. Layer Isolation](#ch-3-레이어-격리)
+  - [x] [Ch 04. Layer Test](#ch-4-레이어-테스트)
+  - [x] [Ch 05. Layer Enhancement](#ch-5-레이어-고도화)
+  - [x] [Ch 06. Service Integration](#ch-6-서비스-통합)
+  - [x] [Ch 07. Architecture Comparison](#ch-7-아키텍처-비교)
 - Part 2. 솔루션
   - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
   - [x] [Ch 09. 솔루션 빌드 설정](#ch-9-솔루션-빌드-설정)
