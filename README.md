@@ -637,9 +637,15 @@ dotnet new editorconfig
   - 사용하지 않는 using 구문
   - using 구문 순서
 
-
 ## Ch 10.2 코드 품질 분석
-
+- [.NET Source Code Analysis](https://swharden.com/blog/2023-03-05-dotnet-code-analysis/)
+- [Treemapping with C#](https://swharden.com/blog/2023-03-07-treemapping/)
+- [DotNet.GitHubActionMetrics](https://github.com/MarvinDrude/DotNet.GitHubActionMetrics)
+- [Automate code metrics and class diagrams with GitHub Actions](https://devblogs.microsoft.com/dotnet/automate-code-metrics-and-class-diagrams-with-github-actions/)
+- [Overview of .NET source code analysis](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/overview?tabs=net-9#enable-on-build)
+  - [Namespace declaration preferences (IDE0160 and IDE0161)](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161)
+  - [Language and unnecessary rules](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/language-rules#option-format)
+- [코드 메트릭 데이터 생성](https://learn.microsoft.com/ko-kr/visualstudio/code-quality/how-to-generate-code-metrics-data?view=vs-2022)
 
 <br/>
 
