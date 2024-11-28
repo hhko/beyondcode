@@ -1,17 +1,18 @@
 > more `fun.` with
 
 # Overview
-## Tech Map
+## Tech. Map
 ![](./.images/TechMap.png)
 
 ## Internal Architecture
-> 레이어 배치
-- Application 레이어가 Internal 아키텍처를 주관(主管)합니다.
+> - 내부 아키텍처는 레이어 배치입니다.
+> - **Application 레이어가** 내부 아키텍처의 레이어를 주관(主管)합니다.
 
 ![](./.images/Architecture.Internal.png)
 
 ## External Architecture
-> 서비스 배치
+> - 외부 아키텍처는 서비스 배치입니다.
+
 - TODO
 
 <br/>
@@ -22,30 +23,30 @@
   - [ ] TODO
 - Part 1. Architecture
   - [x] [Ch 01. Architecture Overview](#ch-1-아키텍처-개요)
-  - [x] [Ch 02. Architectural principles](#ch-2-아키텍처-원칙)
+  - [x] [Ch 02. Architectural Principles](#ch-2-아키텍처-원칙)
   - [x] [Ch 03. Layer Isolation](#ch-3-레이어-격리)
   - [x] [Ch 04. Layer Test](#ch-4-레이어-테스트)
   - [x] [Ch 05. Layer Enhancement](#ch-5-레이어-고도화)
   - [x] [Ch 06. Service Integration](#ch-6-서비스-통합)
   - [x] [Ch 07. Architecture Comparison](#ch-7-아키텍처-비교)
-- Part 2. 솔루션
-  - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
-  - [x] [Ch 09. 솔루션 빌드 설정](#ch-9-솔루션-빌드-설정)
-  - [ ] [Ch 10. 솔루션 코드 분석](#ch-10-솔루션-코드-분석)
-  - [ ] Ch 11. 솔루션 테스트
-  - [ ] Ch 12. 솔루션 빌드
-  - [ ] Ch 13. 솔루션 배포
-- Part 3. 관찰 가능성
-  - [ ] Ch 14. Aspire 대시보드
-  - [ ] Ch 15. OpenSearch 시스템
+- Part 2. Solution
+  - [x] [Ch 08. Solution Structure](#ch-8-솔루션-구조)
+  - [x] [Ch 09. Solution Build Setting](#ch-9-솔루션-빌드-설정)
+  - [ ] [Ch 10. Solution Code Analysis](#ch-10-솔루션-코드-분석)
+  - [ ] Ch 11. Solution Test
+  - [ ] Ch 12. Solution CI
+  - [ ] Ch 13. Solution CD
+- Part 3. Observability
+  - [ ] Ch 14. Aspire Dashboard
+  - [ ] Ch 15. OpenSearch System
   - [ ] TODO 로그
   - [ ] TODO 추적
   - [ ] TODO 지표
-- Part 4. Internal 전술 설계
-  - [x] [Ch 2x. 전술 설계 패턴](#ch-2x-전술-설계-패턴)
+- Part 4. Internal Tactical Design
+  - [x] [Ch 2x. Tactical Design Map](#ch-2x-전술-설계-맵)
   - [ ] TODO
-- Part 5. External 전술 설계
-- Part 6. 전략 설계
+- Part 5. External Tactical Design
+- Part 6. Strategic Design
 - Part 7. 참고 자료
 
 <br/>
@@ -711,7 +712,7 @@ dotnet new editorconfig
 
 # Part 4. Internal 전술 설계
 
-# Ch 2x. 전술 설계 패턴
+# Ch 2x. 전술 설계 맵
 ![](./.images/TacticalDesign.Pattern.png)
 
 <br/>
