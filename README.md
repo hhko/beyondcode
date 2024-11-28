@@ -279,7 +279,7 @@ Application Architecture
   ├─Backend
   │   ├─{T3}
   │   │   ├─Src
-  │   │   │   ├─{T1}.{T2}.{T3}                                  // 호스트 프로젝트
+  │   │   │   ├─{T1}.{T2}.{T3}                                  // Host
   │   │   │   ├─{T1}.{T2}.{T3}.Adapters.Infrastructure          // Adapter 레이어
   │   │   │   ├─{T1}.{T2}.{T3}.Adapters.Persistence             // Adapter 레이어
   │   │   │   ├─{T1}.{T2}.{T3}.Application                      // Application 레이어
@@ -298,7 +298,7 @@ Application Architecture
   └─Frontend
       └─{T3}
           ├─Src
-          │   ├─{T1}.{T2}.{T3}                                  // 호스트 프로젝트
+          │   ├─{T1}.{T2}.{T3}                                  // Host
           │   ├─{T1}.{T2}.{T3}.Adapters.Infrastructure          // Adapter 레이어
           │   ├─{T1}.{T2}.{T3}.Adapters.Persistence             // Adapter 레이어
           │   ├─{T1}.{T2}.{T3}.Application                      // Application 레이어
@@ -602,6 +602,35 @@ Directory.Build.props                                // 전역 프로젝트 공�
 # Ch 10. 솔루션 코드 분석
 
 ## Ch 10.1 코드 스타일 분석
+```ini
+[*.{cs,vb}]
+dotnet_diagnostic.IDE0161.severity = warning
+csharp_style_namespace_declarations = file_scoped:warning
+```
+```xml
+<Project>
+
+  <PropertyGroup>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+</Project>
+```
+```cs
+namespace Crop.Hello.Api.Adapters.Infrastructure   // block-scoped
+{
+    public class Class1
+    {
+
+    }
+}
+```
+```
+error IDE0161:
+ 파일 범위 namespace 스로 변환 (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0161)
+```
+
 - [코드 스타일 규칙](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/)은 `IDExxxx` 규칙으로 정의합니다.
 - 코드 스타일 분석은 .NET 프로젝트 빌드 시 기본적으로 비활성화되어 있으므로, 이를 사용하려면 명시적으로 활성화해야 합니다.
   ```xml

@@ -1,39 +1,39 @@
 root = true
 
-# All files
-[*]
-indent_style = space
+# # All files
+# [*]
+# indent_style = space
 
-# Xml files
-[*.xml]
-indent_size = 2
+# # Xml files
+# [*.xml]
+# indent_size = 2
 
-# C# files
-[*.cs]
+# # C# files
+# [*.cs]
 
-#### Core EditorConfig Options ####
+# #### Core EditorConfig Options ####
 
-# Indentation and spacing
-indent_size = 4
-tab_width = 4
+# # Indentation and spacing
+# indent_size = 4
+# tab_width = 4
 
-# New line preferences
-end_of_line = crlf
-insert_final_newline = false
+# # New line preferences
+# end_of_line = crlf
+# insert_final_newline = false
 
-#### .NET Coding Conventions ####
+# #### .NET Coding Conventions ####
+# [*.{cs,vb}]
+
+# # Organize usings
+# dotnet_separate_import_directive_groups = true
+# dotnet_sort_system_directives_first = true
+# file_header_template = unset
+
+#
+#
+#
+# dotnet_analyzer_diagnostic.category-Style.severity = none
 [*.{cs,vb}]
-
-# Organize usings
-dotnet_separate_import_directive_groups = true
-dotnet_sort_system_directives_first = true
-file_header_template = unset
-
-#
-#
-#
-dotnet_analyzer_diagnostic.category-Style.severity = none
-
 dotnet_diagnostic.IDE0161.severity = warning
 csharp_style_namespace_declarations = file_scoped:warning
 
