@@ -125,7 +125,9 @@ Application Architecture
     - `Unknown` 출력 Adapter: 부수 효과(Side Effects)
 
 ## Ch 2.3 레이어 배치
-![](./.images/Layer.Alignment.png)
+![](./.images/Layer.Alignment.Known.png)
+
+![](./.images/Layer.Alignment.Unknown.png)
 
 <br/>
 
@@ -143,7 +145,7 @@ Application Architecture
 
 # Ch 4. 레이어 테스트
 
-![](./.images/Layer.Isolation.png)
+![](./.images/Layer.Isolation.Test.png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
 - 통합 테스트: Tech. 관심사까지 포함하여 Biz. 관심사를 테스트합니다.
 
@@ -164,11 +166,13 @@ Application Architecture
   - 메시지는 입출력을 범주화할 수 있습니다(Command 메시지와 Query 메시지: CQRS 패턴).
 
 ## Ch 5.2 메시지 고도화
-![](./.images/Layer.Decorator.png)
+![](./.images/Layer.Decorator.Known.png)
 - Mediator 패턴은 Decorator 패턴과 조합하여 동적으로 메시지에 새 기능을 추가할 수 있습니다.
   - 예. 메시지 처리 시간 로그
   - 예. 입력 메시지 유효성 검사
   - 예. Command 메시지일 때 트랜잭션 처리(CQRS 패턴)
+
+![](./.images/Layer.Decorator.Unknown.png)
 
 ## Ch 5.3 메시지 범주화(CQRS)
 ![](./.images/Layer.CQRS.png)
@@ -193,7 +197,7 @@ Application Architecture
 <br/>
 
 # Ch 6. 서비스 통합
-![](./.images/Service.Integration.png)
+![](./.images/Architecture.Internal.Integration.png)
 
 - 서비스 통합은 Biz. 관심사와 분리하여 Tech. 관심사(Adapter 레이어) 중심으로 구성할 수 있게 됩니다(Microservice 아키텍처 패턴).
 
