@@ -1,52 +1,52 @@
 > more `fun.` with
 
-# Overview
-## Tech. Map
+# 개요
+## 기술 맵
 ![](./.images/TechMap.png)
 
-## Internal Architecture
+## Internal 아키텍처
 > - 내부 아키텍처는 레이어 배치입니다.
 > - **Application 레이어가** 내부 아키텍처의 레이어를 주관(主管)합니다.
 
 ![](./.images/Architecture.Internal.png)
 
-## External Architecture
+## External 아키텍처
 > - 외부 아키텍처는 서비스 배치입니다.
 
 - TODO
 
 <br/>
 
-# Table of Contents
-- Part 0. Seminar
-  - [x] [Internal Architecture Overview](./Ch00.Seminar/InternalArchitecture-Overview/)
+# 목차
+- Part 0. 세미나
+  - [x] [Internal 아키텍처 개요](./Ch00.Seminar/InternalArchitecture-Overview/)
   - [ ] TODO
-- Part 1. Architecture
-  - [x] [Ch 01. Architecture Overview](#ch-1-아키텍처-개요)
-  - [x] [Ch 02. Architectural Principles](#ch-2-아키텍처-원칙)
-  - [x] [Ch 03. Layer Isolation](#ch-3-레이어-격리)
-  - [x] [Ch 04. Layer Test](#ch-4-레이어-테스트)
-  - [x] [Ch 05. Layer Enhancement](#ch-5-레이어-고도화)
-  - [x] [Ch 06. Service Integration](#ch-6-서비스-통합)
-  - [x] [Ch 07. Architecture Comparison](#ch-7-아키텍처-비교)
-- Part 2. Solution
-  - [x] [Ch 08. Solution Structure](#ch-8-솔루션-구조)
-  - [x] [Ch 09. Solution Build Setting](#ch-9-솔루션-빌드-설정)
-  - [ ] [Ch 10. Solution Code Analysis](#ch-10-솔루션-코드-분석)
-  - [ ] Ch 11. Solution Test
-  - [ ] Ch 12. Solution CI
-  - [ ] Ch 13. Solution CD
-- Part 3. Observability
-  - [ ] Ch 14. Aspire Dashboard
-  - [ ] Ch 15. OpenSearch System
+- Part 1. 아키텍처
+  - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
+  - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
+  - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
+  - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
+  - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
+  - [x] [Ch 06. 서비스 통합](#ch-6-서비스-통합)
+  - [x] [Ch 07. Internal 아키텍처 비교](#ch-7-internal-아키텍처-비교)
+- Part 2. 솔루션
+  - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
+  - [x] [Ch 09. 솔루션 빌드 설정](#ch-9-솔루션-빌드-설정)
+  - [ ] [Ch 10. 솔루션 코드 분석](#ch-10-솔루션-코드-분석)
+  - [ ] Ch 11. 솔루션 테스트
+  - [ ] Ch 12. 솔루션 빌드 자동화
+  - [ ] Ch 13. 솔루션 컨테이너 배포 자동화
+- Part 3. 관찰 가능성
+  - [ ] Ch 14. Aspire 대시보드
+  - [ ] Ch 15. OpenSearch 시스템
   - [ ] TODO 로그
   - [ ] TODO 추적
   - [ ] TODO 지표
-- Part 4. Internal Tactical Design
-  - [x] [Ch 2x. Tactical Design Map](#ch-2x-전술-설계-맵)
+- Part 4. Internal 전술 설계
+  - [x] [Ch 2x. 전술 설계 맵](#ch-2x-전술-설계-맵)
   - [ ] TODO
-- Part 5. External Tactical Design
-- Part 6. Strategic Design
+- Part 5. External 전술 설계
+- Part 6. 전략 설계
 - Part 7. 참고 자료
 
 <br/>
@@ -204,7 +204,7 @@ Application Architecture
 
 <br/>
 
-# Ch 7. 아키텍처 비교
+# Ch 7. Internal 아키텍처 비교
 ## Ch 7.1 Port 비교
 ![](./.images/Architecture.Vs.Port.png)
 
