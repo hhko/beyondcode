@@ -601,6 +601,28 @@ Directory.Build.props                                // 전역 프로젝트 공�
 
 # Ch 10. 솔루션 코드 분석
 
+- **코드 스타일 분석**: `IDExxxx`
+  ```xml
+  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  ```
+  - `EnforceCodeStyleInBuild`: 코드 스타일 분석 활성화
+  - `TreatWarningsAsErrors`: 경고를 에러화
+- **코드 품질 분석**: `CAxxxx`
+  > AnalysisMode가 .editorconfig보다 우선 순위가 높습니다.
+  ```xml
+  <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  <AnalysisLevel>latest</AnalysisLevel>
+  <AnalysisMode>All</AnalysisMode>
+  <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+  <WarningsNotAsErrors>$(WarningsNotAsErrors);CS8073;CS8882;CS8887;CS8848</WarningsNotAsErrors>
+  ```
+  - `EnableNETAnalyzers`: 코드 품질 분석 활성화
+  - `AnalysisLevel`: 코드 품질 분석 버전
+  - `AnalysisMode`: 코드 품질 분석 범위 
+  - `CodeAnalysisTreatWarningsAsErrors`: AnalysisMode에서 검출된 코드 품질 분석 경고를 에러화(.editorconfig에서 검출된 경고를 에러화하지는 않는다)
+  - `WarningsNotAsErrors` 경고 무시
+
 ## Ch 10.1 코드 스타일 분석
 ```ini
 [*.{cs,vb}]
