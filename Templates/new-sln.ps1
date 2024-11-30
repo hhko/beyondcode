@@ -103,7 +103,7 @@ $commonTestPackages = @{
     "FluentAssertions",
     "coverlet.collector",
     "JunitXml.TestLogger",
-    "NetArchTest.Rules")
+    "TngTech.ArchUnitNET.xUnit")
   Integration = @(
     "Microsoft.NET.Test.Sdk",
     "xunit",

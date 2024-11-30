@@ -780,6 +780,13 @@ dotnet new editorconfig
 - [ ] [Sam.CleanArchitecture](https://github.com/samanazadi1996/Sam.CleanArchitecture)
   - 개별 템플릿 만들기
 - [ ] [Clean-Architecture-Template](https://github.com/babaktaremi/Clean-Architecture-Template)
+- [ ] [Clean-Architecture-Template](https://github.com/babaktaremi/Clean-Architecture-Template)
+  ```shell
+  dotnet dev-certs https -ep $env:USERPROFILE/.aspnet/https/cleanarc.pfx -p Strong@Password
+  dotnet dev-certs https --trust
+  docker build -t bobby-cleanarc -f dockerfile.
+  docker-compose up -d
+  ```
 
 ### 아키텍처 이해
 - [ ] [Hexagonal Architecture (Alistair Cockburn)](https://www.youtube.com/watch?v=k0ykTxw7s0Y)
