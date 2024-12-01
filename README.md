@@ -924,7 +924,7 @@ public sealed partial record class Error(string Code, string Message)
       - ToValidationResult<TValue>()
     - Result
       - ToResult()
-      - ToResult<TValue>()
+      - ToResult\<TValue\>()
 
 <br/>
 
