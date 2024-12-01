@@ -759,11 +759,10 @@ public class LayerDependencyTests : ArchitectureBaseTest
     }
   }
 ```
-- `Domain`은 `Application`, `Adapters.Infrastructure`, `Adapters.Persistence`을 의존하지 않습니다.
 - 레이어 의존성 테스트
-  - DomainLayer_ShouldNotHave_Dependencies_OnAnyOtherLayer
-  - ApplicationLayer_ShouldNotHave_Dependencies_OnAdapterLayer
-  - AdapterLayer_ShouldNotHave_Dependencies_OnDomainLayer
+  - DomainLayer_ShouldNotHave_Dependencies_OnAnyOtherLayer: `Domain`은 `Application`, `Adapters.Infrastructure`, `Adapters.Persistence`을 의존하지 않습니다.
+  - ApplicationLayer_ShouldNotHave_Dependencies_OnAdapterLayer: `Application`은 `Adapters.Infrastructure`, `Adapters.Persistence`을 의존하지 않습니다.
+  - AdapterLayer_ShouldNotHave_Dependencies_OnDomainLayer: `Adapters.Infrastructure`, `Adapters.Persistence`은 `Domain`을 의존하지 않습니다.
 
 ## Ch 11.1 테스트
 - TODO 코드 커버리지
