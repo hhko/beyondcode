@@ -612,6 +612,7 @@ Directory.Build.props                                // 전역 프로젝트 공�
   <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   ```
   - `EnforceCodeStyleInBuild`: 코드 스타일 분석 활성화
+    - [코드 스타일 규칙](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/)은 .NET 프로젝트 빌드 시 기본적으로 비활성화되어 있으므로, 이를 사용하려면 명시적으로 활성화해야 합니다.
   - `TreatWarningsAsErrors`: 경고를 에러화
 - **코드 품질 분석**: `CAxxxx`
   > AnalysisMode가 .editorconfig보다 우선 순위가 높습니다.
@@ -631,9 +632,17 @@ Directory.Build.props                                // 전역 프로젝트 공�
 ## Ch 10.1 코드 스타일 분석
 ```ini
 [*.{cs,vb}]
+# - IDE0160: Use block-scoped namespace
+# - IDE0161: Use file-scoped namespace
 dotnet_diagnostic.IDE0161.severity = warning
+
+# csharp_style_namespace_declarations = block_scoped
+# csharp_style_namespace_declarations = file_scoped
 csharp_style_namespace_declarations = file_scoped:warning
 ```
+- `.editorConfig` 파일을 이용하여 코드 스타일을 정의할 수 있습니다. `.editorConfig`은 Visual Studio 옵션 대화 상자에 지정된 코드 스타일보다 우선합니다.
+- 네임스페이스 규칙: [file_scoped](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161)
+
 ```xml
 <Project>
 
@@ -645,6 +654,7 @@ csharp_style_namespace_declarations = file_scoped:warning
 </Project>
 ```
 ```cs
+// -{EnforceCodeStyleInBuild}-> 경고 -{TreatWarningsAsErrors}-> 에러
 namespace Crop.Hello.Api.Adapters.Infrastructure   // block-scoped
 {
     public class Class1
@@ -658,13 +668,6 @@ error IDE0161:
  파일 범위 namespace 스로 변환 (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0161)
 ```
 
-- [코드 스타일 규칙](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/)은 `IDExxxx` 규칙으로 정의합니다.
-- 코드 스타일 분석은 .NET 프로젝트 빌드 시 기본적으로 비활성화되어 있으므로, 이를 사용하려면 명시적으로 활성화해야 합니다.
-  ```xml
-  <PropertyGroup>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-  </PropertyGroup>
-
 ```shell
 # 템플릿 확인
 dotnet new list | findstr editor
@@ -675,28 +678,6 @@ dotnet new list | findstr editor
 # 템플릿 파일 생성
 dotnet new editorconfig
 ```
-
-- `.editorConfig` 파일을 이용하여 코드 스타일을 정의할 수 있습니다. `.editorConfig`은 Visual Studio 옵션 대화 상자에 지정된 코드 스타일보다 우선합니다.
-- [file_scoped 네임스페이]((https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161)) 코드 스타일 적용 예
-  ```shell
-  # 코드 스타일: File Scoped 네임스페이스가 아닐 때
-  #   - IDE0160: Use block-scoped namespace
-  #   - IDE0161: Use file-scoped namespace
-  dotnet_diagnostic.IDE0161.severity = warning
-
-  # csharp_style_namespace_declarations = block_scoped
-  # csharp_style_namespace_declarations = file_scoped
-  csharp_style_namespace_declarations = file_scoped:warning
-  ```
-  - dotnet_diagnostic.IDE0161.severity: 네임스페이스 규칙 활성화와 심각도 설정
-  - csharp_style_namespace_declarations: 네임스페이스 선언 스타일에 대한 기본 설정
-- 전역 설정
-- 기본 규칙
-  - 네임스페이
-  - public sealed
-  - internal sealed
-  - 사용하지 않는 using 구문
-  - using 구문 순서
 
 ## Ch 10.2 코드 품질 분석
 - [.NET Source Code Analysis](https://swharden.com/blog/2023-03-05-dotnet-code-analysis/)
@@ -899,7 +880,7 @@ public sealed partial record class Error(string Code, string Message)
   - 타입 변환: 실패일 때 & 값이 있을 때
     - ValidationResult\<TValue\> ToValidationResult\<TValue\>()
     - ValidationResult\<TValue\> ToValidationResult()
-- `ValidationResult/ValidationResult\<TValue\>`
+- `ValidationResult/ValidationResult<TValue>`
   - 생성
     - 성공
       - 값이 없을 떄: WithoutErrors()

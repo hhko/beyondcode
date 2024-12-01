@@ -1,9 +1,11 @@
 ﻿using Crop.Hello.Framework.Contracts.Errors;
 using Crop.Hello.Framework.Contracts.Results;
 using FluentAssertions;
+using static Crop.Hello.Framework.Tests.Unit.Abstractions.Constants.Constants;
 
-namespace Crop.Hello.Framework.Tests.Unit;
+namespace Crop.Hello.Framework.Tests.Unit.Results;
 
+[Trait(nameof(UnitTest), UnitTest.Framework)]
 public class ResultTests
 {
     [Fact]

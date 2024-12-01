@@ -59,7 +59,8 @@ public sealed partial record class Error(string Code, string Message)
             //  exception.Message: One or more errors occurred. ([0] Message 값) ([1] Message 값)
             //      - One or more errors occurred. (This was invalid operation) (Invalid argument)
             return New(
-                $"{nameof(Exception)}.{exception.GetType().Name}",
+                //$"{nameof(Exception)}.{exception.GetType().Name}",
+                $"{exception.GetType().Name}",
                 exception.Message);
         }
 
@@ -70,9 +71,21 @@ public sealed partial record class Error(string Code, string Message)
         //   exception.Message(사용자 정의 형식): 입력 값 (InnerException Message 값)
         //      - This was invalid operation (Invalid argument)
         return New(
-            $"{nameof(Exception)}.{exception.GetType().Name}",
+            //$"{nameof(Exception)}.{exception.GetType().Name}",
+            $"{exception.GetType().Name}",
             $"{exception.Message}. ({exception.InnerException.Message})");
     }
+
+    //public static Error FromException<TException>(TException exception)
+    //    where TException : Exception
+    //{
+    //    if (exception is AggregateException || exception.InnerException is null)
+    //    {
+    //        return New(exception.GetType().Name, exception.Message);
+    //    }
+
+    //    return New(exception.GetType().Name, $"{exception.Message}. ({exception.InnerException.Message})");
+    //}
 
     //
     // 타입 변환

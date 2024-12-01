@@ -1,8 +1,10 @@
 ﻿using Crop.Hello.Framework.Contracts.Errors;
 using FluentAssertions;
+using static Crop.Hello.Framework.Tests.Unit.Abstractions.Constants.Constants;
 
-namespace Crop.Hello.Framework.Tests.Unit;
+namespace Crop.Hello.Framework.Tests.Unit.Errors;
 
+[Trait(nameof(UnitTest), UnitTest.Framework)]
 public class ErrorTests
 {
     private const string InvalidOperationExceptionMessage = "This was invalid operation";
@@ -62,7 +64,7 @@ public class ErrorTests
         (
             new InvalidOperationException(InvalidOperationExceptionMessage),
             new ArgumentException(ArgumentExceptionMessage)
-            //new NotFoundException(NotFoundExceptionMessage)
+        //new NotFoundException(NotFoundExceptionMessage)
         );
 
         // Act
@@ -70,6 +72,9 @@ public class ErrorTests
 
         // Assert
         error.Code.Should().Be(nameof(AggregateException));
-        error.Message.Should().ContainAll(InvalidOperationExceptionMessage, ArgumentExceptionMessage, NotFoundExceptionMessage);
+        error.Message.Should().ContainAll(
+            InvalidOperationExceptionMessage,
+            ArgumentExceptionMessage);
+        //NotFoundExceptionMessage);
     }
 }
