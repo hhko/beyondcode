@@ -891,15 +891,15 @@ public sealed partial record class Error(string Code, string Message)
   - 생성
     - 성공
       - 값이 없을 때: Success()
-      - 값이 있을 때: Success<TValue>(TValue value)
+      - 값이 있을 때: Success\<TValue\>(TValue value)
     - 실패
       - 값이 없을 때: Failure(Error error)
-      - 값이 있을 때: Failure<TValue>(Error error)
-      - 값이 있을 때: Failure<TValue>()
+      - 값이 있을 때: Failure\<TValue\>(Error error)
+      - 값이 있을 때: Failure\<TValue\>()
   - 타입 변환: 실패일 때 & 값이 있을 때
-    - ValidationResult<TValue> ToValidationResult<TValue>()
-    - ValidationResult<TValue> ToValidationResult()
-- `ValidationResult/ValidationResult<TValue>`
+    - ValidationResult\<TValue\> ToValidationResult\<TValue\>()
+    - ValidationResult\<TValue\> ToValidationResult()
+- `ValidationResult/ValidationResult\<TValue\>`
   - 생성
     - 성공
       - 값이 없을 떄: WithoutErrors()
@@ -907,21 +907,21 @@ public sealed partial record class Error(string Code, string Message)
     - 실패
       - 값이 없을 때: WithErrors(params Error[] validationErrors)
       - 값이 있을 때: WithErrors(params Error[] validationErrors)
-      - 값이 없을 때: WithErrors(ICollection<Error> validationErrors)
+      - 값이 없을 때: WithErrors(ICollection\<Error\> validationErrors)
       - 값이 있을 때: ???
   - 타입 변환
     - none
 - `Error`
   - 생성
     - New(string code, string message)
-    - FromException<TException>(TException exception)
+    - FromException\<TException\>(TException exception)
   - 타입 변환
     - string
       - 암시적(Code): operator
       - 명시적(Message): ToString()
     - ValidationResult
       - ToValidationResult()
-      - ToValidationResult<TValue>()
+      - ToValidationResult\<TValue\>()
     - Result
       - ToResult()
       - ToResult\<TValue\>()
