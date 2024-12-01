@@ -885,7 +885,7 @@ public sealed class ValidationResult<TValue>
 
 // Error 타입
 public sealed partial record class Error(string Code, string Message)
----
+```
 
 - `IResult/IResult<TValue>`
   - 생성
