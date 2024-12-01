@@ -10,6 +10,11 @@
 
 ![](./.images/Architecture.Internal.png)
 
+- 테스트 패키지
+  - `xunit`
+  - `FluentAssertions`
+  - `TngTech.ArchUnitNET.xUnit`
+
 ## External 아키텍처
 > - 외부 아키텍처는 서비스 배치입니다.
 
@@ -33,7 +38,7 @@
   - [x] [Ch 08. 솔루션 구조](#ch-8-솔루션-구조)
   - [x] [Ch 09. 솔루션 빌드 설정](#ch-9-솔루션-빌드-설정)
   - [ ] [Ch 10. 솔루션 코드 분석](#ch-10-솔루션-코드-분석)
-  - [ ] Ch 11. 솔루션 테스트
+  - [ ] Ch 11. 솔루션 아키텍처 테스트
   - [ ] Ch 12. 솔루션 빌드 자동화
   - [ ] Ch 13. 솔루션 컨테이너 배포 자동화
 - Part 3. 관찰 가능성
@@ -705,7 +710,79 @@ dotnet new editorconfig
 
 <br/>
 
-# Ch 11. 솔루션 테스트
+# Ch 11. 솔루션 아키텍처 테스트
+
+## Ch 11.1 레이어 의존성 테스트
+
+```cs
+public abstract class ArchitectureBaseTest
+{
+  protected static readonly Architecture Architecture = new ArchLoader()
+    .LoadAssemblies(
+      Adapters.Infrastructure.AssemblyReference.Assembly,
+      Adapters.Persistence.AssemblyReference.Assembly,
+      Application.AssemblyReference.Assembly,
+      Domain.AssemblyReference.Assembly)
+    .Build();
+
+  protected static readonly IObjectProvider<IType> AdapterInfrastructureLayer = ArchRuleDefinition
+    .Types()
+    .That()
+    .ResideInAssembly(Adapters.Infrastructure.AssemblyReference.Assembly)
+    .As("Adapters.Infrastructure");
+
+  protected static readonly IObjectProvider<IType> AdapterPersistenceLayer = ArchRuleDefinition
+    .Types()
+    .That()
+    .ResideInAssembly(Adapters.Persistence.AssemblyReference.Assembly)
+    .As("Adapters.Persistence");
+
+  protected static readonly IObjectProvider<IType> ApplicationLayer = ArchRuleDefinition
+    .Types()
+    .That()
+    .ResideInAssembly(Application.AssemblyReference.Assembly)
+    .As("Application");
+
+  protected static readonly IObjectProvider<IType> DomainLayer = ArchRuleDefinition
+    .Types()
+    .That()
+    .ResideInAssembly(Domain.AssemblyReference.Assembly)
+    .As("Domain");
+}
+```
+- ArchLoader을 통해 검증을 수행할 전체 어셈블리를 구성합니다.
+- ArchRuleDefinition으로 개별 어셈블리을 정의합니다.
+
+```cs
+[Trait(nameof(UnitTest), UnitTest.Architecture)]
+public class LayerDependencyTests : ArchitectureBaseTest
+{
+  [Fact]
+  public void DomainLayer_ShouldNotHave_Dependencies_OnAnyOtherLayer()
+  {
+    IObjectProvider<IType>[] layers = [
+      AdapterInfrastructureLayer,
+      AdapterPersistenceLayer,
+      ApplicationLayer
+    ];
+
+    foreach (var layer in layers)
+    {
+      ArchRuleDefinition
+        .Types()
+        .That()
+        .Are(DomainLayer)
+        .Should()
+        .NotDependOnAny(layer)
+        .Check(Architecture);
+    }
+  }
+```
+- `Domain`은 `Application`, `Adapters.Infrastructure`, `Adapters.Persistence`을 의존하지 않습니다.
+- 레이어 의존성 테스트
+  - DomainLayer_ShouldNotHave_Dependencies_OnAnyOtherLayer
+  - ApplicationLayer_ShouldNotHave_Dependencies_OnAdapterLayer
+  - AdapterLayer_ShouldNotHave_Dependencies_OnDomainLayer
 
 ## Ch 11.1 테스트
 - TODO 코드 커버리지
@@ -768,7 +845,86 @@ dotnet new editorconfig
 
 <br/>
 
+# Ch 2x. IResult 타입
+- IResult 타입으로 모든 Known과 Unknown 입출력 메서드 결과 타입으로 정의합니다.
+
+## Ch 2x.1 IResult 타입 정의
+- 성공과 실패를 구분하며, 성공 시에는 값을 가지고, 실패 시에는 에러 값을 포함합니다.
+- 특히, 유효성 검사 실패의 경우 다수의 에러 값을 정의할 수 있습니다.
+
+```cs
+// IResult/IResult<out TValue> 타입
+public interface IResult
+{
+  bool IsSuccess { get; }
+  bool IsFailure { get; }
+  Error Error { get; }
+}
+
+public interface IResult<out TValue>
+  : IResult
+{
+  TValue Value { get; }
+}
+
+// IValidationResult 타입
+public interface IValidationResult
+{
+  Error[] ValidationErrors { get; }
+}
+
+public sealed class ValidationResult
+  : Result
+  , IValidationResult
+{ }
+
+public sealed class ValidationResult<TValue>
+  : Result<TValue>
+  , IValidationResult
+{ }
+
+// Error 타입
+public sealed partial record class Error(string Code, string Message)
 ---
+
+- `IResult/IResult<TValue>`
+  - 생성
+    - 성공
+      - 값이 없을 때: Success()
+      - 값이 있을 때: Success<TValue>(TValue value)
+    - 실패
+      - 값이 없을 때: Failure(Error error)
+      - 값이 있을 때: Failure<TValue>(Error error)
+      - 값이 있을 때: Failure<TValue>()
+  - 타입 변환: 실패일 때 & 값이 있을 때
+    - ValidationResult<TValue> ToValidationResult<TValue>()
+    - ValidationResult<TValue> ToValidationResult()
+- `ValidationResult/ValidationResult<TValue>`
+  - 생성
+    - 성공
+      - 값이 없을 떄: WithoutErrors()
+      - 값이 있을 때: WithoutErrors(TValue? value)
+    - 실패
+      - 값이 없을 때: WithErrors(params Error[] validationErrors)
+      - 값이 있을 때: WithErrors(params Error[] validationErrors)
+      - 값이 없을 때: WithErrors(ICollection<Error> validationErrors)
+      - 값이 있을 때: ???
+  - 타입 변환
+    - none
+- `Error`
+  - 생성
+    - New(string code, string message)
+    - FromException<TException>(TException exception)
+  - 타입 변환
+    - string
+      - 암시적(Code): operator
+      - 명시적(Message): ToString()
+    - ValidationResult
+      - ToValidationResult()
+      - ToValidationResult<TValue>()
+    - Result
+      - ToResult()
+      - ToResult<TValue>()
 
 <br/>
 
@@ -787,6 +943,9 @@ dotnet new editorconfig
   docker build -t bobby-cleanarc -f dockerfile.
   docker-compose up -d
   ```
+- [ ] [dotnet-new-caju](https://github.com/ivanpaulovich/dotnet-new-caju)
+  - https://paulovich.net/clean-architecture-for-net-applications/
+- [ ] [clean-architecture-template](https://github.com/Genocs/clean-architecture-template)
 
 ### 아키텍처 이해
 - [ ] [Hexagonal Architecture (Alistair Cockburn)](https://www.youtube.com/watch?v=k0ykTxw7s0Y)

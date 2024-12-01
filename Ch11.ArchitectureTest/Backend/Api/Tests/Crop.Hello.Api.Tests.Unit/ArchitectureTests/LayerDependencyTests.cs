@@ -12,20 +12,20 @@ public class LayerDependencyTests : ArchitectureBaseTest
     public void DomainLayer_ShouldNotHave_Dependencies_OnAnyOtherLayer()
     {
         IObjectProvider<IType>[] layers = [
-            AdapterInfrastructureLayer,
-            AdapterPersistenceLayer,
+            AdaptersInfrastructureLayer,
+            AdaptersPersistenceLayer,
             ApplicationLayer
         ];
 
         foreach (var layer in layers)
         {
             ArchRuleDefinition
-            .Types()
-            .That()
-            .Are(DomainLayer)
-            .Should()
-            .NotDependOnAny(layer)
-            .Check(Architecture);
+                .Types()
+                .That()
+                .Are(DomainLayer)
+                .Should()
+                .NotDependOnAny(layer)
+                .Check(Architecture);
         }
     }
 
@@ -33,8 +33,8 @@ public class LayerDependencyTests : ArchitectureBaseTest
     public void ApplicationLayer_ShouldNotHave_Dependencies_OnAdapterLayer()
     {
         IObjectProvider<IType>[] adapterLayers = [
-            AdapterInfrastructureLayer,
-            AdapterPersistenceLayer,
+            AdaptersInfrastructureLayer,
+            AdaptersPersistenceLayer,
         ];
 
         foreach (var adapterLayer in adapterLayers)
@@ -53,8 +53,8 @@ public class LayerDependencyTests : ArchitectureBaseTest
     public void AdapterLayer_ShouldNotHave_Dependencies_OnDomainLayer()
     {
         IObjectProvider<IType>[] adapterLayers = [
-            AdapterInfrastructureLayer,
-            AdapterPersistenceLayer,
+            AdaptersInfrastructureLayer,
+            AdaptersPersistenceLayer,
         ];
 
         foreach (var adapterLayer in adapterLayers)

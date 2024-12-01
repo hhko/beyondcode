@@ -14,13 +14,13 @@ public abstract class ArchitectureBaseTest
             Domain.AssemblyReference.Assembly)
         .Build();
 
-    protected static readonly IObjectProvider<IType> AdapterInfrastructureLayer = ArchRuleDefinition
+    protected static readonly IObjectProvider<IType> AdaptersInfrastructureLayer = ArchRuleDefinition
         .Types()
         .That()
         .ResideInAssembly(Adapters.Infrastructure.AssemblyReference.Assembly)
         .As("Adapters.Infrastructure");
 
-    protected static readonly IObjectProvider<IType> AdapterPersistenceLayer = ArchRuleDefinition
+    protected static readonly IObjectProvider<IType> AdaptersPersistenceLayer = ArchRuleDefinition
         .Types()
         .That()
         .ResideInAssembly(Adapters.Persistence.AssemblyReference.Assembly)

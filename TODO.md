@@ -1,4 +1,13 @@
-```
+- protected internal Result(TValue? value, Error error)
+- private protected Result(Error error)
+- 제네릭 타입(variance)
+  - out TValue: 공변성 (Covariance)
+    - 이는 제네릭 타입이 **반환 타입으로만** 사용될 수 있음을 보장합니다.
+    - 공변성 덕분에 더 구체적인 타입으로 대체가 가능합니다. 즉, **서브타입   관계를 유지합니다.**
+  - in TValue: 반공변성 (Contravariance)
+    - 이는 제네릭 타입이 **입력 타입으로만** 사용될 수 있음을 보장합니다.
+    - 반공변성 덕분에 더 일반적인 타입으로 대체가 가능합니다. 즉, **슈퍼타입   관계를 유지합니다.**
+
 ```
 root = true
 
