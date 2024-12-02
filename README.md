@@ -10,6 +10,8 @@
 
 ![](./.images/Architecture.Internal.png)
 
+- 아키텍처
+  - `MediatR`
 - 테스트 패키지
   - `xunit`
   - `FluentAssertions`

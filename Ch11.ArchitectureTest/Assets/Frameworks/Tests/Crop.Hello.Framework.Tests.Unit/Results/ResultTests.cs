@@ -8,6 +8,7 @@ namespace Crop.Hello.Framework.Tests.Unit.Results;
 [Trait(nameof(UnitTest), UnitTest.Framework)]
 public class ResultTests
 {
+    // 값이 없는 성공은 메모리 효율성을 위해 단일 인스턴스로 관리합니다.
     [Fact]
     public void TwoSuccessResults_ShouldReferTheSameCachedResultInstance_WhenTwoNonGenericSuccessResultsAreCreated()
     {
@@ -22,6 +23,8 @@ public class ResultTests
         actual.Should().BeTrue();
     }
 
+    // 값이 있는 실패일 때는 값을 참조할 수 없습니다.
+    //   - 값이 있는 실패일 때는 default 값(NULL)로 저장됩니다.
     [Fact]
     public void GettingValueFromGenericResult_ShouldThrowAnException_WhenResultIsFailureStringResult()
     {
@@ -40,6 +43,8 @@ public class ResultTests
             .Be("The value of a failure result can not be accessed. Type 'System.String'.");
     }
 
+    // 값이 있는 실패일 때는 값을 참조할 수 없습니다.
+    //   - 값이 있는 실패일 때는 default 값(NULL)로 저장됩니다.
     [Fact]
     public void GettingValueFromGenericResult_ShouldThrowAnException_WhenResultIsFailureIntResult()
     {

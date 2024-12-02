@@ -11,6 +11,10 @@
 
 ---
 
+## 옵션
+
+---
+
 ## 의존성 주입
 - 옵션 값
 
@@ -24,29 +28,32 @@
 
 ## 완: Result
 ### Framework 프로젝트
-1. Error
-1. Result, ValidationResult
+- [x] Error
+- [x] Result, ValidationResult
 
 ### Unit 테스트 프로젝트
-1. Error
-1. Result
-
+- [x] Error
+- [x] Result
+- [ ] Error -> IError
 ---
 
 ## 완: CQRS
 ### Framework 프로젝트
-1. ICommand, IQuery
+- [x] ICommand, IQuery
+- [ ] ICachedQuery
 
 ### Unit 테스트 프로젝트
-1. ArchitectureTests/NamingConventionsCQRSTests
+- [x] ArchitectureTests/NamingConventionsCQRSTests
 
 ---
 
 ## Known Pipeline(CQRS)
-- 예외
-- 로그
-- 시간
 - 유효성 검사
+- 로그
+- QueryCachingPipeline
+---
+- 예외
+- 시간
 - 트랜잭션
 
 ---
