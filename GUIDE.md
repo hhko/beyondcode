@@ -100,3 +100,4 @@
 - [ ] Saga 패턴
 - [ ] Specification 패턴
 - [ ] [Outbox 패턴](https://www.kamilgrzybek.com/blog/posts/the-outbox-pattern)
+- [ ] 트랜잭션 스크립트 vs 모델
