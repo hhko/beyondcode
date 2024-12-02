@@ -912,6 +912,7 @@ public sealed partial record class Error(string Code, string Message)
 ## 아키텍처
 ### 클린 아키텍처 템플릿
 - [ ] [ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
+- [ ] [ardalis | CleanArchitecture.WorkerService](https://github.com/ardalis/CleanArchitecture.WorkerService/tree/main)
 - [ ] [amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)
 - [ ] [Sam.CleanArchitecture](https://github.com/samanazadi1996/Sam.CleanArchitecture)
   - 개별 템플릿 만들기
@@ -945,6 +946,7 @@ public sealed partial record class Error(string Code, string Message)
   - 아키텍처 관점에서 Pure Function과 Impure Function 배치의 중요성을 이해할 수 있습니다.
 - [ ] [modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
 - [ ] [함수형 도메인 주도 설계 구현](https://liftio.org/2021/files/jisoo-park-ppt.pdf)
+- [ ] [ddd-guestbook](https://github.com/ardalis/ddd-guestbook)
 
 <br/>
 
