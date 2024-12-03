@@ -959,6 +959,7 @@ public sealed partial record class Error(string Code, string Message)
 - [ ] [Enforcing Software Architecture With Architecture Tests](https://www.milanjovanovic.tech/blog/enforcing-software-architecture-with-architecture-tests)
 - [ ] [Shift Left With Architecture Testing in .NET](https://www.milanjovanovic.tech/blog/shift-left-with-architecture-testing-in-dotnet)
 - [ ] [Enforcing Architecture Rules In .NET](https://honesdev.com/enforcing-architecture-rules-in-dotnet/)
+- [ ] [rchitecture Refactoring with ArchUnitNET](https://www.production-ready.de/2023/12/10/architecture-refactoring-with-archunitnet-en.html)
 - [ ] [PlantUML file diagram builder](https://archunitnet.readthedocs.io/en/latest/guide/#51-full-diagram-dependencies)
 
 ### 성능 테스트
@@ -981,3 +982,9 @@ public sealed partial record class Error(string Code, string Message)
 - [ ] [Publish MediatR Notifications in Parallel](https://code-maze.com/mediatr-parallel-publishing-notifications/)
 
 
+<br/>
+
+## 시스템
+### OpenTelemetry
+- [ ] [practical-net-otelcollector](https://github.com/kimcuhoang/practical-net-otelcollector/tree/main)
+  - https://dev.to/kim-ch/observability-net-opentelemetry-collector-25g1
