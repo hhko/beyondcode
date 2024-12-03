@@ -1,11 +1,11 @@
 ﻿using Crop.Hello.Framework.Utilities;
 using Microsoft.Extensions.Options;
 
-namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.NewFolder;
+namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOptions;
 
-public sealed class OpenTelemetryOptionsValidator : IValidateOptions<OpenTelemetryOption>
+internal sealed class OpenTelemetryOptionsValidator : IValidateOptions<OpenTelemetryOptions>
 {
-    public ValidateOptionsResult Validate(string? name, OpenTelemetryOption options)
+    public ValidateOptionsResult Validate(string? name, OpenTelemetryOptions options)
     {
         var validationResult = string.Empty;
 

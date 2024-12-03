@@ -3,7 +3,7 @@ using ArchUnitNET.xUnit;
 using Crop.Hello.Framework.Contracts.CQRS;
 using static Crop.Hello.Api.Tests.Unit.Abstractions.Constants.Constants;
 
-namespace Crop.Hello.Api.Tests.Unit.ArchitectureTests;
+namespace Crop.Hello.Api.Tests.Unit.ArchitectureTests.NamingConventions;
 
 [Trait(nameof(UnitTest), UnitTest.Architecture)]
 public sealed class NamingConventionsCQRSTests : ArchitectureBaseTest

@@ -1,6 +1,6 @@
-﻿namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.NewFolder;
+﻿namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOptions;
 
-public sealed class OpenTelemetryOption
+public sealed class OpenTelemetryOptions
 {
     public string TeamName { get; set; } = string.Empty;
     public string ApplicationName { get; set; } = string.Empty;

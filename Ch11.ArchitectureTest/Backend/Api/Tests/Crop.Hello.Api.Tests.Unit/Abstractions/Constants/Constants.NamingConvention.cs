@@ -9,6 +9,9 @@ internal static partial class Constants
         public const string Query = nameof(Query);
         public const string QueryUsecase = nameof(QueryUsecase);
 
+        public const string OptionsValidator = nameof(OptionsValidator);
+        public const string OptionsSetup = nameof(OptionsSetup);
+
         //public const string Endpoint = nameof(Endpoint);
         //public const string Group = nameof(Group);
         //public const string DomainEvent = nameof(DomainEvent);

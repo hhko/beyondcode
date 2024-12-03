@@ -6,15 +6,15 @@
 - [X] 단위 테스트 | ArchitectureTests/ArchitectureBaseTest.cs 파일
 - [X] 단위 테스트 | ArchitectureTests/LayerDependencyTests.cs 파일
 
-## 옵션/의존성
+## 관찰 가능성 옵션/의존성
 - [X] 옵션 패턴: IConfigureOptions, IValidateOptions
 - [X] 의존성 폴더 구성
   - XxxRegistration
   - RegisterXxx
 - [X] 옵션 의존성 주입
-  - ConfigureOptions: 
+  - ConfigureOptions
   - AddSingleton
-- [x] appsettings.json  
+- [x] appsettings.json
 - [x] 단위 테스트: 옵션 네이밍
 - [ ] 통합 테스트: 옵션 네이밍
 
@@ -23,7 +23,7 @@
 - [ ] 구조적 로그 Microsoft, Error
 - [ ] 구조적 로그 Microsoft, Exception
 - [ ] 로그 시스템 Aspire
-- [ ] 로그 시스템 
+- [ ] 로그 시스템
 - [ ] 로그 시스템 OpenSearch
 - [ ] 구조적 로그 Serilog
 - [ ] 구조적 로그 Serilog, Error
