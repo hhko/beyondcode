@@ -958,6 +958,8 @@ public sealed partial record class Error(string Code, string Message)
   - ArchUnit 패키지 이해
 - [ ] [Enforcing Software Architecture With Architecture Tests](https://www.milanjovanovic.tech/blog/enforcing-software-architecture-with-architecture-tests)
 - [ ] [Shift Left With Architecture Testing in .NET](https://www.milanjovanovic.tech/blog/shift-left-with-architecture-testing-in-dotnet)
+- [ ] [Enforcing Architecture Rules In .NET](https://honesdev.com/enforcing-architecture-rules-in-dotnet/)
+- [ ] [PlantUML file diagram builder](https://archunitnet.readthedocs.io/en/latest/guide/#51-full-diagram-dependencies)
 
 ### 성능 테스트
 - [ ] [Performance Testing of ASP.NET Core APIs With k6](https://code-maze.com/aspnetcore-performance-testing-with-k6/)
