@@ -1,17 +1,35 @@
-## 완: 의존성 구성
-### 프로젝트
-1. AssemblyReference 파일
+## 완: 프로젝트 구성(레이어 구성)
+- [X] AssemblyReference 파일
+- [X] 단위 테스트 | xunit.runner.json 파일(모든 테스트 프로젝트)
+- [X] 단위 테스트 | Directory.Build.props 테스트 전용 파일
+- [X] 단위 테스트 | Abstractions/Constants/Constants.Constants.cs 파일
+- [X] 단위 테스트 | ArchitectureTests/ArchitectureBaseTest.cs 파일
+- [X] 단위 테스트 | ArchitectureTests/LayerDependencyTests.cs 파일
 
-### Unit 테스트 프로젝트
-1. xunit.runner.json 파일(모든 테스트 프로젝트)
-1. Directory.Build.props 테스트 전용 파일
-1. Abstractions/Constants/Constants.Constants.cs 파일
-1. ArchitectureTests/ArchitectureBaseTest.cs 파일
-1. ArchitectureTests/LayerDependencyTests.cs 파일
+## 옵션/의존성
+- [X] 옵션 패턴: IConfigureOptions, IValidateOptions
+- [X] 의존성 폴더 구성
+  - XxxRegistration
+  - RegisterXxx
+- [X] 옵션 의존성 주입
+  - ConfigureOptions: 
+  - AddSingleton
+- [x] appsettings.json  
+- [x] 단위 테스트: 옵션 네이밍
+- [ ] 통합 테스트: 옵션 네이밍
 
----
+## 로그
+- [ ] 구조적 로그 Microsoft
+- [ ] 구조적 로그 Microsoft, Error
+- [ ] 구조적 로그 Microsoft, Exception
+- [ ] 로그 시스템 Aspire
+- [ ] 로그 시스템 
+- [ ] 로그 시스템 OpenSearch
+- [ ] 구조적 로그 Serilog
+- [ ] 구조적 로그 Serilog, Error
+- [ ] 구조적 로그 Serilog, Exception
 
-## 옵션
+## 컨테이너
 
 ---
 
