@@ -104,20 +104,19 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 #   - sudo          : sudo
 USER root
 RUN apt-get update \
-    && apt-get --no-install-recommends --no-install-suggests --yes --quiet install \
-            procps \
-            net-tools \
-            iputils-ping \
-            curl \
-            sudo \
-    && apt-get clean \
-    && apt-get --yes --quiet autoremove --purge \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-              /usr/share/doc/* /usr/share/groff/* /usr/share/info/* /usr/share/linda/* \
-              /usr/share/lintian/* /usr/share/locale/* /usr/share/man/*
+  && apt-get --no-install-recommends --no-install-suggests --yes --quiet install \
+          procps \
+          net-tools \
+          iputils-ping \
+          curl \
+          sudo \
+  && apt-get clean \
+  && apt-get --yes --quiet autoremove --purge \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+            /usr/share/doc/* /usr/share/groff/* /usr/share/info/* /usr/share/linda/* \
+            /usr/share/lintian/* /usr/share/locale/* /usr/share/man/*
 
 WORKDIR /app
-
 ...
 
 FROM base AS final
@@ -144,7 +143,7 @@ x-logging-common: &logging-common
     max-size: "10m"
     max-file: "7"
 
-services:    
+services:
   corp.solution.service:
     env_file: .env
     image: corp.solution.service:${SERVICE_TAG}
@@ -162,7 +161,7 @@ services:
 
 networks:
   net:
-    name: crop.solution    
+    name: crop.solution
 ```
 
 
