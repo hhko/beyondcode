@@ -1,3 +1,154 @@
+- [x] 레이어 구성
+- [ ] 의존성 다이어그램
+- [x] 레이어 의존성 주입/관찰 가능성 옵션
+- [ ] 관찰 가능성 콘솔 로그
+- [ ] 통합 테스트, 옵션
+---
+- [ ] 컨테이너 구성
+- [ ] 컨테이너 HealthCheck
+---
+- [ ] 관찰 가능성 로그 Aspire
+- [ ] 관찰 가능성 로그 Grafana
+- [ ] 관찰 가능성 로그 OpenSearch
+---
+- [ ] Error 타입
+- [ ] IResult/IResult<T> 타입
+- [ ] ValidationResult/ValidationResult<T> 타입
+- [ ] Validation 로직
+- [ ] Error 코드
+- [ ] Exception 구조적 로그
+---
+- [ ] CQRS 메시지 Meditor 패턴
+- [ ] Command Decorator 패턴
+- [ ] Query Decorator 패턴
+---
+- [ ] IAdapter 인터페이스
+- [ ] IAdapter Decorator 패턴
+---
+- [ ] DTO
+- [ ] Repository 패턴
+- [ ] Unit of Work 패턴
+- [ ] ORM(Command Repository)
+- [ ] SQL(Query Repository)
+---
+- [ ] 빌드 자동화
+- [ ] 코드 품질 지표
+- [ ] 의존성 다이어그램
+- [ ] 배포 자동화
+---
+- [ ] WebApi
+- [ ] RabbitMQ
+- [ ] 반복
+- [ ] FileSystem
+- [ ] FTP
+- [ ] Time
+---
+- [ ] 관찰 가능성 추적
+- [ ] 관찰 가능성 지표
+---
+- [ ] Retry
+- [ ] 서킷 브레이커
+- [ ] 캐시
+---
+- [ ] 아키텍처 테스트
+- [ ] 단위 테스트
+- [ ] 통합 테스트
+- [ ] 성능 테스트
+- [ ] Fake 데이터
+- [ ] Moq
+---
+- [ ] Entity
+- [ ] ValueObject
+- [ ] Enum
+- [ ] Domain Service
+- [ ] Aggregate Root
+- [ ] Domain Event
+- [ ] Factory 패턴
+---
+- [ ] SSG
+---
+- [ ] Specification 패턴
+- [ ] Saga 패턴
+- [ ] Outbox 패턴
+---
+- [ ] Api Gateway?
+
+<br/>
+
+```dockerfile
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+
+# 필수 패키지 설치
+#   - procps        : ps -ef
+#   - net-tools     : ifconfig
+#   - iputils-ping  : ping
+#   - curl          : curl
+#   - sudo          : sudo
+USER root
+RUN apt-get update \
+    && apt-get --no-install-recommends --no-install-suggests --yes --quiet install \
+            procps \
+            net-tools \
+            iputils-ping \
+            curl \
+            sudo \
+    && apt-get clean \
+    && apt-get --yes --quiet autoremove --purge \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+              /usr/share/doc/* /usr/share/groff/* /usr/share/info/* /usr/share/linda/* \
+              /usr/share/lintian/* /usr/share/locale/* /usr/share/man/*
+
+WORKDIR /app
+
+...
+
+FROM base AS final
+ARG SERVICE_USER
+ARG SERVICE_USER_ID
+
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+RUN addgroup --gid $SERVICE_USER_ID $SERVICE_USER \
+    && adduser --uid $SERVICE_USER_ID --gid $SERVICE_USER_ID --disabled-password --gecos "" $SERVICE_USER \
+    && chown -R $SERVICE_USER:$SERVICE_USER /app
+USER $SERVICE_USER
+
+ENTRYPOINT ["dotnet", "Crop.Solution.Service.dll"]
+
+LABEL solution=solution
+LABEL category=service
+```
+```yml
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+services:    
+  corp.solution.service:
+    env_file: .env
+    image: corp.solution.service:${SERVICE_TAG}
+    build:
+      context: .
+      args:
+        - SERVICE_USER=${SERVICE_USER}
+        - SERVICE_USER_ID=${SERVICE_USER_ID}
+      dockerfile: Corp.Solution.Service\Src\Corp.Solution.Service\Dockerfile
+    container_name: corp.solution.service
+    hostname: corp.solution.service
+    networks:
+      - net
+    logging: *logging-common
+
+networks:
+  net:
+    name: crop.solution    
+```
+
+
 ## 완: 프로젝트 구성(레이어 구성)
 - [X] AssemblyReference 파일
 - [X] 단위 테스트 | xunit.runner.json 파일(모든 테스트 프로젝트)
