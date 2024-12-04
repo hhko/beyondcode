@@ -100,6 +100,25 @@ RUN apt-get update \
               /usr/share/lintian/* /usr/share/locale/* /usr/share/man/*
 
 WORKDIR /app
+
+...
+
+FROM base AS final
+ARG SERVICE_USER
+ARG SERVICE_USER_ID
+
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+RUN addgroup --gid $SERVICE_USER_ID $SERVICE_USER \
+    && adduser --uid $SERVICE_USER_ID --gid $SERVICE_USER_ID --disabled-password --gecos "" $SERVICE_USER \
+    && chown -R $SERVICE_USER:$SERVICE_USER /app
+USER $SERVICE_USER
+
+ENTRYPOINT ["dotnet", "Crop.Solution.Service.dll"]
+
+LABEL solution=solution
+LABEL category=service
 ```
 ```yml
 x-logging-common: &logging-common
