@@ -101,6 +101,34 @@ RUN apt-get update \
 
 WORKDIR /app
 ```
+```yml
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+services:    
+  corp.solution.service:
+    env_file: .env
+    image: corp.solution.service:${SERVICE_TAG}
+    build:
+      context: .
+      args:
+        - SERVICE_USER=${SERVICE_USER}
+        - SERVICE_USER_ID=${SERVICE_USER_ID}
+      dockerfile: Corp.Solution.Service\Src\Corp.Solution.Service\Dockerfile
+    container_name: corp.solution.service
+    hostname: corp.solution.service
+    networks:
+      - net
+    logging: *logging-common
+
+networks:
+  net:
+    name: crop.solution    
+```
+
 
 ## 완: 프로젝트 구성(레이어 구성)
 - [X] AssemblyReference 파일
