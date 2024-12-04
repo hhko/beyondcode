@@ -1,6 +1,8 @@
 - [x] 레이어 구성
+- [ ] 의존성 다이어그램
 - [x] 레이어 의존성 주입/관찰 가능성 옵션
 - [ ] 관찰 가능성 콘솔 로그
+- [ ] 통합 테스트, 옵션
 ---
 - [ ] 컨테이너 구성
 - [ ] 컨테이너 HealthCheck
@@ -13,6 +15,8 @@
 - [ ] IResult/IResult<T> 타입
 - [ ] ValidationResult/ValidationResult<T> 타입
 - [ ] Validation 로직
+- [ ] Error 코드
+- [ ] Exception 구조적 로그
 ---
 - [ ] CQRS 메시지 Meditor 패턴
 - [ ] Command Decorator 패턴
@@ -27,8 +31,9 @@
 - [ ] ORM(Command Repository)
 - [ ] SQL(Query Repository)
 ---
-- [ ] SSG
 - [ ] 빌드 자동화
+- [ ] 코드 품질 지표
+- [ ] 의존성 다이어그램
 - [ ] 배포 자동화
 ---
 - [ ] WebApi
@@ -36,6 +41,7 @@
 - [ ] 반복
 - [ ] FileSystem
 - [ ] FTP
+- [ ] Time
 ---
 - [ ] 관찰 가능성 추적
 - [ ] 관찰 가능성 지표
@@ -59,6 +65,8 @@
 - [ ] Domain Event
 - [ ] Factory 패턴
 ---
+- [ ] SSG
+---
 - [ ] Specification 패턴
 - [ ] Saga 패턴
 - [ ] Outbox 패턴
@@ -66,6 +74,33 @@
 - [ ] Api Gateway?
 
 <br/>
+
+```dockerfile
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+
+# 필수 패키지 설치
+#   - procps        : ps -ef
+#   - net-tools     : ifconfig
+#   - iputils-ping  : ping
+#   - curl          : curl
+#   - sudo          : sudo
+USER root
+RUN apt-get update \
+    && apt-get --no-install-recommends --no-install-suggests --yes --quiet install \
+            procps \
+            net-tools \
+            iputils-ping \
+            curl \
+            sudo \
+    && apt-get clean \
+    && apt-get --yes --quiet autoremove --purge \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+              /usr/share/doc/* /usr/share/groff/* /usr/share/info/* /usr/share/linda/* \
+              /usr/share/lintian/* /usr/share/locale/* /usr/share/man/*
+
+WORKDIR /app
+```
 
 ## 완: 프로젝트 구성(레이어 구성)
 - [X] AssemblyReference 파일
