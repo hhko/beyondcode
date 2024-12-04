@@ -1,3 +1,72 @@
+- [x] 레이어 구성
+- [x] 레이어 의존성 주입/관찰 가능성 옵션
+- [ ] 관찰 가능성 콘솔 로그
+---
+- [ ] 컨테이너 구성
+- [ ] 컨테이너 HealthCheck
+---
+- [ ] 관찰 가능성 로그 Aspire
+- [ ] 관찰 가능성 로그 Grafana
+- [ ] 관찰 가능성 로그 OpenSearch
+---
+- [ ] Error 타입
+- [ ] IResult/IResult<T> 타입
+- [ ] ValidationResult/ValidationResult<T> 타입
+- [ ] Validation 로직
+---
+- [ ] CQRS 메시지 Meditor 패턴
+- [ ] Command Decorator 패턴
+- [ ] Query Decorator 패턴
+---
+- [ ] IAdapter 인터페이스
+- [ ] IAdapter Decorator 패턴
+---
+- [ ] DTO
+- [ ] Repository 패턴
+- [ ] Unit of Work 패턴
+- [ ] ORM(Command Repository)
+- [ ] SQL(Query Repository)
+---
+- [ ] SSG
+- [ ] 빌드 자동화
+- [ ] 배포 자동화
+---
+- [ ] WebApi
+- [ ] RabbitMQ
+- [ ] 반복
+- [ ] FileSystem
+- [ ] FTP
+---
+- [ ] 관찰 가능성 추적
+- [ ] 관찰 가능성 지표
+---
+- [ ] Retry
+- [ ] 서킷 브레이커
+- [ ] 캐시
+---
+- [ ] 아키텍처 테스트
+- [ ] 단위 테스트
+- [ ] 통합 테스트
+- [ ] 성능 테스트
+- [ ] Fake 데이터
+- [ ] Moq
+---
+- [ ] Entity
+- [ ] ValueObject
+- [ ] Enum
+- [ ] Domain Service
+- [ ] Aggregate Root
+- [ ] Domain Event
+- [ ] Factory 패턴
+---
+- [ ] Specification 패턴
+- [ ] Saga 패턴
+- [ ] Outbox 패턴
+---
+- [ ] Api Gateway?
+
+<br/>
+
 ## 완: 프로젝트 구성(레이어 구성)
 - [X] AssemblyReference 파일
 - [X] 단위 테스트 | xunit.runner.json 파일(모든 테스트 프로젝트)
