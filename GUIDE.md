@@ -297,3 +297,32 @@ networks:
 - [ ] Specification 패턴
 - [ ] [Outbox 패턴](https://www.kamilgrzybek.com/blog/posts/the-outbox-pattern)
 - [ ] 트랜잭션 스크립트 vs 모델
+
+```
+root = true
+
+[*.cs]
+# CA1501: DepthOfInheritance(5)
+#   상속성을 너무 많이 사용하지 마십시오
+#   Avoid excessive inheritance
+#   https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1501
+dotnet_diagnostic.CA1501.severity = error
+
+# CA1502: CyclomaticComplexity(25)
+#   지나치게 복잡하게 만들지 마십시오(순환 복잡성)
+#   Avoid excessive complexity
+#   https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1502
+dotnet_diagnostic.CA1502.severity = error
+
+# CA1505: MaintainabilityIndex(10)
+#   유지 관리할 수 없는 코드는 사용하지 마십시오
+#   Avoid unmaintainable code
+#   https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/quality-rules/ca1505
+dotnet_diagnostic.CA1505.severity = error
+
+# CA1506: ClassCoupling(95/40)
+#   클래스 결합을 지나치게 많이 사용하지 마십시오
+#   Avoid excessive class coupling
+#   https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/quality-rules/ca1506
+#dotnet_diagnostic.CA1506.severity = error
+```
