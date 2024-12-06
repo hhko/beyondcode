@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Crop.Hello.Api.Domain\Crop.Hello.Api.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\Assets\Frameworks\Src\Crop.Hello.Framework\Crop.Hello.Framework.csproj" />
+    <ProjectReference Include="..\..\..\..\Assets\Domains\Src\Crop.Hello.Domain\Crop.Hello.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" />
+  </ItemGroup>
+  <PropertyGroup>
+  </PropertyGroup>
+</Project>
