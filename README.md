@@ -27,7 +27,8 @@
 # 목차
 - Part 0. 세미나
   - [x] [Internal 아키텍처 개요](./Ch00.Seminar/InternalArchitecture-Overview/)
-  - [ ] TODO
+  - [x] [개발 가이드 01. 레이어 구성](./Step001-LayerStructure/)
+  - [ ] [개발 가이드 02. 레이어 의존성 주입(관찰 가능성 옵션)](./Step002-LayerDependencyInjection/)
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
   - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
