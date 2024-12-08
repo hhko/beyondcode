@@ -26,9 +26,10 @@
 
 # 목차
 - Part 0. 세미나
-  - [x] [Internal 아키텍처 개요](./Ch00.Seminar/InternalArchitecture-Overview/)
-  - [x] [개발 가이드 01. 레이어 구성](./Step001-LayerStructure/)
-  - [ ] [개발 가이드 02. 레이어 의존성 주입(관찰 가능성 옵션)](./Step002-LayerDependencyInjection/)
+  - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.InternalArchitecture-Overview/)
+- Part 0. 개발 가이드
+  - [x] [Ch 01. 레이어 구성](./Part0.Guide/Ch01.LayerStructure/)
+  - [ ] [Ch 02. 레이어 의존성 주입(옵션 패턴)](./Part0.Guide/Ch02.LayerDependencyInjection/)
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
   - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
@@ -913,7 +914,7 @@ public sealed partial record class Error(string Code, string Message)
 
 # Part 7. 참고 자료
 ## 아키텍처
-### 클린 아키텍처 템플릿
+### 클린 아키텍처 템플릿 소스
 - [ ] [ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
 - [ ] [ardalis | CleanArchitecture.WorkerService](https://github.com/ardalis/CleanArchitecture.WorkerService/tree/main)
 - [ ] [amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)
@@ -930,6 +931,15 @@ public sealed partial record class Error(string Code, string Message)
 - [ ] [dotnet-new-caju](https://github.com/ivanpaulovich/dotnet-new-caju)
   - https://paulovich.net/clean-architecture-for-net-applications/
 - [ ] [clean-architecture-template](https://github.com/Genocs/clean-architecture-template)
+- [ ] [VerticalSliceArchitecture](https://github.com/Hona/VerticalSliceArchitecture)
+- [ ] [VerticalSliceArchitecture.Samples.Todos](https://github.com/Hona/VerticalSliceArchitecture.Samples.Todos)
+
+### 관련 소스
+- [ ] [eshop-app-workshop](https://github.com/dotnet-presentations/eshop-app-workshop)
+- [ ] [SharedKernelSample](https://github.com/NimblePros/SharedKernelSample)
+  - Domain과 Application 레이어 구현을 위한 기본 타입 기본 구현과 테스트 참고
+- [ ] [modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
+- [ ] [ddd-guestbook](https://github.com/ardalis/ddd-guestbook)
 
 ### 아키텍처 이해
 - [ ] [Hexagonal Architecture (Alistair Cockburn)](https://www.youtube.com/watch?v=k0ykTxw7s0Y)
@@ -937,8 +947,7 @@ public sealed partial record class Error(string Code, string Message)
 - [ ] [Hexagonal Architecture - What Is It? Why Should You Use It?](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture/)
 - [ ] [CodeMaze | Clean Architecture in .NET](https://code-maze.com/dotnet-clean-architecture/)
 - [ ] [What are the Differences Between Onion Architecture and Clean Architecture in .NET?](https://code-maze.com/dotnet-differences-between-onion-architecture-and-clean-architecture/)
-- [ ] [SharedKernelSample](https://github.com/NimblePros/SharedKernelSample)
-  - Domain과 Application 레이어 구현을 위한 기본 타입 기본 구현과 테스트 참고
+
 
 ### DDD
 - [x] [DDD 그리고 MSA](https://www.youtube.com/watch?v=DOpt6IWU6LU)  
@@ -947,9 +956,7 @@ public sealed partial record class Error(string Code, string Message)
 - [ ] [Moving IO to the edges of your app](https://www.youtube.com/watch?v=P1vES9AgfC4)  
   [![](https://img.youtube.com/vi/P1vES9AgfC4/0.jpg)](https://www.youtube.com/watch?v=P1vES9AgfC4)
   - 아키텍처 관점에서 Pure Function과 Impure Function 배치의 중요성을 이해할 수 있습니다.
-- [ ] [modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
 - [ ] [함수형 도메인 주도 설계 구현](https://liftio.org/2021/files/jisoo-park-ppt.pdf)
-- [ ] [ddd-guestbook](https://github.com/ardalis/ddd-guestbook)
 
 <br/>
 
