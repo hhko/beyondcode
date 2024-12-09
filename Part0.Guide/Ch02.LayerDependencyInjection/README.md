@@ -9,7 +9,7 @@
 ## TODO
 - [ ] .
 
-## 폴더 구성
+## 의존성 폴더 구성
 ![](./.images/DI.Structure.png)
 
 - `Abstractions` 폴더
@@ -32,13 +32,13 @@ appsettings.json
 ```cs
 // {Feature}: OpenTelemetry
 
-// 옵션
+// 옵션 데이터
 public sealed class {Featrue}Options
 {
-
+  // 옵션 데이터
 }
 
-// 옵션 자료구조
+// 옵션 데이터 읽기(appsettings.json)
 internal sealed class {Feature}OptionsSetup(IConfiguration configuration) : IConfigureOptions<{Feature}Options>
 {
   private const string _configurationSectionName = nameof({Feature}Options);
@@ -52,7 +52,7 @@ internal sealed class {Feature}OptionsSetup(IConfiguration configuration) : ICon
   }
 }
 
-// 옵션 유효성
+// 옵션 유효성 검사
 internal sealed class {Feature}OptionsValidator : IValidateOptions<{Feature}Options>
 {
   public ValidateOptionsResult Validate(string? name, {Feature}Options options)
@@ -138,7 +138,7 @@ internal static class OpenTelemetryRegistration
 }
 ```
 
-## Program 통합 테스트
+## Console 통합 테스트
 
 ```xml
 <ItemGroup>
