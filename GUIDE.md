@@ -236,3 +236,76 @@ dotnet_diagnostic.CA1505.severity = error
 #   https://learn.microsoft.com/ko-kr/dotnet/fundamentals/code-analysis/quality-rules/ca1506
 #dotnet_diagnostic.CA1506.severity = error
 ```
+
+```
+public static Serilog.ILogger CreateSerilogLogger()
+{
+    return new LoggerConfiguration()
+        .MinimumLevel.Override(Microsoft, Information)
+        .Enrich.FromLogContext()                          // ?
+        .WriteTo.Console()
+        .CreateBootstrapLogger();                         // ?
+}
+
+Log.Logger = CreateSerilogLogger();
+
+try
+{
+    Log.Information("Staring the host");
+}
+catch (Exception exception)
+{
+    Log.Fatal(exception, "Host terminated unexpectedly");
+    return 1;
+}
+finally
+{
+    Log.Information("Stopping the host");
+    Log.CloseAndFlush();
+}
+
+return 0;
+
+ https://github.com/serilog/serilog-extensions-hosting
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .CreateLogger();
+
+try
+{
+    Log.Information("Starting host");
+
+    var builder = Host.CreateApplicationBuilder(args);
+    builder.Services.AddHostedService<PrintTimeService>();
+    builder.Services.AddSerilog();
+
+    var app = builder.Build();
+
+    await app.RunAsync();
+    return 0;
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Host terminated unexpectedly");
+    return 1;
+}
+finally
+{
+    await Log.CloseAndFlushAsync();
+}
+
+//--------------------------------------------------------------------------------
+
+public static void ConfigureSerilog(this WebApplicationBuilder builder)
+{
+    builder.Host.UseSerilog((context, services, configuration) => configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .ReadFrom.Services(services)
+        .Enrich.FromLogContext());
+}
+
+ https://mohsen.es/configuring-serilog-through-appsettings-json-file-33b26594bb46
+```

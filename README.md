@@ -29,7 +29,9 @@
   - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.InternalArchitecture-Overview/)
 - Part 0. 개발 가이드
   - [x] [Ch 01. 레이어 구성](./Part0.Guide/Ch01.LayerStructure/)
-  - [ ] [Ch 02. 레이어 의존성 주입(옵션 패턴)](./Part0.Guide/Ch02.LayerDependencyInjection/)
+  - [x] [Ch 02. 레이어 의존성 주입(옵션 패턴)](./Part0.Guide/Ch02.LayerDependencyInjection/)
+  - [ ] [Ch 03. 관찰 가능성 로그](./Part0.Guide/Ch03.ObservabilityLogs)
+  - [ ] Ch 04. 관찰 가능성 지표와 추적
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
   - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
