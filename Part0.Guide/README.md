@@ -1,10 +1,13 @@
 # 개발 가이드
 
 ## 1. 레이어 구성
-- [x] 레이어 구성
-- [x] 레이어 테스트 구분
+- [x] 레이어 정의
+- [x] AssemblyReference.cs 파일  
+- [x] Directory.Build.props 파일
+- [x] 테스트 레이어 정의
 - [x] 레이어 의존성 테스트
 - [x] 레이어 다이어그램
+
 
 ## 2. 레이어 의존성 주입(옵션 패턴)
 - [x] 옵션 패턴
@@ -12,21 +15,19 @@
 - [x] 관찰 가능성 콘솔 로그
 - [x] 콘솔 통합 테스트
 
-## 3. 관찰 가능성 로그
+## 3. 관찰 가능성
 - [ ] 구조적 로그 Microsoft
 - [ ] 구조적 로그 Microsoft, Error
 - [ ] 구조적 로그 Microsoft, Exception
 - [ ] 구조적 로그 Serilog
 - [ ] 구조적 로그 Serilog, Error
 - [ ] 구조적 로그 Serilog, Exception
-
-```
 - [ ] 관찰 가능성 추적
 - [ ] 관찰 가능성 지표
----
 - [ ] 관찰 가능성 로그 Grafana
 - [ ] 관찰 가능성 로그 OpenSearch
----
+
+```
 컨테이너
 
 ## 2. 컨테이너
