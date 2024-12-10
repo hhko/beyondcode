@@ -999,7 +999,38 @@ public sealed partial record class Error(string Code, string Message)
 ### 패키지
 - [ ] [Publish MediatR Notifications in Parallel](https://code-maze.com/mediatr-parallel-publishing-notifications/)
 
+### 테스트
+- [ ] [How to use TimeProvider and FakeTimeProvider (time abstraction in .NET)](https://grantwinney.com/how-to-use-timeprovider-and-faketimeprovider/)
+- BackgroundService
+  - [ ] [Handling Background Worker Unit Tests in ASP.NET](https://matt-ghafouri.medium.com/handling-background-worker-unit-tests-in-asp-net-77180e25697d)
+  - [ ] [The NEW Way to Test Background Jobs | .NET 8](https://www.youtube.com/watch?v=uN1V0Sw34NQ)
+  - [ ] [Windows 서비스에서 ASP.NET Core 호스트](https://learn.microsoft.com/ko-kr/aspnet/core/host-and-deploy/windows-service?view=aspnetcore-9.0&tabs=visual-studio)
+  ```
+	dotnet publish -c Release __output "C:\custom\publish\directory"
+	
+	sc.exe create "서비스_이름" binpath="절대경로.exe"
+	sc.exe create "서비스_이름"
+	
+	get-service "서비스_이름"
+	start-service "서비스_이름"
+	stop-service "서비스_이름"
+	
+	
+	RuntimeIdentifier	-r win-x64
+		https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
+	PlatformTarget		?
+	PublishSingleFile	-p:PublishSingleFile=true
+	PublishReadyToRun	-p:PublishReadyToRun=true
+	SelfContained		__self-contained true
+	DebugType			?
 
+  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  <PlatformTarget>x64</PlatformTarget>
+  <PublishSingleFile>true</PublishSingleFile>
+  <PublishReadyToRun>true</PublishReadyToRun>
+  <SelfContained>true</SelfContained>
+  <DebugType>embedded</DebugType>
+  ```
 <br/>
 
 ## 시스템
