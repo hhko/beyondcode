@@ -200,7 +200,7 @@ public class AuditManager
   - `T3U`: Frontend UI
 
 ### 프로젝트 의존성 다이어그램
-- TODO
+![](./.images/Architecture.LayerDiagram.png)
 
 <br/>
 
