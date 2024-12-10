@@ -1,5 +1,59 @@
 # 개발 가이드
 
+# Ch 14. 솔루션 레이어 의존성 주입
+
+
+## Ch 11.1 테스트
+- TODO 코드 커버리지
+- TODO Fake 데이터
+- TODO AutoFixture
+- TODO Snapshot
+- TODO ...
+
+## Ch 11.2 컨테이너 테스트
+- TODO PostgreSQL
+- TODO RabbitMQ, ...
+
+## Ch 11.3 통합 테스트
+- TODO WebApi
+- TODO RabbitMQ
+- TODO FileSystem
+- TODO 반복 작업
+- TODO ...
+
+## Ch 11.4 성능 테스트
+- TODO ...
+
+<br/>
+
+
+# Ch 11. 솔루션 빌드
+- TODO 코드 커버리지
+- TODO 프로젝트 의존성 다이어그램
+- TODO 코드 정적 분석?
+- TODO EFCore 다이어그램
+- TODO 빌드 조건?
+  - 브랜치
+  - PR
+  - 대상 파일
+
+<br/>
+
+# Ch 12. 솔루션 배포
+- TODO GitHub Release
+- TODO GitHub Docker Image
+- TODO 버전
+- TODO Dockerfile 자동 생성
+- TODO 이름 규칙
+- TODO docker compose 솔루션 생성
+- TODO Health Check
+- TODO 진단 도구
+- TODO 버전
+  - 어셈블리
+  - 도커 이미지
+
+---
+
 ## 1. 레이어 구성
 - [x] 레이어 정의
 - [x] AssemblyReference.cs 파일  
