@@ -722,6 +722,8 @@ public static class AssemblyReference
 }
 ```
 
+![](./.images/AssemblyReference.png)
+
 ## Ch 11.2 레이어 의존성 테스트
 - [ArchUnitNET](https://github.com/TNG/ArchUnitNET) 패키지
 
