@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Assets\Frameworks\Src\Crop.Hello.Framework\Crop.Hello.Framework.csproj" />
     <ProjectReference Include="..\Crop.Hello.Api.Application\Crop.Hello.Api.Application.csproj" />
   </ItemGroup>
   <ItemGroup>

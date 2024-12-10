@@ -17,19 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Src\Crop.Hello.Api.Adapters.Infrastructure\Crop.Hello.Api.Adapters.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Src\Crop.Hello.Api.Adapters.Persistence\Crop.Hello.Api.Adapters.Persistence.csproj" />
     <ProjectReference Include="..\..\Src\Crop.Hello.Api.Application\Crop.Hello.Api.Application.csproj" />
     <ProjectReference Include="..\..\Src\Crop.Hello.Api.Domain\Crop.Hello.Api.Domain.csproj" />
   </ItemGroup>
 
-  <!-- <ItemGroup>
-    <Folder Include="ArchitectureTests\" />
-  </ItemGroup> -->
-
 </Project>
-

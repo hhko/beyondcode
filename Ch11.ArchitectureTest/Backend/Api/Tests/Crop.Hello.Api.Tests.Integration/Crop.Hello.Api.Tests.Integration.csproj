@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="coverlet.collector">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -18,12 +17,11 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Using Include="Xunit" />
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Src\Crop.Hello.Api.Adapters.Infrastructure\Crop.Hello.Api.Adapters.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Src\Crop.Hello.Api.Adapters.Persistence\Crop.Hello.Api.Adapters.Persistence.csproj" />
+    <ProjectReference Include="..\..\Src\Crop.Hello.Api\Crop.Hello.Api.csproj" />
   </ItemGroup>
-</Project>
 
+</Project>
