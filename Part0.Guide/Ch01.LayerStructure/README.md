@@ -1,7 +1,7 @@
 # 레이어 구성
 
 ## 목표
-- [x] 레이어 구성
+- [x] 레이어 정의
   ```shell
   Adapters.Infrastructure     # 기술
   Adapters.Persistence
@@ -9,7 +9,9 @@
   Application                 # 비즈니스 흐름
   Domain                      # 비즈니스 단위
   ```
-- [x] 레이어 테스트 구분
+- [x] AssemblyReference.cs 파일  
+- [x] Directory.Build.props 파일
+- [x] 테스트 레이어 정의
   ```shell
   [Trait(nameof(UnitTest), UnitTest.Architecture)]
   ```
@@ -17,21 +19,18 @@
   - [ArchUnitNET](https://github.com/TNG/ArchUnitNET)
   - [Bulletproof Your Software Architecture With ArchUnitNET](https://www.youtube.com/watch?v=R_srbvA6IQM)
 - [x] 레이어 다이어그램
-  - [DependencyVisualizer](https://github.com/nkolev92/DependencyVisualizer)
-  ```
-  dotnet tool install -g DependencyVisualizerTool --version 1.0.0-beta.3
-  dotnet tool list -g
-
-  DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --projects-only
-  ```
 
 ## TODO
 - [ ] AssemblyReference.cs 파일 존재 테스트
 
-## 레이어 구성
+<br/>
+
+## 레이어 정의
 ![](./.images/Architecture.Layers.png)
 
 ![](./.images/Architecture.Diagram.png)
+
+<br/>
 
 ## AssemblyReference.cs 파일
 
@@ -48,62 +47,80 @@ public static class AssemblyReference
 }
 ```
 
+<br/>
+
 ## Directory.Build.props 파일
+- 전역 Directory.Build.props 파일
+  ```xml
+  <Project>
+  
+    <PropertyGroup>
+      <TargetFramework>net9.0</TargetFramework>
+      <Nullable>enable</Nullable>
+      <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+  
+  </Project>
+  ```
+- 테스트 Directory.Build.props 파일
+  ```xml
+  <Project>
+  
+    <!-- 상위 Directory.Build.props 파일 지정 Import -->
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+  
+    <!-- 테스트 프로젝트 공통 속성 -->
+    <PropertyGroup>
+      <IsPackable>false</IsPackable>
+      <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+  
+    <!-- 솔루션 탐색기에서 TestResults 폴더 제외 -->
+    <ItemGroup>
+      <None Remove="TestResults\**" />
+    </ItemGroup>
+  
+    <!-- xunit.runner.json 설정 -->
+    <ItemGroup>
+      <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+  
+    <!-- 전역 using 구문 -->
+    <ItemGroup>
+      <Using Include="Xunit" />
+      <Using Include="FluentAssertions" />
+    </ItemGroup>
+  
+  </Project>
+  ```
+- xunit.runner.json
+  ```json
+  {
+    "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
+    "methodDisplay": "method",
+    "diagnosticMessages": true
+  }
+  ```
 
-```xml
-<Project>
+<br/>
 
-  <!-- 상위 Directory.Build.props 파일 지정 Import -->
-  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
-
-  <!-- 테스트 프로젝트 공통 속성 -->
-  <PropertyGroup>
-    <IsPackable>false</IsPackable>
-    <IsTestProject>true</IsTestProject>
-  </PropertyGroup>
-
-  <!-- 솔루션 탐색기에서 TestResults 폴더 제외 -->
-  <ItemGroup>
-    <None Remove="TestResults\**" />
-  </ItemGroup>
-
-  <!-- xunit.runner.json 설정 -->
-  <ItemGroup>
-    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
-  <!-- 전역 using 구문 -->
-  <ItemGroup>
-    <Using Include="Xunit" />
-    <Using Include="FluentAssertions" />
-  </ItemGroup>
-
-</Project>
-```
-
-## xunit.runner.json 파일
-
-```json
-{
-  "$schema": "https://xunit.net/schema/current/xunit.runner.schema.json",
-  "methodDisplay": "method",
-  "diagnosticMessages": true
-}
-```
-
-## 레이어 테스트 구분
+## 테스트 레이어 정의
 ```cs
 internal static partial class Constants
 {
     public static class UnitTest
     {
         public const string Architecture = nameof(Architecture);
+        public const string Domain = nameof(Domain);
+        // ...
     }
 }
 
 [Trait(nameof(UnitTest), UnitTest.Architecture)]
 public class LayerDependencyTests : ArchitectureBaseTest
 ```
+
+<br/>
 
 ## 레이어 의존성 테스트
 
@@ -133,4 +150,17 @@ ArchRuleDefinition
     .Should()
     .NotDependOnAny(layer)
     .Check(Architecture);       // 검증 대상
+```
+
+<br/>
+
+## 레이어 다이어그램
+- [DependencyVisualizer](https://github.com/nkolev92/DependencyVisualizer)
+
+
+```shell
+dotnet tool install -g DependencyVisualizerTool --version 1.0.0-beta.3
+dotnet tool list -g
+
+DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --projects-only
 ```

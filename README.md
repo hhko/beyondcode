@@ -1,37 +1,28 @@
 > more `fun.` with
 
-# 개요
-## 기술 맵
-![](./.images/TechMap.png)
-
-## Internal 아키텍처
-> - 내부 아키텍처는 레이어 배치입니다.
-> - **Application 레이어가** 내부 아키텍처의 레이어를 주관(主管)합니다.
-
-![](./.images/Architecture.Internal.png)
-
-- 아키텍처
-  - `MediatR`
-- 테스트 패키지
-  - `xunit`
-  - `FluentAssertions`
-  - `TngTech.ArchUnitNET.xUnit`
-
-## External 아키텍처
-> - 외부 아키텍처는 서비스 배치입니다.
-
-- TODO
-
-<br/>
-
 # 목차
 - Part 0. 세미나
   - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.InternalArchitecture-Overview/README.md)
 - Part 0. 개발 가이드
   - [x] [Ch 01. 레이어 구성](./Part0.Guide/Ch01.LayerStructure/README.md)
+    - 레이어 정의
+    - AssemblyReference.cs 파일  
+    - Directory.Build.props 파일
+    - 테스트 레이어 정의
+    - 레이어 의존성 테스트
+    - 레이어 다이어그램
   - [x] [Ch 02. 레이어 의존성 주입(옵션 패턴)](./Part0.Guide/Ch02.LayerDependencyInjection/README.md)
-  - [ ] [Ch 03. 관찰 가능성 로그](./Part0.Guide/Ch03.ObservabilityLogs/README.md)
-  - [ ] Ch 04. 관찰 가능성 지표와 추적
+    - 옵션 패턴
+    - 레이어 의존성 주입
+    - 관찰 가능성 콘솔 로그
+    - 콘솔 통합 테스트
+  - [ ] [Ch 03. 관찰 가능성](./Part0.Guide/Ch03.Observability/README.md)
+  - [ ] Ch 04. 도커 컴포즈
+---
+- Part 0. 개요
+  - [x] [Ch 01. 기술 맵](#ch-01-기술-맵)
+  - [x] [Ch 02. Internal 아키텍처](#ch-02-internal-아키텍처)
+  - [ ] Ch 03. External 아키텍처
 - Part 1. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
   - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
@@ -61,6 +52,32 @@
 - Part 7. 참고 자료
 
 <br/>
+
+
+# Part 1. 개요
+## Ch 01. 기술 맵
+![](./.images/TechMap.png)
+
+## Ch 02. Internal 아키텍처
+> - 내부 아키텍처는 레이어 배치입니다.
+> - **Application 레이어가** 내부 아키텍처의 레이어를 주관(主管)합니다.
+
+![](./.images/Architecture.Internal.png)
+
+- 아키텍처
+  - `MediatR`
+- 테스트 패키지
+  - `xunit`
+  - `FluentAssertions`
+  - `TngTech.ArchUnitNET.xUnit`
+
+## Ch 03. External 아키텍처
+> - 외부 아키텍처는 서비스 배치입니다.
+
+- TODO
+
+<br/>
+
 
 ---
 
@@ -935,6 +952,7 @@ public sealed partial record class Error(string Code, string Message)
 - [ ] [clean-architecture-template](https://github.com/Genocs/clean-architecture-template)
 - [ ] [VerticalSliceArchitecture](https://github.com/Hona/VerticalSliceArchitecture)
 - [ ] [VerticalSliceArchitecture.Samples.Todos](https://github.com/Hona/VerticalSliceArchitecture.Samples.Todos)
+- [ ] [from-zero-to-hero-vertical-slice-architecture](https://github.com/Dometrain/from-zero-to-hero-vertical-slice-architecture)
 
 ### 관련 소스
 - [ ] [eshop-app-workshop](https://github.com/dotnet-presentations/eshop-app-workshop)
