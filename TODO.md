@@ -347,3 +347,116 @@ Crop.Hello.Framework.Tests.Unit 2 경고와 함께 성공 (1.6초) → Assets\Fr
   C:\Assets\Frameworks\Tests\Crop.Hello.Framework.Tests.Unit\Crop.Hello.Framework.Tests.Unit.csproj : warning NU1903: 'System.Net.Http' 4.3.0 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-7jgj-8wvc-jh57이(가) 있습니다.
   C:\Assets\Frameworks\Tests\Crop.Hello.Framework.Tests.Unit\Crop.Hello.Framework.Tests.Unit.csproj : warning NU1903: 'System.Text.RegularExpressions' 4.3.0 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-cmhx-cq75-c4mj이(가) 있습니다.
 ```
+
+
+## 빌드 옵션
+```xml
+<TargetFramework>net8.0-windows</TargetFramework>
+<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+<PlatformTarget>x64</PlatformTarget>
+
+<PublishSingleFile>true</PublishSingleFile>
+<PublishSingleFile Condition="'$(Configuration)' == 'Release'">true</PublishSingleFile>
+
+<PublishReadyToRun>true</PublishReadyToRun>
+<SelfContained>true</SelfContained>
+<DebugType>embedded</DebugType>
+```
+```
+TargetFramework		  : -f net8.0-windows
+RuntimeIdentifier	  : -r win-x64
+  https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
+PlatformTarget		  : -none-
+PublishSingleFile	  : -p:PublishSingleFile=true
+PublishReadyToRun	  : -p:PublishReadyToRun=true
+SelfContained		    : --self-contained true
+DebugType			      : -p:DebugType=Embedded
+```
+
+## 윈도우 서비스
+### Host.CreateDefaultBuilder
+```cs
+// Microsoft.Extensions.Hosting.WindowsServices 패키지
+//
+// IHostApplicationBuilder, Host.CreateApplicationBuilder : 서비스 X
+// IHostBuilder           , Host.CreateDefaultBuilder     : 서비스 O
+var builder = Host.CreateDefaultBuilder(args)
+    .UseWindowsService()
+    .ConfigureServices(services =>
+    {
+        services.AddQuartz(configure =>
+        {
+            var subscribeMessageWorkerKey = JobKey.Create(nameof(SubscribeMessageWorker));
+            configure
+                .AddJob<SubscribeMessageWorker>(jobBuilder =>
+                    jobBuilder
+                        .WithIdentity(subscribeMessageWorkerKey))
+                .AddTrigger(trigger =>
+                    trigger
+                        .ForJob(subscribeMessageWorkerKey)
+                        .WithIdentity(nameof(SubscribeMessageWorker) + "-Trigger")
+                        .StartNow()
+                        .WithCronSchedule("0/5 * * * * ?"));
+                    //.WithSimpleSchedule(schedule => schedule.WithRepeatCount(0)));
+        });
+
+        services.AddQuartzHostedService(option =>
+        {
+            option.WaitForJobsToComplete = true;
+        });
+
+        string appPath = AppDomain.CurrentDomain.BaseDirectory;
+
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.File(Path.Combine(appPath, "logs\\log.txt"))
+            //.WriteTo.File("logs/logs-.txt")
+            .WriteTo.Console()
+            .CreateLogger();
+
+        services.AddSerilog();
+    });
+
+using var app = builder.Build();
+```
+
+### WebApplication.CreateBuilder
+```cs
+var builder = WebApplication.CreateBuilder(args);
+
+//var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+//{
+//    Args = args,
+//    ContentRootPath = Directory.GetCurrentDirectory(),    <-
+//});
+
+builder.Services.AddWindowsService();
+
+builder.Service. ...
+```
+
+### 윈도우 서비스 로그 파일
+```
+Serilog.Settings.Configuration
+
+"path": "${BaseDirectory}Logs\\log-.txt"
+
+ var configuration = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory) // BaseDirectory 설정
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
+
+Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(configuration)
+            .CreateLogger();
+```
+
+### 서비스 생성
+```
+sc.exe create "서비스 이름" binpath="전체 경로"
+
+get-service "서비스 이름"
+start-service "서비스 이름"
+stop-service "서비스 이름"
+
+sc.exe delete "서비스 이름"
+```
