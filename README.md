@@ -20,7 +20,7 @@
   - [x] [Ch 11. 솔루션 빌드 설정](#ch-11-솔루션-빌드-설정)
   - [ ] [Ch 12. 솔루션 코드 분석](#ch-12-솔루션-코드-분석)
   - [x] [Ch 13. 솔루션 아키텍처 테스트](#ch-13-솔루션-아키텍처-테스트)
-  - [ ] Ch 14. 솔루션 레이어 의존성 주입
+  - [ ] [Ch 14. 솔루션 레이어 의존성 주입](#ch-14-솔루션-레이어-의존성-주입)
   - [ ] Ch 15. 솔루션 빌드 자동화
   - [ ] Ch 16. 솔루션 컨테이너 배포 자동화
 - Part 4. 관찰 가능성
@@ -716,6 +716,9 @@ error IDE0161:
 <br/>
 
 # Ch 13. 솔루션 아키텍처 테스트
+![](./.images/Architecture.UnitTestStructure.png)
+
+![](./.images/Architecture.UnitTests.png)
 
 ## Ch 13.1 레이어 어셈블리
 
@@ -834,7 +837,35 @@ public class LayerDependencyTests : ArchitectureBaseTest
   - AdapterLayer_ShouldNotHave_Dependencies_OnDomainLayer: `Adapters.Infrastructure`, `Adapters.Persistence`은 `Domain`을 의존하지 않습니다.
 
 ## Ch 13.3 CQRS 네이밍 컨벤션 테스트
-- TODO
+
+```cs
+[Fact]
+public void CommandMessages_ShouldEndWith_Command()
+{
+  var suts = ArchRuleDefinition
+    .Classes()
+    .That()
+    .ImplementInterface(typeof(ICommand));
+
+  if (!suts.GetObjects(Architecture).Any())
+    return;
+
+  // public sealed recoard XyzCommand : ICommand { }
+  suts.Should().BePublic()
+    .AndShould().BeSealed()
+    .AndShould().BeRecord()
+    .AndShould().HaveNameEndingWith(NamingConvention.Command)
+    .Check(Architecture);
+}
+```
+
+- CQRS 테스트
+  - CommandMessages_ShouldEndWith_Command
+  - CommandMessagesT_ShouldEndWith_Command
+  - CommandUseCases_ShouldEndWith_CommandUsecase
+  - CommandUseCasesT_ShouldEndWith_CommandUsecase
+  - QueryMessagesT_ShouldEndWith_Query
+  - QueryUseCasesT_ShouldEndWith_QueryUsecase
 
 ## Ch 13.4 레이어 의존성 다이어그램
 
@@ -848,6 +879,10 @@ DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --pr
 ```
 
 <br/>
+
+# Ch 14. 솔루션 레이어 의존성 주입
+
+## Ch 14.1 폴더 구성
 
 ---
 
