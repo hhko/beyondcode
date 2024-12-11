@@ -192,6 +192,14 @@ Application Architecture
 - Mediator 패턴을 통해 데이터 쓰기를 위한 메시지(Command)와 데이터를 읽기 위한 메시지(Query)로 구분할 수 있습니다.
   - Command 메시지: 데이터 가변(`CUD`:`Create, Update, Delete`)
   - Query 메시지: 데이터 불변(`R`: `Read`)
+- `Command`: ORM(OLTP, Create, Update, Delete)
+  - Command는 데이터의 상태를 변경하는 작업을 담당합니다.
+  - 이 작업은 일반적으로 여러 테이블을 참조하거나 복잡한 트랜잭션을 포함할 수 있습니다.
+  - 따라서 Command는 데이터베이스에 변경을 가하는데, 복잡한 로직을 처리하거나 여러 엔티티와 상호작용할 수 있습니다.
+- `Query`: SQL(OLAP, Read)
+  - Query는 데이터베이스에서 데이터를 읽어오는 작업에 해당합니다.
+  - 일반적으로 Command보다 쿼리의 수가 많을 수 있으며, 데이터 조회만을 목적으로 하므로 복잡도가 낮고 최적화된 방식으로 실행됩니다.
+  - Query는 데이터의 상태를 변경하지 않고, 데이터를 읽어오는 데 집중합니다.
 
 ## Ch 7.4 메시지 범주화(CQRS) 흐름
 ![](./.images/Layer.CQRS.Flow.png)
