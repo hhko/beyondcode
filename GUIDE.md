@@ -2,11 +2,12 @@
   - 프로젝트 참조
   - 패키지
 - 솔루션 빌드 설정
-  - Directory.Build.props
-  - Directory.Packages.props
+  - Directory.Build.props(전체, 테스트)
+  - Directory.Packages.props(구분)
   - global.json
   - nuget.config
   - .editorconfig
+  - .gitignore
   - README.md
 - 어셈블리 AssemblyReference 구현
 - 아키텍처 단위 테스트 구현
