@@ -11,5 +11,14 @@
   - README.md
 - 어셈블리 AssemblyReference 구현
 - 아키텍처 단위 테스트 구현
+  - 폴더 구성
+    - Abstractions
+    - ArchitectureTests
   - 레이어 의존성 테스트
   - 어셈블리 AssemblyReference 테스트
+- 레이어 의존성 주입
+  ```
+  Abstractions/
+    Registration/
+      {레이어}Registration.cs
+  ```

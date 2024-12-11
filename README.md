@@ -25,12 +25,15 @@
   - [ ] Ch 16. 솔루션 컨테이너 배포 자동화
 - Part 4. 관찰 가능성
   - [ ] Ch 17. Aspire 대시보드
-  - [ ] Ch 18. OpenSearch 시스템
-  - [ ] TODO 로그
-  - [ ] TODO 추적
-  - [ ] TODO 지표
+  - [ ] cH 18. Grafana 시스템
+  - [ ] Ch 19. OpenSearch 시스템
+  - [ ] Ch 20. 로그
+  - [ ] Ch 21. 추적
+  - [ ] Ch 22. 지표
 - Part 5. Internal 전술 설계
-  - [x] [Ch 2x. 전술 설계 맵](#ch-2x-전술-설계-맵)
+  - [x] [Ch 23. 전술 설계 맵](#ch-23-전술-설계-맵)
+  - [ ] [Ch 24. 출력 기본 타입(Result)](#ch-24-출력-기본-타입)
+  - [ ] Ch 25. 도메인 기본 타입
   - [ ] TODO
 - Part 6. External 전술 설계
 - Part 7. 전략 설계
@@ -892,15 +895,15 @@ DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --pr
 
 # Part 4. Internal 전술 설계
 
-# Ch 2x. 전술 설계 맵
+# Ch 23. 전술 설계 맵
 ![](./.images/TacticalDesign.Pattern.png)
 
 <br/>
 
-# Ch 2x. IResult 타입
+# Ch 24. 출력 기본 타입
 - IResult 타입으로 모든 Known과 Unknown 입출력 메서드 결과 타입으로 정의합니다.
 
-## Ch 2x.1 IResult 타입 정의
+## Ch 24.1 IResult 타입 정의
 - 성공과 실패를 구분하며, 성공 시에는 값을 가지고, 실패 시에는 에러 값을 포함합니다.
 - 특히, 유효성 검사 실패의 경우 다수의 에러 값을 정의할 수 있습니다.
 

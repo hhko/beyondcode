@@ -1,5 +1,0 @@
-root = true
-
-[*.{cs,vb}]
-dotnet_diagnostic.IDE0161.severity = warning
-csharp_style_namespace_declarations = file_scoped:warning
