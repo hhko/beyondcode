@@ -161,3 +161,5 @@
 - [ ] Aspire
 - [ ] Dapr
 ```
+- [ ] Host 윈도우 서비스
+- [ ] WebApplication 윈도우 서비스
