@@ -718,7 +718,10 @@ error IDE0161:
 # Ch 13. 솔루션 아키텍처 테스트
 ![](./.images/Architecture.UnitTestStructure.png)
 
-![](./.images/Architecture.UnitTests.png)
+- Abstractions
+  - 테스트를 위해 부가적으로 필요한 코드를 배치 시킵니다.
+- ArchitectureTests
+  - 아키텍처 테스트 코드를 배치합니다.
 
 ## Ch 13.1 레이어 어셈블리
 
@@ -733,7 +736,8 @@ public static class AssemblyReference
 }
 ```
 
-![](./.images/AssemblyReference.png)
+- 모든 레이어 어셈블리(프로젝트)에 공통적으로 `AssemblyReference`을 구현합니다.
+  ![](./.images/AssemblyReference.png)
 
 ## Ch 13.2 레이어 의존성 테스트
 - [ArchUnitNET](https://github.com/TNG/ArchUnitNET) 패키지
@@ -829,12 +833,10 @@ public class LayerDependencyTests : ArchitectureBaseTest
   }
 ```
 
-![](./.images/Architecture.LayerDependencyTests.png)
-
 - 레이어 의존성 테스트
-  - DomainLayer_ShouldNotHave_Dependencies_OnAnyOtherLayer: `Domain`은 `Application`, `Adapters.Infrastructure`, `Adapters.Persistence`을 의존하지 않습니다.
-  - ApplicationLayer_ShouldNotHave_Dependencies_OnAdapterLayer: `Application`은 `Adapters.Infrastructure`, `Adapters.Persistence`을 의존하지 않습니다.
-  - AdapterLayer_ShouldNotHave_Dependencies_OnDomainLayer: `Adapters.Infrastructure`, `Adapters.Persistence`은 `Domain`을 의존하지 않습니다.
+  - DomainLayer_ShouldNotHave_Dependencies_OnAnyOtherLayer
+  - ApplicationLayer_ShouldNotHave_Dependencies_OnAdapterLayer
+  - AdapterLayer_ShouldNotHave_Dependencies_OnDomainLayer
 
 ## Ch 13.3 CQRS 네이밍 컨벤션 테스트
 
