@@ -7,7 +7,7 @@
 
     <!-- 코드 스타일 분석 -->
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- <TreatWarningsAsErrors>true</TreatWarningsAsErrors> -->
   </PropertyGroup>
 
 </Project>

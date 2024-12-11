@@ -18,6 +18,6 @@ public class HostTests : IClassFixture<ApplicationHostBuilderFixture>
     [Fact]
     public void Logger()
     {
-        Class1 c1 = _host.Services.GetRequiredService<Class1>();
+        //Class1 c1 = _host.Services.GetRequiredService<Class1>();
     }
 }

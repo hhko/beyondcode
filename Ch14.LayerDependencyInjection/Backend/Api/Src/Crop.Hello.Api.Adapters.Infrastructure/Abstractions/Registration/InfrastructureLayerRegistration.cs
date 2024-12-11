@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Registration;
 
-public static class PersistenceLayerRegistration
+public static class InfrastructureLayerRegistration
 {
-    public static IServiceCollection RegisterPersistenceLayer(
+    public static IServiceCollection RegisterInfrastructureLayer(
         this IServiceCollection services, 
         IHostEnvironment environment, 
         ILoggingBuilder logging,

@@ -1,6 +1,6 @@
-﻿using Crop.Hello.Api;
-using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Registration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Registration;
+using Crop.Hello.Api.Adapters.Persistence.Abstractions.Registration;
+using Crop.Hello.Api.Application.Abstractions.Registration;
 using Microsoft.Extensions.Hosting;
 
 HostApplicationBuilder builder = CreateApplicationBuilder(args);
@@ -14,9 +14,9 @@ public static partial class Program
         HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
         builder.Services
-            .RegisterPersistenceLayer(builder.Environment, builder.Logging, builder.Configuration);
-
-        builder.Services.AddTransient<Class1>();
+            .RegisterInfrastructureLayer(builder.Environment, builder.Logging, builder.Configuration)
+            .RegisterPersistenceLayer()
+            .RegisterApplicationLayer();
 
         return builder;
     }

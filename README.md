@@ -672,6 +672,9 @@ dotnet new editorconfig
 
 ```ini
 [*.{cs,vb}]
+
+# 코드 스타일: 네임스페이스
+#
 # - IDE0160: Use block-scoped namespace
 # - IDE0161: Use file-scoped namespace
 dotnet_diagnostic.IDE0161.severity = warning
@@ -679,6 +682,9 @@ dotnet_diagnostic.IDE0161.severity = warning
 # csharp_style_namespace_declarations = block_scoped
 # csharp_style_namespace_declarations = file_scoped
 csharp_style_namespace_declarations = file_scoped:warning
+
+# 코드 분석: 기본 생성자
+dotnet_diagnostic.IDE0290.severity = warning
 ```
 - `.editorConfig` 파일을 이용하여 코드 스타일을 정의할 수 있습니다. `.editorConfig`은 Visual Studio 옵션 대화 상자에 지정된 코드 스타일보다 우선합니다.
 - 네임스페이스 규칙: [file_scoped](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161)
@@ -888,6 +894,35 @@ DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --pr
 # Ch 14. 솔루션 레이어 의존성 주입
 
 ## Ch 14.1 폴더 구성
+```
+Abstractions/
+  Registration/
+    {레이어}Registration.cs
+```
+
+## Ch 14.2 옵션 패턴
+  ```
+  - appsettings.json
+  -> {Featrue}Options
+  -> {Feature}OptionsSetup : IConfigureOptions<{Feature}Options>
+  -> {Feature}OptionsValidator : IValidateOptions<{Feature}Options>
+  ```
+  - 옵션 데이터: XyzOptions
+  - 옵션 데이터 읽기: IConfigureOptions
+  - 옵션 유효성 검사: IValidateOptions
+
+<br/>
+
+# Ch 15. 솔루션 빌드 자동화
+
+- 빌드
+- 배포 파일
+  - 1개
+  - 프레임워크 독립성
+- 코드 커러리지
+- 코드 품질
+- 프로젝트 의존성 다이어그램
+- 정적 사이트
 
 ---
 
