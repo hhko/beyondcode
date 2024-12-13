@@ -1,4 +1,4 @@
-﻿namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOptions;
+﻿namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOption;
 
 public sealed class OpenTelemetryOptions
 {

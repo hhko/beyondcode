@@ -914,22 +914,53 @@ DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --pr
 # Ch 14. 솔루션 레이어 의존성 주입
 
 ## Ch 14.1 폴더 구성
+```shell
+Abstractions/                             # 레이어 주 목표가 아닌 부수적인 코드
+  Registration/                           # 의존성 등록
+    InfrastructureLayerRegistration.cs    # {레이어}Registration.cs
+    OptionsRegistration.cs
+    OpenTelemetryRegistration.cs
+  Options/                                # 옵션
+    OpenTelemetryOption/                  # 관찰 가능성 옵션
+      OpenTelemetryOptions.cs
+      OpenTelemetryOptionsSetup.cs
+      OpenTelemetryOptionsValidator.cs
 ```
-Abstractions/
-  Registration/
-    {레이어}Registration.cs
+```shell
+InfrastructureLayerRegistration.cs
+  -> RegisterOptions.cs                   # 옵션 의존성 등록
+     -> OptionsRegistration.cs
+        -> OpenTelemetryOptions.cs
+           -> OpenTelemetryOptionsSetup.cs
+              -> OpenTelemetryOptionsValidator.cs
+  -> OpenTelemetryRegistration.cs         # 관찰 가능성 의존성 등록
 ```
 
+- 부수 코드(레이어 주 목표가 아닌 코드)
+  - `Abstractions`
+    - 레이어 주 목표 외 부수적으로 필요한 코드를 배치 시킵니다.
+- 의존성
+  - `Registration`
+    - 의존성 등록합니다.
+  - `{레이어}Registration.cs`
+    - 레이어 의존성 등록 파일입니다.
+
 ## Ch 14.2 옵션 패턴
-  ```
-  - appsettings.json
-  -> {Featrue}Options
-  -> {Feature}OptionsSetup : IConfigureOptions<{Feature}Options>
-  -> {Feature}OptionsValidator : IValidateOptions<{Feature}Options>
-  ```
-  - 옵션 데이터: XyzOptions
-  - 옵션 데이터 읽기: IConfigureOptions
-  - 옵션 유효성 검사: IValidateOptions
+```
+- appsettings.json
+-> {Featrue}Options
+-> {Feature}OptionsSetup : IConfigureOptions<{Feature}Options>
+-> {Feature}OptionsValidator : IValidateOptions<{Feature}Options>
+```
+- class OpenTelemetry`Options`
+  - 옵션
+- class OpenTelemetry`OptionsSetup`(IConfiguration configuration) `: IConfigureOptions<OpenTelemetryOptions>`
+  - appsettings.json 옵션 파일 읽기
+- class OpenTelemetry`OptionsValidator` `: IValidateOptions<OpenTelemetryOptions>`
+  - appsettings.json 옵션 파일 유효성 검사
+
+## Ch 14.3 옵션 의존성 테스트
+- TODO
 
 <br/>
 

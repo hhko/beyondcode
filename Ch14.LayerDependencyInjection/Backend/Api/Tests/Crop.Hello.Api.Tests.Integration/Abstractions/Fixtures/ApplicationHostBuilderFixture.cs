@@ -13,6 +13,8 @@ public class ApplicationHostBuilderFixture : IDisposable
         // More ...
 
         // appsettings.Test.json
+        // appsettings.OpenTelemetryOptions.json
+        // appsettings.Telemetry
         builder.Environment.EnvironmentName = "Test";
         Host = builder.Build();
     }

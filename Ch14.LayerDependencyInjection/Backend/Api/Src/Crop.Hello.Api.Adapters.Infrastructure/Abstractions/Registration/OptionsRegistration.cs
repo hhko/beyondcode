@@ -1,4 +1,4 @@
-﻿using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOptions;
+﻿using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOption;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 

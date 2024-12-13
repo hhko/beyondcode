@@ -1,7 +1,7 @@
 ﻿using Crop.Hello.Framework.Utilities;
 using Microsoft.Extensions.Options;
 
-namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOptions;
+namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOption;
 
 internal sealed class OpenTelemetryOptionsValidator : IValidateOptions<OpenTelemetryOptions>
 {

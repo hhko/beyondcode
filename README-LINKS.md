@@ -29,6 +29,7 @@
   - Domain과 Application 레이어 구현을 위한 기본 타입 기본 구현과 테스트 참고
 - [ ] [modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
 - [ ] [ddd-guestbook](https://github.com/ardalis/ddd-guestbook)
+- [ ] [CqrsInPractice](https://github.com/vkhorikov/CqrsInPractice)
 
 ### 아키텍처 이해
 - [ ] [Hexagonal Architecture (Alistair Cockburn)](https://www.youtube.com/watch?v=k0ykTxw7s0Y)

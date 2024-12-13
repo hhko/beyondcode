@@ -1,5 +1,4 @@
-﻿using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOptions;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Crop.Hello.Framework.Utilities;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +9,7 @@ using OpenTelemetry.Resources;
 using Microsoft.VisualBasic;
 using OpenTelemetry;
 using System.Diagnostics;
+using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOption;
 
 namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Registration;
 
