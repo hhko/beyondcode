@@ -3,10 +3,14 @@
   - 패키지
 - 솔루션 빌드 설정
   - Directory.Build.props(전체, 테스트)
+    - .NET
+    - 버전
+    - 메타
   - Directory.Packages.props(구분)
   - global.json
   - nuget.config
   - .editorconfig
+    - fILE SCOPE
   - .gitignore
   - README.md
 - 어셈블리 AssemblyReference 구현

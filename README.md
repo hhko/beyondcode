@@ -277,7 +277,7 @@ Application Architecture
 # Part 3. 솔루션
 
 # Ch 10. 솔루션 구조
-> 예제 코드: [링크](./Ch08.SolutionStructure/)
+> 예제 코드: [링크](./Ch10.SolutionStructure/)
 
 ```shell
 .\new-sln.ps1 -t1 Crop -t2 Hello -t3s Master, Api
@@ -388,7 +388,7 @@ Application Architecture
 
 ## Ch 11.1 .NET SDK 빌드 버전
 - `global-json` 파일은 .NET 프로젝트에서 특정 .NET SDK 버전을 지정하여 일관된 개발 환경을 유지하기 위해 사용됩니다.
-  - 예제 코드: [global-json](./Ch09.SolutionBuildSettings/global.json)
+  - 예제 코드: [global-json](./Ch11.SolutionBuildSettings/global.json)
 
 ```shell
 # Host에 설치된 .NET SDK 목록
@@ -455,7 +455,7 @@ dotnet --version
 
 ## Ch 11.2 패키지 소스
 - `nuget.config` 파일은 솔루션 수준에서 패키지 소스을 관리합니다.
-  - 예제 코드: [nuget.config](./Ch09.SolutionBuildSettings/nuget.config)
+  - 예제 코드: [nuget.config](./Ch11.SolutionBuildSettings/nuget.config)
 
 ```shell
 # 템플릿 확인
@@ -482,7 +482,7 @@ dotnet new nuget.config
 
 ## Ch 11.3 중앙 패키지 버전 관리
 - `Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다.
-  - 예제 코드: [Directory.Packages.props](./Ch09.SolutionBuildSettings/Directory.Packages.props)
+  - 예제 코드: [Directory.Packages.props](./Ch11.SolutionBuildSettings/Directory.Packages.props)
 
 ```shell
 # 도구 설치
@@ -510,8 +510,8 @@ upgrade-assistant upgrade
 
 ## Ch 11.4 중앙 빌드 속성 관리
 - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
-  - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch09.SolutionBuildSettings/Directory.Build.props)
-  - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch09.SolutionBuildSettings/Backend/Tests/Directory.Build.props)
+  - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch11.SolutionBuildSettings/Directory.Build.props)
+  - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch11.SolutionBuildSettings/Backend/Tests/Directory.Build.props)
 
 ```shell
 # 전체 공통 빌드 속성
@@ -553,6 +553,20 @@ Directory.Build.props                                // 전역 프로젝트 공�
       <TargetFramework>net8.0</TargetFramework>
       <ImplicitUsings>enable</ImplicitUsings>
       <Nullable>enable</Nullable>
+      <!--
+      <NoWarn>NU1701;NU1803;NU1902</NoWarn>
+      -->
+
+      <!-- 버전 -->
+      <AppVersion>1.0.100</AppVersion>
+      <FileVersion>$(AppVersion)</FileVersion>
+      <AssemblyVersion>$(AppVersion)</AssemblyVersion>
+      <Version>$(AppVersion)</Version>
+
+      <!-- 조직 -->
+      <Company>조직</Company>
+      <ProductName>제품</ProductName>
+      <Copyright>Copyright © 2024</Copyright>
     </PropertyGroup>
 
   </Project>

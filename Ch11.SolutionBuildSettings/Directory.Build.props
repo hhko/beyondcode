@@ -1,9 +1,23 @@
 <Project>
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!--
+    <NoWarn>NU1701;NU1803;NU1902</NoWarn>
+    -->
+
+    <!-- 버전 -->
+    <AppVersion>1.0.100</AppVersion>
+    <FileVersion>$(AppVersion)</FileVersion>
+    <AssemblyVersion>$(AppVersion)</AssemblyVersion>
+    <Version>$(AppVersion)</Version>
+
+    <!-- 조직 -->
+    <Company>조직</Company>
+    <ProductName>제품</ProductName>
+    <Copyright>Copyright © 2024</Copyright>
   </PropertyGroup>
 
 </Project>
