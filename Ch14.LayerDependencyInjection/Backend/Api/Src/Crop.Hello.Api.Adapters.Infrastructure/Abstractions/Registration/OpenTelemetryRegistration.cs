@@ -17,9 +17,9 @@ internal static class OpenTelemetryRegistration
 {
     internal static IServiceCollection RegisterOpenTelemetry(
         this IServiceCollection services, 
-        ILoggingBuilder logging, 
+        //ILoggingBuilder logging, 
         IHostEnvironment environment,
-        IConfigurationManager configuration)
+        IConfiguration configuration)
     {
         var openTelemetryOptions = services.GetOptions<OpenTelemetryOptions>();
         bool useOnlyConsoleExporter = openTelemetryOptions.IsLocal();
@@ -64,6 +64,7 @@ internal static class OpenTelemetryRegistration
         //telemetry.sdk.language: dotnet
         //telemetry.sdk.version: 1.10.0
 
+        /*
         logging.AddOpenTelemetry(options =>
         {
             options.IncludeScopes = true;
@@ -89,6 +90,7 @@ internal static class OpenTelemetryRegistration
             //  - 로그가 완료되면 LogRecord의 메시지를 추출하여 현재 Activity에 이벤트로 추가합니다.
             options.AddProcessor(new ActivityEventLogProcessor());
         });
+        */
 
         //        //services
         //        //    .AddOpenTelemetry()

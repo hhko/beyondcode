@@ -24,7 +24,7 @@ internal sealed class OpenTelemetryOptionsValidator : IValidateOptions<OpenTelem
             validationResult += "Version is missing. ";
         }
 
-        if (options.OtlpCollectorHost.IsNullOrEmpty())
+        if (options.OtlpCollectorHost.IsNullOrEmptyOrWhiteSpace())
         {
             validationResult += "OtlpCollectorHost is missing. ";
         }

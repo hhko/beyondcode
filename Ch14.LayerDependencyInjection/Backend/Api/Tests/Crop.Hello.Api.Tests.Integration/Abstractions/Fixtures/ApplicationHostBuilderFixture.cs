@@ -1,21 +1,31 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace Crop.Hello.Api.Tests.Integration.Abstractions.Fixtures;
 
+// IClassFixture<ApplicationHostBuilderFixture>
 public class ApplicationHostBuilderFixture : IDisposable
 {
     public ApplicationHostBuilderFixture()
     {
-        var builder = Program.CreateApplicationBuilder(Array.Empty<string>());
-        //builder.Services
-        //    .RemoveAll<IFooService>()
-        //    .AddTransient<IFooService, MockFooService>();
-        // More ...
+        //var inMemorySettings = new Dictionary<string, string?> {
+        //    {"OpenTelemetryOptions:TeamName", "테스트"},
+        //    {"OpenTelemetryOptions:ApplicationName", " "},
+        //    {"OpenTelemetryOptions:Meters:0", "Microsoft.AspNetCore.Hosting"},
+        //    {"OpenTelemetryOptions:Meters:1", "2"},
+        //    {"OpenTelemetryOptions:Meters:2", "3"},
+        //};
+        var inMemorySettings = new Dictionary<string, string?> { };
 
-        // appsettings.Test.json
-        // appsettings.OpenTelemetryOptions.json
-        // appsettings.Telemetry
-        builder.Environment.EnvironmentName = "Test";
+        IConfiguration configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(inMemorySettings)
+            .Build();
+
+        IHostBuilder builder = Program.CreateHostBuilder(
+            args: Array.Empty<string>(),
+            configuration: configuration,
+            //removeJsonConfigurationSources: false);
+            removeJsonConfigurationSources: true);
         Host = builder.Build();
     }
 

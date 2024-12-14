@@ -20,7 +20,7 @@
   - [x] [Ch 11. 솔루션 빌드 설정](#ch-11-솔루션-빌드-설정)
   - [ ] [Ch 12. 솔루션 코드 분석](#ch-12-솔루션-코드-분석)
   - [x] [Ch 13. 솔루션 아키텍처 테스트](#ch-13-솔루션-아키텍처-테스트)
-  - [ ] [Ch 14. 솔루션 레이어 의존성 주입](#ch-14-솔루션-레이어-의존성-주입)
+  - [x] [Ch 14. 솔루션 레이어 의존성 주입](#ch-14-솔루션-레이어-의존성-주입)
   - [ ] Ch 15. 솔루션 빌드 자동화
   - [ ] Ch 16. 솔루션 컨테이너 배포 자동화
 - Part 4. 관찰 가능성
@@ -945,7 +945,7 @@ InfrastructureLayerRegistration.cs
   - `{레이어}Registration.cs`
     - 레이어 의존성 등록 파일입니다.
 
-## Ch 14.2 옵션 패턴
+## Ch 14.2 옵션 의존성 주입(옵션 패턴)
 ```
 - appsettings.json
 -> {Featrue}Options
@@ -960,7 +960,75 @@ InfrastructureLayerRegistration.cs
   - appsettings.json 옵션 파일 유효성 검사
 
 ## Ch 14.3 옵션 의존성 테스트
-- TODO
+```cs
+IHostBuilder builder = CreateHostBuilder(args);
+using IHost host = builder.Build();
+await host.RunAsync();
+```
+- `IHostBuilder` 생성을 `CreateHostBuilder` 메서드로 분리하여, 테스트 환경에서도 `IHostBuilder`를 생성할 수 있도록 제공합니다.
+
+```cs
+public static partial class Program
+{
+  public static IHostBuilder CreateHostBuilder(string[] args)
+  {
+    return CreateHostBuilder(
+      args: args,
+      configuration: null);
+  }
+
+  public static IHostBuilder CreateHostBuilder(
+    string[] args,
+    IConfiguration? configuration,
+    bool removeJsonConfigurationSources = true)
+  {
+    return Host.CreateDefaultBuilder(args)
+      .ConfigureAppConfiguration((context, config) =>
+      {
+        if (configuration is null)
+          return;
+
+        if (removeJsonConfigurationSources)
+        {
+          //((List<IConfigurationSource>)config.Sources).RemoveAll(source => source is JsonConfigurationSource);
+          for (int i = config.Sources.Count - 1; i >= 0; i--)
+          {
+            if (config.Sources[i] is JsonConfigurationSource)
+            {
+              config.Sources.RemoveAt(i);
+            }
+          }
+        }
+        config.AddConfiguration(configuration);
+      })
+      .ConfigureServices((context, services) =>
+      {
+        services
+          .RegisterInfrastructureLayer(context.HostingEnvironment, context.Configuration)
+          .RegisterPersistenceLayer()
+          .RegisterApplicationLayer();
+      });
+  }
+}
+```
+- 테스트 환경에서 `IConfiguration`을 제어할 수 있도록 `CreateHostBuilder` 메서드에서 매개변수를 제공합니다.
+
+```cs
+// Arragne
+IConfiguration configuration = new ConfigurationBuilder()
+  .AddJsonFile(jsonFilePath)
+  .Build();
+
+// Act
+IHostBuilder builder = Program.CreateHostBuilder(
+  args: Array.Empty<string>(),
+  configuration: configuration,           // 테스트 appsettings.json 설정
+  removeJsonConfigurationSources: true);  // 기본 appsettings.json 모두 삭제
+Action act = () => builder.Build();
+
+// Assert
+act.Should().Throw<OptionsValidationException>();
+```
 
 <br/>
 

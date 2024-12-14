@@ -9,13 +9,14 @@ public static class InfrastructureLayerRegistration
 {
     public static IServiceCollection RegisterInfrastructureLayer(
         this IServiceCollection services, 
-        IHostEnvironment environment, 
-        ILoggingBuilder logging,
-        IConfigurationManager configuration)
+        IHostEnvironment environment,
+        //ILoggingBuilder logging,
+        IConfiguration configuration)
     {
         services
             .RegisterOptions()
-            .RegisterOpenTelemetry(logging, environment, configuration);
+            //.RegisterOpenTelemetry(logging, environment, configuration);
+            .RegisterOpenTelemetry(environment, configuration);
 
         return services;
     }
