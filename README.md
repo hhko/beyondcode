@@ -550,6 +550,7 @@ Directory.Build.props                                // 전역 프로젝트 공�
   <Project>
 
     <PropertyGroup>
+      <!-- 빌드 -->
       <TargetFramework>net8.0</TargetFramework>
       <ImplicitUsings>enable</ImplicitUsings>
       <Nullable>enable</Nullable>
@@ -563,7 +564,7 @@ Directory.Build.props                                // 전역 프로젝트 공�
       <AssemblyVersion>$(AppVersion)</AssemblyVersion>
       <Version>$(AppVersion)</Version>
 
-      <!-- 조직 -->
+      <!-- 메타 -->
       <Company>조직</Company>
       <ProductName>제품</ProductName>
       <Copyright>Copyright © 2024</Copyright>
@@ -661,7 +662,16 @@ Directory.Build.props                                // 전역 프로젝트 공�
     </Project>
     ```
 
-## Ch 11.5 버전 공유
+## Ch 11.5 단일 파일 빌드
+```shell
+# 윈도우
+<PublishSingleFile>true</PublishSingleFile>
+<SelfContained>true</SelfContained>
+<PublishReadyToRun>true</PublishReadyToRun>
+<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+
+# 리눅스
+```
 - TODO
 
 <br/>
