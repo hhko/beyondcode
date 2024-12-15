@@ -923,7 +923,9 @@ DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --pr
 
 # Ch 14. 솔루션 레이어 의존성 주입
 
-## Ch 14.1 폴더 구성
+## Ch 14.1 레이어 의존성 폴더 구성
+- Adapter 레이어 Infrastructure에서 OpenTelemetryOptions 옵션을 사용하기 위한 레이어 의존성 주입 사레입니다.
+
 ```shell
 Abstractions/                             # 레이어 주 목표가 아닌 부수적인 코드
   Registration/                           # 의존성 등록
@@ -955,7 +957,7 @@ InfrastructureLayerRegistration.cs
   - `{레이어}Registration.cs`
     - 레이어 의존성 등록 파일입니다.
 
-## Ch 14.2 옵션 의존성 주입(옵션 패턴)
+## Ch 14.2 레이어 의존성 주입(옵션 패턴)
 ```
 - appsettings.json
 -> {Featrue}Options
@@ -969,7 +971,9 @@ InfrastructureLayerRegistration.cs
 - class OpenTelemetry`OptionsValidator` `: IValidateOptions<OpenTelemetryOptions>`
   - appsettings.json 옵션 파일 유효성 검사
 
-## Ch 14.3 옵션 의존성 테스트
+## Ch 14.3 레이어 의존성 테스트(옵션 패턴)
+![](./.images/IntegrationTest.OptionPattern.png)
+
 ```cs
 IHostBuilder builder = CreateHostBuilder(args);
 using IHost host = builder.Build();
@@ -1024,20 +1028,26 @@ public static partial class Program
 - 테스트 환경에서 `IConfiguration`을 제어할 수 있도록 `CreateHostBuilder` 메서드에서 매개변수를 제공합니다.
 
 ```cs
-// Arragne
-IConfiguration configuration = new ConfigurationBuilder()
-  .AddJsonFile(jsonFilePath)
-  .Build();
+[Theory]
+[InlineData("./Options/appsettings.Invalid.TeamName.json")]
+[InlineData("./Options/appsettings.Invalid.ApplicationName.json")]
+public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFilePath)
+{
+  // Arragne
+  IConfiguration configuration = new ConfigurationBuilder()
+    .AddJsonFile(jsonFilePath)
+    .Build();
 
-// Act
-IHostBuilder builder = Program.CreateHostBuilder(
-  args: Array.Empty<string>(),
-  configuration: configuration,           // 테스트 appsettings.json 설정
-  removeJsonConfigurationSources: true);  // 기본 appsettings.json 모두 삭제
-Action act = () => builder.Build();
+  // Act
+  IHostBuilder builder = Program.CreateHostBuilder(
+    args: Array.Empty<string>(),
+    configuration: configuration,           // 테스트 appsettings.json 설정
+    removeJsonConfigurationSources: true);  // 기본 appsettings.json 모두 삭제
+  Action act = () => builder.Build();
 
-// Assert
-act.Should().Throw<OptionsValidationException>();
+  // Assert
+  act.Should().Throw<OptionsValidationException>();
+}
 ```
 
 <br/>
