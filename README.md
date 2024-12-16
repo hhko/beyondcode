@@ -1171,6 +1171,7 @@ public sealed partial record class Error(string Code, string Message)
 
 | IHost    | Windows Service | Docker | Integration Test | Performance Test | Pipeline(Exception) |
 | ---      | :---:           | :---:  | :---:            | :---:            | :---:               |
+| Console  |                 |        |                  |                  |                     |
 | Schedule | O               | O      | O                |                  |                     |
 | WebApi   |                 |        |                  |                  |                     |
 | RabbitMQ |                 |        |                  |                  |                     |
