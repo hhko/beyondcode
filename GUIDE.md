@@ -12,7 +12,7 @@
     - [x] Frameworks
     - [x] Libraries
     - [x] Domains
-- 솔루션 빌드
+- [ ] 솔루션 빌드
   - [x] Directory.Build.props: 전체, 테스트
     - [x] .NET
     - [x] 버전
@@ -94,10 +94,10 @@
 
 ## 관찰 가능성 시스템
 | System     | Logs(Windows) | Logs(Linux) | Logs(Container) | Metrics(Windows) | Metrics(Linux) | Metrics(Container) | Traces |
-| ---        | ---           | ---         | ---             | ---              | ---            | ---                | ---    |  
-| Aspire     |               |             |                 |                  |                |                    |        |  
-| Grafana    |               |             |                 |                  |                |                    |        |  
-| OpenSearch |               |             |                 |                  |                |                    |        |  
+| ---        | ---           | ---         | ---             | ---              | ---            | ---                | ---    |
+| Aspire     |               |             |                 |                  |                |                    |        |
+| Grafana    |               |             |                 |                  |                |                    |        |
+| OpenSearch |               |             |                 |                  |                |                    |        |
 
 ## 관찰 가능성
 - 로그
@@ -105,7 +105,7 @@
   - 파일 Json
   - gRPC OpenTelemetry
   - 로그 테스트
-  - Fake 데이터 테스트  
+  - Fake 데이터 테스트
 
 ## 전역 기본 타입
 - Error
