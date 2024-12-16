@@ -35,6 +35,8 @@
 ## 배포 구성
 - appsettings 배포 N개
 - 도커 컴포즈 N개
+- 컨테이너 Health Check
+- 컨테이너 시작 순서
 - 도커 컴포즈 통합 테스트
   - 서비스
   - 인프라
@@ -77,6 +79,7 @@
 
 ## CI/CD
 - 빌드 자동화
+  - git 버전 통합
   - 코드 커버리지
   - 레이어 다이어그램
   - 코드 품질
@@ -119,10 +122,21 @@
 - CQRS
   - ICommand
   - IQuery
-- Pipeline
+- Known Pipeline
   - 예외
   - 로그
   - 유효성 검사
   - 캐시?
+- Unknown Pipeline
+  - IAdapter
 
 ## Domain 기본 타입
+- Entity
+- Value Object
+- Enum
+- Domain Service
+- Factory
+
+## Adapter 기본 기능
+- Retry
+- Circuit Breaker
