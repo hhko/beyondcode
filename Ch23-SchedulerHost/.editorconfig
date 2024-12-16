@@ -1,0 +1,13 @@
+root = true
+
+[*.{cs,vb}]
+# dotnet_analyzer_diagnostic.severity = none
+# dotnet_analyzer_diagnostic.category-Style.severity = error
+
+# 코드 스타일: 네임스페이스
+dotnet_diagnostic.IDE0161.severity = warning
+csharp_style_namespace_declarations = file_scoped:warning
+
+# # 코드 분석: 기본 생성자
+dotnet_diagnostic.IDE0290.severity = warning
+# csharp_style_prefer_primary_constructors

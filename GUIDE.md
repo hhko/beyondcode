@@ -1,36 +1,39 @@
 ## 레이어
-- 솔루션 구성
-  - 제품
-    - Adapters.Infrastructure
-    - Adpaters.Persistence
-    - Adapters.Presnetation
-    - Application
-    - Domain
-  - 어셈블리
-    - AssemblyReference 구현
-  - Asserts
-    - Frameworks
-    - Libraries
-    - Domains
+- [x] 솔루션 구성
+  - [x] 제품
+    - [x] Adapters.Infrastructure
+    - [x] Adpaters.Persistence
+    - [x] Adapters.Presnetation
+    - [x] Application
+    - [x] Domain
+  - [x] 어셈블리
+    - [x] AssemblyReference 구현
+  - [x] Asserts
+    - [x] Frameworks
+    - [x] Libraries
+    - [x] Domains
 - 솔루션 빌드
-  - Directory.Build.props(전체, 테스트)
-    - .NET
-    - 버전
-    - 메타
-  - Directory.Packages.props(구분)
-  - global.json
-  - nuget.config
-  - .editorconfig
-    - 네임스페이스: File scope
-    - await 없는 async 메서드
-  - .gitignore
-  - .gitattirute
-- 아키텍처 단위 테스트
-  - 폴더 구성
-    - Abstractions
-    - ArchitectureTests
-  - 레이어 의존성 테스트
-  - 어셈블리 AssemblyReference 테스트
+  - [x] Directory.Build.props: 전체, 테스트
+    - [x] .NET
+    - [x] 버전
+    - [x] 메타
+    - [ ] 단일 파일
+  - [x] Directory.Packages.props
+    - [x] 생성 CLI
+    - [ ] 구분
+  - [x] global.json
+  - [x] nuget.config
+  - [x] .editorconfig
+    - [x] 네임스페이스: File scope
+    - [ ] await 없는 async 메서드
+  - [x] .gitignore
+  - [ ] .gitattirute
+- [ ] 아키텍처 단위 테스트
+  - [x] 폴더 구성
+    - [x] Abstractions
+    - [x] ArchitectureTests
+  - [x] 레이어 의존성 테스트
+  - [x] 어셈블리 AssemblyReference 테스트
 
 ## 배포 구성
 - appsettings 배포 N개

@@ -31,11 +31,10 @@
   - [ ] Ch 21. 추적
   - [ ] Ch 22. 지표
 - Part 5. 호스트
-  - [ ] 윈도우 서비스(반복 작업)
-  - [ ] 리눅스 컨테이너(반복 작업)
-  - [ ] WebApi
-  - [ ] RabbitMQ
-  - [ ] gRPC
+  - [ ] [Ch 23. Schedule 호스트](#ch-23-schedule-호스트)
+  - [ ] Ch 24. WebApi 호스트
+  - [ ] Ch 25. RabbitMQ 호스트
+  - [ ] Ch 26. gRPC 호스트
 - Part 6. Internal 전술 설계
   - [x] [Ch 23. 전술 설계 맵](#ch-23-전술-설계-맵)
   - [ ] [Ch 24. 출력 기본 타입(Result)](#ch-24-출력-기본-타입)
@@ -1161,3 +1160,20 @@ public sealed partial record class Error(string Code, string Message)
     - Result
       - ToResult()
       - ToResult\<TValue\>()
+
+<br/>
+
+---
+
+<br/>
+
+# Part 5. 호스트
+
+| IHost    | Windows Service | Docker | Integration Test | Performance Test | Pipeline(Exception) |
+| ---      | ---             | ---    | ---              | ---              | ---                 |
+| Schedule | O               | O      | O                |                  |                     |
+| WebApi   |                 |        |                  |                  |                     |
+| RabbitMQ |                 |        |                  |                  |                     |
+| gRPC     |                 |        |                  |                  |                     |
+
+# Ch 23. Schedule 호스트
