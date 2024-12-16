@@ -1170,7 +1170,7 @@ public sealed partial record class Error(string Code, string Message)
 # Part 5. 호스트
 
 | IHost    | Windows Service | Docker | Integration Test | Performance Test | Pipeline(Exception) |
-| ---      | ---             | ---    | ---              | ---              | ---                 |
+| ---      | :---:           | :---:  | :---:            | :---:            | :---:               |
 | Schedule | O               | O      | O                |                  |                     |
 | WebApi   |                 |        |                  |                  |                     |
 | RabbitMQ |                 |        |                  |                  |                     |
