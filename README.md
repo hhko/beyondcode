@@ -939,12 +939,12 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
       OpenTelemetryOptionsValidator.cs
 ```
 ```shell
-InfrastructureLayerRegistration.cs
+InfrastructureLayerRegistration.cs        # Adapter 레이어 Infrastructure 레이어 등록
   -> RegisterOptions.cs                   # 옵션 의존성 등록
-     -> OptionsRegistration.cs
+     -> OptionsRegistration.cs            # 옵션 패턴
         -> OpenTelemetryOptions.cs
-           -> OpenTelemetryOptionsSetup.cs
-              -> OpenTelemetryOptionsValidator.cs
+        -> OpenTelemetryOptionsSetup.cs
+        -> OpenTelemetryOptionsValidator.cs
   -> OpenTelemetryRegistration.cs         # 관찰 가능성 의존성 등록
 ```
 
@@ -959,17 +959,24 @@ InfrastructureLayerRegistration.cs
 
 ## Ch 14.2 레이어 의존성 주입(옵션 패턴)
 ```
-- appsettings.json
--> {Featrue}Options
--> {Feature}OptionsSetup : IConfigureOptions<{Feature}Options>
--> {Feature}OptionsValidator : IValidateOptions<{Feature}Options>
+appsettings.json
+  -> {Featrue}Options
+     Featrue 옵션
+  -> {Feature}OptionsSetup : IConfigureOptions<{Feature}Options>
+     Featrue 옵션 데이터 읽기
+  -> {Feature}OptionsValidator : IValidateOptions<{Feature}Options>
+     Featrue 옵션 데이터 유효성 검사
 ```
-- class OpenTelemetry`Options`
-  - 옵션
-- class OpenTelemetry`OptionsSetup`(IConfiguration configuration) `: IConfigureOptions<OpenTelemetryOptions>`
-  - appsettings.json 옵션 파일 읽기
-- class OpenTelemetry`OptionsValidator` `: IValidateOptions<OpenTelemetryOptions>`
-  - appsettings.json 옵션 파일 유효성 검사
+```cs
+// 옵션 데이터
+class OpenTelemetryOptions
+
+// 옵션 데이터 appsettings.json에서 읽기
+class OpenTelemetryOptionsSetup(IConfiguration configuration) : IConfigureOptions<OpenTelemetryOptions>
+
+// 옵션 데이터 유효성 검사
+class OpenTelemetryOptionsValidator : IValidateOptions<OpenTelemetryOptions>
+```
 
 ## Ch 14.3 레이어 의존성 테스트(옵션 패턴)
 ![](./.images/IntegrationTest.OptionPattern.png)
