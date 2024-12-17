@@ -57,6 +57,13 @@
 
 - 아키텍처
   - `MediatR`
+  - `Serilog`
+    - `Serilog.Extensions.Hosting`
+    - `Serilog.Settings.Configuration`
+    - `Serilog.Sinks.Console`
+    - `Serilog.Sinks.File`
+    - `Destructurama.Attributed`
+    - `Serilog.Exceptions`
 - 테스트 패키지
   - `xunit`
   - `FluentAssertions`
@@ -1171,7 +1178,6 @@ public sealed partial record class Error(string Code, string Message)
 
 | IHost    | Windows Service | Docker | Integration Test | Performance Test | Pipeline(Exception) |
 | ---      | :---:           | :---:  | :---:            | :---:            | :---:               |
-| Console  |                 |        |                  |                  |                     |
 | Schedule | O               | O      | O                |                  |                     |
 | WebApi   |                 |        |                  |                  |                     |
 | RabbitMQ |                 |        |                  |                  |                     |

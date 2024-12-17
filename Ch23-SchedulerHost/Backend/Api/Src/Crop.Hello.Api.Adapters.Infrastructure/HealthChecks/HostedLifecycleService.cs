@@ -5,6 +5,9 @@ using System.Runtime.CompilerServices;
 
 namespace Crop.Hello.Api.Adapters.Infrastructure.HealthChecks;
 
+// https://learn.microsoft.com/en-us/dotnet/core/diagnostics/diagnostic-health-checks
+// https://medium.com/@jeslurrahman/implementing-health-checks-in-net-8-c3ba10af83c3
+// https://weblogs.asp.net/ricardoperes/checking-the-heath-of-an-asp-net-core-application
 internal class HostedLifecycleService(
     HealthCheckService healthCheckService,
     ILogger<HostedLifecycleService> logger)

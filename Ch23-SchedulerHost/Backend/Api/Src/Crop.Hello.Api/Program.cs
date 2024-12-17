@@ -3,11 +3,31 @@ using Crop.Hello.Api.Adapters.Persistence.Abstractions.Registration;
 using Crop.Hello.Api.Application.Abstractions.Registration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 IHostBuilder builder = CreateHostBuilder(args);
+
+builder.ConfigureServices(services =>
+{
+    services.AddTransient<Demo>();
+});
+
 using IHost host = builder.Build();
+
+Demo demo = host.Services.GetRequiredService<Demo>();
+
 await host.RunAsync();
+
+public class Demo
+{
+    public Demo(ILogger<Demo> logger)
+    {
+        logger.LogInformation("{Key} is", "Foo");
+    }
+}
 
 public static partial class Program
 {
@@ -49,5 +69,11 @@ public static partial class Program
                     .RegisterPersistenceLayer()
                     .RegisterApplicationLayer();
             });
+            //.ConfigureLogging((context, builder) =>
+            //{
+            //    //builder.ClearProviders().AddSerilog()
+            //});
+        //(host, builder) => builder.ClearProviders().AddSerilog(host.Configuration))
+
     }
 }
