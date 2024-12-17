@@ -60,6 +60,9 @@
 - [ ] [rchitecture Refactoring with ArchUnitNET](https://www.production-ready.de/2023/12/10/architecture-refactoring-with-archunitnet-en.html)
 - [ ] [PlantUML file diagram builder](https://archunitnet.readthedocs.io/en/latest/guide/#51-full-diagram-dependencies)
 
+### 로그 테스트
+- [ ] [How To: Test Logging when Using Microsoft.Extensions.Logging and Serilog](https://seankilleen.com/2024/04/how-to-test-logging-when-using-microsoft-extensions-logging-and-serilog/)
+
 ### 성능 테스트
 - [ ] [Performance Testing of ASP.NET Core APIs With k6](https://code-maze.com/aspnetcore-performance-testing-with-k6/)
 
@@ -128,3 +131,6 @@
 ### OpenTelemetry
 - [ ] [practical-net-otelcollector](https://github.com/kimcuhoang/practical-net-otelcollector/tree/main)
   - https://dev.to/kim-ch/observability-net-opentelemetry-collector-25g1
+
+### GitHub Actions
+- [Beautiful .NET Test Reports Using GitHub Actions](https://seankilleen.com/2024/03/beautiful-net-test-reports-using-github-actions/)

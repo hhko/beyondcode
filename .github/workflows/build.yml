@@ -1,0 +1,171 @@
+name: build
+
+# TODO: PR일 때 코드 커버리지 댓글 추가
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    # paths: [ 'src/**', 'tests/**', '.github/workflows/dotnet-ci.yml' ]
+    paths-ignore:
+      - '**.md'
+      - '**.pptx'
+      - '**.png'
+      #- '.github/workflows/build-docs.yml'
+      #- 'docs/**'
+  # pull_request:
+  #   branches: [ main ]
+
+
+# 솔루션 테스트 결과 trx 추가
+#   - dorny/test-reporter@v1
+#   - Error: HttpError: Resource not accessible by integration
+permissions:
+  checks: write
+
+jobs:
+  build:
+    name: Build
+
+    # 빌드 환경 경우의 수 정의
+    strategy:
+      matrix:
+        dotnet-version: [ '9.0.x' ]
+        configuration: [ Release ]
+        os: [ ubuntu-24.04 ]
+
+    # 빌드 환경 지정
+    runs-on: ${{ matrix.os }}
+    #runs-on: ubuntu-22.04
+
+    # 환경 변수
+    #  - 규칙: ${{ env.환경_변수_이름 }}
+    #  - 예제: ${{ env.solution_dir }}
+    env:
+      solution_path: ./Template/Hello.sln
+    #   coverage_dir: ./Template/.build/coverage
+    #   coverage_path: ./.build/coverage/coverage.cobertura.merged.xml
+
+    steps:
+      # 형상관리 최신 소스 받기
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Git Commit SHA 얻기
+      #   - Deprecating save-state and set-output commands: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+      #   - GitHub Actions에서 output 변수의 문법 변경: https://blog.outsider.ne.kr/1651
+      #   - Github Actions and creating a short SHA hash: https://dev.to/hectorleiva/github-actions-and-creating-a-short-sha-hash-8b7
+      #
+      # 동적 변수 만들기
+      # 규칙 1. $GITHUB_OUTPUT은 "steps.vars.outputs"을 지정한다.
+      # 규칙 2. "키=값" 형식으로 outputs을 정의한다.
+      # 예. ${{ steps.vars.outputs.short_sha }}
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "short_sha=$calculatedSha" >> $GITHUB_OUTPUT
+
+      # .NET SDK 설치
+      - name: Setup .NET SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      # 솔루션 패키지 복원
+      - name: Restore nuget packages
+        run: |
+          dotnet restore ${{ env.solution_path }} \
+            --verbosity q
+
+      # 솔루션 빌드
+      - name: Build
+        run: |
+          dotnet build ${{ env.solution_path }} \
+              --no-restore \
+              --configuration ${{ matrix.configuration }} \
+              --verbosity q
+
+      # 솔루션 테스트
+
+      # {테스트 프로젝트}
+      #   └─TestResults
+      #       ├─0ca60e99-32fb-43ac-bbd3-01f5a5ef6886        : XPlat Code Coverage 폴더
+      #       │   └─coverage.cobertura.xml                  : 코드 커버리지 파일(dotnet-coverage merge 대상)
+      #       ├─{username}_{hostname}_2024-03-14_15_16_30   : trx 로그 폴더
+      #       │   └─In
+      #       │       └─{hostname}
+      #       │           └─coverage.cobertura.xml          : 코드 커버리지 파일(사용 안함, Junit 로그 생성시 자동 생성됨)
+      #       └─logs.trx                                    : trx 로그 파일
+
+      # 테스트와 코드 커버리지 coverage.cobertura.xml 파일 생성
+      #   - name: Find coverage output path
+      #     run: |
+      #       cp $(find . -name "coverage.cobertura.xml") .
+      - name: Test
+        run: |
+          dotnet test ${{ env.solution_path }} \
+              --configuration ${{ matrix.configuration }} \
+              --no-build \
+              --collect "XPlat Code Coverage" \
+              --logger "trx;LogFileName=logs.trx" \
+              --verbosity q
+
+    #   # 솔루션 테스트 상세 보고서 생성
+    #   - name: Create test detail report
+    #     uses: dorny/test-reporter@v1
+    #     if: always()
+    #     with:
+    #       name: Test Detail Report
+    #       path: "tests/**/logs.trx"
+    #       reporter: dotnet-trx
+
+    #   # dotnet-coverage 도구 설치
+    #   - name: Install dotnet-coverage tool
+    #     run: dotnet tool install -g dotnet-coverage --version 17.9.6
+
+    #   # 솔루션 코드 커버리지 폴더 생성
+    #   - name: Create coverage folder
+    #     run: mkdir -p ${{ env.coverage_dir }}
+
+    #   # 솔루션 코드 커버지리 병합
+    #   #   N개 coverage.cobertura.xml 파일을 1개 coverage.cobertura.merged.xml로 통합
+    #   - name: Convert .coverage.xml to .cobertura.merged.xml
+    #     run: |
+    #       dotnet-coverage merge "**/TestResults/*/*.cobertura.xml" \
+    #           -f cobertura \
+    #           -o ${{ env.coverage_path }}
+
+      # 솔루션 코드 커버리지 보고서 생성
+
+      # {솔루션}
+      #  └─.results
+      #      └─coverage
+      #           ├─coverage.cobertura.merged.xml
+      #           └─report
+      #                ├─...
+      #                └─SummaryGithub.md
+    #   - name: Create coverage markdown file
+    #     uses: danielpalme/ReportGenerator-GitHub-Action@5.2.2
+    #     with:
+    #       reports: '${{ env.coverage_path }}'
+    #       targetdir: '${{ env.coverage_dir }}/report'
+    #       reporttypes: 'MarkdownSummaryGithub;Html'
+
+    #   # 솔루션 코드 커버리지 보고서 Summary 업로드
+    #   - name: Upload coverage markdown into github actions summary
+    #     run: cat ${{ env.coverage_dir }}/report/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+
+    #   # 솔루션 테스트 결과 Artifacts 업로드
+    #   - name: Upload coverage files into github actions artifacts
+    #     uses: actions/upload-artifact@v4
+    #     with:
+    #       name: coverage_${{ matrix.dotnet-version }}_sha-${{ steps.vars.outputs.short_sha }}
+    #       path: ${{ env.coverage_dir }}/report
+
+    #   # 솔루션 코드 커버리지 전송(Codecov)
+    #   - name: Upload coverage reports to Codecov
+    #     uses: codecov/codecov-action@v4.0.1
+    #     with:
+    #       token: ${{ secrets.CODECOV_TOKEN }}
+    #       slug: hhko/ArchDdd
