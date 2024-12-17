@@ -43,8 +43,8 @@ jobs:
     #  - 예제: ${{ env.solution_dir }}
     env:
       solution_path: ./Template/Hello.sln
-    #   coverage_dir: ./Template/.build/coverage
-    #   coverage_path: ./.build/coverage/coverage.cobertura.merged.xml
+      coverage_dir: ./Template/.build/coverage/output
+      coverage_path: ./Template/.build/coverage/coverage.cobertura.merged.xml
 
     steps:
       # 형상관리 최신 소스 받기
@@ -110,6 +110,33 @@ jobs:
               --collect "XPlat Code Coverage" \
               --logger "trx;LogFileName=logs.trx" \
               --verbosity q
+
+      # {솔루션}
+      #  └─.results
+      #      └─coverage
+      #           ├─coverage.cobertura.merged.xml
+      #           └─report
+      #                ├─...
+      #                └─SummaryGithub.md
+    #   - name: Create coverage markdown file
+    #     uses: danielpalme/ReportGenerator-GitHub-Action@5.2.2
+    #     with:
+    #       reports: '${{ env.coverage_path }}'
+    #       targetdir: '${{ env.coverage_dir }}/report'
+    #       reporttypes: 'MarkdownSummaryGithub;Html'
+
+      - name: Combine Coverage Reports # This is because one report is produced per project, and we want one result for all of them.
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
+        with:
+          reports: "./Template/**/*.cobertura.xml" # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+          targetdir: '${{ env.coverage_dir }}'
+          #targetdir: "${{ github.workspace }}" # REQUIRED # The directory where the generated report should be saved.
+          reporttypes: 'Cobertura' # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, CsvSummary, Html, Html_Dark, Html_Light, Html_BlueRed, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlInline_AzurePipelines_Light, HtmlSummary, JsonSummary, Latex, LatexSummary, lcov, MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, TextDeltaSummary, Xml, XmlSummary
+          verbosity: "Info" # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
+          title: "Code Coverage" # Optional title.
+          tag: "${{ github.run_number }}_${{ github.run_id }}" # Optional tag or build version.
+          customSettings: "" # Optional custom settings (separated by semicolon). See: https://github.com/danielpalme/ReportGenerator/wiki/Settings.
+          toolpath: "reportgeneratortool" # Default directory for installing the dotnet tool.
 
     #   # 솔루션 테스트 상세 보고서 생성
     #   - name: Create test detail report

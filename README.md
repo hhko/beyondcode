@@ -1,3 +1,5 @@
+[![build](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml/badge.svg)](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml)
+
 > 슬기로운 코드를 만들기 위한 발자취
 
 # 목차
@@ -21,7 +23,7 @@
   - [ ] [Ch 12. 솔루션 코드 분석](#ch-12-솔루션-코드-분석)
   - [x] [Ch 13. 솔루션 아키텍처 테스트](#ch-13-솔루션-아키텍처-테스트)
   - [x] [Ch 14. 솔루션 레이어 의존성 주입](#ch-14-솔루션-레이어-의존성-주입)
-  - [ ] Ch 15. 솔루션 빌드 자동화
+  - [ ] [Ch 15. 솔루션 빌드 자동화](#ch-15-솔루션-빌드-자동화)
   - [ ] Ch 16. 솔루션 컨테이너 배포 자동화
 - Part 4. 관찰 가능성
   - [ ] Ch 17. Aspire 대시보드
@@ -1066,6 +1068,10 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 <br/>
 
 # Ch 15. 솔루션 빌드 자동화
+
+```
+.github/workflows/build.yaml
+```
 
 - 빌드
 - 배포 파일
