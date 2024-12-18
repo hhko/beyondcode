@@ -83,6 +83,7 @@
 - [ ] [Publish MediatR Notifications in Parallel](https://code-maze.com/mediatr-parallel-publishing-notifications/)
 
 ### 테스트
+- [ ] [Integration Testing for ASP.NET APIs (1/3)]{https://knowyourtoolset.com/2024/01/integration-testing/)
 - [ ] [How to use TimeProvider and FakeTimeProvider (time abstraction in .NET)](https://grantwinney.com/how-to-use-timeprovider-and-faketimeprovider/)
 - BackgroundService
   - [ ] [Handling Background Worker Unit Tests in ASP.NET](https://matt-ghafouri.medium.com/handling-background-worker-unit-tests-in-asp-net-77180e25697d)
