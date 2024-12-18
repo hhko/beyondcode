@@ -136,3 +136,4 @@
 - [ ] [Beautiful .NET Test Reports Using GitHub Actions](https://seankilleen.com/2024/03/beautiful-net-test-reports-using-github-actions/)
 - [ ] [.NET test and coverage reports in GitHub Actions](https://www.damirscorner.com/blog/posts/20240719-DotNetTestAndCoverageReportsInGitHubActions.html)
 - [ ] [Code Coverage in .NET](https://code-maze.com/dotnet-code-coverage/)
+- [ ] [Code Coverage Reports for .NET Projects](https://knowyourtoolset.com/2024/01/coverage-reports/)
