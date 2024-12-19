@@ -4,6 +4,7 @@ using Crop.Hello.Api.Application.Abstractions.Registration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.WindowsServices;
 
 IHostBuilder builder = CreateHostBuilder(args);
 using IHost host = builder.Build();

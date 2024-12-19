@@ -66,6 +66,7 @@
     - `Serilog.Sinks.File`
     - `Destructurama.Attributed`
     - `Serilog.Exceptions`
+  - `Microsoft.Extensions.Hosting.WindowsServices`
 - 테스트 패키지
   - `xunit`
   - `FluentAssertions`
@@ -1190,3 +1191,6 @@ public sealed partial record class Error(string Code, string Message)
 | gRPC     |                 |        |                  |                  |                     |
 
 # Ch 23. Schedule 호스트
+
+## Ch 23.1 통합 테스트
+![](./.images/Host.Schedule.IntegrationTest.Options.png)
