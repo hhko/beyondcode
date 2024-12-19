@@ -83,6 +83,7 @@
 - [ ] [Publish MediatR Notifications in Parallel](https://code-maze.com/mediatr-parallel-publishing-notifications/)
 
 ### 테스트
+- [ ] [Integration Testing for ASP.NET APIs](https://knowyourtoolset.com/2024/01/integration-testing/)
 - [ ] [How to use TimeProvider and FakeTimeProvider (time abstraction in .NET)](https://grantwinney.com/how-to-use-timeprovider-and-faketimeprovider/)
 - BackgroundService
   - [ ] [Handling Background Worker Unit Tests in ASP.NET](https://matt-ghafouri.medium.com/handling-background-worker-unit-tests-in-asp-net-77180e25697d)
@@ -133,4 +134,7 @@
   - https://dev.to/kim-ch/observability-net-opentelemetry-collector-25g1
 
 ### GitHub Actions
-- [Beautiful .NET Test Reports Using GitHub Actions](https://seankilleen.com/2024/03/beautiful-net-test-reports-using-github-actions/)
+- [ ] [Beautiful .NET Test Reports Using GitHub Actions](https://seankilleen.com/2024/03/beautiful-net-test-reports-using-github-actions/)
+- [ ] [.NET test and coverage reports in GitHub Actions](https://www.damirscorner.com/blog/posts/20240719-DotNetTestAndCoverageReportsInGitHubActions.html)
+- [ ] [Code Coverage in .NET](https://code-maze.com/dotnet-code-coverage/)
+- [ ] [Code Coverage Reports for .NET Projects](https://knowyourtoolset.com/2024/01/coverage-reports/)
