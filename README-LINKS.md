@@ -3,9 +3,10 @@
 
 ## 아키텍처
 ### 클린 아키텍처 템플릿 소스
-- [ ] [ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
-- [ ] [ardalis | CleanArchitecture.WorkerService](https://github.com/ardalis/CleanArchitecture.WorkerService/tree/main)
-- [ ] [amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)
+- [ ] **[SSW.CleanArchitecture](https://github.com/SSWConsulting/SSW.CleanArchitecture)**
+- [ ] **[ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)**
+- [ ] **[ardalis | CleanArchitecture.WorkerService](https://github.com/ardalis/CleanArchitecture.WorkerService/tree/main)**
+- [ ] **[amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)**
 - [ ] [Sam.CleanArchitecture](https://github.com/samanazadi1996/Sam.CleanArchitecture)
   - 개별 템플릿 만들기
 - [ ] [Clean-Architecture-Template](https://github.com/babaktaremi/Clean-Architecture-Template)
@@ -22,6 +23,7 @@
 - [ ] [VerticalSliceArchitecture](https://github.com/Hona/VerticalSliceArchitecture)
 - [ ] [VerticalSliceArchitecture.Samples.Todos](https://github.com/Hona/VerticalSliceArchitecture.Samples.Todos)
 - [ ] [from-zero-to-hero-vertical-slice-architecture](https://github.com/Dometrain/from-zero-to-hero-vertical-slice-architecture)
+- [ ] [CleanMinimalApi](https://github.com/stphnwlsh/CleanMinimalApi)
 
 ### 관련 소스
 - [ ] [eshop-app-workshop](https://github.com/dotnet-presentations/eshop-app-workshop)
