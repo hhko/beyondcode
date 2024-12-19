@@ -73,8 +73,8 @@ public class OpenTelemetryOptionsTests
     //}
 
     [Theory]
-    [InlineData("./OptionTests/OpenTelemetryOption/appsettings.Invalid.TeamName.json")]
-    [InlineData("./OptionTests/OpenTelemetryOption/appsettings.Invalid.ApplicationName.json")]
+    [InlineData("./OptionTests/OpenTelemetryOptions/appsettings.Invalid.TeamName.json")]
+    [InlineData("./OptionTests/OpenTelemetryOptions/appsettings.Invalid.ApplicationName.json")]
     public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFilePath)
     {
         // Arragne
