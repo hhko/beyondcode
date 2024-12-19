@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <Content Include="Options\appsettings.Invalid.ApplicationName.json">
+    <Content Include="OptionTests\OpenTelemetryOption\appsettings.Invalid.ApplicationName.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Options\appsettings.Invalid.TeamName.json">
+    <Content Include="OptionTests\OpenTelemetryOption\appsettings.Invalid.TeamName.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

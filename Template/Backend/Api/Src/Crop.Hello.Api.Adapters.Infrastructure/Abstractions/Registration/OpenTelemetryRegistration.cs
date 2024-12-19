@@ -1,93 +1,31 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Crop.Hello.Framework.Utilities;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using OpenTelemetry.Logs;
-using OpenTelemetry.Resources;
-using Microsoft.VisualBasic;
 using OpenTelemetry;
 using System.Diagnostics;
 using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOption;
-using Destructurama;
 
 namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Registration;
 
 internal static class OpenTelemetryRegistration
 {
-    //private static IServiceCollection AddSerilog(this IServiceCollection services, IConfiguration configuration)
-    //{
-    //    Log.Logger = new LoggerConfiguration()
-    //        .ReadFrom.Configuration(configuration)
-    //        .CreateLogger();
-
-    //    services.AddSerilog();
-
-    //    return services;
-    //}
-
     internal static IServiceCollection RegisterOpenTelemetry(
         this IServiceCollection services, 
-        //ILoggingBuilder logging, 
         IHostEnvironment environment,
         IConfiguration configuration)
     {
         var openTelemetryOptions = services.GetOptions<OpenTelemetryOptions>();
         bool useOnlyConsoleExporter = openTelemetryOptions.IsLocal();
 
-        /*
-         * Serilog
-         * 
-        // FromLogContext", "WithMachineName", "WithProcessId", "WithThreadId
-
-        // "Serilog": {
-        //     "WriteTo": [
-        //         {
-        //              "Name": "Console"
-        //         }
-        //     ]
-        // },
-        */
-        //"Serilog": {
-        //  "Using": [],
-        //  "MinimumLevel": {
-        //    "Default": "Information",
-        //    "Override": {
-        //      "Microsoft.Hosting": "Information",
-        //      "NetClient.Elastic": "Information"
-        //    }
-        //  },
-        //  "Enrich": [
-        //    "FromLogContext",
-        //    "WithMachineName",
-        //    "WithEnvironmentUserName",
-        //    "WithEnvironmentName",
-        //    "WithProcessId",
-        //    "WithThreadId"
-        //  ],
-        //  "Properties": {
-        //    "Domain": "NetClient",
-        //    "DomainContext": "NetClient.Elastic"
-        //  },
-        //  "WriteTo": [
-        //    {
-        //      "Name": "Console",
-        //      "Args": {
-        //        "outputTemplate": "-> [{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"
-        //      }
-        //    }
-        //  ]
-        //}
-
-        
-        Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(configuration)
-            .Destructure.UsingAttributes()
-            .CreateLogger();
-
-        //logging.AddSerilog();     // Microsoft Logging -> Microsoft Logging 
-        services.AddSerilog();      // Microsoft Logging -> Serilog
+        //logging.AddSerilog();       // Microsoft Logging -> Microsoft Logging 
+        //services.AddSerilog();      // Microsoft Logging -> Serilog
+        services.AddSerilog(configure =>
+        {
+            configure.ReadFrom.Configuration(configuration);
+        });
 
         //info: Crop.Hello.Api.Class1[0]
         //    Class1 is

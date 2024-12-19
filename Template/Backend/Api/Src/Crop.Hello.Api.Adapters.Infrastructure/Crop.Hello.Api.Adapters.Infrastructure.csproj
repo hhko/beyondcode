@@ -4,7 +4,6 @@
     <ProjectReference Include="..\Crop.Hello.Api.Application\Crop.Hello.Api.Application.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Destructurama.Attributed" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.ResourceUtilization" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Extensions.Logging" />
