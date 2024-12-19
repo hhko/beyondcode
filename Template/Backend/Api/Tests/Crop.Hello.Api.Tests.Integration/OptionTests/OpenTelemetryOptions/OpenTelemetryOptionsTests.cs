@@ -3,10 +3,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using static Crop.Hello.Api.Tests.Integration.Abstractions.Constants.Constants;
 
-namespace Crop.Hello.Api.Tests.Integration.OptionTests.OpenTelemetryOption;
+namespace Crop.Hello.Api.Tests.Integration.OptionTests.OpenTelemetryOptions;
 
 [Trait(nameof(IntegrationTest), IntegrationTest.Option)]
-public class OpenTelemetryOptionTests
+public class OpenTelemetryOptionsTests
 {
     //{
     //  "OpenTelemetryOptions": {
