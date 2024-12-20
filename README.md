@@ -1,6 +1,6 @@
 [![build](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml/badge.svg)](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml)
 
-> 슬기로운 코드를 만들기 위한 발자취
+> 슬기로운 코드를 만들기 위한 아름다운 여정
 
 # 목차
 - Part 0. 세미나
@@ -38,9 +38,9 @@
   - [ ] Ch 25. RabbitMQ 호스트
   - [ ] Ch 26. gRPC 호스트
 - Part 6. Internal 전술 설계
-  - [x] [Ch 23. 전술 설계 맵](#ch-23-전술-설계-맵)
-  - [ ] [Ch 24. 출력 기본 타입(Result)](#ch-24-출력-기본-타입)
-  - [ ] Ch 25. 도메인 기본 타입
+  - [x] [Ch 27. 전술 설계 맵](#ch-27-전술-설계-맵)
+  - [ ] [Ch 28. 출력 기본 타입(Result)](#ch-28-출력-기본-타입)
+  - [ ] Ch 29. 도메인 기본 타입
   - [ ] TODO
 - Part 6. External 전술 설계
 - Part 7. 전략 설계
@@ -52,13 +52,14 @@
 ![](./.images/TechMap.png)
 
 ## Ch 2. Internal 아키텍처
-> - 내부 아키텍처는 레이어 배치입니다.
+> - 내부 아키텍처 목표는 레이어 배치입니다.
 > - **Application 레이어가** 내부 아키텍처의 레이어를 주관(主管)합니다.
 
 ![](./.images/Architecture.Internal.png)
 
-- 아키텍처
+- Application 레이어
   - `MediatR`
+- Adapter 레이어
   - `Serilog`
     - `Serilog.Extensions.Hosting`
     - `Serilog.Settings.Configuration`
@@ -67,18 +68,17 @@
     - `Destructurama.Attributed`
     - `Serilog.Exceptions`
   - `Microsoft.Extensions.Hosting.WindowsServices`
-- 테스트 패키지
+- Unit Test
   - `xunit`
   - `FluentAssertions`
   - `TngTech.ArchUnitNET.xUnit`
 
 ## Ch 03. External 아키텍처
-> - 외부 아키텍처는 서비스 배치입니다.
+> - 외부 아키텍처 목표는 서비스 배치입니다.
 
 - TODO
 
 <br/>
-
 
 ---
 
@@ -1085,16 +1085,40 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 ---
 
+---
+
 <br/>
 
-# Part 4. Internal 전술 설계
+# Part 5. 호스트
 
-# Ch 23. 전술 설계 맵
+| IHost    | Windows Service | Docker | Integration Test | Performance Test | Pipeline(Exception) |
+| ---      | :---:           | :---:  | :---:            | :---:            | :---:               |
+| Schedule | O               | O      | O                |                  |                     |
+| WebApi   |                 |        |                  |                  |                     |
+| RabbitMQ |                 |        |                  |                  |                     |
+| gRPC     |                 |        |                  |                  |                     |
+
+# Ch 23. Schedule 호스트
+
+## Ch 23.1 통합 테스트
+![](./.images/Host.Schedule.IntegrationTest.Options.png)
+
+- `appsettings.json` 유효성 통합 테스트
+
+<br/>
+
+---
+
+<br/>
+
+# Part 6. Internal 전술 설계
+
+# Ch 27. 전술 설계 맵
 ![](./.images/TacticalDesign.Pattern.png)
 
 <br/>
 
-# Ch 24. 출력 기본 타입
+# Ch 28. 출력 기본 타입
 - IResult 타입으로 모든 Known과 Unknown 입출력 메서드 결과 타입으로 정의합니다.
 
 ## Ch 24.1 IResult 타입 정의
@@ -1181,16 +1205,3 @@ public sealed partial record class Error(string Code, string Message)
 
 <br/>
 
-# Part 5. 호스트
-
-| IHost    | Windows Service | Docker | Integration Test | Performance Test | Pipeline(Exception) |
-| ---      | :---:           | :---:  | :---:            | :---:            | :---:               |
-| Schedule | O               | O      | O                |                  |                     |
-| WebApi   |                 |        |                  |                  |                     |
-| RabbitMQ |                 |        |                  |                  |                     |
-| gRPC     |                 |        |                  |                  |                     |
-
-# Ch 23. Schedule 호스트
-
-## Ch 23.1 통합 테스트
-![](./.images/Host.Schedule.IntegrationTest.Options.png)
