@@ -1100,6 +1100,91 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 # Ch 23. Schedule 호스트
 
+## Ch 23.1 윈도우 서비스
+```shell
+# 윈도우 서비스 의존성 등록
+RegisterInfrastructureLayer   # Infrastructure 레이어
+  -> RegisterWindowsService
+  -> AddWindowsService        # Microsoft.Extensions.Hosting.WindowsServices 패키지
+
+# 윈도우 서비스 활성화
+EnalbeInfrastructureLayer     # Infrastructure 레이어
+  -> EnableWindowsService
+  -> UseWindowsService        # Microsoft.Extensions.Hosting.WindowsServices 패키지
+```
+
+```cs
+// Microsoft.Extensions.Hosting.WindowsServices 패키지
+using Microsoft.Extensions.Hosting;
+
+IHostBuilder builder = CreateHostBuilder(args);
+using IHost host = builder.Build();
+await host.RunAsync();
+
+public static IHostBuilder CreateHostBuilder(
+  string[] args,
+  IConfiguration? configuration,
+  bool removeJsonConfigurationSources = true)
+{
+  return Host.CreateDefaultBuilder(args)
+    .ConfigureAppConfiguration((context, config) =>
+    {
+      // ...
+    })
+    .ConfigureServices((context, services) =>
+    {
+      services
+        .RegisterInfrastructureLayer(context.HostingEnvironment, context.Configuration)
+        .RegisterPersistenceLayer()
+        .RegisterApplicationLayer();
+    })
+    .EnableInfrastructureLayer();
+}
+```
+```cs
+public static class InfrastructureLayerRegistration
+{
+  public static IServiceCollection RegisterInfrastructureLayer(
+    this IServiceCollection services,
+    IHostEnvironment environment,
+    IConfiguration configuration)
+  {
+    services
+      .RegisterOptions()
+      .RegisterWindowsService()
+      .RegisterOpenTelemetry(environment, configuration);
+
+      return services;
+  }
+
+  public static IHostBuilder EnalbeInfrastructureLayer(this IHostBuilder app)
+  {
+    app.EnalbeWindowsService();
+
+    return app;
+  }
+}
+```
+```cs
+internal static class WindowsServiceRegistration
+{
+  internal static IServiceCollection RegisterWindowsService(this IServiceCollection service)
+  {
+    service.AddWindowsService();
+
+    return service;
+  }
+
+  internal static IHostBuilder EnalbeWindowsService(this IHostBuilder app)
+  {
+    app.UseWindowsService();
+
+    return app;
+  }
+}
+```
+
+
 ## Ch 23.1 통합 테스트
 ![](./.images/Host.Schedule.IntegrationTest.Options.png)
 
@@ -1121,7 +1206,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 # Ch 28. 출력 기본 타입
 - IResult 타입으로 모든 Known과 Unknown 입출력 메서드 결과 타입으로 정의합니다.
 
-## Ch 24.1 IResult 타입 정의
+## Ch 28.1 IResult 타입 정의
 - 성공과 실패를 구분하며, 성공 시에는 값을 가지고, 실패 시에는 에러 값을 포함합니다.
 - 특히, 유효성 검사 실패의 경우 다수의 에러 값을 정의할 수 있습니다.
 
