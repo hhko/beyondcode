@@ -7,6 +7,7 @@ using OpenTelemetry.Logs;
 using OpenTelemetry;
 using System.Diagnostics;
 using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOption;
+using Microsoft.Extensions.Logging;
 
 namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Registration;
 
@@ -22,10 +23,15 @@ internal static class OpenTelemetryRegistration
 
         //logging.AddSerilog();       // Microsoft Logging -> Microsoft Logging 
         //services.AddSerilog();      // Microsoft Logging -> Serilog
-        services.AddSerilog(configure =>
-        {
-            configure.ReadFrom.Configuration(configuration);
-        });
+        services
+            .AddSerilog(configure =>
+            {
+                configure.ReadFrom.Configuration(configuration);
+            });
+            //.AddOpenTelemetry()
+            //.WithLogging()
+
+            //.AddOpenTelemetry
 
         //info: Crop.Hello.Api.Class1[0]
         //    Class1 is
@@ -151,3 +157,63 @@ internal static class OpenTelemetryRegistration
     //    //    options.Protocol = OtlpExportProtocol.Grpc;
     //    //}
 }
+
+
+// 참고 소스
+//
+//using Microsoft.Extensions.DependencyInjection;
+//using Microsoft.Extensions.Hosting;
+//using OpenTelemetry.Logs;
+//using OpenTelemetry.Resources;
+//using Serilog;
+//using Serilog.Sinks.OpenTelemetry;
+//using System.Diagnostics;
+
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        // Configure Serilog
+//        Log.Logger = new LoggerConfiguration()
+//            .WriteTo.Console() // Console sink for debugging
+//            .WriteTo.OpenTelemetry(options =>
+//            {
+//                options.ResourceAttributes = new Dictionary<string, object>
+//                {
+//                    { "service.name", "YourServiceName" }
+//                };
+//            })
+//            .CreateLogger();
+
+//        var host = Host.CreateDefaultBuilder(args)
+//            .ConfigureServices(services =>
+//            {
+//                // Add OpenTelemetry
+//                services.AddOpenTelemetry()
+//                    .WithLogging(logging =>
+//                    {
+//                        logging.IncludeScopes = true; // Include scope information
+//                        logging.IncludeFormattedMessage = true; // Log formatted messages
+//                        logging.ParseStateValues = true; // Parse state values for structured logging
+//                        logging.AddProcessor<SimpleLogRecordExportProcessor>(); // Optional: Custom log processors
+//                    });
+
+//                // Add additional services if needed
+//            })
+//            .UseSerilog() // Use Serilog for logging
+//            .Build();
+
+//        // Example logging
+//        var logger = host.Services.GetRequiredService<ILogger<Program>>();
+
+//        using (var activity = new Activity("ExampleActivity"))
+//        {
+//            activity.Start();
+//            activity.AddEvent(new ActivityEvent("ExampleEvent"));
+//            logger.LogInformation("Activity started and event added.");
+//            activity.Stop();
+//        }
+
+//        host.Run();
+//    }
+//}

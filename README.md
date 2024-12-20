@@ -1150,20 +1150,17 @@ public static class InfrastructureLayerRegistration
     IHostEnvironment environment,
     IConfiguration configuration)
   {
-    services
+    return services
       .RegisterOptions()
       .RegisterWindowsService()
       .RegisterOpenTelemetry(environment, configuration);
-
-      return services;
   }
 
   // 활성화
   public static IHostBuilder EnableInfrastructureLayer(this IHostBuilder app)
   {
-    app.EnableWindowsService();
-
-    return app;
+    return app
+      .EnableWindowsService();
   }
 }
 ```
