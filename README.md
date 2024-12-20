@@ -1091,12 +1091,12 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 # Part 5. 호스트
 
-| IHost    | Windows Service | Docker | Integration Test | Performance Test | Pipeline(Exception) |
-| ---      | :---:           | :---:  | :---:            | :---:            | :---:               |
-| Schedule | O               | O      | O                |                  |                     |
-| WebApi   |                 |        |                  |                  |                     |
-| RabbitMQ |                 |        |                  |                  |                     |
-| gRPC     |                 |        |                  |                  |                     |
+| IHost    | Windows Service | Docker Container | Integration Test | Performance Test | Pipeline(Exception) |
+| ---      | :---:           | :---:            | :---:            | :---:            | :---:               |
+| Schedule | O               | O                | O                |                  |                     |
+| WebApi   |                 |                  |                  |                  |                     |
+| RabbitMQ |                 |                  |                  |                  |                     |
+| gRPC     |                 |                  |                  |                  |                     |
 
 # Ch 23. Schedule 호스트
 
@@ -1157,9 +1157,9 @@ public static class InfrastructureLayerRegistration
       return services;
   }
 
-  public static IHostBuilder EnalbeInfrastructureLayer(this IHostBuilder app)
+  public static IHostBuilder EnableInfrastructureLayer(this IHostBuilder app)
   {
-    app.EnalbeWindowsService();
+    app.EnableWindowsService();
 
     return app;
   }
@@ -1170,13 +1170,15 @@ internal static class WindowsServiceRegistration
 {
   internal static IServiceCollection RegisterWindowsService(this IServiceCollection service)
   {
+    // 윈도우 서비스 의존성 등록
     service.AddWindowsService();
 
     return service;
   }
 
-  internal static IHostBuilder EnalbeWindowsService(this IHostBuilder app)
+  internal static IHostBuilder EnableWindowsService(this IHostBuilder app)
   {
+    // 윈도우 서비스 활성화
     app.UseWindowsService();
 
     return app;
@@ -1184,8 +1186,9 @@ internal static class WindowsServiceRegistration
 }
 ```
 
+## Ch 23.2 Docker Container
 
-## Ch 23.1 통합 테스트
+## Ch 23.3 통합 테스트
 ![](./.images/Host.Schedule.IntegrationTest.Options.png)
 
 - `appsettings.json` 유효성 통합 테스트
