@@ -1083,7 +1083,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 - 프로젝트 의존성 다이어그램
 - 정적 사이트
 
----
+<br/>
 
 ---
 
@@ -1091,12 +1091,12 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 # Part 5. 호스트
 
-| IHost    | Windows Service | Docker Container | Integration Test | Performance Test | Pipeline(Exception) |
-| ---      | :---:           | :---:            | :---:            | :---:            | :---:               |
-| Schedule | O               | O                | O                |                  |                     |
-| WebApi   |                 |                  |                  |                  |                     |
-| RabbitMQ |                 |                  |                  |                  |                     |
-| gRPC     |                 |                  |                  |                  |                     |
+| IHost    | Windows Service | Container | Integration Test | Performance Test | Pipeline(Exception) |
+| ---      | :---:           | :---:     | :---:            | :---:            | :---:               |
+| Schedule | O               | O         | O                |                  |                     |
+| WebApi   |                 |           |                  |                  |                     |
+| RabbitMQ |                 |           |                  |                  |                     |
+| gRPC     |                 |           |                  |                  |                     |
 
 # Ch 23. Schedule 호스트
 
@@ -1108,7 +1108,7 @@ RegisterInfrastructureLayer   # Infrastructure 레이어
   -> AddWindowsService        # Microsoft.Extensions.Hosting.WindowsServices 패키지
 
 # 윈도우 서비스 활성화
-EnalbeInfrastructureLayer     # Infrastructure 레이어
+EnableInfrastructureLayer     # Infrastructure 레이어
   -> EnableWindowsService
   -> UseWindowsService        # Microsoft.Extensions.Hosting.WindowsServices 패키지
 ```
@@ -1144,6 +1144,7 @@ public static IHostBuilder CreateHostBuilder(
 ```cs
 public static class InfrastructureLayerRegistration
 {
+  // 의존성 등록
   public static IServiceCollection RegisterInfrastructureLayer(
     this IServiceCollection services,
     IHostEnvironment environment,
@@ -1157,6 +1158,7 @@ public static class InfrastructureLayerRegistration
       return services;
   }
 
+  // 활성화
   public static IHostBuilder EnableInfrastructureLayer(this IHostBuilder app)
   {
     app.EnableWindowsService();
@@ -1186,7 +1188,7 @@ internal static class WindowsServiceRegistration
 }
 ```
 
-## Ch 23.2 Docker Container
+## Ch 23.2 Container
 
 ## Ch 23.3 통합 테스트
 ![](./.images/Host.Schedule.IntegrationTest.Options.png)
