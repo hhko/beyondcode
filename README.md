@@ -116,7 +116,7 @@ Application Architecture
       └─ External Architecture
            └─ 외부 시스템 구성 아키텍처: 예. CNCF Landscape
 ```
-- Microservices Architecture = Internal Architecture + External Architecture
+- `Microservices` Architecture = `Internal` Architecture + `External` Architecture
   ![](./.images/Architecture.Microservices.png)
 
   ※ 출처: [DDD 및 CQRS 패턴을 사용하여 마이크로 서비스에서 비즈니스 복잡성 처리](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/)

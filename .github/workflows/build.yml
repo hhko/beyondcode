@@ -42,9 +42,10 @@ jobs:
     #  - 규칙: ${{ env.환경_변수_이름 }}
     #  - 예제: ${{ env.solution_dir }}
     env:
-      solution_path: ./Template/Hello.sln
-      coverage_dir: ./Template/.build/coverage/output
-      coverage_path: ./Template/.build/coverage/coverage.cobertura.merged.xml
+      solution_file: ./Template/Hello.sln
+      coverage_in_files: ./Template/**/*.cobertura.xml
+      coverage_out_dir: ./Template/.build/coverage/output
+      #coverage_out_file: ./Template/.build/coverage/coverage.cobertura.merged.xml
 
     steps:
       # 형상관리 최신 소스 받기
@@ -75,16 +76,17 @@ jobs:
       # 솔루션 패키지 복원
       - name: Restore nuget packages
         run: |
-          dotnet restore ${{ env.solution_path }} \
+          dotnet restore ${{ env.solution_file }} \
             --verbosity q
 
       # 솔루션 빌드
       - name: Build
         run: |
-          dotnet build ${{ env.solution_path }} \
+          dotnet build ${{ env.solution_file }} \
               --no-restore \
               --configuration ${{ matrix.configuration }} \
               --verbosity q
+              -clp:ErrorsOnly
 
       # 솔루션 테스트
 
@@ -104,8 +106,9 @@ jobs:
       #       cp $(find . -name "coverage.cobertura.xml") .
       - name: Test
         run: |
-          dotnet test ${{ env.solution_path }} \
+          dotnet test ${{ env.solution_file }} \
               --configuration ${{ matrix.configuration }} \
+              --no-restore \
               --no-build \
               --collect "XPlat Code Coverage" \
               --logger "trx;LogFileName=logs.trx" \
@@ -150,8 +153,8 @@ jobs:
       - name: Combine Coverage Reports # This is because one report is produced per project, and we want one result for all of them.
         uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
         with:
-          reports: "./Template/**/*.cobertura.xml" # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
-          targetdir: '${{ env.coverage_dir }}'
+          reports: '${{ env.coverage_in_files }}' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+          targetdir: '${{ env.coverage_out_dir }}'
           #targetdir: "${{ github.workspace }}" # REQUIRED # The directory where the generated report should be saved.
           reporttypes: 'Cobertura' # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, CsvSummary, Html, Html_Dark, Html_Light, Html_BlueRed, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlInline_AzurePipelines_Light, HtmlSummary, JsonSummary, Latex, LatexSummary, lcov, MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, TextDeltaSummary, Xml, XmlSummary
           verbosity: "Info" # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
