@@ -1209,9 +1209,9 @@ internal static class WindowsServiceRegistration
 @echo off
 
 :: 서비스 설치
-sc create "MyService" ^                     :: 서비스 이름
-  binPath= "C:\Path\To\MyService.exe" ^     :: 서비스 전체 경로
-  start= auto                               :: 서비스 시작 설정
+sc create "MyService" ^                               :: 서비스 이름
+  binPath= "C:\Path\To\MyService.exe" ^               :: 서비스 전체 경로
+  start= auto                                         :: 서비스 시작 설정
 
 :: 복구 동작 설정 (3번 실패 시 1분 후 재시작)
 sc failure "MyService" ^                              :: 서비스 이름
