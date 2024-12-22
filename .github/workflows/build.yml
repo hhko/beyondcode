@@ -45,6 +45,7 @@ jobs:
       solution_file: ./Template/Hello.sln
       coverage_in_files: ./Template/**/*.cobertura.xml
       coverage_out_dir: ./Template/.build/coverage/output
+      testresult_dirs: ./Template/**/TestResults/**/*
       #coverage_out_file: ./Template/.build/coverage/coverage.cobertura.merged.xml
 
     steps:
@@ -176,6 +177,13 @@ jobs:
           indicators: true
           output: both
           #thresholds: "10 30"
+
+      - name: Upload Test Result Files
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ${{ env.testresult_dirs }}
+          retention-days: 5
 
     #   # 솔루션 테스트 상세 보고서 생성
     #   - name: Create test detail report
