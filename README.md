@@ -2,56 +2,57 @@
 
 > 슬기로운 코드를 만들기 위한 아름다운 여정
 
-# 목차
-- Part 0. 세미나
-  - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.InternalArchitecture-Overview/README.md)
-- Part 1. 개요
-  - [x] [Ch 01. 기술 맵](#ch-1-기술-맵)
-  - [x] [Ch 02. Internal 아키텍처](#ch-2-internal-아키텍처)
-  - [ ] Ch 03. External 아키텍처
-- Part 2. 아키텍처
-  - [x] [Ch 03. 아키텍처 개요](#ch-3-아키텍처-개요)
-  - [x] [Ch 04. 아키텍처 원칙](#ch-4-아키텍처-원칙)
-  - [x] [Ch 05. 레이어 격리](#ch-5-레이어-격리)
-  - [x] [Ch 06. 레이어 테스트](#ch-6-레이어-테스트)
-  - [x] [Ch 07. 레이어 고도화](#ch-7-레이어-고도화)
-  - [x] [Ch 08. 서비스 통합](#ch-8-서비스-통합)
-  - [x] [Ch 09. Internal 아키텍처 비교](#ch-9-internal-아키텍처-비교)
-- Part 3. 솔루션
-  - [x] [Ch 10. 솔루션 구조](#ch-10-솔루션-구조)
-  - [x] [Ch 11. 솔루션 빌드 설정](#ch-11-솔루션-빌드-설정)
-  - [ ] [Ch 12. 솔루션 코드 분석](#ch-12-솔루션-코드-분석)
-  - [x] [Ch 13. 솔루션 아키텍처 테스트](#ch-13-솔루션-아키텍처-테스트)
-  - [x] [Ch 14. 솔루션 레이어 의존성 주입](#ch-14-솔루션-레이어-의존성-주입)
-  - [ ] [Ch 15. 솔루션 빌드 자동화](#ch-15-솔루션-빌드-자동화)
-  - [ ] Ch 16. 솔루션 컨테이너 배포 자동화
-- Part 4. 관찰 가능성
-  - [ ] Ch 17. Aspire 대시보드
-  - [ ] cH 18. Grafana 시스템
-  - [ ] Ch 19. OpenSearch 시스템
-  - [ ] Ch 20. 로그
+# Table of Contents
+- Part 0. Seminar
+  - [x] [Ch 01. Overview of Internal Architecture](./Part0.Seminar/Ch01.Overview-InternalArchitecture/README.md)
+- Part 1. Overview
+  - [x] [Ch 01. Technology Map](#ch-1-technology-map)
+  - [x] [Ch 02. Internal Architecture](#ch-2-internal-architecture)
+  - [ ] [Ch 03. External Architecture](#ch-3-external-architecture)
+- Part 2. Architecture
+  - [x] [Ch 03. Architecture Overview](#ch-3-architecture-overview)
+  - [x] [Ch 04. Architecture Principles](#ch-4-architecture-principles)
+  - [x] [Ch 05. Layer Isolation](#ch-5-layer-isolation)
+  - [x] [Ch 06. Layer Testing](#ch-6-layer-testing)
+  - [x] [Ch 07. Layer Enhancement](#ch-7-layer-enhancement)
+  - [x] [Ch 08. Service Integration](#ch-8-service-integration)
+  - [x] [Ch 09. Internal Architecture Comparison](#ch-9-internal-architecture-comparison)
+- Part 3. Solution
+  - [x] [Ch 10. Solution Structure](#ch-10-solution-structure)
+  - [x] [Ch 11. Solution Build Configuration](#ch-11-solution-build-configuration)
+  - [ ] [Ch 12. Solution Code Analysis](#ch-12-solution-code-analysis)
+  - [x] [Ch 13. Solution Architecture Testing](#ch-13-solution-architecture-testing)
+  - [x] [Ch 14. Solution Layer Dependency Injection](#ch-14-solution-layer-dependency-injection)
+  - [ ] [Ch 15. Solution Build Automation](#ch-15-solution-build-automation)
+  - [ ] Ch 16. Solution Container Deployment Automation
+- Part 4. Observability
+  - [ ] Ch 17. Aspire Dashboard
+  - [ ] cH 18. Grafana System
+  - [ ] Ch 19. OpenSearch System
+  - [ ] Ch 20. Traces
   - [ ] Ch 21. 추적
-  - [ ] Ch 22. 지표
-- Part 5. 호스트
-  - [ ] [Ch 23. Schedule 호스트](#ch-23-schedule-호스트)
-  - [ ] Ch 24. WebApi 호스트
-  - [ ] Ch 25. RabbitMQ 호스트
-  - [ ] Ch 26. gRPC 호스트
-- Part 6. Internal 전술 설계
-  - [x] [Ch 27. 전술 설계 맵](#ch-27-전술-설계-맵)
-  - [ ] [Ch 28. 출력 기본 타입(Result)](#ch-28-출력-기본-타입)
-  - [ ] Ch 29. 도메인 기본 타입
+  - [ ] Ch 22. Metrics
+- Part 5. Hosts
+  - [ ] [Ch 23. Schedule Host](#ch-23-schedule-host)
+  - [ ] Ch 24. WebApi Host
+  - [ ] Ch 25. RabbitMQ Host
+  - [ ] Ch 26. gRPC Host
+- Part 6. Internal Tactical Design
+  - [x] [Ch 27. Tactical Design Map](#ch-27-tactical-design-map)
+  - [ ] [Ch 28. Output Type(Result)](#ch-28-output-type)
+  - [ ] Ch 29. Domain Type
   - [ ] TODO
-- Part 6. External 전술 설계
-- Part 7. 전략 설계
+- Part 6. External Tactical Design
+- Part 7.  Strategic Design
 
 <br/>
 
-# Part 1. 개요
-## Ch 1. 기술 맵
+# Part 1. Overview
+
+# Ch 1. Technology Map
 ![](./.images/TechMap.png)
 
-## Ch 2. Internal 아키텍처
+# Ch 2. Internal Architecture
 > - 내부 아키텍처 목표는 레이어 배치입니다.
 > - **Application 레이어가** 내부 아키텍처의 레이어를 주관(主管)합니다.
 
@@ -73,7 +74,7 @@
   - `FluentAssertions`
   - `TngTech.ArchUnitNET.xUnit`
 
-## Ch 03. External 아키텍처
+# Ch 3. External Architecture
 > - 외부 아키텍처 목표는 서비스 배치입니다.
 
 - TODO
@@ -84,9 +85,9 @@
 
 <br/>
 
-# Part 2. 아키텍처
+# Part 2. Architecture
 
-# Ch 3. 아키텍처 개요
+# Ch 3. Architecture Overview
 
 ## Ch 3.1 아키텍처 정의
 ![](./.images/Architecture.png)
@@ -127,7 +128,7 @@ Application Architecture
 
 <br/>
 
-# Ch 4. 아키텍처 원칙
+# Ch 4. Architecture Principles
 > 아키텍처 원칙: [Separation of concerns](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns)
 
 ![](./.images/Architecture.Vs.png)
@@ -161,7 +162,7 @@ Application Architecture
 
 <br/>
 
-# Ch 5. 레이어 격리
+# Ch 5. Layer Isolation
 
 ## Ch 5.1 격리 전
 ![](./.images/Layer.Isolation.Before.png)
@@ -173,7 +174,7 @@ Application Architecture
 
 <br/>
 
-# Ch 6. 레이어 테스트
+# Ch 6. Layer Testing
 
 ![](./.images/Layer.Isolation.Test.png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
@@ -181,7 +182,7 @@ Application Architecture
 
 <br/>
 
-# Ch 7. 레이어 고도화
+# Ch 7. Layer Enhancement
 
 ## Ch 7.1 격리 고도화
 ![](./.images/Layer.Mediator.png)
@@ -234,14 +235,14 @@ Application Architecture
 
 <br/>
 
-# Ch 8. 서비스 통합
+# Ch 8. Service Integration
 ![](./.images/Architecture.Internal.Integration.png)
 
 - 서비스 통합은 Biz. 관심사와 분리하여 Tech. 관심사(Adapter 레이어) 중심으로 구성할 수 있게 됩니다(Microservice 아키텍처 패턴).
 
 <br/>
 
-# Ch 9. Internal 아키텍처 비교
+# Ch 9. Internal Architecture Comparison
 ## Ch 9.1 Port 비교
 ![](./.images/Architecture.Vs.Port.png)
 
@@ -283,9 +284,9 @@ Application Architecture
 
 <br/>
 
-# Part 3. 솔루션
+# Part 3. Solution
 
-# Ch 10. 솔루션 구조
+# Ch 10. Solution Structure
 > 예제 코드: [링크](./Ch10.SolutionStructure/)
 
 ```shell
@@ -393,7 +394,7 @@ Application Architecture
 
 <br/>
 
-# Ch 11. 솔루션 빌드 설정
+# Ch 11. Solution Build Configuration
 
 ## Ch 11.1 .NET SDK 빌드 버전
 - `global-json` 파일은 .NET 프로젝트에서 특정 .NET SDK 버전을 지정하여 일관된 개발 환경을 유지하기 위해 사용됩니다.
@@ -685,7 +686,7 @@ Directory.Build.props                                // 전역 프로젝트 공�
 
 <br/>
 
-# Ch 12. 솔루션 코드 분석
+# Ch 12. Solution Code Analysis
 
 ```init
 #
@@ -783,7 +784,7 @@ error IDE0161:
 
 <br/>
 
-# Ch 13. 솔루션 아키텍처 테스트
+# Ch 13. Solution Architecture Testing
 ![](./.images/Architecture.UnitTestStructure.png)
 
 - Abstractions
@@ -950,7 +951,7 @@ DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --pr
 
 <br/>
 
-# Ch 14. 솔루션 레이어 의존성 주입
+# Ch 14. Solution Layer Dependency Injection
 
 ## Ch 14.1 레이어 의존성 폴더 구성
 - Adapter 레이어 Infrastructure에서 OpenTelemetryOptions 옵션을 사용하기 위한 레이어 의존성 주입 사레입니다.
@@ -1088,7 +1089,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 <br/>
 
-# Ch 15. 솔루션 빌드 자동화
+# Ch 15. Solution Build Automation
 
 ```
 .github/workflows/build.yaml
@@ -1109,7 +1110,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 <br/>
 
-# Part 5. 호스트
+# Part 5. Hosts
 
 | IHost    | Windows Service | Container | Integration Test | Performance Test | Pipeline(Exception) |
 | ---      | :---:           | :---:     | :---:            | :---:            | :---:               |
@@ -1118,7 +1119,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 | RabbitMQ |                 |           |                  |                  |                     |
 | gRPC     |                 |           |                  |                  |                     |
 
-# Ch 23. Schedule 호스트
+# Ch 23. Schedule Host
 
 ## Ch 23.1 윈도우 서비스
 ```shell
@@ -1238,14 +1239,14 @@ echo "서비스 설치 및 복구 설정 완료"
 
 <br/>
 
-# Part 6. Internal 전술 설계
+# Part 6. Internal Tactical Design
 
-# Ch 27. 전술 설계 맵
+# Ch 27. Tactical Design Map
 ![](./.images/TacticalDesign.Pattern.png)
 
 <br/>
 
-# Ch 28. 출력 기본 타입
+# Ch 28. Output Type
 - IResult 타입으로 모든 Known과 Unknown 입출력 메서드 결과 타입으로 정의합니다.
 
 ## Ch 28.1 IResult 타입 정의

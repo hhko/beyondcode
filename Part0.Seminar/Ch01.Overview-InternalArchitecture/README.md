@@ -1,4 +1,4 @@
-# Internal 아키텍처 개요
+# Overview of Internal Architecture
 
 ## 목표
 - Internal 아키텍처의 다양한 레이어와 그 역할을 이해한다.
