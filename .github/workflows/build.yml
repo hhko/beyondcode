@@ -23,6 +23,17 @@ on:
 # permissions:
 #   checks: write
 
+# 솔루션 테스트 결과 trx 추가
+#  - https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
+#    2024-12-22 22:46:33 +0000
+#     - github.GithubRetry
+#     - INFO
+#     - Request POST /repos/hhko/better-code-with-ddd/check-runs failed with 403: Forbidden
+
+permissions:
+  checks: write
+  pull-requests: write
+
 jobs:
   build:
     name: Build
@@ -186,6 +197,7 @@ jobs:
           path: ${{ env.testresult_dirs }}
           retention-days: 5
 
+      # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2.16.1
         if: always()
