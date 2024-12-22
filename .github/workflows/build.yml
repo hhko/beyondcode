@@ -46,6 +46,7 @@ jobs:
       coverage_in_files: ./Template/**/*.cobertura.xml
       coverage_out_dir: ./Template/.build/coverage/output
       testresult_dirs: ./Template/**/TestResults/**/*
+      trx_files: ./Template/**/*.trx
       #coverage_out_file: ./Template/.build/coverage/coverage.cobertura.merged.xml
 
     steps:
@@ -178,12 +179,18 @@ jobs:
           output: both
           #thresholds: "10 30"
 
-      - name: Upload Test Result Files
+      - name: Upload Test Results
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
+          name: Test-Results
           path: ${{ env.testresult_dirs }}
           retention-days: 5
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.16.1
+        if: always()
+        with:
+          trx_files: ${{ env.trx_files }}
 
     #   # 솔루션 테스트 상세 보고서 생성
     #   - name: Create test detail report
