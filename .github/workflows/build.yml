@@ -53,12 +53,12 @@ jobs:
     #  - 규칙: ${{ env.환경_변수_이름 }}
     #  - 예제: ${{ env.solution_dir }}
     env:
-      solution_file: ./Template/Hello.sln
-      coverage_in_files: ./Template/**/*.cobertura.xml
-      coverage_out_dir: ./Template/.build/coverage/output
-      testresult_dirs: ./Template/**/TestResults/**/*
-      trx_files: ./Template/**/*.trx
-      #coverage_out_file: ./Template/.build/coverage/coverage.cobertura.merged.xml
+      solution_file:      ./Template/Hello.sln
+      coverage_in_files:  ./Template/**/*.cobertura.xml
+      coverage_out_dir:   ./Template/.build/coverage/output
+      coverage_out_file:  ./Template/.build/coverage/output/Cobertura.xml
+      testresult_dirs:    ./Template/**/TestResults/**/*
+      trx_files:          ./Template/**/*.trx
 
     steps:
       # 형상관리 최신 소스 받기
@@ -180,7 +180,7 @@ jobs:
       - name: Publish Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: "./Template/.build/coverage/output/Cobertura.xml"
+          filename: ${{ env.coverage_out_file }}
           badge: true
           fail_below_min: false # just informative for now
           format: markdown
@@ -195,6 +195,13 @@ jobs:
         with:
           name: Test-Results
           path: ${{ env.testresult_dirs }}
+          retention-days: 5
+
+      - name: Upload Combined Coverage XML
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: ${{ env.coverage_out_file }}
           retention-days: 5
 
       # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions

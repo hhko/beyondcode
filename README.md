@@ -1095,6 +1095,88 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 .github/workflows/build.yaml
 ```
 
+## Ch 15.1 빌드 요약
+![](./.images/Build.Summary.png)
+
+## Ch 15.2 테스트 결과
+![](./.images/Build.TestResults.png)
+
+## Ch 15.3 빌드 스크립트
+```yml
+permissions:
+  checks: write
+  pull-requests: write
+
+jobs:
+  build:
+    name: Build
+
+    # 빌드 환경 경우의 수 정의
+    strategy:
+      matrix:
+        dotnet-version: [ '9.0.x' ]
+        configuration: [ Release ]
+        os: [ ubuntu-24.04 ]
+
+    # 빌드 환경 지정
+    runs-on: ${{ matrix.os }}
+
+    # 환경 변수
+    env:
+      solution_file: ./Template/Hello.sln
+      coverage_in_files: ./Template/**/*.cobertura.xml
+      coverage_out_dir: ./Template/.build/coverage/output
+      testresult_dirs: ./Template/**/TestResults/**/*
+      trx_files: ./Template/**/*.trx
+
+    steps:
+      - ...
+
+      # 테스트
+      - name: Test
+        run: |
+          dotnet test ${{ env.solution_file }} \
+              --configuration ${{ matrix.configuration }} \
+              --no-restore \
+              --no-build \
+              --collect "XPlat Code Coverage" \
+              --logger "trx;LogFileName=logs.trx" \
+              --verbosity q
+
+      # 코드커버리지
+      - name: Combine Coverage Reports
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
+        with:
+          reports: '${{ env.coverage_in_files }}'
+          targetdir: '${{ env.coverage_out_dir }}'
+          reporttypes: 'Cobertura'
+          verbosity: "Info"
+          title: "Code Coverage"
+          tag: "${{ github.run_number }}_${{ github.run_id }}"
+          customSettings: ""
+          toolpath: "reportgeneratortool"
+
+      - name: Publish Code Coverage Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: "./Template/.build/coverage/output/Cobertura.xml"
+          badge: true
+          fail_below_min: false # just informative for now
+          format: markdown
+          hide_branch_rate: false
+          hide_complexity: false
+          indicators: true
+          output: both
+
+      # 테스트 결과
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.16.1
+        if: always()
+        with:
+          trx_files: ${{ env.trx_files }}
+
+```
+
 - 빌드
 - 배포 파일
   - 1개
