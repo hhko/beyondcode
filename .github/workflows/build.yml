@@ -86,7 +86,6 @@ jobs:
               --no-restore \
               --configuration ${{ matrix.configuration }} \
               --verbosity q
-              -clp:ErrorsOnly
 
       # 솔루션 테스트
 
