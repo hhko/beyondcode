@@ -49,6 +49,6 @@ public static partial class Program
                     .RegisterPersistenceLayer()
                     .RegisterApplicationLayer();
             })
-            .EnalbeInfrastructureLayer();
+            .EnableInfrastructureLayer();
     }
 }

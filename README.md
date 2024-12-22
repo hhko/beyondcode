@@ -687,6 +687,26 @@ Directory.Build.props                                // 전역 프로젝트 공�
 
 # Ch 12. 솔루션 코드 분석
 
+```init
+#
+# 코드 스타일
+#
+
+# 네임스페이스 파일 스코프
+dotnet_diagnostic.IDE0161.severity = warning
+csharp_style_namespace_declarations = file_scoped:warning
+
+# 기본 생성자
+dotnet_diagnostic.IDE0290.severity = warning
+
+[*.generated.cs]
+generated_code = true
+```
+
+```xml
+<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+```
+
 ## Ch 12.1 코드 스타일 분석
 ```xml
 <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
@@ -1183,6 +1203,26 @@ internal static class WindowsServiceRegistration
     return app;
   }
 }
+```
+
+```bat
+@echo off
+
+:: 서비스 설치
+sc create "MyService" ^                     :: 서비스 이름
+  binPath= "C:\Path\To\MyService.exe" ^     :: 서비스 전체 경로
+  start= auto                               :: 서비스 시작 설정
+
+:: 복구 동작 설정 (3번 실패 시 1분 후 재시작)
+sc failure "MyService" ^                              :: 서비스 이름
+  reset= 3600  ^                                      :: 1시간 후 복구 카운터 초기화
+  actions= restart/60000/restart/60000/restart/60000  :: 1분 후 서비스 재시작(서비스 복구 동작)
+
+echo "서비스 설치 및 복구 설정 완료"
+
+:: 서비스 제거 예제
+:: sc stop "MyService"
+:: sc delete "MyService"
 ```
 
 ## Ch 23.2 Container

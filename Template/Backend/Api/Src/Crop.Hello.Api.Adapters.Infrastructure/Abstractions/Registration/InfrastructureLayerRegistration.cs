@@ -17,7 +17,7 @@ public static class InfrastructureLayerRegistration
             .RegisterOpenTelemetry(environment, configuration);
     }
 
-    public static IHostBuilder EnalbeInfrastructureLayer(this IHostBuilder app)
+    public static IHostBuilder EnableInfrastructureLayer(this IHostBuilder app)
     {
         return app
             .EnableWindowsService();

@@ -140,3 +140,11 @@
 - [ ] [.NET test and coverage reports in GitHub Actions](https://www.damirscorner.com/blog/posts/20240719-DotNetTestAndCoverageReportsInGitHubActions.html)
 - [ ] [Code Coverage in .NET](https://code-maze.com/dotnet-code-coverage/)
 - [ ] [Code Coverage Reports for .NET Projects](https://knowyourtoolset.com/2024/01/coverage-reports/)
+
+### MediatR
+- [ ] [5 Amazing Use Cases for MediatR Pipelines - Cross-Cutting Concerns](https://www.youtube.com/watch?v=Iql4yjHYRiA)
+  - 예외
+  - 로그
+  - 유효성 검사
+  - Command 트랜잭션
+  - Query 캐싱
