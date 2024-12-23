@@ -56,8 +56,8 @@ jobs:
       solution_file:                ./Template/Hello.sln
       coverage_in_cobertura_files:  ./Template/**/*.cobertura.xml
       coverage_out_dir:             ./Template/.build/coverage
+      #coverage_out_cobertura_file:  ./Template/.build/coverage/Cobertura.xml
       testresults_in_trx_files:     ./Template/**/*.trx
-      #coverage_out_cobertura_file:  ./Template/.build/coverage/cobertura.xml
       #testresult_dirs:              ./Template/**/TestResults/**/*
 
     steps:
@@ -204,6 +204,33 @@ jobs:
           name: Test Detail Report
           path: "${{ env.testresults_in_trx_files }}"
           reporter: dotnet-trx
+
+      # code-coverage-results.md
+      - name: Publish Code Coverage Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: "${{ env.coverage_in_cobertura_files }}"
+          badge: true
+          fail_below_min: false # just informative for now
+          format: markdown
+          hide_branch_rate: false
+          hide_complexity: false
+          indicators: true
+          output: both
+          #thresholds: "10 30"
+
+      - name: "출력"
+        run: |
+          #find "$(pwd)/.build"
+          find . -type f -name "code-coverage-results.md"
+
+
+      # - name: Add Coverage PR Comment
+      #   uses: marocchino/sticky-pull-request-comment@v2
+      #   if: github.event_name == 'pull_request'
+      #   with:
+      #     recreate: true
+      #     path: code-coverage-results.md
 
       # # https://github.com/irongut/CodeCoverageSummary
       # - name: Publish Code Coverage Report
