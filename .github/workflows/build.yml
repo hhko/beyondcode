@@ -33,6 +33,9 @@ on:
 permissions:
   checks: write
   pull-requests: write
+  # contents: read
+  # actions: read
+  # checks: write
 
 jobs:
   build:
@@ -197,14 +200,6 @@ jobs:
           files: |
             ${{ env.testresults_in_trx_files }}
 
-      - name: 출력
-        run: |
-          echo "출력"
-          pwd
-
-          echo "./.build 모든 파일"
-          find "$(pwd)/Template/.build"
-
       # # https://github.com/irongut/CodeCoverageSummary
       # - name: Publish Code Coverage Report
       #   uses: irongut/CodeCoverageSummary@v1.3.0
@@ -235,14 +230,15 @@ jobs:
       #     path: ${{ env.coverage_out_cobertura_file }}
       #     retention-days: 5
 
-    #   # 솔루션 테스트 상세 보고서 생성
-    #   - name: Create test detail report
-    #     uses: dorny/test-reporter@v1
-    #     if: always()
-    #     with:
-    #       name: Test Detail Report
-    #       path: "tests/**/logs.trx"
-    #       reporter: dotnet-trx
+      # 솔루션 테스트 상세 보고서 생성
+      - name: Create test detail report
+        uses: dorny/test-reporter@v1.9.1
+        if: always()
+        with:
+          name: Test Detail Report
+          #path: "tests/**/logs.trx"
+          path: "${{ env.testresults_in_trx_files }}"
+          reporter: dotnet-trx
 
     #   # dotnet-coverage 도구 설치
     #   - name: Install dotnet-coverage tool
