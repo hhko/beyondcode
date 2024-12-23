@@ -205,8 +205,8 @@ jobs:
           pwd
 
           echo "./.build 모든 파일"
-          find /home/runner/work/better-code-with-ddd/better-code-with-ddd/.build
-          find "$(pwd)/.build"
+          find /home/runner/work/better-code-with-ddd/better-code-with-ddd/Template/.build
+          find "$(pwd)/Template/.build"
 
       # # https://github.com/irongut/CodeCoverageSummary
       # - name: Publish Code Coverage Report
