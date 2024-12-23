@@ -57,6 +57,8 @@ jobs:
     #  - 예제: ${{ env.solution_dir }}
     # 예약 변수
     #  - ${{ github.workspace }}
+    #  - ${{ github.run_number }}
+    #  - ${{ github.run_id }}
     env:
       solution_file:                ./Template/Hello.sln
       coverage_in_cobertura_files:  ./Template/**/*.cobertura.xml
@@ -156,6 +158,9 @@ jobs:
       #     -reports:./Template/**/*.cobertura.xml \                  <- 입력 파일 N개
       #     -targetdir:./Template/.build/coverage/output \            <- 출력 경로
       #     -reporttypes:Cobertura;MarkdownSummaryGithub \            <- 출력 타입
+      #     -title:Code Coverage \                                    <- 제목
+      #     -verbosity:Info \                                         <- 로그 수준
+      #     -tag:2_12382597103                                        <- run_number-run_id
       #     -sourcedirs: \
       #     -historydir: \
       #     -plugins: \
@@ -164,9 +169,6 @@ jobs:
       #     -filefilters:+* \
       #     -riskhotspotassemblyfilters:+* \
       #     -riskhotspotclassfilters:+* \
-      #     -verbosity:Info \
-      #     -title:Code Coverage \                                    <- 제목
-      #     -tag:2_12382597103
       #     -license:
       - name: Generate Coverage Reports
         uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
@@ -203,7 +205,8 @@ jobs:
           pwd
 
           echo "./.build 모든 파일"
-          ls -R ./.build
+          find /home/runner/work/better-code-with-ddd/better-code-with-ddd/.build
+          find "$(pwd)/.build"
 
       # # https://github.com/irongut/CodeCoverageSummary
       # - name: Publish Code Coverage Report
