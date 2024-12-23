@@ -131,7 +131,6 @@ jobs:
               --logger "trx;LogFileName=logs.trx" \
               --verbosity q
 
-              ./Template/.build/coverage/output/Cobertura.xml
       # {솔루션}
       #  └─.build
       #      └─coverage
