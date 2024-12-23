@@ -62,10 +62,10 @@ jobs:
     env:
       solution_file:                ./Template/Hello.sln
       coverage_in_cobertura_files:  ./Template/**/*.cobertura.xml
-      coverage_out_dir:             ./Template/.build/coverage/output
-      coverage_out_cobertura_file:  ./Template/.build/coverage/cobertura.xml
+      coverage_out_dir:             ./Template/.build/coverage
+      #coverage_out_cobertura_file:  ./Template/.build/coverage/cobertura.xml
       #testresult_dirs:             ./Template/**/TestResults/**/*
-      trx_files:                    ./Template/**/*.trx
+      testresults_in_trx_files:     ./Template/**/*.trx
 
     steps:
       # 형상관리 최신 소스 받기
@@ -136,16 +136,14 @@ jobs:
       # {솔루션}
       #  └─.build
       #      └─coverage
-      #           ├─coverage.cobertura.merged.xml
-      #           └─report
-      #                ├─...
-      #                └─SummaryGithub.md
+      #           ├─Cobertura.xml
+      #           └─SummaryGithub.md
 
       # https://github.com/danielpalme/ReportGenerator-GitHub-Action
       #
-      # 결과물
-      #  - ./Template/.build/coverage/output/Cobertura.xml
-      #  - ./Template/.build/coverage/output/SummaryGithub.md
+      # reportgenerator 결과물
+      #  - ./Template/.build/coverage/Cobertura.xml
+      #  - ./Template/.build/coverage/SummaryGithub.md
       #
       # .dotnet toool 설치 명령
       #   /usr/share/dotnet/dotnet tool install dotnet-reportgenerator-globaltool \
@@ -156,7 +154,7 @@ jobs:
       # reportgenerator 명령
       #   /home/runner/work/better-code-with-ddd/better-code-with-ddd/reportgeneratortool/reportgenerator \
       #     -reports:./Template/**/*.cobertura.xml \                  <- 입력 파일 N개
-      #     -targetdir:./Template/.build/coverage/output \            <- 출력 경로
+      #     -targetdir:./Template/.build/coverage \                   <- 출력 경로
       #     -reporttypes:Cobertura;MarkdownSummaryGithub \            <- 출력 타입
       #     -title:Code Coverage \                                    <- 제목
       #     -verbosity:Info \                                         <- 로그 수준
@@ -197,7 +195,7 @@ jobs:
         if: always()
         with:
           files: |
-            ${{ env.trx_files }}
+            ${{ env.testresults_in_trx_files }}
 
       - name: 출력
         run: |
@@ -205,7 +203,6 @@ jobs:
           pwd
 
           echo "./.build 모든 파일"
-          find /home/runner/work/better-code-with-ddd/better-code-with-ddd/Template/.build
           find "$(pwd)/Template/.build"
 
       # # https://github.com/irongut/CodeCoverageSummary
