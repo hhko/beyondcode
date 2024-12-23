@@ -58,12 +58,12 @@ jobs:
     # 예약 변수
     #  - ${{ github.workspace }}
     env:
-      solution_file:      ./Template/Hello.sln
-      coverage_in_files:  ./Template/**/*.cobertura.xml
-      coverage_out_dir:   ./Template/.build/coverage/output
-      coverage_out_file:  ./Template/.build/coverage/output/Cobertura.xml
-      testresult_dirs:    ./Template/**/TestResults/**/*
-      trx_files:          ./Template/**/*.trx
+      solution_file:                ./Template/Hello.sln
+      coverage_in_cobertura_files:  ./Template/**/*.cobertura.xml
+      coverage_out_dir:             ./Template/.build/coverage/output
+      coverage_out_cobertura_file:  ./Template/.build/coverage/cobertura.xml
+      #testresult_dirs:             ./Template/**/TestResults/**/*
+      trx_files:                    ./Template/**/*.trx
 
     steps:
       # 형상관리 최신 소스 받기
@@ -106,7 +106,7 @@ jobs:
               --verbosity q
 
       # 솔루션 테스트
-
+      #
       # {테스트 프로젝트}
       #   └─TestResults
       #       ├─0ca60e99-32fb-43ac-bbd3-01f5a5ef6886        : XPlat Code Coverage 폴더
@@ -131,69 +131,86 @@ jobs:
               --logger "trx;LogFileName=logs.trx" \
               --verbosity q
 
+              ./Template/.build/coverage/output/Cobertura.xml
       # {솔루션}
-      #  └─.results
+      #  └─.build
       #      └─coverage
       #           ├─coverage.cobertura.merged.xml
       #           └─report
       #                ├─...
       #                └─SummaryGithub.md
-    #   - name: Create coverage markdown file
-    #     uses: danielpalme/ReportGenerator-GitHub-Action@5.2.2
-    #     with:
-    #       reports: '${{ env.coverage_path }}'
-    #       targetdir: '${{ env.coverage_dir }}/report'
-    #       reporttypes: 'MarkdownSummaryGithub;Html'
-
-        # /usr/share/dotnet/dotnet tool install dotnet-reportgenerator-globaltool \
-        #   --tool-path reportgeneratortool \
-        #   --version 5.4.1 \
-        #   --ignore-failed-sources
-
-        # /home/runner/work/better-code-with-ddd/better-code-with-ddd/reportgeneratortool/reportgenerator \
-        #   -reports:./Template/**/*.cobertura.xml \
-        #   -targetdir:./Template/.build/coverage/output \
-        #   -reporttypes:Cobertura;MarkdownSummaryGithub \
-        #   -sourcedirs: \
-        #   -historydir: \
-        #   -plugins: \
-        #   -assemblyfilters:+* \
-        #   -classfilters:+* \
-        #   -filefilters:+* \
-        #   -riskhotspotassemblyfilters:+* \
-        #   -riskhotspotclassfilters:+* \
-        #   -verbosity:Info \
-        #   -title:Code Coverage \
-        #   -tag:2_12382597103
-        #   -license:
 
       # https://github.com/danielpalme/ReportGenerator-GitHub-Action
       #
       # 결과물
       #  - ./Template/.build/coverage/output/Cobertura.xml
       #  - ./Template/.build/coverage/output/SummaryGithub.md
-      - name: Generate Coverage Reports # This is because one report is produced per project, and we want one result for all of them.
+      #
+      # .dotnet toool 설치 명령
+      #   /usr/share/dotnet/dotnet tool install dotnet-reportgenerator-globaltool \
+      #     --tool-path reportgeneratortool \
+      #     --version 5.4.1 \
+      #     --ignore-failed-sources
+      #
+      # reportgenerator 명령
+      #   /home/runner/work/better-code-with-ddd/better-code-with-ddd/reportgeneratortool/reportgenerator \
+      #     -reports:./Template/**/*.cobertura.xml \                  <- 입력 파일 N개
+      #     -targetdir:./Template/.build/coverage/output \            <- 출력 경로
+      #     -reporttypes:Cobertura;MarkdownSummaryGithub \            <- 출력 타입
+      #     -sourcedirs: \
+      #     -historydir: \
+      #     -plugins: \
+      #     -assemblyfilters:+* \
+      #     -classfilters:+* \
+      #     -filefilters:+* \
+      #     -riskhotspotassemblyfilters:+* \
+      #     -riskhotspotclassfilters:+* \
+      #     -verbosity:Info \
+      #     -title:Code Coverage \                                    <- 제목
+      #     -tag:2_12382597103
+      #     -license:
+      - name: Generate Coverage Reports
         uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
         with:
-          reports: '${{ env.coverage_in_files }}' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+          reports: '${{ env.coverage_in_cobertura_files }}'
           targetdir: '${{ env.coverage_out_dir }}'
-          #targetdir:  # REQUIRED # The directory where the generated report should be saved.
-          reporttypes: 'Cobertura;MarkdownSummaryGithub' # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, CsvSummary, Html, Html_Dark, Html_Light, Html_BlueRed, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlInline_AzurePipelines_Light, HtmlSummary, JsonSummary, Latex, LatexSummary, lcov, MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, TextDeltaSummary, Xml, XmlSummary
-          verbosity: "Info" # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
-          title: "Code Coverage" # Optional title.
-          tag: "${{ github.run_number }}_${{ github.run_id }}" # Optional tag or build version.
-          customSettings: "" # Optional custom settings (separated by semicolon). See: https://github.com/danielpalme/ReportGenerator/wiki/Settings.
-          toolpath: "reportgeneratortool" # Default directory for installing the dotnet tool.
+          reporttypes: 'Cobertura;MarkdownSummaryGithub'
+          verbosity: "Info"
+          title: "Code Coverage"
+          tag: "${{ github.run_number }}_${{ github.run_id }}"
+          customSettings: ""                # https://github.com/danielpalme/ReportGenerator/wiki/Settings.
+          toolpath: "reportgeneratortool"   # dotnet tool.
 
       - name: Publish Coverage Reports in Build Summary
         run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
         shell: bash
 
+      # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
+      # GitHub Summary
+      # Test Results
+      #  4 files   4 suites   1s ⏱️
+      # 22 tests 22 ✅ 0 💤 0 ❌
+      # 23 runs  23 ✅ 0 💤 0 ❌
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
+        if: always()
+        with:
+          files: |
+            ${{ env.trx_files }}
+
+      - name: 출력
+        run: |
+          echo "출력"
+          pwd
+
+          echo "./.build 모든 파일"
+          find ./.build
+
       # # https://github.com/irongut/CodeCoverageSummary
       # - name: Publish Code Coverage Report
       #   uses: irongut/CodeCoverageSummary@v1.3.0
       #   with:
-      #     filename: ${{ env.coverage_out_file }}
+      #     filename: ${{ env.coverage_out_cobertura_file }}
       #     badge: true
       #     fail_below_min: false # just informative for now
       #     format: markdown
@@ -203,12 +220,7 @@ jobs:
       #     output: both
       #     #thresholds: "10 30"
 
-      # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.16.1
-        if: always()
-        with:
-          trx_files: ${{ env.trx_files }}
+      
 
       # # 첨부 파일
       # - name: Upload Test Results
@@ -223,7 +235,7 @@ jobs:
       #   uses: actions/upload-artifact@v4
       #   with:
       #     name: coverage
-      #     path: ${{ env.coverage_out_file }}
+      #     path: ${{ env.coverage_out_cobertura_file }}
       #     retention-days: 5
 
     #   # 솔루션 테스트 상세 보고서 생성
