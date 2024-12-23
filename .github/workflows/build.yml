@@ -188,17 +188,30 @@ jobs:
         shell: bash
 
       # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
+      #
       # GitHub Summary
-      # Test Results
-      #  4 files   4 suites   1s ⏱️
-      # 22 tests 22 ✅ 0 💤 0 ❌
-      # 23 runs  23 ✅ 0 💤 0 ❌
-      - name: Publish Test Results
+      #   Test Results
+      #    4 files   4 suites   1s ⏱️
+      #   22 tests 22 ✅ 0 💤 0 ❌
+      #   23 runs  23 ✅ 0 💤 0 ❌
+      - name: Publish Test Summary
         uses: EnricoMi/publish-unit-test-result-action@v2.18.0
         if: always()
         with:
           files: |
             ${{ env.testresults_in_trx_files }}
+          check_name: "Test Summary"
+
+      # https://github.com/dorny/test-reporter?tab=readme-ov-file
+      #
+      # 
+      - name: Publish Test Detail Report
+        uses: dorny/test-reporter@v1.9.1
+        if: always()
+        with:
+          name: Test Detail Report
+          path: "${{ env.testresults_in_trx_files }}"
+          reporter: dotnet-trx
 
       # # https://github.com/irongut/CodeCoverageSummary
       # - name: Publish Code Coverage Report
@@ -230,15 +243,7 @@ jobs:
       #     path: ${{ env.coverage_out_cobertura_file }}
       #     retention-days: 5
 
-      # 솔루션 테스트 상세 보고서 생성
-      - name: Create test detail report
-        uses: dorny/test-reporter@v1.9.1
-        if: always()
-        with:
-          name: Test Detail Report
-          #path: "tests/**/logs.trx"
-          path: "${{ env.testresults_in_trx_files }}"
-          reporter: dotnet-trx
+
 
     #   # dotnet-coverage 도구 설치
     #   - name: Install dotnet-coverage tool
