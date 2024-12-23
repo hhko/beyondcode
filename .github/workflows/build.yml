@@ -1,6 +1,5 @@
 name: build
 
-# TODO: PR일 때 코드 커버리지 댓글 추가
 on:
   workflow_dispatch:
   push:
@@ -17,25 +16,17 @@ on:
   #   branches: [ main ]
 
 
-# # 솔루션 테스트 결과 trx 추가
-# #   - dorny/test-reporter@v1
-# #   - Error: HttpError: Resource not accessible by integration
-# permissions:
-#   checks: write
-
-# 솔루션 테스트 결과 trx 추가
+# 1. 솔루션 테스트 결과 trx 추가: Summary
+#  - publish-unit-test-result-action
 #  - https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
-#    2024-12-22 22:46:33 +0000
-#     - github.GithubRetry
-#     - INFO
-#     - Request POST /repos/hhko/better-code-with-ddd/check-runs failed with 403: Forbidden
-
+# 2. 솔루션 테스트 결과 trx 추가: Detail
+#   - dorny/test-reporter@v1
+#   - https://github.com/dorny/test-reporter
 permissions:
   checks: write
   pull-requests: write
   # contents: read
   # actions: read
-  # checks: write
 
 jobs:
   build:
@@ -50,7 +41,6 @@ jobs:
 
     # 빌드 환경 지정
     runs-on: ${{ matrix.os }}
-    #runs-on: ubuntu-22.04
 
     # $GITHUB_OUTPUT
     # $GITHUB_STEP_SUMMARY
@@ -66,9 +56,9 @@ jobs:
       solution_file:                ./Template/Hello.sln
       coverage_in_cobertura_files:  ./Template/**/*.cobertura.xml
       coverage_out_dir:             ./Template/.build/coverage
-      #coverage_out_cobertura_file:  ./Template/.build/coverage/cobertura.xml
-      #testresult_dirs:             ./Template/**/TestResults/**/*
       testresults_in_trx_files:     ./Template/**/*.trx
+      #coverage_out_cobertura_file:  ./Template/.build/coverage/cobertura.xml
+      #testresult_dirs:              ./Template/**/TestResults/**/*
 
     steps:
       # 형상관리 최신 소스 받기
@@ -106,9 +96,9 @@ jobs:
       - name: Build
         run: |
           dotnet build ${{ env.solution_file }} \
-              --no-restore \
-              --configuration ${{ matrix.configuration }} \
-              --verbosity q
+            --no-restore \
+            --configuration ${{ matrix.configuration }} \
+            --verbosity q
 
       # 솔루션 테스트
       #
@@ -121,20 +111,15 @@ jobs:
       #       │       └─{hostname}
       #       │           └─coverage.cobertura.xml          : 코드 커버리지 파일(사용 안함, Junit 로그 생성시 자동 생성됨)
       #       └─logs.trx                                    : trx 로그 파일
-
-      # 테스트와 코드 커버리지 coverage.cobertura.xml 파일 생성
-      #   - name: Find coverage output path
-      #     run: |
-      #       cp $(find . -name "coverage.cobertura.xml") .
       - name: Test
         run: |
           dotnet test ${{ env.solution_file }} \
-              --configuration ${{ matrix.configuration }} \
-              --no-restore \
-              --no-build \
-              --collect "XPlat Code Coverage" \
-              --logger "trx;LogFileName=logs.trx" \
-              --verbosity q
+            --configuration ${{ matrix.configuration }} \
+            --no-restore \
+            --no-build \
+            --collect "XPlat Code Coverage" \
+            --logger "trx;LogFileName=logs.trx" \
+            --verbosity q
 
       # {솔루션}
       #  └─.build
@@ -187,9 +172,27 @@ jobs:
         run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
         shell: bash
 
+      # https://github.com/dorny/test-reporter?tab=readme-ov-file
+      #
+      # 결과: Test Detail Report
+      #   23 passed, 0 failed and 0 skipped
+      #
+      #   Report	                                                                                Passed	Failed	Skipped	Time
+      #   ./Template/Assets/Domains/Tests/Crop.Hello.Domain.Unit/TestResults/logs.trx	               1✅                   3s
+      #   ./Template/Assets/Frameworks/Tests/Crop.Hello.Framework.Tests.Unit/TestResults/logs.trx	   7✅                   4s
+      #   ./Template/Backend/Api/Tests/Crop.Hello.Api.Tests.Integration/TestResults/logs.trx	       2✅                   4s
+      #   ./Template/Backend/Api/Tests/Crop.Hello.Api.Tests.Unit/TestResults/logs.trx	              13✅                   4s
+      - name: Publish Test Detail Report
+        uses: dorny/test-reporter@v1.9.1
+        if: always()
+        with:
+          name: Test Detail Report
+          path: "${{ env.testresults_in_trx_files }}"
+          reporter: dotnet-trx
+
       # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
       #
-      # GitHub Summary
+      # 결과: GitHub Summary
       #   Test Results
       #    4 files   4 suites   1s ⏱️
       #   22 tests 22 ✅ 0 💤 0 ❌
@@ -201,17 +204,6 @@ jobs:
           files: |
             ${{ env.testresults_in_trx_files }}
           check_name: "Test Summary"
-
-      # https://github.com/dorny/test-reporter?tab=readme-ov-file
-      #
-      # 
-      - name: Publish Test Detail Report
-        uses: dorny/test-reporter@v1.9.1
-        if: always()
-        with:
-          name: Test Detail Report
-          path: "${{ env.testresults_in_trx_files }}"
-          reporter: dotnet-trx
 
       # # https://github.com/irongut/CodeCoverageSummary
       # - name: Publish Code Coverage Report
@@ -231,7 +223,7 @@ jobs:
       # - name: Upload Test Results
       #   uses: actions/upload-artifact@v4
       #   with:
-      #     name: Test-Results
+      #     name: Test-Results_${{ matrix.dotnet-version }}_sha-${{ steps.vars.outputs.short_sha }}
       #     path: ${{ env.testresult_dirs }}
       #     retention-days: 5
 
@@ -239,58 +231,18 @@ jobs:
       # - name: Upload Combined Coverage XML
       #   uses: actions/upload-artifact@v4
       #   with:
-      #     name: coverage
+      #     name: coverage_${{ matrix.dotnet-version }}_sha-${{ steps.vars.outputs.short_sha }}
       #     path: ${{ env.coverage_out_cobertura_file }}
       #     retention-days: 5
 
+      #   # 솔루션 코드 커버리지 전송(Codecov)
+      #   - name: Upload coverage reports to Codecov
+      #     uses: codecov/codecov-action@v4.0.1
+      #     with:
+      #       token: ${{ secrets.CODECOV_TOKEN }}
+      #       slug: hhko/ArchDdd
 
-
-    #   # dotnet-coverage 도구 설치
-    #   - name: Install dotnet-coverage tool
-    #     run: dotnet tool install -g dotnet-coverage --version 17.9.6
-
-    #   # 솔루션 코드 커버리지 폴더 생성
-    #   - name: Create coverage folder
-    #     run: mkdir -p ${{ env.coverage_dir }}
-
-    #   # 솔루션 코드 커버지리 병합
-    #   #   N개 coverage.cobertura.xml 파일을 1개 coverage.cobertura.merged.xml로 통합
-    #   - name: Convert .coverage.xml to .cobertura.merged.xml
-    #     run: |
-    #       dotnet-coverage merge "**/TestResults/*/*.cobertura.xml" \
-    #           -f cobertura \
-    #           -o ${{ env.coverage_path }}
-
-      # 솔루션 코드 커버리지 보고서 생성
-
-      # {솔루션}
-      #  └─.results
-      #      └─coverage
-      #           ├─coverage.cobertura.merged.xml
-      #           └─report
-      #                ├─...
-      #                └─SummaryGithub.md
-    #   - name: Create coverage markdown file
-    #     uses: danielpalme/ReportGenerator-GitHub-Action@5.2.2
-    #     with:
-    #       reports: '${{ env.coverage_path }}'
-    #       targetdir: '${{ env.coverage_dir }}/report'
-    #       reporttypes: 'MarkdownSummaryGithub;Html'
-
-    #   # 솔루션 코드 커버리지 보고서 Summary 업로드
-    #   - name: Upload coverage markdown into github actions summary
-    #     run: cat ${{ env.coverage_dir }}/report/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
-
-    #   # 솔루션 테스트 결과 Artifacts 업로드
-    #   - name: Upload coverage files into github actions artifacts
-    #     uses: actions/upload-artifact@v4
-    #     with:
-    #       name: coverage_${{ matrix.dotnet-version }}_sha-${{ steps.vars.outputs.short_sha }}
-    #       path: ${{ env.coverage_dir }}/report
-
-    #   # 솔루션 코드 커버리지 전송(Codecov)
-    #   - name: Upload coverage reports to Codecov
-    #     uses: codecov/codecov-action@v4.0.1
-    #     with:
-    #       token: ${{ secrets.CODECOV_TOKEN }}
-    #       slug: hhko/ArchDdd
+      # 테스트와 코드 커버리지 coverage.cobertura.xml 파일 생성
+      #   - name: Find coverage output path
+      #     run: |
+      #       cp $(find . -name "coverage.cobertura.xml") .
