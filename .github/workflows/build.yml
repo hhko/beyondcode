@@ -203,7 +203,7 @@ jobs:
           pwd
 
           echo "./.build 모든 파일"
-          find ./.build
+          ls -R ./.build
 
       # # https://github.com/irongut/CodeCoverageSummary
       # - name: Publish Code Coverage Report
@@ -218,8 +218,6 @@ jobs:
       #     indicators: true
       #     output: both
       #     #thresholds: "10 30"
-
-      
 
       # # 첨부 파일
       # - name: Upload Test Results
