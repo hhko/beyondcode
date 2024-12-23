@@ -49,9 +49,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     #runs-on: ubuntu-22.04
 
+    # $GITHUB_OUTPUT
+    # $GITHUB_STEP_SUMMARY
+
     # 환경 변수
     #  - 규칙: ${{ env.환경_변수_이름 }}
     #  - 예제: ${{ env.solution_dir }}
+    # 예약 변수
+    #  - ${{ github.workspace }}
     env:
       solution_file:      ./Template/Hello.sln
       coverage_in_files:  ./Template/**/*.cobertura.xml
@@ -74,7 +79,7 @@ jobs:
       # 규칙 1. $GITHUB_OUTPUT은 "steps.vars.outputs"을 지정한다.
       # 규칙 2. "키=값" 형식으로 outputs을 정의한다.
       # 예. ${{ steps.vars.outputs.short_sha }}
-      - name: Set short git commit SHA
+      - name: Set Short Git Commit SHA
         id: vars
         run: |
           calculatedSha=$(git rev-parse --short ${{ github.sha }})
@@ -87,7 +92,7 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
 
       # 솔루션 패키지 복원
-      - name: Restore nuget packages
+      - name: Restore NuGet Packages
         run: |
           dotnet restore ${{ env.solution_file }} \
             --verbosity q
@@ -148,7 +153,7 @@ jobs:
         # /home/runner/work/better-code-with-ddd/better-code-with-ddd/reportgeneratortool/reportgenerator \
         #   -reports:./Template/**/*.cobertura.xml \
         #   -targetdir:./Template/.build/coverage/output \
-        #   -reporttypes:Cobertura \
+        #   -reporttypes:Cobertura;MarkdownSummaryGithub \
         #   -sourcedirs: \
         #   -historydir: \
         #   -plugins: \
@@ -162,13 +167,17 @@ jobs:
         #   -tag:2_12382597103
         #   -license:
 
-      # ./Template/.build/coverage/output/Cobertura.xml
-      - name: Combine Coverage Reports # This is because one report is produced per project, and we want one result for all of them.
+      # https://github.com/danielpalme/ReportGenerator-GitHub-Action
+      #
+      # 결과물
+      #  - ./Template/.build/coverage/output/Cobertura.xml
+      #  - ./Template/.build/coverage/output/SummaryGithub.md
+      - name: Generate Coverage Reports # This is because one report is produced per project, and we want one result for all of them.
         uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
         with:
           reports: '${{ env.coverage_in_files }}' # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
           targetdir: '${{ env.coverage_out_dir }}'
-          #targetdir: "${{ github.workspace }}" # REQUIRED # The directory where the generated report should be saved.
+          #targetdir:  # REQUIRED # The directory where the generated report should be saved.
           reporttypes: 'Cobertura;MarkdownSummaryGithub' # The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, CsvSummary, Html, Html_Dark, Html_Light, Html_BlueRed, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlInline_AzurePipelines_Light, HtmlSummary, JsonSummary, Latex, LatexSummary, lcov, MarkdownSummary, MarkdownSummaryGithub, MarkdownDeltaSummary, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, TextDeltaSummary, Xml, XmlSummary
           verbosity: "Info" # The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off
           title: "Code Coverage" # Optional title.
@@ -176,8 +185,8 @@ jobs:
           customSettings: "" # Optional custom settings (separated by semicolon). See: https://github.com/danielpalme/ReportGenerator/wiki/Settings.
           toolpath: "reportgeneratortool" # Default directory for installing the dotnet tool.
 
-      - name: Publish coverage in build summary # Only applicable if 'MarkdownSummaryGithub' or one of the other Markdown report types is generated
-        run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY # Adjust path and filename if necessary
+      - name: Publish Coverage Reports in Build Summary
+        run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
         shell: bash
 
       # # https://github.com/irongut/CodeCoverageSummary
@@ -194,12 +203,12 @@ jobs:
       #     output: both
       #     #thresholds: "10 30"
 
-      # # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
-      # - name: Publish Test Results
-      #   uses: EnricoMi/publish-unit-test-result-action@v2.16.1
-      #   if: always()
-      #   with:
-      #     trx_files: ${{ env.trx_files }}
+      # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.16.1
+        if: always()
+        with:
+          trx_files: ${{ env.trx_files }}
 
       # # 첨부 파일
       # - name: Upload Test Results
