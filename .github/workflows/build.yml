@@ -174,7 +174,7 @@ jobs:
           reports: '${{ env.coverage_in_cobertura_files }}'
           targetdir: '${{ env.coverage_out_dir }}'
           reporttypes: 'Cobertura;MarkdownSummaryGithub'
-          verbosity: "Info"
+          verbosity: "Warning"
           title: "Code Coverage"
           tag: "${{ github.run_number }}_${{ github.run_id }}"
           customSettings: ""                # https://github.com/danielpalme/ReportGenerator/wiki/Settings.
