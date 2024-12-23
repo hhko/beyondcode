@@ -172,6 +172,21 @@ jobs:
         run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
         shell: bash
 
+      # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
+      #
+      # 결과: GitHub Summary
+      #   Test Results
+      #    4 files   4 suites   1s ⏱️
+      #   22 tests 22 ✅ 0 💤 0 ❌
+      #   23 runs  23 ✅ 0 💤 0 ❌
+      - name: Publish Test Summary
+        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
+        if: always()
+        with:
+          files: |
+            ${{ env.testresults_in_trx_files }}
+          check_name: "Test Summary"
+
       # https://github.com/dorny/test-reporter?tab=readme-ov-file
       #
       # 결과: Test Detail Report
@@ -189,21 +204,6 @@ jobs:
           name: Test Detail Report
           path: "${{ env.testresults_in_trx_files }}"
           reporter: dotnet-trx
-
-      # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
-      #
-      # 결과: GitHub Summary
-      #   Test Results
-      #    4 files   4 suites   1s ⏱️
-      #   22 tests 22 ✅ 0 💤 0 ❌
-      #   23 runs  23 ✅ 0 💤 0 ❌
-      - name: Publish Test Summary
-        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
-        if: always()
-        with:
-          files: |
-            ${{ env.testresults_in_trx_files }}
-          check_name: "Test Summary"
 
       # # https://github.com/irongut/CodeCoverageSummary
       # - name: Publish Code Coverage Report
