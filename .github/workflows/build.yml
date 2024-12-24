@@ -157,6 +157,7 @@ jobs:
       # 코드 커버리지 생성
       - name: Generate Coverage Reports
         uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
+        if: always()
         with:
           reports: '${{ env.coverage_in_cobertura_files }}'
           targetdir: '${{ env.coverage_out_dir }}'
@@ -169,6 +170,7 @@ jobs:
 
       # $GITHUB_STEP_SUMMARY에 코드 커버리지 보고
       - name: Publish Coverage Reports in Build Summary
+        if: always()
         run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
         shell: bash
 
@@ -231,7 +233,7 @@ jobs:
       #   ./Template/Assets/Frameworks/Tests/Crop.Hello.Framework.Tests.Unit/TestResults/logs.trx	   7✅                   4s
       #   ./Template/Backend/Api/Tests/Crop.Hello.Api.Tests.Integration/TestResults/logs.trx	       2✅                   4s
       #   ./Template/Backend/Api/Tests/Crop.Hello.Api.Tests.Unit/TestResults/logs.trx	              13✅                   4s
-      - name: Publish Test Detail Report
+      - name: Publish Test Report
         uses: dorny/test-reporter@v1.9.1
         if: always()
         with:

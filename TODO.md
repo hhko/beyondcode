@@ -1,16 +1,16 @@
 - [x] 옵션 통합 테스트
 - [x] 윈도우 서비스
 - [x] 테스트 요약
-- [ ] 코드 커버리지 어셈블리 단위
+- [x] 코드 커버리지 어셈블리 단위
 - [ ] 도커 컨테이너
-- [ ] reportgenerator cli
 ---
 - [ ] Serilog와 OpenTelemtry 통합
 ---
-- [ ] GitHub 빌드 자동화, 코드 커버리지
+- [x] GitHub 빌드 자동화, 코드 커버리지
+- [ ] reportgenerator cli
 - [ ] Local 빌드 자동화, 코드 커버리지
 - [ ] 단일 파일 배포
-- [ ] 윈도우 서비스
+- [x] 윈도우 서비스
 - [ ] Docker 구성
 ---
 - [ ] Job 설정
