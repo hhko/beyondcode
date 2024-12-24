@@ -598,9 +598,11 @@ Directory.Build.props                                // 전역 프로젝트 공�
     </PropertyGroup>
 
     <!-- 솔루션 탐색기에서 TestResults 폴더 제외 -->
+    <!--
     <ItemGroup>
       <None Remove="TestResults\**" />
     </ItemGroup>
+    -->
 
     <!-- xunit.runner.json 설정 -->
     <ItemGroup>
@@ -1095,11 +1097,102 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 .github/workflows/build.yaml
 ```
 
-## Ch 15.1 빌드 요약
-![](./.images/Build.Summary.png)
+```
+{솔루션}
+  ├─.build
+  │   └─coverage
+  │       ├─Cobertura.xml                           # 머지된 Cobertura.xml 파일
+  │       └─SummaryGithub.md                        # GitHub 전용 Markdown 파일
+  └─{솔루션}.sln
+```
 
-## Ch 15.2 테스트 결과
-![](./.images/Build.TestResults.png)
+```shell
+{테스트 프로젝트}
+  └─TestResults
+      ├─0ca60e99-32fb-43ac-bbd3-01f5a5ef6886        # XPlat Code Coverage 폴더
+      │   └─coverage.cobertura.xml                  # 코드 커버리지 파일(dotnet-coverage merge 대상)
+      ├─{username}_{hostname}_2024-03-14_15_16_30   # trx 로그 폴더
+      │   └─In
+      │       └─{hostname}
+      │           └─coverage.cobertura.xml          # 코드 커버리지 파일(사용 안함, Junit 로그 생성시 자동 생성됨)
+      └─logs.trx                                    # trx 로그 파일
+```
+
+## Ch 15.1 테스트 요약
+![](./.images/Build.Test.Summary.png)
+
+```yml
+# 코드 커버리지 생성
+- name: Generate Coverage Reports
+  uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
+  with:
+    reports: '${{ env.coverage_in_cobertura_files }}'
+    targetdir: '${{ env.coverage_out_dir }}'
+    reporttypes: 'Cobertura;MarkdownSummaryGithub'
+    verbosity: "Warning"
+    title: "Code Coverage"
+    tag: "${{ github.run_number }}_${{ github.run_id }}"
+    customSettings: ""                # https://github.com/danielpalme/ReportGenerator/wiki/Settings.
+    toolpath: "reportgeneratortool"   # dotnet tool.
+
+# $GITHUB_STEP_SUMMARY에 코드 커버리지 보고
+- name: Publish Coverage Reports in Build Summary
+  run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
+  shell: bash
+```
+- [ReportGenerator-GitHub-Action](https://github.com/danielpalme/ReportGenerator-GitHub-Action)
+
+## Ch 15.2 테스트 건수
+![](./.images/Build.Test.Results.png)
+
+```yml
+- name: Publish Test Summary
+  uses: EnricoMi/publish-unit-test-result-action@v2.18.0
+  if: always()
+  with:
+    files: |
+      ./**/*.trx
+    check_name: "Test Summary"
+```
+- [publish-unit-test-result-action](https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file)
+
+## Ch 15.3 테스트 테이블 요약
+![](./.images/Build.Test.TableSummary.png)
+
+```yml
+- name: Publish Code Coverage Report
+  uses: irongut/CodeCoverageSummary@v1.3.0
+  with:
+    filename: "${{ env.coverage_out_dir }}/Cobertura.xml"     # 머지된 Cobertura.xml 파일
+    badge: true
+    fail_below_min: false # just informative for now
+    format: markdown
+    hide_branch_rate: false
+    hide_complexity: false
+    indicators: true
+    output: both
+
+- name: Publish Coverage Reports in Build Summary
+  run: cat ./code-coverage-results.md >> $GITHUB_STEP_SUMMARY
+  shell: bash
+```
+
+https://github.com/irongut/CodeCoverageSummary
+
+## Ch 15.4 테스트 메서드
+![](./.images/Build.Test.Methods.png)
+
+```yml
+- name: Publish Test Detail Report
+  uses: dorny/test-reporter@v1.9.1
+  if: always()
+  with:
+    name: Test Detail Report
+    path: "${{ env.testresults_in_trx_files }}"
+    reporter: dotnet-trx
+```
+
+- [test-reporter](https://github.com/dorny/test-reporter)
 
 ## Ch 15.3 빌드 스크립트
 ```yml

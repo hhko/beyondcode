@@ -9,10 +9,12 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
-  <!-- 솔루션 탐색기에서 TestResults 폴더 제외 -->
+  <!--  솔루션 탐색기에서 TestResults 폴더 제외 -->
+  <!--
   <ItemGroup>
     <None Remove="TestResults\**" />
   </ItemGroup>
+  -->
 
   <!-- xunit.runner.json 설정 -->
   <ItemGroup>

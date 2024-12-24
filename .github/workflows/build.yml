@@ -11,16 +11,13 @@ on:
       - '**.pptx'
       - '**.png'
       #- '.github/workflows/build-docs.yml'
-      #- 'docs/**'
   # pull_request:
   #   branches: [ main ]
 
 
-# 1. 솔루션 테스트 결과 trx 추가: Summary
-#  - publish-unit-test-result-action
+# 1. publish-unit-test-result-action: 솔루션 테스트 결과 trx 추가: Summary
 #  - https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
-# 2. 솔루션 테스트 결과 trx 추가: Detail
-#   - dorny/test-reporter@v1
+# 2. dorny/test-reporter: 솔루션 테스트 메서드 목록
 #   - https://github.com/dorny/test-reporter
 permissions:
   checks: write
@@ -151,11 +148,13 @@ jobs:
       #     -historydir: \
       #     -plugins: \
       #     -assemblyfilters:+* \
-      #     -classfilters:+* \
+      #     -classfilters:+* \                    # -classfilters:"+MyNamespace.*;-MyNamespace.Tests.*"
       #     -filefilters:+* \
       #     -riskhotspotassemblyfilters:+* \
       #     -riskhotspotclassfilters:+* \
       #     -license:
+
+      # 코드 커버리지 생성
       - name: Generate Coverage Reports
         uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
         with:
@@ -168,11 +167,12 @@ jobs:
           customSettings: ""                # https://github.com/danielpalme/ReportGenerator/wiki/Settings.
           toolpath: "reportgeneratortool"   # dotnet tool.
 
+      # $GITHUB_STEP_SUMMARY에 코드 커버리지 보고
       - name: Publish Coverage Reports in Build Summary
         run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
         shell: bash
 
-      # https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
+      # Publish-Unit-Test-Result-Action: https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
       #
       # 결과: GitHub Summary
       #   Test Results
@@ -186,6 +186,41 @@ jobs:
           files: |
             ${{ env.testresults_in_trx_files }}
           check_name: "Test Summary"
+
+      # CodeCoverageSummary: https://github.com/irongut/CodeCoverageSummary
+      #
+      # 결과: code-coverage-results.md
+      #   Package                                 | Line Rate | Branch Rate | Complexity  | Health
+      #   --------                                | --------- | ----------- | ----------  | ------
+      #   Crop.Hello.Api                          | 74%       | 88%         | 11          | ➖
+      #   Crop.Hello.Api.Adapters.Infrastructure  | 51%       | 57%         | 39          | ➖
+      #   Crop.Hello.Api.Adapters.Persistence     | 50%       | 100%        | 2           | ➖
+      #   Crop.Hello.Api.Application              | 50%       | 100%        | 2           | ➖
+      #   Crop.Hello.Api.Domain                   | 100%      | 100%        | 1           | ✔
+      #   Crop.Hello.Framework                    | 71%       | 50%         | 7           | ➖
+      #   Crop.Hello.Framework.Contracts          | 43%       | 38%         | 64          | ❌
+      #   **Summary**                             | **52%** (107 / 205) | **52%** (26 / 50) | **126** | ➖
+      - name: Publish Code Coverage Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: "${{ env.coverage_out_dir }}/Cobertura.xml"     # 머지된 Cobertura.xml 파일
+          badge: true
+          fail_below_min: false # just informative for now
+          format: markdown
+          hide_branch_rate: false
+          hide_complexity: false
+          indicators: true
+          output: both
+          #thresholds: "10 30"
+
+      # - name: "출력"
+      #   run: |
+      #     #find "$(pwd)/.build"
+      #     find . -type f -name "code-coverage-results.md"
+
+      - name: Publish Coverage Reports in Build Summary
+        run: cat ./code-coverage-results.md >> $GITHUB_STEP_SUMMARY
+        shell: bash
 
       # https://github.com/dorny/test-reporter?tab=readme-ov-file
       #
@@ -204,30 +239,6 @@ jobs:
           name: Test Detail Report
           path: "${{ env.testresults_in_trx_files }}"
           reporter: dotnet-trx
-
-      # code-coverage-results.md
-      - name: Publish Code Coverage Report
-        uses: irongut/CodeCoverageSummary@v1.3.0
-        with:
-          #filename: "${{ env.coverage_in_cobertura_files }}"
-          filename: "${{ env.coverage_out_dir }}/Cobertura.xml"
-          badge: true
-          fail_below_min: false # just informative for now
-          format: markdown
-          hide_branch_rate: false
-          hide_complexity: false
-          indicators: true
-          output: both
-          #thresholds: "10 30"
-
-      - name: "출력"
-        run: |
-          #find "$(pwd)/.build"
-          find . -type f -name "code-coverage-results.md"
-
-      - name: Publish Coverage Reports in Build Summary
-        run: cat ./code-coverage-results.md >> $GITHUB_STEP_SUMMARY
-        shell: bash
 
 
       # - name: Add Coverage PR Comment

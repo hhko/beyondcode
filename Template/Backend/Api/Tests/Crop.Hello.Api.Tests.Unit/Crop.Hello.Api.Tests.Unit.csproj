@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\Src\Crop.Hello.Api.Domain\Crop.Hello.Api.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="TestResults\**" />
+  </ItemGroup>
+
 </Project>

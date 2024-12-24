@@ -3,6 +3,7 @@
 - [x] 테스트 요약
 - [ ] 코드 커버리지 어셈블리 단위
 - [ ] 도커 컨테이너
+- [ ] reportgenerator cli
 ---
 - [ ] Serilog와 OpenTelemtry 통합
 ---
