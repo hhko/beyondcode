@@ -1096,7 +1096,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 ```
 .github/workflows/build.yaml
 ```
-- GitHub Action 스크립트는 `.github/workflows/` 폴더 yaml 파일로 배치합니다.
+- GitHub Action 스크립트는 `.github/workflows/` 폴더의 yaml 파일로 배치합니다.
 
 ```shell
 {솔루션}
@@ -1106,24 +1106,20 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
   │       └─SummaryGithub.md                        # 코드 커버리지 Markdown 파일
   │
   ├─{솔루션}.sln
-  └─.build.ps1                                      # 로컬 빌드 파일
+  ├─.build.ps1                                      # 로컬 빌드 파일
+  │
+  ├─ ...
+      └─{테스트 프로젝트}
+          └─TestResults
+              ├─0ca60e99-32fb-43ac-bbd3-01f5a5ef6886
+              │   └─coverage.cobertura.xml         # Cobertura 코드 커버리지 파일
+              └─logs.trx                           # trx 로그 파일
 ```
-- GitHub Action으로 코드 커버리지 관련 파일을 생성합니다.
+- `dotnet test`은 "테스트 프로젝트" 단위로 Cobertura 코드 커버리지 파일과 trx 로그 파일을 생성합니다.
+- `ReportGenerator`은 개별 Cobertura 코드 커버리지 파일을 통합하여 .build 폴더에 머지된 코드 커버리지 관련 파일(Cobertura.xml, SummaryGithub.md)을 생성합니다.
 
-```shell
-{테스트 프로젝트}
-  └─TestResults
-      ├─0ca60e99-32fb-43ac-bbd3-01f5a5ef6886        # XPlat Code Coverage 폴더
-      │   └─coverage.cobertura.xml                  # 코드 커버리지 파일(dotnet-coverage merge 대상)
-      ├─{username}_{hostname}_2024-03-14_15_16_30   # trx 로그 폴더
-      │   └─In
-      │       └─{hostname}
-      │           └─coverage.cobertura.xml          # 코드 커버리지 파일(사용 안함, Junit 로그 생성시 자동 생성됨)
-      └─logs.trx                                    # trx 로그 파일
-```
-
-## Ch 15.1 테스트 요약
-![](./.images/Build.Test.Summary.png)
+## Ch 15.1 코드 커버리지 보고서
+![](./.images/Build.Test.CodeCoverage.png)
 
 ```yml
 # 코드 커버리지 생성
@@ -1147,7 +1143,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
   shell: bash
 ```
 - [ReportGenerator-GitHub-Action](https://github.com/danielpalme/ReportGenerator-GitHub-Action)
--`if: always()`을 이용하여 테스트가 실패할 때도 코드 커버리지를 생성합니다.
+- `if: always()`을 이용하여 테스트가 실패할 때도 코드 커버리지를 생성합니다.
 
 ## Ch 15.2 테스트 보고서
 ![](./.images/Build.Test.Report.png)
@@ -1163,92 +1159,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 ```
 
 - [test-reporter](https://github.com/dorny/test-reporter)
--`if: always()`을 이용하여 테스트가 실패할 때도 테스트 보고서를 생성하여 실패 로그를 확인합니다.
-
-## Ch 15.3 빌드 스크립트
-```yml
-permissions:
-  checks: write
-  pull-requests: write
-
-jobs:
-  build:
-    name: Build
-
-    # 빌드 환경 경우의 수 정의
-    strategy:
-      matrix:
-        dotnet-version: [ '9.0.x' ]
-        configuration: [ Release ]
-        os: [ ubuntu-24.04 ]
-
-    # 빌드 환경 지정
-    runs-on: ${{ matrix.os }}
-
-    # 환경 변수
-    env:
-      solution_file: ./Template/Hello.sln
-      coverage_in_files: ./Template/**/*.cobertura.xml
-      coverage_out_dir: ./Template/.build/coverage/output
-      testresult_dirs: ./Template/**/TestResults/**/*
-      trx_files: ./Template/**/*.trx
-
-    steps:
-      - ...
-
-      # 테스트
-      - name: Test
-        run: |
-          dotnet test ${{ env.solution_file }} \
-              --configuration ${{ matrix.configuration }} \
-              --no-restore \
-              --no-build \
-              --collect "XPlat Code Coverage" \
-              --logger "trx;LogFileName=logs.trx" \
-              --verbosity q
-
-      # 코드커버리지
-      - name: Combine Coverage Reports
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
-        with:
-          reports: '${{ env.coverage_in_files }}'
-          targetdir: '${{ env.coverage_out_dir }}'
-          reporttypes: 'Cobertura'
-          verbosity: "Info"
-          title: "Code Coverage"
-          tag: "${{ github.run_number }}_${{ github.run_id }}"
-          customSettings: ""
-          toolpath: "reportgeneratortool"
-
-      - name: Publish Code Coverage Report
-        uses: irongut/CodeCoverageSummary@v1.3.0
-        with:
-          filename: "./Template/.build/coverage/output/Cobertura.xml"
-          badge: true
-          fail_below_min: false # just informative for now
-          format: markdown
-          hide_branch_rate: false
-          hide_complexity: false
-          indicators: true
-          output: both
-
-      # 테스트 결과
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.16.1
-        if: always()
-        with:
-          trx_files: ${{ env.trx_files }}
-
-```
-
-- 빌드
-- 배포 파일
-  - 1개
-  - 프레임워크 독립성
-- 코드 커러리지
-- 코드 품질
-- 프로젝트 의존성 다이어그램
-- 정적 사이트
+- `if: always()`을 이용하여 테스트가 실패할 때도 테스트 보고서를 생성하여 실패 로그를 확인합니다.
 
 <br/>
 
