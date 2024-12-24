@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Crop.Hello.Api.Tests.Unit;
+﻿namespace Crop.Hello.Api.Tests.Unit;
 
 public class Class1
 {
@@ -12,6 +6,6 @@ public class Class1
     public void Hello()
     {
         int x = 0;
-        int y / x;
+        int y = 2025 / x;
     }
 }
