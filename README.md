@@ -29,8 +29,8 @@
   - [ ] Ch 17. Aspire Dashboard
   - [ ] cH 18. Grafana System
   - [ ] Ch 19. OpenSearch System
-  - [ ] Ch 20. Traces
-  - [ ] Ch 21. 추적
+  - [ ] Ch 20. Logs
+  - [ ] Ch 21. Traces
   - [ ] Ch 22. Metrics
 - Part 5. Hosts
   - [ ] [Ch 23. Schedule Host](#ch-23-schedule-host)
@@ -60,6 +60,7 @@
 
 - Application 레이어
   - `MediatR`
+    - `MediatR.Contracts`
 - Adapter 레이어
   - `Serilog`
     - `Serilog.Extensions.Hosting`
@@ -73,6 +74,11 @@
   - `xunit`
   - `FluentAssertions`
   - `TngTech.ArchUnitNET.xUnit`
+- GitHub Actions
+  - `actions/checkout`
+  - `actions/setup-dotnet`
+  - `danielpalme/ReportGenerator-GitHub-Action`
+  - `dorny/test-reporter`
 
 # Ch 3. External Architecture
 > - 외부 아키텍처 목표는 서비스 배치입니다.

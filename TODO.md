@@ -17,7 +17,7 @@
 - [ ] Job 통합 테스트, 테스트 종료
 - [ ] 로그 의존성 주입
 ---
-- [ ] Serilog 구조적 파일 로그
+- [ ] Serilog 구조적 파일 로그, https://github.com/ijardillier/netclient-elastic?tab=readme-ov-file#logs-via-serilog
 - [ ] Serilog 예외
 - [ ] Serilog 데이터 출력 제약
   - [ ] 제외
@@ -28,7 +28,7 @@
 - [ ] 로컬 빌드
 - [ ] 도커 구성
 - [ ] 도커 CLI
-- [ ] 도커 헬스체크
+- [ ] 도커 헬스체크, https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
 
 <br/>
 
