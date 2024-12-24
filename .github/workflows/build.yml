@@ -51,7 +51,7 @@ jobs:
     #  - ${{ github.run_id }}
     env:
       solution_dir:                 ./Template
-      solution_filename:            Hello.lsn
+      solution_filename:            Hello.sln
 
       #coverage_in_cobertura_files:  ./Template/**/*.cobertura.xml
       coverage_out_dir:             ./Template/.build/coverage
