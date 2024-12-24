@@ -1096,15 +1096,19 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 ```
 .github/workflows/build.yaml
 ```
+- GitHub Action 스크립트는 `.github/workflows/` 폴더 yaml 파일로 배치합니다.
 
-```
+```shell
 {솔루션}
-  ├─.build
+  ├─.build                                          # 빌드 자동화 결과
   │   └─coverage
   │       ├─Cobertura.xml                           # 머지된 Cobertura.xml 파일
-  │       └─SummaryGithub.md                        # GitHub 전용 Markdown 파일
-  └─{솔루션}.sln
+  │       └─SummaryGithub.md                        # 코드 커버리지 Markdown 파일
+  │
+  ├─{솔루션}.sln
+  └─.build.ps1                                      # 로컬 빌드 파일
 ```
+- GitHub Action으로 코드 커버리지 관련 파일을 생성합니다.
 
 ```shell
 {테스트 프로젝트}
@@ -1125,6 +1129,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 # 코드 커버리지 생성
 - name: Generate Coverage Reports
   uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
+  if: always()
   with:
     reports: '${{ env.coverage_in_cobertura_files }}'
     targetdir: '${{ env.coverage_out_dir }}'
@@ -1137,50 +1142,15 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 # $GITHUB_STEP_SUMMARY에 코드 커버리지 보고
 - name: Publish Coverage Reports in Build Summary
+  if: always()
   run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
   shell: bash
 ```
 - [ReportGenerator-GitHub-Action](https://github.com/danielpalme/ReportGenerator-GitHub-Action)
+-`if: always()`을 이용하여 테스트가 실패할 때도 코드 커버리지를 생성합니다.
 
-## Ch 15.2 테스트 건수
-![](./.images/Build.Test.Results.png)
-
-```yml
-- name: Publish Test Summary
-  uses: EnricoMi/publish-unit-test-result-action@v2.18.0
-  if: always()
-  with:
-    files: |
-      ./**/*.trx
-    check_name: "Test Summary"
-```
-- [publish-unit-test-result-action](https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file)
-
-## Ch 15.3 테스트 테이블 요약
-![](./.images/Build.Test.TableSummary.png)
-
-```yml
-- name: Publish Code Coverage Report
-  uses: irongut/CodeCoverageSummary@v1.3.0
-  with:
-    filename: "${{ env.coverage_out_dir }}/Cobertura.xml"     # 머지된 Cobertura.xml 파일
-    badge: true
-    fail_below_min: false # just informative for now
-    format: markdown
-    hide_branch_rate: false
-    hide_complexity: false
-    indicators: true
-    output: both
-
-- name: Publish Coverage Reports in Build Summary
-  run: cat ./code-coverage-results.md >> $GITHUB_STEP_SUMMARY
-  shell: bash
-```
-
-https://github.com/irongut/CodeCoverageSummary
-
-## Ch 15.4 테스트 메서드
-![](./.images/Build.Test.Methods.png)
+## Ch 15.2 테스트 보고서
+![](./.images/Build.Test.Report.png)
 
 ```yml
 - name: Publish Test Detail Report
@@ -1188,11 +1158,12 @@ https://github.com/irongut/CodeCoverageSummary
   if: always()
   with:
     name: Test Detail Report
-    path: "${{ env.testresults_in_trx_files }}"
+    path: "${{ env.solution_dir }}/**/*.trx"
     reporter: dotnet-trx
 ```
 
 - [test-reporter](https://github.com/dorny/test-reporter)
+-`if: always()`을 이용하여 테스트가 실패할 때도 테스트 보고서를 생성하여 실패 로그를 확인합니다.
 
 ## Ch 15.3 빌드 스크립트
 ```yml

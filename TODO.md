@@ -32,6 +32,11 @@
 
 <br/>
 
+- [ ] 빌드 자동화 | "Add Coverage PR Comment" 빌드 자동화
+- [ ] 빌드 자동화 | 코드 커버리지 외부 사이트 연동
+
+<br/>
+
 ```dockerfile
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base

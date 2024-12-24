@@ -139,7 +139,7 @@ jobs:
           toolpath: "reportgeneratortool"   # dotnet tool.
 
       # 코드 커버러지 $GITHUB_STEP_SUMMARY에 추가
-      - name: Publish Coverage Report in Build Summary
+      - name: Publish Coverage Reports in Build Summary
         if: always()
         run: cat "${{ env.build_dir }}/coverage/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
         shell: bash
