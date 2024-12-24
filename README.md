@@ -1122,7 +1122,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 ![](./.images/Build.Test.CodeCoverage.png)
 
 ```yml
-# 코드 커버리지 생성
+# 코드 커버리지 생성: Cobertura.xml, MarkdownSummaryGithub.md
 - name: Generate Coverage Reports
   uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
   if: always()
@@ -1136,7 +1136,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
     customSettings: ""                # https://github.com/danielpalme/ReportGenerator/wiki/Settings.
     toolpath: "reportgeneratortool"   # dotnet tool.
 
-# $GITHUB_STEP_SUMMARY에 코드 커버리지 보고
+# 코드 커버러지 $GITHUB_STEP_SUMMARY에 추가
 - name: Publish Coverage Reports in Build Summary
   if: always()
   run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
