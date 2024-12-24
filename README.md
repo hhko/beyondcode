@@ -1144,6 +1144,7 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 ```
 - [ReportGenerator-GitHub-Action](https://github.com/danielpalme/ReportGenerator-GitHub-Action)
 - `if: always()`을 이용하여 테스트가 실패할 때도 코드 커버리지를 생성합니다.
+- 코드 커버리지 SummaryGithub.md 파일 내용을 $GITHUB_STEP_SUMMARY에 출력하여 빌드 "Summary"에 포함 시킵니다.
 
 ## Ch 15.2 테스트 보고서
 ![](./.images/Build.Test.Report.png)
