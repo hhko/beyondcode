@@ -123,7 +123,7 @@ jobs:
       #      └─coverage
       #           ├─Cobertura.xml
       #           └─SummaryGithub.md
-
+      #
       # https://github.com/danielpalme/ReportGenerator-GitHub-Action
       #
       # reportgenerator 결과물
@@ -172,61 +172,60 @@ jobs:
         run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
         shell: bash
 
-      # Publish-Unit-Test-Result-Action: https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
-      #
-      # 결과: GitHub Summary
-      #   Test Results
-      #    4 files   4 suites   1s ⏱️
-      #   22 tests 22 ✅ 0 💤 0 ❌
-      #   23 runs  23 ✅ 0 💤 0 ❌
-      - name: Publish Test Summary
-        uses: EnricoMi/publish-unit-test-result-action@v2.18.0
-        if: always()
-        with:
-          files: |
-            ${{ env.testresults_in_trx_files }}
-          check_name: "Test Summary"
+      # # Publish-Unit-Test-Result-Action: https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
+      # #
+      # # 결과: GitHub Summary
+      # #   Test Results
+      # #    4 files   4 suites   1s ⏱️
+      # #   22 tests 22 ✅ 0 💤 0 ❌
+      # #   23 runs  23 ✅ 0 💤 0 ❌
+      # - name: Publish Test Summary
+      #   uses: EnricoMi/publish-unit-test-result-action@v2.18.0
+      #   if: always()
+      #   with:
+      #     files: |
+      #       ${{ env.testresults_in_trx_files }}
+      #     check_name: "Test Summary"
 
-      # CodeCoverageSummary: https://github.com/irongut/CodeCoverageSummary
-      #
-      # 결과: code-coverage-results.md
-      #   Package                                 | Line Rate | Branch Rate | Complexity  | Health
-      #   --------                                | --------- | ----------- | ----------  | ------
-      #   Crop.Hello.Api                          | 74%       | 88%         | 11          | ➖
-      #   Crop.Hello.Api.Adapters.Infrastructure  | 51%       | 57%         | 39          | ➖
-      #   Crop.Hello.Api.Adapters.Persistence     | 50%       | 100%        | 2           | ➖
-      #   Crop.Hello.Api.Application              | 50%       | 100%        | 2           | ➖
-      #   Crop.Hello.Api.Domain                   | 100%      | 100%        | 1           | ✔
-      #   Crop.Hello.Framework                    | 71%       | 50%         | 7           | ➖
-      #   Crop.Hello.Framework.Contracts          | 43%       | 38%         | 64          | ❌
-      #   **Summary**                             | **52%** (107 / 205) | **52%** (26 / 50) | **126** | ➖
-      - name: Publish Code Coverage Report
-        uses: irongut/CodeCoverageSummary@v1.3.0
-        with:
-          filename: "${{ env.coverage_out_dir }}/Cobertura.xml"     # 머지된 Cobertura.xml 파일
-          badge: true
-          fail_below_min: false # just informative for now
-          format: markdown
-          hide_branch_rate: false
-          hide_complexity: false
-          indicators: true
-          output: both
-          #thresholds: "10 30"
+      # # CodeCoverageSummary: https://github.com/irongut/CodeCoverageSummary
+      # #
+      # # 결과: code-coverage-results.md
+      # #   Package                                 | Line Rate | Branch Rate | Complexity  | Health
+      # #   --------                                | --------- | ----------- | ----------  | ------
+      # #   Crop.Hello.Api                          | 74%       | 88%         | 11          | ➖
+      # #   Crop.Hello.Api.Adapters.Infrastructure  | 51%       | 57%         | 39          | ➖
+      # #   Crop.Hello.Api.Adapters.Persistence     | 50%       | 100%        | 2           | ➖
+      # #   Crop.Hello.Api.Application              | 50%       | 100%        | 2           | ➖
+      # #   Crop.Hello.Api.Domain                   | 100%      | 100%        | 1           | ✔
+      # #   Crop.Hello.Framework                    | 71%       | 50%         | 7           | ➖
+      # #   Crop.Hello.Framework.Contracts          | 43%       | 38%         | 64          | ❌
+      # #   **Summary**                             | **52%** (107 / 205) | **52%** (26 / 50) | **126** | ➖
+      # - name: Publish Code Coverage Report
+      #   uses: irongut/CodeCoverageSummary@v1.3.0
+      #   with:
+      #     filename: "${{ env.coverage_out_dir }}/Cobertura.xml"     # 머지된 Cobertura.xml 파일
+      #     badge: true
+      #     fail_below_min: false # just informative for now
+      #     format: markdown
+      #     hide_branch_rate: false
+      #     hide_complexity: false
+      #     indicators: true
+      #     output: both
+      #     #thresholds: "10 30"
 
-      # - name: "출력"
-      #   run: |
-      #     #find "$(pwd)/.build"
-      #     find . -type f -name "code-coverage-results.md"
+      # # - name: "출력"
+      # #   run: |
+      # #     #find "$(pwd)/.build"
+      # #     find . -type f -name "code-coverage-results.md"
 
-      - name: Publish Coverage Reports in Build Summary
-        run: cat ./code-coverage-results.md >> $GITHUB_STEP_SUMMARY
-        shell: bash
+      # - name: Publish Coverage Reports in Build Summary
+      #   run: cat ./code-coverage-results.md >> $GITHUB_STEP_SUMMARY
+      #   shell: bash
 
       # https://github.com/dorny/test-reporter?tab=readme-ov-file
       #
       # 결과: Test Detail Report
       #   23 passed, 0 failed and 0 skipped
-      #
       #   Report	                                                                                Passed	Failed	Skipped	Time
       #   ./Template/Assets/Domains/Tests/Crop.Hello.Domain.Unit/TestResults/logs.trx	               1✅                   3s
       #   ./Template/Assets/Frameworks/Tests/Crop.Hello.Framework.Tests.Unit/TestResults/logs.trx	   7✅                   4s
@@ -236,7 +235,7 @@ jobs:
         uses: dorny/test-reporter@v1.9.1
         if: always()
         with:
-          name: Test Detail Report
+          name: Test Report
           path: "${{ env.testresults_in_trx_files }}"
           reporter: dotnet-trx
 
