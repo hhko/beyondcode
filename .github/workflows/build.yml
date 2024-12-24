@@ -50,14 +50,9 @@ jobs:
     #  - ${{ github.run_number }}
     #  - ${{ github.run_id }}
     env:
-      solution_dir:                 ./Template
-      solution_filename:            Hello.sln
-
-      #coverage_in_cobertura_files:  ./Template/**/*.cobertura.xml
-      coverage_out_dir:             ./Template/.build/coverage
-      testresults_in_trx_files:     ./Template/**/*.trx
-      #coverage_out_cobertura_file:  ./Template/.build/coverage/Cobertura.xml
-      #testresult_dirs:              ./Template/**/TestResults/**/*
+      solution_dir:       ./Template
+      build_dir:          ./Template/.build
+      solution_filename:  Hello.sln
 
     steps:
       # 형상관리 최신 소스 받기
@@ -135,7 +130,7 @@ jobs:
         if: always()
         with:
           reports: ${{ env.solution_dir }}/**/*.cobertura.xml
-          targetdir: '${{ env.coverage_out_dir }}'
+          targetdir: ${{ env.build_dir }}/coverage
           reporttypes: 'Cobertura;MarkdownSummaryGithub'
           verbosity: "Warning"
           title: "Code Coverage"
@@ -146,7 +141,7 @@ jobs:
       # 코드 커버러지 $GITHUB_STEP_SUMMARY에 추가
       - name: Publish Coverage Report in Build Summary
         if: always()
-        run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
+        run: cat "${{ env.build_dir }}/coverage/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
         shell: bash
 
       # 테스트 보고서
@@ -164,7 +159,7 @@ jobs:
         if: always()
         with:
           name: Test Report
-          path: "${{ env.testresults_in_trx_files }}"
+          path: "${{ env.solution_dir }}/**/*.trx"
           reporter: dotnet-trx
 
       # # Publish-Unit-Test-Result-Action: https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
@@ -179,7 +174,7 @@ jobs:
       #   if: always()
       #   with:
       #     files: |
-      #       ${{ env.testresults_in_trx_files }}
+      #       ${{ env.solution_dir }}/**/*.trx
       #     check_name: "Test Summary"
 
       # # CodeCoverageSummary: https://github.com/irongut/CodeCoverageSummary
@@ -198,7 +193,7 @@ jobs:
       # - name: Publish Code Coverage Report
       #   uses: irongut/CodeCoverageSummary@v1.3.0
       #   with:
-      #     filename: "${{ env.coverage_out_dir }}/Cobertura.xml"     # 머지된 Cobertura.xml 파일
+      #     filename: "${{ env.build_dir }}/coverage/Cobertura.xml"     # 머지된 Cobertura.xml 파일
       #     badge: true
       #     fail_below_min: false # just informative for now
       #     format: markdown
