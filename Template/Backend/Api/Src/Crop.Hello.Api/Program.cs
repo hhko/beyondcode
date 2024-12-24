@@ -29,6 +29,7 @@ public static partial class Program
                 if (configuration is null)
                     return;
 
+                // 기존 환경 설정 파일 제거
                 if (removeJsonConfigurationSources)
                 {
                     //((List<IConfigurationSource>)config.Sources).RemoveAll(source => source is JsonConfigurationSource);
@@ -40,10 +41,13 @@ public static partial class Program
                         }
                     }
                 }
+
+                // 신규 환경 설정 추가
                 config.AddConfiguration(configuration);
             })
             .ConfigureServices((context, services) =>
             {
+                // 레이어 의존성 등록
                 services
                     .RegisterInfrastructureLayer(context.HostingEnvironment, context.Configuration)
                     .RegisterPersistenceLayer()

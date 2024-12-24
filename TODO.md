@@ -1,3 +1,12 @@
+- Job
+- 테스트 환경 설정
+- Aspire 대시보드
+- Docker
+- Serilog
+
+---
+<br/>
+
 - [x] 옵션 통합 테스트
 - [x] 윈도우 서비스
 - [x] 테스트 요약
@@ -19,6 +28,7 @@
 ---
 - [ ] Serilog 구조적 파일 로그, https://github.com/ijardillier/netclient-elastic?tab=readme-ov-file#logs-via-serilog
 - [ ] Serilog 예외
+- [ ] Serilog 테스트 https://seankilleen.com/2024/04/how-to-test-logging-when-using-microsoft-extensions-logging-and-serilog/
 - [ ] Serilog 데이터 출력 제약
   - [ ] 제외
   - [ ] 건수 제약
