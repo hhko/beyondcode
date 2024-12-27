@@ -1157,15 +1157,6 @@ public void We_CanTest_TheHost()
 
 # Ch 25. Option
 ## Ch 25.1 레이어 의존성 주입(예. 옵션 패턴)
-```
-appsettings.json
-  -> {Featrue}Options.cs
-     Featrue 옵션 데이터
-  -> {Feature}OptionsValidator.cs     <- AbstractValidator<{Featrue}Options>
-     Featrue 옵션 데이터 유효성 검사
-```
-- 프로그램 설정 파일과 옵셩 관련 클래스
-
 ```shell
 Abstractions/                             # 레이어 주 목표가 아닌 부수적인 코드
   Registration/                           # 의존성 등록
@@ -1173,9 +1164,9 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
     OptionsRegistration.cs                # 옵션 의존성 등록
 
   Options/                                # 옵션
-    OpenTelemetry/                        # 관찰 가능성 옵션
-      OpenTelemetryOptions.cs             # 관찰 가능성 옵션 데이터
-      OpenTelemetryOptionsValidator.cs    # 관찰 가능성 옵션 데이터 유효성 검사
+    OpenTelemetry/
+      OpenTelemetryOptions.cs             # 옵션 데이터
+      OpenTelemetryOptionsValidator.cs    # 옵션 데이터 유효성 검사
 ```
 - 옵션 의존성 등록을 위한 폴더 구성
 
