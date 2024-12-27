@@ -1,0 +1,1 @@
+FROM mcr.microsoft.com/dotnet/aspire-dashboard:9.0
