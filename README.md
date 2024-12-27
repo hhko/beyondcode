@@ -590,7 +590,7 @@ Directory.Build.props                                // 전역 프로젝트 공�
       <Version>$(AppVersion)</Version>
 
       <!-- 메타 -->
-      <Company>조직</Company>
+      <Company>Corporation</Company>
       <ProductName>제품</ProductName>
       <Copyright>Copyright © 2024</Copyright>
     </PropertyGroup>
@@ -1253,31 +1253,70 @@ SERVICE_VERSION=1.0.1
 ```
 
 ## Ch 26.1 C# 서비스 이름
-구분          | 규칙                                | 예제
----          | ---                                  | ---
-컴포즈 이름   | {조직}-{솔루션}                       | crop-hello
-서비스 이름   | {조직}.{솔루션}.{서비스}              | crop.hello.api:
-이미지 이름   | {조직}/{솔루션}/{서비스}:{서비스 버전} | crop/hello/api:${SERVICE_VERSION}
-컨테이너 이름 | {조직}.{솔루션}.{서비스}              | corp.hello.api
-호스트 이름   | {조직}.{솔루션}.{서비스}              | corp.hello.api
-네트워크 이름 | {조직}.{솔루션}                       | crop.hello
+Item            | Rule                                                  | Example
+---             | ---                                                   | ---
+compose name    | {Corporation}-{Solution}                              | crop-hello
+service name    | {Corporation}.{Solution}.{Service}                    | crop.hello.api:
+image name      | {Corporation}/{Solution}/{Service}:{Service Version}  | crop/hello/api:${SERVICE_VERSION}
+container name  | {Corporation}.{Solution}.{Service}                    | corp.hello.api
+host name       | {Corporation}.{Solution}.{Service}                    | corp.hello.api
+network name    | {Corporation}.{Solution}                              | crop.hello
 
-- 예. 조직: crop
-- 예. 솔루션: hello
-- 예. 서비스: api, ...
+- 예. Corporation: crop
+- 예. Solution: hello
+- 예. Service: api, ...
+
+```yml
+services:
+  crop.hello.api:                             # <- service name
+    image: crop/hello/api:${SERVICE_VERSION}  # <- image name
+    build:
+      context: .
+      dockerfile: Backend/Api/Src/Crop.Hello.Api/Dockerfile
+    container_name: corp.hello.api            # <- container name
+    hostname: corp.hello.api                  # <- host name
+    networks:
+      - net
+    volumes:
+      - ./logs/crop.hello.api:/app/logs
+    logging: *logging-common
+
+networks:
+  net:
+    name: crop.hello                          # <- network name
+```
+
+- 로그 볼륨
+  - 프러덕션: docker-compose.yml
+    ```yml
+    volumes:
+      - ./logs/crop.hello.api:/app/logs
+    ```
+  - 디버그: docker-compose.override.yml
+    ```yml
+    volumes:
+      - ./.logs/crop.hello.api:/app/logs
+    ```
+    - .gitignore 파일에 `.logs/`을 추가합니다.
 
 ## Ch 26.2 인프라 서비스 이름
-  구분          | 규칙                                      | 예제
-  ---          | ---                                        | ---
-  서비스 이름   | {조직}.{솔루션}.infra.{서비스}              | crop.hello.infra.aspire:
-  이미지 이름   | {조직}/{솔루션}/infra/{서비스}:{서비스 버전} | crop/hello/infra/aspire:${SERVICE_VERSION}
-  컨테이너 이름 | {조직}.{솔루션}.infra.{서비스}              | corp.hello.infra.aspire
-  호스트 이름   | {조직}.{솔루션}.infra.{서비스}              | corp.hello.infra.aspire
-  네트워크 이름 | {조직}.{솔루션}                             | crop.hello
+Item            | Rule                                                        | Example
+---             | ---                                                         | ---
+service name    | {Corporation}.{Solution}.infra.{Service}                    | crop.hello.infra.aspire:
+image name      | {Corporation}/{Solution}/infra/{Service}:{Service Version}  | crop/hello/infra/aspire:${SERVICE_VERSION}
+container name  | {Corporation}.{Solution}.infra.{Service}                    | corp.hello.infra.aspire
+host name       | {Corporation}.{Solution}.infra.{Service}                    | corp.hello.infra.aspire
+network name    | {Corporation}.{Solution}                                    | crop.hello
 
-```
+- 예. Corporation: crop
+- 예. Solution: hello
+- 예. Service: aspire, ...
+
+```shell
+# Windows
 [System.Environment]::SetEnvironmentVariable("DOTNET_ASPIRE_CONTAINER_RUNTIME", "podman", "User")
 
+# Linux
 export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
 ```
 
