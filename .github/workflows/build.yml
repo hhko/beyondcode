@@ -10,6 +10,7 @@ on:
       - '**.md'
       - '**.pptx'
       - '**.png'
+      - '**.ps1'
       #- '.github/workflows/build-docs.yml'
   # pull_request:
   #   branches: [ main ]
