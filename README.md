@@ -1137,11 +1137,15 @@ networks:
   ```
 
 ## Ch 16.3 Docker Compose 전용 디버깅 환경 변수
+```yml
+services:
+  crop.hello.api:
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
+    volumes:
+      - ./.logs/crop.hello.api:/app/logs
 ```
-docker-compose.override.yml
-  -> DOTNET_ENVIRONMENT=Docker
-     -> appsettings.Docker.json
-```
+- docker-compose.override.yml 파일
 - 콘솔과 Docker Compose의 설정이 다를 경우, Visual Studio에서 디버깅 목적으로 사용하는 docker-compose.override.yml 파일을 활용하여 DOTNET_ENVIRONMENT 값을 설정할 수 있습니다. 이를 통해 appsettings.Docker.json에 Docker Compose 전용 설정을 지
 
 ```json
@@ -1155,16 +1159,6 @@ docker-compose.override.yml
 - OtlpCollectorHost 값 구분
   - 컨테이너일 때(도커 컴포즈): host.docker.internal
   - 호스트일 때(콘솔): 127.0.0.1
-
-```yml
-services:
-  crop.hello.api:
-    environment:
-      - DOTNET_ENVIRONMENT=Docker
-    volumes:
-      - ./.logs/crop.hello.api:/app/logs
-```
-- docker-compose.override.yml 파일
 
 <br/>
 
