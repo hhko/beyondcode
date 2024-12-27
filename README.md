@@ -1161,6 +1161,8 @@ services:
   - 호스트일 때(콘솔): 127.0.0.1
 
 ## Ch 16.4 콘솔 프로젝트 appsettings.json 그룹핑
+![](./.images/appsettings.groupping.png)
+
 ```xml
 <ItemGroup>
   <Content Include="appsettings.json">
