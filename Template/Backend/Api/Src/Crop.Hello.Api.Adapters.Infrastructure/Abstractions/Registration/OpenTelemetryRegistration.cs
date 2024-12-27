@@ -6,8 +6,8 @@ using Serilog;
 using OpenTelemetry.Logs;
 using OpenTelemetry;
 using System.Diagnostics;
-using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetryOption;
 using Microsoft.Extensions.Logging;
+using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetry;
 
 namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Registration;
 

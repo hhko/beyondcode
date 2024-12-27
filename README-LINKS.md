@@ -49,6 +49,7 @@
   [![](https://img.youtube.com/vi/P1vES9AgfC4/0.jpg)](https://www.youtube.com/watch?v=P1vES9AgfC4)
   - 아키텍처 관점에서 Pure Function과 Impure Function 배치의 중요성을 이해할 수 있습니다.
 - [ ] [함수형 도메인 주도 설계 구현](https://liftio.org/2021/files/jisoo-park-ppt.pdf)
+- [ ] [Domain-Driven Design Sample](https://github.com/henriquelourente/Domain-Driven-Design-Sample)
 
 <br/>
 
@@ -83,6 +84,10 @@
 
 ### 패키지
 - [ ] [Publish MediatR Notifications in Parallel](https://code-maze.com/mediatr-parallel-publishing-notifications/)
+
+### Option
+- [x] [Easily Validate the Options Pattern with FluentValidation](https://www.youtube.com/watch?v=I0YPTeCYvrE)
+- [x] [Adding validation to strongly typed configuration objects using FluentValidation](https://andrewlock.net/adding-validation-to-strongly-typed-configuration-objects-using-flentvalidation/)
 
 ### 테스트
 - [ ] [Integration Testing for ASP.NET APIs](https://knowyourtoolset.com/2024/01/integration-testing/)

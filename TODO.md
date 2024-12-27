@@ -68,7 +68,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 #   - curl          : curl
 #   - sudo          : sudo
 USER root
-RUN apt-get update \
+RUN apt-get update -q \
   && apt-get --no-install-recommends --no-install-suggests --yes --quiet install \
           procps \
           net-tools \
@@ -81,6 +81,9 @@ RUN apt-get update \
             /usr/share/doc/* /usr/share/groff/* /usr/share/info/* /usr/share/linda/* \
             /usr/share/lintian/* /usr/share/locale/* /usr/share/man/*
 
+RUN apt-get update -q \
+    && apt-get install -qy build-essential wget libfontconfig1 \
+    && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 ...
 

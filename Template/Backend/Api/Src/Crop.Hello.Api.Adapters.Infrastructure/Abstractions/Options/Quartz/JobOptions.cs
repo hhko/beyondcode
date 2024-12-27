@@ -1,4 +1,4 @@
-﻿namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.QuartzOption;
+﻿namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.Quartz;
 
 public sealed class JobOptions
 {
@@ -11,8 +11,7 @@ public sealed class JobOptions
     // ---
     // 7. 연도(선택 사항)
 
-    // 매일 특정 시간에 실행
-    // 0 9 * * ?                : 매일 오전 9시에 실행
+    public string CronSchedule { get; init; } = default!;
 
     // 매주 월요일 오전 10시에 실행
     // 0 10 ? * MON             : 매주 월요일 오전 10시에 실행
@@ -58,6 +57,4 @@ public sealed class JobOptions
     // 0 0/5 * * * ?                : 5분 단위, ? 요일 무시
 
     // 0 30 10-13 ? * WED,FRI       : 0초, 30분매주 Wednesday과 Friday의 10:30, 11:30, 12:30, 13:30
-
-    public string CronSchedule { get; set; } = string.Empty;
 }

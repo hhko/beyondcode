@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using Quartz;
 
-namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.QuartzOption;
+namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.Quartz;
 
 internal sealed class QuartzOptionsSetup(
     IOptions<JobOptions> workerOptions)

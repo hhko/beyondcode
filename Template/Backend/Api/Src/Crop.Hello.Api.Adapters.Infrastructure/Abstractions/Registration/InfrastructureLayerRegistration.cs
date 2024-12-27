@@ -14,7 +14,8 @@ public static class InfrastructureLayerRegistration
         return services
             .RegisterOptions()
             .RegisterWindowsService()
-            .RegisterOpenTelemetry(environment, configuration);
+            .RegisterOpenTelemetry(environment, configuration)
+            .RegisterQuartz();
     }
 
     public static IHostBuilder EnableInfrastructureLayer(this IHostBuilder app)

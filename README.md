@@ -32,18 +32,23 @@
   - [ ] Ch 20. Logs
   - [ ] Ch 21. Traces
   - [ ] Ch 22. Metrics
-- Part 5. Hosts
-  - [ ] [Ch 23. Schedule Host](#ch-23-schedule-host)
+- Part 5. Host
+  - [ ] [Ch 23. Console Host](#ch-23-console-host)
   - [ ] Ch 24. WebApi Host
-  - [ ] Ch 25. RabbitMQ Host
-  - [ ] Ch 26. gRPC Host
-- Part 6. Internal Tactical Design
-  - [x] [Ch 27. Tactical Design Map](#ch-27-tactical-design-map)
-  - [ ] [Ch 28. Output Type(Result)](#ch-28-output-type)
-  - [ ] Ch 29. Domain Type
+  - [x] [Ch 25. Option](#ch-25-option)
+  - [ ] Ch 26. Container Health Check
+- Part 6. Hosts
+  - [ ] [Ch 27. Schedule Host](#ch-23-schedule-host)
+  - [ ] Ch 28. RabbitMQ Host
+  - [ ] Ch 29. gRPC Host
+  - [ ] Ch 30. WebApi Host
+- Part 7. Internal Tactical Design
+  - [x] [Ch 31. Tactical Design Map](#ch-27-tactical-design-map)
+  - [ ] [Ch 32. Output Type(Result)](#ch-28-output-type)
+  - [ ] Ch 33. Domain Type
   - [ ] TODO
-- Part 6. External Tactical Design
-- Part 7.  Strategic Design
+- Part 8. External Tactical Design
+- Part 9. Strategic Design
 
 <br/>
 
@@ -70,6 +75,10 @@
     - `Destructurama.Attributed`
     - `Serilog.Exceptions`
   - `Microsoft.Extensions.Hosting.WindowsServices`
+  - `Quartz`
+    - `Quartz.Extensions.Hosting`
+  - `FluentValidation`
+    - `FluentValidation.DependencyInjectionExtensions`
 - Unit Test
   - `xunit`
   - `FluentAssertions`
@@ -968,22 +977,9 @@ DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --pr
 Abstractions/                             # 레이어 주 목표가 아닌 부수적인 코드
   Registration/                           # 의존성 등록
     InfrastructureLayerRegistration.cs    # {레이어}Registration.cs
-    OptionsRegistration.cs
-    OpenTelemetryRegistration.cs
-  Options/                                # 옵션
-    OpenTelemetryOption/                  # 관찰 가능성 옵션
-      OpenTelemetryOptions.cs
-      OpenTelemetryOptionsSetup.cs
-      OpenTelemetryOptionsValidator.cs
-```
-```shell
-InfrastructureLayerRegistration.cs        # Adapter 레이어 Infrastructure 레이어 등록
-  -> RegisterOptions.cs                   # 옵션 의존성 등록
-     -> OptionsRegistration.cs            # 옵션 패턴
-        -> OpenTelemetryOptions.cs
-        -> OpenTelemetryOptionsSetup.cs
-        -> OpenTelemetryOptionsValidator.cs
-  -> OpenTelemetryRegistration.cs         # 관찰 가능성 의존성 등록
+                                          #  예. InfrastructureLayerRegistration.cs
+                                          #  예. PersistenceLayerRegistration.cs
+                                          #  예. ApplicationLayerRegistration.cs
 ```
 
 - 부수 코드(레이어 주 목표가 아닌 코드)
@@ -994,110 +990,6 @@ InfrastructureLayerRegistration.cs        # Adapter 레이어 Infrastructure 레
     - 의존성 등록합니다.
   - `{레이어}Registration.cs`
     - 레이어 의존성 등록 파일입니다.
-
-## Ch 14.2 레이어 의존성 주입(옵션 패턴)
-```
-appsettings.json
-  -> {Featrue}Options
-     Featrue 옵션
-  -> {Feature}OptionsSetup : IConfigureOptions<{Feature}Options>
-     Featrue 옵션 데이터 읽기
-  -> {Feature}OptionsValidator : IValidateOptions<{Feature}Options>
-     Featrue 옵션 데이터 유효성 검사
-```
-```cs
-// 옵션 데이터
-class OpenTelemetryOptions
-
-// 옵션 데이터 appsettings.json에서 읽기
-class OpenTelemetryOptionsSetup(IConfiguration configuration) : IConfigureOptions<OpenTelemetryOptions>
-
-// 옵션 데이터 유효성 검사
-class OpenTelemetryOptionsValidator : IValidateOptions<OpenTelemetryOptions>
-```
-
-## Ch 14.3 레이어 의존성 테스트(옵션 패턴)
-![](./.images/IntegrationTest.OptionPattern.png)
-
-```cs
-IHostBuilder builder = CreateHostBuilder(args);
-using IHost host = builder.Build();
-await host.RunAsync();
-```
-- `IHostBuilder` 생성을 `CreateHostBuilder` 메서드로 분리하여, 테스트 환경에서도 `IHostBuilder`를 생성할 수 있도록 제공합니다.
-
-```cs
-public static partial class Program
-{
-  public static IHostBuilder CreateHostBuilder(string[] args)
-  {
-    return CreateHostBuilder(
-      args: args,
-      configuration: null);
-  }
-
-  public static IHostBuilder CreateHostBuilder(
-    string[] args,
-    IConfiguration? configuration,
-    bool removeJsonConfigurationSources = true)
-  {
-    return Host.CreateDefaultBuilder(args)
-      .ConfigureAppConfiguration((context, config) =>
-      {
-        if (configuration is null)
-          return;
-
-        // 기존 환경 설정 제거
-        if (removeJsonConfigurationSources)
-        {
-          //((List<IConfigurationSource>)config.Sources).RemoveAll(source => source is JsonConfigurationSource);
-          for (int i = config.Sources.Count - 1; i >= 0; i--)
-          {
-            if (config.Sources[i] is JsonConfigurationSource)
-            {
-              config.Sources.RemoveAt(i);
-            }
-          }
-        }
-
-        // 신규 환경 설정 추가
-        config.AddConfiguration(configuration);
-      })
-      .ConfigureServices((context, services) =>
-      {
-        // 레이어 의존성 등록
-        services
-          .RegisterInfrastructureLayer(context.HostingEnvironment, context.Configuration)
-          .RegisterPersistenceLayer()
-          .RegisterApplicationLayer();
-      });
-  }
-}
-```
-- 테스트 환경에서 `IConfiguration`을 제어할 수 있도록 `CreateHostBuilder` 메서드에서 매개변수를 제공합니다.
-
-```cs
-[Theory]
-[InlineData("./Options/appsettings.Invalid.TeamName.json")]
-[InlineData("./Options/appsettings.Invalid.ApplicationName.json")]
-public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFilePath)
-{
-  // Arragne
-  IConfiguration configuration = new ConfigurationBuilder()
-    .AddJsonFile(jsonFilePath)
-    .Build();
-
-  // Act
-  IHostBuilder builder = Program.CreateHostBuilder(
-    args: Array.Empty<string>(),
-    configuration: configuration,           // 테스트 appsettings.json 설정
-    removeJsonConfigurationSources: true);  // 기본 appsettings.json 모두 삭제
-  Action act = () => builder.Build();
-
-  // Assert
-  act.Should().Throw<OptionsValidationException>();
-}
-```
 
 <br/>
 
@@ -1178,7 +1070,197 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 <br/>
 
-# Part 5. Hosts
+# Part 5. Hosts Configuration
+
+# Ch 23. Console Host
+```xml
+<Project>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Crop.Hello.Api.Tests.Integration" />
+  </ItemGroup>
+</Project>
+```
+
+```cs
+IHostBuilder builder = CreateHostBuilder(args);
+using IHost host = builder.Build();
+await host.RunAsync();
+
+public static partial class Program
+{
+  public static IHostBuilder CreateHostBuilder(string[] args)
+  {
+    return CreateHostBuilder(
+      args: args,
+      configuration: null);
+  }
+
+  public static IHostBuilder CreateHostBuilder(
+    string[] args,
+    IConfiguration? configuration,
+    bool removeJsonConfigurationSources = true)
+  {
+    return Host.CreateDefaultBuilder(args)
+      .ConfigureAppConfiguration((context, config) =>
+      {
+        if (configuration is null)
+          return;
+
+        // 기존 환경 설정 제거
+        if (removeJsonConfigurationSources)
+        {
+          //((List<IConfigurationSource>)config.Sources).RemoveAll(source => source is JsonConfigurationSource);
+          for (int i = config.Sources.Count - 1; i >= 0; i--)
+          {
+            if (config.Sources[i] is JsonConfigurationSource)
+            {
+              config.Sources.RemoveAt(i);
+            }
+          }
+        }
+
+        // 신규 환경 설정 추가
+        config.AddConfiguration(configuration);
+      })
+      .ConfigureServices((context, services) =>
+      {
+        // 레이어 의존성 등록
+        services
+          .RegisterInfrastructureLayer(context.HostingEnvironment, context.Configuration)
+          .RegisterPersistenceLayer()
+          .RegisterApplicationLayer();
+      });
+  }
+}
+```
+- 테스트 환경에서 `IConfiguration`을 제어할 수 있도록 `CreateHostBuilder` 메서드에서 매개변수를 제공합니다.
+
+```cs
+[Fact]
+public void We_CanTest_TheHost()
+{
+  // Arragne
+  IHostBuilder builder = Program.CreateHostBuilder(
+    args: Array.Empty<string>());
+
+  // Act
+  // ...
+
+  // Assert
+  // ...
+
+}
+```
+
+# Ch 24. WebApi Host
+- TODO 테스트 가능한 호스트
+
+# Ch 25. Option
+## Ch 25.1 레이어 의존성 주입(예. 옵션 패턴)
+```
+appsettings.json
+  -> {Featrue}Options.cs
+     Featrue 옵션 데이터
+  -> {Feature}OptionsValidator.cs     <- AbstractValidator<{Featrue}Options>
+     Featrue 옵션 데이터 유효성 검사
+```
+- 프로그램 설정 파일과 옵셩 관련 클래스
+
+```shell
+Abstractions/                             # 레이어 주 목표가 아닌 부수적인 코드
+  Registration/                           # 의존성 등록
+    InfrastructureLayerRegistration.cs    # {레이어}Registration.cs
+    OptionsRegistration.cs                # 옵션 의존성 등록
+
+  Options/                                # 옵션
+    OpenTelemetry/                        # 관찰 가능성 옵션
+      OpenTelemetryOptions.cs             # 관찰 가능성 옵션 데이터
+      OpenTelemetryOptionsValidator.cs    # 관찰 가능성 옵션 데이터 유효성 검사
+```
+- 옵션 의존성 등록을 위한 폴더 구성
+
+```cs
+// 옵션 의존성 등록
+internal static class OptionsRegistration
+{
+  internal static IServiceCollection RegisterOptions(this IServiceCollection services)
+  {
+    // FluentValidation 통합을 위한 확장 메서드
+    services.AddOptionsWithValidation<
+      OpenTelemetryOptions,
+      OpenTelemetryOptionsValidator>(nameof(OpenTelemetryOptions));
+
+    return services;
+  }
+}
+```
+- `AddOptionsWithValidation` 확장 메서드는 FluentValidation 패키지를 이용하여 옵션 데이터 유효성 검사를 수행하도록 확장합니다.
+- 참고 자료
+  - [Adding validation to strongly typed configuration objects using FluentValidation](https://andrewlock.net/adding-validation-to-strongly-typed-configuration-objects-using-flentvalidation/)
+  - [Easily Validate the Options Pattern with FluentValidation](https://www.youtube.com/watch?v=I0YPTeCYvrE)
+
+```cs
+// 옵션 데이터
+public sealed class OpenTelemetryOptions
+{
+  public string TeamName { get; init; } = default!;
+}
+
+// 옵션 데이터 유효성 검사: FluentValidation 패캐지
+internal sealed class OpenTelemetryOptionsValidator
+  : AbstractValidator<OpenTelemetryOptions>
+{
+  public OpenTelemetryOptionsValidator()
+  {
+    RuleFor(x => x.TeamName).NotEmpty();
+  }
+}
+```
+
+## Ch 25.2 레이어 의존성 테스트(예. 옵션 패턴)
+![](./.images/IntegrationTest.OptionPattern.png)
+
+```cs
+IHostBuilder builder = CreateHostBuilder(args);
+using IHost host = builder.Build();
+await host.RunAsync();
+```
+- `IHostBuilder` 생성을 `CreateHostBuilder` 메서드로 분리하여, 테스트 환경에서도 `IHostBuilder`를 생성할 수 있도록 제공합니다.
+
+```cs
+[Theory]
+[InlineData("./Options/appsettings.Invalid.TeamName.json")]
+[InlineData("./Options/appsettings.Invalid.ApplicationName.json")]
+public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFilePath)
+{
+  // Arragne
+  IConfiguration configuration = new ConfigurationBuilder()
+    .AddJsonFile(jsonFilePath)
+    .Build();
+  IHostBuilder builder = Program.CreateHostBuilder(
+    args: Array.Empty<string>(),
+    configuration: configuration,           // 테스트 appsettings.json 설정
+    removeJsonConfigurationSources: true);  // 기본 appsettings.json 모두 삭제
+
+  // Act
+  Action act = () => builder.Build();
+
+  // Assert
+  act.Should().Throw<OptionsValidationException>();
+}
+```
+
+<br/>
+
+# Ch 26. Container Health Check
+
+<br/>
+
+---
+
+<br/>
+
+# Part 6. Hosts
 
 | IHost    | Windows Service | Container | Integration Test | Performance Test | Pipeline(Exception) |
 | ---      | :---:           | :---:     | :---:            | :---:            | :---:               |
@@ -1187,19 +1269,19 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 | RabbitMQ |                 |           |                  |                  |                     |
 | gRPC     |                 |           |                  |                  |                     |
 
-# Ch 23. Schedule Host
+# Ch 27. Schedule Host
 
-## Ch 23.1 윈도우 서비스
+## Ch 27.1 윈도우 서비스
 ```shell
 # 윈도우 서비스 의존성 등록
 RegisterInfrastructureLayer   # Infrastructure 레이어
   -> RegisterWindowsService
-  -> AddWindowsService        # Microsoft.Extensions.Hosting.WindowsServices 패키지
+     -> AddWindowsService     # Microsoft.Extensions.Hosting.WindowsServices 패키지
 
 # 윈도우 서비스 활성화
 EnableInfrastructureLayer     # Infrastructure 레이어
   -> EnableWindowsService
-  -> UseWindowsService        # Microsoft.Extensions.Hosting.WindowsServices 패키지
+     -> UseWindowsService     # Microsoft.Extensions.Hosting.WindowsServices 패키지
 ```
 
 ```cs
@@ -1294,9 +1376,9 @@ echo "서비스 설치 및 복구 설정 완료"
 :: sc delete "MyService"
 ```
 
-## Ch 23.2 Container
+## Ch 27.2 컨테이너너
 
-## Ch 23.3 통합 테스트
+## Ch 27.3 통합 테스트
 ![](./.images/Host.Schedule.IntegrationTest.Options.png)
 
 - `appsettings.json` 유효성 통합 테스트
@@ -1307,17 +1389,17 @@ echo "서비스 설치 및 복구 설정 완료"
 
 <br/>
 
-# Part 6. Internal Tactical Design
+# Part 7. Internal Tactical Design
 
-# Ch 27. Tactical Design Map
+# Ch 31. Tactical Design Map
 ![](./.images/TacticalDesign.Pattern.png)
 
 <br/>
 
-# Ch 28. Output Type
+# Ch 32. Output Type
 - IResult 타입으로 모든 Known과 Unknown 입출력 메서드 결과 타입으로 정의합니다.
 
-## Ch 28.1 IResult 타입 정의
+## Ch 32.1 IResult 타입 정의
 - 성공과 실패를 구분하며, 성공 시에는 값을 가지고, 실패 시에는 에러 값을 포함합니다.
 - 특히, 유효성 검사 실패의 경우 다수의 에러 값을 정의할 수 있습니다.
 
