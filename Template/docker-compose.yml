@@ -19,6 +19,8 @@ services:
     hostname: corp.hello.api
     networks:
       - net
+    volumes:
+      - ./logs/crop.hello.api:/app/logs
     logging: *logging-common
 
 networks:

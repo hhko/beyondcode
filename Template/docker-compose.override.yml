@@ -1,0 +1,4 @@
+services:
+  crop.hello.api:
+    volumes:
+      - ./.logs/crop.hello.api:/app/logs

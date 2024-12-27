@@ -1245,20 +1245,28 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 <br/>
 
-# Ch 26. Container Health Check
+# Ch 26. Container
 
-## Ch 26.1 컨테이너 이름 규칙
-- C# 서비스 이름
-  구분          | 규칙                                | 예제
-  ---          | ---                                  | ---
-  컴포즈 이름   | {조직}-{솔루션}                       | crop-hello
-  서비스 이름   | {조직}.{솔루션}.{서비스}              | crop.hello.api:
-  이미지 이름   | {조직}/{솔루션}/{서비스}:{서비스 버전} | crop/hello/api:${SERVICE_VERSION}
-  컨테이너 이름 | {조직}.{솔루션}.{서비스}              | corp.hello.api
-  호스트 이름   | {조직}.{솔루션}.{서비스}              | corp.hello.api
-  네트워크 이름 | {조직}.{솔루션}                       | crop.hello
+```ini
+COMPOSE_PROJECT_NAME=crop-hello
+SERVICE_VERSION=1.0.1
+```
 
-- 인프라 서비스 이름
+## Ch 26.1 C# 서비스 이름
+구분          | 규칙                                | 예제
+---          | ---                                  | ---
+컴포즈 이름   | {조직}-{솔루션}                       | crop-hello
+서비스 이름   | {조직}.{솔루션}.{서비스}              | crop.hello.api:
+이미지 이름   | {조직}/{솔루션}/{서비스}:{서비스 버전} | crop/hello/api:${SERVICE_VERSION}
+컨테이너 이름 | {조직}.{솔루션}.{서비스}              | corp.hello.api
+호스트 이름   | {조직}.{솔루션}.{서비스}              | corp.hello.api
+네트워크 이름 | {조직}.{솔루션}                       | crop.hello
+
+- 예. 조직: crop
+- 예. 솔루션: hello
+- 예. 서비스: api, ...
+
+## Ch 26.2 인프라 서비스 이름
   구분          | 규칙                                      | 예제
   ---          | ---                                        | ---
   서비스 이름   | {조직}.{솔루션}.infra.{서비스}              | crop.hello.infra.aspire:
@@ -1266,15 +1274,6 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
   컨테이너 이름 | {조직}.{솔루션}.infra.{서비스}              | corp.hello.infra.aspire
   호스트 이름   | {조직}.{솔루션}.infra.{서비스}              | corp.hello.infra.aspire
   네트워크 이름 | {조직}.{솔루션}                             | crop.hello
-
-```ini
-COMPOSE_PROJECT_NAME=crop-hello
-SERVICE_VERSION=1.0.1
-```
-
-- 조직: crop
-- 솔루션: hello
-- 서비스: api, ...
 
 ```
 [System.Environment]::SetEnvironmentVariable("DOTNET_ASPIRE_CONTAINER_RUNTIME", "podman", "User")
@@ -1285,6 +1284,8 @@ export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
 [Podman for Windows](https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md)
 
 <br/>
+
+# Ch 27. Container Health Check
 
 ---
 

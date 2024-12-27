@@ -3,7 +3,7 @@
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/runtime:9.0 AS base
 
-# ÇÊ¼ö ÆĞÅ°Áö ¼³Ä¡
+# í•„ìˆ˜ íŒ¨í‚¤ì§€ ì„¤ì¹˜
 #   - procps        : ps -ef
 #   - net-tools     : ifconfig
 #   - iputils-ping  : ping
@@ -53,14 +53,14 @@ RUN dotnet build "./Crop.Hello.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./Crop.Hello.Api.csproj" \
-	-c $BUILD_CONFIGURATION \
-	-o /app/publish \
-	/p:UseAppHost=false \
-    --os linux \
-    --arch x64 \
-    /t:PublishContainer
+  -c $BUILD_CONFIGURATION \
+  -o /app/publish \
+  /p:UseAppHost=false \
+  --os linux \
+  --arch x64 \
+  /t:PublishContainer
 
-    # ÄÁÅ×ÀÌ³Ê
+    # ì»¨í…Œì´ë„ˆ Publish ì˜µì…˜
     #   console, worker: /t:PublishContainer
     #   webapi: -p:PublishProfile=DefaultContainer
 
