@@ -26,7 +26,7 @@
   - [ ] [Ch 15. Solution Build Automation](#ch-15-solution-build-automation)
   - [ ] Ch 16. Solution Container Deployment Automation
 - Part 4. Observability
-  - [ ] Ch 17. Aspire Dashboard
+  - [x] [Ch 17. Aspire Dashboard](#ch-16-aspire-dashboard)
   - [ ] cH 18. Grafana System
   - [ ] Ch 19. OpenSearch System
   - [ ] Ch 20. Logs
@@ -65,20 +65,21 @@
 
 - Application 레이어
   - `MediatR`
-    - `MediatR.Contracts`
+    - MediatR.Contracts
 - Adapter 레이어
   - `Serilog`
-    - `Serilog.Extensions.Hosting`
-    - `Serilog.Settings.Configuration`
-    - `Serilog.Sinks.Console`
-    - `Serilog.Sinks.File`
-    - `Destructurama.Attributed`
-    - `Serilog.Exceptions`
+    - Serilog.Extensions.Hosting
+    - Serilog.Settings.Configuration
+    - Serilog.Sinks.Console
+    - Serilog.Sinks.File
+    - Destructurama.Attributed
+    - Serilog.Exceptions
+    - Serilog.Sinks.OpenTelemetry
   - `Microsoft.Extensions.Hosting.WindowsServices`
   - `Quartz`
-    - `Quartz.Extensions.Hosting`
+    - Quartz.Extensions.Hosting
   - `FluentValidation`
-    - `FluentValidation.DependencyInjectionExtensions`
+    - FluentValidation.DependencyInjectionExtensions
 - Unit Test
   - `xunit`
   - `FluentAssertions`
@@ -1070,6 +1071,74 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 
 <br/>
 
+# Part 4. Observability
+
+# Ch 16. Aspire Dashboard
+```dockerfile
+FROM mcr.microsoft.com/dotnet/aspire-dashboard:9.0
+```
+
+```yml
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+services:
+  crop.hello.infra.aspire:
+    env_file: .env
+    image: crop/hello/infra/aspire:${SERVICE_VERSION}
+    build:
+      context: .
+      dockerfile: Backend/Build/Dockerfiles/Aspire/Dockerfile
+    container_name: corp.hello.infra.aspire
+    hostname: corp.hello.infra.aspire
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+    ports:
+      - 4317:18889      # OTLP/gRPC
+      - 4318:18890      # OTLP/HTTP
+      - 18888:18888     # http dashboard: http://localhost:18888
+    networks:
+      - net
+    logging: *logging-common
+
+networks:
+  net:
+    name: crop.hello
+```
+
+- 인증을 사용하지 않도록 대시보드를 구성하고 익명 액세스를 허용합니다.
+  ```yml
+  DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+  ```
+- [데이터 수집 제한](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/dashboard/configuration?tabs=bash#telemetry-limits)
+  ```shell
+  docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard \
+    -e DASHBOARD__TELEMETRYLIMITS__MAXLOGCOUNT='1000' \
+    -e DASHBOARD__TELEMETRYLIMITS__MAXTRACECOUNT='1000' \
+    -e DASHBOARD__TELEMETRYLIMITS__MAXMETRICSCOUNT='1000' \
+    mcr.microsoft.com/dotnet/aspire-dashboard:9.0
+  ```
+  ```json
+  {
+    "Dashboard": {
+      "TelemetryLimits": {
+        "MaxLogCount": 1000,
+        "MaxTraceCount": 1000,
+        "MaxMetricsCount": 1000
+      }
+    }
+  }
+  ```
+
+<br/>
+
+---
+
+<br/>
+
 # Part 5. Hosts Configuration
 
 # Ch 23. Console Host
@@ -1247,11 +1316,6 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 # Ch 26. Container
 
-```ini
-COMPOSE_PROJECT_NAME=crop-hello
-SERVICE_VERSION=1.0.1
-```
-
 ## Ch 26.1 C# 서비스 이름
 Item            | Rule                                                  | Example
 ---             | ---                                                   | ---
@@ -1266,7 +1330,19 @@ network name    | {Corporation}.{Solution}                              | crop.h
 - 예. Solution: hello
 - 예. Service: api, ...
 
+```ini
+COMPOSE_PROJECT_NAME=crop-hello               # <- compose name
+SERVICE_VERSION=1.0.1
+```
+- .env 파일
+
 ```yml
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
 services:
   crop.hello.api:                             # <- service name
     image: crop/hello/api:${SERVICE_VERSION}  # <- image name
@@ -1285,7 +1361,7 @@ networks:
   net:
     name: crop.hello                          # <- network name
 ```
-
+- docker-compose.yml 파일
 - 로그 볼륨
   - 프러덕션: docker-compose.yml
     ```yml

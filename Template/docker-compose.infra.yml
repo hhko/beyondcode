@@ -17,6 +17,12 @@ services:
       dockerfile: Backend/Build/Dockerfiles/Aspire/Dockerfile
     container_name: corp.hello.infra.aspire
     hostname: corp.hello.infra.aspire
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+    ports:
+      - 4317:18889      # OTLP/gRPC
+      - 4318:18890      # OTLP/HTTP
+      - 18888:18888     # http dashboard
     networks:
       - net
     logging: *logging-common
