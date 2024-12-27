@@ -8,6 +8,8 @@ using OpenTelemetry;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetry;
+using Serilog.Sinks.OpenTelemetry;
+using System.Net.Sockets;
 
 namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Registration;
 
@@ -26,7 +28,30 @@ internal static class OpenTelemetryRegistration
         services
             .AddSerilog(configure =>
             {
-                configure.ReadFrom.Configuration(configuration);
+                configure
+                    .ReadFrom.Configuration(configuration)
+                    .WriteTo.OpenTelemetry(options =>
+                    {
+                        // OTLP/gRPC: 4317
+                        //options.Endpoint = "http://127.0.0.1:4317";
+                        //options.Endpoint = "http://host.docker.internal:4317";
+                        options.Endpoint = $"http://{openTelemetryOptions.OtlpCollectorHost}:4317";
+
+                        // service.naver
+                        // service.version
+                        options.ResourceAttributes = new Dictionary<string, object>
+                         {
+                             ["service.name"] = "test-logging-service",
+                             ["index"] = 10,
+                             ["flag"] = true,
+                             ["value"] = 3.14
+                         };
+
+                         //options.IncludedData =
+                         //   IncludedData.TraceIdField |
+                         //   IncludedData.SpanIdField |
+                         //   IncludedData.TemplateBody;
+                     });
             });
             //.AddOpenTelemetry()
             //.WithLogging()

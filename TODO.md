@@ -1,31 +1,15 @@
-- aspire 대시보드 실행
 - serilog -> aspire 대시보드 전송
 - Job 설정 이해
 - 테스트 환경 설정
-- [x] Aspire 대시보드
-- [x] Docker
-- Serilog
+- 성능 테스트
+- github action 로컬 실행: act
+- 리눅스 단일 파일 배포
+- 배포 파일 재구성
 
 <br/>
 
-- [x] 옵션 통합 테스트
-- [x] 윈도우 서비스
-- [x] 테스트 요약
-- [x] 코드 커버리지 어셈블리 단위
-- [ ] 도커 컨테이너
----
-- [ ] Serilog와 OpenTelemtry 통합
----
-- [x] GitHub 빌드 자동화, 코드 커버리지
-- [ ] reportgenerator cli
-- [ ] Local 빌드 자동화, 코드 커버리지
-- [ ] 단일 파일 배포
-- [x] 윈도우 서비스
-- [ ] Docker 구성
----
 - [ ] Job 설정
 - [ ] Job 통합 테스트, 테스트 종료
-- [ ] 로그 의존성 주입
 ---
 - [ ] Serilog 구조적 파일 로그, https://github.com/ijardillier/netclient-elastic?tab=readme-ov-file#logs-via-serilog
 - [ ] Serilog 예외
@@ -34,15 +18,21 @@
   - [ ] 제외
   - [ ] 건수 제약
 ---
-- [x] Aspire
----
-- [ ] 로컬 빌드
-- [ ] 도커 구성
-- [ ] 도커 CLI
+- [ ] 도커 desktop 없이 CLI
 - [ ] 도커 헬스체크, https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
 
 <br/>
 
+- [x] aspire | 컨테이너 구성
+- [ ] aspire | 로그 출력
+- [ ] aspire | 지표 출력
+- [ ] aspire | 추적 출력
+- [ ] grafana | 지표
+- [ ] grafana | 성능 모니터링
+- [ ] grafana | 로그
+- [ ] grafana | 추적
+
+---
 - [x] 도커 | 도커 컴포즈 구성
 - [x] 도커 | 이름 규칙
 - [x] 도커 | 로그 볼륨 구성성

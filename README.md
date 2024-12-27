@@ -1074,11 +1074,13 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 # Part 4. Observability
 
 # Ch 16. Aspire Dashboard
+## Ch 16.1 Aspire Dockerfile
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/aspire-dashboard:9.0
 ```
 - Backend/Build/Dockerfiles/Aspire/Dockerfile 파일
 
+## Ch 16.2 Aspire Docker Compose
 ```yml
 x-logging-common: &logging-common
   driver: "json-file"
@@ -1109,7 +1111,7 @@ networks:
   net:
     name: crop.hello                                    # <- network name
 ```
-
+- docker-compose.infra.yml 파일일
 - 인증을 사용하지 않도록 대시보드를 구성하고 익명 액세스를 허용합니다.
   ```yml
   DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
@@ -1133,6 +1135,33 @@ networks:
     }
   }
   ```
+
+## Ch 16.3 Docker Compose 전용 디버깅 환경 변수
+```
+docker-compose.override.yml
+  -> DOTNET_ENVIRONMENT=Docker
+     -> appsettings.Docker.json
+```
+- 콘솔과 Docker Compose의 설정이 다를 경우, Visual Studio에서 디버깅 목적으로 사용하는 docker-compose.override.yml 파일을 활용하여 DOTNET_ENVIRONMENT 값을 설정할 수 있습니다. 이를 통해 appsettings.Docker.json에 Docker Compose 전용 설정을 지
+
+```json
+{
+  "OpenTelemetryOptions": {
+    "OtlpCollectorHost": "host.docker.internal"
+  }
+}
+```
+- appsettings.Docker.json 파일
+
+```yml
+services:
+  crop.hello.api:
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
+    volumes:
+      - ./.logs/crop.hello.api:/app/logs
+```
+- docker-compose.override.yml 파일
 
 <br/>
 
