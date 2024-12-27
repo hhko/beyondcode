@@ -1077,6 +1077,7 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/aspire-dashboard:9.0
 ```
+- Backend/Build/Dockerfiles/Aspire/Dockerfile 파일
 
 ```yml
 x-logging-common: &logging-common
@@ -1086,14 +1087,14 @@ x-logging-common: &logging-common
     max-file: "7"
 
 services:
-  crop.hello.infra.aspire:
+  crop.hello.infra.aspire:                              # <- service name
     env_file: .env
-    image: crop/hello/infra/aspire:${SERVICE_VERSION}
+    image: crop/hello/infra/aspire:${SERVICE_VERSION}   # <- image name
     build:
       context: .
       dockerfile: Backend/Build/Dockerfiles/Aspire/Dockerfile
-    container_name: corp.hello.infra.aspire
-    hostname: corp.hello.infra.aspire
+    container_name: corp.hello.infra.aspire             # <- container name
+    hostname: corp.hello.infra.aspire                   # <- host name
     environment:
       - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
     ports:
@@ -1106,7 +1107,7 @@ services:
 
 networks:
   net:
-    name: crop.hello
+    name: crop.hello                                    # <- network name
 ```
 
 - 인증을 사용하지 않도록 대시보드를 구성하고 익명 액세스를 허용합니다.
