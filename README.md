@@ -1152,6 +1152,9 @@ docker-compose.override.yml
 }
 ```
 - appsettings.Docker.json 파일
+- OtlpCollectorHost 값 구분
+  - 컨테이너일 때(도커 컴포즈): host.docker.internal
+  - 호스트일 때(콘솔): 127.0.0.1
 
 ```yml
 services:
