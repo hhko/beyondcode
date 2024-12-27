@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crop.Hello.Api.Tests.Unit",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crop.Hello.Domain.Tests.Unit", "Assets\Domains\Tests\Crop.Hello.Domain.Tests.Unit\Crop.Hello.Domain.Tests.Unit.csproj", "{AF02AAE4-B8F7-49F2-A380-03F8D8E9DE68}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{10C28E96-560A-487D-9B40-C4F4C061BCB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{AF02AAE4-B8F7-49F2-A380-03F8D8E9DE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF02AAE4-B8F7-49F2-A380-03F8D8E9DE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF02AAE4-B8F7-49F2-A380-03F8D8E9DE68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10C28E96-560A-487D-9B40-C4F4C061BCB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10C28E96-560A-487D-9B40-C4F4C061BCB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10C28E96-560A-487D-9B40-C4F4C061BCB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10C28E96-560A-487D-9B40-C4F4C061BCB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

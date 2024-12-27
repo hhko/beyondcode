@@ -1,0 +1,26 @@
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+services:
+  crop.hello.infra.aspire:
+    env_file: .env
+    image: crop/hello/infra/aspire:${SERVICE_VERSION}
+    build:
+      context: .
+      args:
+        - SERVICE_USER=${SERVICE_USER}
+        - SERVICE_UID=${SERVICE_UID}
+        - SERVICE_GID=${SERVICE_GID}
+      dockerfile: Backend/Build/Dockerfiles/Aspire/Dockerfile
+    container_name: corp.hello.infra.aspire
+    hostname: corp.hello.infra.aspire
+    networks:
+      - net
+    logging: *logging-common
+
+networks:
+  net:
+    name: crop.hello

@@ -1,0 +1,26 @@
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+services:
+  crop.hello.api:
+    env_file: .env
+    image: crop/hello/api:${SERVICE_VERSION}
+    build:
+      context: .
+      args:
+        - SERVICE_USER=${SERVICE_USER}
+        - SERVICE_UID=${SERVICE_UID}
+        - SERVICE_GID=${SERVICE_GID}
+      dockerfile: Backend/Api/Src/Crop.Hello.Api/Dockerfile
+    container_name: corp.hello.api
+    hostname: corp.hello.api
+    networks:
+      - net
+    logging: *logging-common
+
+networks:
+  net:
+    name: crop.hello

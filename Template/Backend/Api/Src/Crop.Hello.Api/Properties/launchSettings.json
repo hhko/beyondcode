@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Crop.Hello.Api": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
