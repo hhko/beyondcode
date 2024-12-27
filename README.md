@@ -1157,6 +1157,8 @@ public void We_CanTest_TheHost()
 
 # Ch 25. Option
 ## Ch 25.1 레이어 의존성 주입(예. 옵션 패턴)
+![](./.images/Host.Configuration.Options.png)
+
 ```shell
 Abstractions/                             # 레이어 주 목표가 아닌 부수적인 코드
   Registration/                           # 의존성 등록
