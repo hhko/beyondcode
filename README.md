@@ -1160,6 +1160,19 @@ services:
   - 컨테이너일 때(도커 컴포즈): host.docker.internal
   - 호스트일 때(콘솔): 127.0.0.1
 
+## Ch 16.4 콘솔 프로젝트 appsettings.json 그룹핑
+```xml
+<ItemGroup>
+  <Content Include="appsettings.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </Content>
+  <Content Include="appsettings.*.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <DependentUpon>appsettings.json</DependentUpon>
+  </Content>
+</ItemGroup>
+```
+
 <br/>
 
 ---

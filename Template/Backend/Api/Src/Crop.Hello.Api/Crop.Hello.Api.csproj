@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.Docker.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>appsettings.json</DependentUpon>
     </Content>
   </ItemGroup>
 
@@ -32,10 +33,6 @@
 
   <ItemGroup>
     <None Remove="logs\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="appsettings.Docker.json" />
   </ItemGroup>
 
 </Project>
