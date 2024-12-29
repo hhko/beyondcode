@@ -41,7 +41,8 @@ internal static class OpenTelemetryRegistration
                         // service.version
                         options.ResourceAttributes = new Dictionary<string, object>
                          {
-                             ["service.name"] = "test-logging-service",
+                             ["service.name"] = openTelemetryOptions.ApplicationName,
+                             ["service.version"] = openTelemetryOptions.Version,
                              ["index"] = 10,
                              ["flag"] = true,
                              ["value"] = 3.14

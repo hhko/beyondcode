@@ -25,27 +25,28 @@
   - [x] [Ch 14. Solution Layer Dependency Injection](#ch-14-solution-layer-dependency-injection)
   - [ ] [Ch 15. Solution Build Automation](#ch-15-solution-build-automation)
   - [ ] Ch 16. Solution Container Deployment Automation
-- Part 4. Observability
-  - [x] [Ch 17. Aspire Dashboard](#ch-16-aspire-dashboard)
-  - [ ] cH 18. Grafana System
-  - [ ] Ch 19. OpenSearch System
-  - [ ] Ch 20. Logs
-  - [ ] Ch 21. Traces
-  - [ ] Ch 22. Metrics
+- Part 4. Host Testing
+  - [ ] [Ch 17. Console Host Testing](#ch-17-console-host-testing)
+  - [ ] Ch 18. WebApi Host
+  - [x] [Ch 19. Options Testing](#ch-19-options-testing)
+  - [ ] [Ch 20. Container Testing](#ch-20-container-testing)
+  - [ ] Ch 21. Container Health Check Testing
 - Part 5. Host
-  - [ ] [Ch 23. Console Host](#ch-23-console-host)
-  - [ ] Ch 24. WebApi Host
-  - [x] [Ch 25. Option](#ch-25-option)
-  - [ ] [Ch 26. Container Health Check](#ch-26-container-health-check)
-- Part 6. Hosts
-  - [ ] [Ch 27. Schedule Host](#ch-23-schedule-host)
-  - [ ] Ch 28. RabbitMQ Host
-  - [ ] Ch 29. gRPC Host
-  - [ ] Ch 30. WebApi Host
+  - [ ] [Ch 22. Schedule Host](#ch-22-schedule-host)
+  - [ ] Ch 23. RabbitMQ Host
+  - [ ] Ch 24. gRPC Host
+  - [ ] Ch 25. WebApi Host
+- Part 6. Observability
+  - [x] [Ch 26. Aspire Dashboard](#ch-16-aspire-dashboard)
+  - [ ] cH 27. Grafana System
+  - [ ] Ch 28. OpenSearch System
+  - [ ] Ch 29. Logs
+  - [ ] Ch 30. Traces
+  - [ ] Ch 31. Metrics
 - Part 7. Internal Tactical Design
-  - [x] [Ch 31. Tactical Design Map](#ch-27-tactical-design-map)
-  - [ ] [Ch 32. Output Type(Result)](#ch-28-output-type)
-  - [ ] Ch 33. Domain Type
+  - [x] [Ch 32. Tactical Design Map](#ch-32-tactical-design-map)
+  - [ ] [Ch 33. Output Type(Result)](#ch-33-output-type)
+  - [ ] Ch 34. Domain Type
   - [ ] TODO
 - Part 8. External Tactical Design
 - Part 9. Strategic Design
@@ -1071,119 +1072,11 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 
 <br/>
 
-# Part 4. Observability
+# Part 4. Host Testing
 
-# Ch 16. Aspire Dashboard
-## Ch 16.1 Aspire Dockerfile
-```dockerfile
-FROM mcr.microsoft.com/dotnet/aspire-dashboard:9.0
-```
-- Backend/Build/Dockerfiles/Aspire/Dockerfile 파일
+# Ch 17. Console Host Testing
 
-## Ch 16.2 Aspire Docker Compose
-```yml
-x-logging-common: &logging-common
-  driver: "json-file"
-  options:
-    max-size: "10m"
-    max-file: "7"
-
-services:
-  crop.hello.infra.aspire:                              # <- service name
-    env_file: .env
-    image: crop/hello/infra/aspire:${SERVICE_VERSION}   # <- image name
-    build:
-      context: .
-      dockerfile: Backend/Build/Dockerfiles/Aspire/Dockerfile
-    container_name: corp.hello.infra.aspire             # <- container name
-    hostname: corp.hello.infra.aspire                   # <- host name
-    environment:
-      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
-    ports:
-      - 4317:18889      # OTLP/gRPC
-      - 4318:18890      # OTLP/HTTP
-      - 18888:18888     # http dashboard: http://localhost:18888
-    networks:
-      - net
-    logging: *logging-common
-
-networks:
-  net:
-    name: crop.hello                                    # <- network name
-```
-- docker-compose.infra.yml 파일일
-- 인증을 사용하지 않도록 대시보드를 구성하고 익명 액세스를 허용합니다.
-  ```yml
-  DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
-  ```
-- [데이터 수집 제한](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/dashboard/configuration?tabs=bash#telemetry-limits)
-  ```shell
-  docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard \
-    -e DASHBOARD__TELEMETRYLIMITS__MAXLOGCOUNT='1000' \
-    -e DASHBOARD__TELEMETRYLIMITS__MAXTRACECOUNT='1000' \
-    -e DASHBOARD__TELEMETRYLIMITS__MAXMETRICSCOUNT='1000' \
-    mcr.microsoft.com/dotnet/aspire-dashboard:9.0
-  ```
-  ```json
-  {
-    "Dashboard": {
-      "TelemetryLimits": {
-        "MaxLogCount": 1000,
-        "MaxTraceCount": 1000,
-        "MaxMetricsCount": 1000
-      }
-    }
-  }
-  ```
-
-## Ch 16.3 Docker Compose 전용 디버깅 환경 변수
-```yml
-services:
-  crop.hello.api:
-    environment:
-      - DOTNET_ENVIRONMENT=Docker
-    volumes:
-      - ./.logs/crop.hello.api:/app/logs
-```
-- docker-compose.override.yml 파일
-- 콘솔과 Docker Compose의 설정이 다를 경우, Visual Studio에서 디버깅 목적으로 사용하는 docker-compose.override.yml 파일을 활용하여 DOTNET_ENVIRONMENT 값을 설정할 수 있습니다. 이를 통해 appsettings.Docker.json에 Docker Compose 전용 설정을 지
-
-```json
-{
-  "OpenTelemetryOptions": {
-    "OtlpCollectorHost": "host.docker.internal"
-  }
-}
-```
-- appsettings.Docker.json 파일
-- OtlpCollectorHost 값 구분
-  - 컨테이너일 때(도커 컴포즈): host.docker.internal
-  - 호스트일 때(콘솔): 127.0.0.1
-
-## Ch 16.4 콘솔 프로젝트 appsettings.json 그룹핑
-![](./.images/appsettings.groupping.png)
-
-```xml
-<ItemGroup>
-  <Content Include="appsettings.json">
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  </Content>
-  <Content Include="appsettings.*.json">
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    <DependentUpon>appsettings.json</DependentUpon>
-  </Content>
-</ItemGroup>
-```
-
-<br/>
-
----
-
-<br/>
-
-# Part 5. Hosts Configuration
-
-# Ch 23. Console Host
+## Ch 17.1 InternalsVisibleTo
 ```xml
 <Project>
   <ItemGroup>
@@ -1191,7 +1084,10 @@ services:
   </ItemGroup>
 </Project>
 ```
+- `InternalsVisibleTo`InternalsVisibleTo는 어셈블리 간의 `Internal`로 선언된 멤버 접근을 허용하는 데 사용되는 특성(Attribute)입니다.
+- 테스트 목적으로 Internal로 선언된 `Program` 클래스를 테스트 어셈블리에서 접근할 수 있게됩니다.
 
+## Ch 17.2 Program 클래스
 ```cs
 IHostBuilder builder = CreateHostBuilder(args);
 using IHost host = builder.Build();
@@ -1246,6 +1142,7 @@ public static partial class Program
 ```
 - 테스트 환경에서 `IConfiguration`을 제어할 수 있도록 `CreateHostBuilder` 메서드에서 매개변수를 제공합니다.
 
+## Ch 17.3 Program 클래스 Testing
 ```cs
 [Fact]
 public void We_CanTest_TheHost()
@@ -1263,11 +1160,16 @@ public void We_CanTest_TheHost()
 }
 ```
 
-# Ch 24. WebApi Host
+<br/>
+
+# Ch 18. WebApi Host Testing
 - TODO 테스트 가능한 호스트
 
-# Ch 25. Option
-## Ch 25.1 레이어 의존성 주입(예. 옵션 패턴)
+<br/>
+
+# Ch 19. Options Testing
+
+## Ch 19.1 옵션 의존성 등록
 ![](./.images/Host.Configuration.Options.png)
 
 ```shell
@@ -1321,7 +1223,7 @@ internal sealed class OpenTelemetryOptionsValidator
 }
 ```
 
-## Ch 25.2 레이어 의존성 테스트(예. 옵션 패턴)
+## Ch 19.2 옵션 Testing
 ![](./.images/IntegrationTest.OptionPattern.png)
 
 ```cs
@@ -1356,9 +1258,9 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 <br/>
 
-# Ch 26. Container
+# Ch 20. Container Testing
 
-## Ch 26.1 C# 서비스 이름
+## Ch 20.1 C# 서비스 컨테이너 이름 규칙
 Item            | Rule                                                  | Example
 ---             | ---                                                   | ---
 compose name    | {Corporation}-{Solution}                              | crop-hello
@@ -1417,7 +1319,7 @@ networks:
     ```
     - .gitignore 파일에 `.logs/`을 추가합니다.
 
-## Ch 26.2 인프라 서비스 이름
+## Ch 20.2 인프라 서비스 컨테이너 이름 규칙
 Item            | Rule                                                        | Example
 ---             | ---                                                         | ---
 service name    | {Corporation}.{Solution}.infra.{Service}                    | crop.hello.infra.aspire:
@@ -1442,13 +1344,16 @@ export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
 
 <br/>
 
-# Ch 27. Container Health Check
+# Ch 21. Container Health Check Testing
+- TODO
+
+<br/>
 
 ---
 
 <br/>
 
-# Part 6. Hosts
+# Part 6. Host
 
 | IHost    | Windows Service | Container | Integration Test | Performance Test | Pipeline(Exception) |
 | ---      | :---:           | :---:     | :---:            | :---:            | :---:               |
@@ -1457,9 +1362,9 @@ export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
 | RabbitMQ |                 |           |                  |                  |                     |
 | gRPC     |                 |           |                  |                  |                     |
 
-# Ch 27. Schedule Host
+# Ch 22. Schedule Host
 
-## Ch 27.1 윈도우 서비스
+## Ch 22.1 윈도우 서비스
 ```shell
 # 윈도우 서비스 의존성 등록
 RegisterInfrastructureLayer   # Infrastructure 레이어
@@ -1472,57 +1377,6 @@ EnableInfrastructureLayer     # Infrastructure 레이어
      -> UseWindowsService     # Microsoft.Extensions.Hosting.WindowsServices 패키지
 ```
 
-```cs
-// Microsoft.Extensions.Hosting.WindowsServices 패키지
-using Microsoft.Extensions.Hosting;
-
-IHostBuilder builder = CreateHostBuilder(args);
-using IHost host = builder.Build();
-await host.RunAsync();
-
-public static IHostBuilder CreateHostBuilder(
-  string[] args,
-  IConfiguration? configuration,
-  bool removeJsonConfigurationSources = true)
-{
-  return Host.CreateDefaultBuilder(args)
-    .ConfigureAppConfiguration((context, config) =>
-    {
-      // ...
-    })
-    .ConfigureServices((context, services) =>
-    {
-      services
-        .RegisterInfrastructureLayer(context.HostingEnvironment, context.Configuration)
-        .RegisterPersistenceLayer()
-        .RegisterApplicationLayer();
-    })
-    .EnableInfrastructureLayer();
-}
-```
-```cs
-public static class InfrastructureLayerRegistration
-{
-  // 의존성 등록
-  public static IServiceCollection RegisterInfrastructureLayer(
-    this IServiceCollection services,
-    IHostEnvironment environment,
-    IConfiguration configuration)
-  {
-    return services
-      .RegisterOptions()
-      .RegisterWindowsService()
-      .RegisterOpenTelemetry(environment, configuration);
-  }
-
-  // 활성화
-  public static IHostBuilder EnableInfrastructureLayer(this IHostBuilder app)
-  {
-    return app
-      .EnableWindowsService();
-  }
-}
-```
 ```cs
 internal static class WindowsServiceRegistration
 {
@@ -1544,6 +1398,7 @@ internal static class WindowsServiceRegistration
 }
 ```
 
+## Ch 22.2 윈도우 서비스 등록
 ```bat
 @echo off
 
@@ -1564,12 +1419,152 @@ echo "서비스 설치 및 복구 설정 완료"
 :: sc delete "MyService"
 ```
 
-## Ch 27.2 컨테이너너
+## Ch 22.3 컨테이너너
 
-## Ch 27.3 통합 테스트
+## Ch 22.3 통합 테스트
 ![](./.images/Host.Schedule.IntegrationTest.Options.png)
 
 - `appsettings.json` 유효성 통합 테스트
+
+<br/>
+
+---
+
+<br/>
+
+# Part 6. Observability
+
+# Ch 26. Aspire Dashboard
+![](./.images/aspire.dashdoard.png)
+
+## Ch 26.1 Aspire Dockerfile
+```dockerfile
+FROM mcr.microsoft.com/dotnet/aspire-dashboard:9.0
+```
+- Backend/Build/Dockerfiles/Aspire/Dockerfile 파일
+
+## Ch 26.2 Aspire Docker Compose
+```yml
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+services:
+  crop.hello.infra.aspire:                              # <- service name
+    env_file: .env
+    image: crop/hello/infra/aspire:${SERVICE_VERSION}   # <- image name
+    build:
+      context: .
+      dockerfile: Backend/Build/Dockerfiles/Aspire/Dockerfile
+    container_name: corp.hello.infra.aspire             # <- container name
+    hostname: corp.hello.infra.aspire                   # <- host name
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+    ports:
+      - 4317:18889      # OTLP/gRPC
+      - 4318:18890      # OTLP/HTTP
+      - 18888:18888     # http dashboard: http://localhost:18888
+    networks:
+      - net
+    logging: *logging-common
+
+networks:
+  net:
+    name: crop.hello                                    # <- network name
+```
+- docker-compose.infra.yml 파일일
+- 인증을 사용하지 않도록 대시보드를 구성하고 익명 액세스를 허용합니다.
+  ```yml
+  DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+  ```
+- [데이터 수집 제한](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/dashboard/configuration?tabs=bash#telemetry-limits)
+  ```shell
+  docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard \
+    -e DASHBOARD__TELEMETRYLIMITS__MAXLOGCOUNT='1000' \
+    -e DASHBOARD__TELEMETRYLIMITS__MAXTRACECOUNT='1000' \
+    -e DASHBOARD__TELEMETRYLIMITS__MAXMETRICSCOUNT='1000' \
+    mcr.microsoft.com/dotnet/aspire-dashboard:9.0
+  ```
+  ```json
+  {
+    "Dashboard": {
+      "TelemetryLimits": {
+        "MaxLogCount": 1000,
+        "MaxTraceCount": 1000,
+        "MaxMetricsCount": 1000
+      }
+    }
+  }
+  ```
+
+## Ch 26.3 Docker Compose 전용 디버깅 환경 변수
+```yml
+services:
+  crop.hello.api:
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
+    volumes:
+      - ./.logs/crop.hello.api:/app/logs
+```
+- docker-compose.override.yml 파일
+- 콘솔과 Docker Compose의 설정이 다를 경우, Visual Studio에서 디버깅 목적으로 사용하는 docker-compose.override.yml 파일을 활용하여 DOTNET_ENVIRONMENT 값을 설정할 수 있습니다. 이를 통해 appsettings.Docker.json에 Docker Compose 전용 설정을 지
+
+```json
+{
+  "OpenTelemetryOptions": {
+    "OtlpCollectorHost": "host.docker.internal"
+  }
+}
+```
+- appsettings.Docker.json 파일
+- OtlpCollectorHost 값 구분
+  - 컨테이너일 때(도커 컴포즈): host.docker.internal
+  - 호스트일 때(콘솔): 127.0.0.1
+
+## Ch 26.4 콘솔 프로젝트 appsettings.json 그룹핑
+![](./.images/appsettings.groupping.png)
+
+```xml
+<ItemGroup>
+  <Content Include="appsettings.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </Content>
+  <Content Include="appsettings.*.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <DependentUpon>appsettings.json</DependentUpon>
+  </Content>
+</ItemGroup>
+```
+
+## Ch 26.5 구조적 로그 전송
+```cs
+services
+  .AddSerilog(configure =>
+  {
+    configure
+      .ReadFrom.Configuration(configuration)
+      .WriteTo.OpenTelemetry(options =>
+      {
+        // OTLP/gRPC: 4317
+        //options.Endpoint = "http://127.0.0.1:4317";
+        //options.Endpoint = "http://host.docker.internal:4317";
+        options.Endpoint = $"http://{openTelemetryOptions.OtlpCollectorHost}:4317";
+
+        options.ResourceAttributes = new Dictionary<string, object>
+        {
+            ["service.name"] = openTelemetryOptions.ApplicationName,
+            ["service.version"] = openTelemetryOptions.Version,
+        };
+
+        //options.IncludedData =
+        //   IncludedData.TraceIdField |
+        //   IncludedData.SpanIdField |
+        //   IncludedData.TemplateBody;
+      });
+  });
+```
 
 <br/>
 
