@@ -10,74 +10,90 @@ using Microsoft.Extensions.Logging;
 using Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Options.OpenTelemetry;
 using Serilog.Sinks.OpenTelemetry;
 using System.Net.Sockets;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Instrumentation.Quartz;
+using Quartz;
+using OpenTelemetry.Exporter;
+using Crop.Hello.Api.Adapters.Infrastructure.Jobs;
+using Serilog.Events;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Metrics;
+using System;
+using System.Configuration;
 
 namespace Crop.Hello.Api.Adapters.Infrastructure.Abstractions.Registration;
 
 internal static class OpenTelemetryRegistration
 {
     internal static IServiceCollection RegisterOpenTelemetry(
-        this IServiceCollection services, 
+        this IServiceCollection services,
         IHostEnvironment environment,
         IConfiguration configuration)
     {
-        var openTelemetryOptions = services.GetOptions<OpenTelemetryOptions>();
-        bool useOnlyConsoleExporter = openTelemetryOptions.IsLocal();
+        OpenTelemetryOptions openTelemetryOptions = services.GetOptions<OpenTelemetryOptions>();
+        //bool useOnlyConsoleExporter = openTelemetryOptions.IsLocal();
+        string otlpCollectorExporterEndpoint = CreateOtlpCollectorExporterEndpoint(openTelemetryOptions.OtlpCollectorHost);
 
         //logging.AddSerilog();       // Microsoft Logging -> Microsoft Logging 
         //services.AddSerilog();      // Microsoft Logging -> Serilog
         services
-            .AddSerilog(configure =>
+            .AddSerilog(configure => ConfigureLog(
+                configure,
+                configuration,
+                environment,
+                openTelemetryOptions,
+                otlpCollectorExporterEndpoint));
+
+        services
+            .AddOpenTelemetry()
+            .AddResources(environment.EnvironmentName, openTelemetryOptions)
+            .WithMetrics(builder => ConfigureMetrics(builder, otlpCollectorExporterEndpoint))
+            .WithTracing(builder => ConfigureTrace(builder, environment, otlpCollectorExporterEndpoint));
+
+        return services;
+    }
+
+    private static void ConfigureLog(
+        LoggerConfiguration configure,
+        IConfiguration configuration,
+        IHostEnvironment environment,
+        OpenTelemetryOptions openTelemetryOptions,
+        string endpoint)
+    {
+        configure
+            .ReadFrom.Configuration(configuration)
+            .WriteTo.OpenTelemetry(options =>
             {
-                configure
-                    .ReadFrom.Configuration(configuration)
-                    .WriteTo.OpenTelemetry(options =>
-                    {
-                        // OTLP/gRPC: 4317
-                        //options.Endpoint = "http://127.0.0.1:4317";
-                        //options.Endpoint = "http://host.docker.internal:4317";
-                        options.Endpoint = $"http://{openTelemetryOptions.OtlpCollectorHost}:4317";
+                // OTLP/gRPC: 4317
+                //  - Host:     "http://127.0.0.1:4317";
+                //  - Docker:   "http://host.docker.internal:4317";
+                options.Endpoint = endpoint;
+                options.Protocol = OtlpProtocol.Grpc;
 
-                        // service.naver
-                        // service.version
-                        options.ResourceAttributes = new Dictionary<string, object>
-                         {
-                             ["service.name"] = openTelemetryOptions.ApplicationName,
-                             ["service.version"] = openTelemetryOptions.Version,
-                             ["index"] = 10,
-                             ["flag"] = true,
-                             ["value"] = 3.14
-                         };
+                // 리소스
+                options.ResourceAttributes = new Dictionary<string, object>
+                {
+                    ["service.name"] = openTelemetryOptions.ApplicationName,
+                    ["service.version"] = openTelemetryOptions.Version,
+                    ["environment.name"] = environment.EnvironmentName,
+                    ["team.name"] = openTelemetryOptions.TeamName
+                };
 
-                         //options.IncludedData =
-                         //   IncludedData.TraceIdField |
-                         //   IncludedData.SpanIdField |
-                         //   IncludedData.TemplateBody;
-                     });
+                // 구조적 로그
+                //
+                // Level                   | Information
+                // Message                 | 값1 is 값2
+                // Key1                    | 값1
+                // Key2                    | 값2
+                // message_template.text   | {Key1} is {Key2}
+
+                // 기본 값
+                //options.IncludedData = 
+                //    IncludedData.MessageTemplateTextAttribute | 
+                //    IncludedData.TraceIdField | 
+                //    IncludedData.SpanIdField | 
+                //    IncludedData.SpecRequiredResourceAttributes;
             });
-            //.AddOpenTelemetry()
-            //.WithLogging()
-
-            //.AddOpenTelemetry
-
-        //info: Crop.Hello.Api.Class1[0]
-        //    Class1 is
-        //LogRecord.Timestamp:               2024 - 12 - 08T22: 54:40.2979150Z
-        //LogRecord.CategoryName:            Crop.Hello.Api.Class1
-        //LogRecord.Severity:                Info
-        //LogRecord.SeverityText:            Information
-        //LogRecord.FormattedMessage:        Class1 is
-        //LogRecord.Body:                    { Msg} is
-        //LogRecord.Attributes(Key: Value):
-        //    Msg: Class1
-        //    OriginalFormat(a.k.a Body): { Msg} is
-        //
-        //Resource associated with LogRecord:
-        //service.name: Crop.Hello.Api
-        //service.version: 1.0.1
-        //service.instance.id: 49a7e94d - 9005 - 4315 - a3d7 - 8ef7be3657ba
-        //telemetry.sdk.name: opentelemetry
-        //telemetry.sdk.language: dotnet
-        //telemetry.sdk.version: 1.10.0
 
         /*
         logging.AddOpenTelemetry(options =>
@@ -106,82 +122,110 @@ internal static class OpenTelemetryRegistration
             options.AddProcessor(new ActivityEventLogProcessor());
         });
         */
-
-        //        //services
-        //        //    .AddOpenTelemetry()
-        //        //    .AddResources(environment.EnvironmentName, openTelemetryOptions)
-        //        //    .WithMetrics(metricBuilder =>
-        //        //    {
-        //        //        metricBuilder
-        //        //            .AddRuntimeInstrumentation()
-        //        //            .AddAspNetCoreInstrumentation()
-        //        //            .AddFusionCacheInstrumentation()
-        //        //            .AddMeter(openTelemetryOptions.Meters);
-
-        //        //        if (useOnlyConsoleExporter)
-        //        //        {
-        //        //            metricBuilder.AddConsoleExporter();
-        //        //        }
-        //        //        else
-        //        //        {
-        //        //            metricBuilder.AddOtlpExporter(options => ConfigureOtlpCollectorExporter(options, openTelemetryOptions.OtlpCollectorHost));
-        //        //        }
-        //        //    })
-        //        //    .WithTracing(traceBuilder =>
-        //        //    {
-        //        //        if (environment.IsDevelopment())
-        //        //        {
-        //        //            traceBuilder.SetSampler<AlwaysOnSampler>();
-        //        //        }
-
-        //        //        traceBuilder
-        //        //            .AddAspNetCoreInstrumentation()
-        //        //            .AddHttpClientInstrumentation()
-        //        //            .AddFusionCacheInstrumentation()
-        //        //            .AddEntityFrameworkCoreInstrumentation();
-
-        //        //        if (useOnlyConsoleExporter)
-        //        //        {
-        //        //            traceBuilder.AddConsoleExporter();
-        //        //        }
-        //        //        else
-        //        //        {
-        //        //            traceBuilder.AddOtlpExporter(options => ConfigureOtlpCollectorExporter(options, openTelemetryOptions.OtlpCollectorHost));
-        //        //        }
-        //        //    });
-
-        return services;
     }
 
-    // ActivityEventLogProcessor는 LogRecord와 OpenTelemetry의 Activity를 연결하는 데 사용됩니다.
-    //  로그가 완료되면 LogRecord의 메시지를 추출하여 현재 Activity에 이벤트로 추가합니다.
-    //  이를 통해, 분산 추적과 로그 데이터 간의 연관성을 강화하여 더 나은 관찰 가능성을 제공합니다.
-    private sealed class ActivityEventLogProcessor : BaseProcessor<LogRecord>
+    private static void ConfigureTrace(
+        TracerProviderBuilder builder,
+        IHostEnvironment environment,
+        string endpoint)
     {
-        public override void OnEnd(LogRecord log)
+        // OpenTelemetry.Instrumentation.Quartz
+        // https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Quartz
+        builder.AddQuartzInstrumentation();
+        //    x.AddQuartzInstrumentation(
+        //        opts =>
+        //        {
+        //            // you can trace only execute operations using this snippet
+        //            opts.TracedOperations = new HashSet<string>(new[] {
+        //                OperationName.Job.Execute,
+        //            });
+
+        //            // activity.IsAllDataRequested
+        //            // Enable enriching an activity after it is created.
+        //            opts.Enrich = (activity, eventName, quartzJobDetails) =>
+        //            {
+        //                // update activity
+        //                if (quartzJobDetails is IJobDetail jobDetail)
+        //                {
+        //                    activity.SetTag("customProperty", jobDetail.JobDataMap["customProperty"]);
+        //                    //...
+        //                }
+        //            };
+        //        });
+
+        if (environment.IsDevelopmentOrDocker())
         {
-            base.OnEnd(log);
-            Activity.Current?.AddEvent(new ActivityEvent(log.FormattedMessage!));
+            builder.SetSampler<AlwaysOnSampler>();
         }
+
+        //traceBuilder
+        //    .AddAspNetCoreInstrumentation()
+        //    .AddHttpClientInstrumentation()
+        //    .AddFusionCacheInstrumentation()
+        //    .AddEntityFrameworkCoreInstrumentation();
+
+        builder.AddOtlpExporter(options =>
+        {
+            options.Endpoint = new Uri(endpoint);
+            options.Protocol = OtlpExportProtocol.Grpc;
+        });
     }
 
-    //    //private static IOpenTelemetryBuilder AddResources(this IOpenTelemetryBuilder builder, string environment, OpenTelemetryOptions openTelemetryOptions)
-    //    //{
-    //    //    return builder.ConfigureResource(resourceBuilder => resourceBuilder
-    //    //        .AddService(serviceName: openTelemetryOptions.ApplicationName, serviceVersion: openTelemetryOptions.Version)
-    //    //        .AddAttributes(new Dictionary<string, object>
-    //    //        {
-    //    //            ["environment.name"] = environment,
-    //    //            ["team.name"] = openTelemetryOptions.TeamName
-    //    //        }));
-    //    //}
+    private static void ConfigureMetrics(MeterProviderBuilder builder, string endpoint)
+    {
+        builder
+            .AddRuntimeInstrumentation()
+            .AddProcessInstrumentation();
+        //.AddAspNetCoreInstrumentation()
+        //.AddFusionCacheInstrumentation()
+        //.AddMeter(openTelemetryOptions.Meters);
 
-    //    //private static void ConfigureOtlpCollectorExporter(this OtlpExporterOptions options, string otlpCollectorHost)
-    //    //{
-    //    //    const string _grpcCollectorPort = "4317";
-    //    //    options.Endpoint = new Uri($"http://{otlpCollectorHost}:{_grpcCollectorPort}");
-    //    //    options.Protocol = OtlpExportProtocol.Grpc;
-    //    //}
+        builder.AddOtlpExporter(options =>
+        {
+            options.Endpoint = new Uri(endpoint);
+            options.Protocol = OtlpExportProtocol.Grpc;
+        });
+    }
+    //// ActivityEventLogProcessor는 LogRecord와 OpenTelemetry의 Activity를 연결하는 데 사용됩니다.
+    ////  로그가 완료되면 LogRecord의 메시지를 추출하여 현재 Activity에 이벤트로 추가합니다.
+    ////  이를 통해, 분산 추적과 로그 데이터 간의 연관성을 강화하여 더 나은 관찰 가능성을 제공합니다.
+    //private sealed class ActivityEventLogProcessor : BaseProcessor<LogRecord>
+    //{
+    //    public override void OnEnd(LogRecord log)
+    //    {
+    //        base.OnEnd(log);
+    //        Activity.Current?.AddEvent(new ActivityEvent(log.FormattedMessage!));
+    //    }
+    //}
+
+    private static IOpenTelemetryBuilder AddResources(
+        this IOpenTelemetryBuilder builder,
+        string environment,
+        OpenTelemetryOptions openTelemetryOptions)
+    {
+        return builder.ConfigureResource(resourceBuilder => resourceBuilder
+            .AddService(
+                serviceName: openTelemetryOptions.ApplicationName, 
+                serviceVersion: openTelemetryOptions.Version)
+            .AddAttributes(new Dictionary<string, object>
+            {
+                ["environment.name"] = environment,
+                ["team.name"] = openTelemetryOptions.TeamName
+            }));
+    }
+
+    //private static void ConfigureOtlpCollectorExporter(this OtlpExporterOptions options, string otlpCollectorHost)
+    //{
+    //    const string _grpcCollectorPort = "4317";
+    //    options.Endpoint = new Uri($"http://{otlpCollectorHost}:{_grpcCollectorPort}");
+    //    options.Protocol = OtlpExportProtocol.Grpc;
+    //}
+
+    private static string CreateOtlpCollectorExporterEndpoint(string otlpCollectorHost)
+    {
+        const string _grpcCollectorPort = "4317";
+        return $"http://{otlpCollectorHost}:{_grpcCollectorPort}";
+    }
 }
 
 

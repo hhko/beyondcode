@@ -1,7 +1,9 @@
-- serilog -> aspire 대시보드 전송
-- Job 설정 이해
-- 테스트 환경 설정
+- grafana
+- 지표 -> grafana
 - 성능 테스트
+---
+- Job 설정 이해
+- 설정 파일 기반으로 테스트 환경 설정
 - github action 로컬 실행: act
 - 리눅스 단일 파일 배포
 - 배포 파일 재구성
@@ -24,9 +26,10 @@
 <br/>
 
 - [x] aspire | 컨테이너 구성
-- [ ] aspire | 로그 출력
-- [ ] aspire | 지표 출력
-- [ ] aspire | 추적 출력
+- [x] aspire | 로그 출력
+- [x] aspire | 로그 -> 추적 연동동
+- [x] aspire | 지표 출력
+- [x] aspire | 추적 출력
 - [ ] grafana | 지표
 - [ ] grafana | 성능 모니터링
 - [ ] grafana | 로그

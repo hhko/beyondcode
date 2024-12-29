@@ -14,7 +14,7 @@ internal sealed class ProcessOutboxMessagesJob(
 
     public Task Execute(IJobExecutionContext context)
     {
-        _logger.LogInformation("{Key} is", "ProcessOutboxMessagesJob");
+        _logger.LogInformation("{Key} is {Value}", "ProcessOutboxMessagesJob", "월요일");
 
         return Task.CompletedTask;
     }

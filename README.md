@@ -81,6 +81,13 @@
     - Quartz.Extensions.Hosting
   - `FluentValidation`
     - FluentValidation.DependencyInjectionExtensions
+  - `OpenTelemetry`
+    - OpenTelemetry.Extensions.Hosting
+    - OpenTelemetry.Instrumentation.Runtime
+    - OpenTelemetry.Instrumentation.Process
+    - OpenTelemetry.Instrumentation.Quartz
+    - OpenTelemetry.Exporter.Console
+    - OpenTelemetry.Exporter.OpenTelemetryProtocol
 - Unit Test
   - `xunit`
   - `FluentAssertions`
@@ -1558,13 +1565,25 @@ services
             ["service.version"] = openTelemetryOptions.Version,
         };
 
+        // 기본 값
         //options.IncludedData =
-        //   IncludedData.TraceIdField |
-        //   IncludedData.SpanIdField |
-        //   IncludedData.TemplateBody;
+        //    IncludedData.MessageTemplateTextAttribute |
+        //    IncludedData.TraceIdField |
+        //    IncludedData.SpanIdField |
+        //    IncludedData.SpecRequiredResourceAttributes;
       });
   });
 ```
+
+ 구조적 로그
+
+Key                     | Value
+---                     |
+Level                   | Information
+Message                 | 값1 is 값2
+Key1                    | 값1
+Key2                    | 값2
+message_template.text   | {Key1} is {Key2}
 
 <br/>
 
