@@ -2,6 +2,9 @@
 - 지표 -> grafana
 - 성능 테스트
 ---
+- 지표 콘솔로 확인하기
+- OpenTelemetry 테스트트
+---
 - Job 설정 이해
 - 설정 파일 기반으로 테스트 환경 설정
 - github action 로컬 실행: act
@@ -30,6 +33,7 @@
 - [x] aspire | 로그 -> 추적 연동동
 - [x] aspire | 지표 출력
 - [x] aspire | 추적 출력
+- [ ] OpenTelemtry | https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry.Exporter.InMemory/README.md
 - [ ] grafana | 지표
 - [ ] grafana | 성능 모니터링
 - [ ] grafana | 로그

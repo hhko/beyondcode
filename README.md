@@ -15,41 +15,39 @@
   - [x] [Ch 05. Layer Isolation](#ch-5-layer-isolation)
   - [x] [Ch 06. Layer Testing](#ch-6-layer-testing)
   - [x] [Ch 07. Layer Enhancement](#ch-7-layer-enhancement)
-  - [x] [Ch 08. Service Integration](#ch-8-service-integration)
-  - [x] [Ch 09. Internal Architecture Comparison](#ch-9-internal-architecture-comparison)
+  - [x] [Ch 08. Internal Architecture Comparison](#ch-8-internal-architecture-comparison)
 - Part 3. Solution
-  - [x] [Ch 10. Solution Structure](#ch-10-solution-structure)
-  - [x] [Ch 11. Solution Build Configuration](#ch-11-solution-build-configuration)
-  - [ ] [Ch 12. Solution Code Analysis](#ch-12-solution-code-analysis)
-  - [x] [Ch 13. Solution Architecture Testing](#ch-13-solution-architecture-testing)
-  - [x] [Ch 14. Solution Layer Dependency Injection](#ch-14-solution-layer-dependency-injection)
-  - [ ] [Ch 15. Solution Build Automation](#ch-15-solution-build-automation)
-  - [ ] Ch 16. Solution Container Deployment Automation
+  - [x] [Ch 09. Solution Structure](#ch-9-solution-structure)
+  - [x] [Ch 10. Solution Build Configuration](#ch-10-solution-build-configuration)
+  - [ ] [Ch 11. Solution Code Analysis](#ch-11-solution-code-analysis)
+  - [x] [Ch 12. Solution Architecture Testing](#ch-12-solution-architecture-testing)
+  - [x] [Ch 13. Solution Layer Dependency Injection](#ch-13-solution-layer-dependency-injection)
+  - [ ] [Ch 14. Solution Build Automation](#ch-14-solution-build-automation)
+  - [ ] Ch 15. Solution Container Deployment Automation
 - Part 4. Host Testing
-  - [ ] [Ch 17. Console Host Testing](#ch-17-console-host-testing)
-  - [ ] Ch 18. WebApi Host
-  - [x] [Ch 19. Options Testing](#ch-19-options-testing)
-  - [ ] [Ch 20. Container Testing](#ch-20-container-testing)
-  - [ ] Ch 21. Container Health Check Testing
+  - [ ] [Ch 16. Console Host Testing](#ch-16-console-host-testing)
+  - [ ] Ch 17. WebApi Host Testing
+  - [x] [Ch 18. Options Testing](#ch-18-options-testing)
+  - [ ] [Ch 19. Container Testing](#ch-19-container-testing)
+  - [ ] Ch 20. Container Health Check Testing
 - Part 5. Host
-  - [ ] [Ch 22. Schedule Host](#ch-22-schedule-host)
-  - [ ] Ch 23. RabbitMQ Host
-  - [ ] Ch 24. gRPC Host
-  - [ ] Ch 25. WebApi Host
+  - [ ] [Ch 21. Schedule Host](#ch-21-schedule-host)
+  - [ ] Ch 22. RabbitMQ Host
+  - [ ] Ch 23. gRPC Host
+  - [ ] Ch 24. WebApi Host
 - Part 6. Observability
-  - [x] [Ch 26. Aspire Dashboard](#ch-16-aspire-dashboard)
-  - [ ] cH 27. Grafana System
-  - [ ] Ch 28. OpenSearch System
-  - [ ] Ch 29. Logs
-  - [ ] Ch 30. Traces
-  - [ ] Ch 31. Metrics
-- Part 7. Internal Tactical Design
-  - [x] [Ch 32. Tactical Design Map](#ch-32-tactical-design-map)
-  - [ ] [Ch 33. Output Type(Result)](#ch-33-output-type)
-  - [ ] Ch 34. Domain Type
+  - [x] [Ch 25. Logging](#ch-25-logging)
+  - [x] [Ch 26. Tracing](#ch-26-tracing)
+  - [x] [Ch 27. Metrics](#ch-27-metrics)
+  - [x] [Ch 28. Aspire Dashboard](#ch-28-aspire-dashboard)
+  - [ ] cH 29. Grafana System
+  - [ ] Ch 30. OpenSearch System
+- Part 7. Tactical Design
+  - [x] [Ch 31. Tactical Design Map](#ch-31-tactical-design-map)
+  - [ ] [Ch 32. Output Type(Result)](#ch-32-output-type)
+  - [ ] Ch 33. Domain Type
   - [ ] TODO
-- Part 8. External Tactical Design
-- Part 9. Strategic Design
+- Part 8. Strategic Design
 
 <br/>
 
@@ -1081,9 +1079,9 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 
 # Part 4. Host Testing
 
-# Ch 17. Console Host Testing
+# Ch 16. Console Host Testing
 
-## Ch 17.1 InternalsVisibleTo
+## Ch 16.1 InternalsVisibleTo
 ```xml
 <Project>
   <ItemGroup>
@@ -1094,7 +1092,7 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 - `InternalsVisibleTo`InternalsVisibleTo는 어셈블리 간의 `Internal`로 선언된 멤버 접근을 허용하는 데 사용되는 특성(Attribute)입니다.
 - 테스트 목적으로 Internal로 선언된 `Program` 클래스를 테스트 어셈블리에서 접근할 수 있게됩니다.
 
-## Ch 17.2 Program 클래스
+## Ch 16.2 Program 클래스
 ```cs
 IHostBuilder builder = CreateHostBuilder(args);
 using IHost host = builder.Build();
@@ -1149,7 +1147,7 @@ public static partial class Program
 ```
 - 테스트 환경에서 `IConfiguration`을 제어할 수 있도록 `CreateHostBuilder` 메서드에서 매개변수를 제공합니다.
 
-## Ch 17.3 Program 클래스 Testing
+## Ch 16.3 Program 클래스 Testing
 ```cs
 [Fact]
 public void We_CanTest_TheHost()
@@ -1167,16 +1165,33 @@ public void We_CanTest_TheHost()
 }
 ```
 
+## Ch 16.4 콘솔 프로젝트 appsettings.json 그룹핑
+![](./.images/appsettings.groupping.png)
+
+```xml
+<ItemGroup>
+  <Content Include="appsettings.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </Content>
+  <Content Include="appsettings.*.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <DependentUpon>appsettings.json</DependentUpon>
+  </Content>
+</ItemGroup>
+```
+
 <br/>
 
-# Ch 18. WebApi Host Testing
+# Ch 17. WebApi Host Testing
 - TODO 테스트 가능한 호스트
 
 <br/>
 
-# Ch 19. Options Testing
+# Ch 18. Options Testing
+## Ch 18.1 옵션 테스트 구성
+![](./.images/Host.Schedule.IntegrationTest.Options.png)
 
-## Ch 19.1 옵션 의존성 등록
+## Ch 18.2 옵션 의존성 등록
 ![](./.images/Host.Configuration.Options.png)
 
 ```shell
@@ -1230,7 +1245,7 @@ internal sealed class OpenTelemetryOptionsValidator
 }
 ```
 
-## Ch 19.2 옵션 Testing
+## Ch 18.3 appsettings.json 통합 테스트
 ![](./.images/IntegrationTest.OptionPattern.png)
 
 ```cs
@@ -1265,9 +1280,9 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 <br/>
 
-# Ch 20. Container Testing
+# Ch 19. Container Testing
 
-## Ch 20.1 C# 서비스 컨테이너 이름 규칙
+## Ch 19.1 C# 서비스 컨테이너 이름 규칙
 Item            | Rule                                                  | Example
 ---             | ---                                                   | ---
 compose name    | {Corporation}-{Solution}                              | crop-hello
@@ -1326,7 +1341,7 @@ networks:
     ```
     - .gitignore 파일에 `.logs/`을 추가합니다.
 
-## Ch 20.2 인프라 서비스 컨테이너 이름 규칙
+## Ch 19.2 인프라 서비스 컨테이너 이름 규칙
 Item            | Rule                                                        | Example
 ---             | ---                                                         | ---
 service name    | {Corporation}.{Solution}.infra.{Service}                    | crop.hello.infra.aspire:
@@ -1351,7 +1366,7 @@ export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
 
 <br/>
 
-# Ch 21. Container Health Check Testing
+# Ch 20. Container Health Check Testing
 - TODO
 
 <br/>
@@ -1360,7 +1375,7 @@ export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
 
 <br/>
 
-# Part 6. Host
+# Part 5. Host
 
 | IHost    | Windows Service | Container | Integration Test | Performance Test | Pipeline(Exception) |
 | ---      | :---:           | :---:     | :---:            | :---:            | :---:               |
@@ -1369,9 +1384,9 @@ export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
 | RabbitMQ |                 |           |                  |                  |                     |
 | gRPC     |                 |           |                  |                  |                     |
 
-# Ch 22. Schedule Host
+# Ch 21. Schedule Host
 
-## Ch 22.1 윈도우 서비스
+## Ch 21.1 윈도우 서비스
 ```shell
 # 윈도우 서비스 의존성 등록
 RegisterInfrastructureLayer   # Infrastructure 레이어
@@ -1405,7 +1420,7 @@ internal static class WindowsServiceRegistration
 }
 ```
 
-## Ch 22.2 윈도우 서비스 등록
+## Ch 21.2 윈도우 서비스 등록
 ```bat
 @echo off
 
@@ -1426,13 +1441,6 @@ echo "서비스 설치 및 복구 설정 완료"
 :: sc delete "MyService"
 ```
 
-## Ch 22.3 컨테이너너
-
-## Ch 22.3 통합 테스트
-![](./.images/Host.Schedule.IntegrationTest.Options.png)
-
-- `appsettings.json` 유효성 통합 테스트
-
 <br/>
 
 ---
@@ -1441,16 +1449,122 @@ echo "서비스 설치 및 복구 설정 완료"
 
 # Part 6. Observability
 
-# Ch 26. Aspire Dashboard
+# Ch 25. Logging
+## Ch 25.1 구조적 로그 전송
+```cs
+services
+  .AddSerilog(configure =>
+  {
+    configure
+      .ReadFrom.Configuration(configuration)
+      .WriteTo.OpenTelemetry(options =>         // Serilog.Sink.OpenTelemetry
+      {
+        // OTLP/gRPC: 4317
+        //  - Host:     "http://127.0.0.1:4317";
+        //  - Docker:   "http://host.docker.internal:4317";
+        options.Endpoint = otlpCollectorExporterEndpoint;
+        options.Protocol = OtlpProtocol.Grpc;
+
+        // 리소스
+        options.ResourceAttributes = new Dictionary<string, object>
+        {
+          ["service.name"] = openTelemetryOptions.ApplicationName,
+          ["service.version"] = openTelemetryOptions.Version,
+          ["environment.name"] = environment.EnvironmentName,
+          ["team.name"] = openTelemetryOptions.TeamName
+        };
+      });
+  });
+```
+
+## Ch 25.2 구조적 로그
+Item                    | Value
+---                     | ---
+Level                   | Information
+Message                 | Value1 is Value2
+Key1                    | Value1
+Key2                    | Value2
+message_template.text   | {Key1} is {Key2}
+
+```cs
+logger.LogInformation("{Key1} is {Key2}", "Value1", "Value2");
+```
+
+<br/>
+
+# Ch 26. Tracing
+```cs
+services
+  .AddOpenTelemetry()
+  .AddResources(environment.EnvironmentName, openTelemetryOptions)
+  .WithTracing(builder => ConfigureTracing(builder, environment))
+  .UseOtlpExporter(OtlpExportProtocol.Grpc, new Uri(otlpCollectorExporterEndpoint));
+
+private static void ConfigureTracing(TracerProviderBuilder builder, IHostEnvironment environment)
+{
+    // OpenTelemetry.Instrumentation.Quartz: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Quartz
+    builder.AddQuartzInstrumentation();
+
+    if (environment.IsDevelopmentOrLocal())
+    {
+      builder.SetSampler<AlwaysOnSampler>();
+    }
+
+    //traceBuilder
+    //    .AddAspNetCoreInstrumentation()
+    //    .AddHttpClientInstrumentation()
+    //    .AddFusionCacheInstrumentation()
+    //    .AddEntityFrameworkCoreInstrumentation();
+}
+```
+
+<br/>
+
+# Ch 27. Metrics
+
+## Ch 27.1 Metrics 전송
+```cs
+services
+  .AddOpenTelemetry()
+  .AddResources(environment.EnvironmentName, openTelemetryOptions)
+  .WithMetrics(builder => ConfigureMetrics(builder))
+  .UseOtlpExporter(OtlpExportProtocol.Grpc, new Uri(otlpCollectorExporterEndpoint));
+
+private static void ConfigureMetrics(MeterProviderBuilder builder)
+{
+  builder
+    .AddRuntimeInstrumentation()        // OpenTelemetry.Instrumentation.Runtime
+    .AddProcessInstrumentation();       // OpenTelemetry.Instrumentation.Process
+    //.AddAspNetCoreInstrumentation()
+    //.AddFusionCacheInstrumentation()
+    //.AddMeter(openTelemetryOptions.Meters);
+}
+```
+
+## Ch 27.2 Metrics 지표
+![](./.images/OpenTelemetry.Metrics.png)
+
+- OpenTelemetry.Instrumentation.Runtime
+  - dotnet.assembly.*
+  - dotnet.gc.*
+  - dotnet.git.*
+  - dotnet.monitor.*
+  - dotnet.process.*
+  - dotnet.thread.*
+  - dotnet.timer.*
+- OpenTelemetry.Instrumentation.Process
+<br/>
+
+# Ch 28. Aspire Dashboard
 ![](./.images/aspire.dashdoard.png)
 
-## Ch 26.1 Aspire Dockerfile
+## Ch 28.1 Aspire Dockerfile
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/aspire-dashboard:9.0
 ```
 - Backend/Build/Dockerfiles/Aspire/Dockerfile 파일
 
-## Ch 26.2 Aspire Docker Compose
+## Ch 28.2 Aspire Docker Compose
 ```yml
 x-logging-common: &logging-common
   driver: "json-file"
@@ -1506,7 +1620,7 @@ networks:
   }
   ```
 
-## Ch 26.3 Docker Compose 전용 디버깅 환경 변수
+## Ch 28.3 Docker Compose 전용 디버깅 환경 변수
 ```yml
 services:
   crop.hello.api:
@@ -1530,68 +1644,13 @@ services:
   - 컨테이너일 때(도커 컴포즈): host.docker.internal
   - 호스트일 때(콘솔): 127.0.0.1
 
-## Ch 26.4 콘솔 프로젝트 appsettings.json 그룹핑
-![](./.images/appsettings.groupping.png)
-
-```xml
-<ItemGroup>
-  <Content Include="appsettings.json">
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  </Content>
-  <Content Include="appsettings.*.json">
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    <DependentUpon>appsettings.json</DependentUpon>
-  </Content>
-</ItemGroup>
-```
-
-## Ch 26.5 구조적 로그 전송
-```cs
-services
-  .AddSerilog(configure =>
-  {
-    configure
-      .ReadFrom.Configuration(configuration)
-      .WriteTo.OpenTelemetry(options =>
-      {
-        // OTLP/gRPC: 4317
-        //options.Endpoint = "http://127.0.0.1:4317";
-        //options.Endpoint = "http://host.docker.internal:4317";
-        options.Endpoint = $"http://{openTelemetryOptions.OtlpCollectorHost}:4317";
-
-        options.ResourceAttributes = new Dictionary<string, object>
-        {
-            ["service.name"] = openTelemetryOptions.ApplicationName,
-            ["service.version"] = openTelemetryOptions.Version,
-        };
-
-        // 기본 값
-        //options.IncludedData =
-        //    IncludedData.MessageTemplateTextAttribute |
-        //    IncludedData.TraceIdField |
-        //    IncludedData.SpanIdField |
-        //    IncludedData.SpecRequiredResourceAttributes;
-      });
-  });
-```
-
- 구조적 로그
-
-Key                     | Value
----                     |
-Level                   | Information
-Message                 | 값1 is 값2
-Key1                    | 값1
-Key2                    | 값2
-message_template.text   | {Key1} is {Key2}
-
 <br/>
 
 ---
 
 <br/>
 
-# Part 7. Internal Tactical Design
+# Part 7. Tactical Design
 
 # Ch 31. Tactical Design Map
 ![](./.images/TacticalDesign.Pattern.png)
@@ -1684,4 +1743,3 @@ public sealed partial record class Error(string Code, string Message)
 ---
 
 <br/>
-

@@ -1,7 +1,7 @@
 services:
   crop.hello.api:
     environment:
-      - DOTNET_ENVIRONMENT=Docker
-      #- ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Local.Docker
+      #- ASPNETCORE_ENVIRONMENT=LocalDocker
     volumes:
       - ./.logs/crop.hello.api:/app/logs
