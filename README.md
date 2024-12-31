@@ -62,7 +62,8 @@
 
 # Part 1. 기술 스택
 
-## Ch 1. 기술 맵
+## Ch 1. 기술 
+![](./.images/TechMap.Header.png)
 ![](./.images/TechMap.png)
 
 ## Ch 2. Internal 아키텍처
