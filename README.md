@@ -1621,7 +1621,7 @@ private static void ConfigureTracing(TracerProviderBuilder builder, IHostEnviron
 
 ## Ch 3. 지표
 
-## Ch 27.1 Metrics 전송
+### Ch 3.1 Metrics 전송
 ```cs
 services
   .AddOpenTelemetry()
@@ -1640,7 +1640,7 @@ private static void ConfigureMetrics(MeterProviderBuilder builder)
 }
 ```
 
-## Ch 27.2 Metrics 지표
+### Ch 3.2 Metrics 지표
 ![](./.images/OpenTelemetry.Metrics.png)
 
 - OpenTelemetry.Instrumentation.Runtime
