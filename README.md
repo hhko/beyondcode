@@ -3,51 +3,55 @@
 > 슬기로운 코드를 만들기 위한 아름다운 여정
 
 # Table of Contents
-- Part 0. Seminar
+- **Seminar**
   - [x] [Ch 01. Overview of Internal Architecture](./Part0.Seminar/Ch01.Overview-InternalArchitecture/README.md)
-- Part 1. Overview
-  - [x] [Ch 01. Technology Map](#ch-1-technology-map)
-  - [x] [Ch 02. Internal Architecture](#ch-2-internal-architecture)
-  - [ ] [Ch 03. External Architecture](#ch-3-external-architecture)
-- Part 2. Architecture
-  - [x] [Ch 03. Architecture Overview](#ch-3-architecture-overview)
-  - [x] [Ch 04. Architecture Principles](#ch-4-architecture-principles)
-  - [x] [Ch 05. Layer Isolation](#ch-5-layer-isolation)
-  - [x] [Ch 06. Layer Testing](#ch-6-layer-testing)
-  - [x] [Ch 07. Layer Enhancement](#ch-7-layer-enhancement)
-  - [x] [Ch 08. Internal Architecture Comparison](#ch-8-internal-architecture-comparison)
-- Part 3. Solution
-  - [x] [Ch 09. Solution Structure](#ch-9-solution-structure)
-  - [x] [Ch 10. Solution Build Configuration](#ch-10-solution-build-configuration)
-  - [ ] [Ch 11. Solution Code Analysis](#ch-11-solution-code-analysis)
-  - [x] [Ch 12. Solution Architecture Testing](#ch-12-solution-architecture-testing)
-  - [x] [Ch 13. Solution Layer Dependency Injection](#ch-13-solution-layer-dependency-injection)
-  - [ ] [Ch 14. Solution Build Automation](#ch-14-solution-build-automation)
-  - [ ] Ch 15. Solution Container Deployment Automation
-- Part 4. Host Testing
-  - [ ] [Ch 16. Console Host Testing](#ch-16-console-host-testing)
-  - [ ] Ch 17. WebApi Host Testing
-  - [x] [Ch 18. Options Testing](#ch-18-options-testing)
-  - [ ] [Ch 19. Container Testing](#ch-19-container-testing)
-  - [ ] Ch 20. Container Health Check Testing
-- Part 5. Host
-  - [ ] [Ch 21. Schedule Host](#ch-21-schedule-host)
-  - [ ] Ch 22. RabbitMQ Host
-  - [ ] Ch 23. gRPC Host
-  - [ ] Ch 24. WebApi Host
-- Part 6. Observability
-  - [x] [Ch 25. Logging](#ch-25-logging)
-  - [x] [Ch 26. Tracing](#ch-26-tracing)
-  - [x] [Ch 27. Metrics](#ch-27-metrics)
-  - [x] [Ch 28. Aspire Dashboard](#ch-28-aspire-dashboard)
-  - [ ] cH 29. Grafana System
-  - [ ] Ch 30. OpenSearch System
-- Part 7. Tactical Design
-  - [x] [Ch 31. Tactical Design Map](#ch-31-tactical-design-map)
-  - [ ] [Ch 32. Output Type(Result)](#ch-32-output-type)
-  - [ ] Ch 33. Domain Type
-  - [ ] TODO
-- Part 8. Strategic Design
+- **Overview**
+  - Part 1. Tech. Stack
+    - [x] [Ch 01. Technology Map](#ch-1-technology-map)
+    - [x] [Ch 02. Internal Architecture](#ch-2-internal-architecture)
+    - [ ] [Ch 03. External Architecture](#ch-3-external-architecture)
+  - Part 2. Architecture
+    - [x] [Ch 01. Architecture Overview](#ch-4-architecture-overview)
+    - [x] [Ch 02. Architecture Principles](#ch-5-architecture-principles)
+    - [x] [Ch 03. Layer Isolation](#ch-6-layer-isolation)
+    - [x] [Ch 04. Layer Testing](#ch-7-layer-testing)
+    - [x] [Ch 05. Layer Enhancement](#ch-8-layer-enhancement)
+    - [x] [Ch 06. Internal Architecture Comparison](#ch-9-internal-architecture-comparison)
+- **Inner Architecture**
+  - Part 3. Solution
+    - [x] [Ch 01. Solution Structure](#ch-10-solution-structure)
+    - [x] [Ch 02. Solution Build Configuration](#ch-11-solution-build-configuration)
+    - [ ] [Ch 03. Solution Code Analysis](#ch-12-solution-code-analysis)
+    - [x] [Ch 04. Solution Architecture Testing](#ch-13-solution-architecture-testing)
+    - [x] [Ch 05. Solution Layer Dependency Injection](#ch-14-solution-layer-dependency-injection)
+    - [ ] [Ch 06. Solution Build Automation](#ch-15-solution-build-automation)
+    - [ ] [Ch 07. Solution Container Deployment Automation]()
+  - Part 4. Host Testing
+    - [ ] [Ch 01. Console Host Testing](#ch-17-console-host-testing)
+    - [ ] [Ch 02. WebApi Host Testing]()
+    - [x] [Ch 03. Options Testing](#ch-19-options-testing)
+    - [ ] [Ch 04. Container Testing](#ch-20-container-testing)
+    - [ ] [Ch 05. Container Health Check Testing]()
+  - Part 5. Host
+    - [ ] [Ch 01. Schedule Host](#ch-22-schedule-host)
+    - [ ] [Ch 02. RabbitMQ Host]()
+    - [ ] [Ch 03. gRPC Host]()
+    - [ ] [Ch 04. WebApi Host]()
+  - Part 6. Tactical Design
+    - [x] [Ch 01. Tactical Design Map](#ch-32-tactical-design-map)
+    - [ ] [Ch 02. Output Type(Result)](#ch-33-output-type)
+    - [ ] [Ch 03. Domain Type]()
+    - [ ] TODO
+- **External Architecture**
+  - Part 7. Observability
+    - [x] [Ch 01. Logging](#ch-26-logging)
+    - [x] [Ch 02. Tracing](#ch-27-tracing)
+    - [x] [Ch 03. Metrics](#ch-28-metrics)
+    - [x] [Ch 04. Aspire Dashboard](#ch-29-aspire-dashboard)
+    - [ ] [Ch 05. Grafana System]()
+    - [ ] [Ch 06. OpenSearch System]()
+  - Part 8. TODO
+- **Strategic Design**
 
 <br/>
 
@@ -109,14 +113,14 @@
 
 # Part 2. Architecture
 
-# Ch 3. Architecture Overview
+# Ch 4. Architecture Overview
 
-## Ch 3.1 아키텍처 정의
+## Ch 4.1 아키텍처 정의
 ![](./.images/Architecture.png)
 
 ※ 출처: [Making Architecture Matter, 소프트웨어 아키텍처의 중요성](https://www.youtube.com/watch?v=4E1BHTvhB7Y)
 
-## Ch 3.2 아키텍처 범주
+## Ch 4.2 아키텍처 범주
 ![](./.images/Architecture.Category.png)
 
 ※ 출처: [Making old applications new again](https://sellingsimplifiedinsights.com/asset/app-development/ASSET_co-modernization-whitepaper-inc0460201-122016kata-v1-en_1511772094768.pdf)
@@ -143,26 +147,26 @@ Application Architecture
 
   ※ 출처: [DDD 및 CQRS 패턴을 사용하여 마이크로 서비스에서 비즈니스 복잡성 처리](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/)
 
-## Ch 3.3 아키텍처 역사
+## Ch 4.3 아키텍처 역사
 ![](./.images/Architecture.History.png)
 
   ※ 출처: [The Grand Unified Theory of Clean Architecture and  Pyramid ](https://www.youtube.com/watch?v=mzznsq4jCHY)
 
 <br/>
 
-# Ch 4. Architecture Principles
+# Ch 5. Architecture Principles
 > 아키텍처 원칙: [Separation of concerns](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns)
 
 ![](./.images/Architecture.Vs.png)
 
-## Ch 4.1 관심사의 분리
+## Ch 5.1 관심사의 분리
 - 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 Biz.와 Tech. 관심사 기준으로 같아야 합니다.**
   - **개발 시** 요구사항을 비즈니스와 기술 관심사로 분해합니다.
   - **운영 시** 로그를 비즈니스와 기술 관심사로 식별합니다.
 
 ![](./.images/Layer.SoC.Abstraction.png)
 
-## Ch 4.2 레이어
+## Ch 5.2 레이어
 - 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 레이어 기준으로 동일해야 합니다.**
 
 ![](./.images/Layer.SoC.png)
@@ -177,26 +181,26 @@ Application Architecture
     - `Known` 출력 Adapter
     - `Unknown` 출력 Adapter: 부수 효과(Side Effects)
 
-## Ch 4.3 레이어 배치
+## Ch 5.3 레이어 배치
 ![](./.images/Layer.Alignment.Known.png)
 
 ![](./.images/Layer.Alignment.Unknown.png)
 
 <br/>
 
-# Ch 5. Layer Isolation
+# Ch 6. Layer Isolation
 
-## Ch 5.1 격리 전
+## Ch 6.1 격리 전
 ![](./.images/Layer.Isolation.Before.png)
 - 출력의 변화 영향이 입력까지 전파됩니다.
 
-## Ch 5.2 격리 후
+## Ch 6.2 격리 후
 ![](./.images/Layer.Isolation.After.png)
 - 입출력 인터페이스를 활용하여, 입출력 변화의 영향이 Operation 레이어에 전파되지 않도록 차단합니다(Strategy 패턴).
 
 <br/>
 
-# Ch 6. Layer Testing
+# Ch 7. Layer Testing
 
 ![](./.images/Layer.Isolation.Test.png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
@@ -204,9 +208,9 @@ Application Architecture
 
 <br/>
 
-# Ch 7. Layer Enhancement
+# Ch 8. Layer Enhancement
 
-## Ch 7.1 격리 고도화
+## Ch 8.1 격리 고도화
 ![](./.images/Layer.Mediator.png)
 
 - Mediator 패턴을 활용하여, 격리된 레이어 간의 소통을 위해 인터페이스의 입출력을 메시지 기반으로 단순화합니다.
@@ -218,7 +222,7 @@ Application Architecture
   - 메시지는 런타임에 메시지에 부가 기능을 더 쉽게 추가할 수 있습니다(Decorator 패턴)
   - 메시지는 입출력을 범주화할 수 있습니다(Command 메시지와 Query 메시지: CQRS 패턴).
 
-## Ch 7.2 메시지 고도화
+## Ch 8.2 메시지 고도화
 ![](./.images/Layer.Decorator.Known.png)
 - Mediator 패턴은 Decorator 패턴과 조합하여 동적으로 메시지에 새 기능을 추가할 수 있습니다.
   - 예. 메시지 처리 시간 로그
@@ -227,7 +231,7 @@ Application Architecture
 
 ![](./.images/Layer.Decorator.Unknown.png)
 
-## Ch 7.3 메시지 범주화(CQRS)
+## Ch 8.3 메시지 범주화(CQRS)
 ![](./.images/Layer.CQRS.png)
 
 - Mediator 패턴을 통해 데이터 쓰기를 위한 메시지(Command)와 데이터를 읽기 위한 메시지(Query)로 구분할 수 있습니다.
@@ -242,7 +246,7 @@ Application Architecture
   - 일반적으로 Command보다 쿼리의 수가 많을 수 있으며, 데이터 조회만을 목적으로 하므로 복잡도가 낮고 최적화된 방식으로 실행됩니다.
   - Query는 데이터의 상태를 변경하지 않고, 데이터를 읽어오는 데 집중합니다.
 
-## Ch 7.4 메시지 범주화(CQRS) 흐름
+## Ch 8.4 메시지 범주화(CQRS) 흐름
 ![](./.images/Layer.CQRS.Flow.png)
 ※ 출처: [Module Requests Processing via CQRS](https://github.com/kgrzybek/modular-monolith-with-ddd?tab=readme-ov-file#34-module-requests-processing-via-cqrs)  
 
@@ -254,13 +258,6 @@ Application Architecture
 | SQL 복잡도 | ↓(낮다)  | ↑(높다)     |
 
 - 데이터 읽기 위한 메시지 처리에서는 SQL 구문을 사용하여 DTO 데이터 변환 없이 데이터베이스 조회 결과를 바로 반환합니다.
-
-<br/>
-
-# Ch 8. Service Integration
-![](./.images/Architecture.Internal.Integration.png)
-
-- 서비스 통합은 Biz. 관심사와 분리하여 Tech. 관심사(Adapter 레이어) 중심으로 구성할 수 있게 됩니다(Microservice 아키텍처 패턴).
 
 <br/>
 
@@ -1079,9 +1076,9 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 
 # Part 4. Host Testing
 
-# Ch 16. Console Host Testing
+# Ch 17. Console Host Testing
 
-## Ch 16.1 InternalsVisibleTo
+## Ch 17.1 InternalsVisibleTo
 ```xml
 <Project>
   <ItemGroup>
@@ -1092,7 +1089,7 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 - `InternalsVisibleTo`InternalsVisibleTo는 어셈블리 간의 `Internal`로 선언된 멤버 접근을 허용하는 데 사용되는 특성(Attribute)입니다.
 - 테스트 목적으로 Internal로 선언된 `Program` 클래스를 테스트 어셈블리에서 접근할 수 있게됩니다.
 
-## Ch 16.2 Program 클래스
+## Ch 17.2 Program 클래스
 ```cs
 IHostBuilder builder = CreateHostBuilder(args);
 using IHost host = builder.Build();
@@ -1147,7 +1144,7 @@ public static partial class Program
 ```
 - 테스트 환경에서 `IConfiguration`을 제어할 수 있도록 `CreateHostBuilder` 메서드에서 매개변수를 제공합니다.
 
-## Ch 16.3 Program 클래스 Testing
+## Ch 17.3 Program 클래스 Testing
 ```cs
 [Fact]
 public void We_CanTest_TheHost()
