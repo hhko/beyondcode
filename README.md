@@ -9,8 +9,8 @@
 ### 개요
 - Part 1. 기술 스택택
   - [x] [Ch 01. 기술 맵](#ch-1-기술-맵)
-  - [x] [Ch 02. 내부 아키텍처](#ch-2-내부-아키텍처)
-  - [ ] [Ch 03. 외부 아키텍처](#ch-3-외부-아키텍처)
+  - [x] [Ch 02. Internal 아키텍처](#ch-2-internal-아키텍처)
+  - [ ] [Ch 03. External 아키텍처](#ch-3-external-아키텍처)
 - Part 2. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처 개요)
   - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처 원칙)
@@ -19,21 +19,21 @@
   - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
   - [x] [Ch 06. 내부 아키텍처 비교](#ch-6-내부-아키텍처-비교)
 
-### 내부 아키텍처
+### Internal 아키텍처
 - Part 3. 솔루션
   - [x] [Ch 01. 솔루션 구조](#ch-1-솔루션-구조)
-  - [x] [Ch 02. 솔루션 아키텍처 테스트](#ch-2-솔루션-아키텍처-테스트)
-  - [x] [Ch 03. 솔루션 빌드 설정](#ch-3-솔루션-빌드-설정)
-  - [ ] [Ch 04. 솔루션 코드 분석](#ch-3-솔루션-코드-분석)
-  - [x] [Ch 05. 솔루션 레이어 의존성 등록](#ch-5-솔루션-레이어-의존성-등록)
-  - [ ] [Ch 06. 솔루션 빌드 자동화](#ch-6-솔루션-빌드-자동화)
-  - [ ] [Ch 07. 솔루션 컨테이너 배포 자동화]()
+  - [x] [Ch 02. 솔루션 빌드](#ch-2-솔루션-빌드-설정)
+  - [ ] [Ch 03. 솔루션 코드 분석](#ch-3-솔루션-코드-분석)
+  - [x] [Ch 04. 솔루션 레이어 의존성 등록](#ch-4-솔루션-레이어-의존성-등록)
+  - [ ] [Ch 05. 솔루션 빌드 자동화](#ch-5-솔루션-빌드-자동화)
+  - [ ] [Ch 06. 솔루션 컨테이너 배포 자동화]()
 - Part 4. 호스트 테스트
   - [ ] [Ch 01. 콘솔 호스트 테스트](#ch-1-콘솔-호스트-테스트)
   - [ ] [Ch 02. WebApi 호스트 테스트](#ch-2-webapi-호스트-테스트)
-  - [x] [Ch 03. 호스트 옵션 테스트](#ch-3-호스트-옵션-테스트)
-  - [ ] [Ch 04. 컨테이너 호스트 테스트](#ch-4-컨테이너-호스트-테스트)
-  - [ ] [Ch 05. 컨테이너 호스트 헬스 체크 테스트]()
+  - [x] [Ch 03. 호스트 의존성 테스트](#ch-3-호스트-의존성-테스트)
+  - [x] [Ch 04. 호스트 옵션 테스트](#ch-3-호스트-옵션-테스트)
+  - [ ] [Ch 05. 컨테이너 호스트 테스트](#ch-4-컨테이너-호스트-테스트)
+  - [ ] [Ch 06. 컨테이너 호스트 헬스 체크 테스트]()
 - Part 5. 호스트
   - [ ] [Ch 01. Schedule 호스트](#ch-1-schedule-호스트)
   - [ ] [Ch 02. RabbitMQ 호스트]()
@@ -45,7 +45,7 @@
   - [ ] [Ch 03. 도메인 기본 타입]()
   - [ ] TODO
 
-### 외부 아키텍처
+### External 아키텍처
 - Part 7. 관찰 가능성
   - [x] [Ch 01. 로그](#ch-1-로그)
   - [x] [Ch 02. 추적](#ch-2-추적)
@@ -56,6 +56,7 @@
 - Part 8. TODO
 
 ### 전략 설계
+- Part 9. TODO
 
 <br/>
 
@@ -64,7 +65,7 @@
 ## Ch 1. 기술 맵
 ![](./.images/TechMap.png)
 
-## Ch 2. 내부 아키텍처
+## Ch 2. Internal 아키텍처
 > - 내부 아키텍처 목표는 레이어 배치입니다.
 > - **Application 레이어가** 내부 아키텍처의 레이어를 주관(主管)합니다.
 
@@ -104,7 +105,7 @@
   - `danielpalme/ReportGenerator-GitHub-Action`
   - `dorny/test-reporter`
 
-## Ch 3. 외부 아키텍처
+## Ch 3. External 아키텍처
 > - 외부 아키텍처 목표는 서비스 배치입니다.
 
 - TODO
@@ -192,19 +193,19 @@ Application Architecture
 
 <br/>
 
-# Ch 3. 레이어 격리
+## Ch 3. 레이어 격리
 
-## Ch 3.1 격리 전
+### Ch 3.1 격리 전
 ![](./.images/Layer.Isolation.Before.png)
 - 출력의 변화 영향이 입력까지 전파됩니다.
 
-## Ch 3.2 격리 후
+### Ch 3.2 격리 후
 ![](./.images/Layer.Isolation.After.png)
 - 입출력 인터페이스를 활용하여, 입출력 변화의 영향이 Operation 레이어에 전파되지 않도록 차단합니다(Strategy 패턴).
 
 <br/>
 
-# Ch 4. 레이어 테스트
+## Ch 4. 레이어 테스트
 
 ![](./.images/Layer.Isolation.Test.png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
@@ -212,9 +213,9 @@ Application Architecture
 
 <br/>
 
-# Ch 5. 레이어 고도화
+## Ch 5. 레이어 고도화
 
-## Ch 5.1 격리 고도화
+### Ch 5.1 격리 고도화
 ![](./.images/Layer.Mediator.png)
 
 - Mediator 패턴을 활용하여, 격리된 레이어 간의 소통을 위해 인터페이스의 입출력을 메시지 기반으로 단순화합니다.
@@ -226,7 +227,7 @@ Application Architecture
   - 메시지는 런타임에 메시지에 부가 기능을 더 쉽게 추가할 수 있습니다(Decorator 패턴)
   - 메시지는 입출력을 범주화할 수 있습니다(Command 메시지와 Query 메시지: CQRS 패턴).
 
-## Ch 5.2 메시지 고도화
+### Ch 5.2 메시지 고도화
 ![](./.images/Layer.Decorator.Known.png)
 - Mediator 패턴은 Decorator 패턴과 조합하여 동적으로 메시지에 새 기능을 추가할 수 있습니다.
   - 예. 메시지 처리 시간 로그
@@ -235,7 +236,7 @@ Application Architecture
 
 ![](./.images/Layer.Decorator.Unknown.png)
 
-## Ch 5.3 메시지 범주화(CQRS)
+### Ch 5.3 메시지 범주화(CQRS)
 ![](./.images/Layer.CQRS.png)
 
 - Mediator 패턴을 통해 데이터 쓰기를 위한 메시지(Command)와 데이터를 읽기 위한 메시지(Query)로 구분할 수 있습니다.
@@ -250,7 +251,7 @@ Application Architecture
   - 일반적으로 Command보다 쿼리의 수가 많을 수 있으며, 데이터 조회만을 목적으로 하므로 복잡도가 낮고 최적화된 방식으로 실행됩니다.
   - Query는 데이터의 상태를 변경하지 않고, 데이터를 읽어오는 데 집중합니다.
 
-## Ch 5.4 메시지 범주화(CQRS) 흐름
+### Ch 5.4 메시지 범주화(CQRS) 흐름
 ![](./.images/Layer.CQRS.Flow.png)
 ※ 출처: [Module Requests Processing via CQRS](https://github.com/kgrzybek/modular-monolith-with-ddd?tab=readme-ov-file#34-module-requests-processing-via-cqrs)  
 
@@ -265,9 +266,9 @@ Application Architecture
 
 <br/>
 
-# Ch 6. 내부 아키텍처 비교
+## Ch 6. 내부 아키텍처 비교
 
-## Ch 6.1 Port 비교
+### Ch 6.1 Port 비교
 ![](./.images/Architecture.Vs.Port.png)
 
 | 구분                | 아키텍처        | 헥사고날 아키텍처 |
@@ -279,25 +280,25 @@ Application Architecture
   - Known 입출력은 Mediator 패턴을 활용하여 메시지 기반으로 처리합니다.
   - Unknown 입출력은 Strategy 패턴을 사용하여 인터페이스를 통해 처리합니다.
 
-## Ch 6.2 Message 비교
+### Ch 6.2 Message 비교
 ![](./.images/Architecture.Vs.Message.png)
 
 - 데이터 쓰기를 위한 메시지(Command)와 데이터를 읽기 위한 메시지(Query)로 구분합니다.
 - 모든 메시지를 대상으로 부가 기능을 Decorator로 추가합니다.
 
-## Ch 6.3 Adapter 비교
+### Ch 6.3 Adapter 비교
 ![](./.images/Architecture.Vs.Adapter.png)
 
 - Known과 Unknown 외부 입출력을 명시적으로 구분하여 Adapter 위치를 배치합니다.
   - Known 입출력은 Mediator 패턴을 활용하여 메시지 발신과 수신을 구현합니다.
   - Unknown 입출력은 Strategy 패턴을 사용하여 인터페이스을 구현합니다.
 
-## Ch 6.4 Application 비교
+### Ch 6.4 Application 비교
 ![](./.images/Architecture.Vs.Application.png)
 
 - Application은 동일하게 모두 DDD 전술 설계 패턴에서 제시하는 Application Service 중심으로 구현됩니다.
 
-## Ch 6.5 Domain 비교
+### Ch 6.5 Domain 비교
 ![](./.images/Architecture.Vs.Domain.png)
 
 - Domain은 동일하게 모두 DDD 전술 설계 패턴에서 제시하는 Entity와 Value Object 그리고 Domain Service을 중심으로 구현됩니다.
@@ -310,7 +311,7 @@ Application Architecture
 
 # Part 3. 솔루션
 
-# Ch 10. Solution Structure
+## Ch 1. 솔루션 구조
 > 예제 코드: [링크](./Ch10.SolutionStructure/)
 
 ```shell
@@ -318,7 +319,7 @@ Application Architecture
 ```
 - new-sln.ps1 파일: [링크](./Templates/new-sln.ps1)
 
-## Ch 10.1 솔루션 구조 템플릿
+### Ch 1.1 솔루션 구조 템플릿
 ```shell
 {T2}.sln
   │ # Asset 범주: 공유 자산
@@ -371,7 +372,7 @@ Application Architecture
               └─{T1}.{T2}.{T3}.Tests.Unit                       // Unit Test
 ```
 
-## Ch 10.2 솔루션 구조 형식
+### Ch 1.2 솔루션 구조 형식
 
 | Level  | Src             | Tests            |
 |------- |-------------    |--------------    |
@@ -394,7 +395,7 @@ Application Architecture
   - Performance
   - E2E(End to End)
 
-## Ch 10.3 솔루션 구조 예제
+### Ch 1.3 솔루션 구조 예제
 ![](./.images/SolutionExplorer.png)
 
 - Src 예: `Corporation`.`Solution`.`Service`.`Adapters`.`Infrastructure`
@@ -418,9 +419,9 @@ Application Architecture
 
 <br/>
 
-# Ch 11. Solution Build Configuration
+## Ch 2. 솔루션 빌드
 
-## Ch 11.1 .NET SDK 빌드 버전
+### Ch 2.1 .NET SDK 빌드 버전
 - `global-json` 파일은 .NET 프로젝트에서 특정 .NET SDK 버전을 지정하여 일관된 개발 환경을 유지하기 위해 사용됩니다.
   - 예제 코드: [global-json](./Ch11.SolutionBuildSettings/global.json)
 
@@ -487,7 +488,7 @@ dotnet --version
   ```
   - 8.0.102 지정된 .NET SDK 버전만을 허용하빈다.
 
-## Ch 11.2 패키지 소스
+### Ch 2.2 패키지 소스
 - `nuget.config` 파일은 솔루션 수준에서 패키지 소스을 관리합니다.
   - 예제 코드: [nuget.config](./Ch11.SolutionBuildSettings/nuget.config)
 
@@ -514,7 +515,7 @@ dotnet new nuget.config
 ```
 - 전역 설정에 지정된 기존 NuGet 패키지 소스 목록을 모두 제거 후에 새 패키지 저장소 `https://api.nuget.org/v3/index.json`을 지정합니다.
 
-## Ch 11.3 중앙 패키지 버전 관리
+### Ch 2.3 중앙 패키지 버전 관리
 - `Directory.Package.props` 파일을 통해 각 프로젝트의 패키지 버전을 일일이 수정하지 않고, 한 곳에서 공통 패키지 버전을 정의할 수 있습니다.
   - 예제 코드: [Directory.Packages.props](./Ch11.SolutionBuildSettings/Directory.Packages.props)
 
@@ -542,7 +543,7 @@ upgrade-assistant upgrade
   ![](./.images/Directory.Package.props.png)
   - 프로젝트 파일에서 제거된 `PackageReference`의 `Version` 값을 `PackageVersion`으로 추가하여 버전을 중앙에서 관리합니다.
 
-## Ch 11.4 중앙 빌드 속성 관리
+### Ch 2.4 중앙 빌드 속성 관리
 - `Directory.Build.props` 파일을 사용하면 각 프로젝트 파일에 일일이 동일한 속성을 추가할 필요 없이, 한 곳에서 공통 속성을 정의하고 관리할 수 있습니다.
   - 예제 코드: 솔루션 빌드 속성 [Directory.Build.props](./Ch11.SolutionBuildSettings/Directory.Build.props)
   - 예제 코드: 테스트 빌드 속성 [Directory.Build.props](./Ch11.SolutionBuildSettings/Backend/Tests/Directory.Build.props)
@@ -698,7 +699,7 @@ Directory.Build.props                                // 전역 프로젝트 공�
     </Project>
     ```
 
-## Ch 11.5 단일 파일 빌드
+### Ch 2.5 단일 파일 빌드
 ```shell
 # 윈도우
 <PublishSingleFile>true</PublishSingleFile>
@@ -712,7 +713,7 @@ Directory.Build.props                                // 전역 프로젝트 공�
 
 <br/>
 
-# Ch 12. Solution Code Analysis
+## Ch 3. 솔루션 코드 분석
 
 ```init
 #
@@ -734,7 +735,7 @@ generated_code = true
 <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 ```
 
-## Ch 12.1 코드 스타일 분석
+### Ch 3.1 코드 스타일 분석
 ```xml
 <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -790,7 +791,7 @@ error IDE0161:
  파일 범위 namespace 스로 변환 (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0161)
 ```
 
-## Ch 12.2 코드 품질 분석
+### Ch 3.2 코드 품질 분석
 ```xml
 <EnableNETAnalyzers>true</EnableNETAnalyzers>
 <AnalysisLevel>latest</AnalysisLevel>
@@ -805,12 +806,225 @@ error IDE0161:
 - `CodeAnalysisTreatWarningsAsErrors`: AnalysisMode에서 검출된 코드 품질 분석 경고를 에러화(.editorconfig에서 검출된 경고를 에러화하지는 않는다)
 - `WarningsNotAsErrors` 경고 무시
 
-## Ch 12.3 코드 품질 지표
+### Ch 3.3 코드 품질 지표
 - TODO
 
 <br/>
 
-# Ch 13. Solution Architecture Testing
+
+## Ch 4. 솔루션 레이어 의존성 등록
+
+### Ch 4.1 레이어 의존성 폴더 구성
+- Adapter 레이어 Infrastructure에서 OpenTelemetryOptions 옵션을 사용하기 위한 레이어 의존성 주입 사레입니다.
+
+```shell
+Abstractions/                             # 레이어 주 목표가 아닌 부수적인 코드
+  Registration/                           # 의존성 등록
+    InfrastructureLayerRegistration.cs    # {레이어}Registration.cs
+                                          #  예. InfrastructureLayerRegistration.cs
+                                          #  예. PersistenceLayerRegistration.cs
+                                          #  예. ApplicationLayerRegistration.cs
+```
+
+- 부수 코드(레이어 주 목표가 아닌 코드)
+  - `Abstractions`
+    - 레이어 주 목표 외 부수적으로 필요한 코드를 배치 시킵니다.
+- 의존성
+  - `Registration`
+    - 의존성 등록합니다.
+  - `{레이어}Registration.cs`
+    - 레이어 의존성 등록 파일입니다.
+
+<br/>
+
+## Ch 5. 솔루션 빌드 자동화
+
+```
+.github/workflows/build.yaml
+```
+- GitHub Action 스크립트는 `.github/workflows/` 폴더의 yaml 파일로 배치합니다.
+
+```shell
+{솔루션}
+  ├─.build                                          # 빌드 자동화 결과
+  │   └─coverage
+  │       ├─Cobertura.xml                           # 머지된 Cobertura.xml 파일
+  │       └─SummaryGithub.md                        # 코드 커버리지 Markdown 파일
+  │
+  ├─{솔루션}.sln
+  ├─.build.ps1                                      # 로컬 빌드 파일
+  │
+  ├─ ...
+      └─{테스트 프로젝트}
+          └─TestResults
+              ├─0ca60e99-32fb-43ac-bbd3-01f5a5ef6886
+              │   └─coverage.cobertura.xml         # Cobertura 코드 커버리지 파일
+              └─logs.trx                           # trx 로그 파일
+```
+- `dotnet test`은 "테스트 프로젝트" 단위로 Cobertura 코드 커버리지 파일과 trx 로그 파일을 생성합니다.
+- `ReportGenerator`은 개별 Cobertura 코드 커버리지 파일을 통합하여 .build 폴더에 머지된 코드 커버리지 관련 파일(Cobertura.xml, SummaryGithub.md)을 생성합니다.
+
+### Ch 5.1 코드 커버리지 보고서
+![](./.images/Build.Test.CodeCoverage.png)
+
+```yml
+# 코드 커버리지 생성: Cobertura.xml, MarkdownSummaryGithub.md
+- name: Generate Coverage Reports
+  uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
+  if: always()
+  with:
+    reports: '${{ env.coverage_in_cobertura_files }}'
+    targetdir: '${{ env.coverage_out_dir }}'
+    reporttypes: 'Cobertura;MarkdownSummaryGithub'
+    verbosity: "Warning"
+    title: "Code Coverage"
+    tag: "${{ github.run_number }}_${{ github.run_id }}"
+    customSettings: ""                # https://github.com/danielpalme/ReportGenerator/wiki/Settings.
+    toolpath: "reportgeneratortool"   # dotnet tool.
+
+# 코드 커버러지 $GITHUB_STEP_SUMMARY에 추가
+- name: Publish Coverage Reports in Build Summary
+  if: always()
+  run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
+  shell: bash
+```
+- [ReportGenerator-GitHub-Action](https://github.com/danielpalme/ReportGenerator-GitHub-Action)
+- `if: always()`을 이용하여 테스트가 실패할 때도 코드 커버리지를 생성합니다.
+- 코드 커버리지 SummaryGithub.md 파일 내용을 $GITHUB_STEP_SUMMARY에 출력하여 빌드 "Summary"에 포함 시킵니다.
+
+### Ch 5.2 테스트 보고서
+![](./.images/Build.Test.Report.png)
+
+```yml
+- name: Publish Test Detail Report
+  uses: dorny/test-reporter@v1.9.1
+  if: always()
+  with:
+    name: Test Detail Report
+    path: "${{ env.solution_dir }}/**/*.trx"
+    reporter: dotnet-trx
+```
+
+- [test-reporter](https://github.com/dorny/test-reporter)
+- `if: always()`을 이용하여 테스트가 실패할 때도 테스트 보고서를 생성하여 실패 로그를 확인합니다.
+
+<br/>
+
+---
+
+<br/>
+
+# Part 4. 호스트 테스트
+
+## Ch 1. 콘솔 호스트 테스트
+
+### Ch 1.1 InternalsVisibleTo
+```xml
+<Project>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Crop.Hello.Api.Tests.Integration" />
+  </ItemGroup>
+</Project>
+```
+- `InternalsVisibleTo`InternalsVisibleTo는 어셈블리 간의 `Internal`로 선언된 멤버 접근을 허용하는 데 사용되는 특성(Attribute)입니다.
+- 테스트 목적으로 Internal로 선언된 `Program` 클래스를 테스트 어셈블리에서 접근할 수 있게됩니다.
+
+### Ch 1.2 Program 클래스
+```cs
+IHostBuilder builder = CreateHostBuilder(args);
+using IHost host = builder.Build();
+await host.RunAsync();
+
+public static partial class Program
+{
+  public static IHostBuilder CreateHostBuilder(string[] args)
+  {
+    return CreateHostBuilder(
+      args: args,
+      configuration: null);
+  }
+
+  public static IHostBuilder CreateHostBuilder(
+    string[] args,
+    IConfiguration? configuration,
+    bool removeJsonConfigurationSources = true)
+  {
+    return Host.CreateDefaultBuilder(args)
+      .ConfigureAppConfiguration((context, config) =>
+      {
+        if (configuration is null)
+          return;
+
+        // 기존 환경 설정 제거
+        if (removeJsonConfigurationSources)
+        {
+          //((List<IConfigurationSource>)config.Sources).RemoveAll(source => source is JsonConfigurationSource);
+          for (int i = config.Sources.Count - 1; i >= 0; i--)
+          {
+            if (config.Sources[i] is JsonConfigurationSource)
+            {
+              config.Sources.RemoveAt(i);
+            }
+          }
+        }
+
+        // 신규 환경 설정 추가
+        config.AddConfiguration(configuration);
+      })
+      .ConfigureServices((context, services) =>
+      {
+        // 레이어 의존성 등록
+        services
+          .RegisterInfrastructureLayer(context.HostingEnvironment, context.Configuration)
+          .RegisterPersistenceLayer()
+          .RegisterApplicationLayer();
+      });
+  }
+}
+```
+- 테스트 환경에서 `IConfiguration`을 제어할 수 있도록 `CreateHostBuilder` 메서드에서 매개변수를 제공합니다.
+
+### Ch 1.3 Program 클래스 Testing
+```cs
+[Fact]
+public void We_CanTest_TheHost()
+{
+  // Arragne
+  IHostBuilder builder = Program.CreateHostBuilder(
+    args: Array.Empty<string>());
+
+  // Act
+  // ...
+
+  // Assert
+  // ...
+
+}
+```
+
+### Ch 1.4 콘솔 프로젝트 appsettings.json 그룹핑
+![](./.images/appsettings.groupping.png)
+
+```xml
+<ItemGroup>
+  <Content Include="appsettings.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </Content>
+  <Content Include="appsettings.*.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <DependentUpon>appsettings.json</DependentUpon>
+  </Content>
+</ItemGroup>
+```
+
+<br/>
+
+## Ch 2. WebApi 호스트 테스트
+- TODO 테스트 가능한 호스트
+
+<br/>
+
+## Ch 3. 호스트 의존성성 테스트
 ![](./.images/Architecture.UnitTestStructure.png)
 
 - Abstractions
@@ -818,7 +1032,7 @@ error IDE0161:
 - ArchitectureTests
   - 아키텍처 테스트 코드를 배치합니다.
 
-## Ch 13.1 레이어 어셈블리
+### Ch 3.1 레이어 어셈블리
 
 ```cs
 using System.Reflection;
@@ -834,7 +1048,7 @@ public static class AssemblyReference
 - 모든 레이어 어셈블리(프로젝트)에 공통적으로 `AssemblyReference`을 구현합니다.
   ![](./.images/AssemblyReference.png)
 
-## Ch 13.2 레이어 의존성 테스트
+### Ch 3.2 레이어 의존성 테스트
 - [ArchUnitNET](https://github.com/TNG/ArchUnitNET) 패키지
 
 ```cs
@@ -933,7 +1147,7 @@ public class LayerDependencyTests : ArchitectureBaseTest
   - ApplicationLayer_ShouldNotHave_Dependencies_OnAdapterLayer
   - AdapterLayer_ShouldNotHave_Dependencies_OnDomainLayer
 
-## Ch 13.3 CQRS 네이밍 컨벤션 테스트
+### Ch 3.3 CQRS 네이밍 컨벤션 테스트
 
 ```cs
 [Fact]
@@ -964,7 +1178,7 @@ public void CommandMessages_ShouldEndWith_Command()
   - QueryMessagesT_ShouldEndWith_Query
   - QueryUseCasesT_ShouldEndWith_QueryUsecase
 
-## Ch 13.4 레이어 의존성 다이어그램
+### Ch 3.4 레이어 의존성 다이어그램
 
 ![](./.images/Architecture.LayerDiagram.png)
 
@@ -977,223 +1191,12 @@ DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --pr
 
 <br/>
 
-# Ch 14. Solution Layer Dependency Injection
+## Ch 4. 호스트 옵션 테스트
 
-## Ch 14.1 레이어 의존성 폴더 구성
-- Adapter 레이어 Infrastructure에서 OpenTelemetryOptions 옵션을 사용하기 위한 레이어 의존성 주입 사레입니다.
-
-```shell
-Abstractions/                             # 레이어 주 목표가 아닌 부수적인 코드
-  Registration/                           # 의존성 등록
-    InfrastructureLayerRegistration.cs    # {레이어}Registration.cs
-                                          #  예. InfrastructureLayerRegistration.cs
-                                          #  예. PersistenceLayerRegistration.cs
-                                          #  예. ApplicationLayerRegistration.cs
-```
-
-- 부수 코드(레이어 주 목표가 아닌 코드)
-  - `Abstractions`
-    - 레이어 주 목표 외 부수적으로 필요한 코드를 배치 시킵니다.
-- 의존성
-  - `Registration`
-    - 의존성 등록합니다.
-  - `{레이어}Registration.cs`
-    - 레이어 의존성 등록 파일입니다.
-
-<br/>
-
-# Ch 15. Solution Build Automation
-
-```
-.github/workflows/build.yaml
-```
-- GitHub Action 스크립트는 `.github/workflows/` 폴더의 yaml 파일로 배치합니다.
-
-```shell
-{솔루션}
-  ├─.build                                          # 빌드 자동화 결과
-  │   └─coverage
-  │       ├─Cobertura.xml                           # 머지된 Cobertura.xml 파일
-  │       └─SummaryGithub.md                        # 코드 커버리지 Markdown 파일
-  │
-  ├─{솔루션}.sln
-  ├─.build.ps1                                      # 로컬 빌드 파일
-  │
-  ├─ ...
-      └─{테스트 프로젝트}
-          └─TestResults
-              ├─0ca60e99-32fb-43ac-bbd3-01f5a5ef6886
-              │   └─coverage.cobertura.xml         # Cobertura 코드 커버리지 파일
-              └─logs.trx                           # trx 로그 파일
-```
-- `dotnet test`은 "테스트 프로젝트" 단위로 Cobertura 코드 커버리지 파일과 trx 로그 파일을 생성합니다.
-- `ReportGenerator`은 개별 Cobertura 코드 커버리지 파일을 통합하여 .build 폴더에 머지된 코드 커버리지 관련 파일(Cobertura.xml, SummaryGithub.md)을 생성합니다.
-
-## Ch 15.1 코드 커버리지 보고서
-![](./.images/Build.Test.CodeCoverage.png)
-
-```yml
-# 코드 커버리지 생성: Cobertura.xml, MarkdownSummaryGithub.md
-- name: Generate Coverage Reports
-  uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
-  if: always()
-  with:
-    reports: '${{ env.coverage_in_cobertura_files }}'
-    targetdir: '${{ env.coverage_out_dir }}'
-    reporttypes: 'Cobertura;MarkdownSummaryGithub'
-    verbosity: "Warning"
-    title: "Code Coverage"
-    tag: "${{ github.run_number }}_${{ github.run_id }}"
-    customSettings: ""                # https://github.com/danielpalme/ReportGenerator/wiki/Settings.
-    toolpath: "reportgeneratortool"   # dotnet tool.
-
-# 코드 커버러지 $GITHUB_STEP_SUMMARY에 추가
-- name: Publish Coverage Reports in Build Summary
-  if: always()
-  run: cat "${{ env.coverage_out_dir }}/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
-  shell: bash
-```
-- [ReportGenerator-GitHub-Action](https://github.com/danielpalme/ReportGenerator-GitHub-Action)
-- `if: always()`을 이용하여 테스트가 실패할 때도 코드 커버리지를 생성합니다.
-- 코드 커버리지 SummaryGithub.md 파일 내용을 $GITHUB_STEP_SUMMARY에 출력하여 빌드 "Summary"에 포함 시킵니다.
-
-## Ch 15.2 테스트 보고서
-![](./.images/Build.Test.Report.png)
-
-```yml
-- name: Publish Test Detail Report
-  uses: dorny/test-reporter@v1.9.1
-  if: always()
-  with:
-    name: Test Detail Report
-    path: "${{ env.solution_dir }}/**/*.trx"
-    reporter: dotnet-trx
-```
-
-- [test-reporter](https://github.com/dorny/test-reporter)
-- `if: always()`을 이용하여 테스트가 실패할 때도 테스트 보고서를 생성하여 실패 로그를 확인합니다.
-
-<br/>
-
----
-
-<br/>
-
-# Part 4. Host Testing
-
-# Ch 17. Console Host Testing
-
-## Ch 17.1 InternalsVisibleTo
-```xml
-<Project>
-  <ItemGroup>
-    <InternalsVisibleTo Include="Crop.Hello.Api.Tests.Integration" />
-  </ItemGroup>
-</Project>
-```
-- `InternalsVisibleTo`InternalsVisibleTo는 어셈블리 간의 `Internal`로 선언된 멤버 접근을 허용하는 데 사용되는 특성(Attribute)입니다.
-- 테스트 목적으로 Internal로 선언된 `Program` 클래스를 테스트 어셈블리에서 접근할 수 있게됩니다.
-
-## Ch 17.2 Program 클래스
-```cs
-IHostBuilder builder = CreateHostBuilder(args);
-using IHost host = builder.Build();
-await host.RunAsync();
-
-public static partial class Program
-{
-  public static IHostBuilder CreateHostBuilder(string[] args)
-  {
-    return CreateHostBuilder(
-      args: args,
-      configuration: null);
-  }
-
-  public static IHostBuilder CreateHostBuilder(
-    string[] args,
-    IConfiguration? configuration,
-    bool removeJsonConfigurationSources = true)
-  {
-    return Host.CreateDefaultBuilder(args)
-      .ConfigureAppConfiguration((context, config) =>
-      {
-        if (configuration is null)
-          return;
-
-        // 기존 환경 설정 제거
-        if (removeJsonConfigurationSources)
-        {
-          //((List<IConfigurationSource>)config.Sources).RemoveAll(source => source is JsonConfigurationSource);
-          for (int i = config.Sources.Count - 1; i >= 0; i--)
-          {
-            if (config.Sources[i] is JsonConfigurationSource)
-            {
-              config.Sources.RemoveAt(i);
-            }
-          }
-        }
-
-        // 신규 환경 설정 추가
-        config.AddConfiguration(configuration);
-      })
-      .ConfigureServices((context, services) =>
-      {
-        // 레이어 의존성 등록
-        services
-          .RegisterInfrastructureLayer(context.HostingEnvironment, context.Configuration)
-          .RegisterPersistenceLayer()
-          .RegisterApplicationLayer();
-      });
-  }
-}
-```
-- 테스트 환경에서 `IConfiguration`을 제어할 수 있도록 `CreateHostBuilder` 메서드에서 매개변수를 제공합니다.
-
-## Ch 17.3 Program 클래스 Testing
-```cs
-[Fact]
-public void We_CanTest_TheHost()
-{
-  // Arragne
-  IHostBuilder builder = Program.CreateHostBuilder(
-    args: Array.Empty<string>());
-
-  // Act
-  // ...
-
-  // Assert
-  // ...
-
-}
-```
-
-## Ch 16.4 콘솔 프로젝트 appsettings.json 그룹핑
-![](./.images/appsettings.groupping.png)
-
-```xml
-<ItemGroup>
-  <Content Include="appsettings.json">
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  </Content>
-  <Content Include="appsettings.*.json">
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    <DependentUpon>appsettings.json</DependentUpon>
-  </Content>
-</ItemGroup>
-```
-
-<br/>
-
-# Ch 17. WebApi Host Testing
-- TODO 테스트 가능한 호스트
-
-<br/>
-
-# Ch 18. Options Testing
-## Ch 18.1 옵션 테스트 구성
+### Ch 4.1 호스트 옵션 테스트 구성
 ![](./.images/Host.Schedule.IntegrationTest.Options.png)
 
-## Ch 18.2 옵션 의존성 등록
+### Ch 4.2 호스트 옵션 의존성 등록
 ![](./.images/Host.Configuration.Options.png)
 
 ```shell
@@ -1247,7 +1250,7 @@ internal sealed class OpenTelemetryOptionsValidator
 }
 ```
 
-## Ch 18.3 appsettings.json 통합 테스트
+### Ch 4.3 appsettings.json 통합 테스트
 ![](./.images/IntegrationTest.OptionPattern.png)
 
 ```cs
@@ -1282,9 +1285,9 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 <br/>
 
-# Ch 19. Container Testing
+## Ch 5. 컨테이너 호스트 테스트
 
-## Ch 19.1 C# 서비스 컨테이너 이름 규칙
+### Ch 5.1 C# 서비스 컨테이너 이름 규칙
 Item            | Rule                                                  | Example
 ---             | ---                                                   | ---
 compose name    | {Corporation}-{Solution}                              | crop-hello
@@ -1343,7 +1346,7 @@ networks:
     ```
     - .gitignore 파일에 `.logs/`을 추가합니다.
 
-## Ch 19.2 인프라 서비스 컨테이너 이름 규칙
+### Ch 5.2 인프라 서비스 컨테이너 이름 규칙
 Item            | Rule                                                        | Example
 ---             | ---                                                         | ---
 service name    | {Corporation}.{Solution}.infra.{Service}                    | crop.hello.infra.aspire:
@@ -1368,7 +1371,7 @@ export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
 
 <br/>
 
-# Ch 20. Container Health Check Testing
+## Ch 6. 컨테이너 호스트 헬스 체크 테스트
 - TODO
 
 <br/>
@@ -1377,7 +1380,7 @@ export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
 
 <br/>
 
-# Part 5. Host
+# Part 5. 호스트
 
 | IHost    | Windows Service | Container | Integration Test | Performance Test | Pipeline(Exception) |
 | ---      | :---:           | :---:     | :---:            | :---:            | :---:               |
@@ -1386,9 +1389,9 @@ export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
 | RabbitMQ |                 |           |                  |                  |                     |
 | gRPC     |                 |           |                  |                  |                     |
 
-# Ch 21. Schedule Host
+## Ch 1. Schedule 호스트
 
-## Ch 21.1 윈도우 서비스
+### Ch 1.1 윈도우 서비스
 ```shell
 # 윈도우 서비스 의존성 등록
 RegisterInfrastructureLayer   # Infrastructure 레이어
@@ -1422,7 +1425,7 @@ internal static class WindowsServiceRegistration
 }
 ```
 
-## Ch 21.2 윈도우 서비스 등록
+### Ch 1.2 윈도우 서비스 등록
 ```bat
 @echo off
 
@@ -1449,220 +1452,17 @@ echo "서비스 설치 및 복구 설정 완료"
 
 <br/>
 
-# Part 6. Observability
+# Part 6. 전술 설계
 
-# Ch 25. Logging
-## Ch 25.1 구조적 로그 전송
-```cs
-services
-  .AddSerilog(configure =>
-  {
-    configure
-      .ReadFrom.Configuration(configuration)
-      .WriteTo.OpenTelemetry(options =>         // Serilog.Sink.OpenTelemetry
-      {
-        // OTLP/gRPC: 4317
-        //  - Host:     "http://127.0.0.1:4317";
-        //  - Docker:   "http://host.docker.internal:4317";
-        options.Endpoint = otlpCollectorExporterEndpoint;
-        options.Protocol = OtlpProtocol.Grpc;
-
-        // 리소스
-        options.ResourceAttributes = new Dictionary<string, object>
-        {
-          ["service.name"] = openTelemetryOptions.ApplicationName,
-          ["service.version"] = openTelemetryOptions.Version,
-          ["environment.name"] = environment.EnvironmentName,
-          ["team.name"] = openTelemetryOptions.TeamName
-        };
-      });
-  });
-```
-
-## Ch 25.2 구조적 로그
-Item                    | Value
----                     | ---
-Level                   | Information
-Message                 | Value1 is Value2
-Key1                    | Value1
-Key2                    | Value2
-message_template.text   | {Key1} is {Key2}
-
-```cs
-logger.LogInformation("{Key1} is {Key2}", "Value1", "Value2");
-```
-
-<br/>
-
-# Ch 26. Tracing
-```cs
-services
-  .AddOpenTelemetry()
-  .AddResources(environment.EnvironmentName, openTelemetryOptions)
-  .WithTracing(builder => ConfigureTracing(builder, environment))
-  .UseOtlpExporter(OtlpExportProtocol.Grpc, new Uri(otlpCollectorExporterEndpoint));
-
-private static void ConfigureTracing(TracerProviderBuilder builder, IHostEnvironment environment)
-{
-    // OpenTelemetry.Instrumentation.Quartz: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Quartz
-    builder.AddQuartzInstrumentation();
-
-    if (environment.IsDevelopmentOrLocal())
-    {
-      builder.SetSampler<AlwaysOnSampler>();
-    }
-
-    //traceBuilder
-    //    .AddAspNetCoreInstrumentation()
-    //    .AddHttpClientInstrumentation()
-    //    .AddFusionCacheInstrumentation()
-    //    .AddEntityFrameworkCoreInstrumentation();
-}
-```
-
-<br/>
-
-# Ch 27. Metrics
-
-## Ch 27.1 Metrics 전송
-```cs
-services
-  .AddOpenTelemetry()
-  .AddResources(environment.EnvironmentName, openTelemetryOptions)
-  .WithMetrics(builder => ConfigureMetrics(builder))
-  .UseOtlpExporter(OtlpExportProtocol.Grpc, new Uri(otlpCollectorExporterEndpoint));
-
-private static void ConfigureMetrics(MeterProviderBuilder builder)
-{
-  builder
-    .AddRuntimeInstrumentation()        // OpenTelemetry.Instrumentation.Runtime
-    .AddProcessInstrumentation();       // OpenTelemetry.Instrumentation.Process
-    //.AddAspNetCoreInstrumentation()
-    //.AddFusionCacheInstrumentation()
-    //.AddMeter(openTelemetryOptions.Meters);
-}
-```
-
-## Ch 27.2 Metrics 지표
-![](./.images/OpenTelemetry.Metrics.png)
-
-- OpenTelemetry.Instrumentation.Runtime
-  - dotnet.assembly.*
-  - dotnet.gc.*
-  - dotnet.git.*
-  - dotnet.monitor.*
-  - dotnet.process.*
-  - dotnet.thread.*
-  - dotnet.timer.*
-- OpenTelemetry.Instrumentation.Process
-<br/>
-
-# Ch 28. Aspire Dashboard
-![](./.images/aspire.dashdoard.png)
-
-## Ch 28.1 Aspire Dockerfile
-```dockerfile
-FROM mcr.microsoft.com/dotnet/aspire-dashboard:9.0
-```
-- Backend/Build/Dockerfiles/Aspire/Dockerfile 파일
-
-## Ch 28.2 Aspire Docker Compose
-```yml
-x-logging-common: &logging-common
-  driver: "json-file"
-  options:
-    max-size: "10m"
-    max-file: "7"
-
-services:
-  crop.hello.infra.aspire:                              # <- service name
-    env_file: .env
-    image: crop/hello/infra/aspire:${SERVICE_VERSION}   # <- image name
-    build:
-      context: .
-      dockerfile: Backend/Build/Dockerfiles/Aspire/Dockerfile
-    container_name: corp.hello.infra.aspire             # <- container name
-    hostname: corp.hello.infra.aspire                   # <- host name
-    environment:
-      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
-    ports:
-      - 4317:18889      # OTLP/gRPC
-      - 4318:18890      # OTLP/HTTP
-      - 18888:18888     # http dashboard: http://localhost:18888
-    networks:
-      - net
-    logging: *logging-common
-
-networks:
-  net:
-    name: crop.hello                                    # <- network name
-```
-- docker-compose.infra.yml 파일일
-- 인증을 사용하지 않도록 대시보드를 구성하고 익명 액세스를 허용합니다.
-  ```yml
-  DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
-  ```
-- [데이터 수집 제한](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/dashboard/configuration?tabs=bash#telemetry-limits)
-  ```shell
-  docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard \
-    -e DASHBOARD__TELEMETRYLIMITS__MAXLOGCOUNT='1000' \
-    -e DASHBOARD__TELEMETRYLIMITS__MAXTRACECOUNT='1000' \
-    -e DASHBOARD__TELEMETRYLIMITS__MAXMETRICSCOUNT='1000' \
-    mcr.microsoft.com/dotnet/aspire-dashboard:9.0
-  ```
-  ```json
-  {
-    "Dashboard": {
-      "TelemetryLimits": {
-        "MaxLogCount": 1000,
-        "MaxTraceCount": 1000,
-        "MaxMetricsCount": 1000
-      }
-    }
-  }
-  ```
-
-## Ch 28.3 Docker Compose 전용 디버깅 환경 변수
-```yml
-services:
-  crop.hello.api:
-    environment:
-      - DOTNET_ENVIRONMENT=Docker
-    volumes:
-      - ./.logs/crop.hello.api:/app/logs
-```
-- docker-compose.override.yml 파일
-- 콘솔과 Docker Compose의 설정이 다를 경우, Visual Studio에서 디버깅 목적으로 사용하는 docker-compose.override.yml 파일을 활용하여 DOTNET_ENVIRONMENT 값을 설정할 수 있습니다. 이를 통해 appsettings.Docker.json에 Docker Compose 전용 설정을 지
-
-```json
-{
-  "OpenTelemetryOptions": {
-    "OtlpCollectorHost": "host.docker.internal"
-  }
-}
-```
-- appsettings.Docker.json 파일
-- OtlpCollectorHost 값 구분
-  - 컨테이너일 때(도커 컴포즈): host.docker.internal
-  - 호스트일 때(콘솔): 127.0.0.1
-
-<br/>
-
----
-
-<br/>
-
-# Part 7. Tactical Design
-
-# Ch 31. Tactical Design Map
+## Ch 1. 전술 설계 맵
 ![](./.images/TacticalDesign.Pattern.png)
 
 <br/>
 
-# Ch 32. Output Type
+## Ch 2. 출력 기본 타입
 - IResult 타입으로 모든 Known과 Unknown 입출력 메서드 결과 타입으로 정의합니다.
 
-## Ch 32.1 IResult 타입 정의
+### Ch 2.1 IResult 타입 정의
 - 성공과 실패를 구분하며, 성공 시에는 값을 가지고, 실패 시에는 에러 값을 포함합니다.
 - 특히, 유효성 검사 실패의 경우 다수의 에러 값을 정의할 수 있습니다.
 
@@ -1743,5 +1543,204 @@ public sealed partial record class Error(string Code, string Message)
 <br/>
 
 ---
+
+<br/>
+
+# Part 7. 관찰 가능성
+
+## Ch 1. 로그그
+### Ch 1.1 구조적 로그 전송
+```cs
+services
+  .AddSerilog(configure =>
+  {
+    configure
+      .ReadFrom.Configuration(configuration)
+      .WriteTo.OpenTelemetry(options =>         // Serilog.Sink.OpenTelemetry
+      {
+        // OTLP/gRPC: 4317
+        //  - Host:     "http://127.0.0.1:4317";
+        //  - Docker:   "http://host.docker.internal:4317";
+        options.Endpoint = otlpCollectorExporterEndpoint;
+        options.Protocol = OtlpProtocol.Grpc;
+
+        // 리소스
+        options.ResourceAttributes = new Dictionary<string, object>
+        {
+          ["service.name"] = openTelemetryOptions.ApplicationName,
+          ["service.version"] = openTelemetryOptions.Version,
+          ["environment.name"] = environment.EnvironmentName,
+          ["team.name"] = openTelemetryOptions.TeamName
+        };
+      });
+  });
+```
+
+### Ch 1.2 구조적 로그
+Item                    | Value
+---                     | ---
+Level                   | Information
+Message                 | Value1 is Value2
+Key1                    | Value1
+Key2                    | Value2
+message_template.text   | {Key1} is {Key2}
+
+```cs
+logger.LogInformation("{Key1} is {Key2}", "Value1", "Value2");
+```
+
+<br/>
+
+## Ch 2. 추적
+```cs
+services
+  .AddOpenTelemetry()
+  .AddResources(environment.EnvironmentName, openTelemetryOptions)
+  .WithTracing(builder => ConfigureTracing(builder, environment))
+  .UseOtlpExporter(OtlpExportProtocol.Grpc, new Uri(otlpCollectorExporterEndpoint));
+
+private static void ConfigureTracing(TracerProviderBuilder builder, IHostEnvironment environment)
+{
+    // OpenTelemetry.Instrumentation.Quartz: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Quartz
+    builder.AddQuartzInstrumentation();
+
+    if (environment.IsDevelopmentOrLocal())
+    {
+      builder.SetSampler<AlwaysOnSampler>();
+    }
+
+    //traceBuilder
+    //    .AddAspNetCoreInstrumentation()
+    //    .AddHttpClientInstrumentation()
+    //    .AddFusionCacheInstrumentation()
+    //    .AddEntityFrameworkCoreInstrumentation();
+}
+```
+
+<br/>
+
+## Ch 3. 지표
+
+## Ch 27.1 Metrics 전송
+```cs
+services
+  .AddOpenTelemetry()
+  .AddResources(environment.EnvironmentName, openTelemetryOptions)
+  .WithMetrics(builder => ConfigureMetrics(builder))
+  .UseOtlpExporter(OtlpExportProtocol.Grpc, new Uri(otlpCollectorExporterEndpoint));
+
+private static void ConfigureMetrics(MeterProviderBuilder builder)
+{
+  builder
+    .AddRuntimeInstrumentation()        // OpenTelemetry.Instrumentation.Runtime
+    .AddProcessInstrumentation();       // OpenTelemetry.Instrumentation.Process
+    //.AddAspNetCoreInstrumentation()
+    //.AddFusionCacheInstrumentation()
+    //.AddMeter(openTelemetryOptions.Meters);
+}
+```
+
+## Ch 27.2 Metrics 지표
+![](./.images/OpenTelemetry.Metrics.png)
+
+- OpenTelemetry.Instrumentation.Runtime
+  - dotnet.assembly.*
+  - dotnet.gc.*
+  - dotnet.git.*
+  - dotnet.monitor.*
+  - dotnet.process.*
+  - dotnet.thread.*
+  - dotnet.timer.*
+- OpenTelemetry.Instrumentation.Process
+<br/>
+
+## Ch 4. Aspire 대시보드
+![](./.images/aspire.dashdoard.png)
+
+### Ch 4.1 Aspire 도커파일
+```dockerfile
+FROM mcr.microsoft.com/dotnet/aspire-dashboard:9.0
+```
+- Backend/Build/Dockerfiles/Aspire/Dockerfile 파일
+
+### Ch 4.2 Aspire 도커 컴포즈
+```yml
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+services:
+  crop.hello.infra.aspire:                              # <- service name
+    env_file: .env
+    image: crop/hello/infra/aspire:${SERVICE_VERSION}   # <- image name
+    build:
+      context: .
+      dockerfile: Backend/Build/Dockerfiles/Aspire/Dockerfile
+    container_name: corp.hello.infra.aspire             # <- container name
+    hostname: corp.hello.infra.aspire                   # <- host name
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+    ports:
+      - 4317:18889      # OTLP/gRPC
+      - 4318:18890      # OTLP/HTTP
+      - 18888:18888     # http dashboard: http://localhost:18888
+    networks:
+      - net
+    logging: *logging-common
+
+networks:
+  net:
+    name: crop.hello                                    # <- network name
+```
+- docker-compose.infra.yml 파일일
+- 인증을 사용하지 않도록 대시보드를 구성하고 익명 액세스를 허용합니다.
+  ```yml
+  DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+  ```
+- [데이터 수집 제한](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/dashboard/configuration?tabs=bash#telemetry-limits)
+  ```shell
+  docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard \
+    -e DASHBOARD__TELEMETRYLIMITS__MAXLOGCOUNT='1000' \
+    -e DASHBOARD__TELEMETRYLIMITS__MAXTRACECOUNT='1000' \
+    -e DASHBOARD__TELEMETRYLIMITS__MAXMETRICSCOUNT='1000' \
+    mcr.microsoft.com/dotnet/aspire-dashboard:9.0
+  ```
+  ```json
+  {
+    "Dashboard": {
+      "TelemetryLimits": {
+        "MaxLogCount": 1000,
+        "MaxTraceCount": 1000,
+        "MaxMetricsCount": 1000
+      }
+    }
+  }
+  ```
+
+### Ch 4.3 Docker Compose 전용 디버깅 환경 변수
+```yml
+services:
+  crop.hello.api:
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
+    volumes:
+      - ./.logs/crop.hello.api:/app/logs
+```
+- docker-compose.override.yml 파일
+- 콘솔과 Docker Compose의 설정이 다를 경우, Visual Studio에서 디버깅 목적으로 사용하는 docker-compose.override.yml 파일을 활용하여 DOTNET_ENVIRONMENT 값을 설정할 수 있습니다. 이를 통해 appsettings.Docker.json에 Docker Compose 전용 설정을 지
+
+```json
+{
+  "OpenTelemetryOptions": {
+    "OtlpCollectorHost": "host.docker.internal"
+  }
+}
+```
+- appsettings.Docker.json 파일
+- OtlpCollectorHost 값 구분
+  - 컨테이너일 때(도커 컴포즈): host.docker.internal
+  - 호스트일 때(콘솔): 127.0.0.1
 
 <br/>
