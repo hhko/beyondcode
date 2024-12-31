@@ -3,10 +3,10 @@
 > 슬기로운 코드를 만들기 위한 아름다운 여정
 
 # 목차
-### 세미나
-- [x] [Ch 01. 인터널 아키텍처 개요](./Part0.Seminar/Ch01.Overview-InternalArchitecture/README.md)
 
 ### 개요
+- Part 0. 세미나
+  - [x] [Ch 01. 인터널 아키텍처 개요](./Part0.Seminar/Ch01.Overview-InternalArchitecture/README.md)
 - Part 1. 기술 스택택
   - [x] [Ch 01. 기술 맵](#ch-1-기술-맵)
   - [x] [Ch 02. Internal 아키텍처](#ch-2-internal-아키텍처)
