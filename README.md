@@ -22,7 +22,7 @@
 ### Internal 아키텍처
 - Part 3. 솔루션
   - [x] [Ch 01. 솔루션 구조](#ch-1-솔루션-구조)
-  - [x] [Ch 02. 솔루션 빌드](#ch-2-솔루션-빌드-설정)
+  - [x] [Ch 02. 솔루션 빌드](#ch-2-솔루션-빌드)
   - [ ] [Ch 03. 솔루션 코드 분석](#ch-3-솔루션-코드-분석)
   - [x] [Ch 04. 솔루션 레이어 의존성 등록](#ch-4-솔루션-레이어-의존성-등록)
   - [x] [Ch 05. 솔루션 빌드 자동화](#ch-5-솔루션-빌드-자동화)
@@ -31,7 +31,7 @@
   - [x] [Ch 01. 콘솔 호스트 테스트](#ch-1-콘솔-호스트-테스트)
   - [ ]  Ch 02. WebApi 호스트 테스트
   - [x] [Ch 03. 호스트 의존성 테스트](#ch-3-호스트-의존성-테스트)
-  - [x] [Ch 04. 호스트 옵션 테스트](#ch-3-호스트-옵션-테스트)
+  - [x] [Ch 04. 호스트 옵션 테스트](#ch-4-호스트-옵션-테스트)
   - [ ]  Ch 05. 컨테이너 호스트 테스트
   - [ ]  Ch 06. 컨테이너 호스트 헬스 체크 테스트
 - Part 5. 호스트
@@ -50,7 +50,7 @@
   - [x] [Ch 01. 로그](#ch-1-로그)
   - [x] [Ch 02. 추적](#ch-2-추적)
   - [x] [Ch 03. 지표](#ch-3-지표)
-  - [x] [Ch 04. Aspire 대시보드](#ch-24-aspire-대시보드)
+  - [x] [Ch 04. Aspire 대시보드](#ch-4-aspire-대시보드)
   - [ ]  Ch 05. Grafana 시스템
   - [ ]  Ch 06. OpenSearch 시스템
 - Part 8. TODO
@@ -1024,7 +1024,7 @@ public void We_CanTest_TheHost()
 
 <br/>
 
-## Ch 3. 호스트 의존성성 테스트
+## Ch 3. 호스트 의존성 테스트
 ![](./.images/Architecture.UnitTestStructure.png)
 
 - Abstractions
@@ -1548,7 +1548,7 @@ public sealed partial record class Error(string Code, string Message)
 
 # Part 7. 관찰 가능성
 
-## Ch 1. 로그그
+## Ch 1. 로그
 ### Ch 1.1 구조적 로그 전송
 ```cs
 services
