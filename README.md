@@ -61,10 +61,10 @@
 
 # Part 1. 기술 스택
 
-# Ch 1. 기술 맵
+## Ch 1. 기술 맵
 ![](./.images/TechMap.png)
 
-# Ch 2. 내부 아키텍처
+## Ch 2. 내부 아키텍처
 > - 내부 아키텍처 목표는 레이어 배치입니다.
 > - **Application 레이어가** 내부 아키텍처의 레이어를 주관(主管)합니다.
 
@@ -104,7 +104,7 @@
   - `danielpalme/ReportGenerator-GitHub-Action`
   - `dorny/test-reporter`
 
-# Ch 3. 외부 아키텍처
+## Ch 3. 외부 아키텍처
 > - 외부 아키텍처 목표는 서비스 배치입니다.
 
 - TODO
@@ -117,14 +117,14 @@
 
 # Part 2. 아키텍처
 
-# Ch 1. 아키텍처 개요
+## Ch 1. 아키텍처 개요
 
-## Ch 1.1 아키텍처 정의
+### Ch 1.1 아키텍처 정의
 ![](./.images/Architecture.png)
 
 ※ 출처: [Making Architecture Matter, 소프트웨어 아키텍처의 중요성](https://www.youtube.com/watch?v=4E1BHTvhB7Y)
 
-## Ch 1.2 아키텍처 범주
+### Ch 1.2 아키텍처 범주
 ![](./.images/Architecture.Category.png)
 
 ※ 출처: [Making old applications new again](https://sellingsimplifiedinsights.com/asset/app-development/ASSET_co-modernization-whitepaper-inc0460201-122016kata-v1-en_1511772094768.pdf)
@@ -151,26 +151,26 @@ Application Architecture
 
   ※ 출처: [DDD 및 CQRS 패턴을 사용하여 마이크로 서비스에서 비즈니스 복잡성 처리](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/)
 
-## Ch 1.3 아키텍처 역사
+### Ch 1.3 아키텍처 역사
 ![](./.images/Architecture.History.png)
 
   ※ 출처: [The Grand Unified Theory of Clean Architecture and  Pyramid ](https://www.youtube.com/watch?v=mzznsq4jCHY)
 
 <br/>
 
-# Ch 2. 아키텍처 원칙
+## Ch 2. 아키텍처 원칙
 > 아키텍처 원칙: [Separation of concerns](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns)
 
 ![](./.images/Architecture.Vs.png)
 
-## Ch 2.1 관심사의 분리
+### Ch 2.1 관심사의 분리
 - 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 Biz.와 Tech. 관심사 기준으로 같아야 합니다.**
   - **개발 시** 요구사항을 비즈니스와 기술 관심사로 분해합니다.
   - **운영 시** 로그를 비즈니스와 기술 관심사로 식별합니다.
 
 ![](./.images/Layer.SoC.Abstraction.png)
 
-## Ch 2.2 레이어
+### Ch 2.2 레이어
 - 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 레이어 기준으로 동일해야 합니다.**
 
 ![](./.images/Layer.SoC.png)
@@ -185,7 +185,7 @@ Application Architecture
     - `Known` 출력 Adapter
     - `Unknown` 출력 Adapter: 부수 효과(Side Effects)
 
-## Ch 2.3 레이어 배치
+### Ch 2.3 레이어 배치
 ![](./.images/Layer.Alignment.Known.png)
 
 ![](./.images/Layer.Alignment.Unknown.png)
@@ -308,7 +308,7 @@ Application Architecture
 
 <br/>
 
-# Part 3. 솔루션션
+# Part 3. 솔루션
 
 # Ch 10. Solution Structure
 > 예제 코드: [링크](./Ch10.SolutionStructure/)
