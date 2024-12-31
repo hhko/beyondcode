@@ -3,55 +3,59 @@
 > 슬기로운 코드를 만들기 위한 아름다운 여정
 
 # Table of Contents
-- **Seminar**
-  - [x] [Ch 01. Overview of Internal Architecture](./Part0.Seminar/Ch01.Overview-InternalArchitecture/README.md)
-- **Overview**
-  - Part 1. Tech. Stack
-    - [x] [Ch 01. Technology Map](#ch-1-technology-map)
-    - [x] [Ch 02. Internal Architecture](#ch-2-internal-architecture)
-    - [ ] [Ch 03. External Architecture](#ch-3-external-architecture)
-  - Part 2. Architecture
-    - [x] [Ch 01. Architecture Overview](#ch-4-architecture-overview)
-    - [x] [Ch 02. Architecture Principles](#ch-5-architecture-principles)
-    - [x] [Ch 03. Layer Isolation](#ch-6-layer-isolation)
-    - [x] [Ch 04. Layer Testing](#ch-7-layer-testing)
-    - [x] [Ch 05. Layer Enhancement](#ch-8-layer-enhancement)
-    - [x] [Ch 06. Internal Architecture Comparison](#ch-9-internal-architecture-comparison)
-- **Inner Architecture**
-  - Part 3. Solution
-    - [x] [Ch 01. Solution Structure](#ch-10-solution-structure)
-    - [x] [Ch 02. Solution Build Configuration](#ch-11-solution-build-configuration)
-    - [ ] [Ch 03. Solution Code Analysis](#ch-12-solution-code-analysis)
-    - [x] [Ch 04. Solution Architecture Testing](#ch-13-solution-architecture-testing)
-    - [x] [Ch 05. Solution Layer Dependency Injection](#ch-14-solution-layer-dependency-injection)
-    - [ ] [Ch 06. Solution Build Automation](#ch-15-solution-build-automation)
-    - [ ] [Ch 07. Solution Container Deployment Automation]()
-  - Part 4. Host Testing
-    - [ ] [Ch 01. Console Host Testing](#ch-17-console-host-testing)
-    - [ ] [Ch 02. WebApi Host Testing]()
-    - [x] [Ch 03. Options Testing](#ch-19-options-testing)
-    - [ ] [Ch 04. Container Testing](#ch-20-container-testing)
-    - [ ] [Ch 05. Container Health Check Testing]()
-  - Part 5. Host
-    - [ ] [Ch 01. Schedule Host](#ch-22-schedule-host)
-    - [ ] [Ch 02. RabbitMQ Host]()
-    - [ ] [Ch 03. gRPC Host]()
-    - [ ] [Ch 04. WebApi Host]()
-  - Part 6. Tactical Design
-    - [x] [Ch 01. Tactical Design Map](#ch-32-tactical-design-map)
-    - [ ] [Ch 02. Output Type(Result)](#ch-33-output-type)
-    - [ ] [Ch 03. Domain Type]()
-    - [ ] TODO
-- **External Architecture**
-  - Part 7. Observability
-    - [x] [Ch 01. Logging](#ch-26-logging)
-    - [x] [Ch 02. Tracing](#ch-27-tracing)
-    - [x] [Ch 03. Metrics](#ch-28-metrics)
-    - [x] [Ch 04. Aspire Dashboard](#ch-29-aspire-dashboard)
-    - [ ] [Ch 05. Grafana System]()
-    - [ ] [Ch 06. OpenSearch System]()
-  - Part 8. TODO
-- **Strategic Design**
+### Seminar
+- [x] [Ch 01. Overview of Internal Architecture](./Part0.Seminar/Ch01.Overview-InternalArchitecture/README.md)
+
+### Overview
+- Part 1. Tech. Stack
+  - [x] [Ch 01. Technology Map](#ch-1-technology-map)
+  - [x] [Ch 02. Internal Architecture](#ch-2-internal-architecture)
+  - [ ] [Ch 03. External Architecture](#ch-3-external-architecture)
+- Part 2. Architecture
+  - [x] [Ch 01. Architecture Overview](#ch-4-architecture-overview)
+  - [x] [Ch 02. Architecture Principles](#ch-5-architecture-principles)
+  - [x] [Ch 03. Layer Isolation](#ch-6-layer-isolation)
+  - [x] [Ch 04. Layer Testing](#ch-7-layer-testing)
+  - [x] [Ch 05. Layer Enhancement](#ch-8-layer-enhancement)
+  - [x] [Ch 06. Internal Architecture Comparison](#ch-9-internal-architecture-comparison)
+
+### Inner Architecture
+- Part 3. Solution
+  - [x] [Ch 01. Solution Structure](#ch-10-solution-structure)
+  - [x] [Ch 02. Solution Build Configuration](#ch-11-solution-build-configuration)
+  - [ ] [Ch 03. Solution Code Analysis](#ch-12-solution-code-analysis)
+  - [x] [Ch 04. Solution Architecture Testing](#ch-13-solution-architecture-testing)
+  - [x] [Ch 05. Solution Layer Dependency Injection](#ch-14-solution-layer-dependency-injection)
+  - [ ] [Ch 06. Solution Build Automation](#ch-15-solution-build-automation)
+  - [ ] [Ch 07. Solution Container Deployment Automation]()
+- Part 4. Host Testing
+  - [ ] [Ch 01. Console Host Testing](#ch-17-console-host-testing)
+  - [ ] [Ch 02. WebApi Host Testing]()
+  - [x] [Ch 03. Options Testing](#ch-19-options-testing)
+  - [ ] [Ch 04. Container Testing](#ch-20-container-testing)
+  - [ ] [Ch 05. Container Health Check Testing]()
+- Part 5. Host
+  - [ ] [Ch 01. Schedule Host](#ch-22-schedule-host)
+  - [ ] [Ch 02. RabbitMQ Host]()
+  - [ ] [Ch 03. gRPC Host]()
+  - [ ] [Ch 04. WebApi Host]()
+- Part 6. Tactical Design
+  - [x] [Ch 01. Tactical Design Map](#ch-32-tactical-design-map)
+  - [ ] [Ch 02. Output Type(Result)](#ch-33-output-type)
+  - [ ] [Ch 03. Domain Type]()
+  - [ ] TODO
+
+### External Architecture
+- Part 7. Observability
+  - [x] [Ch 01. Logging](#ch-26-logging)
+  - [x] [Ch 02. Tracing](#ch-27-tracing)
+  - [x] [Ch 03. Metrics](#ch-28-metrics)
+  - [x] [Ch 04. Aspire Dashboard](#ch-29-aspire-dashboard)
+  - [ ] [Ch 05. Grafana System]()
+  - [ ] [Ch 06. OpenSearch System]()
+- Part 8. TODO
+
+### Strategic Design
 
 <br/>
 
