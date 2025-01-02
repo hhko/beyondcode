@@ -37,9 +37,16 @@
 
 ## 배포 구성
 - appsettings 배포 N개
+- 윈도우 성능 분서기: https://github.com/xoofx/ultra
 - 도커 컴포즈 N개
+- 컨테이너 기본 패키지
+  - 유틸리티
+  - /tmp
+  - 성능 테스트
 - 컨테이너 Health Check
 - 컨테이너 시작 순서
+  - docker compose 의존성 속성
+  - 도구
 - 도커 컴포즈 통합 테스트
   - 서비스
   - 인프라
@@ -143,3 +150,18 @@
 ## Adapter 기본 기능
 - Retry
 - Circuit Breaker
+
+
+# Adapter
+## WebApi
+- Auth
+- Gateway
+- Cache
+---
+- [How To Build an API Gateway for Microservices with YARP](https://www.youtube.com/watch?v=UidT7YYu97s)
+- [Implementing API Gateway Authentication With YARP + .NET 8](https://www.youtube.com/watch?v=gk1uQrWDMjk)
+- [Which API Gateway is better? YARP vs Ocelot](https://www.youtube.com/watch?v=2_hjz-325Fg)
+---
+- [Completely 🚀Master .NET 8 Microservices with Ocelot : implement Auth, Gateway, Caching & More](https://www.youtube.com/watch?v=m9gUf7OdLmA)
+
+

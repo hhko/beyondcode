@@ -6,7 +6,7 @@
 
 ### 개요
 - Part 0. 세미나
-  - [x] [Ch 01. 인터널 아키텍처 개요](./Part0.Seminar/Ch01.Overview-InternalArchitecture/README.md)
+  - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.Overview-InternalArchitecture/README.md)
 - Part 1. 기술 스택택
   - [x] [Ch 01. 기술 맵](#ch-1-기술-맵)
   - [x] [Ch 02. Internal 아키텍처](#ch-2-internal-아키텍처)
@@ -17,7 +17,7 @@
   - [x] [Ch 03. 레이어 격리](#ch-3-레이어-격리)
   - [x] [Ch 04. 레이어 테스트](#ch-4-레이어-테스트)
   - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
-  - [x] [Ch 06. 내부 아키텍처 비교](#ch-6-내부-아키텍처-비교)
+  - [x] [Ch 06. Internal 아키텍처 비교](#ch-6-내부-아키텍처-비교)
 
 ### Internal 아키텍처
 - Part 3. 솔루션
@@ -67,8 +67,8 @@
 ![](./.images/TechMap.png)
 
 ## Ch 2. Internal 아키텍처
-> - 내부 아키텍처 목표는 레이어 배치입니다.
-> - **Application 레이어가** 내부 아키텍처의 레이어를 주관(主管)합니다.
+> - Internal 아키텍처 목표는 레이어 배치입니다.
+> - **Application 레이어가** Internal 아키텍처의 레이어를 주관(主管)합니다.
 
 ![](./.images/Architecture.Internal.png)
 
@@ -107,7 +107,7 @@
   - `dorny/test-reporter`
 
 ## Ch 3. External 아키텍처
-> - 외부 아키텍처 목표는 서비스 배치입니다.
+> - External 아키텍처 목표는 서비스 배치입니다.
 
 - TODO
 
@@ -267,7 +267,7 @@ Application Architecture
 
 <br/>
 
-## Ch 6. 내부 아키텍처 비교
+## Ch 6. Internal 아키텍처 비교
 
 ### Ch 6.1 Port 비교
 ![](./.images/Architecture.Vs.Port.png)
