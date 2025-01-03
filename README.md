@@ -46,22 +46,32 @@
   - [ ] TODO
 
 ### External 아키텍처
-- Part 7. 관찰 가능성
+- Part 7. 컨테이너 오케스트레이션
+- Part 8. 관찰 가능성
   - [x] [Ch 01. 로그](#ch-1-로그)
   - [x] [Ch 02. 추적](#ch-2-추적)
   - [x] [Ch 03. 지표](#ch-3-지표)
   - [x] [Ch 04. Aspire 대시보드](#ch-4-aspire-대시보드)
   - [ ]  Ch 05. Grafana 시스템
   - [ ]  Ch 06. OpenSearch 시스템
-- Part 8. WebApi
+- Part 9. WebApi
   - [ ] Ch 01. 인증
   - [ ] Ch 02. 다국어
-- Part 9. RabbitMQ
-- Part 10. PostgreSQL
-- TODO
+  - [ ] Ch 03. Cache
+  - [ ] Ch 04. Gateway(Load Balancer)
+  - [ ] Ch 05. Circuit Breaker Pattern
+- Part 10. RabbitMQ
+  - [ ] Ch 01. Outbox 패턴
+- Part 11. gRPC
+- Part 12. PostgreSQL
+- Part 13. OpenSearch
+- Part 14. Redis
+- Part 13. Cache
+- Part 14. Service Mesh
+- Part 15. Ansible
 
 ### 전략 설계
-- Part 9. TODO
+- Part 16. TODO
 
 <br/>
 
