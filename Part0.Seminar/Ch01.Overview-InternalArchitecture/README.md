@@ -1,4 +1,4 @@
-# Overview of Internal Architecture
+# Internal 아키텍처 개요요
 
 ## 목표
 - Internal 아키텍처의 다양한 레이어와 그 역할을 이해한다.
@@ -7,7 +7,7 @@
 <br/>
 
 ## 주요 키워드
-- Internal/External 아키텍처
+- Internal 아키텍처와 External 아키텍처
 - 관심사의 분리
 - 레이어
 - 순수/불순 함수
@@ -115,13 +115,13 @@ public class AuditManager
 <br/>
 
 ## 솔루션 구성
-| Level  | Src             | s            |
-|------- |-------------    |--------------    |
-| `T1`   | Corporation     | Corporation      |
-| `T2`   | Solution        | Solution         |
-| `T3`   | Service 또는 UI  | Service 또는 UI  |
-| `T4`   | **Layers**      | **s**        |
-| `T5`   | **Sub-Layers**  | ** Pyramid** |
+ Level  | Src              | Tests
+------- |-------------     |--------------
+ `T1`   | Corporation      | Corporation
+ `T2`   | Solution         | Solution
+ `T3`   | Service 또는 UI  | Service 또는 UI
+ `T4`   | **Layers**       | **Tests**
+ `T5`   | **Sub-Layers**   | **Test Pyramid**
 
 - Layer
   - Domain
@@ -130,10 +130,10 @@ public class AuditManager
     - Infrastructure
     - Persistence
     - Presentation
--  Pyramid
-  - Unit 
-  - Integration 
-  - Performance 
+- Test Pyramid
+  - Unit
+  - Integration
+  - Performance
   - End to End(E2E)
 
 ```
@@ -144,7 +144,7 @@ public class AuditManager
   │   │   ├─Src
   │   │   │   ├─{T1}.{T2}.Framework
   │   │   │   └─{T1}.{T2}.Framework.Contracts
-  │   │   └─s
+  │   │   └─Tests
   │   │       └─{T1}.{T2}.Framework.Tests.Unit
   │   ├─Libraries
   │   │   └─{T1}.{T2}.[Tech]                                    // 예. RabbitMQ, ...
@@ -208,8 +208,8 @@ public class AuditManager
 > 주요 목표를 달성하기 위한 모든 부가 활동은 `Abstractions`으로 정의합니다.
 
 - 비즈니스 주요 목표: 유한
-  - 비즈니스 단위: Aggregate Root
-  - 비즈니스 흐름: Use Case
+  - 비즈니스 단위(Domain 레이어): Aggregate Root
+  - 비즈니스 흐름(Application 레이어어): Use Case
 - 기술 주요 목표: 무한
 
 ### 레이어 예제
