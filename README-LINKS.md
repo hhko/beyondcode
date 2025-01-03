@@ -121,6 +121,833 @@
   <SelfContained>true</SelfContained>
   <DebugType>embedded</DebugType>
   ```
+### AOP
+- [ ] [.NET AOP DynamicProxy](https://jandari91.tistory.com/102)
+- [ ] [Migrating RealProxy Usage to DispatchProxy](https://devblogs.microsoft.com/dotnet/migrating-realproxy-usage-to-dispatchproxy/)
+
+```cs
+public interface IAdapter
+{
+    // 빈 인터페이스
+}
+
+public class Foo : IAdapter
+{
+    public int DoSomething(int x)
+    {
+        if (x < 0) throw new ArgumentException("x cannot be negative");
+        return x + 1;
+    }
+}
+
+public class Bar : IAdapter
+{
+    public string DoSomethingElse(string message)
+    {
+        return $"Message: {message}";
+    }
+}
+
+using System;
+using System.Reflection;
+
+public class AdapterProxy<T> : DispatchProxy where T : class
+{
+    private T _target;
+
+    public void SetTarget(T target)
+    {
+        _target = target;
+    }
+
+    protected override object Invoke(MethodInfo targetMethod, object[] args)
+    {
+        try
+        {
+            Console.WriteLine($"Before calling {targetMethod.Name}");
+            var result = targetMethod.Invoke(_target, args);
+            Console.WriteLine($"After calling {targetMethod.Name}");
+            return result;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception in {targetMethod.Name}: {ex.Message}");
+            throw; // 필요시 예외를 처리하거나 변환
+        }
+    }
+}
+
+public static class AdapterFactory
+{
+    public static T Create<T>(T target) where T : class, IAdapter
+    {
+        var proxy = DispatchProxy.Create<T, AdapterProxy<T>>() as AdapterProxy<T>;
+        proxy.SetTarget(target);
+        return proxy as T;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var foo = AdapterFactory.Create(new Foo());
+        var bar = AdapterFactory.Create(new Bar());
+
+        try
+        {
+            Console.WriteLine(foo.DoSomething(5)); // Foo의 메서드 호출
+            Console.WriteLine(foo.DoSomething(-1)); // 예외 발생
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Handled exception: {ex.Message}");
+        }
+
+        Console.WriteLine(bar.DoSomethingElse("Hello, Bar!")); // Bar의 메서드 호출
+    }
+}
+```
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+public static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddAdapterWithProxy<TInterface, TImplementation>(this IServiceCollection services)
+        where TInterface : class
+        where TImplementation : class, TInterface
+    {
+        services.AddTransient<TImplementation>();
+        services.AddTransient<TInterface>(provider =>
+        {
+            var implementation = provider.GetRequiredService<TImplementation>();
+            var proxy = DispatchProxy.Create<TInterface, AdapterProxy<TInterface>>() as AdapterProxy<TInterface>;
+            proxy.SetTarget(implementation);
+            return proxy as TInterface;
+        });
+
+        return services;
+    }
+}
+
+using Microsoft.Extensions.DependencyInjection;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // DI 컨테이너 구성
+        var services = new ServiceCollection();
+
+        services.AddAdapterWithProxy<IAdapter, Foo>();
+        services.AddAdapterWithProxy<IAdapter, Bar>();
+
+        var serviceProvider = services.BuildServiceProvider();
+
+        // 서비스 요청
+        var foo = serviceProvider.GetRequiredService<IAdapter>();
+        var bar = serviceProvider.GetRequiredService<IAdapter>();
+
+        // 사용
+        try
+        {
+            Console.WriteLine(foo.DoSomething(5)); // Foo의 메서드 호출
+            Console.WriteLine(foo.DoSomething(-1)); // 예외 발생
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Handled exception: {ex.Message}");
+        }
+
+        Console.WriteLine(bar.DoSomethingElse("Hello, Bar!")); // Bar의 메서드 호출
+    }
+}
+```
+
+```cs
+// 성능 개선
+using System;
+using System.Collections.Concurrent;
+using System.Reflection;
+
+public class AdapterProxy<T> : DispatchProxy where T : class
+{
+    private static readonly ConcurrentDictionary<Type, AdapterProxy<T>> _proxyCache = new();
+    private T _target;
+
+    private AdapterProxy() { }
+
+    public static AdapterProxy<T> Create(T target)
+    {
+        var proxy = _proxyCache.GetOrAdd(typeof(T), _ => new AdapterProxy<T>());
+        proxy.SetTarget(target);
+        return proxy;
+    }
+
+    public void SetTarget(T target)
+    {
+        _target = target;
+    }
+
+    protected override object Invoke(MethodInfo targetMethod, object[] args)
+    {
+        try
+        {
+            Console.WriteLine($"Before calling {targetMethod.Name}");
+            var result = targetMethod.Invoke(_target, args);
+            Console.WriteLine($"After calling {targetMethod.Name}");
+            return result;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception in {targetMethod.Name}: {ex.Message}");
+            throw;
+        }
+    }
+}
+
+using Microsoft.Extensions.DependencyInjection;
+using System;
+
+public static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddAdapterWithProxy<TInterface, TImplementation>(this IServiceCollection services)
+        where TInterface : class
+        where TImplementation : class, TInterface
+    {
+        services.AddTransient<TImplementation>();
+
+        services.AddTransient<TInterface>(provider =>
+        {
+            var implementation = provider.GetRequiredService<TImplementation>();
+            return AdapterProxy<TInterface>.Create(implementation);
+        });
+
+        return services;
+    }
+}
+
+using Microsoft.Extensions.DependencyInjection;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // DI 컨테이너 구성
+        var services = new ServiceCollection();
+
+        services.AddAdapterWithProxy<IAdapter, Foo>();
+        services.AddAdapterWithProxy<IAdapter, Bar>();
+
+        var serviceProvider = services.BuildServiceProvider();
+
+        // 서비스 요청
+        var foo = serviceProvider.GetRequiredService<IAdapter>();
+        var bar = serviceProvider.GetRequiredService<IAdapter>();
+
+        // 사용
+        try
+        {
+            Console.WriteLine(foo.DoSomething(5)); // Foo의 메서드 호출
+            Console.WriteLine(foo.DoSomething(-1)); // 예외 발생
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Handled exception: {ex.Message}");
+        }
+
+        Console.WriteLine(bar.DoSomethingElse("Hello, Bar!")); // Bar의 메서드 호출
+    }
+}
+```
+
+```cs
+// dotnet add package Castle.Core
+public interface IAdapter
+{
+    // 빈 인터페이스
+}
+
+public class Foo : IAdapter
+{
+    public int DoSomething(int x)
+    {
+        if (x < 0) throw new ArgumentException("x cannot be negative");
+        return x + 1;
+    }
+}
+
+public class Bar : IAdapter
+{
+    public string DoSomethingElse(string message)
+    {
+        return $"Message: {message}";
+    }
+}
+
+using Castle.DynamicProxy;
+using System;
+
+public class AdapterInterceptor : IInterceptor
+{
+    public void Intercept(IInvocation invocation)
+    {
+        try
+        {
+            // 메서드 호출 전 공통 작업
+            Console.WriteLine($"Before calling {invocation.Method.Name}");
+
+            // 메서드 호출
+            invocation.Proceed();
+
+            // 메서드 호출 후 공통 작업
+            Console.WriteLine($"After calling {invocation.Method.Name}");
+        }
+        catch (Exception ex)
+        {
+            // 예외 처리
+            Console.WriteLine($"Exception in {invocation.Method.Name}: {ex.Message}");
+            throw; // 예외를 다시 던지거나, 필요한 경우 처리
+        }
+    }
+}
+
+using Microsoft.Extensions.DependencyInjection;
+using Castle.DynamicProxy;
+
+public static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddAdapterWithDynamicProxy<TInterface, TImplementation>(this IServiceCollection services)
+        where TInterface : class
+        where TImplementation : class, TInterface
+    {
+        var proxyGenerator = new ProxyGenerator();
+        services.AddTransient<TImplementation>();
+
+        // 프록시 생성 및 인터셉터 설정
+        services.AddTransient<TInterface>(provider =>
+        {
+            var implementation = provider.GetRequiredService<TImplementation>();
+            var interceptor = new AdapterInterceptor();
+            return proxyGenerator.CreateInterfaceProxyWithTarget<TInterface>(implementation, interceptor);
+        });
+
+        return services;
+    }
+}
+
+using Microsoft.Extensions.DependencyInjection;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // DI 컨테이너 구성
+        var services = new ServiceCollection();
+
+        services.AddAdapterWithDynamicProxy<IAdapter, Foo>();
+        services.AddAdapterWithDynamicProxy<IAdapter, Bar>();
+
+        var serviceProvider = services.BuildServiceProvider();
+
+        // 서비스 요청
+        var foo = serviceProvider.GetRequiredService<IAdapter>();
+        var bar = serviceProvider.GetRequiredService<IAdapter>();
+
+        // 사용
+        try
+        {
+            Console.WriteLine(foo.DoSomething(5)); // Foo의 메서드 호출
+            Console.WriteLine(foo.DoSomething(-1)); // 예외 발생
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Handled exception: {ex.Message}");
+        }
+
+        Console.WriteLine(bar.DoSomethingElse("Hello, Bar!")); // Bar의 메서드 호출
+    }
+}
+```
+
+```cs
+// n개
+using Castle.DynamicProxy;
+using System;
+
+public class ExceptionHandlingInterceptor : IInterceptor
+{
+    public void Intercept(IInvocation invocation)
+    {
+        try
+        {
+            invocation.Proceed();  // 실제 메서드 실행
+        }
+        catch (Exception ex)
+        {
+            // 예외 처리 로직
+            Console.WriteLine($"Exception in {invocation.Method.Name}: {ex.Message}");
+            throw; // 예외를 다시 던짐
+        }
+    }
+}
+
+using Castle.DynamicProxy;
+using System;
+
+public class LoggingInterceptor : IInterceptor
+{
+    public void Intercept(IInvocation invocation)
+    {
+        Console.WriteLine($"Calling method {invocation.Method.Name} with arguments {string.Join(", ", invocation.Arguments)}");
+        
+        invocation.Proceed();  // 실제 메서드 실행
+        
+        Console.WriteLine($"Method {invocation.Method.Name} returned {invocation.ReturnValue}");
+    }
+}
+
+using Castle.DynamicProxy;
+using Microsoft.Extensions.DependencyInjection;
+
+public static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddAdapterWithDynamicProxy<TInterface, TImplementation>(
+        this IServiceCollection services)
+        where TInterface : class
+        where TImplementation : class, TInterface
+    {
+        var proxyGenerator = new ProxyGenerator();
+        
+        // 프록시 객체 생성 시 여러 인터셉터를 사용할 수 있도록 설정
+        services.AddTransient<TImplementation>();
+
+        services.AddTransient<TInterface>(provider =>
+        {
+            var implementation = provider.GetRequiredService<TImplementation>();
+            var interceptors = new IInterceptor[]
+            {
+                provider.GetRequiredService<LoggingInterceptor>(),  // 로그 인터셉터
+                provider.GetRequiredService<ExceptionHandlingInterceptor>()  // 예외 처리 인터셉터
+            };
+            
+            // 인터셉터 배열을 전달하여 프록시 생성
+            return proxyGenerator.CreateInterfaceProxyWithTarget<TInterface>(implementation, interceptors);
+        });
+
+        return services;
+    }
+}
+
+using Microsoft.Extensions.DependencyInjection;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // DI 컨테이너 구성
+        var services = new ServiceCollection();
+
+        // 인터셉터 등록
+        services.AddTransient<LoggingInterceptor>();
+        services.AddTransient<ExceptionHandlingInterceptor>();
+
+        // 서비스 및 프록시 등록
+        services.AddAdapterWithDynamicProxy<IAdapter, Foo>();
+
+        var serviceProvider = services.BuildServiceProvider();
+
+        // 서비스 요청
+        var foo = serviceProvider.GetRequiredService<IAdapter>();
+
+        // 사용
+        try
+        {
+            Console.WriteLine(foo.DoSomething(5)); // Foo의 메서드 호출
+            Console.WriteLine(foo.DoSomething(-1)); // 예외 발생
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Handled exception: {ex.Message}");
+        }
+    }
+}
+
+using Castle.DynamicProxy;
+using System;
+using System.Diagnostics;
+
+public class PerformanceInterceptor : IInterceptor
+{
+    public void Intercept(IInvocation invocation)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        
+        invocation.Proceed();  // 실제 메서드 실행
+        
+        stopwatch.Stop();
+        Console.WriteLine($"Method {invocation.Method.Name} executed in {stopwatch.ElapsedMilliseconds}ms");
+    }
+}
+
+public static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddAdapterWithDynamicProxy<TInterface, TImplementation>(
+        this IServiceCollection services)
+        where TInterface : class
+        where TImplementation : class, TInterface
+    {
+        var proxyGenerator = new ProxyGenerator();
+        
+        services.AddTransient<TImplementation>();
+
+        services.AddTransient<TInterface>(provider =>
+        {
+            var implementation = provider.GetRequiredService<TImplementation>();
+            var interceptors = new IInterceptor[]
+            {
+                provider.GetRequiredService<LoggingInterceptor>(),  // 로그 인터셉터
+                provider.GetRequiredService<ExceptionHandlingInterceptor>(),  // 예외 처리 인터셉터
+                provider.GetRequiredService<PerformanceInterceptor>()  // 성능 측정 인터셉터
+            };
+            
+            return proxyGenerator.CreateInterfaceProxyWithTarget<TInterface>(implementation, interceptors);
+        });
+
+        return services;
+    }
+}
+```
+
+```cs
+public interface IResult
+{
+    bool Success { get; }
+    string Message { get; }
+}
+
+public class SuccessResult : IResult
+{
+    public SuccessResult(string message)
+    {
+        Success = true;
+        Message = message;
+    }
+
+    public bool Success { get; }
+    public string Message { get; }
+}
+
+public interface IErrorResult : IResult
+{
+    string ErrorCode { get; }
+    string Details { get; }
+}
+
+public class ErrorResult : IErrorResult
+{
+    public ErrorResult(string message, string errorCode = null, string details = null)
+    {
+        Success = false;
+        Message = message;
+        ErrorCode = errorCode;
+        Details = details;
+    }
+
+    public bool Success { get; }
+    public string Message { get; }
+    public string ErrorCode { get; }
+    public string Details { get; }
+}
+
+
+public interface IAdapter
+{
+    // 이 인터페이스는 메서드를 정의하지 않습니다.
+}
+
+using Castle.DynamicProxy;
+using System;
+
+public class ExceptionHandlingInterceptor : IInterceptor
+{
+    public void Intercept(IInvocation invocation)
+    {
+        try
+        {
+            invocation.Proceed();  // 실제 메서드 호출
+        }
+        catch (Exception ex)
+        {
+            // 예외 발생 시 ErrorResult 반환
+            var errorResult = new ErrorResult(
+                $"Exception in {invocation.Method.Name}: {ex.Message}",
+                "EXCEPTION_OCCURRED",
+                ex.StackTrace
+            );
+            invocation.ReturnValue = errorResult;
+        }
+    }
+}
+
+public class Foo : IAdapter
+{
+    public IResult DoSomething(int x)
+    {
+        // 예외 처리 없이 정상 결과 반환
+        return new SuccessResult($"Processed {x}");
+    }
+}
+
+public class Bar : IAdapter
+{
+    public IResult DoSomethingElse(string message)
+    {
+        // 예외 처리 없이 정상 결과 반환
+        return new SuccessResult($"Processed message: {message}");
+    }
+}
+
+using Castle.DynamicProxy;
+using Microsoft.Extensions.DependencyInjection;
+
+public static class ServiceCollectionExtensions
+{
+    public static IServiceCollection AddAdapterWithDynamicProxy<TInterface, TImplementation>(
+        this IServiceCollection services)
+        where TInterface : class
+        where TImplementation : class, TInterface
+    {
+        var proxyGenerator = new ProxyGenerator();
+
+        services.AddTransient<TImplementation>();
+
+        services.AddTransient<TInterface>(provider =>
+        {
+            var implementation = provider.GetRequiredService<TImplementation>();
+            var interceptors = new IInterceptor[]
+            {
+                provider.GetRequiredService<ExceptionHandlingInterceptor>(),  // 예외 처리 인터셉터
+                // 필요한 다른 인터셉터들 추가 가능
+            };
+            return proxyGenerator.CreateInterfaceProxyWithTarget<TInterface>(implementation, interceptors);
+        });
+
+        return services;
+    }
+}
+
+using Microsoft.Extensions.DependencyInjection;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // DI 컨테이너 구성
+        var services = new ServiceCollection();
+
+        // 인터셉터 등록
+        services.AddTransient<ExceptionHandlingInterceptor>();
+
+        // 서비스 및 프록시 등록
+        services.AddAdapterWithDynamicProxy<IAdapter, Foo>();
+        services.AddAdapterWithDynamicProxy<IAdapter, Bar>();
+
+        var serviceProvider = services.BuildServiceProvider();
+
+        // 서비스 요청
+        var foo = serviceProvider.GetRequiredService<IAdapter>();
+        var bar = serviceProvider.GetRequiredService<IAdapter>();
+
+        // Foo 사용
+        var resultFoo = ((Foo)foo).DoSomething(5);
+        Console.WriteLine($"Foo Result: {resultFoo.Message}");
+
+        // 예외 발생을 시도해보겠습니다
+        var resultFooError = ((Foo)foo).DoSomething(-1);  // 예외가 발생하지 않지만, 예외 처리 인터셉터로 처리됨
+        Console.WriteLine($"Foo Error Result: {resultFooError.Message}");
+
+        // Bar 사용
+        var resultBar = ((Bar)bar).DoSomethingElse("Hello!");
+        Console.WriteLine($"Bar Result: {resultBar.Message}");
+    }
+}
+
+
+// 테스트
+//dotnet add package xunit
+//dotnet add package Moq
+//dotnet add package Castle.Core
+
+using Castle.DynamicProxy;
+using Moq;
+using System;
+using Xunit;
+
+public class AdapterTests
+{
+    // 예외 처리 인터셉터 테스트
+    [Fact]
+    public void Foo_ShouldReturnErrorResult_WhenExceptionOccurs()
+    {
+        // Arrange
+        var interceptor = new Mock<IInterceptor>();
+        var foo = new Foo();
+        var proxyGenerator = new ProxyGenerator();
+
+        // 인터셉터 동작 정의: 예외를 던지도록 설정
+        interceptor.Setup(i => i.Intercept(It.IsAny<IInvocation>())).Callback<IInvocation>(invocation =>
+        {
+            invocation.Proceed();  // 메서드 실행
+            throw new InvalidOperationException("Test exception");
+        });
+
+        var proxy = proxyGenerator.CreateInterfaceProxyWithTarget<IAdapter>(foo, interceptor.Object);
+
+        // Act
+        var result = proxy.DoSomething(5);
+
+        // Assert
+        Assert.False(result.Success);  // 실패한 경우
+        Assert.Equal("Exception in DoSomething: Test exception", result.Message);  // 예외 메시지 확인
+    }
+
+    [Fact]
+    public void Foo_ShouldReturnSuccessResult_WhenNoExceptionOccurs()
+    {
+        // Arrange
+        var foo = new Foo();
+
+        // Act
+        var result = foo.DoSomething(5);
+
+        // Assert
+        Assert.True(result.Success);  // 성공한 경우
+        Assert.Equal("Processed 5", result.Message);  // 메시지 확인
+    }
+
+    [Fact]
+    public void Bar_ShouldReturnSuccessResult_WhenNoExceptionOccurs()
+    {
+        // Arrange
+        var bar = new Bar();
+
+        // Act
+        var result = bar.DoSomethingElse("Hello!");
+
+        // Assert
+        Assert.True(result.Success);  // 성공한 경우
+        Assert.Equal("Processed message: Hello!", result.Message);  // 메시지 확인
+    }
+}
+
+using Castle.DynamicProxy;
+using Microsoft.Extensions.DependencyInjection;
+using Moq;
+using Xunit;
+
+public class ServiceTests
+{
+    [Fact]
+    public void ShouldReturnErrorResult_WhenExceptionIsThrownInProxy()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+        services.AddTransient<ExceptionHandlingInterceptor>();
+        services.AddAdapterWithDynamicProxy<IAdapter, Foo>();  // Foo에 대한 프록시 등록
+
+        var serviceProvider = services.BuildServiceProvider();
+        var foo = serviceProvider.GetRequiredService<IAdapter>();  // Foo 인터페이스 요청
+
+        // Act
+        var result = foo.DoSomething(5);  // 정상적인 호출
+        var resultError = foo.DoSomething(-1);  // 예외 발생을 유발할 수 있는 호출
+
+        // Assert
+        Assert.True(result.Success);  // 정상적인 결과
+        Assert.Equal("Processed 5", result.Message);
+
+        Assert.False(resultError.Success);  // 예외 처리된 결과
+        Assert.Equal("Exception in DoSomething: Test exception", resultError.Message);
+    }
+}
+
+// Foo_ShouldReturnErrorResult_WhenExceptionOccurs
+//    이 테스트는 Foo 클래스에서 예외가 발생할 때, ExceptionHandlingInterceptor가 예외를 처리하고 ErrorResult를 반환하는지 확인합니다.
+//    Moq를 사용하여 IInterceptor를 모킹하고, 예외가 발생하도록 설정합니다. 그런 다음 결과가 ErrorResult인지 확인합니다.
+// Foo_ShouldReturnSuccessResult_WhenNoExceptionOccurs
+//    이 테스트는 예외가 발생하지 않고 Foo 클래스에서 정상적인 결과를 반환하는지 확인합니다.
+//    Bar_ShouldReturnSuccessResult_WhenNoExceptionOccurs
+// Bar 클래스에서 예외 없이 정상적인 결과를 반환하는지 확인하는 테스트입니다.
+//    ShouldReturnErrorResult_WhenExceptionIsThrownInProxy
+//    DI 컨테이너와 Castle DynamicProxy를 사용하여 Foo 클래스에 대한 프록시를 생성하고, 예외가 발생할 때 예외가 제대로 처리되는지 테스트합니다.
+```
+
+```cs
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+using Castle.DynamicProxy;
+using System;
+using System.Linq;
+
+public class PerformanceTests
+{
+    private ProxyGenerator _proxyGenerator;
+    private IAdapter _fooProxy;
+    private IAdapter _barProxy;
+    private IAdapter _foo;
+    private IAdapter _bar;
+
+    public PerformanceTests()
+    {
+        _proxyGenerator = new ProxyGenerator();
+        _foo = new Foo();
+        _bar = new Bar();
+    }
+
+    // 성능 테스트 - Foo 클래스의 메서드 실행
+    [Benchmark]
+    public IResult TestFooWithoutInterceptor()
+    {
+        return _foo.DoSomething(5);
+    }
+
+    // 성능 테스트 - Foo 클래스의 메서드 실행 (인터셉터 포함)
+    [Benchmark]
+    public IResult TestFooWithInterceptor()
+    {
+        var interceptor = new ExceptionHandlingInterceptor();
+        _fooProxy = _proxyGenerator.CreateInterfaceProxyWithTarget<IAdapter>(_foo, interceptor);
+        return _fooProxy.DoSomething(5);
+    }
+
+    // 성능 테스트 - Bar 클래스의 메서드 실행
+    [Benchmark]
+    public IResult TestBarWithoutInterceptor()
+    {
+        return _bar.DoSomethingElse("Hello!");
+    }
+
+    // 성능 테스트 - Bar 클래스의 메서드 실행 (인터셉터 포함)
+    [Benchmark]
+    public IResult TestBarWithInterceptor()
+    {
+        var interceptor = new ExceptionHandlingInterceptor();
+        _barProxy = _proxyGenerator.CreateInterfaceProxyWithTarget<IAdapter>(_bar, interceptor);
+        return _barProxy.DoSomethingElse("Hello!");
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var summary = BenchmarkRunner.Run<PerformanceTests>();
+    }
+}
+```
+
 
 ### 코드 품질
 - [.NET Source Code Analysis](https://swharden.com/blog/2023-03-05-dotnet-code-analysis/)

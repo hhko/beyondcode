@@ -53,7 +53,12 @@
   - [x] [Ch 04. Aspire 대시보드](#ch-4-aspire-대시보드)
   - [ ]  Ch 05. Grafana 시스템
   - [ ]  Ch 06. OpenSearch 시스템
-- Part 8. TODO
+- Part 8. WebApi
+  - [ ] Ch 01. 인증
+  - [ ] Ch 02. 다국어
+- Part 9. RabbitMQ
+- Part 10. PostgreSQL
+- TODO
 
 ### 전략 설계
 - Part 9. TODO
