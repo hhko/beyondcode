@@ -27,13 +27,12 @@
   - [x] [Ch 04. 솔루션 레이어 의존성 등록](#ch-4-솔루션-레이어-의존성-등록)
   - [x] [Ch 05. 솔루션 빌드 자동화](#ch-5-솔루션-빌드-자동화)
   - [ ]  Ch 06. 솔루션 컨테이너 배포 자동화
-- Part 4. 호스트 테스트
-  - [x] [Ch 01. 콘솔 호스트 테스트](#ch-1-콘솔-호스트-테스트)
-  - [ ]  Ch 02. WebApi 호스트 테스트
-  - [x] [Ch 03. 호스트 의존성 테스트](#ch-3-호스트-의존성-테스트)
-  - [x] [Ch 04. 호스트 옵션 테스트](#ch-4-호스트-옵션-테스트)
-  - [ ]  Ch 05. 컨테이너 호스트 테스트
-  - [ ]  Ch 06. 컨테이너 호스트 헬스 체크 테스트
+- Part 4. 호스트 구성
+  - [ ] [Ch 01. 도커 컴포즈](#ch-1-도커-컴포즈)
+  - [x] [Ch 02. 윈도우 서비스](#ch-2-윈도우-서비스)
+  - [x] [Ch 03. 호스트 테스트](#ch-3-호스트-테스트)
+  - [x] [Ch 04. 호스트 의존성 테스트](#ch-4-호스트-의존성-테스트)
+  - [x] [Ch 05. 호스트 옵션 테스트](#ch-5-호스트-옵션-테스트)
 - Part 5. 호스트
   - [ ] [Ch 01. Schedule 호스트](#ch-1-schedule-호스트)
   - [ ]  Ch 02. RabbitMQ 호스트
@@ -930,11 +929,230 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 
 <br/>
 
-# Part 4. 호스트 테스트
 
-## Ch 1. 콘솔 호스트 테스트
+# Part 4. 호스트 구성
 
-### Ch 1.1 InternalsVisibleTo
+## Ch 1 도커 컴포즈
+### Ch 1.1 컨테이너 이름 규칙
+Category        | Item            | Rule                                                        | Example
+----            | ---             | ---                                                         | ---
+compose         | compose name    | {Corporation}-{Solution}                                    | crop-hello
+C# Service      | service name    | {Corporation}.{Solution}.{Service}                          | crop.hello.api:
+C# Service      | image name      | {Corporation}/{Solution}/{Service}:{Service Version}        | crop/hello/api:${SERVICE_VERSION}
+C# Service      | container name  | {Corporation}.{Solution}.{Service}                          | corp.hello.api
+C# Service      | host name       | {Corporation}.{Solution}.{Service}                          | corp.hello.api
+C# Service      | network name    | {Corporation}.{Solution}                                    | crop.hello
+Infra Service   | service name    | {Corporation}.{Solution}.infra.{Service}                    | crop.hello.infra.aspire:
+Infra Service   | image name      | {Corporation}/{Solution}/infra/{Service}:{Service Version}  | crop/hello/infra/aspire:${SERVICE_VERSION}
+Infra Service   | container name  | {Corporation}.{Solution}.infra.{Service}                    | corp.hello.infra.aspire
+Infra Service   | host name       | {Corporation}.{Solution}.infra.{Service}                    | corp.hello.infra.aspire
+Infra Service   | network name    | {Corporation}.{Solution}                                    | crop.hello
+
+- 예. Corporation: crop
+- 예. Solution: hello
+- 예. C# Service: api, ...
+- 예. infra: aspire, ...
+
+```ini
+COMPOSE_PROJECT_NAME=crop-hello           # <- compose name
+SERVICE_VERSION=1.0.1                     # <- C# 서비스 버전
+INFRA_VERSION=1.0.1-infra                 # <- Infra 서비스 버전
+```
+- .env 파일
+
+```yml
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+services:
+  crop.hello.api:                             # <- service name
+    image: crop/hello/api:${SERVICE_VERSION}  # <- image name
+    build:
+      context: .
+      dockerfile: Backend/Api/Src/Crop.Hello.Api/Dockerfile
+    container_name: corp.hello.api            # <- container name
+    hostname: corp.hello.api                  # <- host name
+    networks:
+      - net
+    volumes:
+      - ./logs/crop.hello.api:/app/logs
+    logging: *logging-common
+
+networks:
+  net:
+    name: crop.hello                          # <- network name
+```
+- docker-compose.yml 파일
+- 로그 볼륨
+  - 프러덕션: docker-compose.yml
+    ```yml
+    volumes:
+      - ./logs/crop.hello.api:/app/logs       # ./logs    <- 리눅스 컨테이너
+    ```
+  - 디버그: docker-compose.override.yml
+    ```yml
+    volumes:
+      - ./.logs/crop.hello.api:/app/logs      # ./.logs   <- 윈도우 호스트
+    ```
+    - .gitignore 파일에 `.logs/`을 추가합니다.
+
+
+### Ch 1.2 디버깅 설정
+![](./.images/Docker.Environment.png)
+
+```yml
+services:
+  crop.hello.api:
+    environment:
+      - DOTNET_ENVIRONMENT=Local.Docker     # appsettings.Local.Docker.json
+    volumes:
+      - ./.logs/crop.hello.api:/app/logs    # ./.logs: 윈도우 호스트(.gitignore 형상관리 제외)
+```
+- `docker-compose.override.yml` 파일
+
+### Ch 1.3 컨테이너 헬스 체크
+- TODO
+
+### Ch 1.4 참고 자료
+- [ ] [Podman for Windows](https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md)
+
+<br/>
+
+## Ch 2. 윈도우 서비스
+### Ch 2.1 윈도우 서비스 의존성 등록
+```shell
+# 윈도우 서비스 의존성 등록
+RegisterInfrastructureLayer   # Infrastructure 레이어
+  -> RegisterWindowsService
+     -> AddWindowsService     # Microsoft.Extensions.Hosting.WindowsServices 패키지
+
+# 윈도우 서비스 활성화
+EnableInfrastructureLayer     # Infrastructure 레이어
+  -> EnableWindowsService
+     -> UseWindowsService     # Microsoft.Extensions.Hosting.WindowsServices 패키지
+```
+
+```cs
+internal static class WindowsServiceRegistration
+{
+  internal static IServiceCollection RegisterWindowsService(this IServiceCollection service)
+  {
+    // 윈도우 서비스 의존성 등록
+    service.AddWindowsService();
+
+    return service;
+  }
+
+  internal static IHostBuilder EnableWindowsService(this IHostBuilder app)
+  {
+    // 윈도우 서비스 활성화
+    app.UseWindowsService();
+
+    return app;
+  }
+}
+```
+
+### Ch 2.2 윈도우 서비스 호스트 등록
+```
+.\InstallService.ps1 -ServiceName "MyService" -ExecutablePath "C:\Path\To\MyService.exe"
+```
+- 관리자 권한 PowerShell에서 `InstallService.ps1`을 실행합니다.
+
+```powershell
+<#
+.SYNOPSIS
+Windows 서비스 설치 및 복구 동작 설정 스크립트.
+
+.DESCRIPTION
+이 스크립트는 Windows 서비스를 설치하고, 복구 동작(3번 실패 시 1분 후 재시작)을 설정합니다.
+
+.PARAMETER ServiceName
+설치할 서비스의 이름.
+
+.PARAMETER ExecutablePath
+서비스 실행 파일의 전체 경로.
+
+.PARAMETER StartType
+서비스의 시작 유형 (기본값: Auto).
+
+.EXAMPLE
+.\InstallService.ps1 -ServiceName "MyService" -ExecutablePath "C:\Path\To\MyService.exe"
+#>
+
+param (
+    [Parameter(Mandatory = $true)]
+    [string]$ServiceName,
+
+    [Parameter(Mandatory = $true)]
+    [string]$ExecutablePath,
+
+    [Parameter(Mandatory = $false)]
+    [ValidateSet("auto", "manual", "disabled")]
+    [string]$StartType = "auto"
+)
+
+function Install-Service {
+    param (
+        [string]$ServiceName,
+        [string]$ExecutablePath,
+        [string]$StartType
+    )
+
+    Write-Host "서비스를 설치 중입니다: $ServiceName" -ForegroundColor Green
+
+    # 서비스 설치 명령
+    $installCommand = "sc create `"$ServiceName`" binPath= `"$ExecutablePath`" start= $StartType"
+    Invoke-Expression $installCommand
+
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "서비스 설치에 실패했습니다."
+        exit 1
+    }
+
+    Write-Host "서비스 설치 완료." -ForegroundColor Green
+}
+
+function Configure-ServiceRecovery {
+    param (
+        [string]$ServiceName
+    )
+
+    Write-Host "서비스 복구 설정 중입니다: $ServiceName" -ForegroundColor Green
+
+    # 서비스 복구 설정 명령
+    $recoveryCommand = "sc failure `"$ServiceName`" reset= 3600 actions= restart/60000/restart/60000/restart/60000"
+    Invoke-Expression $recoveryCommand
+
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "서비스 복구 설정에 실패했습니다."
+        exit 1
+    }
+
+    Write-Host "서비스 복구 설정 완료." -ForegroundColor Green
+}
+
+try {
+    Install-Service -ServiceName $ServiceName -ExecutablePath $ExecutablePath -StartType $StartType
+    Configure-ServiceRecovery -ServiceName $ServiceName
+    Write-Host "`n서비스 설치 및 복구 설정이 완료되었습니다." -ForegroundColor Cyan
+} catch {
+    Write-Error "오류가 발생했습니다: $_"
+    exit 1
+}
+
+# 참고: 서비스 제거
+# Stop-Service -Name "MyService"
+# sc delete "MyService"
+```
+
+<br/>
+
+## Ch 3. 호스트 테스트
+### Ch 3.1 InternalsVisibleTo
 ```xml
 <Project>
   <ItemGroup>
@@ -945,7 +1163,7 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 - `InternalsVisibleTo`InternalsVisibleTo는 어셈블리 간의 `Internal`로 선언된 멤버 접근을 허용하는 데 사용되는 특성(Attribute)입니다.
 - 테스트 목적으로 Internal로 선언된 `Program` 클래스를 테스트 어셈블리에서 접근할 수 있게됩니다.
 
-### Ch 1.2 Program 클래스
+### Ch 3.2 Program 클래스
 ```cs
 IHostBuilder builder = CreateHostBuilder(args);
 using IHost host = builder.Build();
@@ -1000,7 +1218,7 @@ public static partial class Program
 ```
 - 테스트 환경에서 `IConfiguration`을 제어할 수 있도록 `CreateHostBuilder` 메서드에서 매개변수를 제공합니다.
 
-### Ch 1.3 Program 클래스 Testing
+### Ch 3.3 Program 클래스 Testing
 ```cs
 [Fact]
 public void We_CanTest_TheHost()
@@ -1018,7 +1236,7 @@ public void We_CanTest_TheHost()
 }
 ```
 
-### Ch 1.4 콘솔 프로젝트 appsettings.json 그룹핑
+### Ch 3.4 콘솔 프로젝트 appsettings.json 그룹핑
 ![](./.images/appsettings.groupping.png)
 
 ```xml
@@ -1035,12 +1253,7 @@ public void We_CanTest_TheHost()
 
 <br/>
 
-## Ch 2. WebApi 호스트 테스트
-- TODO 테스트 가능한 호스트
-
-<br/>
-
-## Ch 3. 호스트 의존성 테스트
+## Ch 4. 호스트 의존성 테스트
 ![](./.images/Architecture.UnitTestStructure.png)
 
 - Abstractions
@@ -1048,7 +1261,7 @@ public void We_CanTest_TheHost()
 - ArchitectureTests
   - 아키텍처 테스트 코드를 배치합니다.
 
-### Ch 3.1 레이어 어셈블리
+### Ch 4.1 레이어 어셈블리
 
 ```cs
 using System.Reflection;
@@ -1064,7 +1277,7 @@ public static class AssemblyReference
 - 모든 레이어 어셈블리(프로젝트)에 공통적으로 `AssemblyReference`을 구현합니다.
   ![](./.images/AssemblyReference.png)
 
-### Ch 3.2 레이어 의존성 테스트
+### Ch 4.2 레이어 의존성 테스트
 - [ArchUnitNET](https://github.com/TNG/ArchUnitNET) 패키지
 
 ```cs
@@ -1163,7 +1376,7 @@ public class LayerDependencyTests : ArchitectureBaseTest
   - ApplicationLayer_ShouldNotHave_Dependencies_OnAdapterLayer
   - AdapterLayer_ShouldNotHave_Dependencies_OnDomainLayer
 
-### Ch 3.3 CQRS 네이밍 컨벤션 테스트
+### Ch 4.3 CQRS 네이밍 컨벤션 테스트
 
 ```cs
 [Fact]
@@ -1194,7 +1407,7 @@ public void CommandMessages_ShouldEndWith_Command()
   - QueryMessagesT_ShouldEndWith_Query
   - QueryUseCasesT_ShouldEndWith_QueryUsecase
 
-### Ch 3.4 레이어 의존성 다이어그램
+### Ch 4.4 레이어 의존성 다이어그램
 
 ![](./.images/Architecture.LayerDiagram.png)
 
@@ -1207,12 +1420,12 @@ DependencyVisualizer .\Backend\Api\Src\Crop.Hello.Api\Crop.Hello.Api.csproj --pr
 
 <br/>
 
-## Ch 4. 호스트 옵션 테스트
+## Ch 5. 호스트 옵션 테스트
 
-### Ch 4.1 호스트 옵션 테스트 구성
+### Ch 5.1 호스트 옵션 테스트 구성
 ![](./.images/Host.Schedule.IntegrationTest.Options.png)
 
-### Ch 4.2 호스트 옵션 의존성 등록
+### Ch 5.2 호스트 옵션 의존성 등록
 ![](./.images/Host.Configuration.Options.png)
 
 ```shell
@@ -1266,7 +1479,7 @@ internal sealed class OpenTelemetryOptionsValidator
 }
 ```
 
-### Ch 4.3 appsettings.json 통합 테스트
+### Ch 5.3 appsettings.json 통합 테스트
 ![](./.images/IntegrationTest.OptionPattern.png)
 
 ```cs
@@ -1301,166 +1514,28 @@ public void OpenTelemetryOptionsValidator_ShouldThrow_FromJsonFile(string jsonFi
 
 <br/>
 
-## Ch 5. 컨테이너 호스트 테스트
-
-### Ch 5.1 C# 서비스 컨테이너 이름 규칙
-Item            | Rule                                                  | Example
----             | ---                                                   | ---
-compose name    | {Corporation}-{Solution}                              | crop-hello
-service name    | {Corporation}.{Solution}.{Service}                    | crop.hello.api:
-image name      | {Corporation}/{Solution}/{Service}:{Service Version}  | crop/hello/api:${SERVICE_VERSION}
-container name  | {Corporation}.{Solution}.{Service}                    | corp.hello.api
-host name       | {Corporation}.{Solution}.{Service}                    | corp.hello.api
-network name    | {Corporation}.{Solution}                              | crop.hello
-
-- 예. Corporation: crop
-- 예. Solution: hello
-- 예. Service: api, ...
-
-```ini
-COMPOSE_PROJECT_NAME=crop-hello               # <- compose name
-SERVICE_VERSION=1.0.1
-```
-- .env 파일
-
-```yml
-x-logging-common: &logging-common
-  driver: "json-file"
-  options:
-    max-size: "10m"
-    max-file: "7"
-
-services:
-  crop.hello.api:                             # <- service name
-    image: crop/hello/api:${SERVICE_VERSION}  # <- image name
-    build:
-      context: .
-      dockerfile: Backend/Api/Src/Crop.Hello.Api/Dockerfile
-    container_name: corp.hello.api            # <- container name
-    hostname: corp.hello.api                  # <- host name
-    networks:
-      - net
-    volumes:
-      - ./logs/crop.hello.api:/app/logs
-    logging: *logging-common
-
-networks:
-  net:
-    name: crop.hello                          # <- network name
-```
-- docker-compose.yml 파일
-- 로그 볼륨
-  - 프러덕션: docker-compose.yml
-    ```yml
-    volumes:
-      - ./logs/crop.hello.api:/app/logs
-    ```
-  - 디버그: docker-compose.override.yml
-    ```yml
-    volumes:
-      - ./.logs/crop.hello.api:/app/logs
-    ```
-    - .gitignore 파일에 `.logs/`을 추가합니다.
-
-### Ch 5.2 인프라 서비스 컨테이너 이름 규칙
-Item            | Rule                                                        | Example
----             | ---                                                         | ---
-service name    | {Corporation}.{Solution}.infra.{Service}                    | crop.hello.infra.aspire:
-image name      | {Corporation}/{Solution}/infra/{Service}:{Service Version}  | crop/hello/infra/aspire:${SERVICE_VERSION}
-container name  | {Corporation}.{Solution}.infra.{Service}                    | corp.hello.infra.aspire
-host name       | {Corporation}.{Solution}.infra.{Service}                    | corp.hello.infra.aspire
-network name    | {Corporation}.{Solution}                                    | crop.hello
-
-- 예. Corporation: crop
-- 예. Solution: hello
-- 예. Service: aspire, ...
-
-```shell
-# Windows
-[System.Environment]::SetEnvironmentVariable("DOTNET_ASPIRE_CONTAINER_RUNTIME", "podman", "User")
-
-# Linux
-export DOTNET_ASPIRE_CONTAINER_RUNTIME=podman
-```
-
-[Podman for Windows](https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md)
-
-<br/>
-
-## Ch 6. 컨테이너 호스트 헬스 체크 테스트
-- TODO
-
-<br/>
-
 ---
 
 <br/>
 
 # Part 5. 호스트
 
-| IHost    | Windows Service | Container | Integration Test | Performance Test | Pipeline(Exception) |
-| ---      | :---:           | :---:     | :---:            | :---:            | :---:               |
-| Schedule | O               | O         | O                |                  |                     |
-| WebApi   |                 |           |                  |                  |                     |
-| RabbitMQ |                 |           |                  |                  |                     |
-| gRPC     |                 |           |                  |                  |                     |
+| IHost    | Windows Service | Docker Compose | Integration Test | Performance Test | Pipeline(Exception) |
+| ---      | :---:           | :---:          | :---:            | :---:            | :---:               |
+| Schedule | O               | O              | O                |                  |                     |
+| RabbitMQ |                 |                |                  |                  |                     |
+| gRPC     |                 |                |                  |                  |                     |
+| WebApi   |                 |                |                  |                  |                     |
+
 
 ## Ch 1. Schedule 호스트
 
-### Ch 1.1 윈도우 서비스
-```shell
-# 윈도우 서비스 의존성 등록
-RegisterInfrastructureLayer   # Infrastructure 레이어
-  -> RegisterWindowsService
-     -> AddWindowsService     # Microsoft.Extensions.Hosting.WindowsServices 패키지
+## Ch 2. RabbitMQ 호스트
 
-# 윈도우 서비스 활성화
-EnableInfrastructureLayer     # Infrastructure 레이어
-  -> EnableWindowsService
-     -> UseWindowsService     # Microsoft.Extensions.Hosting.WindowsServices 패키지
-```
+## Ch 3. gRPC 호스트
 
-```cs
-internal static class WindowsServiceRegistration
-{
-  internal static IServiceCollection RegisterWindowsService(this IServiceCollection service)
-  {
-    // 윈도우 서비스 의존성 등록
-    service.AddWindowsService();
-
-    return service;
-  }
-
-  internal static IHostBuilder EnableWindowsService(this IHostBuilder app)
-  {
-    // 윈도우 서비스 활성화
-    app.UseWindowsService();
-
-    return app;
-  }
-}
-```
-
-### Ch 1.2 윈도우 서비스 등록
-```bat
-@echo off
-
-:: 서비스 설치
-sc create "MyService" ^                               :: 서비스 이름
-  binPath= "C:\Path\To\MyService.exe" ^               :: 서비스 전체 경로
-  start= auto                                         :: 서비스 시작 설정
-
-:: 복구 동작 설정 (3번 실패 시 1분 후 재시작)
-sc failure "MyService" ^                              :: 서비스 이름
-  reset= 3600  ^                                      :: 1시간 후 복구 카운터 초기화
-  actions= restart/60000/restart/60000/restart/60000  :: 1분 후 서비스 재시작(서비스 복구 동작)
-
-echo "서비스 설치 및 복구 설정 완료"
-
-:: 서비스 제거 예제
-:: sc stop "MyService"
-:: sc delete "MyService"
-```
+## Ch 4. WebApi 호스트 테스트
+- TODO 테스트 가능한 호스트
 
 <br/>
 

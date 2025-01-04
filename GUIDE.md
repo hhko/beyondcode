@@ -1,3 +1,25 @@
+## DDD
+- 솔루션 구성
+  - 레이어 구성
+    - [x] Adapters
+      - Infrastructure
+      - Persistence
+      - Presentation
+    - [x] Application
+    - [x] Domain
+  - 테스트 구성
+    - [x] Unit
+    - [x] Integration
+    = [x] Performance
+    - [x] End to End
+  - Assets 구성
+    - [x] Domains
+    - [x] Frameworks
+    - [x] Libraries
+
+## 테스트
+
+
 ## 레이어
 - [x] 솔루션 구성
   - [x] 제품

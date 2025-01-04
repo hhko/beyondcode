@@ -839,3 +839,15 @@ stop-service "서비스 이름"
 
 sc.exe delete "서비스 이름"
 ```
+
+```
+     build:
+        context: .
+          dockerfile: WebFrontEnd/Dockerfile
+
+<PropertyGroup>
+   <!-- existing properties -->
+   <DependencyAwareStart>true</DependencyAwareStart>
+</PropertyGroup>
+```
+- https://learn.microsoft.com/en-us/visualstudio/containers/tutorial-multicontainer?view=vs-2022
