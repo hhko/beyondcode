@@ -934,24 +934,32 @@ Abstractions/                             # 레이어 주 목표가 아닌 부�
 
 ## Ch 1 도커 컴포즈
 ### Ch 1.1 컨테이너 이름 규칙
-Category        | Item            | Rule                                                        | Example
-----            | ---             | ---                                                         | ---
-compose         | compose name    | {Corporation}-{Solution}                                    | crop-hello
-C# Service      | service name    | {Corporation}.{Solution}.{Service}                          | crop.hello.api:
-C# Service      | image name      | {Corporation}/{Solution}/{Service}:{Service Version}        | crop/hello/api:${SERVICE_VERSION}
-C# Service      | container name  | {Corporation}.{Solution}.{Service}                          | corp.hello.api
-C# Service      | host name       | {Corporation}.{Solution}.{Service}                          | corp.hello.api
-C# Service      | network name    | {Corporation}.{Solution}                                    | crop.hello
-Infra Service   | service name    | {Corporation}.{Solution}.infra.{Service}                    | crop.hello.infra.aspire:
-Infra Service   | image name      | {Corporation}/{Solution}/infra/{Service}:{Service Version}  | crop/hello/infra/aspire:${SERVICE_VERSION}
-Infra Service   | container name  | {Corporation}.{Solution}.infra.{Service}                    | corp.hello.infra.aspire
-Infra Service   | host name       | {Corporation}.{Solution}.infra.{Service}                    | corp.hello.infra.aspire
-Infra Service   | network name    | {Corporation}.{Solution}                                    | crop.hello
-
-- 예. Corporation: crop
-- 예. Solution: hello
-- 예. C# Service: api, ...
-- 예. infra: aspire, ...
+- Docker Compose
+  Item            | Rule                                                        | Example
+  ---             | ---                                                         | ---
+  compose name    | {Corporation}-{Solution}                                    | crop-hello
+- C# Service
+  Item            | Rule                                                        | Example
+  ---             | ---                                                         | ---
+  compose name    | {Corporation}-{Solution}                                    | crop-hello
+  service name    | {Corporation}.{Solution}.{Service}                          | crop.hello.api:
+  image name      | {Corporation}/{Solution}/{Service}:{Service Version}        | crop/hello/api:${SERVICE_VERSION}
+  container name  | {Corporation}.{Solution}.{Service}                          | corp.hello.api
+  host name       | {Corporation}.{Solution}.{Service}                          | corp.hello.api
+  network name    | {Corporation}.{Solution}                                    | crop.hello
+- Infra Service
+  Item            | Rule                                                        | Example
+  ---             | ---                                                         | ---
+  service name    | {Corporation}.{Solution}.infra.{Service}                    | crop.hello.infra.aspire:
+  image name      | {Corporation}/{Solution}/infra/{Service}:{Service Version}  | crop/hello/infra/aspire:${SERVICE_VERSION}
+  container name  | {Corporation}.{Solution}.infra.{Service}                    | corp.hello.infra.aspire
+  host name       | {Corporation}.{Solution}.infra.{Service}                    | corp.hello.infra.aspire
+  network name    | {Corporation}.{Solution}                                    | crop.hello
+- 예제
+  - 예. Corporation: crop
+  - 예. Solution: hello
+  - 예. C# Service: api, ...
+  - 예. infra: aspire, ...
 
 ```ini
 COMPOSE_PROJECT_NAME=crop-hello           # <- compose name
