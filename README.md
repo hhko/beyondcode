@@ -1267,13 +1267,11 @@ public void We_CanTest_TheHost()
 <RunSettings>
   <LoggerRunSettings>
     <Loggers>
-      <!-- --verbosity quiet -->
       <Logger friendlyName="console" enabled="True">
         <Configuration>
             <Verbosity>quiet</Verbosity>
         </Configuration>
       </Logger>
-      <!-- --logger "trx;LogFileName=logs.trx" -->
       <Logger friendlyName="trx" enabled="True">
         <Configuration>
           <LogFileName>logs.trx</LogFileName>
