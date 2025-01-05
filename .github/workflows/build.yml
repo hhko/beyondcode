@@ -113,10 +113,10 @@ jobs:
             --configuration ${{ matrix.configuration }} \
             --no-restore \
             --no-build \
-            --collect "XPlat Code Coverage" \
-            --logger "trx;LogFileName=logs.trx" \
-            --verbosity q
-
+            --verbosity q \
+            --settings ${{ env.solution_dir }}/.runsettings
+            # --collect "XPlat Code Coverage" \
+            # --logger "trx;LogFileName=logs.trx" \
       # 코드 커버리지
       #  - https://github.com/danielpalme/ReportGenerator-GitHub-Action
       #

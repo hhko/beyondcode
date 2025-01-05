@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <!-- XPlat Code Coverage 설정 -->
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <!-- 출력 형식 -->
+          <Format>cobertura</Format>
+          <!-- 어셈블리 단위로 제외 -->
+          <Exclude>[*.Tests?]*</Exclude>
+          <!-- 파일 단위로 제외 -->
+          <ExcludeByFile>**/Migrations/*.cs,</ExcludeByFile>
+          <!-- 자동 생성된 속성(자동 프로퍼티)에 대한 커버리지 계산을 생략 -->
+          <!-- 예. public string Name { get; set; } // 이 코드는 커버리지 측정에서 제외 -->
+          <SkipAutoProps>true</SkipAutoProps>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

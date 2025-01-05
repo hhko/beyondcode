@@ -1261,6 +1261,45 @@ public void We_CanTest_TheHost()
 </ItemGroup>
 ```
 
+### Ch 3.5 .runsettings 테스트 설정
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <!-- 출력 형식 -->
+          <Format>cobertura</Format>
+          <!-- 어셈블리 단위로 제외 -->
+          <Exclude>[*.Tests?]*</Exclude>
+          <!-- 파일 단위로 제외 -->
+          <ExcludeByFile>**/Migrations/*.cs,</ExcludeByFile>
+          <!-- 자동 생성된 속성(자동 프로퍼티)에 대한 커버리지 계산을 생략 -->
+          <!-- 예. public string Name { get; set; } // 이 코드는 커버리지 측정에서 제외 -->
+          <SkipAutoProps>true</SkipAutoProps>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
+```
+```shell
+# .runsettings 적용 전
+dotnet test ${{ env.solution_dir }}/${{ env.solution_filename }} \
+    --configuration ${{ matrix.configuration }} \
+    --no-restore \
+    --no-build \
+    --collect "XPlat Code Coverage" \
+    --logger "trx;LogFileName=logs.trx" \
+    --verbosity q
+
+# .runsettings 적용 후
+dotnet test ${{ env.solution_dir }}/${{ env.solution_filename }} \
+    --configuration ${{ matrix.configuration }} \
+    --settings .runsettings
+```
+
 <br/>
 
 ## Ch 4. 호스트 의존성 테스트
