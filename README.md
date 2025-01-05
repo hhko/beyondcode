@@ -1265,19 +1265,41 @@ public void We_CanTest_TheHost()
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <RunSettings>
+  <LoggerRunSettings>
+    <Loggers>
+      <!-- --verbosity quiet -->
+      <Logger friendlyName="console" enabled="True">
+        <Configuration>
+            <Verbosity>quiet</Verbosity>
+        </Configuration>
+      </Logger>
+      <!-- --logger "trx;LogFileName=logs.trx" -->
+      <Logger friendlyName="trx" enabled="True">
+        <Configuration>
+          <LogFileName>logs.trx</LogFileName>
+        </Configuration>
+      </Logger>
+    </Loggers>
+  </LoggerRunSettings>
   <DataCollectionRunSettings>
     <DataCollectors>
-      <DataCollector friendlyName="XPlat code coverage">
+      <!-- XPlat Code Coverage 설정 -->
+      <DataCollector friendlyName="XPlat Code Coverage">
         <Configuration>
+    
           <!-- 출력 형식 -->
           <Format>cobertura</Format>
+    
           <!-- 어셈블리 단위로 제외 -->
           <Exclude>[*.Tests?]*</Exclude>
+    
           <!-- 파일 단위로 제외 -->
           <ExcludeByFile>**/Migrations/*.cs,</ExcludeByFile>
+    
           <!-- 자동 생성된 속성(자동 프로퍼티)에 대한 커버리지 계산을 생략 -->
           <!-- 예. public string Name { get; set; } // 이 코드는 커버리지 측정에서 제외 -->
           <SkipAutoProps>true</SkipAutoProps>
+    
         </Configuration>
       </DataCollector>
     </DataCollectors>
@@ -1297,8 +1319,13 @@ dotnet test ${{ env.solution_dir }}/${{ env.solution_filename }} \
 # .runsettings 적용 후
 dotnet test ${{ env.solution_dir }}/${{ env.solution_filename }} \
     --configuration ${{ matrix.configuration }} \
+    --no-restore \
+    --no-build \
     --settings .runsettings
 ```
+
+### Ch 3.6 참고 자료
+- [x] [.runsettings 파일을 사용하여 단위 테스트 구성](https://learn.microsoft.com/ko-kr/visualstudio/test/configure-unit-tests-by-using-a-dot-runsettings-file?view=vs-2022)
 
 <br/>
 
