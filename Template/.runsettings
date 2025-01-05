@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RunSettings>
-  <RunConfiguration>
+  <LoggerRunSettings>
     <Loggers>
-      <Logger friendlyName="trx" enabled="true">
+      <Logger friendlyName="console" enabled="True">
+        <Configuration>
+            <Verbosity>quiet</Verbosity>
+        </Configuration>
+      </Logger>
+      <Logger friendlyName="trx" enabled="True">
         <Configuration>
           <LogFileName>logs.trx</LogFileName>
         </Configuration>
       </Logger>
     </Loggers>
-  </RunConfiguration>
+  </LoggerRunSettings>
   <DataCollectionRunSettings>
     <DataCollectors>
       <!-- XPlat Code Coverage 설정 -->
