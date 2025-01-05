@@ -4,10 +4,10 @@
 
 # 목차
 
-### 개요
+## 개요
 - Part 0. 세미나
-  - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.Overview-InternalArchitecture/README.md)
-- Part 1. 기술 스택택
+  - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.InternalArchitecture/README.md)
+- Part 1. 기술 스택
   - [x] [Ch 01. 기술 맵](#ch-1-기술-맵)
   - [x] [Ch 02. Internal 아키텍처](#ch-2-internal-아키텍처)
   - [ ]  Ch 03. External 아키텍처
@@ -19,7 +19,7 @@
   - [x] [Ch 05. 레이어 고도화](#ch-5-레이어-고도화)
   - [x] [Ch 06. Internal 아키텍처 비교](#ch-6-내부-아키텍처-비교)
 
-### Internal 아키텍처
+## Internal 아키텍처
 - Part 3. 솔루션
   - [x] [Ch 01. 솔루션 구조](#ch-1-솔루션-구조)
   - [x] [Ch 02. 솔루션 빌드](#ch-2-솔루션-빌드)
@@ -38,13 +38,15 @@
   - [ ]  Ch 02. RabbitMQ 호스트
   - [ ]  Ch 03. gRPC 호스트
   - [ ]  Ch 04. WebApi 호스트
+  - [ ]  Ch 05. Aspire 호스트
 - Part 6. 전술 설계
   - [x] [Ch 01. 전술 설계 맵](#ch-1-전술-설계-맵)
   - [ ] [Ch 02. 출력 기본 타입](#ch-2-출력-기본-타입)
-  - [ ]  Ch 03. 도메인 기본 타입
-  - [ ] TODO
+  - [ ]  Ch 03. Known 입출력 Pipeline
+  - [ ]  Ch 04. Unknown 입출력 Pipeline
+  - [ ]  Ch 05. 도메인 기본 타입
 
-### External 아키텍처
+## External 아키텍처
 - Part 7. 컨테이너 오케스트레이션
 - Part 8. 관찰 가능성
   - [x] [Ch 01. 로그](#ch-1-로그)
@@ -69,14 +71,14 @@
 - Part 14. Service Mesh
 - Part 15. Ansible
 
-### 전략 설계
+## 전략 설계
 - Part 16. TODO
 
 <br/>
 
 # Part 1. 기술 스택
 
-## Ch 1. 기술
+## Ch 1. 기술 맵
 ![](./.images/TechMap.Keyword.png)
 ![](./.images/TechMap.png)
 
@@ -994,32 +996,25 @@ networks:
     name: crop.hello                          # <- network name
 ```
 - docker-compose.yml 파일
-- 로그 볼륨
-  - 프러덕션: docker-compose.yml
-    ```yml
-    volumes:
-      - ./logs/crop.hello.api:/app/logs       # ./logs    <- 리눅스 컨테이너
-    ```
-  - 디버그: docker-compose.override.yml
-    ```yml
-    volumes:
-      - ./.logs/crop.hello.api:/app/logs      # ./.logs   <- 윈도우 호스트
-    ```
-    - .gitignore 파일에 `.logs/`을 추가합니다.
-
 
 ### Ch 1.2 디버깅 설정
 ![](./.images/Docker.Environment.png)
 
-```yml
-services:
-  crop.hello.api:
+- `docker-compose.override.yml` 파일
+  - 프러덕션: docker-compose.yml
+    ```yml
+    environment:
+    volumes:
+      - ./logs/crop.hello.api:/app/logs       # ./logs    <- 프러덕션: 리눅스 컨테이너
+    ```
+  - 디버그: docker-compose.override.yml
+    ```yml
     environment:
       - DOTNET_ENVIRONMENT=Local.Docker     # appsettings.Local.Docker.json
     volumes:
-      - ./.logs/crop.hello.api:/app/logs    # ./.logs: 윈도우 호스트(.gitignore 형상관리 제외)
-```
-- `docker-compose.override.yml` 파일
+      - ./.logs/crop.hello.api:/app/logs      # ./.logs   <- 디버그: 윈도우 호스트(.gitignore 형상관리 제외)
+    ```
+    - .gitignore 파일에 `.logs/`을 추가합니다.
 
 ### Ch 1.3 컨테이너 헬스 체크
 - TODO
@@ -1069,6 +1064,7 @@ internal static class WindowsServiceRegistration
 .\InstallService.ps1 -ServiceName "MyService" -ExecutablePath "C:\Path\To\MyService.exe"
 ```
 - 관리자 권한 PowerShell에서 `InstallService.ps1`을 실행합니다.
+- InstallService.ps1: [링크](./Template/InstallService.ps1)
 
 ```powershell
 <#
