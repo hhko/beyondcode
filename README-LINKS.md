@@ -72,9 +72,13 @@
 <br/>
 
 ## .NET
+### 컨테이너
+- [ ] [콘솔 헬스 체크](https://github.com/acarmona1989/ConsoleAppHealthCheck)
+
 ### SDK
 - [ ] [.NET's hidden Garbage Collector - from 1.9GB to 85MB of memory?](https://www.youtube.com/watch?v=y7FTxAqExyU)
 - [ ] [C#10 `record struct` Deep Dive & Performance Implications](https://nietras.com/2021/06/14/csharp-10-record-struct/)
+- [x] [Mocking your appsettings in unit tests on .NET](https://medium.com/@TheLe0/mocking-your-appsettings-in-unit-tests-on-net-cb057de7db64)
 
 ### 코드 분석
 - [ ] [Editorconfig In Visual Studio In 10 Minutes or Less](https://www.youtube.com/watch?v=CQW5b58mPdg&t)
