@@ -140,6 +140,7 @@ public class Xxx : IXxx
 - [ ] Pipleline 구조화
 - [ ] NuGet 패키지화
 - [ ] Source Generator 테스트
+- [ ] virtual, override 제거?
 
 ## 적용 프로젝트
 - [x] .g.cs 파일 명시적 생성
@@ -194,4 +195,238 @@ public class Xxx : IXxx
   // XyzAdapterProxy
   var xyz = serviceProvider.GetRequiredService<IXyz>();
   ```
+- [ ] 인텔리센스 오동작, 에러 인식?
 
+
+```cs
+using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
+using System.Diagnostics;
+using System.Text;
+
+namespace ClassListGenerator2;
+
+
+[Generator]
+public class AdapterSourceGenerator2 : IIncrementalGenerator
+{
+    public static bool AttachDebugger { get; set; } = false;
+
+    public void Initialize(IncrementalGeneratorInitializationContext context)
+    {
+        //if (AttachDebugger)
+        //{
+        //    Debugger.Launch();
+        //}
+        //Debugger.Launch();
+
+        var provider = context.SyntaxProvider
+            .CreateSyntaxProvider(
+                // 클래스
+                predicate: (syntaxNode, _) => syntaxNode is ClassDeclarationSyntax classDeclaration,
+                // IAdapter 클래스
+                transform: (ctx, _) => TransformToClassDeclaration(ctx))
+            .Where(classDeclaration => classDeclaration is not null);
+
+        var compilation = context.CompilationProvider.Combine(provider.Collect());
+        context.RegisterSourceOutput(compilation, Execute);
+    }
+
+    private ClassDeclarationSyntax? TransformToClassDeclaration(GeneratorSyntaxContext ctx)
+    {
+        var classDeclaration = (ClassDeclarationSyntax)ctx.Node;
+        var semanticModel = ctx.SemanticModel;
+        var classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+
+        // IAdapter 인터페이스를 구현하는지 확인
+        return classSymbol?.AllInterfaces
+            .Any(i => i.Name == "IAdapter") is true
+                ? classDeclaration 
+                : null;
+    }
+
+    private void Execute(SourceProductionContext context, (Compilation Left, ImmutableArray<ClassDeclarationSyntax?> Right) tuple)
+    {
+        var (compilation, classes) = tuple;
+
+        foreach (var classDeclaration in classes)
+        {
+            var className = classDeclaration!.Identifier.Text;
+            var namespaceName = GetNamespace(classDeclaration);
+            var proxyCode = GenerateProxyClass(compilation, namespaceName, className, classDeclaration);
+
+            context.AddSource($"{className}Proxy.g.cs", SourceText.From(proxyCode, Encoding.UTF8));
+        }
+    }
+
+    private string GetNamespace(ClassDeclarationSyntax classDeclaration)
+    {
+        var namespaceDeclaration = classDeclaration.AncestorsAndSelf()
+            .OfType<BaseNamespaceDeclarationSyntax>()
+            .FirstOrDefault();
+
+        return namespaceDeclaration switch
+        {
+            // 파일 스코프
+            FileScopedNamespaceDeclarationSyntax fileScopedNamespace => fileScopedNamespace.Name.ToString(),
+            // 블럭 스코드
+            NamespaceDeclarationSyntax regularNamespace => regularNamespace.Name.ToString(),
+            // 없을 때
+            _ => "GlobalNamespace" //string.Empty // Global namespace
+        };
+    }
+
+    private string GenerateProxyClass(Compilation compilation, string namespaceName, string className, ClassDeclarationSyntax classDeclaration)
+    {
+        var builder = new StringBuilder();
+        
+        if (!string.IsNullOrEmpty(namespaceName))
+        {
+            builder.AppendLine($"namespace {namespaceName};");
+            builder.AppendLine();
+        }
+
+        builder.AppendLine($"public sealed class {className}Proxy : {className}");
+        builder.AppendLine("{");
+        builder.AppendLine($"    private readonly {className} _inner;");
+        builder.AppendLine();
+        builder.AppendLine($"    public {className}Proxy({className} inner)");
+        builder.AppendLine("    {");
+        builder.AppendLine("        _inner = inner;");
+        builder.AppendLine("    }");
+
+        // 가로챌 메서드 생성 (클래스 및 인터페이스 메서드 포함)
+        var allMethods = GetAllPublicMethods(compilation, classDeclaration);
+        foreach (var method in allMethods)
+        {
+            AppendMethod(builder, method);
+        }
+
+        builder.AppendLine("}");
+        return builder.ToString();
+    }
+
+    private void AppendMethod(StringBuilder builder, IMethodSymbol method)
+    {
+        var returnType = method.ReturnType.ToDisplayString();
+        var methodName = method.Name;
+        var parameters = string.Join(", ", method.Parameters.Select(p => $"{p.Type.ToDisplayString()} {p.Name}"));
+        var arguments = string.Join(", ", method.Parameters.Select(p => p.Name));
+
+        if (method.IsAsync)
+        {
+            builder.AppendLine($"    public override async {returnType} {methodName}({parameters})");
+        }
+        else
+        {
+            builder.AppendLine($"    public override {returnType} {methodName}({parameters})");
+        }
+            
+        builder.AppendLine("    {");
+        builder.AppendLine("        Console.WriteLine(\"Before method execution\");");
+
+        if (method.IsAsync)
+        {
+            builder.AppendLine($"        var result = await _inner.{methodName}({arguments});");
+        }
+        else
+        {
+            builder.AppendLine($"        var result = _inner.{methodName}({arguments});");
+        }
+
+        builder.AppendLine("        Console.WriteLine(\"After method execution\");");
+        builder.AppendLine("        return result;");
+
+        //if (returnType == "void")
+        //{
+        //    builder.AppendLine($"        _inner.{methodName}({arguments});");
+        //    builder.AppendLine("        Console.WriteLine(\"After method execution\");");
+        //}
+        //else
+        //{
+        //    builder.AppendLine($"        var result = _inner.{methodName}({arguments});");
+        //    builder.AppendLine("        Console.WriteLine(\"After method execution\");");
+        //    builder.AppendLine("        return result;");
+        //}
+
+        builder.AppendLine("    }");
+    }
+
+    private IEnumerable<IMethodSymbol> GetAllPublicMethods(Compilation compilation, ClassDeclarationSyntax classDeclaration)
+    {
+        var semanticModel = compilation.GetSemanticModel(classDeclaration.SyntaxTree);
+        var classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+
+        if (classSymbol == null)
+        {
+            return Enumerable.Empty<IMethodSymbol>();
+        }
+
+        // 클래스 메서드 + 상속된 인터페이스 메서드 모두 가져오기
+        var allMethods = classSymbol.GetMembers()
+            .OfType<IMethodSymbol>()
+            .Where(m => m.DeclaredAccessibility == Accessibility.Public 
+                && !m.IsStatic
+                && m.MethodKind != MethodKind.Constructor
+                //&& m.IsVirtual                                 // .g.cs 파일에서 virtual이 없을 때 컴퍼일러 에러 제공
+                && IsIResultOrDerivedType(m.ReturnType))
+            .ToList();
+
+        //// 인터페이스 메서드 포함
+        //foreach (var interfaceSymbol in classSymbol.AllInterfaces)
+        //{
+        //    allMethods.AddRange(interfaceSymbol.GetMembers()
+        //        .OfType<IMethodSymbol>()
+        //        .Where(m => m.DeclaredAccessibility == Accessibility.Public
+        //            && m.IsVirtual
+        //            && IsIResultOrDerivedType(m.ReceiverType!)));
+        //}
+
+        //return allMethods.Distinct();
+        return allMethods;
+    }
+
+    private bool IsIResultOrDerivedType(ITypeSymbol returnType)
+    {
+        // 검사할 타입 이름: IResult 또는 IResult<T>
+        const string resultTypeName = "IResult";
+
+        // 직접적으로 IResult 또는 IResult<T>인지 확인
+        if (returnType.Name == resultTypeName)
+        {
+            return true;
+        }
+
+        // 제네릭 타입 검사
+        if (returnType is INamedTypeSymbol namedType && namedType.IsGenericType)
+        {
+            if (namedType.ConstructedFrom.Name == resultTypeName)
+            {
+                return true;
+            }
+        }
+
+        // IResult 또는 IResult<T>를 상속받았는지 확인
+        if (returnType.AllInterfaces.Any(i => i.Name == resultTypeName))
+        {
+            return true;
+        }
+
+        // 4. Task<IResult> 또는 Task<IResult<T>> 검사
+        if (returnType is INamedTypeSymbol taskType && taskType.Name == "Task" && taskType.TypeArguments.Length == 1)
+        {
+            var typeArgument = taskType.TypeArguments[0];
+            // Task<IResult> 또는 Task<IResult<T>>에 대해 재귀적으로 검사
+            if (IsIResultOrDerivedType(typeArgument))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+```
