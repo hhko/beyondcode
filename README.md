@@ -1,9 +1,11 @@
 [![build](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml/badge.svg)](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml)
 
 > 슬기로운 코드를 만들기 위한 아름다운 여정
+
 - Internal 아키텍처  
   내부 아키텍처는 시스템을 구성하는 **레이어별로** 책임, 역할, 그리고 협력을 명확히 정의하고 구조화합니다.  
-  이를 통해 각 레이어가 독립적으로 동작하면서도 유기적으로 협력할 수 있는 기반을 마련합니다.
+  이를 통해 각 레이어가 독립적으로 동작하면서도 유기적으로 협력할 수 있는 기반을 마련합니다.  
+  **유스케이스(Application 레이어)가 모든 레이어를 주관합니다.**
 - External 아키텍처  
   외부 아키텍처는 **서비스 단위로** 시스템의 책임, 역할, 그리고 협력을 체계적으로 설계합니다.  
   이를 통해 서비스 간 경계를 명확히 하며, 각 서비스가 독립적으로 확장 가능하도록 지원합니다.
@@ -1261,6 +1263,8 @@ public void We_CanTest_TheHost()
 </ItemGroup>
 ```
 
+- .csproj 파일이 `<Project Sdk="Microsoft.NET.Sdk">`일 때만 appsettings.json 그룹핑을 위해 명시적 설정이 필요합니다.
+
 ### Ch 3.5 .runsettings 테스트 설정
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -1284,20 +1288,20 @@ public void We_CanTest_TheHost()
       <!-- XPlat Code Coverage 설정 -->
       <DataCollector friendlyName="XPlat Code Coverage">
         <Configuration>
-    
+
           <!-- 출력 형식 -->
           <Format>cobertura</Format>
-    
+
           <!-- 어셈블리 단위로 제외 -->
           <Exclude>[*.Tests?]*</Exclude>
-    
+
           <!-- 파일 단위로 제외 -->
           <ExcludeByFile>**/Migrations/*.cs,</ExcludeByFile>
-    
+
           <!-- 자동 생성된 속성(자동 프로퍼티)에 대한 커버리지 계산을 생략 -->
           <!-- 예. public string Name { get; set; } // 이 코드는 커버리지 측정에서 제외 -->
           <SkipAutoProps>true</SkipAutoProps>
-    
+
         </Configuration>
       </DataCollector>
     </DataCollectors>
@@ -1307,19 +1311,22 @@ public void We_CanTest_TheHost()
 ```shell
 # .runsettings 적용 전
 dotnet test ${{ env.solution_dir }}/${{ env.solution_filename }} \
-    --configuration ${{ matrix.configuration }} \
-    --no-restore \
-    --no-build \
-    --collect "XPlat Code Coverage" \
-    --logger "trx;LogFileName=logs.trx" \
-    --verbosity q
+  --configuration ${{ matrix.configuration }} \
+  --no-restore \
+  --no-build \
+  --verbosity q \
+  --collect "XPlat Code Coverage" \
+  --logger "trx;LogFileName=logs.trx"
 
 # .runsettings 적용 후
 dotnet test ${{ env.solution_dir }}/${{ env.solution_filename }} \
-    --configuration ${{ matrix.configuration }} \
-    --no-restore \
-    --no-build \
-    --settings .runsettings
+  --configuration ${{ matrix.configuration }} \
+  --no-restore \
+  --no-build \
+  --verbosity q \
+  --settings ${{ env.solution_dir }}/.runsettings
+  # --collect "XPlat Code Coverage" \
+  # --logger "trx;LogFileName=logs.trx" \
 ```
 
 ### Ch 3.6 참고 자료
