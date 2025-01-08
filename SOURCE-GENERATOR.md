@@ -430,3 +430,22 @@ public class AdapterSourceGenerator2 : IIncrementalGenerator
     }
 }
 ```
+
+
+## HAProxy
+- [한글, D115. HAProxy installation and testing (check this before moving on to Spring Cloud!!)](https://www.youtube.com/watch?v=dZ-vKnACuaM&list=PLogzC_RPf25Fx3eNZzxLVw3dOL7r4XIUk&index=18)
+- [한글, D116. HAProxy high availability configuration with keepalived](https://www.youtube.com/watch?v=LXo-sfckeWA&list=PLogzC_RPf25Fx3eNZzxLVw3dOL7r4XIUk&index=19)
+- [5. switching & routing 라우터 동작원리와 L3스위치](https://www.youtube.com/watch?v=HnxaDoSo6mo)
+
+## Full 코드 동영상
+- [ ] 07:05:22 | [ASP.NET Core - Clean Architecture - Full Course](https://www.youtube.com/watch?v=gGa7SLk1-0Q)
+- [ ] 06:21:19 | [Clean Architecture Fundaments in .NET Core MVC (.NET 8)](https://www.youtube.com/watch?v=CAwpmoA7sno)
+---
+- [ ] **02:22:40 | [Completely 🚀Master .NET 8 Microservices with Ocelot : implement Auth, Gateway, Caching & More🌟](https://www.youtube.com/watch?v=m9gUf7OdLmA&t=6464s)**
+- [ ] 07:06:31 | [.NET Microservices – Full Course for Beginners](https://www.youtube.com/watch?v=CqCDOosvZIk)
+- [ ] 09:28:18 | [Completely build 🛒 eCommerce Microservice in .NET 8: Implement 🚀 Gateway, Rate Limiting & more](https://www.youtube.com/watch?v=L2L_qe-FnUY)
+- [ ] 11:05:57 | [.NET Microservices – Full Course](https://www.youtube.com/watch?v=DgVjEo3OGBI)
+- [ ] 07:56:54 | [Introduction to .NET Microservices (.NET 8)](https://www.youtube.com/watch?v=Nw4AZs1kLAs&t=26579s)
+
+## 테스트
+- [ ] [Testing.Platform, the new way to run .NET tests](https://www.youtube.com/watch?v=9Jz47Ze9LOI)
