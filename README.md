@@ -50,8 +50,8 @@
 - Part 6. 전술 설계
   - [x] [Ch 01. 전술 설계 맵](#ch-1-전술-설계-맵)
   - [ ] [Ch 02. 출력 기본 타입](#ch-2-출력-기본-타입)
-  - [ ]  Ch 03. Known 입출력 Pipeline
-  - [ ]  Ch 04. Unknown 입출력 Pipeline
+  - [ ]  Ch 03. Known 입출력 Pipeline(MediatR: Mediator 패턴 + Decorator 패턴)
+  - [ ]  Ch 04. Unknown 입출력 Pipeline(Source Generator: Strategy 패턴 + Decorator 패턴)
   - [ ]  Ch 05. 도메인 기본 타입
 
 ## External 아키텍처
