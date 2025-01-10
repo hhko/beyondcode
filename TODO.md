@@ -1,3 +1,8 @@
+- [ ] [Microsoft.CodeAnalysis.PublicApiAnalyzers](https://github.com/dotnet/roslyn-analyzers/blob/main/src/PublicApiAnalyzers/PublicApiAnalyzers.Help.md)
+- [x] OpenTelemetry MediatR | Logs
+- [ ] OpenTelemetry MediatR | Traces
+- [ ] OpenTelemetry MediatR | Metrics
+---
 - grafana
 - 지표 -> grafana
 - 성능 테스트
