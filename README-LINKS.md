@@ -155,6 +155,7 @@
 ### OpenTelemetry
 - [ ] [practical-net-otelcollector](https://github.com/kimcuhoang/practical-net-otelcollector/tree/main)
   - https://dev.to/kim-ch/observability-net-opentelemetry-collector-25g1
+- [ ] [Adding distributed tracing instrumentation](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing-instrumentation-walkthroughs)
 
 ### GitHub Actions
 - [ ] [Beautiful .NET Test Reports Using GitHub Actions](https://seankilleen.com/2024/03/beautiful-net-test-reports-using-github-actions/)
@@ -169,8 +170,6 @@
   - 유효성 검사
   - Command 트랜잭션
   - Query 캐싱
-
-
 
 ## HAProxy
 - [한글, D115. HAProxy installation and testing (check this before moving on to Spring Cloud!!)](https://www.youtube.com/watch?v=dZ-vKnACuaM&list=PLogzC_RPf25Fx3eNZzxLVw3dOL7r4XIUk&index=18)
@@ -190,3 +189,6 @@
 
 ## 테스트
 - [ ] [Testing.Platform, the new way to run .NET tests](https://www.youtube.com/watch?v=9Jz47Ze9LOI)
+
+## 로그
+- [ ] [Compile-time logging source generation](https://learn.microsoft.com/en-us/dotnet/core/extensions/logger-message-generator)
