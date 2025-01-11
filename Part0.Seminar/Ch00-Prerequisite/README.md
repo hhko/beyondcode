@@ -1,4 +1,4 @@
-
+# 프로그램 설치
 
 ## Chocolately 설치
 - Chocolatey는 Windows 운영 체제용 패키지 관리자입니다.
@@ -27,7 +27,7 @@ choco -v
 
 <br/>
 
-## 프로그램 설치
+## 프로그램 설치 목록
 1. powershell-core
 1. microsoft-windows-terminal
 1. vscode
@@ -37,6 +37,7 @@ choco -v
 1. wsl2
 1. docker-desktop
 1. dotnet-sdk
+1. k6
 1. dotnet tool
    - dotnet-counters
    - dotnet-trace

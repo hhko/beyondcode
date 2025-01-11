@@ -182,6 +182,7 @@
 - [ ] 06:21:19 | [Clean Architecture Fundaments in .NET Core MVC (.NET 8)](https://www.youtube.com/watch?v=CAwpmoA7sno)
 ---
 - [ ] **02:22:40 | [Completely 🚀Master .NET 8 Microservices with Ocelot : implement Auth, Gateway, Caching & More🌟](https://www.youtube.com/watch?v=m9gUf7OdLmA&t=6464s)**
+  - [Course |🚀 Master .NET 8 Microservices with ...](https://www.youtube.com/playlist?list=PL285LgYq_FoKFuZzlwROA4ZUXOuvRiDrF)
 - [ ] 07:06:31 | [.NET Microservices – Full Course for Beginners](https://www.youtube.com/watch?v=CqCDOosvZIk)
 - [ ] 09:28:18 | [Completely build 🛒 eCommerce Microservice in .NET 8: Implement 🚀 Gateway, Rate Limiting & more](https://www.youtube.com/watch?v=L2L_qe-FnUY)
 - [ ] 11:05:57 | [.NET Microservices – Full Course](https://www.youtube.com/watch?v=DgVjEo3OGBI)

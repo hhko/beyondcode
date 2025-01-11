@@ -14,6 +14,7 @@
 
 ## 개요
 - Part 0. 세미나
+  - [x] [Ch 00. 프로그램 설치](./Part0.Seminar/Ch00-Prerequisite/README.md)
   - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.InternalArchitecture/README.md)
 - Part 1. 기술 스택
   - [x] [Ch 01. 기술 맵](#ch-1-기술-맵)
@@ -50,8 +51,8 @@
 - Part 6. 전술 설계
   - [x] [Ch 01. 전술 설계 맵](#ch-1-전술-설계-맵)
   - [ ] [Ch 02. 출력 기본 타입](#ch-2-출력-기본-타입)
-  - [ ]  Ch 03. Known 입출력 Pipeline(MediatR: Mediator 패턴 + Decorator 패턴)
-  - [ ]  Ch 04. Unknown 입출력 Pipeline(Source Generator: Strategy 패턴 + Decorator 패턴)
+  - [ ]  Ch 03. Known 입출력 Pipeline
+  - [ ]  Ch 04. Unknown 입출력 Pipeline
   - [ ]  Ch 05. 도메인 기본 타입
 
 ## External 아키텍처
