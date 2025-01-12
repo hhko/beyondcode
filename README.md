@@ -19,8 +19,8 @@
 - Part 1. 기술 스택
   - [x] [Ch 01. 기술 맵](#ch-1-기술-맵)
   - [x] [Ch 02. 아키텍처 성숙 지표](#ch-2-아키텍처-성속-지표)
-  - [x] [Ch 02. Internal 아키텍처](#ch-3-internal-아키텍처)
-  - [ ]  Ch 03. External 아키텍처
+  - [x] [Ch 03. Internal 아키텍처](#ch-3-internal-아키텍처)
+  - [ ]  Ch 04. External 아키텍처
 - Part 2. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
   - [x] [Ch 02. 아키텍처 원칙](#ch-2-아키텍처-원칙)
