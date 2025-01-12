@@ -243,8 +243,6 @@ root@{호스트}:~# ls /home
 ```
 
 ### Ubuntu 기본 계정
-![](./.images/Wsl-User-Default.png)
-
 ```shell
 # 로그인 기본 계정: /etc/wsl.conf 파일을 생성한다
 root@{호스트}:~# cat << EOF | sudo tee /etc/wsl.conf
