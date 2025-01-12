@@ -18,7 +18,8 @@
   - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.InternalArchitecture/README.md)
 - Part 1. 기술 스택
   - [x] [Ch 01. 기술 맵](#ch-1-기술-맵)
-  - [x] [Ch 02. Internal 아키텍처](#ch-2-internal-아키텍처)
+  - [x] [Ch 02. 아키텍처 성숙 지표](#ch-2-아키텍처-성속-지표)
+  - [x] [Ch 02. Internal 아키텍처](#ch-3-internal-아키텍처)
   - [ ]  Ch 03. External 아키텍처
 - Part 2. 아키텍처
   - [x] [Ch 01. 아키텍처 개요](#ch-1-아키텍처-개요)
@@ -91,7 +92,10 @@
 ![](./.images/TechMap.Keyword.png)
 ![](./.images/TechMap.png)
 
-## Ch 2. Internal 아키텍처
+## Ch 2. 아키텍처 성속 지표
+![](./.images/Architecture.MaturityMetrics.png)
+
+## Ch 3. Internal 아키텍처
 > - Internal 아키텍처 목표는 레이어 배치입니다.
 > - **Application 레이어가** Internal 아키텍처의 레이어를 주관(主管)합니다.
 
@@ -131,7 +135,7 @@
   - `danielpalme/ReportGenerator-GitHub-Action`
   - `dorny/test-reporter`
 
-## Ch 3. External 아키텍처
+## Ch 4. External 아키텍처
 > - External 아키텍처 목표는 서비스 배치입니다.
 
 - TODO

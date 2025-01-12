@@ -1,7 +1,30 @@
 - [ ] [Microsoft.CodeAnalysis.PublicApiAnalyzers](https://github.com/dotnet/roslyn-analyzers/blob/main/src/PublicApiAnalyzers/PublicApiAnalyzers.Help.md)
+  - https://github.com/dotnet/roslyn-analyzers/tree/main/src/PublicApiAnalyzers
+
+```
+dotnet add package Microsoft.CodeAnalysis.PublicApiAnalyzers
+
+PublicAPI.Shipped.txt: 릴리스된 API를 정의.
+PublicAPI.Unshipped.txt: 아직 릴리스되지 않은 API를 정의
+
+RS0016: 공개 API가 추가되었지만 PublicAPI.Unshipped.txt에 반영되지 않았음.
+RS0017: PublicAPI.Shipped.txt 또는 PublicAPI.Unshipped.txt에서 제거된 API가 발견됨.
+RS0025: API가 새로 추가되었지만 공개 API 파일에 정의되지 않음.
+
+
+<Project>
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+  </PropertyGroup>
+</Project>
+
+```
 - [x] OpenTelemetry MediatR | Logs
 - [ ] OpenTelemetry MediatR | Traces
 - [ ] OpenTelemetry MediatR | Metrics
+---
+- [] [Analyze this: Raise your code quality and follow code standards with Roslyn - Fredrik Ljung](https://www.youtube.com/watch?v=ZX7RTZX9_aE)
 ---
 - grafana
 - 지표 -> grafana
