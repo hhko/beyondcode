@@ -229,11 +229,11 @@ wsl --unregister ubuntu22.04
 ```
 
 ### Ubuntu 계정 생성
-> **{계정}은** `mirero`로 진행합니다.
+> **{계정}은** `hello`로 진행합니다.
 
 ```shell
 # root 계정에서 계정 생성
-#   - 계정: mirero
+#   - 계정: hello
 root@{호스트}:~# adduser {계정}
 # 계정 생성 확인
 root@{호스트}:~# ls /home
