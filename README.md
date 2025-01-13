@@ -18,7 +18,7 @@
   - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.InternalArchitecture/README.md)
 - Part 1. 아키텍처 기술 스택
   - [x] [Ch 01. 아키텍처 맵](#ch-1-아키텍처-맵)
-  - [x] [Ch 02. 아키텍처 성숙 지표](#ch-2-아키텍처-성속-지표)
+  - [x] [Ch 02. 아키텍처 성숙 지표](#ch-2-아키텍처-성숙-지표)
   - [x] [Ch 03. Internal 아키텍처](#ch-3-internal-아키텍처)
   - [ ]  Ch 04. External 아키텍처
 - Part 2. 아키텍처
@@ -92,7 +92,7 @@
 ![](./.images/TechMap.Keyword.png)
 ![](./.images/TechMap.png)
 
-## Ch 2. 아키텍처 성속 지표
+## Ch 2. 아키텍처 성숙 지표
 ![](./.images/Architecture.MaturityMetrics.png)
 
 ## Ch 3. Internal 아키텍처
