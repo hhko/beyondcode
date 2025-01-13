@@ -210,7 +210,7 @@ public class AuditManager
 
 구분               | 목표   | 레이어
 ---                | ---   | ---
-비즈니스 주요 목표  | 유한   | Domain 레이어, Application 레이어
+비즈니스 주요 목표  | 유한   | Domain 레이어(비즈니스 단위), Application 레이어(비즈니스 흐름)
 기술 주요 목표      | 무한   | Adapter 레이어
 
 - 비즈니스 주요 목표: 유한
