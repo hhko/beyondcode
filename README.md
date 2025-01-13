@@ -16,7 +16,7 @@
 - Part 0. 세미나
   - [x] [Ch 00. 프로그램 설치](./Part0.Seminar/Ch00-Prerequisite/README.md)
   - [x] [Ch 01. Internal 아키텍처 개요](./Part0.Seminar/Ch01.InternalArchitecture/README.md)
-- Part 1. 기술 스택
+- Part 1. 아키텍처 기술 스택
   - [x] [Ch 01. 아키텍처 맵](#ch-1-아키텍처-맵)
   - [x] [Ch 02. 아키텍처 성숙 지표](#ch-2-아키텍처-성속-지표)
   - [x] [Ch 03. Internal 아키텍처](#ch-3-internal-아키텍처)
