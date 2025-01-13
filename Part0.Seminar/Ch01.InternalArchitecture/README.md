@@ -123,18 +123,19 @@ public class AuditManager
  `T4`   | **Layers**       | **Tests**
  `T5`   | **Sub-Layers**   | **Test Pyramid**
 
-- Layer
+- `T4`: Layers
   - Domain
   - Application
-  - Adapter
+  - `T5`: Adapters
     - Infrastructure
     - Persistence
     - Presentation
-- Test Pyramid
-  - Unit
-  - Integration
-  - Performance
-  - End to End(E2E)
+- `T4`: Tests
+  - `T5`: Test Pyramid
+    - Unit
+    - Integration
+    - Performance
+    - End to End(E2E)
 
 ```
 {T2}.sln
