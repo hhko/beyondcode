@@ -1,5 +1,88 @@
-
 # 참고 자료
+
+## WebApi
+### Gateway
+- [ ] [[.NET Conf 2021 x Seoul] YARP를 이용한 리버스 프록시 서버 구축](https://www.youtube.com/watch?v=YrmE9aNGRaE)
+- [x] [How To Build an API Gateway for Microservices with YARP](https://www.youtube.com/watch?v=UidT7YYu97s)
+  ```cs
+  builder.Services.AddReverseProxy()
+                .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+
+  app.MapReverseProxy();
+  ```
+  ```json
+  {
+    "ReverseProxy": {
+      "Routes": {
+        "identity-route": {
+          "ClusterId": "identity-cluster",
+          "Match": {
+            "Path": "identity-api/{**catch-all}"
+          },
+          "Transforms": [
+            { "PathPattern": "{**catch-all}" }
+          ]
+        },
+        "weatherforecast-route": {
+          "ClusterId": "weatherforecast-cluster",
+          "Match": {
+            "Path": "weatherforecast-api/{**catch-all}"
+          },
+          "Transforms": [
+            { "PathPattern": "{**catch-all}" }
+          ]
+        }
+      },
+      "Clusters": {
+        "identity-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "http://localhost:7001/"
+            }
+          }
+        },
+        "weatherforecast-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "http://localhost:7002/"
+            }
+          }
+        }
+      }
+    }
+  }
+  ```
+  ```json
+  {
+    "ReverseProxy": {
+      "Routes": {
+        "identity-route": {
+          "ClusterId": "identity-cluster",
+          "Match": {
+            "Path": "{**catch-all}"
+          }
+        },
+      },
+      "Clusters": {
+        "identity-cluster": {
+          "Destinations": {
+            "destination1": {
+              "Address": "http://localhost:7001/"
+            }
+          }
+        }
+      }
+    }
+  }
+  ```
+- [ ] [How To Build a Load Balancer In .NET With YARP Reverse Proxy](https://www.youtube.com/watch?v=0RaH9hhOF4g)
+- [ ] [🚀Completely Master Microservices with YARP Reverse Proxy - add Authentication, Caching & more](https://www.youtube.com/watch?v=ZkVIPqRJQq4)
+
+### Authentication
+- [ ] [Token Authentication In ASP.NET Core 7 With JWT | Clean Architecture](https://www.youtube.com/watch?v=4cFhYUK8wnc)
+
+<br/>
+<br/>
 
 ### 테스트
 - [ ] [Configure unit tests by using a .runsettings file](https://learn.microsoft.com/en-us/visualstudio/test/configure-unit-tests-by-using-a-dot-runsettings-file?view=vs-2022)
