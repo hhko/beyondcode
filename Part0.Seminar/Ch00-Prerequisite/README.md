@@ -58,15 +58,15 @@ choco install microsoft-windows-terminal --version 1.20.11781 -y
 choco install vscode --version 1.91.1 -y
     code -v
 
-# 3.1 VSCode 확장 도구
-#   - 개발 확장 도구
-#     - Remote Development: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack
-#     - Docker: https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
-#     - REST Client: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
-#   - 편집 확장 도구
-#     - Markdown Preview Enhanced: https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced
-#     - Draw.io Integration: https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
-#     - Paste Image: https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image
+# VSCode 확장 도구
+# - 개발 확장 도구
+#   - Remote Development: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack
+#   - Docker: https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
+#   - REST Client: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+# - 편집 확장 도구
+#   - Markdown Preview Enhanced: https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced
+#   - Draw.io Integration: https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
+#   - Paste Image: https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image
 
 # 4. Git: https://community.chocolatey.org/packages/git
 choco install git --version 2.45.2 -y
@@ -178,6 +178,7 @@ Server:
 #
 # D:\Workspace\wsl\Ubuntu\22.04
 #     \Volume
+#         WSL 머신 데이터 파일
 #     \Release
 #         ubuntu-jammy-wsl-amd64-wsl.rootfs.tar.gz
 mkdir -p D:\Workspace\wsl\Ubuntu\22.04\Volume
@@ -200,11 +201,11 @@ wsl -d ubuntu22.04              # 특정 distribution 실행
 
 # 버전 확인
 root@{호스트}:~# lsb_release -a
-No LSB modules are available.
-Distributor ID: Ubuntu
-Description:    Ubuntu 22.04.4 LTS
-Release:        22.04
-Codename:       jammy
+  No LSB modules are available.
+  Distributor ID: Ubuntu
+  Description:    Ubuntu 22.04.4 LTS
+  Release:        22.04
+  Codename:       jammy
 
 # root 암호 변경
 root@{호스트}:~# passwd
@@ -288,7 +289,7 @@ wsl -l -v
 
 ```shell
 # 윈도우 -> WSL
-\\wsl$                # 윈도우 탐색기에서 입력
+\\wsl$                                  # 윈도우 탐색기에서 입력
 
 # 윈도우 <- WSL
 {계정}@{호스트}:~$ mount -l

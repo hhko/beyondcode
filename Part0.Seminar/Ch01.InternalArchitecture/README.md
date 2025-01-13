@@ -1,16 +1,16 @@
-# Internal 아키텍처 개요요
+# Internal 아키텍처 개요
 
 ## 목표
-- Internal 아키텍처의 다양한 레이어와 그 역할을 이해한다.
-- 아키텍처 트릴레마(캡슐화, 순수성, 성능) 관점에서 각 설계 요소의 필요성과 트레이드오프를 파악한다.
+- Internal 아키텍처의 레이어와 그 역할을 이해합니다.
+- 아키텍처 트릴레마(캡슐화, 순수성, 성능) 관점에서 각 설계 요소의 필요성과 트레이드 오프를 확인합니다.
 
 <br/>
 
 ## 주요 키워드
-- Internal 아키텍처와 External 아키텍처
+- Internal 아키텍처 & External 아키텍처
 - 관심사의 분리
 - 레이어
-- 순수/불순 함수
+- 순수 & 불순 함수
 
 <br/>
 
@@ -24,8 +24,8 @@
 ![](./../../.images/Architecture.Category.png)
 ![](./../../.images/Architecture.Microservices.png)
 
-- External 아키텍처: 프로세스 외부, **서비스 배치**
-- Internal 아키텍처: 프로세스 내부, **레이어 배치**
+- **External** 아키텍처: 프로세스 외부, **서비스 배치**
+- **Internal** 아키텍처: 프로세스 내부, **레이어 배치**
 
 <br/>
 
@@ -138,8 +138,8 @@ public class AuditManager
 
 ```
 {T2}.sln
-  │ # 부수(Abstraction) 범주: Backend와 Frontend을 구성하기 위해 필요한 부수적인 코드
-  ├─Abstraction
+  │ # 자산(Assets) 범주: Backend와 Frontend을 구성하기 위해 자산 코드
+  ├─Assets
   │   ├─Frameworks
   │   │   ├─Src
   │   │   │   ├─{T1}.{T2}.Framework
@@ -147,7 +147,8 @@ public class AuditManager
   │   │   └─Tests
   │   │       └─{T1}.{T2}.Framework.Tests.Unit
   │   ├─Libraries
-  │   │   └─{T1}.{T2}.[Tech]                                    // 예. RabbitMQ, ...
+  │   │   ├─{T1}.{T2}.[Tech]                                    // 예. RabbitMQ, ...
+  │   │   └─...
   │   └─Domains
   │       ├─Src
   │       │   └─{T1}.{T2}.Domain
@@ -158,7 +159,7 @@ public class AuditManager
   ├─Backend
   │   ├─{T3}
   │   │   ├─Src
-  │   │   │   ├─{T1}.{T2}.{T3}                                  // 호스트 프로젝트
+  │   │   │   ├─{T1}.{T2}.{T3}                                  // Host 프로젝트
   │   │   │   ├─{T1}.{T2}.{T3}.Adapters.Infrastructure          // Adapter 레이어
   │   │   │   ├─{T1}.{T2}.{T3}.Adapters.Persistence             // Adapter 레이어
   │   │   │   ├─{T1}.{T2}.{T3}.Application                      // Application 레이어
@@ -177,7 +178,7 @@ public class AuditManager
   └─Frontend
       └─{T3}
           ├─Src
-          │   ├─{T1}.{T2}.{T3}                                  // 호스트 프로젝트
+          │   ├─{T1}.{T2}.{T3}                                  // Host 프로젝트
           │   ├─{T1}.{T2}.{T3}.Adapters.Infrastructure          // Adapter 레이어
           │   ├─{T1}.{T2}.{T3}.Adapters.Persistence             // Adapter 레이어
           │   ├─{T1}.{T2}.{T3}.Application                      // Application 레이어
@@ -205,7 +206,12 @@ public class AuditManager
 <br/>
 
 ## 레이어별 주요 목표
-> 주요 목표를 달성하기 위한 모든 부가 활동은 `Abstractions`으로 정의합니다.
+> 주요 목표를 달성하기 위한 모든 부가 활동은 `Abstractions` 폴더에 관련 코드를 배치 시킵니다.
+
+구분               | 목표   | 레이어
+---                | ---   | ---
+비즈니스 주요 목표  | 유한   | Domain 레이어, Application 레이어
+기술 주요 목표      | 무한   | Adapter 레이어
 
 - 비즈니스 주요 목표: 유한
   - 비즈니스 단위(Domain 레이어): Aggregate Root
@@ -256,4 +262,3 @@ Corp.Hello.Api.Adapters.Infrastructure
 ## Q&A
 - Internal 아키텍처를 주관하는 레이어는?  
   ※ 주관 (主管, 어떤 일의 주가 되어 그 일을 책임지고 맡아 관리함)
-
