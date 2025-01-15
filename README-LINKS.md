@@ -81,6 +81,10 @@
 ### Authentication
 - [ ] [Token Authentication In ASP.NET Core 7 With JWT | Clean Architecture](https://www.youtube.com/watch?v=4cFhYUK8wnc)
 
+## 컨테이너
+### Health Check
+- [ ] [Mastering Custom Health Checks in ASP.NET Core for Robust and Reliable Applications](https://programmingpulse.vercel.app/blog/mastering-custom-health-checks-in-aspnet-core)
+
 <br/>
 <br/>
 

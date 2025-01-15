@@ -1,3 +1,7 @@
+- [ ] README.md PPT 정리
+- [ ] README.md 목차 정리
+- [ ] 템플릿 학습
+----
 - [ ] [Microsoft.CodeAnalysis.PublicApiAnalyzers](https://github.com/dotnet/roslyn-analyzers/blob/main/src/PublicApiAnalyzers/PublicApiAnalyzers.Help.md)
   - https://github.com/dotnet/roslyn-analyzers/tree/main/src/PublicApiAnalyzers
 
