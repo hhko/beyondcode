@@ -85,15 +85,25 @@
 ### Health Check
 - [ ] [Mastering Custom Health Checks in ASP.NET Core for Robust and Reliable Applications](https://programmingpulse.vercel.app/blog/mastering-custom-health-checks-in-aspnet-core)
 
+### Podman
+- [ ] [Start Podman on WSL2 in 4 steps](https://dev.to/thangchung/start-podman-on-wsl2-in-4-steps-3jn9)
+- [ ] [.NET 8 Integration Tests on Podman Desktop (Windows 11 - WSL2 Ubuntu 23)](https://dev.to/thangchung/net-8-integration-tests-on-podman-desktop-windows-11-wsl2-ubuntu-23-4hpo)
+
+## DDD
+### 문서
+- [ ] [Clean Domain-Driven Design in 10 minutes](https://medium.com/hackernoon/clean-domain-driven-design-in-10-minutes-6037a59c8b7b)
+
 <br/>
 <br/>
 
+# 정리 중
 ### 테스트
 - [ ] [Configure unit tests by using a .runsettings file](https://learn.microsoft.com/en-us/visualstudio/test/configure-unit-tests-by-using-a-dot-runsettings-file?view=vs-2022)
 - [x] [Code Coverage Reports for .NET Projects](https://knowyourtoolset.com/2024/01/coverage-reports/)
 - [ ] [Integration Testing for ASP.NET APIs (1/3) - Basics](https://knowyourtoolset.com/2024/01/integration-testing/)
 - [ ] [Integration Testing for ASP.NET APIs (2/3) - Data](https://knowyourtoolset.com/2024/01/integration-testing-data/)
 - [ ] [Integration Testing for ASP.NET APIs (3/3) - Auth](https://knowyourtoolset.com/2024/01/integration-testing-auth/)
+
 
 ## 아키텍처
 ### 클린 아키텍처 템플릿 소스
