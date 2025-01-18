@@ -63,10 +63,8 @@ Application Architecture
   - Domain: 비즈니스 단위(Biz. Unit)
 - **기술 관심사**
   - Adapter
-    - `Known` 입력 Adapter
-    - ~~`Unknown` 입력 Adapter~~
-    - `Known` 출력 Adapter
-    - `Unknown` 출력 Adapter: 부수 효과(Side Effects)
+    - `Known` 입출력 Adapter
+    - `Unknown` 입출력 Adapter: 부수 효과(Side Effects)
 
 <br/>
 
@@ -117,14 +115,14 @@ Application Architecture
   - 메시지는 입출력을 범주화할 수 있습니다(Command 메시지와 Query 메시지: CQRS 패턴).
 
 ### 메시지 고도화
-![](./.images/Layer.Decorator.KnownIO.png)
-- Known 입출력(Mediator 패턴)은 Decorator 패턴과 조합하여 동적으로 메시지에 새 기능을 추가할 수 있습니다.
+![](./.images/Layer.Pipeline.KnownIO.png)
+- Known 입출력(Mediator 패턴)은 Decorator 패턴(Pipeline)과 조합하여 동적으로 메시지에 새 기능을 추가할 수 있습니다.
   - 예. 메시지 처리 시간 로그
   - 예. 입력 메시지 유효성 검사
   - 예. Command 메시지일 때 트랜잭션 처리(CQRS 패턴)
 
-![](./.images/Layer.Decorator.UnknownIO.png)
-- Unknown 입출력(Strategy 패턴)도 역시 Decorator 패턴과 조합하여 동적으로 새 기능을 추가할 수 있습니다.
+![](./.images/Layer.Pipeline.UnknownIO.png)
+- Unknown 입출력(Strategy 패턴)도 역시 Decorator 패턴(Pipeline)과 조합하여 동적으로 새 기능을 추가할 수 있습니다.
 
 
 ### 메시지 범주화(CQRS)
