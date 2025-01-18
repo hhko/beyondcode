@@ -1,15 +1,12 @@
 [![build](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml/badge.svg)](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml)
 
 > 슬기로운 코드를 만들기 위한 아름다운 여정
-- 솔루션 탐색기는 **도서의 목차**와 같습니다.
+- 소스 코드의 폴더 구성은 **도서의 목차**와 같습니다.
 - 테스트 코드는 **개발자 매뉴얼**입니다.
 
 <br/>
 
-# 아키텍처
-## 아키텍처 맵
-![](./.images/Architecture.Map.Keyword.png)
-![](./.images/Architecture.Map.png)
+# 아키텍처 구성
 
 ## Internal 아키텍처 구성도
 ![](./Part1-Overview/Ch04-InternalArchitecture/.images/Architecture.Internal.png)
