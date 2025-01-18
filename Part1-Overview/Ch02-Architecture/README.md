@@ -124,7 +124,7 @@ Application Architecture
   - 예. Command 메시지일 때 트랜잭션 처리(CQRS 패턴)
 
 ![](./.images/Layer.Decorator.UnknownIO.png)
-- Unknown 입출력(Strategy 패턴)은 역시 Decorator 패턴과 조합하여 동적으로 새 기능을 추가할 수 있습니다.
+- Unknown 입출력(Strategy 패턴)도 역시 Decorator 패턴과 조합하여 동적으로 새 기능을 추가할 수 있습니다.
 
 
 ### 메시지 범주화(CQRS)
