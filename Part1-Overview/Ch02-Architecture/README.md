@@ -118,12 +118,14 @@ Application Architecture
 
 ### 메시지 고도화
 ![](./.images/Layer.Decorator.KnownIO.png)
-- Mediator 패턴은 Decorator 패턴과 조합하여 동적으로 메시지에 새 기능을 추가할 수 있습니다.
+- Known 입출력(Mediator 패턴)은 Decorator 패턴과 조합하여 동적으로 메시지에 새 기능을 추가할 수 있습니다.
   - 예. 메시지 처리 시간 로그
   - 예. 입력 메시지 유효성 검사
   - 예. Command 메시지일 때 트랜잭션 처리(CQRS 패턴)
 
 ![](./.images/Layer.Decorator.UnknownIO.png)
+- Unknown 입출력(Strategy 패턴)은 역시 Decorator 패턴과 조합하여 동적으로 새 기능을 추가할 수 있습니다.
+
 
 ### 메시지 범주화(CQRS)
 ![](./.images/Layer.CQRS.png)
