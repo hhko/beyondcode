@@ -1,6 +1,6 @@
 [![build](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml/badge.svg)](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml)
 
-> 슬기로운 코드를 만들기 위한 아름다운 여정
+> 지혜로운 코드를 만들기 위한 아름다운 여정
 - 소스 코드의 폴더 구조는는 **책의 목차**와 같습니다.
 - 테스트 코드는 **개발자 매뉴얼**입니다.
 
@@ -17,7 +17,6 @@
 <br/>
 
 # 목차
-## 개요
 - Part 0. 세미나
   - [x] [Ch 01. Internal 아키텍처 개요](./Part0-Seminar/Ch01.InternalArchitecture/README.md)
 - Part 1. 개요
