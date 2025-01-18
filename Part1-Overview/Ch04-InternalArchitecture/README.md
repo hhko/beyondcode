@@ -7,9 +7,10 @@
   이를 통해 각 레이어가 독립적으로 동작하면서도 유기적으로 협력할 수 있는 기반을 마련합니다.
 - **유스케이스(Application 레이어)가 모든 레이어를 주관합니다.**
 
-## Internal 아키텍처 세부 범주
+## Internal 아키텍처 범주
 ![](./.images/Architecture.Internal.Categories.png)
 
+## Internal 아키텍처 패키지
 - Application 레이어
   - `MediatR`
     - MediatR.Contracts
