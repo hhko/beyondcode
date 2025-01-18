@@ -15,14 +15,14 @@
 <br/>
 
 ## 아키텍처 정의
-![](./../../.images/Architecture.png)
+![](./../../Part1-Overview/Ch02-Architecture/.images/Architecture.png)
 - [소프트웨어 아키텍처의 중요성](https://www.youtube.com/watch?v=4E1BHTvhB7Y)
 
 <br/>
 
 ## 아키텍처 분류
-![](./../../.images/Architecture.Category.png)
-![](./../../.images/Architecture.Microservices.png)
+![](./../../Part1-Overview/Ch02-Architecture/.images/Architecture.Category.png)
+![](./../../Part1-Overview/Ch02-Architecture/.images/Architecture.Microservices.png)
 
 - **External** 아키텍처: 프로세스 외부, **서비스 배치**
 - **Internal** 아키텍처: 프로세스 내부, **레이어 배치**
@@ -30,7 +30,7 @@
 <br/>
 
 ## 아키텍처 원칙
-![](./../../.images/Architecture.Vs.png)
+![](./../../Part1-Overview/Ch02-Architecture/.images/Architecture.Principle.png)
 
 - 관심사의 분리(Separation of concerns): 기술과 비즈니스를 분리한다.
   - 결정을 내리는 코드: 비즈니스(**순수 함수**: 숨은 입출력이 없는 함수)
