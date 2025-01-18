@@ -29,12 +29,12 @@ Application Architecture
       └─ External Architecture
            └─ 외부 시스템 구성 아키텍처: 예. CNCF Landscape
 ```
-- `Microservices` Architecture = `Internal` Architecture + `External` Architecture
+- **`Application`** Architecture = `Internal` Architecture + `External` Architecture
   ![](./.images/Architecture.Microservices.png)
 
   ※ 출처: [DDD 및 CQRS 패턴을 사용하여 마이크로 서비스에서 비즈니스 복잡성 처리](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/)
 
-### Ch 1.3 아키텍처 역사
+### 아키텍처 역사
 ![](./.images/Architecture.History.png)
 
   ※ 출처: [The Grand Unified Theory of Clean Architecture and  Pyramid ](https://www.youtube.com/watch?v=mzznsq4jCHY)
@@ -44,7 +44,7 @@ Application Architecture
 ## 아키텍처 원칙
 > 아키텍처 원칙: [Separation of concerns](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns)
 
-![](./.images/Architecture.Vs.png)
+![](./.images/Architecture.Principle.png)
 
 ### 관심사의 분리
 - 개발 시 요구사항과 운영 시 로그는 서로 다른 시점이지만, **코드에 대한 관점은 Biz.와 Tech. 관심사 기준으로 같아야 합니다.**
@@ -68,20 +68,27 @@ Application Architecture
     - `Known` 출력 Adapter
     - `Unknown` 출력 Adapter: 부수 효과(Side Effects)
 
-### 레이어 배치
-![](./.images/Layer.Alignment.Known.png)
+<br/>
 
-![](./.images/Layer.Alignment.Unknown.png)
+## 레이어 배치
+
+### 레이어 Known I/O 배치
+
+![](./.images/Layer.Alignment.KnownIO.png)
+
+### 레이어 Unknown I/O 배치
+
+![](./.images/Layer.Alignment.UnknownIO.png)
 
 <br/>
 
 ## 레이어 격리
 
-### 격리 전
+### 레이어 격리 전
 ![](./.images/Layer.Isolation.Before.png)
 - 출력의 변화 영향이 입력까지 전파됩니다.
 
-### 격리 후
+### 레이어 격리 후
 ![](./.images/Layer.Isolation.After.png)
 - 입출력 인터페이스를 활용하여, 입출력 변화의 영향이 Operation 레이어에 전파되지 않도록 차단합니다(Strategy 패턴).
 
@@ -110,13 +117,13 @@ Application Architecture
   - 메시지는 입출력을 범주화할 수 있습니다(Command 메시지와 Query 메시지: CQRS 패턴).
 
 ### 메시지 고도화
-![](./.images/Layer.Decorator.Known.png)
+![](./.images/Layer.Decorator.KnownIO.png)
 - Mediator 패턴은 Decorator 패턴과 조합하여 동적으로 메시지에 새 기능을 추가할 수 있습니다.
   - 예. 메시지 처리 시간 로그
   - 예. 입력 메시지 유효성 검사
   - 예. Command 메시지일 때 트랜잭션 처리(CQRS 패턴)
 
-![](./.images/Layer.Decorator.Unknown.png)
+![](./.images/Layer.Decorator.UnknownIO.png)
 
 ### 메시지 범주화(CQRS)
 ![](./.images/Layer.CQRS.png)

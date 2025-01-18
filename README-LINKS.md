@@ -93,6 +93,10 @@
 ### 문서
 - [ ] [Clean Domain-Driven Design in 10 minutes](https://medium.com/hackernoon/clean-domain-driven-design-in-10-minutes-6037a59c8b7b)
 
+### 소스
+- [ ] [ValueObjectsDemo](https://github.com/ardalis/ValueObjectsDemo)
+  - [treat-primitive-obsession-with-value-objects.pdf](https://github.com/codemash-conference/session-slides/blob/main/2025/slides/treat-primitive-obsession-with-value-objects.pdf)
+
 <br/>
 <br/>
 
