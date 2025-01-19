@@ -51,15 +51,15 @@ jobs:
         with:
           path: .vitepress/dist
 
-  # 배포 작업
-  docs_deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: docs-Deploy
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  # # 배포 작업
+  # docs_deploy:
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   name: docs-Deploy
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4
