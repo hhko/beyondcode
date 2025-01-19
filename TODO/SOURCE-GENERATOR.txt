@@ -71,7 +71,7 @@ public class Xxx : IXxx
       var namespaceDeclaration = classDeclaration.AncestorsAndSelf()
           .OfType<BaseNamespaceDeclarationSyntax>()
           .FirstOrDefault();
-  
+
       return namespaceDeclaration switch
       {
           // 파일 스코프

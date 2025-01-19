@@ -4,7 +4,7 @@ import { type DefaultTheme, defineConfig } from "vitepress";
 export default defineConfig({
   title: "Beyond Code",
   description: "VOC |> DDD |> Architecture",
-  lang: "ko",
+  lang: "ko-KR",
   themeConfig: {
     outline: {
       label: "페이지 내용"

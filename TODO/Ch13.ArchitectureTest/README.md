@@ -26,15 +26,18 @@
 <br/>
 
 ## 레이어 정의
+```
 ![](./.images/Architecture.Layers.png)
 
 ![](./.images/Architecture.Diagram.png)
+```
 
 <br/>
 
 ## AssemblyReference.cs 파일
-
+```
 ![](./.images/AssemblyReference.png)
+```
 
 ```cs
 using System.Reflection;
@@ -123,10 +126,11 @@ public class LayerDependencyTests : ArchitectureBaseTest
 <br/>
 
 ## 레이어 의존성 테스트
-
+```
 ![](./.images/Architecture.TestSolution.png)
 
 ![](./.images/Architecture.Tests.png)
+```
 
 - 테스트 목록
   - DomainLayer_ShouldNotHave_Dependencies_OnAnyOtherLayer
