@@ -24,7 +24,7 @@ concurrency:
 
 jobs:
   # 빌드 작업
-  docs-build:
+  docs_build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -51,15 +51,15 @@ jobs:
         with:
           path: docs/.vitepress/dist
 
-  # 배포 작업
-  docs-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    name: docs-Deploy
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  # # 배포 작업
+  # docs_deploy:
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   name: docs-Deploy
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4
