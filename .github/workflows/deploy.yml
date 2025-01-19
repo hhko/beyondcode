@@ -24,7 +24,7 @@ concurrency:
 
 jobs:
   # 빌드 작업
-  build:
+  docs-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -52,13 +52,13 @@ jobs:
           path: docs/.vitepress/dist
 
   # 배포 작업
-  deploy:
+  docs-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
-    name: Deploy
+    name: docs-Deploy
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
