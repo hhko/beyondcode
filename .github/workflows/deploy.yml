@@ -29,8 +29,6 @@ jobs:
     # 빌드 환경 경우의 수 정의
     strategy:
       matrix:
-        dotnet-version: [ '9.0.x' ]
-        configuration: [ Release ]
         os: [ ubuntu-24.04 ]
 
     # 빌드 환경 지정
@@ -64,7 +62,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .vitepress/dist
+          path: ./.vitepress/dist
 
   # # 배포 작업
   # docs_deploy:
