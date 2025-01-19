@@ -400,3 +400,7 @@ FodyWeavers.xsd
 # 사용자 정의
 .build/
 .logs/
+
+# vitepress
+.vitepress/cache
+.vitepress/dist

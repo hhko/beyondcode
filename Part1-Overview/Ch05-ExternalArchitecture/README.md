@@ -1,6 +1,10 @@
+---
+outline: deep
+---
+
 # External 아키텍처
 
-# External 아키텍처 구성도
+## External 아키텍처 구성도
 > TODO
 
 - External 아키텍처는 **서비스 단위로** 시스템의 책임, 역할, 그리고 협력을 체계적으로 설계합니다.  

@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # 프로그램 환경
 
 ## Chocolately 설치
@@ -24,8 +28,6 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 # 5. choco 버전
 choco -v
 ```
-
-<br/>
 
 ## 프로그램 설치 목록
 1. powershell-core
@@ -107,9 +109,8 @@ dotnet tool install -g dotnet-reportgenerator-globaltool --version 5.3.7
     dotnet tool list -g
 ```
 
-<br/>
-
 ## Docker Desktop
+
 ### 이미지 다운로드
 ```shell
 # nodejs
@@ -143,7 +144,6 @@ docker image ls
 
 ![](./.images/Docker-Insecure-Registries.png)
 
-
 ```json
 {
   "insecure-registries": [
@@ -161,9 +161,8 @@ Server:
   xxx.xxx.co.kr:5005
 ```
 
-<br/>
-
 ## WSL2
+
 ### Ubuntu 다운로드
 버전 | 이미지 파일
 --- | ---
@@ -318,9 +317,9 @@ localhostForwarding=true
 ### WSL2 Docker 통합
 ![](./.images/Wsl-Integration.png)
 
-<br/>
 
 ## SSH
+
 ### SSH 서버(WSL2 Ubuntu 서버)
 ```shell
 # 1. 시스템에 대한 모든 호스트 키를 생성합니다
@@ -392,7 +391,71 @@ cd .ssh
 cat authorized_keys
 ```
 
-<br/>
+## Vitepress 사이트 생성
+```shell
+# https://vitepress.dev/ko/guide/getting-started
+
+# 0. Node.js 18버전 이상 설치
+
+npm show vitepress versions
+npm show vitepress version
+
+# 1. VitePress 설치
+#   - 이전 명령: npm install --save-dev vitepress
+#     -D = --save-dev
+#   - 특정 버전 설치: npm add -D vitepress@1.5.0
+npm add -D vitepress
+#   - 생성 파일
+#     ├─ node_modules
+#     │   └─ ...
+#     ├─ package.json
+#     └─ package-lock.json
+
+# 2. VitePress 프로젝트 초기화
+npx vitepress init
+
+  ┌  Welcome to VitePress!
+  │
+  ◇  Where should VitePress initialize the config? # 현재 경로
+  │  ./
+  │
+  ◇  Site title: # 사이트 제목
+  │  Beyond Code
+  │
+  ◇  Site description: # 사이트 설명
+  │  VOC |> DDD |> Architecture
+  │
+  ◇  Theme: # 사이트 테마
+  │  Default Theme + Customization
+  │
+  ◇  Use TypeScript for config and theme files? # TypeScript 지원
+  │  Yes
+  │
+  ◇  Add VitePress npm scripts to package.json? # 빌드를 위한 스크립트 추가
+  │  Yes
+  │
+  └  Done! Now run npm run docs:dev and start writing.
+
+#   - 생성 파일
+#     ├─ .vitepress
+#     │  ├─ theme
+#     │  │   ├─ index.ts
+#     │  │   └─ style.css
+#     │  └─ config.js
+#     │
+#     ├─ node_modules
+#     │  └─ ...
+#     │
+#     ├─ api-examples.md
+#     ├─ markdown-examples.md
+#     ├─ index.md
+#     │
+#     ├─ package.json
+#     └─ package-lock.json
+
+# 3. VitePress 빌드
+npm run docs:dev
+```
 
 ## Chocolately 주요 명령
 ```shell

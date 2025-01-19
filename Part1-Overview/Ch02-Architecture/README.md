@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # 아키텍처
 
 ## 아키텍처 개요
@@ -39,8 +43,6 @@ Application Architecture
 
   ※ 출처: [The Grand Unified Theory of Clean Architecture and  Pyramid ](https://www.youtube.com/watch?v=mzznsq4jCHY)
 
-<br/>
-
 ## 아키텍처 원칙
 > 아키텍처 원칙: [Separation of concerns](https://learn.microsoft.com/ko-kr/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns)
 
@@ -66,8 +68,6 @@ Application Architecture
     - `Known` 입출력 Adapter
     - `Unknown` 입출력 Adapter: 부수 효과(Side Effects)
 
-<br/>
-
 ## 레이어 배치
 
 ### 레이어 Known I/O 배치
@@ -77,8 +77,6 @@ Application Architecture
 ### 레이어 Unknown I/O 배치
 
 ![](./.images/Layer.Alignment.UnknownIO.png)
-
-<br/>
 
 ## 레이어 격리
 
@@ -90,15 +88,11 @@ Application Architecture
 ![](./.images/Layer.Isolation.After.png)
 - 입출력 인터페이스를 활용하여, 입출력 변화의 영향이 Operation 레이어에 전파되지 않도록 차단합니다(Strategy 패턴).
 
-<br/>
-
 ## 레이어 테스트
 
 ![](./.images/Layer.Isolation.Test.png)
 - 단위 테스트: Biz. 관심사를 테스트합니다.
 - 통합 테스트: Tech. 관심사까지 포함하여 Biz. 관심사를 테스트합니다.
-
-<br/>
 
 ## 레이어 고도화
 

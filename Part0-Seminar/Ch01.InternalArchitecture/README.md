@@ -1,10 +1,12 @@
+---
+outline: deep
+---
+
 # Internal 아키텍처 개요
 
 ## 목표
 - Internal 아키텍처의 레이어와 그 역할을 이해합니다.
 - 아키텍처 트릴레마(캡슐화, 순수성, 성능) 관점에서 각 설계 요소의 필요성과 트레이드 오프를 확인합니다.
-
-<br/>
 
 ## 주요 키워드
 - Internal 아키텍처 & External 아키텍처
@@ -12,13 +14,9 @@
 - 레이어
 - 순수 & 불순 함수
 
-<br/>
-
 ## 아키텍처 정의
 ![](./../../Part1-Overview/Ch02-Architecture/.images/Architecture.png)
 - [소프트웨어 아키텍처의 중요성](https://www.youtube.com/watch?v=4E1BHTvhB7Y)
-
-<br/>
 
 ## 아키텍처 분류
 ![](./../../Part1-Overview/Ch02-Architecture/.images/Architecture.Category.png)
@@ -26,8 +24,6 @@
 
 - **External** 아키텍처: 프로세스 외부, **서비스 배치**
 - **Internal** 아키텍처: 프로세스 내부, **레이어 배치**
-
-<br/>
 
 ## 아키텍처 원칙
 ![](./../../Part1-Overview/Ch02-Architecture/.images/Architecture.Principle.png)
@@ -40,8 +36,6 @@
     - 비즈니스 단위: Domain
     - 비즈니스 흐름: Application
   - 기술 레이어: Adapter
-
-<br/>
 
 ## 아키텍처 트릴레마(trilemma)
 > 세 가지 선택지나 목표 중에서 오직 두 가지만 만족할 수 있고, 나머지 하나는 포기해야 하는 상황을 가리킵니다.  
@@ -111,8 +105,6 @@ public class AuditManager
     }
   }
 ```
-
-<br/>
 
 ## 솔루션 구성
  Level  | Src              | Tests
@@ -204,8 +196,6 @@ public class AuditManager
 ### 프로젝트 의존성 다이어그램
 ![](./.images/Architecture.LayerDiagram.png)
 
-<br/>
-
 ## 레이어별 주요 목표
 > 주요 목표를 달성하기 위한 모든 부가 활동은 `Abstractions` 폴더에 관련 코드를 배치 시킵니다.
 
@@ -257,8 +247,6 @@ Corp.Hello.Api.Adapters.Infrastructure
       ├─...
 
 ```
-
-<br/>
 
 ## Q&A
 - Internal 아키텍처를 주관하는 레이어는?  

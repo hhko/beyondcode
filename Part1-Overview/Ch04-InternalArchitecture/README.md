@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # Internal 아키텍처
 
 ## Internal 아키텍처 구성도
