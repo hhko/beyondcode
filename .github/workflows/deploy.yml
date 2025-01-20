@@ -64,15 +64,24 @@ jobs:
         with:
           path: ./.vitepress/dist
 
-  # # 배포 작업
-  # docs_deploy:
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   name: docs-Deploy
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
+  # 배포 작업
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+
+    name: Deploy
+
+    # 빌드 환경 경우의 수 정의
+    strategy:
+      matrix:
+        os: [ ubuntu-24.04 ]
+
+    # 빌드 환경 지정
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
