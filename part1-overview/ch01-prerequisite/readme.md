@@ -4,6 +4,25 @@ outline: deep
 
 # 프로그램 환경
 
+## 프로그램 목록
+1. chocolately
+1. powershell-core
+1. microsoft-windows-terminal
+1. vscode
+1. git
+1. nodejs-lts
+1. speedscope
+1. wsl2
+1. docker-desktop
+1. dotnet-sdk
+1. k6
+1. dotnet tool
+   - dotnet-counters
+   - dotnet-trace
+   - dotnet-dump
+   - dotnet-gcdump
+   - dotnet-reportgenerator-globaltool
+
 ## Chocolately 설치
 - Chocolatey는 Windows 운영 체제용 패키지 관리자입니다.
 - 소프트웨어 설치, 업그레이드, 구성, 제거 등을 자동화하는 데 사용됩니다.
@@ -29,24 +48,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco -v
 ```
 
-## 프로그램 설치 목록
-1. powershell-core
-1. microsoft-windows-terminal
-1. vscode
-1. git
-1. nodejs-lts
-1. speedscope
-1. wsl2
-1. docker-desktop
-1. dotnet-sdk
-1. k6
-1. dotnet tool
-   - dotnet-counters
-   - dotnet-trace
-   - dotnet-dump
-   - dotnet-gcdump
-   - dotnet-reportgenerator-globaltool
-
+## 프로그램 설치 명령령
 ```shell
 # 1. Powershell-Core: https://community.chocolatey.org/packages/powershell-core/7.4.4#versionhistory
 choco install powershell-core --version 7.4.4 -y

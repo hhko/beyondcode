@@ -79,7 +79,20 @@ export default defineConfig({
 function nav(): DefaultTheme.NavItem[] {
   return [
     { text: '홈', link: '/' },
-    { text: 'README', link: '/part1-overview/ch02-architecture/readme' }
+    { text: 'README',
+      items: [
+        {
+          text: '개요',
+          items: [
+            { text: '프로그램 환경', link: '/part1-overview/ch01-prerequisite/readme' },
+            { text: '아키텍처', link: '/part1-overview/ch02-architecture/readme' },
+            { text: '아키텍처 진단', link: '/part1-overview/ch03-architecturediagnosis/readme' },
+            { text: 'Internal 아키텍처', link: '/part1-overview/ch04-internalarchitecture/readme' },
+            { text: 'External 아키텍처', link: '/part1-overview/ch05-externalarchitecture/readme' }
+          ]
+        },
+      ]
+    }
   ];
 }
 
