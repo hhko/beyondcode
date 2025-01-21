@@ -107,7 +107,7 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: 'Internal 아키텍처',
           items: [
-            { text: '솔루션 구성', link: '/part2-internalarchitecture/ch01-prerequisite/readme' }
+            { text: '솔루션 구성', link: '/part2-solution/ch01-solutionlstructure/readme' }
           ]
         },
       ]
