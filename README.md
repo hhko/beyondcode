@@ -9,7 +9,7 @@
 # 아키텍처 구성
 
 ## Internal 아키텍처 구성도
-![](./Part1-Overview/Ch04-InternalArchitecture/.images/Architecture.Internal.png)
+![](./part1-overview/ch04-internalarchitecture/.images/Architecture.Internal.png)
 
 ## External 아키텍처 구성도
 > TODO
@@ -18,11 +18,11 @@
 
 # 목차
 - Part 0. 세미나
-  - [x] [Ch 01. Internal 아키텍처 개요](./Part0-Seminar/Ch01.InternalArchitecture/README.md)
+  - [x] [Ch 01. Internal 아키텍처 개요](./part0-seminar/ch01.internalarchitecture/readme.md)
 - Part 1. 개요
-  - [x] [Ch 01. 프로그램 환경](./Part1-Overview/Ch01-Prerequisite/README.md)
-  - [x] [Ch 02. 아키텍처](./Part1-Overview/Ch02-Architecture/README.md)
-  - [ ] [Ch 03. 아키텍처 진단](./Part1-Overview/Ch03-ArchitectureDiagnosis/README.md)
-  - [x] [Ch 04. Internal 아키텍처](./Part1-Overview/Ch04-InternalArchitecture/README.md)
-  - [ ] [Ch 05. External 아키텍처](./Part1-Overview/Ch05-ExternalArchitecture/README.md)
+  - [x] [Ch 01. 프로그램 환경](./part1-overview/ch01-prerequisite/readme.md)
+  - [x] [Ch 02. 아키텍처](./part1-overview/ch02-architecture/readme.md)
+  - [ ] [Ch 03. 아키텍처 진단](./part1-overview/ch03-architecturediagnosis/readme.md)
+  - [x] [Ch 04. Internal 아키텍처](./part1-overview/ch04-internalarchitecture/readme.md)
+  - [ ] [Ch 05. External 아키텍처](./part1-overview/ch05-externalarchitecture/readme.md)
 - `TODO`
