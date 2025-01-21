@@ -79,7 +79,7 @@ export default defineConfig({
 function nav(): DefaultTheme.NavItem[] {
   return [
     { text: '홈', link: '/' },
-    { text: 'README', link: '/Part1-Overview/Ch02-Architecture/README' }
+    { text: 'README', link: '/part1-overview/ch02-architecture/readme' }
   ];
 }
 
@@ -91,17 +91,23 @@ function sidebar(): DefaultTheme.Sidebar {
         {
           text: '세미나',
           items: [
-            { text: 'Internal 아키텍처 개요', link: '/Part0-Seminar/Ch01.InternalArchitecture/README' }
+            { text: 'Internal 아키텍처 개요', link: '/part0-seminar/ch01.internalarchitecture/readme' }
           ]
         },
         {
           text: '개요',
           items: [
-            { text: '프로그램 환경', link: '/Part1-Overview/Ch01-Prerequisite/README' },
-            { text: '아키텍처', link: '/Part1-Overview/Ch02-Architecture/README' },
-            { text: '아키텍처 진단', link: '/Part1-Overview/Ch03-ArchitectureDiagnosis/README' },
-            { text: 'Internal 아키텍처', link: '/Part1-Overview/Ch04-InternalArchitecture/README' },
-            { text: 'External 아키텍처', link: '/Part1-Overview/Ch05-ExternalArchitecture/README' }
+            { text: '프로그램 환경', link: '/part1-overview/ch01-prerequisite/readme' },
+            { text: '아키텍처', link: '/part1-overview/ch02-architecture/readme' },
+            { text: '아키텍처 진단', link: '/part1-overview/ch03-architecturediagnosis/readme' },
+            { text: 'Internal 아키텍처', link: '/part1-overview/ch04-internalarchitecture/readme' },
+            { text: 'External 아키텍처', link: '/part1-overview/ch05-externalarchitecture/readme' }
+          ]
+        },
+        {
+          text: 'Internal 아키텍처',
+          items: [
+            { text: '솔루션 구성', link: '/part2-internalarchitecture/ch01-prerequisite/readme' }
           ]
         },
       ]

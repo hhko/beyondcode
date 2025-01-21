@@ -4,19 +4,19 @@ layout: home
 hero:
   name: "VOC |> DDD |> Architecture"
   tagline: 배움은 설렘이다. 배움은 겸손이다. 배움은 이타심이다.
-  image:
-    src: /.images/InternalArchitecture.png
-    alt: Internal Architecture
+  # image:
+  #   src: /.images/InternalArchitecture.png
+  #   alt: Internal Architecture
   actions:
     - theme: brand
       text: 아키텍처
-      link: /Part1-Overview/Ch02-Architecture/README
+      link: /part1-overview/ch02-architecture/readme
     - theme: alt
       text: Internal 아키텍처
-      link: /Part1-Overview/Ch04-InternalArchitecture/README
+      link: /part1-overview/ch04-internalarchitecture/readme
     - theme: alt
       text: External 아키텍처
-      link: /Part1-Overview/Ch05-ExternalArchitecture/README
+      link: /part1-overview/ch05-externalarchitecture/readme
 
 features:
   - icon: 😍
