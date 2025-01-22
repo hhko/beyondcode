@@ -1,0 +1,18 @@
+services:
+  조직.프로젝트.infra.wiki:
+    image: 조직/프로젝트/infra/wiki:${INFRA_VERSION}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 조직.프로젝트.infra.wiki
+    hostname: 조직.프로젝트.infra.wiki
+    restart: always
+    environment:
+      NODE_ENV: production
+    ports:
+      - ${WIKI_PORT}:3000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "7"

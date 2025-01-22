@@ -124,6 +124,17 @@ function sidebar(): DefaultTheme.Sidebar {
           ]
         },
       ]
+    },
+    {
+      text: 'SSG',
+      items: [
+        {
+          text: 'Docusaurus',
+          items: [
+            { text: 'Docusaurus 구축', link: '/tutorials/ssg/docusaurus/readme' }
+          ]
+        },
+      ]
     }
   ];
 }
