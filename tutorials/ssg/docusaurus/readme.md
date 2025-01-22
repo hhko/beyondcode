@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # Docusaurs
 
 ## 실행
