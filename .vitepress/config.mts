@@ -130,6 +130,12 @@ function sidebar(): DefaultTheme.Sidebar {
       items: [
         { text: 'Docusaurus', link: '/tutorials/ssg/docusaurus/readme' }
       ]
+    },
+    {
+      text: 'observability',
+      items: [
+        { text: '로그', link: 'tutorials/observability/logs/readme' }
+      ]
     }
   ];
 }
