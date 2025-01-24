@@ -126,15 +126,26 @@ function sidebar(): DefaultTheme.Sidebar {
       ]
     },
     {
-      text: 'SSG',
+      text: 'INFRA',
       items: [
-        { text: 'Docusaurus', link: '/tutorials/ssg/docusaurus/readme' }
-      ]
-    },
-    {
-      text: 'observability',
-      items: [
-        { text: '로그', link: 'tutorials/observability/logs/readme' }
+        { 
+          text: '도커',
+          items: [
+            { text: '설치', link: 'infra/docker/install/readme' }
+          ]
+        },
+        {
+          text: '관찰 가능성',
+          items: [
+            { text: '로그', link: 'infra/observability/logs/readme' }
+          ]
+        },
+        {
+          text: '사이트 생성기',
+          items: [
+            { text: 'Docusaurus', link: '/infra/ssg/docusaurus/readme' }
+          ]
+        }
       ]
     }
   ];

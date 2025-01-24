@@ -1,6 +1,11 @@
+---
+outline: deep
+---
+
 # 로그
 
 ## 개요
+
 ### 구조적 로그
 ![](https://messagetemplates.org/img/MessageTemplates.png)
 - 출처: [Message Templates](https://messagetemplates.org/)
