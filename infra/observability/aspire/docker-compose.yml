@@ -1,0 +1,33 @@
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+services:
+  #
+  # aspire
+  #
+  {조직}.{프로젝트}.infra.aspire:
+    env_file: .env
+    image: {조직}/{프로젝트}/infra/aspire:${INFRA_TAG}
+    build:
+      context: .
+      dockerfile: dockerfiles/aspire/Dockerfile
+    container_name: {조직}.{프로젝트}.infra.aspire
+    hostname: {조직}.{프로젝트}.infra.aspire
+    restart: always
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+    networks:
+      - net
+    ports:
+      - 4317:18889    # OTLP gRPC receiver: 4317
+      - 18888:18888   # Aspire 대시보드
+    volumes:
+      - /etc/localtime:/etc/localtime
+    logging: *logging-common
+
+networks:
+  net:
+    driver: bridge

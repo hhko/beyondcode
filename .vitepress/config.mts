@@ -126,18 +126,30 @@ function sidebar(): DefaultTheme.Sidebar {
       ]
     },
     {
+      text: 'TUTORIAL',
+      items: [
+        {
+          text: 'observability',
+          items: [
+            { text: '로그', link: 'tutorials\observability\logs\readme' }
+          ]
+        },
+      ]
+    },
+    {
       text: 'INFRA',
       items: [
-        { 
-          text: '도커',
+        {
+          text: 'Docker',
           items: [
             { text: '설치', link: 'infra/docker/install/readme' }
           ]
         },
         {
-          text: '관찰 가능성',
+          text: 'observability',
           items: [
-            { text: '로그', link: 'infra/observability/logs/readme' }
+            { text: 'Aspire', link: 'infra/observability/aspire/readme' },
+            { text: 'Otel-Collector', link: 'infra\observability\otel-collector\readme' }
           ]
         },
         {
