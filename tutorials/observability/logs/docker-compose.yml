@@ -1,0 +1,76 @@
+x-logging-common: &logging-common
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "7"
+
+services:
+  #
+  # service
+  #
+  helloworld:
+    env_file: .env
+    image: {조직}/{프로젝트}/helloworld
+    build:
+      context: .
+      dockerfile: Helloworld/Dockerfile
+    container_name: {조직}.{프로젝트}.helloworld
+    hostname: {조직}.{프로젝트}.helloworld
+    restart: always
+    networks:
+      - net
+
+  #
+  # aspire
+  #
+  {조직}.{프로젝트}.infra.aspire:
+    env_file: .env
+    image: {조직}/{프로젝트}/infra/aspire:${INFRA_TAG}
+    build:
+      context: .
+      dockerfile: dockerfiles/aspire/Dockerfile
+    container_name: {조직}.{프로젝트}.infra.aspire
+    hostname: {조직}.{프로젝트}.infra.aspire
+    restart: always
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+    networks:
+      - net
+    ports:
+      - 18889:18889   # OTLP gRPC receiver: 4317
+      - 18888:18888   # Aspire 대시보드
+    volumes:
+      - /etc/localtime:/etc/localtime
+    logging: *logging-common
+
+  #
+  # otel-collector
+  #
+  {조직}.{프로젝트}.infra.otel-collector:
+    env_file: .env
+    image: {조직}/{프로젝트}/infra/otel-collector:${INFRA_TAG}
+    build:
+      context: .
+      dockerfile: dockerfiles/otel-collector/Dockerfile
+    container_name: {조직}.{프로젝트}.infra.otel-collector
+    hostname: {조직}.{프로젝트}.infra.otel-collector
+    restart: always
+    command: ["--config=/etc/otel-collector-config.yaml", "${OTELCOL_ARGS}"]
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./config/otel-collector/config.yaml:/etc/otel-collector-config.yaml
+      # Linux Only
+      # 호스트 루트 파일 시스템 (/) 전체를 컨테이너에 마운트합니다.
+      #- /:/hostfs
+    networks:
+      - net
+    ports:
+      - "9999:8899"   # Prometheus exporter metrics
+      # - "13133:13133" # health_check extension
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP HTTP receiver
+    logging: *logging-common
+
+networks:
+  net:
+    driver: bridge
