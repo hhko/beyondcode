@@ -50,11 +50,13 @@ services:
     networks:
       - net
     ports:
-      - "9999:8899"   # Prometheus exporter metrics
+      - "8899:8899"   # Prometheus exporter metrics
       # - "13133:13133" # health_check extension
       - "4317:4317"   # OTLP gRPC receiver
       - "4318:4318"   # OTLP HTTP receiver
     logging: *logging-common
+    stdin_open: true
+    tty: true
 
 networks:
   net:

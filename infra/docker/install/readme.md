@@ -7,22 +7,14 @@ outline: deep
 ## 폴더 구성
 ```shell
 # 폴더 구성
-/home/{조직}
-    /{프로젝트}
-        /instll
-            /docker-27.3.1              # 도커 설치 파일
-            /docker-27.3.1-plugin       # 도커 Plugin 설치 파일
-            /docker-compose-2.29.7      # 도커 컴포즈 설치 파일
-        /data
-            /docker                     # 도커 볼륨 경로: /var/lib/docker 이전 경로
-        /images
-            /1.0.1-poc.3.2024.11.12
-            /1.0.1-poc.3.2024.11.12-infra
-
-        .env
-        docker-compose.yml
-        docker-compose.infra.yml
-        docker-compose.install.sh
+/home/{조직}/
+    {프로젝트}
+        packages/                       # 패키지 오프라인 설치 파일
+            docker-27.3.1/              # 도커 설치 파일
+            docker-27.3.1-plugin/       # 도커 Plugin 설치 파일
+            docker-compose-2.29.7/      # 도커 컴포즈 설치 파일
+        lib/
+            docker/                     # 도커 볼륨 경로: /var/lib/docker
 ```
 
 ## 오프라인 도커 설치 준비
@@ -69,30 +61,31 @@ apt download \
       | grep "^\w" \
       | sort -u)
 ```
-1. containerd.io_1.7.22-1_amd64.deb
-1. docker-ce-cli_5%3a27.3.1-1~ubuntu.22.04~jammy_amd64.deb
-1. docker-ce_5%3a27.3.1-1~ubuntu.22.04~jammy_amd64.deb
-1. gcc-12-base_12.3.0-1ubuntu1~22.04_amd64.deb
-1. iptables_1.8.7-1ubuntu5.2_amd64.deb
-1. libc6_2.35-0ubuntu3.8_amd64.deb
-1. libcap2_1%3a2.44-1ubuntu0.22.04.1_amd64.deb
-1. libcrypt1_1%3a4.4.27-1_amd64.deb
-1. libgcc-s1_12.3.0-1ubuntu1~22.04_amd64.deb
-1. libgcrypt20_1.9.4-3ubuntu3_amd64.deb
-1. libgpg-error0_1.43-3_amd64.deb
-1. libip4tc2_1.8.7-1ubuntu5.2_amd64.deb
-1. libip6tc2_1.8.7-1ubuntu5.2_amd64.deb
-1. liblz4-1_1.9.3-2build2_amd64.deb
-1. liblzma5_5.2.5-2ubuntu1_amd64.deb
-1. libmnl0_1.0.4-3build2_amd64.deb
-1. libnetfilter-conntrack3_1.0.9-1_amd64.deb
-1. libnfnetlink0_1.0.1-3build3_amd64.deb
-1. libnftnl11_1.2.1-1build1_amd64.deb
-1. libseccomp2_2.5.3-2ubuntu2_amd64.deb
-1. libsystemd0_249.11-0ubuntu3.12_amd64.deb
-1. libxtables12_1.8.7-1ubuntu5.2_amd64.deb
-1. libzstd1_1.4.8+dfsg-3build1_amd64.deb
-1. netbase_6.3_all.deb
+- 다운로드 파일
+  - containerd.io_1.7.22-1_amd64.deb
+  - docker-ce-cli_5%3a27.3.1-1~ubuntu.22.04~jammy_amd64.deb
+  - docker-ce_5%3a27.3.1-1~ubuntu.22.04~jammy_amd64.deb
+  - gcc-12-base_12.3.0-1ubuntu1~22.04_amd64.deb
+  - iptables_1.8.7-1ubuntu5.2_amd64.deb
+  - libc6_2.35-0ubuntu3.8_amd64.deb
+  - libcap2_1%3a2.44-1ubuntu0.22.04.1_amd64.deb
+  - libcrypt1_1%3a4.4.27-1_amd64.deb
+  - libgcc-s1_12.3.0-1ubuntu1~22.04_amd64.deb
+  - libgcrypt20_1.9.4-3ubuntu3_amd64.deb
+  - libgpg-error0_1.43-3_amd64.deb
+  - libip4tc2_1.8.7-1ubuntu5.2_amd64.deb
+  - libip6tc2_1.8.7-1ubuntu5.2_amd64.deb
+  - liblz4-1_1.9.3-2build2_amd64.deb
+  - liblzma5_5.2.5-2ubuntu1_amd64.deb
+  - libmnl0_1.0.4-3build2_amd64.deb
+  - libnetfilter-conntrack3_1.0.9-1_amd64.deb
+  - libnfnetlink0_1.0.1-3build3_amd64.deb
+  - libnftnl11_1.2.1-1build1_amd64.deb
+  - libseccomp2_2.5.3-2ubuntu2_amd64.deb
+  - libsystemd0_249.11-0ubuntu3.12_amd64.deb
+  - libxtables12_1.8.7-1ubuntu5.2_amd64.deb
+  - libzstd1_1.4.8+dfsg-3build1_amd64.deb
+  - netbase_6.3_all.deb
 
 ### 도커 Plugin 파일 다운로드
 ```shell
@@ -106,10 +99,11 @@ sudo curl -L "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/a
 sudo curl -L "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb" -o ./docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb
 ```
 
-1. docker-buildx-plugin_0.17.1-1~ubuntu.22.04~jammy_amd64.deb
-1. docker-ce-rootless-extras_27.3.1-1~ubuntu.22.04~jammy_amd64.deb
-1. docker-compose-plugin_2.29.7-1~ubuntu.22.04~jammy_amd64.deb
-1. docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb
+- 다운로드 파일
+  - docker-buildx-plugin_0.17.1-1~ubuntu.22.04~jammy_amd64.deb
+  - docker-ce-rootless-extras_27.3.1-1~ubuntu.22.04~jammy_amd64.deb
+  - docker-compose-plugin_2.29.7-1~ubuntu.22.04~jammy_amd64.deb
+  - docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb
 
 ### 도커 컴포즈 파일 다운로드
 ```shell
@@ -120,7 +114,8 @@ sudo curl -L "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/a
 https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-linux-x86_64
 sudo curl -L "https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-$(uname -s)-$(uname -m)" -o ./docker-compose
 ```
-- docker-compose
+- 다운로드 파일
+  - docker-compose
 
 
 ## 오프라인 도커 설치
@@ -172,12 +167,12 @@ sudo systemctl status docker
 df -h
 findmnt -T /lib/systemd/system
 
-mkdir -p ~/{프로젝트}/data/docker
-findmnt -T ~/{프로젝트}/data/docker
+mkdir -p ~/{프로젝트}/lib/docker
+findmnt -T ~/{프로젝트}/lib/docker
 
-# /home/mirero/{프로젝트}/data/docker 경로 확인
+# /home/mirero/{프로젝트}/lib/docker 경로 확인
 sudo vi /lib/systemd/system/docker.service
-ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --data-root=/home/mirero/{프로젝트}/data/docker
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --data-root=/home/mirero/{프로젝트}/lib/docker
 
 sudo systemctl stop docker
 sudo systemctl daemon-reload
