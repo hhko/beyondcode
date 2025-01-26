@@ -10,6 +10,13 @@ outline: deep
 - Internal 아키텍처는 시스템을 구성하는 **레이어별로** 책임, 역할, 그리고 협력을 명확히 정의하고 구조화합니다. 이를 통해 각 레이어가 독립적으로 동작하면서도 유기적으로 협력할 수 있는 기반을 마련합니다.
 - **유스케이스(Application 레이어: 비즈니스 흐름)가 모든 레이어를 주관합니다.**
 
+## Internal 아키텍처 메시지 흐름
+![](./../ch02-architecture/.images/Layer.CQRS.Flow.png)
+
+- 입력 메시지를 데이터 수정 유/무로 Command과 Query로 분리합니다.
+  - Command일 때는 ORM을, Query일 때는 SQL을 사용합니다.
+  - Query의 경우 ORM 대신 SQL을 사용함으로써 불필요한 DTO 사용을 줄일 수 있고, 여러 테이블을 참조해야 하는 복잡한 SQL Query를 DB 담당자와 더 효율적으로 소통하고 관리할 수 있습니다.
+
 ## Internal 아키텍처 범주
 ![](./.images/Architecture.Internal.Categories.png)
 
