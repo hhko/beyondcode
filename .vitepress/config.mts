@@ -129,9 +129,9 @@ function sidebar(): DefaultTheme.Sidebar {
       text: 'TUTORIAL',
       items: [
         {
-          text: 'observability',
+          text: 'Observability',
           items: [
-            { text: '로그', link: 'tutorials\observability\logs\readme' }
+            { text: '로그', link: 'tutorials/observability/logs/readme' }
           ]
         },
       ]
@@ -146,10 +146,10 @@ function sidebar(): DefaultTheme.Sidebar {
           ]
         },
         {
-          text: 'observability',
+          text: 'Observability',
           items: [
             { text: 'Aspire', link: 'infra/observability/aspire/readme' },
-            { text: 'Otel-Collector', link: 'infra\observability\otel-collector\readme' }
+            { text: 'Otel-Collector', link: 'infra/observability/otel-collector/readme' }
           ]
         },
         {
