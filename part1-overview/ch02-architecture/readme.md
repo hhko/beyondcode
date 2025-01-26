@@ -66,7 +66,7 @@ Application Architecture
 
 ![](./.images/Architecture.Principles.SoC.png)
 
-### 의존성 역전전
+### 의존성 역전
 ![](./.images/Architecture.Principles.InvertedDenpendencyGraph.png)
 
 ### 레이어
