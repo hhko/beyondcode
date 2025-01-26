@@ -26,7 +26,7 @@ outline: deep
 - **Internal** 아키텍처: 프로세스 내부, **레이어 배치**
 
 ## 아키텍처 원칙
-![](./../../part1-overview/ch02-architecture/.images/Architecture.Principle.png)
+![](./../../part1-overview/ch02-architecture/.images/Architecture.Principles.png)
 
 - 관심사의 분리(Separation of concerns): 기술과 비즈니스를 분리한다.
   - 결정을 내리는 코드: 비즈니스(**순수 함수**: 숨은 입출력이 없는 함수)
