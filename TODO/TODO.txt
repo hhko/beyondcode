@@ -1,3 +1,21 @@
+- [x] 복수 상단 메뉴 구성: 개별 사이드바
+- [ ] Getting Started: Domain-Driven Design, 3장 Exploring a Complex Domain
+  ```
+  https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design
+  https://github.com/Dometrain/getting-started-domain-driven-design
+  ```
+
+
+
+
+
+
+
+
+
+
+---
+
 - [ ] README.md PPT 정리
 - [ ] README.md 목차 정리
 - [ ] 템플릿 학습

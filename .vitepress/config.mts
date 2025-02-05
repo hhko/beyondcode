@@ -32,6 +32,46 @@ export default defineConfig({
     nav: nav(),
 
     sidebar: sidebar(),
+    // sidebar: {
+    //   '/01-architecture/': [
+    //     {
+    //       text: '아키텍처',
+    //       items: [
+    //         {
+    //           text: '개요',
+    //           items: [
+    //             { text: '개발 환경', link: '/01-architecture/part1-overview/ch01-prerequisite/' },
+    //             { text: '아키텍처', link: '/01-architecture/part1-overview/ch02-architecture/' },
+    //             { text: '아키텍처 진단', link: '/01-architecture/part1-overview/ch03-architecture-diagnosis/' },
+    //             { text: 'Internal 아키텍처', link: '/01-architecture/part1-overview/ch04-internal-architecture/' },
+    //             { text: 'External 아키텍처', link: '/01-architecture/part1-overview/ch05-external-architecture/' }
+    //           ]
+    //         },
+    //       ],
+    //     },
+    //   ],
+    //   '/02-seminar/': [
+    //     {
+    //       text: '세미나',
+    //       items: [
+    //         { text: 'Internal 아키텍처', link: '/02-seminar/ch01-internal-architecture/'}
+    //       ]
+    //     }
+    //   ],
+    //   '/03-tutorial/': [
+    //     {
+    //       text: '튜토리얼',
+    //       items: [
+    //         {
+    //           text: 'DDD 기본',
+    //           items: [
+    //             { text: '도메인 탐색', link: '/03-tutorial/ddd-basic/ch01-exploring-a-complex-domain/'}
+    //           ]
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // },
 
     // search: {
     //   provider: "local",
@@ -79,89 +119,151 @@ export default defineConfig({
 function nav(): DefaultTheme.NavItem[] {
   return [
     { text: '홈', link: '/' },
-    { text: 'README',
-      items: [
-        {
-          text: '개요',
-          items: [
-            { text: '프로그램 환경', link: '/part1-overview/ch01-prerequisite/readme' },
-            { text: '아키텍처', link: '/part1-overview/ch02-architecture/readme' },
-            { text: '아키텍처 진단', link: '/part1-overview/ch03-architecturediagnosis/readme' },
-            { text: 'Internal 아키텍처', link: '/part1-overview/ch04-internalarchitecture/readme' },
-            { text: 'External 아키텍처', link: '/part1-overview/ch05-externalarchitecture/readme' }
-          ]
-        },
-      ]
-    }
+    { text: '아키텍처', link: '/01-architecture/part1-overview/ch02-architecture/'},
+    { text: '세미나', link: '/02-seminar/ch01-internal-architecture/'},
+    { text: '튜토리얼', link: '/03-tutorial/ddd-basic/ch01-exploring-a-complex-domain/' },
   ];
+}
+function sidebar(): DefaultTheme.Sidebar {
+  return {
+    '/01-architecture/': [
+      {
+        text: '아키텍처',
+        items: [
+          {
+            text: '개요',
+            items: [
+              { text: '개발 환경', link: '/01-architecture/part1-overview/ch01-prerequisite/' },
+              { text: '아키텍처', link: '/01-architecture/part1-overview/ch02-architecture/' },
+              { text: '아키텍처 진단', link: '/01-architecture/part1-overview/ch03-architecture-diagnosis/' },
+              { text: 'Internal 아키텍처', link: '/01-architecture/part1-overview/ch04-internal-architecture/' },
+              { text: 'External 아키텍처', link: '/01-architecture/part1-overview/ch05-external-architecture/' }
+            ]
+          },
+        ],
+      },
+    ],
+    '/02-seminar/': [
+      {
+        text: '세미나',
+        items: [
+          { text: 'Internal 아키텍처', link: '/02-seminar/ch01-internal-architecture/'}
+        ]
+      }
+    ],
+    '/03-tutorial/': [
+      {
+        text: '튜토리얼',
+        items: [
+          {
+            text: 'DDD 기본',
+            items: [
+              { text: '도메인 탐색', link: '/03-tutorial/ddd-basic/ch01-exploring-a-complex-domain/'}
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
 
-function sidebar(): DefaultTheme.Sidebar {
-  return [
-    {
-      text: 'README',
-      items: [
-        {
-          text: '세미나',
-          items: [
-            { text: 'Internal 아키텍처 개요', link: '/part0-seminar/ch01.internalarchitecture/readme' }
-          ]
-        },
-        {
-          text: '개요',
-          items: [
-            { text: '프로그램 환경', link: '/part1-overview/ch01-prerequisite/readme' },
-            { text: '아키텍처', link: '/part1-overview/ch02-architecture/readme' },
-            { text: '아키텍처 진단', link: '/part1-overview/ch03-architecturediagnosis/readme' },
-            { text: 'Internal 아키텍처', link: '/part1-overview/ch04-internalarchitecture/readme' },
-            { text: 'External 아키텍처', link: '/part1-overview/ch05-externalarchitecture/readme' }
-          ]
-        },
-        {
-          text: 'Internal 아키텍처',
-          items: [
-            { text: '솔루션 구성', link: '/part2-solution/ch01-solutionlstructure/readme' }
-          ]
-        },
-      ]
-    },
-    {
-      text: 'TUTORIAL',
-      items: [
-        {
-          text: 'Observability',
-          items: [
-            { text: '로그', link: 'tutorials/observability/logs/readme' }
-          ]
-        },
-      ]
-    },
-    {
-      text: 'INFRA',
-      items: [
-        {
-          text: 'Docker',
-          items: [
-            { text: '설치', link: 'infra/docker/install/readme' }
-          ]
-        },
-        {
-          text: 'Observability',
-          items: [
-            { text: 'Aspire', link: 'infra/observability/aspire/readme' },
-            { text: 'Otel-Collector', link: 'infra/observability/otel-collector/readme' }
-          ]
-        },
-        {
-          text: '사이트 생성기',
-          items: [
-            { text: 'Docusaurus', link: '/infra/ssg/docusaurus/readme' }
-          ]
-        }
-      ]
-    }
-  ];
-}
+// function nav(): DefaultTheme.NavItem[] {
+//   return [
+//     { text: '홈', link: '/' },
+//     { text: 'README',
+//       items: [
+//         {
+//           text: '개요',
+//           items: [
+//             { text: '프로그램 환경', link: '/part1-overview/ch01-prerequisite/readme' },
+//             { text: '아키텍처', link: '/part1-overview/ch02-architecture/readme' },
+//             { text: '아키텍처 진단', link: '/part1-overview/ch03-architecturediagnosis/readme' },
+//             { text: 'Internal 아키텍처', link: '/part1-overview/ch04-internalarchitecture/readme' },
+//             { text: 'External 아키텍처', link: '/part1-overview/ch05-externalarchitecture/readme' }
+//           ]
+//         },
+//       ]
+//     },
+//     { text: '튜토리얼',
+//       items: [
+//         {
+//           text: 'DDD 기본',
+//           items: [
+//             { text: '도메인 레이어', link: '/tutorials/ddd-baisc/ch01-domain/readme' },
+//           ]
+//         },
+//       ]
+//     }
+//   ];
+// }
+
+// function sidebar(): DefaultTheme.Sidebar {
+//   return [
+//     '/README/': {
+//         text: 'README',
+//         items: [
+//           {
+//             text: '세미나',
+//             items: [
+//               { text: 'Internal 아키텍처 개요', link: '/part0-seminar/ch01.internalarchitecture/readme' }
+//             ]
+//           },
+//           {
+//             text: '개요',
+//             items: [
+//               { text: '프로그램 환경', link: '/part1-overview/ch01-prerequisite/readme' },
+//               { text: '아키텍처', link: '/part1-overview/ch02-architecture/readme' },
+//               { text: '아키텍처 진단', link: '/part1-overview/ch03-architecturediagnosis/readme' },
+//               { text: 'Internal 아키텍처', link: '/part1-overview/ch04-internalarchitecture/readme' },
+//               { text: 'External 아키텍처', link: '/part1-overview/ch05-externalarchitecture/readme' }
+//             ]
+//           },
+//           {
+//             text: 'Internal 아키텍처',
+//             items: [
+//               { text: '솔루션 구성', link: '/part2-solution/ch01-solutionlstructure/readme' }
+//             ]
+//           },
+//         ]
+//       },
+//       {
+//         text: 'TUTORIAL',
+//         items: [
+//           {
+//             text: 'Observability',
+//             items: [
+//               { text: '로그', link: 'tutorials/observability/logs/readme' }
+//             ]
+//           },
+//         ]
+//       },
+//       {
+//         text: 'INFRA',
+//         items: [
+//           {
+//             text: 'Docker',
+//             items: [
+//               { text: '설치', link: 'infra/docker/install/readme' }
+//             ]
+//           },
+//           {
+//             text: 'Observability',
+//             items: [
+//               { text: 'Aspire', link: 'infra/observability/aspire/readme' },
+//               { text: 'Otel-Collector', link: 'infra/observability/otel-collector/readme' }
+//             ]
+//           },
+//           {
+//             text: '사이트 생성기',
+//             items: [
+//               { text: 'Docusaurus', link: '/infra/ssg/docusaurus/readme' }
+//             ]
+//           }
+//         ]
+//       }
+//     ]
+//   ];
+// }
 
 export const search: DefaultTheme.LocalSearchOptions["locales"] = {
   root: {
