@@ -15,7 +15,7 @@ outline: deep
 - 순수 & 불순 함수
 
 ## 아키텍처 정의
-![](./../../part1-overview/ch02-architecture/.images/Architecture.png)
+![](./../../01-architecture/part1-overview/ch02-architecture/.images/Architecture.png)
 - [소프트웨어 아키텍처의 중요성](https://www.youtube.com/watch?v=4E1BHTvhB7Y)
 
 ## 아키텍처 분류
