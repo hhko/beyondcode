@@ -95,6 +95,7 @@
 
 ### 소스
 - [ ] **[ing-ddd](https://github.com/kgrzybek/ing-ddd)**
+- [ ] **[ddd-guestbook](https://github.com/ardalis/ddd-guestbook)**
 - [ ] [ValueObjectsDemo](https://github.com/ardalis/ValueObjectsDemo)
 - [ ] [ValueObjectsDemo](https://github.com/ardalis/ValueObjectsDemo)
   - [treat-primitive-obsession-with-value-objects.pdf](https://github.com/codemash-conference/session-slides/blob/main/2025/slides/treat-primitive-obsession-with-value-objects.pdf)
@@ -140,7 +141,6 @@
 - [ ] [SharedKernelSample](https://github.com/NimblePros/SharedKernelSample)
   - Domain과 Application 레이어 구현을 위한 기본 타입 기본 구현과 테스트 참고
 - [ ] [modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
-- [ ] [ddd-guestbook](https://github.com/ardalis/ddd-guestbook)
 - [ ] [CqrsInPractice](https://github.com/vkhorikov/CqrsInPractice)
 
 ### 아키텍처 이해

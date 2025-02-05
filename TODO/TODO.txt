@@ -1,6 +1,59 @@
 - [ ] README.md PPT 정리
 - [ ] README.md 목차 정리
 - [ ] 템플릿 학습
+
+https://cfrenzel.com/dotnet-new-templating-nuget/
+https://github.com/dotnet/templating/wiki/Post-Action-Registry#add-projects-to-a-solution-file
+
+동영상: https://www.youtube.com/watch?v=rdWZo5PD9Ek
+
+```
+mkdir MyCustomTemplate
+cd MyCustomTemplate
+
+dotnet new sln -n MySolution
+
+dotnet new webapi -n MySolution.Api
+dotnet new classlib -n MySolution.Core
+dotnet new xunit -n MySolution.Tests
+
+dotnet sln add MySolution.Api/MySolution.Api.csproj
+dotnet sln add MySolution.Core/MySolution.Core.csproj
+dotnet sln add MySolution.Tests/MySolution.Tests.csproj
+
+dotnet add MySolution.Api/MySolution.Api.csproj reference MySolution.Core/MySolution.Core.csproj
+dotnet add MySolution.Tests/MySolution.Tests.csproj reference MySolution.Core/MySolution.Core.csproj
+
+
+mkdir -p .template.config
+
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "YourName",
+  "classifications": [ "Web", "API", "Solution" ],
+  "identity": "MySolution.Template",
+  "name": "My Custom .NET Solution Template",
+  "shortName": "mysln",
+  "sourceName": "MySolution",
+  "preferNameDirectory": true
+}
+
+  "shortName": "mysln",
+  "sourceName": "MySolution",
+  "preferNameDirectory": true : dotnet new mysln -n NewProject 실행 시 NewProject 폴더가 자동 생성됨
+
+dotnet clean
+rm -rf bin obj
+
+
+dotnet new --install .
+dotnet new --list
+
+dotnet new mysln -n NewProject
+dotnet new --uninstall MySolution.Template
+
+```
+
 ----
 - [ ] [Microsoft.CodeAnalysis.PublicApiAnalyzers](https://github.com/dotnet/roslyn-analyzers/blob/main/src/PublicApiAnalyzers/PublicApiAnalyzers.Help.md)
   - https://github.com/dotnet/roslyn-analyzers/tree/main/src/PublicApiAnalyzers
