@@ -10,13 +10,10 @@ hero:
   actions:
     - theme: brand
       text: 아키텍처
-      link: /part1-overview/ch02-architecture/readme
+      link: /01-architecture\part1-overview\ch02-architecture/
     - theme: alt
       text: Internal 아키텍처
-      link: /part1-overview/ch04-internalarchitecture/readme
-    - theme: alt
-      text: External 아키텍처
-      link: /part1-overview/ch05-externalarchitecture/readme
+      link: /01-architecture\part1-overview\ch04-internal-architecture/
 
 features:
   - icon: 😍
