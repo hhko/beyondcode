@@ -4,9 +4,9 @@
   https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design
   https://github.com/Dometrain/getting-started-domain-driven-design
   ```
-
-
-
+- [x] 도메인 불변 규칙
+- [ ] vitepress 이미지 확대
+- [ ] vitepress README.md -> /README 없이 /로 처리할 수 있나?
 
 
 
