@@ -2,4 +2,4 @@
 
 ## 도메인 불변 조건
 
-![](./.images/Invariants.png){medium-zoom}
+![](./.images/Invariants.png)
