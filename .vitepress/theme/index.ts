@@ -2,7 +2,10 @@
 import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import mediumZoom from 'medium-zoom';
+import 'viewerjs/dist/viewer.min.css';
+import imageViewer from 'vitepress-plugin-image-viewer';
+import vImageViewer from 'vitepress-plugin-image-viewer/lib/vImageViewer.vue';
+import { useRoute } from 'vitepress';
 import './style.css'
 
 export default {
@@ -14,11 +17,12 @@ export default {
   },
   enhanceApp({ app, router, siteData }) {
     // ...
-    router.onAfterRouteChanged = () => {
-      mediumZoom('.main img', {
-        margin: 100,  // 이미지와 화면의 여백 설정
-        background: '#000',  // 확대 시 배경색
-      });
-    };
+    app.component('vImageViewer', vImageViewer);
   },
+  setup() {
+    // Get route
+    const route = useRoute();
+    // Using
+    imageViewer(route);
+  }
 } satisfies Theme

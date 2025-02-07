@@ -464,7 +464,8 @@ npm install medium-zoom
 npm list
 ```
 
-- .vitepress\theme\index.ts
+- `.vitepress\theme\index.ts`
+
 ```ts
 import mediumZoom from 'medium-zoom';
 
@@ -482,7 +483,8 @@ export default {
 } satisfies Theme
 ```
 
-- .vitepress\theme\style.css
+- `.vitepress\theme\style.css`
+
 ```css
 .medium-zoom-overlay {
   z-index: 1000;
@@ -491,6 +493,41 @@ export default {
 .medium-zoom-image {
   z-index: 1001;
 }
+```
+
+```shell
+# https://github.com/T-miracle/vitepress-plugin-image-viewer
+npm i vitepress-plugin-image-viewer
+
+# - `.vitepress\theme\index.ts`
+// https://vitepress.dev/guide/custom-theme
+import { h } from 'vue'
+import type { Theme } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import 'viewerjs/dist/viewer.min.css';
+import imageViewer from 'vitepress-plugin-image-viewer';
+import vImageViewer from 'vitepress-plugin-image-viewer/lib/vImageViewer.vue';
+import { useRoute } from 'vitepress';
+import './style.css'
+
+export default {
+  extends: DefaultTheme,
+  Layout: () => {
+    return h(DefaultTheme.Layout, null, {
+      // https://vitepress.dev/guide/extending-default-theme#layout-slots
+    })
+  },
+  enhanceApp({ app, router, siteData }) {
+    // ...
+    app.component('vImageViewer', vImageViewer);
+  },
+  setup() {
+    // Get route
+    const route = useRoute();
+    // Using
+    imageViewer(route);
+  }
+} satisfies Theme
 ```
 
 ## Chocolately 주요 명령
