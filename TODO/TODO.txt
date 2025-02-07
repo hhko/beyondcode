@@ -1,11 +1,14 @@
 - [x] 복수 상단 메뉴 구성: 개별 사이드바
-- [ ] Getting Started: Domain-Driven Design, 3장 Exploring a Complex Domain
+- [x] 도메인 불변 규칙
+- [x] vitepress 이미지 확대
+- [ ] DDD 기본
+  - Getting Started: Domain-Driven Design, 3장 Exploring a Complex Domain
   ```
   https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design
   https://github.com/Dometrain/getting-started-domain-driven-design
   ```
-- [x] 도메인 불변 규칙
-- [ ] vitepress 이미지 확대
+- [ ] DDD 심화
+- [ ] 모듈러 아키텍처 튜토리얼
 - [ ] vitepress README.md -> /README 없이 /로 처리할 수 있나?
 
 
