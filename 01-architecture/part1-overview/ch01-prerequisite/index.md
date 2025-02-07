@@ -399,8 +399,8 @@ cat authorized_keys
 
 # 0. Node.js 18버전 이상 설치
 
-npm show vitepress versions
-npm show vitepress version
+npm show vitepress versions   # 모든 버전
+npm show vitepress version    # 최신 버전
 
 # 1. VitePress 설치
 #   - 이전 명령: npm install --save-dev vitepress
@@ -457,6 +457,40 @@ npx vitepress init
 
 # 3. VitePress 빌드
 npm run docs:dev
+
+npm show medium-zoom versions
+npm install medium-zoom
+
+npm list
+```
+
+- .vitepress\theme\index.ts
+```ts
+import mediumZoom from 'medium-zoom';
+
+export default {
+  extends: DefaultTheme,
+  // ...,
+  enhanceApp({ app, router, siteData }) {
+    router.onAfterRouteChanged = () => {
+      mediumZoom('.main img', {
+        margin: 16,           // 이미지와 화면의 여백 설정
+        background: '#000',   // 확대 시 배경색
+      });
+    };
+  },
+} satisfies Theme
+```
+
+- .vitepress\theme\style.css
+```css
+.medium-zoom-overlay {
+  z-index: 1000;
+}
+
+.medium-zoom-image {
+  z-index: 1001;
+}
 ```
 
 ## Chocolately 주요 명령
