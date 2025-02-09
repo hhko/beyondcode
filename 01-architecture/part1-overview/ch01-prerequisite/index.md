@@ -108,6 +108,10 @@ dotnet tool install -g dotnet-trace --version 8.0.532401
 dotnet tool install -g dotnet-dump --version 8.0.532401
 dotnet tool install -g dotnet-gcdump --version 8.0.532401
 dotnet tool install -g dotnet-reportgenerator-globaltool --version 5.3.7
+
+# https://github.com/dotMorten/DotNetOMDGenerator
+#  generateomd /source=c:\github\dotnet\corefx\src /exclude="*/ref/*;*/tests/*;*/perftests/*"
+dotnet tool install --global dotMorten.OmdGenerator
     dotnet tool list -g
 ```
 
