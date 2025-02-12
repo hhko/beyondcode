@@ -21,6 +21,8 @@ smartctl -a -d ccis , 1/2/3 /dev/sda
 
 # https://www.servermon.kr/board/board.html?code=servermon_board2&page=1&type=v&board_cate=&num1=999670&num2=00000&number=312&lock=N&srsltid=AfmBOooov4qPfTx0uY6O1rW9N2OJwjKak3CwkqvYEl5pgcLXG2zNeQJ1
 
+# https://blog.naver.com/anysecure3/221636186842
+
 df -h	  
 sudo smartctl -H /dev/sdX
 sudo smartctl -a /dev/sdX
