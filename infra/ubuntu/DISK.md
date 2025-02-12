@@ -1,6 +1,26 @@
 - S.M.A.R.T.(Self-Monitoring, Analysis, and Reporting Technology) 
 
 ```
+
+smartctl --scan
+
+# 상태
+smartctl -H /dev/sda
+
+# 디스크 정보
+smartctl -i /dev/sda
+
+# 디스크이 모든 정보
+smartctl -a /dev/sda
+
+# -d
+# ccis
+# 1: SCIS 번호: lsscis -g
+smartctl -a -d ccis , 1 /dev/sda
+smartctl -a -d ccis , 1/2/3 /dev/sda
+
+# https://www.servermon.kr/board/board.html?code=servermon_board2&page=1&type=v&board_cate=&num1=999670&num2=00000&number=312&lock=N&srsltid=AfmBOooov4qPfTx0uY6O1rW9N2OJwjKak3CwkqvYEl5pgcLXG2zNeQJ1
+
 df -h	  
 sudo smartctl -H /dev/sdX
 sudo smartctl -a /dev/sdX
@@ -23,3 +43,26 @@ ID	| 속성 | 설명
 - Reallocated_Sector_Ct > 0 → 배드 섹터 있음, 백업 필요
 - Current_Pending_Sector > 0 → 디스크 고장 가능성 있음
 - Offline_Uncorrectable > 0 → 복구 불가능한 오류 있음, 즉시 교체 고려
+
+
+```
+Raw_Read_Error_Rate
+디스크 표면이로부터 데이터를 읽는 과정에서 문제가 있을때 발생
+Reallocated_Sector_Ct
+섹터에 문제가 생겨서 스페어영역의 섹터로 대체한 횟수
+
+Seek_Error_Rate 
+탐색 오류율
+
+Spin_Retry_Count
+최대rpm에 도달하기위해서 회전을 시도하는 횟수
+
+Current_Pending_Sector
+불안정적인 섹터로 스페어영역 섹터로 remapping을 준비중이거나 읽는 과정에 문제가 생긴 섹터
+
+Offline_Uncorrectable
+읽기/쓰기에 문제가 생긴 섹터, 즉 디스크 표면이 손상됨. 
+
+UDMA_CRC_Error_Count
+하드디스크 인터페이스를 통해 데이타 전송과정에 발생한 CRC 오류 횟수
+```
