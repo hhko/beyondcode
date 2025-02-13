@@ -3,7 +3,7 @@ using Throw;
 
 namespace DddGym.Domain.Rooms.ValueObjects;
 
-public class TimeRange
+public sealed class TimeRange
 {
     public TimeOnly Start { get; init; }
     public TimeOnly End { get; init; }

@@ -1,8 +1,8 @@
 ﻿using DddGym.Domain.Subscriptions;
 using DddGym.Domain.Subscriptions.Enumerations;
-using DddGym.Tests.Unit.Abstractions.Constants;
+using DddGym.Tests.Unit.LayerTests.Domain.Constants;
 
-namespace DddGym.Tests.Unit.Abstractions.Factories;
+namespace DddGym.Tests.Unit.LayerTests.Domain.Factories;
 
 internal static class SubscriptionFactory
 {

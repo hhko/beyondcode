@@ -1,7 +1,7 @@
 ﻿using DddGym.Domain.Rooms;
-using DddGym.Tests.Unit.Abstractions.Constants;
+using DddGym.Tests.Unit.LayerTests.Domain.Constants;
 
-namespace DddGym.Tests.Unit.Abstractions.Factories;
+namespace DddGym.Tests.Unit.LayerTests.Domain.Factories;
 
 public class RoomFactory
 {

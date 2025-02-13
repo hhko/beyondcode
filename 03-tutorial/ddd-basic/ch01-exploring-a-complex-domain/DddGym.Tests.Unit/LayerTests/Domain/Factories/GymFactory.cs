@@ -1,7 +1,7 @@
 ﻿using DddGym.Domain.Gyms;
-using DddGym.Tests.Unit.Abstractions.Constants;
+using DddGym.Tests.Unit.LayerTests.Domain.Constants;
 
-namespace DddGym.Tests.Unit.Abstractions.Factories;
+namespace DddGym.Tests.Unit.LayerTests.Domain.Factories;
 
 public static class GymFactory
 {
@@ -11,7 +11,7 @@ public static class GymFactory
     {
         return new Gym(
             maxRooms,
-            //subscriptionId: Constants.Subscriptions.Id,
+            subscriptionId: DomainConstants.Subscription.Id,
             id: id ?? DomainConstants.Gym.Id);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using DddGym.Domain.Gyms;
 using DddGym.Domain.Subscriptions;
-using DddGym.Tests.Unit.Abstractions.Factories;
+using DddGym.Tests.Unit.LayerTests.Domain.Factories;
 using ErrorOr;
 using Shouldly;
 using static DddGym.Domain.Subscriptions.Errors.DomainErrors;

@@ -9,7 +9,7 @@ public sealed class Subscription
 {
     private readonly Grade _grade;
     private readonly Guid _adminId;
-    private readonly Guid _id;
+    private readonly Guid _id;                      // TODO: public Guid Id { get; }
 
     private readonly List<Guid> _gymIds = [];
     private readonly int _maxGyms;
@@ -53,11 +53,16 @@ public sealed class Subscription
     public ErrorOr<Success> AddGym(Gym gym)
     {
         // TODO: IValidator
+
+        // 규칙 생략: Id 중복
         if (_gymIds.Contains(gym.Id))
         {
             return Error.Conflict(description: "Gym already exists in subscription");
         }
 
+        // 규칙
+        // 구독은 구독(구독 등급)이 허용된 개수보다 더 많은 헬스장을 가질 수 없다.
+        // A subscription cannot have more gyms than the subscription allows
         if (_gymIds.Count >= _maxGyms)
         {
             return AddGymErrors.CannotHaveMoreGymsThanSubscriptionAllows;

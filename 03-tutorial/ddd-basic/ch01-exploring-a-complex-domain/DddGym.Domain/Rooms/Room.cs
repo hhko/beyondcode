@@ -1,5 +1,6 @@
 ﻿using DddGym.Domain.Rooms.ValueObjects;
 using DddGym.Domain.Sessions;
+using DddGym.Domain.Subscriptions;
 using ErrorOr;
 using static DddGym.Domain.Rooms.Errors.DomainErrors;
 
@@ -10,8 +11,7 @@ public class Room
     private readonly List<Guid> _sessionIds = [];
     private readonly int _maxDailySessions;
     private readonly Guid _gymId;
-    //private readonly Schedule _schedule = Schedule.Empty();
-    private readonly Schedule _schedule;
+    private readonly Schedule _schedule = Schedule.Empty();
 
     public Guid Id { get; }
 
@@ -29,21 +29,29 @@ public class Room
 
     public ErrorOr<Success> ScheduleSession(Session session)
     {
+        // 규칙 생략: Id 중복
         if (_sessionIds.Any(id => id == session.Id))
         {
             return Error.Conflict(description: "Session already exists in room");
         }
 
+        // 규칙
+        // 방은 구독(구독 등급)이 허용하는 개수보다 더 많은 세션을 가질 수 없다.
+        // A room cannot have more sessions than the subscription allows
         if (_sessionIds.Count >= _maxDailySessions)
         {
             return ScheduleSessionErrors.CannotHaveMoreSessionThanSubscriptionAllows;
         }
 
-        var addEventResult = _schedule.BookTimeSlot(session.Date, session.Time);
-
-        if (addEventResult.IsError && addEventResult.FirstError.Type == ErrorType.Conflict)
+        // 규칙
+        // 방은 두 개 이상의 겹치는 세션을 가질 수 없다.
+        // A room cannot have two or more overlapping sessions
+        var bookTimeSlotResult = _schedule.BookTimeSlot(session.Date, session.Time);
+        if (bookTimeSlotResult.IsError)
         {
-            return ScheduleSessionErrors.CannotHaveTwoOrMoreOverlappingSessions;
+            return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
+                ? ScheduleSessionErrors.CannotHaveTwoOrMoreOverlappingSessions
+                : bookTimeSlotResult.Errors;
         }
 
         _sessionIds.Add(session.Id);

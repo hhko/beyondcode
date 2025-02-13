@@ -1,6 +1,6 @@
 ﻿using DddGym.Domain.Rooms.ValueObjects;
 
-namespace DddGym.Tests.Unit.Abstractions.Constants;
+namespace DddGym.Tests.Unit.LayerTests.Domain.Constants;
 
 public static partial class DomainConstants
 {

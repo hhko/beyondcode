@@ -1,8 +1,8 @@
 ﻿using DddGym.Domain.Rooms.ValueObjects;
 using DddGym.Domain.Sessions;
-using DddGym.Tests.Unit.Abstractions.Constants;
+using DddGym.Tests.Unit.LayerTests.Domain.Constants;
 
-namespace DddGym.Tests.Unit.Abstractions.Factories;
+namespace DddGym.Tests.Unit.LayerTests.Domain.Factories;
 
 public static class SessionFactory
 {

@@ -1,8 +1,11 @@
 ﻿using DddGym.Domain.Rooms;
-using DddGym.Tests.Unit.Abstractions.Factories;
+using DddGym.Domain.Sessions;
+using DddGym.Tests.Unit.LayerTests.Domain.Constants;
+using DddGym.Tests.Unit.LayerTests.Domain.Factories;
 using ErrorOr;
 using Shouldly;
 using static DddGym.Domain.Rooms.Errors.DomainErrors;
+using static DddGym.Domain.Trainers.Errors.DomainErrors;
 using static DddGym.Tests.Unit.Abstractions.Constants.Constants;
 
 namespace DddGym.Tests.Unit.LayerTests.Domain;
@@ -32,5 +35,41 @@ public class RoomTests
         ErrorOr<Success> lastScheduleSessionResult = scheduleSessionResults[scheduleSessionResults.Count - 1];
         lastScheduleSessionResult.IsError.ShouldBeTrue();
         lastScheduleSessionResult.FirstError.ShouldBe(ScheduleSessionErrors.CannotHaveMoreSessionThanSubscriptionAllows);
+    }
+
+    [Theory]
+    [InlineData(1, 3, 1, 3)]
+    [InlineData(1, 3, 2, 3)]
+    [InlineData(1, 3, 2, 4)]
+    [InlineData(1, 3, 0, 2)]
+    [InlineData(1, 3, 0, 4)]
+    public void ScheduleSession_WhenSessionOverlapsWithAnotherSession_ShouldFail(
+        int startHourSession1,
+        int endHourSession1,
+        int startHourSession2,
+        int endHourSession2)
+    {
+        // Arrange
+        Room sut = RoomFactory.CreateRoom();
+
+        Session session1 = SessionFactory.CreateSession(
+            date: DomainConstants.Session.Date,
+            time: TimeRangeFactory.CreateFromHours(startHourSession1, endHourSession1),
+            id: Guid.NewGuid());
+
+        Session session2 = SessionFactory.CreateSession(
+            date: DomainConstants.Session.Date,
+            time: TimeRangeFactory.CreateFromHours(startHourSession2, endHourSession2),
+            id: Guid.NewGuid());
+
+        // Act
+        var addSession1Result = sut.ScheduleSession(session1);
+        var addSession2Result = sut.ScheduleSession(session2);
+
+        // Assert
+        addSession1Result.IsError.ShouldBeFalse();
+
+        addSession2Result.IsError.ShouldBeTrue();
+        addSession2Result.FirstError.ShouldBe(ScheduleSessionErrors.CannotHaveTwoOrMoreOverlappingSessions);
     }
 }

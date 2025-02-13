@@ -2,9 +2,9 @@
 
 namespace DddGym.Domain.Rooms.ValueObjects;
 
-public class Schedule
+public sealed class Schedule
 {
-    private readonly Dictionary<DateOnly, List<TimeRange>> _calendar = new();
+    private readonly Dictionary<DateOnly, List<TimeRange>> _calendar = [];
     private readonly Guid _id;
 
     private Schedule() 
@@ -15,7 +15,7 @@ public class Schedule
         Dictionary<DateOnly, List<TimeRange>>? calendar = null,
         Guid? id = null)
     {
-        _calendar = calendar ?? new();
+        _calendar = calendar ?? [];
         _id = id ?? Guid.NewGuid();
     }
 

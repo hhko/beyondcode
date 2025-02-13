@@ -9,7 +9,4 @@
     <PackageReference Include="ErrorOr" />
     <PackageReference Include="Throw" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Trainers\" />
-  </ItemGroup>
 </Project>

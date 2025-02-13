@@ -1,5 +1,5 @@
 ﻿using DddGym.Domain.Gyms;
-using DddGym.Tests.Unit.Abstractions.Factories;
+using DddGym.Tests.Unit.LayerTests.Domain.Factories;
 using ErrorOr;
 using Shouldly;
 using static DddGym.Domain.Gyms.Errors.DomainErrors;
