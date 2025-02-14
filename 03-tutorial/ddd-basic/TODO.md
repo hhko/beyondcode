@@ -27,9 +27,11 @@ upgrade-assistant upgrade
 - [x] 목차 | Ch01. Flat
 - [x] 목차 | Ch02. 폴더 구조화
 - [x] 목차 | Ch03. 테스트
-- [ ] 목차 | 유스케이스
-- [ ] 목차 | WebApi
-
+- [x] 목차 | Ch04. 전술 패턴
+- [ ] 목차 | Ch05. 도메인 요구사항 추가 ::::: Ch05. Start
+- [ ] 목차 | Ch06. Application 레이어
+- [ ] 목차 | WebApi / EFCore(Sqlite)
+- [ ] 목차 | 도메인 이벤트 :::::: Ch05. End
 ---
 - [x] 솔루션 | nuget.config
 - [x] 솔루션 | Directory.Packages.props
