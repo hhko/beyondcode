@@ -1,9 +1,10 @@
-﻿using ErrorOr;
+﻿using DddGym.Domain.Abstractions.BaseTypes;
+using ErrorOr;
 using Throw;
 
 namespace DddGym.Domain.Abstractions.ValueObjects;
 
-public sealed class TimeRange
+public sealed class TimeRange : ValueObject
 {
     public TimeOnly Start { get; init; }
     public TimeOnly End { get; init; }
@@ -37,5 +38,11 @@ public sealed class TimeRange
         }
 
         return true;
+    }
+
+    public override IEnumerable<object?> GetEqualityComponents()
+    {
+        yield return Start;
+        yield return End;
     }
 }

@@ -2,16 +2,15 @@
 using DddGym.Domain.Abstractions.ValueObjects;
 using ErrorOr;
 using static DddGym.Domain.Sessions.Errors.DomainErrors;
+using DddGym.Domain.Abstractions.BaseTypes;
 
 namespace DddGym.Domain.Sessions;
 
-public sealed class Session
+public sealed class Session : AggregateRoot
 {
     private readonly Guid _trainerId;
     private readonly List<Guid> _participantIds = [];
     private readonly int _maxParticipants;
-
-    public Guid Id { get; }
 
     public DateOnly Date { get; }
 
@@ -22,13 +21,12 @@ public sealed class Session
         TimeRange time,
         int maxParticipants,
         Guid trainerId,
-        Guid? id = null)
+        Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         Date = date;
         Time = time;
         _maxParticipants = maxParticipants;
         _trainerId = trainerId;
-        Id = id ?? Guid.NewGuid();
     }
 
     public ErrorOr<Success> ReserveSpot(Participant participant)

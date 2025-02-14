@@ -1,23 +1,18 @@
-﻿using DddGym.Domain.Abstractions.ValueObjects;
+﻿using DddGym.Domain.Abstractions.BaseTypes;
+using DddGym.Domain.Abstractions.ValueObjects;
 using ErrorOr;
 
 namespace DddGym.Domain.Abstractions.Entities;
 
-public sealed class Schedule
+public sealed class Schedule : Entity
 {
     private readonly Dictionary<DateOnly, List<TimeRange>> _calendar = [];
-    private readonly Guid _id;
-
-    private Schedule()
-    {
-    }
 
     public Schedule(
         Dictionary<DateOnly, List<TimeRange>>? calendar = null,
-        Guid? id = null)
+        Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         _calendar = calendar ?? [];
-        _id = id ?? Guid.NewGuid();
     }
 
     public static Schedule Empty()

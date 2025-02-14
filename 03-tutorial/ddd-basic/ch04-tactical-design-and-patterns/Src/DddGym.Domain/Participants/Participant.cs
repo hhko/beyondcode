@@ -1,22 +1,22 @@
-﻿using DddGym.Domain.Abstractions.Entities;
+﻿using DddGym.Domain.Abstractions.BaseTypes;
+using DddGym.Domain.Abstractions.Entities;
 using DddGym.Domain.Sessions;
 using ErrorOr;
 using static DddGym.Domain.Participants.Errors.DomainErrors;
 
 namespace DddGym.Domain.Participants;
 
-public sealed class Participant
+public sealed class Participant : AggregateRoot
 {
     private readonly Schedule _schedule = Schedule.Empty();
     private readonly Guid _userId;
     private readonly List<Guid> _sessionIds = [];
 
-    public Guid Id { get; }
-
-    public Participant(Guid userId, Guid? id = null)
+    public Participant(
+        Guid userId, 
+        Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         _userId = userId;
-        Id = id ?? Guid.NewGuid();
     }
 
     public ErrorOr<Success> AddToSchedule(Session session)

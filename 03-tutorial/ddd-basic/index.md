@@ -53,9 +53,27 @@
              └─ {Aggregate Root}
 ```
 
+## 도메인 타입
+```cs
+// Aggregate Root
+public sealed class Trainer : AggregateRoot { }
+public sealed class Gym : AggregateRoot { }
+public sealed class Participant : AggregateRoot { }
+public sealed class Room : AggregateRoot { }
+public sealed class Session : AggregateRoot { }
+public sealed class Subscription : AggregateRoot { }
+
+// Entity
+public sealed class Schedule : Entity { }
+
+// Value Object
+public sealed class TimeRange : ValueObject { }
+```
+
+
 ## 패키지
 - [SmartEnum](https://github.com/ardalis/SmartEnum)
 - [Throw](https://github.com/amantinband/throw)
 - [Shouldly](https://github.com/shouldly/shouldly)
-
+- Value Object
 

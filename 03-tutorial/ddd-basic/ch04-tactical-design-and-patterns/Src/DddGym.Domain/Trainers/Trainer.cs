@@ -1,13 +1,13 @@
-﻿using DddGym.Domain.Abstractions.Entities;
+﻿using DddGym.Domain.Abstractions.BaseTypes;
+using DddGym.Domain.Abstractions.Entities;
 using DddGym.Domain.Sessions;
 using ErrorOr;
 using static DddGym.Domain.Trainers.Errors.DomainErrors;
 
 namespace DddGym.Domain.Trainers;
 
-public sealed class Trainer
+public sealed class Trainer : AggregateRoot
 {
-    private readonly Guid _id;                                  // TODO: public Guid Id { get; }
     private readonly Guid _userId;
     private readonly List<Guid> _sessionIds = [];
     private readonly Schedule _schedule = Schedule.Empty();
@@ -15,11 +15,10 @@ public sealed class Trainer
     public Trainer(
         Guid userId,
         Schedule? schedule = null,
-        Guid? id = null)
+        Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         _userId = userId;
         _schedule = schedule ?? Schedule.Empty();
-        _id = id ?? Guid.NewGuid();
     }
 
     public ErrorOr<Success> AddSessionToSchedule(Session session)

@@ -1,15 +1,15 @@
-﻿using DddGym.Domain.Gyms;
+﻿using DddGym.Domain.Abstractions.BaseTypes;
+using DddGym.Domain.Gyms;
 using DddGym.Domain.Subscriptions.Enumerations;
 using ErrorOr;
 using static DddGym.Domain.Subscriptions.Errors.DomainErrors;
 
 namespace DddGym.Domain.Subscriptions;
 
-public sealed class Subscription
+public sealed class Subscription : AggregateRoot
 {
     private readonly SubscriptionType _subscriptionType;
     private readonly Guid _adminId;
-    private readonly Guid _id;                      // TODO: public Guid Id { get; }
 
     private readonly List<Guid> _gymIds = [];
     private readonly int _maxGyms;
@@ -17,11 +17,10 @@ public sealed class Subscription
     public Subscription(
         SubscriptionType subscriptionType,
         Guid adminId,
-        Guid? id = null)
+        Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         _subscriptionType = subscriptionType;
         _adminId = adminId;
-        _id = id ?? Guid.NewGuid();                 // TODO: Fast Guid
 
         _maxGyms = GetMaxGyms();
     }
