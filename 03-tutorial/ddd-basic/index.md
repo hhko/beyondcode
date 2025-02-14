@@ -40,17 +40,17 @@
 ![](./.images/Structuring.png)
 
 ```shell
-{프로젝트}
+{Project}
  ├─ Src
- │  └─ {프로젝트}.Domain
+ │  └─ {Project}.Domain                   # Domain 레이어
  │     ├─ Abstractions                    # Domain 레이어를 위한 부수 코드
  │     └─ {Aggregate Root}                # Domain 레이어 주제
  └─ Tests
-    └─ {프로젝트}.Tests.Unit
+    └─ {Project}.Tests.Unit
        ├─ Abstractions                    # Unit 테스트를 위한 부수 코드
        └─ LayerTests                      # 레이어 테스트
           └─ Domain                       # 도메인 레이어 테스트
-             └─ {Aggregate Root 테스트}
+             └─ {Aggregate Root}
 ```
 
 ## 패키지
