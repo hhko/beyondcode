@@ -1,0 +1,123 @@
+- 에러 문구에 "in" 추가
+  ```
+  return Error.Conflict(description: "Gym already exists");  --> in Su...
+  ```
+- 복수형(Subscriptions)을 단수형(Subscription)으로
+  ```
+  Constants.Subscription.cs
+        class Subscriptions
+  public const int MaxDailySessions = Subscriptions.MaxDailySessionsFreeTier;
+
+  Constants.Participants.cs
+        clsss Participant
+  ```
+- 접근 제어
+  ```
+  public sealed class
+  internal sealed class
+  ```
+- 누락된 테스트 추가
+  ```cs
+  [Theory]
+  [InlineData(1, 3, 1, 3)]
+  [InlineData(1, 3, 2, 3)]
+  [InlineData(1, 3, 2, 4)]
+  [InlineData(1, 3, 0, 2)]
+  [InlineData(1, 3, 0, 4)]
+  public void ScheduleSession_WhenSessionOverlapsWithAnotherSession_ShouldFail(
+      int startHourSession1,
+      int endHourSession1,
+      int startHourSession2,
+      int endHourSession2)
+  {
+      // Arrange
+      Room sut = RoomFactory.CreateRoom(1 <-- 확인 필요 --->);
+
+      Session session1 = SessionFactory.CreateSession(
+          date: DomainConstants.Session.Date,
+          time: TimeRangeFactory.CreateFromHours(startHourSession1, endHourSession1),
+          id: Guid.NewGuid());
+
+      Session session2 = SessionFactory.CreateSession(
+          date: DomainConstants.Session.Date,
+          time: TimeRangeFactory.CreateFromHours(startHourSession2, endHourSession2),
+          id: Guid.NewGuid());
+
+      // Act
+      var addSession1Result = sut.ScheduleSession(session1);
+      var addSession2Result = sut.ScheduleSession(session2);
+
+      // Assert
+      addSession1Result.IsError.ShouldBeFalse();
+
+      addSession2Result.IsError.ShouldBeTrue();
+      addSession2Result.FirstError.ShouldBe(ScheduleSessionErrors.CannotHaveTwoOrMoreOverlappingSessions);
+  }
+  ```
+- if 구문 통일
+  ```
+  // 변경 전
+  if (bookTimeSlotResult.IsError && bookTimeSlotResult.FirstError.Type == ErrorType.Conflict)
+  {
+      return AddSessionToScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions;
+  }
+
+  // addEventResult
+
+  // 변경 후
+  if (bookTimeSlotResult.IsError)
+  {
+      return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
+          ? AddToSchedule.CannotHaveTwoOrMoreOverlappingSessions
+          : bookTimeSlotResult.Errors;
+  }
+
+  // bookTimeSlotResult
+  ```
+- 함수 매개변수 통일
+  ```
+  // 無
+  // 有
+    code: $"{nameof(DomainErrors)}.{nameof(Gym)}.{nameof(CannotHaveMoreRoomsThanSubscriptionAllows)}",
+    description:
+  ```
+- 초과 테스트 개선
+  ```cs
+  [Fact]
+  public void ScheduleSession_WhenMoreThanSubscriptionAllows_ShouldFail()
+  {
+      // Arrange
+      int maxDailySessions = 1;
+      Room sut = RoomFactory.CreateRoom(maxDailySessions: maxDailySessions);
+
+      var sessions = Enumerable.Range(0, maxDailySessions + 1)
+          .Select(_ => SessionFactory.CreateSession(id: Guid.NewGuid()))
+          .ToList();
+
+      // Act
+      List<ErrorOr<Success>> scheduleSessionResults = sessions.ConvertAll(sut.ScheduleSession);
+
+      // Assert: 추가 성공 검증(마지막 추가를 제외한 결과)
+      IEnumerable<ErrorOr<Success>> allButLastScheduleSession = scheduleSessionResults.Take(..^1);
+      allButLastScheduleSession.ShouldAllBe(result => !result.IsError);
+
+      // Assert: 추가 실패 검증(마지막 추가 결과)
+      ErrorOr<Success> lastScheduleSessionResult = scheduleSessionResults[scheduleSessionResults.Count - 1];
+      lastScheduleSessionResult.IsError.ShouldBeTrue();
+      lastScheduleSessionResult.FirstError.ShouldBe(ScheduleSessionErrors.CannotHaveMoreSessionThanSubscriptionAllows);
+  }
+  ```
+- _id, Id -> Id 통합합
+
+```
+Xxxs
+  Enumerations
+  Errors
+  Events
+  ValueObjects
+  ???
+
+  AggregateRoot클래스.cs
+  Enttity클래스.cs
+  I인터페이스.cs
+```

@@ -1,8 +1,3 @@
-#
-# 도구
-#  project-tree-generator: https://woochanleee.github.io/project-tree-generator/
-#
-
 $curDir         = Split-Path -parent $MyInvocation.MyCommand.Definition
 $coverageDir    = $curDir | Join-Path -ChildPath ".build" | Join-Path -ChildPath "CodeCoverage"
 
