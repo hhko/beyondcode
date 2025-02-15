@@ -75,5 +75,3 @@ public sealed class TimeRange : ValueObject { }
 - [SmartEnum](https://github.com/ardalis/SmartEnum)
 - [Throw](https://github.com/amantinband/throw)
 - [Shouldly](https://github.com/shouldly/shouldly)
-- Value Object
-

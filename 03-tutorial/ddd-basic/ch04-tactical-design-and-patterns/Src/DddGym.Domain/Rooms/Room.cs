@@ -6,7 +6,7 @@ using static DddGym.Domain.Rooms.Errors.DomainErrors;
 
 namespace DddGym.Domain.Rooms;
 
-public class Room : AggregateRoot
+public sealed class Room : AggregateRoot
 {
     private readonly List<Guid> _sessionIds = [];
     private readonly int _maxDailySessions;
