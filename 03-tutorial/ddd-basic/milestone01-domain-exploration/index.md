@@ -57,8 +57,8 @@ outline: deep
  └─ Tests                                 # 테스트
     └─ {Project}.Tests.Unit               # 단위 테스트
        ├─ Abstractions                    # 단위 테스트 부수 코드
-       └─ LayerTests                      # 레이어 테스트
-          └─ Domain                       # 도메인 레이어 테스트
+       └─ LayerTests                      # 레이어 단위 테스트
+          └─ Domain                       # 도메인 레이어 단위 테스트
              └─ {Aggregate Root}
 ```
 

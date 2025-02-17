@@ -13,6 +13,6 @@ outline: deep
 ![](./../milestone01-domain-exploration/.images/DomainExploration.png)
 
 ### 탐색 후
-![](./.images/DeeperDomainExploration.png)
+![](./.images/DeeperDomainExploration-Compared.png)
 
 - ...
