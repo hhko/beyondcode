@@ -32,15 +32,17 @@ upgrade-assistant upgrade
   - [x] Subscription
   - [x] Gym
   - [x] Room
-  - [ ] Trainer
-  - [ ] Participant
-  - [ ] Session
-  - [ ] Schedule
-  - [ ] TimeRange
-
-- [ ] 목차 | Ch06. Application 레이어
-- [ ] 목차 | WebApi / EFCore(Sqlite)
-- [ ] 목차 | 도메인 이벤트 :::::: Ch05. End
+  - [x] Trainer
+  - [x] Participant
+  - [x] Session
+  - [x] Schedule
+  - [x] TimeRange
+  - [x] Addmin
+- [ ] 목차 | 도메인 이벤트
+- [ ] 목차 | Application 레이어
+----
+- [ ] 목차 | WebApi
+- [ ] 목차 | EFCore(Sqlite)
 ---
 - [x] 솔루션 | nuget.config
 - [x] 솔루션 | Directory.Packages.props

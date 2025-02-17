@@ -107,7 +107,31 @@
       lastScheduleSessionResult.FirstError.ShouldBe(ScheduleSessionErrors.CannotHaveMoreSessionThanSubscriptionAllows);
   }
   ```
-- _id, Id -> Id 통합합
+- session 5. rooms
+  ```cs
+  RemoveFromSchedule
+    //return Error.Conflict("Trainer already assigned to teach session");
+    return Error.NotFound(description: "session not found");
+  ```
+- 용어 통일???
+  - TimeRange
+  - TimeSlot
+  - Time
+- 에러 전파 방법???
+  ```cs
+  if (removeBookingResult.IsError)
+  {
+    // ?
+    return removeBookingResult.Errors;
+
+    // ?
+    return removeBookingResult;
+  }
+  ```
+- 사전 정의된 에러 검사 방법
+  ```
+  ShouldBe(Error.NotFound);       // 에러
+  ```
 
 ```
 Xxxs
