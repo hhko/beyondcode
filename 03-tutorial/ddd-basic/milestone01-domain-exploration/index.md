@@ -62,7 +62,7 @@ outline: deep
              └─ {Aggregate Root}
 ```
 
-### 도메인 규칙 테스트
+## 도메인 규칙 테스트
 - **구독, Subscription**
   - AddGym
     > - 구독은 구독(구독 등급)이 허용된 개수보다 더 많은 헬스장을 가질 수 없다.
