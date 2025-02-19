@@ -6,6 +6,6 @@ public sealed class ListSubscriptionsQueryValidator : AbstractValidator<ListSubs
 {
     public ListSubscriptionsQueryValidator()
     {
-        
+        RuleFor(x => x.Name).NotEmpty();
     }
 }

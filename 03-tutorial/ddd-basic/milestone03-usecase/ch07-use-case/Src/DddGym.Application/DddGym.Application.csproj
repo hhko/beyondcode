@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\BaseTypes\Mappings\" />
+    <Compile Remove="Abstractions\BaseTypes\Mappings\**" />
+    <EmbeddedResource Remove="Abstractions\BaseTypes\Mappings\**" />
+    <None Remove="Abstractions\BaseTypes\Mappings\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Usecases\Subscriptions\Commands\" />
   </ItemGroup>
 

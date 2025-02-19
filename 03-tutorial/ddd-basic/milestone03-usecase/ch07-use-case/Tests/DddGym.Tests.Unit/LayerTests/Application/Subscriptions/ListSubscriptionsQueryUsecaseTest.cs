@@ -32,7 +32,7 @@ public class ListSubscriptionsQueryUsecaseTest
         ISender sut = provider.GetRequiredService<ISender>();
 
         // Act
-        IErrorOr<SubscriptionsResponse> actual = await sut.Send(new ListSubscriptionsQuery());
+        IErrorOr<SubscriptionsResponse> actual = await sut.Send(new ListSubscriptionsQuery(Name: ""));
 
         // Assert
         actual.IsError.ShouldBeFalse();

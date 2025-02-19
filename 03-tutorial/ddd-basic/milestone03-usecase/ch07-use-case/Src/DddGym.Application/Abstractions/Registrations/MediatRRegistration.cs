@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DddGym.Application.Abstractions.Pipelines;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DddGym.Application.Abstractions.Registrations;
 
@@ -12,7 +13,7 @@ internal static class MediatRRegistration
 
             // IPipelineBehavior 호출 순서는 중요하다: 데코레이터 순서
             //cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
-            //cfg.AddOpenBehavior(typeof(ValidatorPipeline<,>));
+            cfg.AddOpenBehavior(typeof(FluentValidationPipeline<,>));
         });
 
         return services;
