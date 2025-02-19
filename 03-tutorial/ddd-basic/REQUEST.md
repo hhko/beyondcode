@@ -132,16 +132,56 @@
   ```
   ShouldBe(Error.NotFound);       // 에러
   ```
+- IDateTimeProvider -> .NET
+  - TimeProvider
+  - Microsoft.Extensions.TimeProvider.Testing
+  - https://grantwinney.com/how-to-use-timeprovider-and-faketimeprovider-to-test-timers/
+  - https://code-maze.com/csharp-testing-time-dependent-code-with-timeprovider/
+  - https://andrewlock.net/exploring-the-dotnet-8-preview-avoiding-flaky-tests-with-timeprovider-and-itimer/?ref=grantwinney.com
+  ---
+  - https://learn.microsoft.com/en-us/dotnet/standard/datetime/timeprovider-overview
 
-```
-Xxxs
-  Enumerations
-  Errors
-  Events
-  ValueObjects
-  ???
+- Participant 생성자
+  ```cs
+  public Participant(
+    Schedule? schedule = null,
+  ```
+- 이벤트에서 왜 객체를 전달하나? id가 아니라???
+  ```
+  _domainEvents.Add(new RoomRemovedEvent(this, room));
 
-  AggregateRoot클래스.cs
-  Enttity클래스.cs
-  I인터페이스.cs
-```
+  room.Id???
+  ```
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- The "Designing with types" series
+  - https://fsharpforfunandprofit.com/series/designing-with-types/
+- 조영호
+  - https://github.com/eternity-oop/Woowahan-OO-01-object-reference
+  - https://github.com/eternity-oop/Woowahan-OO-02-object-reference
+  - https://github.com/eternity-oop/Woowahan-OO-03-object-reference
+- https://mj950425.github.io/jvm-lang/dev/seminar/experience/nextstep-ddd-seminar-1/
+- 도메인 표현 패턴
+  - Association
+  - Value Object
+  - Entity
+  - Service
+  - Module
+- 생명 주기 패턴
+  - Aggregate Root
+  - Repository
+  - Factory

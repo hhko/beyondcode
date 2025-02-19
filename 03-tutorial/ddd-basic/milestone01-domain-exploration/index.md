@@ -52,14 +52,26 @@ outline: deep
  ├─ Src                                   # 소스
  │  └─ {Project}.Domain                   # Domain 레이어
  │     ├─ Abstractions                    # Domain 레이어 부수 코드
- │     └─ {Aggregate Root}                # Domain 레이어 주제 코드
+ │     │  ├─ Errors
+ │     │  ├─ Events
+ │     │  ├─ ValueObjects
+ │     │  └─ ...
+ │     │
+ │     └─ AggregateRoots                  # Domain 레이어 주제 코드
+ │        └─ {Aggregate Root}s            # Aggregate Root
+ │           ├─ Enumerations
+ │           ├─ Errors
+ │           ├─ Events
+ │           ├─ ValueObjects
+ │           ├─ {Entitiy}...
+ │           └─ {Aggregate Root}
  │
  └─ Tests                                 # 테스트
     └─ {Project}.Tests.Unit               # 단위 테스트
        ├─ Abstractions                    # 단위 테스트 부수 코드
        └─ LayerTests                      # 레이어 단위 테스트
           └─ Domain                       # 도메인 레이어 단위 테스트
-             └─ {Aggregate Root}
+             └─ {Aggregate Root 테스트}
 ```
 
 ## 도메인 규칙 테스트

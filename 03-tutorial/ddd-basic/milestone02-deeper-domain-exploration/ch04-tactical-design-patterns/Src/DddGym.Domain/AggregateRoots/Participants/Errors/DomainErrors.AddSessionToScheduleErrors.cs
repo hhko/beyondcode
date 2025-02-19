@@ -8,6 +8,6 @@ public static partial class DomainErrors
     {
         public static readonly Error CannotHaveTwoOrMoreOverlappingSessions = Error.Validation(
             code: $"{nameof(DomainErrors)}.{nameof(Participant)}.{nameof(CannotHaveTwoOrMoreOverlappingSessions)}",
-            description: "A trainer cannot have two or more overlapping sessions");
+            description: "A participant cannot have two or more overlapping sessions");
     }
 }

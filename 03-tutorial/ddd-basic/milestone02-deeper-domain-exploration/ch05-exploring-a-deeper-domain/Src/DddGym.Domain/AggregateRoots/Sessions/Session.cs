@@ -67,16 +67,18 @@ public sealed class Session : AggregateRoot
         string name,
         string description,
         int maxParticipants,
+
         Guid roomId,
         Guid trainerId,
+
         DateOnly date,
         TimeRange time,
+
         List<SessionCategory> categories,
         Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         Name = name;
         Description = description;
-
         MaxParticipants = maxParticipants;
 
         RoomId = roomId;
@@ -131,7 +133,8 @@ public sealed class Session : AggregateRoot
             return Error.Conflict(description: "Participants cannot reserve twice to the same session");
         }
 
-        _reservations.Add(new Reservation(participant.Id));
+        var reservation = new Reservation(participant.Id);
+        _reservations.Add(reservation);
 
         return Result.Success;
     }
@@ -188,7 +191,7 @@ public sealed class Session : AggregateRoot
         Reservation? reservation = _reservations.Find(reservation => reservation.ParticipantId == participant.Id);
         if (reservation is null)
         {
-            return Error.NotFound(description: "Participant not found");
+            return Error.NotFound(description: "Reservation not found");
         }
 
         // 숨겨진 규칙

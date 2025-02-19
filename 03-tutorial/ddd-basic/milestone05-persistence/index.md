@@ -1,0 +1,5 @@
+- command efcore
+- query dapper
+- sqlite
+- 통합 테스트
+- pipeline

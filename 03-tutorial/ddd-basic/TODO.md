@@ -38,8 +38,37 @@ upgrade-assistant upgrade
   - [x] Schedule
   - [x] TimeRange
   - [x] Addmin
-- [ ] 목차 | 도메인 이벤트
+- [x] 목차 | 도메인 이벤트
 - [ ] 목차 | Application 레이어
+  - [x] IQuery
+  - [x] ToResponse <- IQuery
+  - [x] FluentValidator
+  - [x] MediatR 의존성 주입
+  - [x] FluentValidator 의존성 주입
+  - [ ] MediatR Pipeline: Validator
+  - [ ] MediatR Pipeline: OpenTelemetry
+  - [ ] MediatR Pipeline: 트랜잭션
+  - [ ] MediatR Pipeline: ...?
+  - [x] 단위 테스트: 의존성 주입
+  - [x] 단위 테스트: Mediator 메시지 호출
+  - [x] 단위 테스트: 결과
+  - [ ] ICommand
+  -----------
+  - [ ] GymManagement | Admin
+  - [ ] GymManagement | Gym
+  - [ ] GymManagement | Room
+  - [x] GymManagement | Subscription | Query | List
+  - [ ] GymManagement | Subscription | Command | Create
+  - [ ] SessionReservation | Gym
+  - [ ] SessionReservation | Participant
+  - [ ] SessionReservation | Reservation
+  - [ ] SessionReservation | Room
+  - [ ] SessionReservation | Session
+  - [ ] SessionReservation | Trainer
+  - [ ] UserManagement | Authentication
+  - [ ] UserManagement | Profiles
+
+
 ----
 - [ ] 목차 | WebApi
 - [ ] 목차 | EFCore(Sqlite)

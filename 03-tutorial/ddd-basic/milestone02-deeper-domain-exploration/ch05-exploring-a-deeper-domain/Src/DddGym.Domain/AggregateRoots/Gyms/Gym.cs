@@ -26,7 +26,6 @@ namespace DddGym.Domain.AggregateRoots.Gyms;
 public sealed class Gym : AggregateRoot
 {
     // TODO: _maxTrainers
-    // TODO: Get_N, _trainerIds
 
     private readonly int _maxRooms;
 

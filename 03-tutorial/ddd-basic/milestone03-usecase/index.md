@@ -1,0 +1,10 @@
+- use case
+- dto
+- pipeline
+  - observability: 로그 시작/종료
+  - observability: 로그 예외
+  - observability: 로그 에러
+  - observability: 지표
+  - observability: 추적적
+  - 유효성 검사
+  - 캐시
