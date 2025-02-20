@@ -55,10 +55,10 @@
          └─ Tests
             └─ {Solution}.{Project}.Tests.Unit
                ├─ Abstractions
-                  └─ Constants
+               │  └─ Constants
                └─ LayerTests
                   ├─ Application
-                     └─ {UseCase}Tests.cs
+                  │  └─ {UseCase}Tests.cs
                   └─ Domain
                      ├─ Constants
                      ├─ Factories
