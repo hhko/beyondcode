@@ -3,8 +3,11 @@
 > "[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)"을 기초하여 재구성하였습니다.
 
 ## 목표
-- 지속 가능한 소프트웨어 개발을 위한 구현 순서(비즈니스 관심사 -> 기술 관심사)를 이해합니다.
-- 도메인 지식을 코드화하는 설계 패턴과 구조화를 이해합니다.
+- 지속 가능한 소프트웨어 개발을 위한 구현 순서를 이해합니다.
+  > 비즈니스 관심사 -> 기술 관심사
+- 도메인 지식을 코드로 표현하는 설계 패턴과 구조를 익힙니다.
+  > Aggregate Root  
+  > Use case
 
 ## 목차
 > 목차는 프로젝트 수행 과정에 따라 마일스톤 단위로 구성되어 있습니다.
