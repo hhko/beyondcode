@@ -4,7 +4,7 @@ import { type DefaultTheme, defineConfig } from "vitepress";
 export default defineConfig({
   base: "/beyondcode/",
 
-  title: "Beyond Code",
+  title: "beyond code",
   description: "VOC |> DDD |> Architecture",
   lang: "ko-KR",
   themeConfig: {
