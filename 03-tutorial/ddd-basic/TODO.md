@@ -54,11 +54,25 @@ upgrade-assistant upgrade
   - [x] 단위 테스트: 결과
   - [ ] ICommand
   -----------
+  - [x] GymManagement | Subscription | Query, List
+  - [x] GymManagement | Subscription | Command, Create
+    ```
+    await _adminsRepository.UpdateAsync(admin);     ??? 트랜잭션으로 개선할 수 없을까?
+    ```
+  - [x] GymManagement | Gym | Query, Get
+  - [x] GymManagement | Gym | Query, List
+  - [ ] 논리 오류: if (!await _subscriptionsRepository.ExistsAsync())
+    ```cs
+    if (await _subscriptionsRepository.ExistsAsync(request.SubscriptionId))
+    {
+        return Error.NotFound("Subscription not found");
+    }
+    ```
+  - [ ] GymManagement | Gym | Command, Create
+  - [ ] GymManagement | Gym | Command, Add
+  ---
   - [ ] GymManagement | Admin
-  - [ ] GymManagement | Gym
   - [ ] GymManagement | Room
-  - [x] GymManagement | Subscription | Query | List
-  - [ ] GymManagement | Subscription | Command | Create
   - [ ] SessionReservation | Gym
   - [ ] SessionReservation | Participant
   - [ ] SessionReservation | Reservation
@@ -67,6 +81,14 @@ upgrade-assistant upgrade
   - [ ] SessionReservation | Trainer
   - [ ] UserManagement | Authentication
   - [ ] UserManagement | Profiles
+
+---
+- .editorconfig
+  ```
+  csharp_style_namespace_declarations = file_scoped:error   <- vs 새로 생성할 때 기본 값
+                                                            <- error? 적용 안됨? EnforceCodeStyleInBuild
+  dotnet_diagnostic.IDE0161.severity = error                <- vs 전용 빌드 에러?
+  ```
 
 
 ----

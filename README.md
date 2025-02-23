@@ -11,13 +11,15 @@
 
 <br/>
 
-# Architecture
+# Application Architecture
 
 ## Internal Architecture
 ![](./01-architecture/part1-overview/ch04-internal-architecture/.images/Architecture.Internal.png)
 
 ## External Architecture
 > TODO
+
+<br/>
 
 # Tutorial
 - [Domain-Driven Design Basic](./03-tutorial/ddd-basic/index.md)
