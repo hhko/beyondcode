@@ -1,3 +1,7 @@
+```
+https://woochanleee.github.io/project-tree-generator
+```
+
 - 솔루션 | .gitignore
 - 솔루션 | .gitattributes
 - 솔루션 | global.json
@@ -11,6 +15,51 @@
 - 솔루션 | 솔루션 배포
 
 ---
+
+```
+{Solution}
+├─ Abstractions
+│  ├─ {Library}
+│  └─ SharedKernels
+├─ Backends
+│  ├─ {Service}
+│  └─ Tests
+├─ Frontends
+└─ Wiki
+```
+
+```
+{Solution}
+├─ Abstractions
+│  ├─ {Library}
+│  │  ├─ Src
+│  │  │  └─ {Solution}.{Library}
+│  │  └─ Tests
+│  │     └─ {Solution}.{Library}.Tests.Unit
+│  └─ SharedKernels
+│     ├─ Src
+│     │  ├─ {Solution}.Framework
+│     │  └─ {Solution}.Domain
+│     └─ Tests
+│        ├─ {Solution}.Framework.Tests.Unit
+│        └─ {Solution}.Domain.Tests.Unit
+├─ Backends
+│  ├─ {Service}
+│  │  ├─ Src
+│  │  │  ├─ {Service}
+│  │  │  ├─ {Service}.Adapters.Infrastructure
+│  │  │  ├─ {Service}.Adapters.Persistence
+│  │  │  ├─ {Service}.Application
+│  │  │  └─ {Service}.Domain
+│  │  └─ Tests
+│  │     ├─ {Service}.Tests.Integration
+│  │     ├─ {Service}.Tests.Performance
+│  │     └─ {Service}.Tests.Unit
+│  └─ Tests
+│     └─ {Solution}.Tests.E2E
+├─ Frontends
+└─ Wiki
+```
 
 ```
 {Solution}
@@ -28,6 +77,8 @@
          │  │  ├─ Usecases
          │  │  │  └─ {Usecase}
          │  │  │     ├─ Command
+         │  │  │     ├─ Events
+         │  │  │     ├─ IntegrationEvents
          │  │  │     └─ Queries
          │  │  │        ├─ {Usecase}Query.cs
          │  │  │        ├─ {Usecase}QueryResponse.cs

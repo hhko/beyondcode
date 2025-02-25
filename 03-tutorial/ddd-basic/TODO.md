@@ -81,7 +81,11 @@ upgrade-assistant upgrade
   - [ ] SessionReservation | Trainer
   - [ ] UserManagement | Authentication
   - [ ] UserManagement | Profiles
-
+- [x] Soltuion 템플릿
+- [x] Query 아이템 템플릿
+- [x] Command 아이템 템플릿
+- [ ] AggregateRoot 아잋템 템플릿
+- [ ] Service 프로젝트 템플릿
 ---
 - .editorconfig
   ```
@@ -89,7 +93,8 @@ upgrade-assistant upgrade
                                                             <- error? 적용 안됨? EnforceCodeStyleInBuild
   dotnet_diagnostic.IDE0161.severity = error                <- vs 전용 빌드 에러?
   ```
-
+- 도메인 이벤트로 데이터 Db에 저장?
+- 도메인 이벤트에 객체 전달? 객체 Id가 아니리?
 
 ----
 - [ ] 목차 | WebApi

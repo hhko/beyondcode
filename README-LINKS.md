@@ -1,5 +1,18 @@
 # 참고 자료
 
+## 학습
+- [ ] https://github.com/Dometrain/getting-started-domain-driven-design
+- [ ] https://github.com/Dometrain/deep-dive-domain-driven-design
+---
+- [ ] https://github.com/Dometrain/from-zero-to-hero-open-telemetry-in-dotnet
+---
+- [ ] https://github.com/Dometrain/from-zero-to-hero-vertical-slice-architecture
+- [ ] https://github.com/Dometrain/zero-to-hero-event-driven-architecture
+---
+- [ ] https://github.com/Dometrain/from-zero-to-hero-test-driven-development-tdd-csharp
+- [ ] https://github.com/Dometrain/from-zero-to-hero-clean-code-with-csharp
+- [ ] https://github.com/Dometrain/from-zero-to-hero-asynchronous-programming-in-csharp
+
 ## WebApi
 ### Gateway
 - [ ] [[.NET Conf 2021 x Seoul] YARP를 이용한 리버스 프록시 서버 구축](https://www.youtube.com/watch?v=YrmE9aNGRaE)

@@ -152,8 +152,25 @@
 
   room.Id???
   ```
-- 
+- 배열 객체에 추가한 후 DB에 업데이트하는 방법은?
+  ```
+  // CreateGymCommand
 
+  // 현재
+  await _subscriptionsRepository.UpdateAsync(subscription);
+
+  // 개선???
+  commit???
+  ```
+- domain factory
+  ```
+  CreateGymCommandUsecase
+
+  var gym = new Gym(
+      name: command.Name,
+      maxRooms: subscription.GetMaxRooms(),
+      subscriptionId: subscription.Id);
+  ```
 
 
 

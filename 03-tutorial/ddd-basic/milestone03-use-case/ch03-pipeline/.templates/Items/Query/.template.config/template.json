@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "고형호",
+  "classifications": [
+    "VOC",
+    "DDD",
+    "Architecture"
+  ],
+  "name": "DDD Architecture Query",
+  "description": "Creates a new DDD Architecture Query",
+  "identity": "DDD.Architecture.Query.CSharp",
+  "groupIdentity": "DDD.Architecture.Query",
+  "shortName": "ddd-arch-query",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "sourceName": "QueryName",
+  "preferNameDirectory": false,
+  "sources": [
+    {
+      "source": "./",
+      "target": "./"
+    }
+  ],
+  "symbols": {
+    "hostName": {
+      "type": "parameter",
+      "defaultValue": "HostName",
+      "replaces": "HostName",
+      "isRequired": true,
+      "description": "The name of the host (used for namespace prefix). e.g. Hello"
+    },
+    "entityName": {
+      "type": "parameter",
+      "defaultValue": "EntityName",
+      "replaces": "EntityName",
+      "fileRename": "EntityName",
+      "isRequired": true,
+      "description": "The name of the entity. e.g. Customer"
+    }
+  }
+}
