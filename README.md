@@ -44,12 +44,14 @@
 
 ### Solution Design Principles
 
-- **Separation**
-  - **Concern**: `Business Concern` vs `Technical Concern`
-  - **Goal**: `Main Goal` vs `Sub-Goal`(something supplementary to the main goal, 부수 목표: 주가 되는 것에 붙어 따르는 것)
-- **Direction**
-  - **Up**: The more important thing from a technical aspect(sub-goal: something supplementary to the main goal)
-  - **Down**: The more important thing from a business aspect(main goal)
+1. **Separation**
+   - **Concern**: `Business Concern` vs `Technical Concern`
+   - **Goal**: `Main Goal` vs `Sub-Goal`(something supplementary to the main goal, 부수 목표: 주가 되는 것에 붙어 따르는 것)
+1. **Direction**
+   - **Up**: The more important thing from a technical aspect(Sub-Goal)
+   - **Down**: The more important thing from a business aspect(Main Goal)
+
+<br/>
 
 | `Direction`  | `Separation` of Concerns | `Separation` of Goals                         |
 | --- | --- | --- |
@@ -62,19 +64,19 @@
 ```
 {T}
 ├─Src
-│  ├─{T}                          // Host               > Up: The more important thing from a technical aspect(sub-goal)
+│  ├─{T}                          // Host               > Up: The more important thing from a technical aspect(Sub-Goal)
 │  ├─{T}.Adapters.Infrastructure  // Adapter Layer      > │
 │  ├─{T}.Adapters.Persistence     // Adapter Layer      > │
 │  ├─{T}.Application              // Application Layer  > ↓
-│  └─{T}.Domain                   // Domain Layer       > Down: he more important thing from a business aspect(main goal)
-│     ├─Abstractions                                    > Up: The more important thing from a technical aspect(sub-goal)
+│  └─{T}.Domain                   // Domain Layer       > Down: he more important thing from a business aspect(Main Goal)
+│     ├─Abstractions                                    > Up: The more important thing from a technical aspect(Sub-Goal)
 │     │                                                 > ↓
-│     └─AggregateRoots                                  > Down: he more important thing from a business aspect(main goal)
+│     └─AggregateRoots                                  > Down: he more important thing from a business aspect(Main Goal)
 │
 └─Tests
-   ├─{T}..Tests.Integration       // Integration Test   > Up: The more important thing from a technical aspect(sub-goal)
+   ├─{T}..Tests.Integration       // Integration Test   > Up: The more important thing from a technical aspect(Sub-Goal)
    ├─{T}..Tests.Performance       // Performance Test   > ↓
-   └─{T}..Tests.Unit              // Unit Test          > Down: he more important thing from a business aspect(main goal)
+   └─{T}..Tests.Unit              // Unit Test          > Down: he more important thing from a business aspect(Main Goal)
 ```
 - {T}: Service
 
