@@ -38,14 +38,14 @@
 │  ├─{T1}.{T2}.{T3}.Adapters.Persistence      // Adapter Layer      > │
 │  ├─{T1}.{T2}.{T3}.Application               // Application Layer  > ↓
 │  └─{T1}.{T2}.{T3}.Domain                    // Domain Layer       > Down: he more important thing from a business aspect(main goal)
-│     ├─Abstractions                          //                    > Up: The more important thing from a technical aspect(sub-goal)
+│     ├─Abstractions                                                > Up: The more important thing from a technical aspect(sub-goal)
 │     │                                                             > ↓
-│     └─AggregateRoots                        //                    > Down: he more important thing from a business aspect(main goal)
+│     └─AggregateRoots                                              > Down: he more important thing from a business aspect(main goal)
 │
 └─Tests
-   ├─{T1}.{T2}.{T3}.Tests.Integration        // Integration Test    > Up: The more important thing from a technical aspect(sub-goal)
-   ├─{T1}.{T2}.{T3}.Tests.Performance        // Performance Test    > ↓
-   └─{T1}.{T2}.{T3}.Tests.Unit               // Unit Test           > Down: he more important thing from a business aspect(main goal)
+   ├─{T1}.{T2}.{T3}.Tests.Integration         // Integration Test   > Up: The more important thing from a technical aspect(sub-goal)
+   ├─{T1}.{T2}.{T3}.Tests.Performance         // Performance Test   > ↓
+   └─{T1}.{T2}.{T3}.Tests.Unit                // Unit Test          > Down: he more important thing from a business aspect(main goal)
 ```
 - {T1}: Corporation
 - {T2}: Project
