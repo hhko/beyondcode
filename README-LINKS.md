@@ -1,8 +1,15 @@
-# 참고 자료
+# 자료
+
 
 ## 학습
+- [x] https://www.youtube.com/watch?v=DOpt6IWU6LU: DDD 역사
+- [x] https://www.youtube.com/watch?v=P1vES9AgfC4: Moving IO to the edges of your app: Functional Core, Imperative Shell
+- [x] https://www.youtube.com/watch?v=R_srbvA6IQM: ArchUnitNET 패키지
+- [x] https://liftio.org/2021/files/jisoo-park-ppt.pdf: ADT 자료 구조 장점 소개 한글 ppt
+---
 - [ ] https://github.com/Dometrain/getting-started-domain-driven-design
 - [ ] https://github.com/Dometrain/deep-dive-domain-driven-design
+- [ ] https://github.com/kgrzybek/ing-ddd
 ---
 - [ ] https://github.com/Dometrain/from-zero-to-hero-open-telemetry-in-dotnet
 ---
@@ -12,6 +19,29 @@
 - [ ] https://github.com/Dometrain/from-zero-to-hero-test-driven-development-tdd-csharp
 - [ ] https://github.com/Dometrain/from-zero-to-hero-clean-code-with-csharp
 - [ ] https://github.com/Dometrain/from-zero-to-hero-asynchronous-programming-in-csharp
+- [ ] https://github.com/ardalis/ddd-guestbook
+
+## 템플릿
+- [ ] **[SSW.CleanArchitecture](https://github.com/SSWConsulting/SSW.CleanArchitecture)**
+- [ ] **[ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)**
+- [ ] **[ardalis | CleanArchitecture.WorkerService](https://github.com/ardalis/CleanArchitecture.WorkerService/tree/main)**
+- [ ] **[amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)**
+- [ ] https://github.com/samanazadi1996/Sam.CleanArchitecture: Localization, Functional Tests
+- [ ] https://github.com/babaktaremi/Clean-Architecture-Template : 도커 self-signed SSL certificate
+- [ ] https://github.com/ivanpaulovich/dotnet-new-caju: dotnet template 조건
+- [ ] https://github.com/Genocs/clean-architecture-template: worker
+- [ ] https://github.com/Hona/VerticalSliceArchitecture
+- [ ] https://github.com/Hona/VerticalSliceArchitecture.Samples.Todos
+- [ ] https://github.com/stphnwlsh/CleanMinimalApi: MinimalWebApi
+
+## 예제
+- [ ] https://github.com/dotnet-presentations/eshop-app-workshop/tree/main: eShop
+  - https://github.com/dotnet/eshop
+- [ ] https://github.com/henriquelourente/Domain-Driven-Design-Sample: DDD 예제
+- [ ] https://github.com/kgrzybek/hotels-manager/tree/main: DDD 예제
+
+<br/>
+<br/>
 
 ## WebApi
 ### Gateway
@@ -126,31 +156,7 @@
 
 
 ## 아키텍처
-### 클린 아키텍처 템플릿 소스
-- [ ] **[SSW.CleanArchitecture](https://github.com/SSWConsulting/SSW.CleanArchitecture)**
-- [ ] **[ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)**
-- [ ] **[ardalis | CleanArchitecture.WorkerService](https://github.com/ardalis/CleanArchitecture.WorkerService/tree/main)**
-- [ ] **[amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)**
-- [ ] [Sam.CleanArchitecture](https://github.com/samanazadi1996/Sam.CleanArchitecture)
-  - 개별 템플릿 만들기
-- [ ] [Clean-Architecture-Template](https://github.com/babaktaremi/Clean-Architecture-Template)
-- [ ] [Clean-Architecture-Template](https://github.com/babaktaremi/Clean-Architecture-Template)
-  ```shell
-  dotnet dev-certs https -ep $env:USERPROFILE/.aspnet/https/cleanarc.pfx -p Strong@Password
-  dotnet dev-certs https --trust
-  docker build -t bobby-cleanarc -f dockerfile.
-  docker-compose up -d
-  ```
-- [ ] [dotnet-new-caju](https://github.com/ivanpaulovich/dotnet-new-caju)
-  - https://paulovich.net/clean-architecture-for-net-applications/
-- [ ] [clean-architecture-template](https://github.com/Genocs/clean-architecture-template)
-- [ ] [VerticalSliceArchitecture](https://github.com/Hona/VerticalSliceArchitecture)
-- [ ] [VerticalSliceArchitecture.Samples.Todos](https://github.com/Hona/VerticalSliceArchitecture.Samples.Todos)
-- [ ] [from-zero-to-hero-vertical-slice-architecture](https://github.com/Dometrain/from-zero-to-hero-vertical-slice-architecture)
-- [ ] [CleanMinimalApi](https://github.com/stphnwlsh/CleanMinimalApi)
-
 ### 관련 소스
-- [ ] [eshop-app-workshop](https://github.com/dotnet-presentations/eshop-app-workshop)
 - [ ] [SharedKernelSample](https://github.com/NimblePros/SharedKernelSample)
   - Domain과 Application 레이어 구현을 위한 기본 타입 기본 구현과 테스트 참고
 - [ ] [modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd)
