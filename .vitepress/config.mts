@@ -71,7 +71,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '홈', link: '/' },
     { text: '아키텍처', link: '/01-architecture/part1-overview/ch02-architecture/'},
     { text: '세미나', link: '/02-seminar/ch01-internal-architecture/'},
-    { text: '튜토리얼', link: '/03-tutorial/ddd-basic/milestone01-domain-exploration/' },
+    { text: '튜토리얼', link: '/03-tutorial/ddd-basic/chapter-01-domain-exploration/' },
   ];
 }
 function sidebar(): DefaultTheme.Sidebar {
@@ -108,8 +108,8 @@ function sidebar(): DefaultTheme.Sidebar {
           {
             text: 'DDD 기본', link: '/03-tutorial/ddd-basic/',
             items: [
-              { text: '도메인 탐색', link: '/03-tutorial/ddd-basic/milestone01-domain-exploration/'},
-              { text: '깊은 도메인 탐색', link: '/03-tutorial/ddd-basic/milestone02-deeper-domain-exploration/'}
+              { text: '도메인 탐색', link: '/03-tutorial/ddd-basic/chapter-01-domain-exploration/'},
+              { text: '깊은 도메인 탐색', link: '/03-tutorial/ddd-basic/chapter-02-deeper-domain-exploration/'}
             ]
           }
         ]
