@@ -1,6 +1,5 @@
 # 자료
 
-
 ## 학습
 - [x] https://www.youtube.com/watch?v=DOpt6IWU6LU: DDD 역사
 - [x] https://www.youtube.com/watch?v=P1vES9AgfC4: Moving IO to the edges of your app: Functional Core, Imperative Shell
@@ -39,6 +38,27 @@
   - https://github.com/dotnet/eshop
 - [ ] https://github.com/henriquelourente/Domain-Driven-Design-Sample: DDD 예제
 - [ ] https://github.com/kgrzybek/hotels-manager/tree/main: DDD 예제
+
+<br/>
+<br/>
+
+## 템플릿
+- [ ] **[SSW.CleanArchitecture](https://github.com/SSWConsulting/SSW.CleanArchitecture)**
+- [ ] **[ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)**
+- [ ] **[ardalis | CleanArchitecture.WorkerService](https://github.com/ardalis/CleanArchitecture.WorkerService/tree/main)**
+- [ ] **[amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)**
+- [ ] https://github.com/samanazadi1996/Sam.CleanArchitecture: Localization, Functional Tests
+- [ ] https://github.com/babaktaremi/Clean-Architecture-Template : 도커 self-signed SSL certificate
+- [ ] https://github.com/ivanpaulovich/dotnet-new-caju: dotnet template 조건
+- [ ] https://github.com/Genocs/clean-architecture-template: worker
+- [ ] https://github.com/Hona/VerticalSliceArchitecture
+- [ ] https://github.com/Hona/VerticalSliceArchitecture.Samples.Todos
+- [ ] https://github.com/stphnwlsh/CleanMinimalApi: MinimalWebApi
+
+## 예제
+- [ ] https://github.com/dotnet-presentations/eshop-app-workshop/tree/main: eShop
+  - https://github.com/dotnet/eshop
+- [ ] https://github.com/henriquelourente/Domain-Driven-Design-Sample: DDD 예제  
 
 <br/>
 <br/>
