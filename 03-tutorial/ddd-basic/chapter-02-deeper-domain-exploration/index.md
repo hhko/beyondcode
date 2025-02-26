@@ -10,7 +10,7 @@ outline: deep
 
 ## 도메인 규칙(불변 조건)
 ### 더 깊은 탐색 전
-![](./../milestone01-domain-exploration/.images/DomainExploration.png)
+![](./../chapter-01-domain-exploration/.images/DomainExploration.png)
 
 ### 더 깊은 탐색 후
 ![](./.images/DeeperDomainExploration-Compared.png)
