@@ -39,15 +39,15 @@
 ```
 └─{T3}
     ├─Src
-    │   ├─{T1}.{T2}.{T3}                            // Host                     // 위: 기술적으로(부수 목표) 더 중요한 것
-    │   ├─{T1}.{T2}.{T3}.Adapters.Infrastructure    // Adapter 레이어              │
-    │   ├─{T1}.{T2}.{T3}.Adapters.Persistence       // Adapter 레이어              │
-    │   ├─{T1}.{T2}.{T3}.Application                // Application 레이어          ↓
-    │   └─{T1}.{T2}.{T3}.Domain                     // Domain 레이어            // 아래: 비즈니스적으로(주 목표) 더 중요한 것
-    │       ├─Abstractions                          // Domain 레이어 부수 목표   // 위: 기술적으로(부수 목표) 더 중요한 것
-    │       └─AggregateRoots                        // Domain 레이어 주 목표     // 아래: 비즈니스적으로(주 목표) 더 중요한 것
+    │   ├─{T1}.{T2}.{T3}                            // Host                    > 위: 기술적으로(부수 목표) 더 중요한 것
+    │   ├─{T1}.{T2}.{T3}.Adapters.Infrastructure    // Adapter Layer           > │
+    │   ├─{T1}.{T2}.{T3}.Adapters.Persistence       // Adapter Layer           > │
+    │   ├─{T1}.{T2}.{T3}.Application                // Application Layer       > ↓
+    │   └─{T1}.{T2}.{T3}.Domain                     // Domain Layer            > 아래: 비즈니스적으로(주 목표) 더 중요한 것
+    │       ├─Abstractions                          // Domain Layer, Sub-Goal  > 위: 기술적으로(부수 목표) 더 중요한 것
+    │       └─AggregateRoots                        // Domain Layer, Main Goal > 아래: 비즈니스적으로(주 목표) 더 중요한 것
     └─Tests
-        ├─{T1}.{T2}.{T3}.Tests.Integration          // Integration 테스트       // 위: 기술적으로(부수 목표) 더 중요한 것
-        ├─{T1}.{T2}.{T3}.Tests.Performance          // Performance 테스트          ↓
-        └─{T1}.{T2}.{T3}.Tests.Unit                 // Unit 테스트              // 아래: 비즈니스적으로(주 목표) 더 중요한 것
+        ├─{T1}.{T2}.{T3}.Tests.Integration          // Integration Test        > 위: 기술적으로(부수 목표) 더 중요한 것
+        ├─{T1}.{T2}.{T3}.Tests.Performance          // Performance Test        > ↓
+        └─{T1}.{T2}.{T3}.Tests.Unit                 // Unit Test               > 아래: 비즈니스적으로(주 목표) 더 중요한 것
 ```
