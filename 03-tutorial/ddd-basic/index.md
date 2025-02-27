@@ -18,14 +18,14 @@
   - [ ] Chapter 7. 영속성(Db)
   - [ ] Chapter 8. 서비스
 
-## 솔루션 설계 원칙
+## 솔루션 구성 원칙
 
-- **분리(Separation )**
-  - **괸심사(Concerns)**: `비즈니스 관심사` vs `기술 관심사`
-  - **목표(Goals)**: `주 목표` vs `부수 목표`(주가 되는 것에 붙어 따르는 것)
-- **방향(Direction)**
-  - **위(Up)**: 기술 관점에서 더 중요한 요소(부수 목표)
-  - **아래(Down)**: 비즈니스 관점에서 더 중요한 요소(주 목표)  
+1. **분리(Separation)**
+   - **괸심사(Concerns)**: `비즈니스 관심사` vs `기술 관심사`
+   - **목표(Goals)**: `주 목표` vs `부수 목표`(주가 되는 것에 붙어 따르는 것)
+1. **방향(Direction)**
+   - **위(Up)**: 기술적으로 더 중요한 요소(부수 목표)
+   - **아래(Down)**: 비즈니스적으로 더 중요한 요소(주 목표)  
 
 | 방향  | 관심사의 분리 | 목표의 분리                         |
 | --- | --- | --- |
@@ -33,24 +33,24 @@
 | 아래(Down)  | 비즈니스 관심사(유한)    | 주 목표(유한)     |
 
 - 부수 목표의 무한성을 유한으로 전환하기 위해 `Abstractions` 상위 폴더를 도입하고, 그 아래 하위 폴더에 무한한 부수 목표를 배치합니다.
-- 이를 통해 부수 목표가 주 목표와 명확히 분리되며, 상단(위)에 배치된 Abstractions 폴더를 제외한 모든 폴더가 주 목표로 더욱 직관적으로 이해될 수 있습니다
+- 이를 통해 부수 목표가 주 목표와 명확히 분리되며, 상단(위)에 배치된 `Abstractions` 폴더를 제외한 모든 폴더가 주 목표로 더욱 직관적으로 목표를 이해할 수 있습니다
 
 ```
 {T}
 ├─Src
-│  ├─{T}                          // Host               > 위(Up): 기술 관점에서 더 중요한 요소(부수 목표)
+│  ├─{T}                          // Host               > 위(Up): 기술적으로 더 중요한 요소(부수 목표)
 │  ├─{T}.Adapters.Infrastructure  // Adapter Layer      > │
 │  ├─{T}.Adapters.Persistence     // Adapter Layer      > │
 │  ├─{T}.Application              // Application Layer  > ↓
-│  └─{T}.Domain                   // Domain Layer       > 아래(Down): 비즈니스 관점에서 더 중요한 요소(주 목표)
-│     ├─Abstractions                                    > 위(Up): 기술 관점에서 더 중요한 요소(부수 목표)
+│  └─{T}.Domain                   // Domain Layer       > 아래(Down): 비즈니스적으로 더 중요한 요소(주 목표)
+│     ├─Abstractions                                    > 위(Up): 기술적으로 더 중요한 요소(부수 목표)
 │     │                                                 > ↓
-│     └─AggregateRoots                                  > 아래(Down): 비즈니스 관점에서 더 중요한 요소(주 목표)
+│     └─AggregateRoots                                  > 아래(Down): 비즈니스적으로 더 중요한 요소(주 목표)
 │
 └─Tests
-   ├─{T}..Tests.Integration       // Integration Test   > 위(Up): 기술 관점에서 더 중요한 요소(부수 목표)
+   ├─{T}..Tests.Integration       // Integration Test   > 위(Up): 기술적으로 더 중요한 요소(부수 목표)
    ├─{T}..Tests.Performance       // Performance Test   > ↓
-   └─{T}..Tests.Unit              // Unit Test          > 아래(Down): 비즈니스 관점에서 더 중요한 요소(주 목표)
+   └─{T}..Tests.Unit              // Unit Test          > 아래(Down): 비즈니스적으로 더 중요한 요소(주 목표)
 ```
 
 ![](./.images/SolutionDesignExample.png)
