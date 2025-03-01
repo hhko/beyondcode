@@ -32,4 +32,126 @@
    └─ AssemblyReference.cs
 ```
 
+### Verb
+> QueryName: Verb + Name + `Query`
+
+```shell
+- Create       // 1개
+  - Add        // 매열 멤버 변수
+  - Delete
+  - Get?
+  - List?
+  - Update?
+- Get          // 1개
+- List         // N개
+- Delete?
+- Update?
+```
+
+### 클래스 접근 제어자
+```
+{QueryName}Query                <- public sealed record
+{QueryName}QueryTelemetry       <- internal sealed class
+{QueryName}QueryUsecase         <- internal sealed class
+{QueryName}QueryValidator       <- internal sealed class
+{QueryName}Response             <- public sealed record
+```
+
+### Output DTO
+- Response 생략할 때
+  - 사전 정의된 Result 타입: 예. Success
+  - 성공: Result을 통해 1:1 값 전달할 때
+  - 성공: primitive 값 전달할 때(1:1 값 전달할 때)
+  - 실패: Result의 Error N개을 전달할 때
+
+```cs
+// 사전 정의된 Result 타입: 예. Success
+public async Task<IErrorOr>
+{
+   ...
+
+   return Result.Success.ToErrorOr();     // return Result.Sucess;
+}
+
+// 성공: Result을 통해 1:1 값 전달할 때
+public async Task<IErrorOr>
+{
+   ErrorOr<Guid> createAdminProfileResult = ...
+
+   return createAdminProfileResult;       // x           <-- 확인 필요
+}
+
+// 성공: primitive 값 전달할 때
+public async Task<IErrorOr>
+{
+   return 1.ToErrorOr();                  // return 1;
+}
+
+// 실패: 에러 N개 처리???
+return reserveSpotResult.Errors
+    .ToErrorOr();
+```
+
+### Command 메시지
+```cs
+// {CommandName}Command: 입력 메시지
+// {CommandName}Response: 출력 메시지
+
+// 입력 메시지: 출력 메시지가 있을 때
+public sealed record {CommandName}Command(      // 입력 메시지
+    {입력 타입},                                 // - 입력 파라미터
+    ...,
+    ...) : ICommand<{CommandName}Response>;     // 출력 메시지
+
+// 입력 메시지: 출력 메시지가 없을 때
+public sealed record {CommandName}Command(      // 입력 메시지
+    {입력 타입},                                 // - 입력 파라미터
+    ...,
+    ...) : ICommand;
+
+// 출력력 메시지
+public sealed record {CommandName}Response(     // 출력 메시지
+    {출력 타입},                                 // - 출력 파라미터
+    ...,
+    ...) : IResponse;
+```
+
+### Query 메시지
+```cs
+// {QueryName}Query: 입력 메시지
+// {QueryName}Response: 출력 메시지
+
+// 입력 메시지: 출력 메시지가 있을 때
+public sealed record {QueryName}Command(      // 입력 메시지
+    {입력 타입},                               // - 입력 파라미터
+    ...,
+    ...) : IQuery<{QueryName}Response>;       // 출력 메시지
+
+// 입력 메시지: 출력 메시지가 없을 때
+public sealed record {QueryName}Command(      // 입력 메시지
+    {입력 타입},                               // - 입력 파라미터
+    ...,
+    ...) : IQuery;
+
+// 출력력 메시지
+public sealed record {QueryName}Response(     // 출력 메시지
+    {출력 타입},                               // - 출력 파라미터
+    ...,
+    ...) : IResponse;
+```
+
+### Mapping
+```cs
+public static class {AggregateRoot}Mapping
+{
+    public static {Verb}{AggregateRoot}Response ToResponse(
+        this {출력 타입})
+    {
+        return new {Verb}{AggregateRoot}Response(
+         ...
+        );
+    }
+}
+```
+
 ## Application 단위 테스트

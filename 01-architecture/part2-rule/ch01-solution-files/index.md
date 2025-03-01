@@ -12,6 +12,10 @@
 
 ## 코딩 스타일
 - .editorconfig
-
-
-- 빌드 스크립트
+- - 타입
+  - `var` 키워드를 사용하지 않는다.
+  - `Target-typed new` 키워드를 사용한다.
+- 클래스 접근 제어
+  ```cs
+  internal sealed class Foo
+  ```
