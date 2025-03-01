@@ -1,6 +1,6 @@
-﻿using GymManagement.Domain.Abstractions.Utilities;
-using ErrorOr;
+﻿using ErrorOr;
 using FluentValidation;
+using GymManagement.Domain.Abstractions.Utilities;
 using MediatR;
 using System.Reflection;
 
@@ -52,8 +52,8 @@ public sealed class FluentValidationPipeline<TRequest, TResponse>(IEnumerable<IV
                 .GetMethod(
                     name: nameof(ErrorOr<object>.From),
                     bindingAttr: BindingFlags.Static | BindingFlags.Public,
-                    types: [ typeof(List<Error>) ])?
-                .Invoke(null, [ errors ])!;
+                    types: [typeof(List<Error>)])?
+                .Invoke(null, [errors])!;
 
             return response;
         }
@@ -108,7 +108,7 @@ public sealed class FluentValidationPipeline<TRequest, TResponse>(IEnumerable<IV
 //    }
 
 //    public async Task<TResponse> Handle(
-//        TRequest request, 
+//        TRequest request,
 //        RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
 //    {
 //        var context = new ValidationContext<TRequest>(request);

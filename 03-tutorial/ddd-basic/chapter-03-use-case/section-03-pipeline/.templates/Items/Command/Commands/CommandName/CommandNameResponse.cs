@@ -1,6 +1,6 @@
-﻿using HostName.Application.Abstractions.BaseTypes.Cqrs;
+﻿using SolutionName.Framework.BaseTypes.Application.Cqrs;
 
 namespace HostName.Application.Usecases.EntityNames.Commands.CommandName;
 
-internal sealed record CommandNameResponse()
+public sealed record CommandNameResponse()
     : IResponse;

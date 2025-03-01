@@ -1,7 +1,7 @@
-﻿using GymManagement.Tests.Unit.Abstractions.Providers;
+﻿using ErrorOr;
+using GymManagement.Tests.Unit.Abstractions.Providers;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
 using GymManagement.Tests.Unit.LayerTests.Domain.Factories;
-using ErrorOr;
 using Shouldly;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainErrors;
 using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
@@ -56,7 +56,7 @@ public sealed class SessionTest
         // Act
         var reserveSpotResult = sut.ReserveSpot(participant);
         var cancelReservationResult = sut.CancelReservation(
-            participant,
+            participant.Id,
             new TestDateTimeProvider(fixedDateTime: cancellationDateTime));
 
         // Assert
@@ -82,7 +82,7 @@ public sealed class SessionTest
         // Act
         var reserveSpotResult = sut.ReserveSpot(participant);
         var cancelReservationResult = sut.CancelReservation(
-            participant,
+            participant.Id,
             new TestDateTimeProvider(fixedDateTime: today.ToDateTime(DomainConstants.Session.Time.Start)));
 
         // Assert

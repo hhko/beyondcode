@@ -1,8 +1,8 @@
-﻿using GymManagement.Application.Abstractions.Registrations;
+﻿using ErrorOr;
+using GymManagement.Application.Abstractions.Registrations;
 using GymManagement.Application.Usecases.Subscriptions.Queries.ListSubscriptions;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
 using GymManagement.Tests.Unit.LayerTests.Domain.Factories;
-using ErrorOr;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;

@@ -1,5 +1,23 @@
 # 자료
 
+## 비즈니스 로직
+> 이 코드가 **현실 문제에 대한 의사결정을** 하고 있는가?
+> - 도메인 로직이 아닌 코드는
+>   - 그 의사결정을 위한 입력값을 만들어 주거나
+>   - 그 의사결졍의 결과물을 보여주고 전파하는 코드입니다.
+- [ ] https://www.youtube.com/watch?v=gbzDG_2XQYk
+- [ ] https://tech.osci.kr/%ea%b4%80%ec%8b%ac%ec%82%ac-%eb%b6%84%eb%a6%ac-separation-of-concerns/
+- [ ] https://www.inflearn.com/course/%EC%A7%80%EC%86%8D-%EC%84%B1%EC%9E%A5-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4: 비즈니스 로직 비교 코드
+
+## 아키텍처
+- [ ] [1/5 Hexagonal Architecture – What Is It? Why Should You Use It?](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture/): hexagonal-architecture 체계적 설명, dto 경우의 수 표현, 클린아키텍처와 비교
+- [ ] [2/5 Hexagonal Architecture with Java – Tutorial](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture-java/)
+- [ ] [3/5 Ports and Adapters Java Tutorial: Adding a Database Adapter](https://www.happycoders.eu/software-craftsmanship/ports-and-adapters-java-tutorial-db/)
+- [ ] [4/5 Hexagonal Architecture With Quarkus](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture-quarkus/)
+- [ ] [5/5 Hexagonal Architecture with Spring Boot](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture-spring-boot/)
+- [ ] [Moving IO to the edges of your app: Functional Core, Imperative Shell - Scott Wlaschin](https://www.youtube.com/watch?v=P1vES9AgfC4)
+- [ ] [Exposing the not-so-secret practices of the cult of DDD](https://www.youtube.com/watch?v=ESPnfFT6iD0)
+
 ## 학습
 - [x] https://www.youtube.com/watch?v=DOpt6IWU6LU: DDD 역사
 - [x] https://www.youtube.com/watch?v=P1vES9AgfC4: Moving IO to the edges of your app: Functional Core, Imperative Shell

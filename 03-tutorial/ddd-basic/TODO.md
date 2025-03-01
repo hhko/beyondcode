@@ -54,38 +54,52 @@ upgrade-assistant upgrade
   - [x] 단위 테스트: 결과
   - [ ] ICommand
   -----------
-  - [x] GymManagement | Subscription | Query, List
-  - [x] GymManagement | Subscription | Command, Create
-    ```
-    await _adminsRepository.UpdateAsync(admin);     ??? 트랜잭션으로 개선할 수 없을까?
-    ```
   - [x] GymManagement | Gym | Query, Get
   - [x] GymManagement | Gym | Query, List
-  - [ ] 논리 오류: if (!await _subscriptionsRepository.ExistsAsync())
+  - [x] 논리 오류: if (!await _subscriptionsRepository.ExistsAsync())
     ```cs
     if (await _subscriptionsRepository.ExistsAsync(request.SubscriptionId))
     {
         return Error.NotFound("Subscription not found");
     }
     ```
-  - [ ] GymManagement | Gym | Command, Create
-  - [ ] GymManagement | Gym | Command, Add
-  ---
-  - [ ] GymManagement | Admin
-  - [ ] GymManagement | Room
-  - [ ] SessionReservation | Gym
-  - [ ] SessionReservation | Participant
-  - [ ] SessionReservation | Reservation
-  - [ ] SessionReservation | Room
-  - [ ] SessionReservation | Session
-  - [ ] SessionReservation | Trainer
-  - [ ] UserManagement | Authentication
-  - [ ] UserManagement | Profiles
+---
 - [x] Soltuion 템플릿
 - [x] Query 아이템 템플릿
 - [x] Command 아이템 템플릿
-- [ ] AggregateRoot 아잋템 템플릿
+- [ ] AggregateRoot 아이템 템플릿
+- [ ] Event 아이템 템플릿
+- [ ] Integration Event 아이템 템플릿
 - [ ] Service 프로젝트 템플릿
+---
+- [ ] 데이터 관리???
+  ```cs
+  await _adminsRepository.UpdateAsync(admin);     ??? 트랜잭션으로 개선할 수 없을까?
+  ```
+- [x] GymManagement | Admins
+- [x] GymManagement | Gyms
+- [x] GymManagement | Rooms
+- [x] GymManagement | Subscriptions
+- [x] UserManagement | Profiles
+- [ ] UserManagement | Authentication
+- [x] SessionReservation | Gyms
+- [x] SessionReservation | Participants
+- [x] SessionReservation | Reservations
+- [ ] SessionReservation | Rooms
+- [ ] SessionReservation | Sessions
+- [ ] SessionReservation | Trainers
+
+---
+- [ ] event로 인해 트랜잭션 분리 문제는?
+  예. 예약 취소(삭제)
+    -> 참가자의 
+- [ ] 이벤트는 반환 타입에 IErrorOr을 적용할 수 없다.
+
+---
+- [ ] 문서 정리
+- [ ] 이해
+- [ ] IValidator 개선
+ 
 ---
 - .editorconfig
   ```

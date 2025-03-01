@@ -1,5 +1,4 @@
-﻿
-using ErrorOr;
+﻿using ErrorOr;
 using MediatR;
 
 namespace DddGym.Framework.BaseTypes.Application.Cqrs;

@@ -1,9 +1,9 @@
-﻿using GymManagement.Domain.AggregateRoots.Gyms;
+﻿using DddGym.Framework.BaseTypes.Domain;
+using ErrorOr;
+using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Events;
-using ErrorOr;
 using static GymManagement.Domain.AggregateRoots.Subscriptions.Errors.DomainErrors;
-using DddGym.Framework.BaseTypes.Domain;
 
 namespace GymManagement.Domain.AggregateRoots.Subscriptions;
 

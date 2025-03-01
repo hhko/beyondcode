@@ -24,6 +24,13 @@
     }
   ],
   "symbols": {
+    "slnName": {
+      "type": "parameter",
+      "defaultValue": "SolutionName",
+      "replaces": "SolutionName",
+      "isRequired": true,
+      "description": "The name of the solution (used for namespace prefix). e.g. Hello"
+    },
     "hostName": {
       "type": "parameter",
       "defaultValue": "HostName",

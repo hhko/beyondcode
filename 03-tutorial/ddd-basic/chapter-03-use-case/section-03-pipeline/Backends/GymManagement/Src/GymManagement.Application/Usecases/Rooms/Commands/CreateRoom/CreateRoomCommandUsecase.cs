@@ -2,11 +2,13 @@
 using ErrorOr;
 using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Gyms;
+using GymManagement.Domain.AggregateRoots.Rooms;
+using GymManagement.Domain.AggregateRoots.Subscriptions;
 
 namespace GymManagement.Application.Usecases.Rooms.Commands.CreateRoom;
 
 internal sealed class CreateRoomCommandUsecase
-    : ICommandusecase<CreateRoomCommand, CreateRoomResponse>
+    : ICommandUsecase<CreateRoomCommand, CreateRoomResponse>
 {
     private readonly ISubscriptionsRepository _subscriptionsRepository;
     private readonly IGymsRepository _gymsRepository;
@@ -27,39 +29,30 @@ internal sealed class CreateRoomCommandUsecase
                 .ToErrorOr<CreateRoomResponse>();
         }
 
+        if (await _subscriptionsRepository.GetByIdAsync(gym.SubscriptionId) is not Subscription subscription)
+        {
+            return Error
+                .NotFound(description: "Subscription not found")
+                .ToErrorOr<CreateRoomResponse>();
+        }
 
+        var room = new Room(
+            name: command.RoomName,
+            gymId: gym.Id,
+            maxDailySessions: subscription.GetMaxDailySessions());
+
+        var addRoomResult = gym.AddRoom(room);
+        if (addRoomResult.IsError)
+        {
+            return addRoomResult
+                .Errors
+                .ToErrorOr<CreateRoomResponse>();
+        }
+
+        await _gymsRepository.UpdateAsync(gym);
+
+        return room
+            .ToResponseCreated()
+            .ToErrorOr();
     }
 }
-
-//public async Task<ErrorOr<Room>> Handle(CreateRoomCommand command, CancellationToken cancellationToken)
-//{
-//    var gym = await _gymsRepository.GetByIdAsync(command.GymId);
-
-//    if (gym is null)
-//    {
-//        return Error.NotFound(description: "Gym not found");
-//    }
-
-//    var subscription = await _subscriptionsRepository.GetByIdAsync(gym.SubscriptionId);
-
-//    if (subscription is null)
-//    {
-//        return Error.Unexpected(description: "Subscription not found");
-//    }
-
-//    var room = new Room(
-//        name: command.RoomName,
-//        gymId: gym.Id,
-//        maxDailySessions: subscription.GetMaxDailySessions());
-
-//    var addGymResult = gym.AddRoom(room);
-
-//    if (addGymResult.IsError)
-//    {
-//        return addGymResult.Errors;
-//    }
-
-//    await _gymsRepository.UpdateAsync(gym);
-
-//    return room;
-//}

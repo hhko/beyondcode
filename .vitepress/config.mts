@@ -88,8 +88,20 @@ function sidebar(): DefaultTheme.Sidebar {
               { text: '아키텍처 진단', link: '/01-architecture/part1-overview/ch03-architecture-diagnosis/' },
               { text: 'Internal 아키텍처', link: '/01-architecture/part1-overview/ch04-internal-architecture/' },
               { text: 'External 아키텍처', link: '/01-architecture/part1-overview/ch05-external-architecture/' }
-            ]
+            ],
           },
+          {
+            text: '규칙',
+            items: [
+              { text: '솔루션 파일', link: '/01-architecture/part2-rule/ch01-solution-files' },
+              { text: '솔루션 프로젝트', link: '/01-architecture/part2-rule/ch02-solution-projects' },
+              { text: '솔루션 빌드', link: '/01-architecture/part2-rule/ch03-solution-build' },
+              { text: '아키텍처 테스트', link: '/01-architecture/part2-rule/ch04-architecture-test' },
+              { text: 'Domain 레이어', link: '/01-architecture/part2-rule/ch05-domain-layer' },
+              { text: 'Application 레이어', link: '/01-architecture/part2-rule/ch06-application-layer' }
+            ]
+
+          }
         ],
       },
     ],

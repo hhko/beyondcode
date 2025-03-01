@@ -1,7 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
+using ErrorOr;
 using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Gyms;
-using ErrorOr;
 
 namespace GymManagement.Application.Usecases.Gyms.Queries.GetGym;
 
@@ -25,7 +25,6 @@ internal sealed class GetGymQueryUsecase
                 .NotFound("Subscription not found")
                 .ToErrorOr<GetGymResponse>();
         }
-
 
         if (await _gymsRepository.GetByIdAsync(query.GymId) is not Gym gym)
         {

@@ -4,7 +4,7 @@ using GymManagement.Domain.AggregateRoots.Subscriptions.Events;
 
 namespace GymManagement.Application.Usecases.Gyms.Events.GymAdded;
 
-internal sealed class GymAddedEventUsecase 
+internal sealed class GymAddedEventUsecase
     : IDomainEventUsecase<GymAddedEvent>
 {
     private readonly IGymsRepository _gymsRepository;

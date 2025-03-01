@@ -1,65 +1,103 @@
-```
-https://woochanleee.github.io/project-tree-generator
-```
+# 규칙
 
-- 솔루션 | .gitignore
-- 솔루션 | .gitattributes
-- 솔루션 | global.json
-- 솔루션 | nuget.config
-- 솔루션 | Directory.Packages.props
-- 솔루션 | Directory.Build.props
-- 솔루션 | .editorconfig
-- 솔루션 | 솔루션 빌드 로컬: 코드 커버리지
-- 솔루션 | 솔루션 빌드 로컬: 정적 분석
-- 솔루션 | 솔루션 빌드 로컬: 프로젝트 참조 다이어그램
-- 솔루션 | 솔루션 배포
+## 솔루션 구성 파일
+- 형상관리
+  - .gitignore
+  - .gitattributes
+- 설정
+  - global.json
+  - nuget.config
+  - Directory.Packages.props
+  - Directory.Build.props
+  - .editorconfig
+- 빌드 스크립트
+  - .gitlab-ci.yml
+  - .gitlab-ci-build.ps1
+  - .gitlab-ci-deploy.local.ps1
+  - .gitlab-ci-deploy.ps1
 
----
-
-```
-{Solution}
-├─ Abstractions
-│  ├─ {Library}
-│  └─ SharedKernels
-├─ Backends
-│  ├─ {Service}
-│  └─ Tests
-├─ Frontends
-└─ Wiki
-```
 
 ```
-{Solution}
-├─ Abstractions
-│  ├─ {Library}
-│  │  ├─ Src
-│  │  │  └─ {Solution}.{Library}
-│  │  └─ Tests
-│  │     └─ {Solution}.{Library}.Tests.Unit
-│  └─ SharedKernels
-│     ├─ Src
-│     │  ├─ {Solution}.Framework
-│     │  └─ {Solution}.Domain
-│     └─ Tests
-│        ├─ {Solution}.Framework.Tests.Unit
-│        └─ {Solution}.Domain.Tests.Unit
-├─ Backends
-│  ├─ {Service}
-│  │  ├─ Src
-│  │  │  ├─ {Service}
-│  │  │  ├─ {Service}.Adapters.Infrastructure
-│  │  │  ├─ {Service}.Adapters.Persistence
-│  │  │  ├─ {Service}.Application
-│  │  │  └─ {Service}.Domain
-│  │  └─ Tests
-│  │     ├─ {Service}.Tests.Integration
-│  │     ├─ {Service}.Tests.Performance
-│  │     └─ {Service}.Tests.Unit
-│  └─ Tests
-│     └─ {Solution}.Tests.E2E
-├─ Frontends
-└─ Wiki
+
+
+<br/>
+<br/>
+<br/>
+
+## 코딩 컨벤션
+- 타입
+  - `var` 키워드를 사용하지 않는다.
+  - `Target-typed new` 키워드를 사용한다.
+- 클래스 접근 제어
+  ```cs
+  internal sealed class Foo
+  ```
+
+
+## Usecase
+### 그룹
+- AggregateRoots
+- 의미
+  - 예. Users  -> Profiles       // User 행위 주제 단위 CQRS
+  - 예. 
+
+### 메시지
 ```
+{Verb}{EntityName}Command
+{Verb}{EntityName}Query
+{Verb}{EntityName}Event
+```
+### 메시지 Verb
+```
+- Create       // 1개
+  - Add        // 매열 멤버 변수
+  - Delete
+  - Get?
+  - List?
+  - Update?
+- Get          // 1개
+- List         // N개
+- Delete?
+- Update?
+```
+
+### Usecase 반환 타입
+- Response 생략할 때
+  - Result
+  - 그 외
+    - Primitive 타입: 예. int, Guid, string, ...
+    - Result 정의 타입: 예. Success, ...
+
+public async Task<IErrorOr>
+{
+   ErrorOr<Guid> createAdminProfileResult = ...
+
+   return createAdminProfileResult;       // x           <-- 확인 필요
+}
+
+public async Task<IErrorOr>
+{
+   return 1.ToErrorOr();                  // return 1;
+}
+
+public async Task<IErrorOr>
+{
+   ...
+
+   return Result.Success.ToErrorOr();     // return Result.Sucess;
+}
+
+
+// 에러 N개 처리???
+return reserveSpotResult.Errors
+    .ToErrorOr();
+
+
+
+
+
+
+
 
 ```
 {Solution}
@@ -144,16 +182,7 @@ Usecases
 
       {AggregateRoot}Mappings.cs
 
-Verb
-- Create       // 1개
-  - Add        // 매열 멤버 변수
-  - Delete
-  - Get?
-  - Update?
-- Get          // 1개
-- List         // N개
-- Delete?
-- Update?
+
 
 ### Command 메시지
 public sealed record {Verb}{AggregateRoot}Command(

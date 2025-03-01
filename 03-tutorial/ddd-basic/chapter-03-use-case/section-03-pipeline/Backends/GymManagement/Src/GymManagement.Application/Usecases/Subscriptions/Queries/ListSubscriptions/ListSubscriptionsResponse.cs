@@ -4,5 +4,5 @@ using GymManagement.Domain.AggregateRoots.Subscriptions;
 namespace GymManagement.Application.Usecases.Subscriptions.Queries.ListSubscriptions;
 
 public sealed record ListSubscriptionsResponse(
-    List<Subscription> Subscriptions) 
+    List<Subscription> Subscriptions)
     : IResponse;

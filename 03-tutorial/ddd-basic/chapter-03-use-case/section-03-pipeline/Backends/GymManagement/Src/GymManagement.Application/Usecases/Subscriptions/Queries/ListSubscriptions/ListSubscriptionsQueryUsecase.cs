@@ -1,10 +1,10 @@
-﻿using GymManagement.Domain.AggregateRoots.Subscriptions;
+﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
 using ErrorOr;
-using DddGym.Framework.BaseTypes.Application.Cqrs;
+using GymManagement.Domain.AggregateRoots.Subscriptions;
 
 namespace GymManagement.Application.Usecases.Subscriptions.Queries.ListSubscriptions;
 
-internal sealed class ListSubscriptionsQueryUsecase 
+internal sealed class ListSubscriptionsQueryUsecase
     : IQueryUsecase<ListSubscriptionsQuery, ListSubscriptionsResponse>
 {
     private readonly ISubscriptionRepository _subscriptionRepository;

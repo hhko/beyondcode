@@ -10,11 +10,18 @@
     <PackageReference Include="ErrorOr" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="MediatR" />
+    <PackageReference Include="Riok.Mapperly" />
+    <PackageReference Include="Throw" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Abstractions\Frameworks\Src\DddGym.Framework\DddGym.Framework.csproj" />
     <ProjectReference Include="..\GymManagement.Domain\GymManagement.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Usecases\Profiles\Commands\" />
+    <Folder Include="Usecases\Reservations\Commands\" />
   </ItemGroup>
 
 </Project>

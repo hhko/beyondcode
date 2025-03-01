@@ -6,10 +6,5 @@ internal sealed class CommandNameCommandValidator : AbstractValidator<CommandNam
 {
     public CommandNameCommandValidator()
     {
-        RuleFor(x => x.Name)
-            .NotEmpty();
-
-        RuleFor(x => x.SubscriptionId)
-            .NotEmpty();
     }
 }

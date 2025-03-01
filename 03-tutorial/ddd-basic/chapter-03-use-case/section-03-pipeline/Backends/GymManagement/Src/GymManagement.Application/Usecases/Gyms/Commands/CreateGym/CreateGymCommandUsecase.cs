@@ -1,13 +1,13 @@
-﻿using GymManagement.Application.Abstractions.Repositories;
+﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
+using ErrorOr;
+using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
-using ErrorOr;
-using DddGym.Framework.BaseTypes.Application.Cqrs;
 
 namespace GymManagement.Application.Usecases.Gyms.Commands.CreateGym;
 
 internal sealed class CreateGymCommandUsecase
-    : ICommandusecase<CreateGymCommand, CreateGymResponse>
+    : ICommandUsecase<CreateGymCommand, CreateGymResponse>
 {
     private readonly ISubscriptionsRepository _subscriptionsRepository;
 

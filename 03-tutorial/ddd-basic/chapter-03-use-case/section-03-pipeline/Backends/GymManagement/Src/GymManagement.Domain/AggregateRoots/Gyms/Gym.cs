@@ -1,8 +1,8 @@
-﻿using GymManagement.Domain.AggregateRoots.Gyms.Events;
-using GymManagement.Domain.AggregateRoots.Rooms;
+﻿using DddGym.Framework.BaseTypes.Domain;
 using ErrorOr;
+using GymManagement.Domain.AggregateRoots.Gyms.Events;
+using GymManagement.Domain.AggregateRoots.Rooms;
 using static GymManagement.Domain.AggregateRoots.Gyms.Errors.DomainErrors;
-using DddGym.Framework.BaseTypes.Domain;
 
 namespace GymManagement.Domain.AggregateRoots.Gyms;
 
@@ -87,16 +87,16 @@ public sealed class Gym : AggregateRoot
     }
 
     // 추가
-    public ErrorOr<Success> RemoveRoom(Room room)
+    public ErrorOr<Success> RemoveRoom(Guid roomId)
     {
-        if (!_roomIds.Contains(room.Id))
+        if (!_roomIds.Contains(roomId))
         {
             return Error.NotFound(description: "Room not found");
         }
 
-        _roomIds.Remove(room.Id);
+        _roomIds.Remove(roomId);
 
-        _domainEvents.Add(new RoomRemovedEvent(this, room));
+        _domainEvents.Add(new RoomRemovedEvent(this, roomId));
 
         return Result.Success;
     }

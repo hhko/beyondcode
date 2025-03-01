@@ -171,12 +171,75 @@
       maxRooms: subscription.GetMaxRooms(),
       subscriptionId: subscription.Id);
   ```
+- 변수 이름 변경
+  ```
+  // public async Task<ErrorOr<Room>> Handle(CreateRoomCommand command, CancellationToken cancellationToken)
+  // 전
+  var addGymResult = gym.AddRoom(room);
+
+  // 후
+  var addRoomResult = gym.AddRoom(room);
+  ```
+- 메시지 문법 오류
+  ```
+  // 수정 전
+  have reservation
+
+  // 수정 후
+  have a reservation
+  ```
+- Throw 도입
+  ```
+  var participant = await _participantsRepository.GetByIdAsync(notification.Reservation.ParticipantId)
+            ?? throw new EventualConsistencyException(ReservationCanceledEvent.ParticipantNotFound);
+
+  var participant = ...
+  participant.ThrowIfNull(_ => new EventualConsistencyException(Error.NotFound(description: "Participant not found")));
+  ```
+- Error 타입 변경
+  ```
+  var removeBookingResult = participant.RemoveFromSchedule(notification.Session);
+
+  if (removeBookingResult.IsError)
+  {
+      throw new EventualConsistencyException(
+          ReservationCanceledEvent.ParticipantNotFound,     <-- SessionCanceledEvent.ParticipantScheduleUpdateFailed,
+          removeBookingResult.Errors);
+  }
+  ```
+- 로그 내용 개선
+  ```
+  // 전
+  Removing session from participant schedule failed
+
+  // 후
+  Cannot Remove session from participant schedule
+  ```
+- ErrorOr과 Throw 통합?
 
 
 
+public enum ErrorType
+{
+    Failure,            // 1
+    Unexpected,         // 2
+    Validation,         // 3
+    Conflict,           // 4
+    NotFound,           // 5
+    Unauthorized,       // 6
+    Forbidden           // 7
+}
 
+    Event               // 100
 
+---
+UnableToFind{명사}
 
+Cannot{메서드}            // 주 메서드 실패
+Cannot{메서드}{부가 이유}
+
+- 행위
+- 실패 이유
 
 
 

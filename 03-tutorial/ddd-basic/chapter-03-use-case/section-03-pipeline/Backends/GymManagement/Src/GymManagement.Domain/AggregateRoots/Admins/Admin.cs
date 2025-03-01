@@ -1,7 +1,7 @@
-﻿using GymManagement.Domain.AggregateRoots.Admins.Events;
-using GymManagement.Domain.AggregateRoots.Subscriptions;
+﻿using DddGym.Framework.BaseTypes.Domain;
 using ErrorOr;
-using DddGym.Framework.BaseTypes.Domain;
+using GymManagement.Domain.AggregateRoots.Admins.Events;
+using GymManagement.Domain.AggregateRoots.Subscriptions;
 
 namespace GymManagement.Domain.AggregateRoots.Admins;
 

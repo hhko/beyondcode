@@ -6,4 +6,4 @@ public sealed record AddTrainerCommand(
     Guid SubscriptionId,
     Guid GymId,
     Guid TrainerId)
-    : ICommand<AddTrainerResponse>;
+    : ICommand;

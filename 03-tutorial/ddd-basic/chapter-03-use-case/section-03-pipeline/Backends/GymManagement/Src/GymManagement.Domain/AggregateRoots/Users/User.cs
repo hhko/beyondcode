@@ -1,6 +1,6 @@
-﻿using GymManagement.Domain.AggregateRoots.Users.Events;
+﻿using DddGym.Framework.BaseTypes.Domain;
 using ErrorOr;
-using DddGym.Framework.BaseTypes.Domain;
+using GymManagement.Domain.AggregateRoots.Users.Events;
 
 namespace GymManagement.Domain.AggregateRoots.Users;
 

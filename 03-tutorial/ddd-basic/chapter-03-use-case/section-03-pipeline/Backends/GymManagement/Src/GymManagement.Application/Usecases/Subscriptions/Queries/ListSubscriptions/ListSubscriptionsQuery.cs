@@ -2,5 +2,5 @@
 
 namespace GymManagement.Application.Usecases.Subscriptions.Queries.ListSubscriptions;
 
-public sealed record ListSubscriptionsQuery() 
+public sealed record ListSubscriptionsQuery()
     : IQuery<ListSubscriptionsResponse>;

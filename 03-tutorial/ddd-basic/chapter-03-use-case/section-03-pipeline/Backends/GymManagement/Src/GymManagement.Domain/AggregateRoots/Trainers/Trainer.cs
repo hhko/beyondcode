@@ -1,8 +1,8 @@
-﻿using GymManagement.Domain.Abstractions.Entities;
-using GymManagement.Domain.AggregateRoots.Sessions;
+﻿using DddGym.Framework.BaseTypes.Domain;
 using ErrorOr;
+using GymManagement.Domain.Abstractions.Entities;
+using GymManagement.Domain.AggregateRoots.Sessions;
 using static GymManagement.Domain.AggregateRoots.Trainers.Errors.DomainErrors;
-using DddGym.Framework.BaseTypes.Domain;
 
 namespace GymManagement.Domain.AggregateRoots.Trainers;
 

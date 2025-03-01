@@ -1,5 +1,4 @@
-﻿
-using DddGym.Framework.BaseTypes.Application.Cqrs;
+﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
 
 namespace GymManagement.Application.Usecases.Rooms.Commands.CreateRoom;
 

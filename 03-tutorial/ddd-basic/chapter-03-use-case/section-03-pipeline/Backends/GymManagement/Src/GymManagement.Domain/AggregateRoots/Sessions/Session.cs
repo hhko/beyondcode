@@ -1,10 +1,10 @@
-﻿using GymManagement.Domain.AggregateRoots.Participants;
+﻿using DddGym.Framework.BaseTypes.Domain;
+using ErrorOr;
+using GymManagement.Domain.Abstractions.ValueObjects;
+using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
 using GymManagement.Domain.AggregateRoots.Sessions.Events;
-using ErrorOr;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainErrors;
-using GymManagement.Domain.Abstractions.ValueObjects;
-using DddGym.Framework.BaseTypes.Domain;
 
 namespace GymManagement.Domain.AggregateRoots.Sessions;
 
@@ -118,6 +118,7 @@ public sealed class Session : AggregateRoot
     //}
 
     // 변경
+    // TODO? Guid participantId???
     public ErrorOr<Success> ReserveSpot(Participant participant)
     {
         // 규칙
@@ -187,15 +188,15 @@ public sealed class Session : AggregateRoot
     //}
 
     // 변경
-    public ErrorOr<Success> CancelReservation(Participant participant, IDateTimeProvider dateTimeProvider)
+    public ErrorOr<Success> CancelReservation(Guid participantId, IDateTimeProvider dateTimeProvider)
     {
         // 규칙
         //  세션 시작 24시간 이내에는 무료로 예약을 취소할 수 없다.
         //  A reservation cannot be canceled for free less than 24 hours before the session starts
-        Reservation? reservation = _reservations.Find(reservation => reservation.ParticipantId == participant.Id);
-        if (reservation is null)
+        //Reservation? reservation = _reservations.Find(reservation => reservation.ParticipantId == participantId);
+        if (!_reservations.Any(reservation => reservation.ParticipantId != participantId))
         {
-            return Error.NotFound(description: "Reservation not found");
+            return CancelReservationErrors.ReservationNotFound;
         }
 
         // 숨겨진 규칙
@@ -211,6 +212,7 @@ public sealed class Session : AggregateRoot
             return CancelReservationErrors.CannotCancelReservationTooCloseToSession;
         }
 
+        var reservation = _reservations.First(reservation => reservation.ParticipantId == participantId);
         _reservations.Remove(reservation);
 
         _domainEvents.Add(new ReservationCanceledEvent(this, reservation));

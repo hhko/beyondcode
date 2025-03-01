@@ -1,4 +1,4 @@
-﻿using HostName.Application.Abstractions.BaseTypes.Cqrs;
+﻿using SolutionName.Framework.BaseTypes.Application.Cqrs;
 using HostName.Domain.AggregateRoots.EntityNames;
 using ErrorOr;
 
@@ -9,9 +9,11 @@ internal sealed class QueryNameQueryUsecase
 {
     public async Task<IErrorOr<QueryNameResponse>> Handle(QueryNameQuery query, CancellationToken cancellationToken)
     {
-        // var subscriptions = await _subscriptionRepository.ListAsync();
+        // return Error
+        //     .NotFound(description: "Subscription not found")
+        //     .ToErrorOr<CommandNameResponse>();
 
-        // return subscriptions
+        // return xyx
         //     .ToResponse()
         //     .ToErrorOr();
     }

@@ -1,7 +1,7 @@
-﻿using GymManagement.Application.Abstractions.Repositories;
-using Throw;
+﻿using DddGym.Framework.BaseTypes.Application.Events;
 using DddGym.Framework.IntegrationEvents;
-using DddGym.Framework.BaseTypes.Application.Events;
+using GymManagement.Application.Abstractions.Repositories;
+using Throw;
 
 namespace GymManagement.Application.Usecases.Gyms.IntegrationEvents.SessionScheduled;
 

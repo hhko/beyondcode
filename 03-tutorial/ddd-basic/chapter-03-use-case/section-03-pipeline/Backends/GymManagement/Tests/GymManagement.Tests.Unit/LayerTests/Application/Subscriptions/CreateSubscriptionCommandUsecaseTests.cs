@@ -1,14 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using GymManagement.Application.Abstractions.Registrations;
-using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
-using GymManagement.Tests.Unit.LayerTests.Domain.Factories;
-using NSubstitute;
-using GymManagement.Domain.AggregateRoots.Admins;
-using MediatR;
-using GymManagement.Application.Usecases.Subscriptions.Commands.CreateSubscription;
-using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;
-using Shouldly;
+﻿using GymManagement.Application.Abstractions.Registrations;
 using GymManagement.Application.Abstractions.Repositories;
+using GymManagement.Application.Usecases.Subscriptions.Commands.CreateSubscription;
+using GymManagement.Domain.AggregateRoots.Admins;
+using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;
+using GymManagement.Tests.Unit.LayerTests.Domain.Factories;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using NSubstitute;
+using Shouldly;
+using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
 
 namespace GymManagement.Tests.Unit.LayerTests.Application.Subscriptions;
 
@@ -34,7 +34,7 @@ public class CreateSubscriptionCommandUsecaseTests
 
         // Act
         var actual = await sut.Send(new CreateSubscriptionCommand(
-            SubscriptionType.Pro, 
+            SubscriptionType.Pro,
             admin.Id));
 
         // Assert
