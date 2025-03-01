@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # Domain 레이어
 
 ## Domain 레이어 템플릿
