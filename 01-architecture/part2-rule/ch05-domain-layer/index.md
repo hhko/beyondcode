@@ -6,7 +6,7 @@ outline: deep
 
 ## Domain 레이어 템플릿
 ```shell
-└─ {Solution}.{Service}.Domain
+└─ {Corporation}.{Solution}.{Service}.Domain
    ├─ Abstractions               // 부수 목표
    │  ├─ Enumerations            // - 열거형
    │  ├─ Entities                // - 엔티티 객체

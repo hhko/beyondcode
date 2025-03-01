@@ -6,7 +6,7 @@ outline: deep
 
 ## Application 레이어 템플릿
 ```shell
-└─ {Solution}.{Service}.Application
+└─ {Corporation}.{Solution}.{Service}.Application
    ├─ Abstractions                                      // 부수 목표
    │  ├─ Registrations                                  // - 의존성 등록
    │  ├─ Pipelines                                      // - MediatR 파이프라인
@@ -35,6 +35,8 @@ outline: deep
    │
    └─ AssemblyReference.cs
 ```
+
+## CQRS
 
 ### Verb
 > QueryName: Verb + Name + `Query`
