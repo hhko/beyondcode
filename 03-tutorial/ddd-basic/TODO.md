@@ -201,3 +201,8 @@ upgrade-assistant upgrade
 - [x] 테스트 프로젝트 | Room 규칙 테스트
   - 방은 두 개 이상의 겹치는 세션을 가질 수 없다.
   - A room cannot have two or more overlapping sessions
+- Application Usecase 성공일 때 값이 N개일 때
+  ```cs
+  return (user, _jwtTokenGenerator.GenerateToken(user))     // <---???
+    .ToResponse()
+  ```

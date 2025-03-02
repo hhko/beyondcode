@@ -222,8 +222,10 @@
     Guid GymId,               // <- 사용하지 않는 변수
     Guid RoomId) : IRequest<ErrorOr<Room>>;
   ```
+- Login과 Register 위치 변경: UserManagement, Authentication
+  - public class RegisterCommandHandler
 
-
+```
 public enum ErrorType
 {
     Failure,            // 1
@@ -236,23 +238,9 @@ public enum ErrorType
 }
 
     Event               // 100
+```
 
----
-UnableToFind{명사}
-
-Cannot{메서드}            // 주 메서드 실패
-Cannot{메서드}{부가 이유}
-
-- 행위
-- 실패 이유
-
-
-
-
-
-
-
-
+- 로그 ??? 기본 형식
 - The "Designing with types" series
   - https://fsharpforfunandprofit.com/series/designing-with-types/
 - 조영호
