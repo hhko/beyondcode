@@ -1,9 +1,8 @@
 [![build](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml/badge.svg)](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml)
 
-> A Beautiful Journey to Writing Wise Code
-
-- `The structure` of the source code should be as clear as **a table of contents in a book** to help understand the system.
-- `Test code` should serve as **a manual** for understanding business rules.
+- A Beautiful Journey to Writing Wise Code
+  - `The structure` of the source code should be as clear as **a table of contents in a book** to help understand the system.
+  - `Test code` should serve as **a manual** for understanding business rules.
 
 <br/>
 
@@ -39,7 +38,7 @@
   - [ ] Chapter 08. Resilience
 - Part 3. Input/Output Technical Concern
   - [ ] Chapter 09. WebApi
-  - [ ] Chapter 10. PosgreSQL
+  - [ ] Chapter 10. PostgreSQL
   - [ ] Chapter 11. RabbitMQ
   - [ ] Chapter 12. Reverse Proxy
 
@@ -59,7 +58,7 @@
 | Up    | Technical Concern(Infinite)   | Sub-Goal(Infinite -Abstractions-> Finite)   |
 | Down  | Business Concern(Finite)      | Main Goal(Finite)                           |
 
-- To transform the infinite nature of sub-goals into a finite structure, an `Abstractions` top-level folder is introduced, with sub-goals placed in subfolders beneath it.
+- To transform the infinite nature of sub-goals into a finite structure, an `Abstractions` top-level folder is introduced, with sub-goals placed in sub-folders beneath it.
 - This ensures a clear separation between sub-goals and the main goal, making all folders, except for the `Abstractions` folder at the top, more intuitively understood as part of the main goal."
 
 ```
@@ -70,6 +69,7 @@
 │  ├─{T}.Adapters.Persistence     // Adapter Layer      > │
 │  ├─{T}.Application              // Application Layer  > ↓
 │  └─{T}.Domain                   // Domain Layer       > Down: he more important thing from a business aspect(Main Goal)
+│     │
 │     ├─Abstractions                                    > Up: The more important thing from a technical aspect(Sub-Goal)
 │     │                                                 > ↓
 │     └─AggregateRoots                                  > Down: he more important thing from a business aspect(Main Goal)
