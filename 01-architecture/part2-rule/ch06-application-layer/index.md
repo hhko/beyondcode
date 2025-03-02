@@ -36,8 +36,41 @@ outline: deep
    └─ AssemblyReference.cs
 ```
 
-## CQRS
+## CQRS 구성
+- MediatR의 IRequest 인터페이스를 CQRS 원칙에 맞춰 보다 명확하게 표현하기 위해, 입력 메시지를 ICommand와 IQuery로 구분합니다.
+- 출력 타입을 `IResponse`으로 표준화 시킵니다.
 
+### ICommand 인터페이스
+```cs
+public interface ICommand : IRequest<IErrorOr>;
+
+public interface ICommand<out TResponse> : IRequest<IErrorOr<TResponse>>
+    where TResponse : IResponse;
+
+public interface ICommandUsecase<in TCommand> : IRequestHandler<TCommand, IErrorOr>
+    where TCommand : ICommand;
+
+public interface ICommandUsecase<in TCommand, TResponse> : IRequestHandler<TCommand, IErrorOr<TResponse>>
+    where TCommand : ICommand<TResponse>
+    where TResponse : IResponse;
+```
+
+### IQuery 인터페이스
+```cs
+public interface IQuery<out TResponse> : IRequest<IErrorOr<TResponse>>
+    where TResponse : IResponse;
+
+public interface IQueryUsecase<in TQuery, TResponse> : IRequestHandler<TQuery, IErrorOr<TResponse>>
+    where TQuery : IQuery<TResponse>
+    where TResponse : IResponse;
+```
+
+### 출력 인터페이스
+```cs
+public interface IResponse;
+```
+
+## CQRS 구현
 ### Verb
 > QueryName: Verb + Name + `Query`
 

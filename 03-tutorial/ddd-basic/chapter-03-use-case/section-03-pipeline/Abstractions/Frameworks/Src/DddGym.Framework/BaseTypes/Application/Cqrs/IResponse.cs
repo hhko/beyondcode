@@ -1,5 +1,3 @@
 ﻿namespace DddGym.Framework.BaseTypes.Application.Cqrs;
 
-public interface IResponse
-{
-}
+public interface IResponse;

@@ -28,15 +28,16 @@ outline: deep
 │  ├─ {T}.Adapters.Persistence     // Adapter Layer      > │
 │  ├─ {T}.Application              // Application Layer  > ↓
 │  └─ {T}.Domain                   // Domain Layer       > 아래(Down): 비즈니스적으로 더 중요한 요소(주 목표)
+│     │
 │     ├─ Abstractions                                    > 위(Up): 기술적으로 더 중요한 요소(부수 목표)
 │     │                                                  > ↓
 │     ├─ AggregateRoots                                  > 아래(Down): 비즈니스적으로 더 중요한 요소(주 목표)
 │     └─ AssemblyReference.cs
 │
 └─ Tests
-   ├─ {T}..Tests.Integration       // Integration Test   > 위(Up): 기술적으로 더 중요한 요소(부수 목표)
-   ├─ {T}..Tests.Performance       // Performance Test   > ↓
-   └─ {T}..Tests.Unit              // Unit Test          > 아래(Down): 비즈니스적으로 더 중요한 요소(주 목표)
+   ├─ {T}.Tests.Integration       // Integration Test    > 위(Up): 기술적으로 더 중요한 요소(부수 목표)
+   ├─ {T}.Tests.Performance       // Performance Test    > ↓
+   └─ {T}.Tests.Unit              // Unit Test           > 아래(Down): 비즈니스적으로 더 중요한 요소(주 목표)
 ```
 
 - 레이어 주 목표
@@ -113,3 +114,7 @@ outline: deep
 └─ Wiki
 ```
 
+### 리포지토리 전략
+- 모놀리스(Monolith)
+- 멀티 레포(Multi Repo)
+- 모노레포(Monorepo)
