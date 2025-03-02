@@ -81,7 +81,7 @@ function sidebar(): DefaultTheme.Sidebar {
         text: '아키텍처',
         items: [
           {
-            text: '개요',
+            text: '개요', link: '/01-architecture/part1-overview/',
             items: [
               { text: '개발 환경', link: '/01-architecture/part1-overview/ch01-prerequisite/' },
               { text: '아키텍처', link: '/01-architecture/part1-overview/ch02-architecture/' },
@@ -91,14 +91,14 @@ function sidebar(): DefaultTheme.Sidebar {
             ],
           },
           {
-            text: '규칙',
+            text: '가이드', link: '/01-architecture/part2-guide/',
             items: [
-              { text: '솔루션 파일', link: '/01-architecture/part2-rule/ch01-solution-files' },
-              { text: '솔루션 프로젝트', link: '/01-architecture/part2-rule/ch02-solution-projects' },
-              { text: '솔루션 빌드', link: '/01-architecture/part2-rule/ch03-solution-build' },
-              { text: '아키텍처 테스트', link: '/01-architecture/part2-rule/ch04-architecture-test' },
-              { text: 'Domain 레이어', link: '/01-architecture/part2-rule/ch05-domain-layer' },
-              { text: 'Application 레이어', link: '/01-architecture/part2-rule/ch06-application-layer' }
+              { text: '솔루션 파일', link: '/01-architecture/part2-guide/ch01-solution-files' },
+              { text: '솔루션 프로젝트', link: '/01-architecture/part2-guide/ch02-solution-projects' },
+              { text: '솔루션 빌드', link: '/01-architecture/part2-guide/ch03-solution-build' },
+              { text: '아키텍처 테스트', link: '/01-architecture/part2-guide/ch04-architecture-test' },
+              { text: 'Domain 레이어', link: '/01-architecture/part2-guide/ch05-domain-layer' },
+              { text: 'Application 레이어', link: '/01-architecture/part2-guide/ch06-application-layer' }
             ]
 
           }
