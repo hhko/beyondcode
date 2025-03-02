@@ -4,6 +4,12 @@ outline: deep
 
 # Domain 레이어
 
+## Domain 레이어 패키지
+- Ardalis.SmartEnum
+- MediatR.Contracts
+- ErrorOr
+- Throw
+
 ## Domain 레이어 템플릿
 ```shell
 └─ {Corporation}.{Solution}.{Service}.Domain

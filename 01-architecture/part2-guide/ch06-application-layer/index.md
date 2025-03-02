@@ -4,6 +4,13 @@ outline: deep
 
 # Application 레이어
 
+## Application 레이어 패키지
+- MediatR
+- FluentValidation
+- Riok.Mapperly
+- ErrorOr
+- Throw
+
 ## Application 레이어 템플릿
 ```shell
 └─ {Corporation}.{Solution}.{Service}.Application
