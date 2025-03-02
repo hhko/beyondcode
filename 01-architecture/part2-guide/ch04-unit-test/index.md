@@ -17,8 +17,12 @@ outline: deep
     │  ├─ {Solution}.{Service}.Adapters.Persistence
     │  ├─ {Solution}.{Service}.Application
     │  └─ {Solution}.{Service}.Domain
+    │
+    │  #
+    │  # 테스트
+    │  #
     └─ Tests
-       └─ {Solution}.{Project}.Tests.Unit
+       └─ {Solution}.{Project}.Tests.Unit              # 단위 테스트
            │  # 부수 목표
            ├─ Abstractions
            │  └─ Constants
