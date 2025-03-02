@@ -2,7 +2,11 @@
 outline: deep
 ---
 
-# 아키텍처 테스트
+# 단위 테스트
+
+## 단위 테스트 패키지
+- xUnit
+- Shouldly
 
 ## 단위 테스트 템플릿
 ```shell
@@ -25,3 +29,5 @@ outline: deep
                 ├─ Factories
                 └─ {AggregateRoot}Tests.cs
 ```
+
+## 단위 테스트 그룹화
