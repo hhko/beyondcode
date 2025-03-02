@@ -216,7 +216,12 @@
   Cannot Remove session from participant schedule
   ```
 - ErrorOr과 Throw 통합?
-
+- 불필요한 변수 제거
+  ```cs
+  public record GetRoomQuery(
+    Guid GymId,               // <- 사용하지 않는 변수
+    Guid RoomId) : IRequest<ErrorOr<Room>>;
+  ```
 
 
 public enum ErrorType

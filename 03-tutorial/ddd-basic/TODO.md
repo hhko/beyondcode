@@ -92,14 +92,14 @@ upgrade-assistant upgrade
 ---
 - [ ] event로 인해 트랜잭션 분리 문제는?
   예. 예약 취소(삭제)
-    -> 참가자의 
+    -> 참가자의
 - [ ] 이벤트는 반환 타입에 IErrorOr을 적용할 수 없다.
 
 ---
 - [ ] 문서 정리
 - [ ] 이해
 - [ ] IValidator 개선
- 
+
 ---
 - .editorconfig
   ```

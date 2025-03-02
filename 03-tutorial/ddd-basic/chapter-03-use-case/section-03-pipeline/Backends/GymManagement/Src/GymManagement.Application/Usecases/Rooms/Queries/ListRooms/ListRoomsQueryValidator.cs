@@ -6,5 +6,7 @@ internal sealed class ListRoomsQueryValidator : AbstractValidator<ListRoomsQuery
 {
     public ListRoomsQueryValidator()
     {
+        RuleFor(x => x.GymId)
+            .NotEmpty();
     }
 }
