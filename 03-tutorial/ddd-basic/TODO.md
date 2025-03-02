@@ -98,7 +98,16 @@ upgrade-assistant upgrade
 ---
 - [ ] 문서 정리
 - [ ] 이해
+- [ ] Errors 정의
+  ```
+  ApplicationErrors.{CommandName}Errors.cs
+  ApplicationErrors.{QuerName}Errors.cs
+    ApplicationErrors.{QuerName}.{Reason}     // Message
+  DomainErrors.{MethodName}Errors.cs
+    DomainErrors.{AggregateRoot}.{Reason}     // Aggregate Root
+  ```
 - [ ] IValidator 개선
+- [ ] Factory
 
 ---
 - .editorconfig
