@@ -9,10 +9,10 @@ outline: deep
 - `2.` **숨겨진 주요 도메인 규칙을** 발굴하여 객체 관계를 구성하고 검증합니다.
 
 ## 도메인 규칙(불변 조건)
-### 더 깊은 탐색 전
+### 깊은 탐색 전
 ![](./../chapter-01-domain-exploration/.images/DomainExploration.png)
 
-### 더 깊은 탐색 후
+### 깊은 탐색 후
 ![](./.images/DeeperDomainExploration-Compared.png)
 
 - ...
