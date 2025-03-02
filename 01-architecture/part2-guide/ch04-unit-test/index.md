@@ -18,16 +18,20 @@ outline: deep
     │  ├─ {Solution}.{Service}.Application
     │  └─ {Solution}.{Service}.Domain
     └─ Tests
-    └─ {Solution}.{Project}.Tests.Unit
-        ├─ Abstractions
-        │  └─ Constants
-        └─ LayerTests
-            ├─ Application
-            │  └─ {UseCase}Tests.cs
-            └─ Domain
-                ├─ Constants
-                ├─ Factories
-                └─ {AggregateRoot}Tests.cs
+       └─ {Solution}.{Project}.Tests.Unit
+           │  # 부수 목표
+           ├─ Abstractions
+           │  └─ Constants
+           │
+           │  # 주 목표
+           └─ LayerTests
+               ├─ Application                          # Application 레이어
+               │  └─ {Usecase}Tests.cs                 # Usecase 테스트
+               │
+               └─ Domain                               # Domain 레이어
+                   ├─ Constants
+                   ├─ Factories
+                   └─ {AggregateRoot}Tests.cs          # Aggregate Root 테스트
 ```
 
 ## 단위 테스트 그룹화
