@@ -78,7 +78,7 @@
   ```
   // 無
   // 有
-    code: $"{nameof(DomainErrors)}.{nameof(Gym)}.{nameof(CannotHaveMoreRoomsThanSubscriptionAllows)}",
+    code: $"{nameof(Domain)}.{nameof(Gym)}.{nameof(CannotHaveMoreRoomsThanSubscriptionAllows)}",
     description:
   ```
 - 초과 테스트 개선
