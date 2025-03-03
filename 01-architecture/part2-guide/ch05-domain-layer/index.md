@@ -37,4 +37,36 @@ outline: deep
    └─ AssemblyReference.cs
 ```
 
+## Errors
+
+```shell
+Sessions                                        # Aggregate Root
+└─ Errors
+   ├─ DomainErrors.CancelReservationErrors.cs   # MethodName: CancelReservation
+   └─ DomainErrors.ReserveSpotErrors.cs         # MethodName: ReserveSpot
+```
+
+- DomainErrors.{MethodName}Errors.cs
+  - 코드
+    - `Domain.{AggregateRoot}.{Reason}`
+  - 클래스
+    - `public static partial class DomainErrors`
+    - `public static class {MethodName}Errors`
+  - 템플릿
+    - {MethodName}
+    - {AggregateRoot}
+    - {Reason}
+
+```cs
+public static partial class DomainErrors
+{
+    public static class {MethodName}Errors
+    {
+        public static readonly Error {Reason} = Error.Validation(
+            code: $"{nameof(Domain)}.{nameof({AggregateRoot})}.{nameof({Reason})}",
+            description: " ... ");
+    }
+}
+```
+
 ## Domain 레이어 단위 테스트

@@ -29,6 +29,8 @@ outline: deep
    │  │   │      ├─ {CommandName}CommandValidator.cs    //     - Command Validator: 메시지 유효성 검사
    │  │   │      └─ {CommandName}Response.cs            //     - Command Output: DTO
    │  │   │
+   │  │   ├─ Errors                                     // - Error
+   │  │   │
    │  │   ├─ Events                                     // - Event 유스케이스
    │  │   │
    │  │   └─ Queries                                    // - Query 유스케이스
@@ -196,6 +198,37 @@ public static class {AggregateRoot}Mapping
         return new {Verb}{AggregateRoot}Response(
          ...
         );
+    }
+}
+```
+
+## Errors
+
+```shell
+Authentication
+└─ Errors
+   └─ ApplicationErrors.LoginQueryErrors.cs   # QueryName: LoginQuery
+```
+
+- ApplicationErrors.{CommandName}Errors.cs
+  - 코드
+    - `Application.{CommandName}.{Reason}`
+    - `Application.{QueryName}.{Reason}`
+  - 클래스
+    - `public static partial class ApplicationErrors`
+    - `public static class {CommandName}Errors`
+  - 템플릿
+    - {CommandName}
+    - {Reason}
+
+```cs
+public static partial class ApplicationErrors
+{
+    public static class {CommandName}Errors
+    {
+        public static readonly Error {Reason} = Error.Validation(
+            code: $"{nameof(Application)}.{nameof({CommandName})}.{nameof({Reason})}",
+            description: " ... ");
     }
 }
 ```
