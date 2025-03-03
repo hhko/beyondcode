@@ -215,3 +215,4 @@ upgrade-assistant upgrade
   return (user, _jwtTokenGenerator.GenerateToken(user))     // <---???
     .ToResponse()
   ```
+- SmartEnum Validator???

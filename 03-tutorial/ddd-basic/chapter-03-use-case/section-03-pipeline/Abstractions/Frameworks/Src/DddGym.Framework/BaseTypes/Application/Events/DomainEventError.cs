@@ -9,7 +9,7 @@ public static class DomainEventError
     public static Error From(string code, string description)
     {
         return Error.Custom(
-            type: DomainEventType, 
+            type: DomainEventType,
             code: code,
             description: description);
     }

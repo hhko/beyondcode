@@ -1,5 +1,4 @@
 ﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
-using GymManagement.Domain.AggregateRoots.Gyms;
 using ErrorOr;
 using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Sessions;

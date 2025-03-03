@@ -2,8 +2,6 @@
 using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Sessions.Events;
-using MediatR;
-using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainEventErrors;
 
 namespace GymManagement.Application.Usecases.Participants.Events.SessionCanceled;

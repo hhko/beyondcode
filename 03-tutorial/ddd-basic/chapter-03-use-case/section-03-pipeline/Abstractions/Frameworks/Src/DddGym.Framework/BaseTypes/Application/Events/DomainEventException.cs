@@ -8,8 +8,8 @@ public class DomainEventException : Exception
     public List<Error> UnderlyingErrors { get; }
 
     public DomainEventException(
-        Error domainEventError, 
-        List<Error>? underlyingErrors = null) 
+        Error domainEventError,
+        List<Error>? underlyingErrors = null)
         : base(message: domainEventError.Description)
     {
         DomainEventError = domainEventError;

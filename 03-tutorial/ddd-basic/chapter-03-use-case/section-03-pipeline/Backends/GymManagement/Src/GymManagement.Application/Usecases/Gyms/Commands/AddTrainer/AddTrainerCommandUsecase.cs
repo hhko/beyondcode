@@ -26,7 +26,7 @@ internal sealed class AddTrainerCommandUsecase
         {
             return Error
                 .NotFound(description: "Subscription not found")
-                .ToErrorOr<Success> ();
+                .ToErrorOr<Success>();
         }
 
         // TODO: 언제 객체에서 찾고, 언제 DB에서 찾니?

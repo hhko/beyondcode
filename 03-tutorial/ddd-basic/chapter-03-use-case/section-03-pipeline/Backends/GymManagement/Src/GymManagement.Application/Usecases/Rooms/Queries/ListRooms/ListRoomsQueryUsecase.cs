@@ -1,7 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
-using GymManagement.Domain.AggregateRoots.Rooms;
 using ErrorOr;
 using GymManagement.Application.Abstractions.Repositories;
+using GymManagement.Domain.AggregateRoots.Rooms;
 
 namespace GymManagement.Application.Usecases.Rooms.Queries.ListRooms;
 

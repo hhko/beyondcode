@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using GymManagement.Domain.AggregateRoots.Participants;
 
 namespace GymManagement.Application.Usecases.Sessions.Commands.CreateReservation;
 

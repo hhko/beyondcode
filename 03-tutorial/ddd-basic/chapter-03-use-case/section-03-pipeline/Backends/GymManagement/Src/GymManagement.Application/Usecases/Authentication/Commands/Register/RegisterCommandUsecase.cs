@@ -15,8 +15,8 @@ internal sealed class RegisterCommandUsecase
     private readonly IUsersRepository _usersRepository;
 
     public RegisterCommandUsecase(
-        IJwtTokenGenerator jwtTokenGenerator, 
-        IPasswordHasher passwordHasher, 
+        IJwtTokenGenerator jwtTokenGenerator,
+        IPasswordHasher passwordHasher,
         IUsersRepository usersRepository)
     {
         _jwtTokenGenerator = jwtTokenGenerator;

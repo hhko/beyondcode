@@ -17,8 +17,8 @@ internal sealed class LoginQueryUsecase
     private readonly IUsersRepository _usersRepository;
 
     public LoginQueryUsecase(
-        IJwtTokenGenerator jwtTokenGenerator, 
-        IPasswordHasher passwordHasher, 
+        IJwtTokenGenerator jwtTokenGenerator,
+        IPasswordHasher passwordHasher,
         IUsersRepository usersRepository)
     {
         _jwtTokenGenerator = jwtTokenGenerator;

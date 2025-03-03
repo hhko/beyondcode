@@ -39,34 +39,42 @@ outline: deep
 
 ## Errors
 
-```shell
-Sessions                                        # Aggregate Root
-└─ Errors
-   ├─ DomainErrors.CancelReservationErrors.cs   # MethodName: CancelReservation
-   └─ DomainErrors.ReserveSpotErrors.cs         # MethodName: ReserveSpot
-```
+### 에러 코드
+> `DomainErrors.{AggregateRoot}.{Reason}`
 
-- DomainErrors.{MethodName}Errors.cs
-  - 코드
-    - `Domain.{AggregateRoot}.{Reason}`
-  - 클래스
-    - `public static partial class DomainErrors`
-    - `public static class {MethodName}Errors`
-  - 템플릿
-    - {MethodName}
-    - {AggregateRoot}
-    - {Reason}
-
+### 에러 구현 템플릿
 ```cs
 public static partial class DomainErrors
 {
     public static class {MethodName}Errors
     {
         public static readonly Error {Reason} = Error.Validation(
-            code: $"{nameof(Domain)}.{nameof({AggregateRoot})}.{nameof({Reason})}",
+            // 에러 코드
+            code: $"{nameof(DomainErrors)}.{nameof({AggregateRoot})}.{nameof({Reason})}",
+
+            // 에러 원인
             description: " ... ");
     }
 }
+```
+
+- 파일 이름
+  - DomainErrors.{MethodName}Errors.cs
+- 클래스
+  - `public static partial class DomainErrors`
+  - `public static class {MethodName}Errors`
+- 템플릿 변수
+  - `{MethodName}`
+  - `{AggregateRoot}`
+  - `{Reason}`
+
+
+### 에러 구성 예
+```shell
+Sessions                                        # Aggregate Root
+└─ Errors
+   ├─ DomainErrors.CancelReservationErrors.cs   # MethodName: CancelReservation
+   └─ DomainErrors.ReserveSpotErrors.cs         # MethodName: ReserveSpot
 ```
 
 ## Domain 레이어 단위 테스트

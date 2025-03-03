@@ -1,8 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
-using GymManagement.Domain.AggregateRoots.Users;
 using ErrorOr;
 using GymManagement.Application.Abstractions.Repositories;
-using GymManagement.Application.Usecases.Profiles;
+using GymManagement.Domain.AggregateRoots.Users;
 
 namespace GymManagement.Application.Usecases.Users.Commands.CreateAdminProfile;
 
@@ -27,7 +26,7 @@ internal sealed class CreateAdminProfileCommandUsecase
         }
 
         ErrorOr<Guid> createAdminProfileResult = user.CreateAddminProfile();
-        if (createAdminProfileResult.IsError) 
+        if (createAdminProfileResult.IsError)
         {
             return createAdminProfileResult
                 .Errors

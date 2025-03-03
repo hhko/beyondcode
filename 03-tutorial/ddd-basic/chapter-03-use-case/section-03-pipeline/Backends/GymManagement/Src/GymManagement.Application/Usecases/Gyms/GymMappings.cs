@@ -2,7 +2,6 @@
 using GymManagement.Application.Usecases.Gyms.Queries.GetGym;
 using GymManagement.Application.Usecases.Gyms.Queries.ListGyms;
 using GymManagement.Application.Usecases.Gyms.Queries.ListSessionse;
-using GymManagement.Application.Usecases.Trainers.Commands.AddTrainer;
 using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Sessions;
 

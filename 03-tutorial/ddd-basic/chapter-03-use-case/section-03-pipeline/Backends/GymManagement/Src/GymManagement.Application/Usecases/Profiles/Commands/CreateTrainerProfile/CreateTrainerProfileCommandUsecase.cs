@@ -1,7 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
-using GymManagement.Domain.AggregateRoots.Users;
 using ErrorOr;
 using GymManagement.Application.Abstractions.Repositories;
+using GymManagement.Domain.AggregateRoots.Users;
 
 namespace GymManagement.Application.Usecases.Users.Commands.CreateTrainerProfile;
 

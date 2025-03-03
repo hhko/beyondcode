@@ -1,6 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes.Application.Events;
 using ErrorOr;
-using GymManagement.Domain.Abstractions.Entities;
 
 namespace GymManagement.Domain.AggregateRoots.Sessions.Errors;
 

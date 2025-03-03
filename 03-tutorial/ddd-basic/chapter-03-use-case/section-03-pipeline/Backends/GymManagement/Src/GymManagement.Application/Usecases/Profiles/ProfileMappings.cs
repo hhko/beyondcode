@@ -1,5 +1,4 @@
-﻿using GymManagement.Application.Usecases.Users.Commands.CreateAdminProfile;
-using GymManagement.Application.Usecases.Users.Queries.ListProfiles;
+﻿using GymManagement.Application.Usecases.Users.Queries.ListProfiles;
 using GymManagement.Domain.AggregateRoots.Users;
 
 namespace GymManagement.Application.Usecases.Profiles;

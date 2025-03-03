@@ -219,33 +219,37 @@ public static class {AggregateRoot}Mapping
 
 ## Errors
 
-```shell
-Authentication
-└─ Errors
-   └─ ApplicationErrors.LoginQueryErrors.cs   # QueryName: LoginQuery
-```
+### 에러 코드
+> - `ApplicationErrors.{CommandName}.{Reason}`
+> - `ApplicationErrors.{QueryName}.{Reason}`
 
-- ApplicationErrors.{CommandName}Errors.cs
-  - 코드
-    - `Application.{CommandName}.{Reason}`
-    - `Application.{QueryName}.{Reason}`
-  - 클래스
-    - `public static partial class ApplicationErrors`
-    - `public static class {CommandName}Errors`
-  - 템플릿
-    - {CommandName}
-    - {Reason}
-
+### 에러 구현 템플릿
 ```cs
 public static partial class ApplicationErrors
 {
     public static class {CommandName}Errors
     {
         public static readonly Error {Reason} = Error.Validation(
-            code: $"{nameof(Application)}.{nameof({CommandName})}.{nameof({Reason})}",
+            code: $"{nameof(ApplicationErrors)}.{nameof({CommandName})}.{nameof({Reason})}",
             description: " ... ");
     }
 }
+```
+
+- 파일 이름
+  - ApplicationErrors.{CommandName}Errors.cs
+- 클래스
+  - `public static partial class ApplicationErrors`
+  - `public static class {CommandName}Errors`
+- 템플릿 변수
+  - `{CommandName}`
+  - `{Reason}`
+
+### 에러 구성 예
+```shell
+Authentication
+└─ Errors
+   └─ ApplicationErrors.LoginQueryErrors.cs   # QueryName: LoginQuery
 ```
 
 ## Application 단위 테스트
