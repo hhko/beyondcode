@@ -34,6 +34,6 @@
 | 32 | O |  Subscriptions      | Subscription      | Commands          | CreateSubscription             |
 | 33 | O |  Subscriptions      | Subscription      | Events            | SubscriptionSetEvent           |
 | 34 | O |  Subscriptions      | Subscription      | Queries           | ListSubscriptions              |
-| 35 |   |  Trainers           | Trainer           | Events            | SessionCancledEvent            |
+| 35 | O |  Trainers           | Trainer           | Events            | SessionCancledEvent            |
 | 36 |   |  Trainers           | Trainer           | Events            | SessionScheduledEvent          |
 | 37 |   |  Trainers           | Trainer           | IntegrationEvents | TrainerCreatedEvent            |

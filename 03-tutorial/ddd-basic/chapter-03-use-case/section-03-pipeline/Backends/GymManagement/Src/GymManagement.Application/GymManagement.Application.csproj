@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Usecases\Authentication\Commands\" />
-    <Folder Include="Usecases\Trainers\" />
     <Folder Include="Usecases\Sessions\" />
     <Folder Include="Usecases\Profiles\Commands\" />
     <Folder Include="Usecases\Reservations\Commands\" />

@@ -188,6 +188,21 @@ public sealed record {QueryName}Response(     // 출력 메시지
     ...) : IResponse;
 ```
 
+### Event 구현
+```cs
+// 개선 전
+Participant? participant = await _participantsRepository.GetByIdAsync(domainEvent.Reservation.ParticipantId);
+if (participant is null)
+{
+    throw new DomainEventException(ReservationCanceledEventErrors.ParticipantNotFound);
+}
+
+// 개선 후
+Participant participant = await _participantsRepository.GetByIdAsync(domainEvent.Reservation.ParticipantId)
+    ?? throw new DomainEventException(ReservationCanceledEventErrors.ParticipantNotFound);
+
+```
+
 ### Mapping
 ```cs
 public static class {AggregateRoot}Mapping
