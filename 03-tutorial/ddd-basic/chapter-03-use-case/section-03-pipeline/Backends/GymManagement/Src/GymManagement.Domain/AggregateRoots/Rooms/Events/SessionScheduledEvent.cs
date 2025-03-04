@@ -3,9 +3,14 @@ using GymManagement.Domain.AggregateRoots.Sessions;
 
 namespace GymManagement.Domain.AggregateRoots.Rooms.Events;
 
+//public sealed record SessionScheduledEvent(
+//    Room Room,
+//    Session Session) : IDomainEvent;
+
 public sealed record SessionScheduledEvent(
-    Room Room,
-    Session Session) : IDomainEvent;
+    Guid RoomId,
+    Guid TrainerId) : IDomainEvent;
+
 //{
 //    //public static readonly Error TrainerNotFound = EventualConsistencyError.From(
 //    //    code: "SessionScheduledEvent.TrainerNotFound",

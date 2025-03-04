@@ -19,4 +19,4 @@ public record RoomAddedEvent(
     string Name,
     Guid RoomId,
     Guid GymId,
-    int MaxDailySessions) : IIntegrationEvent;
+    int MaxDailySessions) : IDomainEvent;

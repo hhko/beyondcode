@@ -1,5 +1,5 @@
 ﻿namespace DddGym.Framework.BaseTypes.Domain;
 
-public interface IIntegrationEvent : IDomainEvent
-{
-}
+//public interface IIntegrationEvent : IDomainEvent
+//{
+//}

@@ -2,11 +2,12 @@
 using DddGym.Framework.IntegrationEvents;
 using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Admins;
+using GymManagement.Domain.AggregateRoots.Users.Events;
 
 namespace GymManagement.Application.Usecases.Admins.IntegrationEvents.AdminProfileCreated;
 
 internal sealed class AdminProfileCreatedEventUsecase
-    : IDomainEventUsecase<AdminProfileCreatedIntegrationEvent>
+    : IDomainEventUsecase<AdminProfileCreatedEvent>
 {
     private readonly IAdminsRepository _adminsRepository;
 
@@ -15,7 +16,7 @@ internal sealed class AdminProfileCreatedEventUsecase
         _adminsRepository = adminsRepository;
     }
 
-    public async Task Handle(AdminProfileCreatedIntegrationEvent domainEvent, CancellationToken cancellationToken)
+    public async Task Handle(AdminProfileCreatedEvent domainEvent, CancellationToken cancellationToken)
     {
         var admin = new Admin(domainEvent.UserId, domainEvent.AdminId);
 
