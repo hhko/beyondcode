@@ -35,10 +35,7 @@ public sealed class Room : AggregateRoot
     // 추가
     public int MaxDailySessions 
     {  
-        get 
-        { 
-            return _maxDailySessions; 
-        } 
+        get { return _maxDailySessions; } 
     }
 
     // ---------------------
