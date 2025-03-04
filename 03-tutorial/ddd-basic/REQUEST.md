@@ -224,6 +224,14 @@
   ```
 - Login과 Register 위치 변경: UserManagement, Authentication
   - public class RegisterCommandHandler
+- async 접두사
+  ```
+  // 전
+  Task<List<Session>> ListByRoomId(Guid roomId);
+
+  // 후
+  Task<List<Session>> ListByRoomIdAsync(Guid roomId);
+  ```
 
 ```
 public enum ErrorType

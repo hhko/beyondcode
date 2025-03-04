@@ -32,6 +32,15 @@ public sealed class Room : AggregateRoot
     // 추가
     public string Name { get; }
 
+    // 추가
+    public int MaxDailySessions 
+    {  
+        get 
+        { 
+            return _maxDailySessions; 
+        } 
+    }
+
     // ---------------------
 
     public IReadOnlyList<Guid> SessionIds => _sessionIdsByDate.Values

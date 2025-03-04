@@ -5,7 +5,7 @@ namespace GymManagement.Application.Abstractions.Repositories;
 
 public interface ISessionsRepository
 {
-    //Task AddSessionAsync(Session session);
+    Task AddSessionAsync(Session session);
     Task<Session?> GetByIdAsync(Guid id);
     Task<List<Session>> ListByIds(
         IReadOnlyList<Guid> sessionIds,
@@ -21,6 +21,6 @@ public interface ISessionsRepository
 
     Task UpdateAsync(Session session);
 
-    //Task<List<Session>> ListByRoomId(Guid roomId);
-    //Task RemoveRangeAsync(List<Session> sessions);
+    Task<List<Session>> ListByRoomIdAsync(Guid roomId);
+    Task RemoveRangeAsync(List<Session> sessions);
 }

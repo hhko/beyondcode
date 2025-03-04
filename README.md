@@ -16,30 +16,38 @@
 
 <br/>
 
-## Domain-Driven Design Basic Tutorial
+## Domain-Driven Design Tutorial
 
 > This has been restructured based on "[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)".
 
 ### Goal
 - Understand code structuring for sustainable software development.
-- Learn tactical Design that express domain knowledge as code.
+- Learn tactical design that express domain knowledge as code.
 
 ### Table of Contents
 - Part 1. Business Concern
   - [ ] Chapter 01. Domain Exploration
   - [ ] Chapter 02. Deeper Domain Exploration
-  - [ ] Chapter 03. Use Case(DTO)
-  - [ ] Chapter 04. Factory(Error)
+  - [ ] Chapter 03. Use Case(CQRS, Event)
+    - Validator
+    - DTO
+    - Factory
+    - Pipeline
 - Part 2. Host Technical Concern
-  - [ ] Chapter 05. Host(Option)
-  - [ ] Chapter 06. Container(Service Discovery)
-  - [ ] Chapter 07. OpenTelemetry
-  - [ ] Chapter 08. Resilience
+  - [ ] Chapter 01. Host
+    - Option
+    - Integration Test
+  - [ ] Chapter 02. Container
+    - Dockerfile
+    - docker-compose.yml
+    - Service Discovery
+  - [ ] Chapter 03. OpenTelemetry
+  - [ ] Chapter 04. Resilience
 - Part 3. Input/Output Technical Concern
-  - [ ] Chapter 09. WebApi
-  - [ ] Chapter 10. PostgreSQL
-  - [ ] Chapter 11. RabbitMQ
-  - [ ] Chapter 12. Reverse Proxy
+  - [ ] Chapter 01. WebApi
+  - [ ] Chapter 02. PostgreSQL
+  - [ ] Chapter 03. RabbitMQ
+  - [ ] Chapter 04. Reverse Proxy
 
 ### Solution Design Principles
 
@@ -84,48 +92,57 @@
 
 ### Use case
 
-| No |  Use case           | AggregateRoot     | Category          | Name                           |
-|----| --------------------|-------------------|-------------------|--------------------------------|
-| 1  |  Admins             | Admin             | IntegrationEvents | AdminProfileCreatedEvent       |
-| 2  |  **Authentication** | **User**          | Commands          | Register                       |
-| 3  |  **Authentication** | **User**          | Queries           | Login                          |
-| 4  |  Gyms               | Gym               | Commands          | AddTrainer                     |
-| 5  |  Gyms               | Gym               | Commands          | CreateGym                      |
-| 6  |  Gyms               | Gym               | Events            | GymAddedEvent                  |
-| 7  |  Gyms               | Gym               | IntegrationEvents | SessionScheduledEvent          |
-| 8  |  Gyms               | Gym               | Queries           | GetGym                         |
-| 9  |  Gyms               | Gym               | Queries           | ListGyms                       |
-| 10 |  Gyms               | Gym               | Queries           | ListSessions                   |
-| 11 |  Participants       | Participant       | Commands          | CancelReservation              |
-| 12 |  Participants       | Participant       | Events            | ReservationCanceledEvent       |
-| 13 |  Participants       | Participant       | Events            | SessionCanceledEvent           |
-| 14 |  Participants       | Participant       | Events            | SessionSpotReservedEvent       |
-| 15 |  Participants       | Participant       | IntegrationEvents | ParticipantProfileCreatedEvent |
-| 16 |  Participants       | Participant       | Queries           | ListParticipantSessions        |
-| 17 |  **Profiles**       | **User**          | Commands          | CreateAdminProfile             |
-| 18 |  **Profiles**       | **User**          | Commands          | CreateParticipantProfile       |
-| 19 |  **Profiles**       | **User**          | Commands          | CreateTrainerProfile           |
-| 20 |  **Profiles**       | **User**          | Queries           | ListProfiles                   |
-| 21 |  **Reservations**   | **Session**       | Commands          | CreateReservation              |
-| 22 |  Rooms              | Room              | Commands          | CreateRoom                     |
-| 23 |  Rooms              | Room              | Commands          | DeleteRoom                     |
-| 24 |  Rooms              | Room              | IntegrationEvents | RoomAddedEvent                 |
-| 25 |  Rooms              | Room              | IntegrationEvents | RoomRemovedEvent               |
-| 26 |  Rooms              | Room              | Queries           | GetRoom                        |
-| 27 |  Rooms              | Room              | Queries           | ListRooms                      |
-| 28 |  Sessions           | Session           | Commands          | CreateSession                  |
-| 29 |  Sessions           | Session           | Events            | SessionScheduledEvent          |
-| 30 |  Sessions           | Session           | IntegrationEvents | RoomRemovedEvent               |
-| 31 |  Sessions           | Session           | Queries           | GetSession                     |
-| 32 |  Subscriptions      | Subscription      | Commands          | CreateSubscription             |
-| 33 |  Subscriptions      | Subscription      | Events            | SubscriptionSetEvent           |
-| 34 |  Subscriptions      | Subscription      | Queries           | ListSubscriptions              |
-| 35 |  Trainers           | Trainer           | Events            | SessionCanceledEvent           |
-| 36 |  Trainers           | Trainer           | Events            | SessionScheduledEvent          |
-| 37 |  Trainers           | Trainer           | IntegrationEvents | TrainerCreatedEvent            |
+| No | O | Service  | Use case           | AggregateRoot      | Category            | Name                           |
+|----|---|--------- |--------------------|------------------- |---------------------|--------------------------------|
+| 1  |   |          | Admins             | Admin <-           | Events(Integration) | AdminProfileCreatedEvent       |
+| 2  | O |          | **Authentication** | **User**           | Commands            | Register                       |
+| 3  | O |          | **Authentication** | **User**           | Queries             | Login                          |
+| 4  | O |          | Gyms               | Gym                | Commands            | AddTrainer                     |
+| 5  | O |          | Gyms               | Gym                | Commands            | CreateGym                      |
+| 6  | O |          | Gyms               | Gym <-             | Events              | GymAddedEvent                  |
+| 7  |   |          | Gyms               | Gym <-             | Events(Integration) | SessionScheduledEvent          |
+| 8  | O |          | Gyms               | Gym                | Queries             | GetGym                         |
+| 9  | O |          | Gyms               | Gym                | Queries             | ListGyms                       |
+| 10 | O |          | Gyms               | Gym                | Queries             | ListSessions                   |
+| 11 | O |          | Participants       | Participant        | Commands            | CancelReservation              |
+| 12 | O |          | Participants       | Participant <-     | Events              | ReservationCanceledEvent       |
+| 13 | O |          | Participants       | Participant <-     | Events              | SessionCanceledEvent           |
+| 14 | O |          | Participants       | Participant <-     | Events              | SessionSpotReservedEvent       |
+| 15 |   |          | Participants       | Participant <-     | Events(Integration) | ParticipantProfileCreatedEvent |
+| 16 | O |          | Participants       | Participant        | Queries             | ListParticipantSessions        |
+| 17 | O |          | **Profiles**       | **User**           | Commands            | CreateAdminProfile             |
+| 18 | O |          | **Profiles**       | **User**           | Commands            | CreateParticipantProfile       |
+| 19 | O |          | **Profiles**       | **User**           | Commands            | CreateTrainerProfile           |
+| 20 | O |          | **Profiles**       | **User**           | Queries             | ListProfiles                   |
+| 21 | O |          | **Reservations**   | **Session**        | Commands            | CreateReservation              |
+| 22 | O |          | Rooms              | Room               | Commands            | CreateRoom                     |
+| 23 | O |          | Rooms              | Room               | Commands            | DeleteRoom                     |
+| 24 | O |          | Rooms              | Room <- Gym        | Events(Integration) | RoomAddedEvent                 |
+| 25 | O |          | Rooms              | Room <- Gym        | Events(Integration) | RoomRemovedEvent               |
+| 26 | O |          | Rooms              | Room               | Queries             | GetRoom                        |
+| 27 | O |          | Rooms              | Room               | Queries             | ListRooms                      |
+| 28 | O |          | Sessions           | Session            | Commands            | CreateSession                  |
+| 29 | O |          | Sessions           | Session <-         | Events              | SessionScheduledEvent          |
+| 30 | O |          | Sessions           | Session <- Gym     | Events(Integration) | RoomRemovedEvent               |
+| 31 | O |          | Sessions           | Session            | Queries             | GetSession                     |
+| 32 | O |          | Subscriptions      | Subscription       | Commands            | CreateSubscription             |
+| 33 | O |          | Subscriptions      | Subscription <-    | Events              | SubscriptionSetEvent           |
+| 34 | O |          | Subscriptions      | Subscription       | Queries             | ListSubscriptions              |
+| 35 | O |          | Trainers           | Trainer <- Session | Events              | SessionCanceledEvent           |
+| 36 | O |          | Trainers           | Trainer <- Room    | Events              | SessionScheduledEvent          |
+| 37 | O |          | Trainers           | Trainer <- User    | Events(Integration) | TrainerProfileCreatedEvent     |
 
+- Service
+  - GymManagement
+  - SessionReservation
+  - UserManagement
 - Category
   - Commands
   - Queries
   - Events
-  - IntegrationEvents
+  - Events(Integration)
+- Actors
+  - User
+  - Admin
+  - Participants
+  - Trainers

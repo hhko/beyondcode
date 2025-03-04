@@ -1,6 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes.Domain;
 using ErrorOr;
 using GymManagement.Domain.Abstractions.Entities;
+using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using static GymManagement.Domain.AggregateRoots.Trainers.Errors.DomainErrors;
 
@@ -85,5 +86,11 @@ public sealed class Trainer : AggregateRoot
         _sessionIds.Remove(session.Id);
 
         return Result.Success;
+    }
+
+    // 추가
+    public bool IsTimeSlotFree(DateOnly date, TimeRange timeRange)
+    {
+        return _schedule.CanBookTimeSlot(date, timeRange);
     }
 }

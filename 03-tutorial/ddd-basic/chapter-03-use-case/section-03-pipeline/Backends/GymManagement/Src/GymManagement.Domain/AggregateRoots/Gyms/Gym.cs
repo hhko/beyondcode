@@ -81,7 +81,12 @@ public sealed class Gym : AggregateRoot
 
         _roomIds.Add(room.Id);
 
-        _domainEvents.Add(new RoomAddedEvent(this, room));
+        //_domainEvents.Add(new RoomAddedEvent(this, room));
+        _domainEvents.Add(new RoomAddedEvent(
+            Name: room.Name,
+            RoomId: room.Id,
+            GymId: Id,
+            MaxDailySessions: room.MaxDailySessions));
 
         return Result.Success;
     }
