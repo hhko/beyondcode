@@ -37,12 +37,13 @@
     - [ ] Pipeline
 - Part 2. Host Technical Concern
   - [ ] Chapter 01. Host
-    - Option
-    - Integration Test
+    - [ ] Option
+    - [ ] Job
+    - [ ] Integration Test
   - [ ] Chapter 02. Container
-    - Dockerfile
-    - docker-compose.yml
-    - Service Discovery
+    - [ ] Dockerfile
+    - [ ] docker-compose.yml
+    - [ ] Service Discovery
   - [ ] Chapter 03. OpenTelemetry
   - [ ] Chapter 04. Resilience
 - Part 3. Input/Output Technical Concern
