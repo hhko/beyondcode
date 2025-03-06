@@ -71,7 +71,9 @@
 - To transform the infinite nature of sub-goals into a finite structure, an `Abstractions` top-level folder is introduced, with sub-goals placed in sub-folders beneath it.
 - This ensures a clear separation between sub-goals and the main goal, making all folders, except for the `Abstractions` folder at the top, more intuitively understood as part of the main goal."
 
-```
+```shell
+# {T}: Service
+
 {T}
 ├─Src
 │  ├─{T}                          // Host               > Up: The more important thing from a technical aspect(Sub-Goal)
@@ -85,11 +87,10 @@
 │     └─AggregateRoots                                  > Down: he more important thing from a business aspect(Main Goal)
 │
 └─Tests
-   ├─{T}..Tests.Integration       // Integration Test   > Up: The more important thing from a technical aspect(Sub-Goal)
-   ├─{T}..Tests.Performance       // Performance Test   > ↓
-   └─{T}..Tests.Unit              // Unit Test          > Down: he more important thing from a business aspect(Main Goal)
+   ├─{T}.Tests.Integration        // Integration Test   > Up: The more important thing from a technical aspect(Sub-Goal)
+   ├─{T}.Tests.Performance        // Performance Test   > ↓
+   └─{T}.Tests.Unit               // Unit Test          > Down: he more important thing from a business aspect(Main Goal)
 ```
-- {T}: Service
 
 ![](./03-tutorial/ddd-basic/.images/SolutionDesignExample.png)
 
