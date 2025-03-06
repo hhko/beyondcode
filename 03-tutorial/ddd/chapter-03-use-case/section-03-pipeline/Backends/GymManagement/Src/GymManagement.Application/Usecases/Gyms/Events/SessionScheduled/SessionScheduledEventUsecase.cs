@@ -1,5 +1,4 @@
 ﻿using DddGym.Framework.BaseTypes.Application.Events;
-using DddGym.Framework.IntegrationEvents;
 using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Rooms.Events;
 using Throw;
@@ -21,6 +20,6 @@ internal sealed class SessionScheduledEventUsecase
         var gym = await _gymsRepository.GetByIdAsync(domainEvent.RoomId);
         gym.ThrowIfNull();
 
-        gym.AddTrainer(domainEvent.TrainerId);
+        gym.AddTrainer(domainEvent.Session.TrainerId);
     }
 }

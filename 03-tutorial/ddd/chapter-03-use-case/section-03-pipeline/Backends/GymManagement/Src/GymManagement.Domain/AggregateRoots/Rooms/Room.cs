@@ -130,7 +130,7 @@ public sealed class Room : AggregateRoot
 
         dailySessions.Add(session.Id);
 
-        _domainEvents.Add(new SessionScheduledEvent(Id, session.TrainerId));
+        _domainEvents.Add(new SessionScheduledEvent(Id, session));
 
         return Result.Success;
     }

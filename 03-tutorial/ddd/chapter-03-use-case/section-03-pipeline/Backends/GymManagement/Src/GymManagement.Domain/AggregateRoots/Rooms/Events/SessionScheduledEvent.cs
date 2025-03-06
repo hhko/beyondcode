@@ -7,9 +7,13 @@ namespace GymManagement.Domain.AggregateRoots.Rooms.Events;
 //    Room Room,
 //    Session Session) : IDomainEvent;
 
+//public sealed record SessionScheduledEvent(
+//    Guid RoomId,
+//    Guid TrainerId) : IDomainEvent;
+
 public sealed record SessionScheduledEvent(
     Guid RoomId,
-    Guid TrainerId) : IDomainEvent;
+    Session Session) : IDomainEvent;
 
 //{
 //    //public static readonly Error TrainerNotFound = EventualConsistencyError.From(
