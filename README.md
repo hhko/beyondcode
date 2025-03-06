@@ -92,7 +92,7 @@
    └─{T}.Tests.Unit               // Unit Test          > Down: he more important thing from a business aspect(Main Goal)
 ```
 
-![](./03-tutorial/ddd-basic/.images/SolutionDesignExample.png)
+![](./03-tutorial/ddd/.images/SolutionDesignExample.png)
 
 ### Use case
 
@@ -175,7 +175,7 @@
     - GymAddedEvent
     - **SessionScheduledEvent(3 = 2 IDomainEvent + 1 IIntegrationEvent)**: The data types of `IDomainEvent` and `IIntegrationEvent` are different.
       ```cs
-      // DomainEvent
+      // IDomainEvent
       public record SessionScheduledEvent(
         Room Room,
         Session Session)        // <-
@@ -215,14 +215,3 @@
 | GymManagement       | Rooms         | CreateRoomCommand               | gym.AddRoom                   | -RoomAddedEvent(Integration)->                  | SessionReservation  | Room          |
 | GymManagement       | Rooms         | CreateRoomCommand               | gym.AddRoom                   | -RoomRemovedEvent(Integration)->                | SessionReservation  | Room          |
 | GymManagement       | Rooms         | CreateRoomCommand               | gym.AddRoom                   | -RoomRemovedEvent(Integration)->                | SessionReservation  | Session       |
-
-x 문서 정리
-x 컴파일러 정리
-  ppt 업데이트
-  validator 구현 개선
-  테스트 프로젝트
-    errors?
-    ...
-    코드 리뷰뷰
-
-
