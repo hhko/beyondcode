@@ -220,58 +220,47 @@
 - UserManagement
   - Profiles
     - CreateAdminProfileCommand
-      - user.CreateAdminProfile
-        > -AdminProfileCreatedEvent(Integration)->
+      - user.CreateAdminProfile `-AdminProfileCreatedEvent(Integration)->`
         - GymManagement Admin
     - CreateParticipantProfileCommand
-      - user.CreateParticipantProfile
-        > -ParticipantProfileCreatedEvent(Integration)->
+      - user.CreateParticipantProfile `-ParticipantProfileCreatedEvent(Integration)->`
         - SessionReservation Participant
     - CreateTrainerProfileCommand
-      - user.CreateTrainerProfile
-        > -TrainerProfileCreatedEvent(Integration)->
+      - user.CreateTrainerProfile `-TrainerProfileCreatedEvent(Integration)->`
         - SessionReservation Trainer
 - GymManagement
   - Subscriptions
     - CreateSubscriptionCommand
-      - admin.SetSubscription
-        > -SubscriptionSetEvent->
+      - admin.SetSubscription `-SubscriptionSetEvent->`
         - GymManagement Subscription
   - Gyms
     - CreateGymCommand
-      - subscription.AddGym
-        > -GymAddedEvent->
+      - subscription.AddGym `-GymAddedEvent->`
         - GymManagement Gym
   - Rooms
     - CreateRoomCommand
-      - gym.AddRoom
-        > -RoomAddedEvent(Integration)->
+      - gym.AddRoom `-RoomAddedEvent(Integration)->`
         - SessionReservation Room
     - DeleteRoomCommand
-      - gym.RemoveRoom
-        > -RoomRemovedEvent(Integration)->
+      - gym.RemoveRoom `-RoomRemovedEvent(Integration)->`
         - SessionReservation Room
         - SessionReservation Session
 - SessionReservation
   - Sessions
     - CreateSessionCommand
-      - room.ScheduleSession
-        > -SessionScheduledEvent(Integration)->
+      - room.ScheduleSession `-SessionScheduledEvent(Integration)->`
         - GymManagement Gym
         - SessionReservation Session
         - SessionReservation Trainer
     - RoomRemovedEvent
-      - session.Cancel
-        > -SessionCanceledEvent->
+      - session.Cancel `-SessionCanceledEvent->`
         - SessionReservation Participant
         - SessionReservation Trainer
   - Participants
     - CancelReservationCommand
-      - session.CancelReservation
-        > -ReservationCanceledEvent->
+      - session.CancelReservation `-ReservationCanceledEvent->`
         - SessionReservation Participant
   - Reservations
     - CreateReservationCommand
-      - session.ReserveSpot
-        > -SessionSpotReservedEvent->
+      - session.ReserveSpot `-SessionSpotReservedEvent->`
         - SessionReservation Participant
