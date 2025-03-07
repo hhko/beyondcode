@@ -15,6 +15,7 @@
   - [ ] OpenTelemetry: Logs, Metrics, Traces
   - [ ] Command Transaction??? Event 발생 후 Transaction 호출 순서???
   - [ ] Query Cache
+- [ ] CQRS
 
 ## Adapter
 - [ ] Repository

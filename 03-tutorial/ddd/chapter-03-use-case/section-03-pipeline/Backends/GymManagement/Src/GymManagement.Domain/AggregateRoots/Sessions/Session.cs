@@ -194,7 +194,7 @@ public sealed class Session : AggregateRoot
         //  세션 시작 24시간 이내에는 무료로 예약을 취소할 수 없다.
         //  A reservation cannot be canceled for free less than 24 hours before the session starts
         //Reservation? reservation = _reservations.Find(reservation => reservation.ParticipantId == participantId);
-        if (!_reservations.Any(reservation => reservation.ParticipantId != participantId))
+        if (!_reservations.Any(reservation => reservation.ParticipantId == participantId))
         {
             return CancelReservationErrors.ReservationNotFound;
         }

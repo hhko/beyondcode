@@ -72,8 +72,6 @@
 > - This ensures a clear separation between sub-goals and the main goal, making all folders, except for the `Abstractions` folder at the top, more intuitively understood as part of the main goal."
 
 ```shell
-# {T}: Service
-
 {T}
 ├─Src
 │  ├─{T}                          // Host               > Up: The more important thing from a technical aspect(Sub-Goal)
