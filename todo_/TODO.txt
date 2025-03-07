@@ -959,3 +959,17 @@ sc.exe delete "서비스 이름"
 </PropertyGroup>
 ```
 - https://learn.microsoft.com/en-us/visualstudio/containers/tutorial-multicontainer?view=vs-2022
+
+```
+from-zero-to-hero-asynchronous-programming-in-csharp
+getting-started-domain-driven-design
+deep-dive-domain-driven-design
+from-zero-to-hero-clean-code-with-csharp
+from-zero-to-hero-open-telemetry-in-dotnet
+from-zero-to-hero-test-driven-development-tdd-csharp
+from-zero-to-hero-vertical-slice-architecture
+zero-to-hero-event-driven-architecture
+from-zero-to-hero-configuration-and-options-in-dotnet
+deep-dive-blazor
+from-zero-to-hero-solid-principles-for-csharp-developers
+```

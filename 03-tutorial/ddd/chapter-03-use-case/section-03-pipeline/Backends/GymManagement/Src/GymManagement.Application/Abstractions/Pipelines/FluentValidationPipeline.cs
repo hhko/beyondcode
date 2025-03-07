@@ -9,9 +9,10 @@ namespace GymManagement.Application.Abstractions.Pipelines;
 // https://github.com/amantinband/error-or/issues/10
 // https://github.com/amantinband/error-or?tab=readme-ov-file#mediator--fluentvalidation--erroror-
 
-public sealed class FluentValidationPipeline<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators) : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>
-    where TResponse : class, IErrorOr
+public sealed class FluentValidationPipeline<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators)
+    : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
+        where TResponse : class, IErrorOr
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators = validators;
 

@@ -63,13 +63,13 @@
 
 <br/>
 
-| `Direction` | `Separation` of Concerns    | `Separation` of Goals                     |
-| ---         | ---                         | ---                                       |
-| Up          | Technical Concern(Infinite) | Sub-Goal(Infinite -Abstractions-> Finite) |
-| Down        | Business Concern(Finite)    | Main Goal(Finite)                         |
-
-- To transform the infinite nature of sub-goals into a finite structure, an `Abstractions` top-level folder is introduced, with sub-goals placed in sub-folders beneath it.
-- This ensures a clear separation between sub-goals and the main goal, making all folders, except for the `Abstractions` folder at the top, more intuitively understood as part of the main goal."
+> | `Direction` | `Separation` of Concerns    | `Separation` of Goals                     |
+> | ---         | ---                         | ---                                       |
+> | Up          | Technical Concern(Infinite) | Sub-Goal(Infinite -Abstractions-> Finite) |
+> | Down        | Business Concern(Finite)    | Main Goal(Finite)                         |
+>
+> - To transform the infinite nature of sub-goals into a finite structure, an `Abstractions` top-level folder is introduced, with sub-goals placed in sub-folders beneath it.
+> - This ensures a clear separation between sub-goals and the main goal, making all folders, except for the `Abstractions` folder at the top, more intuitively understood as part of the main goal."
 
 ```shell
 # {T}: Service
@@ -264,3 +264,7 @@
     - CreateReservationCommand: session.ReserveSpot
       - `-SessionSpotReservedEvent->`
         - SessionReservation Participant
+
+
+
+
