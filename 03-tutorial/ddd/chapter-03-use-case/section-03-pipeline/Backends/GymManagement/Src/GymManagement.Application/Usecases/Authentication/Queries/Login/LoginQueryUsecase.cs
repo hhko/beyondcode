@@ -7,7 +7,7 @@ using GymManagement.Application.Usecases.Profiles;
 using GymManagement.Domain.AggregateRoots.Users;
 using static GymManagement.Application.Usecases.Authentication.Errors.ApplicationErrors;
 
-namespace GymManagement.Application.Usecases.Users.Queries.Login;
+namespace GymManagement.Application.Usecases.Authentication.Queries.Login;
 
 internal sealed class LoginQueryUsecase
     : IQueryUsecase<LoginQuery, LoginResponse>

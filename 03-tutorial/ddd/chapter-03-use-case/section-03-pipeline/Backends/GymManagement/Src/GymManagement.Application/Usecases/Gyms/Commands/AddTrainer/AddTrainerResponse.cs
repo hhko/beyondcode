@@ -1,6 +1,6 @@
 ﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
 
-namespace GymManagement.Application.Usecases.Trainers.Commands.AddTrainer;
+namespace GymManagement.Application.Usecases.Gyms.Commands.AddTrainer;
 
 internal sealed record AddTrainerResponse()
     : IResponse;

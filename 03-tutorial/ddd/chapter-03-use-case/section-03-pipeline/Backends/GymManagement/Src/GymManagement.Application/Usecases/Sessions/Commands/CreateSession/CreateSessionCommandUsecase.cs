@@ -1,12 +1,10 @@
 ﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
 using ErrorOr;
 using GymManagement.Application.Abstractions.Repositories;
-using GymManagement.Application.Usecases.Rooms;
 using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Rooms;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Trainers;
-using static GymManagement.Domain.AggregateRoots.Rooms.Errors.DomainErrors;
 
 namespace GymManagement.Application.Usecases.Sessions.Commands.CreateSession;
 
@@ -15,6 +13,14 @@ internal sealed class CreateSessionCommandUsecase
 {
     private readonly IRoomsRepository _roomsRepository;
     private readonly ITrainersRepository _trainersRepository;
+
+    public CreateSessionCommandUsecase(
+        IRoomsRepository roomsRepository,
+        ITrainersRepository trainersRepository)
+    {
+        _roomsRepository = roomsRepository;
+        _trainersRepository = trainersRepository;
+    }
 
     public async Task<IErrorOr<CreateSessionResponse>> Handle(CreateSessionCommand command, CancellationToken cancellationToken)
     {
@@ -27,7 +33,7 @@ internal sealed class CreateSessionCommandUsecase
         }
 
         Trainer? trainer = await _trainersRepository.GetByIdAsync(command.TrainerId);
-        if (trainer is null) 
+        if (trainer is null)
         {
             return Error
                 .NotFound(description: "Trainer not found")
@@ -57,7 +63,7 @@ internal sealed class CreateSessionCommandUsecase
                 .ToErrorOr<CreateSessionResponse>();
         }
 
-        Session session = new Session(
+        Session session = new(
             name: command.Name,
             description: command.Description,
             maxParticipants: command.MaxParticipants,

@@ -4,7 +4,7 @@ using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Sessions;
 
-namespace GymManagement.Application.Usecases.Sessions.Commands.CreateReservation;
+namespace GymManagement.Application.Usecases.Reservations.Commands.CreateReservation;
 
 internal sealed class CreateReservationCommandUsecase
     : ICommandUsecase<CreateReservationCommand>

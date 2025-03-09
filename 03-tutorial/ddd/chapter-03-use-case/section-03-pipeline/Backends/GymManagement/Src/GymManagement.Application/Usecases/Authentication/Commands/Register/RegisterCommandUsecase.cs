@@ -5,7 +5,7 @@ using GymManagement.Application.Abstractions.Tokens;
 using GymManagement.Application.Usecases.Authentication;
 using GymManagement.Domain.AggregateRoots.Users;
 
-namespace GymManagement.Application.Usecases.Users.Commands.Register;
+namespace GymManagement.Application.Usecases.Authentication.Commands.Register;
 
 internal sealed class RegisterCommandUsecase
     : ICommandUsecase<RegisterCommand, RegisterResponse>

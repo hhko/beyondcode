@@ -3,7 +3,7 @@ using ErrorOr;
 using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Users;
 
-namespace GymManagement.Application.Usecases.Users.Commands.CreateParticipantProfile;
+namespace GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfile;
 
 internal sealed class CreateParticipantProfileCommandUsecase
     : ICommandUsecase<CreateParticipantProfileCommand>

@@ -1,4 +1,4 @@
-﻿namespace GymManagement.Application.Usecases.Users.Queries.ListProfiles;
+﻿namespace GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
 
 internal sealed class GetProfileQueryTelemetry
 {

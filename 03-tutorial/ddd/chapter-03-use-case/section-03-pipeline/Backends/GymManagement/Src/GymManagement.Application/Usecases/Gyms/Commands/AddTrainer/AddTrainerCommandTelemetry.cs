@@ -1,4 +1,4 @@
-﻿namespace GymManagement.Application.Usecases.Trainers.Commands.AddTrainer;
+﻿namespace GymManagement.Application.Usecases.Gyms.Commands.AddTrainer;
 
 internal sealed class AddTrainerCommandTelemetry
 {

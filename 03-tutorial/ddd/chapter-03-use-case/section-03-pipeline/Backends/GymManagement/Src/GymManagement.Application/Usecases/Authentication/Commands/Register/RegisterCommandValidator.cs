@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace GymManagement.Application.Usecases.Users.Commands.Register;
+namespace GymManagement.Application.Usecases.Authentication.Commands.Register;
 
 internal sealed class RegisterCommandValidator : AbstractValidator<RegisterCommand>
 {

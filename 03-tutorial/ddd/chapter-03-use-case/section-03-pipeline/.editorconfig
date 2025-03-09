@@ -1,8 +1,7 @@
-# [*.cs]
-# # dotnet_diagnostic.IDE0160.severity = error
-# # dotnet_diagnostic.IDE0161.severity = error
-# dotnet_diagnostic.IDE0161.severity = error
-
 [*.cs]
 #csharp_style_namespace_declarations = file_scoped:suggestion
 csharp_style_namespace_declarations = file_scoped:error
+
+
+# IDE0290 기본 생성자
+# IDE0130

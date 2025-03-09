@@ -13,7 +13,11 @@ internal static class MediatRRegistration
 
             // IPipelineBehavior 호출 순서는 중요하다: 데코레이터 순서
             //cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
+
             cfg.AddOpenBehavior(typeof(FluentValidationPipeline<,>));
+            cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
+            //cfg.AddOpenBehavior(typeof(QueryCachingPipeline<,>));
+            //cfg.AddBehavior<CreateOrderHeaderOpenTelemetryPipeline>();
         });
 
         return services;

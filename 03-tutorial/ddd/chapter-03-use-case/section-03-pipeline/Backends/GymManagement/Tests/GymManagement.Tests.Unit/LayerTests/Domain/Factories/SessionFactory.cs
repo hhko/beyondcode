@@ -15,17 +15,17 @@ internal static class SessionFactory
         int maxParticipants = DomainConstants.Session.MaxParticipants,
         DateOnly? date = null,
         TimeRange? time = null,
-        List<SessionCategory> categories = null,
+        List<SessionCategory>? categories = null,
         Guid? id = null)
     {
         return new Session(
-            name: DomainConstants.Session.Name,
-            description: DomainConstants.Session.Description,
+            name: name,
+            description: description,
             maxParticipants: maxParticipants,
             roomId: roomId ?? DomainConstants.Room.Id,
             trainerId: trainerId ?? DomainConstants.Trainer.Id,
-            date ?? DomainConstants.Session.Date,
-            time ?? DomainConstants.Session.Time,
+            date: date ?? DomainConstants.Session.Date,
+            time: time ?? DomainConstants.Session.Time,
             categories: categories ?? DomainConstants.Session.Categories,
             id: id ?? DomainConstants.Session.Id);
     }

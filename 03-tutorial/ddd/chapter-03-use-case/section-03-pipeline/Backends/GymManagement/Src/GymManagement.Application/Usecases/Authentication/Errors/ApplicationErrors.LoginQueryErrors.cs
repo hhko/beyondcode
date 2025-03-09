@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using GymManagement.Application.Usecases.Users.Queries.Login;
+using GymManagement.Application.Usecases.Authentication.Queries.Login;
 
 namespace GymManagement.Application.Usecases.Authentication.Errors;
 

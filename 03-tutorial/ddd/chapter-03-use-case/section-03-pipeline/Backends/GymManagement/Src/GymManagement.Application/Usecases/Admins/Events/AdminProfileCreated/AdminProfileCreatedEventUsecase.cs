@@ -3,7 +3,7 @@ using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Admins;
 using GymManagement.Domain.AggregateRoots.Users.Events;
 
-namespace GymManagement.Application.Usecases.Admins.IntegrationEvents.AdminProfileCreated;
+namespace GymManagement.Application.Usecases.Admins.Events.AdminProfileCreated;
 
 internal sealed class AdminProfileCreatedEventUsecase
     : IDomainEventUsecase<AdminProfileCreatedEvent>

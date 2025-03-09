@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace GymManagement.Application.Usecases.Users.Commands.CreateAdminProfile;
+namespace GymManagement.Application.Usecases.Profiles.Commands.CreateAdminProfile;
 
 internal sealed class CreateAdminProfileCommandValidator : AbstractValidator<CreateAdminProfileCommand>
 {

@@ -1,4 +1,4 @@
-﻿namespace GymManagement.Application.Usecases.Users.Commands.CreateParticipantProfile;
+﻿namespace GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfile;
 
 internal sealed class CreateParticipantProfileCommandTelemetry
 {

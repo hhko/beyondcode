@@ -12,7 +12,7 @@ internal sealed class DeleteRoomCommandUsecase
 
     public DeleteRoomCommandUsecase(IGymsRepository gymsRepository)
     {
-        _gymsRepository = _gymsRepository;
+        _gymsRepository = gymsRepository;
     }
 
     public async Task<IErrorOr<DeleteRoomResponse>> Handle(DeleteRoomCommand command, CancellationToken cancellationToken)

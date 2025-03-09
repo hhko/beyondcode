@@ -1,5 +1,5 @@
-﻿using GymManagement.Application.Usecases.Users.Commands.Register;
-using GymManagement.Application.Usecases.Users.Queries.Login;
+﻿using GymManagement.Application.Usecases.Authentication.Commands.Register;
+using GymManagement.Application.Usecases.Authentication.Queries.Login;
 using GymManagement.Domain.AggregateRoots.Users;
 
 namespace GymManagement.Application.Usecases.Authentication;

@@ -33,9 +33,9 @@ public sealed class Room : AggregateRoot
     public string Name { get; }
 
     // 추가
-    public int MaxDailySessions 
-    {  
-        get { return _maxDailySessions; } 
+    public int MaxDailySessions
+    {
+        get { return _maxDailySessions; }
     }
 
     // ---------------------
@@ -103,15 +103,21 @@ public sealed class Room : AggregateRoot
             return Error.Conflict(description: "Session already exists in room");
         }
 
-        if (!_sessionIdsByDate.ContainsKey(session.Date))
-        {
-            _sessionIdsByDate[session.Date] = [];
-        }
 
-        // 규칙
-        //  방은 구독(구독 등급)이 허용하는 개수보다 더 많은 세션을 가질 수 없다.
-        //  A room cannot have more sessions than the subscription allows
-        var dailySessions = _sessionIdsByDate[session.Date];
+        if (!_sessionIdsByDate.TryGetValue(session.Date, out List<Guid>? dailySessions))
+        {
+            dailySessions = [];
+            _sessionIdsByDate[session.Date] = dailySessions;
+        }
+        //if (!_sessionIdsByDate.ContainsKey(session.Date))
+        //{
+        //    _sessionIdsByDate[session.Date] = [];
+        //}
+
+        ////규칙
+        //// 방은 구독(구독 등급)이 허용하는 개수보다 더 많은 세션을 가질 수 없다.
+        //// A room cannot have more sessions than the subscription allows
+        //var dailySessions = _sessionIdsByDate[session.Date];
         if (dailySessions.Count >= _maxDailySessions)
         {
             return ScheduleSessionErrors.CannotHaveMoreSessionThanSubscriptionAllows;

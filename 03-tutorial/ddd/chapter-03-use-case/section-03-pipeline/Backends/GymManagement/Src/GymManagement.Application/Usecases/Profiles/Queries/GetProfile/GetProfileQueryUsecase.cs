@@ -4,7 +4,7 @@ using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Application.Usecases.Profiles;
 using GymManagement.Domain.AggregateRoots.Users;
 
-namespace GymManagement.Application.Usecases.Users.Queries.ListProfiles;
+namespace GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
 
 internal sealed class GetProfileQueryUsecase
     : IQueryUsecase<GetProfileQuery, GetProfileResponse>

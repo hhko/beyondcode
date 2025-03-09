@@ -1,67 +1,107 @@
 ﻿using ErrorOr;
 using FluentValidation;
-using GymManagement.Domain.Abstractions.Utilities;
 using MediatR;
-using System.Reflection;
 
 namespace GymManagement.Application.Abstractions.Pipelines;
 
 // https://github.com/amantinband/error-or/issues/10
-// https://github.com/amantinband/error-or?tab=readme-ov-file#mediator--fluentvalidation--erroror-
 
-public sealed class FluentValidationPipeline<TRequest, TResponse>(
-    IEnumerable<IValidator<TRequest>> validators)
+// TODO: FluentValidationPipeline 전용 테스트 작성
+
+// https://github.com/amantinband/error-or?tab=readme-ov-file#mediator--fluentvalidation--erroror-
+public class FluentValidationPipeline<TRequest, TResponse>(IValidator<TRequest>? validator = null)
     : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
-        where TResponse : class, IErrorOr
+        where TResponse : IErrorOr
+
 {
-    private readonly IEnumerable<IValidator<TRequest>> _validators = validators;
+    private readonly IValidator<TRequest>? _validator = validator;
 
     public async Task<TResponse> Handle(
         TRequest request,
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        // IValidator가 없을 때
-        if (_validators.IsEmpty())
+        if (_validator is null)
         {
             return await next();
         }
 
-        Error[] errors = _validators
-            .Select(validator => validator.Validate(request))
-            .SelectMany(validationResult => validationResult.Errors)
-            .Where(validationFailure => validationFailure is not null)
-            .Select(failure =>
-                Error.Validation(
-                    code: failure.PropertyName,
-                    description: failure.ErrorMessage))
-            .Distinct()
-            .ToArray();
+        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
-        if (errors.Length is not 0)
+        if (validationResult.IsValid)
         {
-            // Microsoft.CSharp.RuntimeBinder.RuntimeBinderException:
-            //  Cannot implicitly convert type
-            //      'ErrorOr.Error[]' to
-            //      'ErrorOr.IErrorOr <GymManagement.Application.Usecases.Subscriptions.Queries.ListSubscriptions.SubscriptionsResponse> ''
-
-            //return (TResponse)ValidationResultCache[typeof(TResponse)](errors);
-            //return (dynamic)errors;
-
-            var response = (TResponse?)typeof(TResponse)
-                .GetMethod(
-                    name: nameof(ErrorOr<object>.From),
-                    bindingAttr: BindingFlags.Static | BindingFlags.Public,
-                    types: [typeof(List<Error>)])?
-                .Invoke(null, [errors])!;
-
-            return response;
+            return await next();
         }
 
-        return await next();
+        var errors = validationResult.Errors
+            .ConvertAll(error => Error.Validation(
+                code: error.PropertyName,
+                description: error.ErrorMessage));
+
+        // TODO: 타입 변환
+        // 에러
+        //  'Cannot implicitly convert type 'System.Collections.Generic.List <ErrorOr.Error>'
+        //      to 'ErrorOr.IErrorOr<GymManagement.Application.Usecases.Subscriptions.Commands.CreateSubscription.CreateSubscriptionResponse>'.
+        //   An explicit conversion exists (are you missing a cast?)'
+        return (dynamic)errors;
+        //return ErrorOr<TResponse>.From(errors);
     }
 }
+
+//public sealed class FluentValidationPipeline<TRequest, TResponse>(
+//    IEnumerable<IValidator<TRequest>> validators)
+//    : IPipelineBehavior<TRequest, TResponse>
+//        where TRequest : IRequest<TResponse>
+//        where TResponse : class, IErrorOr
+//{
+//    private readonly IEnumerable<IValidator<TRequest>> _validators = validators;
+
+//    public async Task<TResponse> Handle(
+//        TRequest request,
+//        RequestHandlerDelegate<TResponse> next,
+//        CancellationToken cancellationToken)
+//    {
+//        // IValidator가 없을 때
+//        if (_validators.IsEmpty())
+//        {
+//            return await next();
+//        }
+
+//        Error[] errors = _validators
+//            .Select(validator => validator.Validate(request))
+//            .SelectMany(validationResult => validationResult.Errors)
+//            .Where(validationFailure => validationFailure is not null)
+//            .Select(failure =>
+//                Error.Validation(
+//                    code: failure.PropertyName,
+//                    description: failure.ErrorMessage))
+//            .Distinct()
+//            .ToArray();
+
+//        if (errors.Length is not 0)
+//        {
+//            // Microsoft.CSharp.RuntimeBinder.RuntimeBinderException:
+//            //  Cannot implicitly convert type
+//            //      'ErrorOr.Error[]' to
+//            //      'ErrorOr.IErrorOr <GymManagement.Application.Usecases.Subscriptions.Queries.ListSubscriptions.SubscriptionsResponse> ''
+
+//            //return (TResponse)ValidationResultCache[typeof(TResponse)](errors);
+//            //return (dynamic)errors;
+
+//            var response = (TResponse?)typeof(TResponse)
+//                .GetMethod(
+//                    name: nameof(ErrorOr<object>.From),
+//                    bindingAttr: BindingFlags.Static | BindingFlags.Public,
+//                    types: [typeof(List<Error>)])?
+//                .Invoke(null, [errors])!;
+
+//            return response;
+//        }
+
+//        return await next();
+//    }
+//}
 
 //public class ModelValidationBehaviour<TRequest, IResult>
 //    (IEnumerable<IValidator<TRequest>> validators) : IPipelineBehavior<TRequest, IResult>

@@ -1,6 +1,6 @@
 ﻿using DddGym.Framework.BaseTypes.Application.Cqrs;
 
-namespace GymManagement.Application.Usecases.Users.Commands.Register;
+namespace GymManagement.Application.Usecases.Authentication.Commands.Register;
 
 public sealed record RegisterCommand(
     string FirstName,

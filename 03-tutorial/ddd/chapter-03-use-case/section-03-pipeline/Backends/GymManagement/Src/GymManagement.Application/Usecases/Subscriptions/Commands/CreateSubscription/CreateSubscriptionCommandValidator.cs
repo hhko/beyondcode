@@ -8,5 +8,8 @@ internal sealed class CreateSubscriptionCommandValidator : AbstractValidator<Cre
     {
         RuleFor(x => x.AddminId)
             .NotEmpty();
+
+        // TODO: Ardalis.SmartEnum Validator
+        // 
     }
 }

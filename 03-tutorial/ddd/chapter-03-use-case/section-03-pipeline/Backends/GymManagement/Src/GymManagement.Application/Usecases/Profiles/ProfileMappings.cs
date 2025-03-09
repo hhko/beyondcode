@@ -1,4 +1,4 @@
-﻿using GymManagement.Application.Usecases.Users.Queries.ListProfiles;
+﻿using GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
 using GymManagement.Domain.AggregateRoots.Users;
 
 namespace GymManagement.Application.Usecases.Profiles;
