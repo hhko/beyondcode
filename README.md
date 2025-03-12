@@ -17,8 +17,7 @@
 <br/>
 
 ## Domain-Driven Design Tutorial
-
-> This has been restructured based on "[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)".
+> I have restructured it based on **the design principles I defined**, using '[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)' as a foundation.
 
 ### Goal
 - Understand code structuring for sustainable software development.
