@@ -71,7 +71,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '홈', link: '/' },
     { text: '아키텍처', link: '/01-architecture/part1-overview/ch02-architecture/'},
     { text: '세미나', link: '/02-seminar/ch01-internal-architecture/'},
-    { text: '튜토리얼', link: '/03-tutorial/ddd/chapter-01-domain-exploration/' },
+    { text: '튜토리얼', link: '/03-tutorial/ddd/ch01-domain-exploration/' },
   ];
 }
 function sidebar(): DefaultTheme.Sidebar {
