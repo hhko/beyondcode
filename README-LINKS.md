@@ -57,6 +57,12 @@
 - [ ] https://github.com/henriquelourente/Domain-Driven-Design-Sample: DDD 예제
 - [ ] https://github.com/kgrzybek/hotels-manager/tree/main: DDD 예제
 
+## 문서
+- [ ] [Feature Flag - 안전하고 신뢰할 수 있는 배포로 나아가는 열쇠](https://11st-tech.github.io/2023/11/07/openfeature/)
+- [ ] [DB Function To Java 전환으로 기술부채 갚기](https://11st-tech.github.io/2022/12/02/promotion-dbfunction-to-java/)
+  - DB 함수를 코드로 전환기
+  - 헥사고날 아키텍처
+
 <br/>
 <br/>
 

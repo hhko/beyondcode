@@ -1,14 +1,14 @@
 [![build](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml/badge.svg)](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml)
 
 > A beautiful journey to writing wise code
-> - **`The structure`** of the source code should be as clear as **`a table of contents in a book`** to help understand the system.
+> - **`The source code structure`** should be as clear as **`a table of contents in a book`** to help understand the system.
 > - **`Test code`** should serve as **`a manual`** for understanding business rules.
 
 <br/>
 
 ## Application Architecture
 
-### Internal Architecture
+### Internal Architecture(Hexagonal Architecture)
 ![](./01-architecture/part1-overview/ch04-internal-architecture/.images/Architecture.Internal.png)
 
 ### External Architecture
@@ -25,32 +25,24 @@
 - Learn tactical design that express domain knowledge as code.
 
 ### Table of Contents
-- Part 1. Business Concern
-  - [ ] Chapter 01. Domain Exploration
-  - [ ] Chapter 02. Deeper Domain Exploration
-  - [ ] Chapter 03. Use Case
-    - [ ] CQRS
-    - [ ] Event
-    - [ ] Validator
-    - [ ] DTO
-    - [ ] Factory
-    - [ ] Pipeline
-- Part 2. Host Technical Concern
-  - [ ] Chapter 01. Host
-    - [ ] Option
-    - [ ] Job
-    - [ ] Integration Test
-  - [ ] Chapter 02. Container
-    - [ ] Dockerfile
-    - [ ] docker-compose.yml
-    - [ ] Service Discovery
-  - [ ] Chapter 03. OpenTelemetry
-  - [ ] Chapter 04. Resilience
-- Part 3. Input/Output Technical Concern
-  - [ ] Chapter 01. WebApi
-  - [ ] Chapter 02. PostgreSQL
-  - [ ] Chapter 03. RabbitMQ
-  - [ ] Chapter 04. Reverse Proxy
+- Part 1. Domain Concern
+  - [x] Chapter 01. [Domain Exploration](./03-tutorial/ddd/ch01-domain-exploration/)
+  - [x] Chapter 02. [Domain Exploration Structuring](./03-tutorial/ddd/ch02-domain-exploration-structuring/)
+  - [ ] Chapter 03. Domain Event Exploration
+  - [ ] Chapter 04. Unit Test
+- Part 2. Technical Concern
+  - [ ] Chapter 05. WebApi
+  - [ ] Chapter 06. OpenTelemetry
+  - [ ] Chapter 07. PostgreSQL
+  - [ ] Chapter 08. Containerization
+- Part 3. Microservices Concern
+  - [ ] Chapter 09. RabbitMQ
+  - [ ] Chapter 10. Scheduler
+  - [ ] Chapter 10. Reverse Proxy
+  - [ ] Chapter 11. Resilience
+- Part 4. Deployment Concern
+  - [ ] Chapter 12. Feature Flag Management
+  - [ ] Chapter 13. Infrastructure as Code
 
 ### Solution Design Principles
 
@@ -262,7 +254,3 @@
     - CreateReservationCommand: session.ReserveSpot
       - `-SessionSpotReservedEvent->`
         - SessionReservation Participant
-
-
-
-
