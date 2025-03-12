@@ -127,10 +127,10 @@ function sidebar(): DefaultTheme.Sidebar {
         text: '튜토리얼',
         items: [
           {
-            text: 'DDD 기본', link: '/03-tutorial/ddd/',
+            text: '도메인 주도 설계', link: '/03-tutorial/ddd/',
             items: [
-              { text: '도메인 탐색', link: '/03-tutorial/ddd/chapter-01-domain-exploration/'},
-              { text: '깊은 도메인 탐색', link: '/03-tutorial/ddd/chapter-02-deeper-domain-exploration/'}
+              { text: '도메인 탐색', link: '/03-tutorial/ddd/ch01-domain-exploration/'},
+              { text: '도메인 탐색 구조화', link: '/03-tutorial/ddd/ch02-domain-exploration-structuring/'}
             ]
           }
         ]
