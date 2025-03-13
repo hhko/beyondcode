@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "고형호",
+    "classifications": [
+      "VOC",
+      "DDD",
+      "Architecture"
+    ],
+    "name": "DDD Architecture Solution",
+    "description":  "Creates a new DDD Architecture Solution",
+    "identity": "DDD.Architecture.Solution.CSharp",
+    "groupIdentity": "DDD.Architecture.Solution",
+    "shortName": "ddd-arch",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    },
+    "sourceName": "GymManagement",
+    "preferNameDirectory": true,
+    "sources": [
+      {
+        "source": "./",
+        "target": "./",
+        "exclude": [
+          "**/[Bb]in/**",
+          "**/[Oo]bj/**",
+          ".template.config/**/*",
+          "templates/**",
+          ".vs/**/*",
+          "**/*.filelist",
+          "**/*.user",
+          "**/*.lock.json",
+          "**/.git/**",
+          "*.nuspec",
+          "**/node_modules/**",
+          "CODE_OF_CONDUCT.md",
+          "CONTRIBUTING.md",
+          "package.ps1",
+          "SECURITY.md"
+        ]
+      }
+    ]
+}

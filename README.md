@@ -24,22 +24,22 @@
 - Learn tactical design that express domain knowledge as code.
 
 ### Table of Contents
-- Part 1. Domain Concern
+- Part 1. Domain
   - [x] Chapter 01. [Domain Exploration](./03-tutorial/ddd/ch01-domain-exploration/)
-  - [x] Chapter 02. [Domain Exploration Structuring](./03-tutorial/ddd/ch02-domain-exploration-structuring/)
-  - [ ] Chapter 03. Domain Event Exploration
-  - [ ] Chapter 04. Unit Test
-- Part 2. Technical Concern
+  - [x] Chapter 02. [Domain Structuring](./03-tutorial/ddd/ch02-domain-structuring/)
+  - [x] Chapter 03. [Usecase Exploration](./03-tutorial/ddd/ch03-usecase-exploration/)
+  - [ ] Chapter 04. Usecase Pipeline
+- Part 2. Monolithic
   - [ ] Chapter 05. WebApi
   - [ ] Chapter 06. OpenTelemetry
   - [ ] Chapter 07. PostgreSQL
   - [ ] Chapter 08. Containerization
-- Part 3. Microservices Concern
+- Part 3. Microservices
   - [ ] Chapter 09. RabbitMQ
   - [ ] Chapter 10. Scheduler
   - [ ] Chapter 10. Reverse Proxy
   - [ ] Chapter 11. Resilience
-- Part 4. Deployment Concern
+- Part 4. Deployment
   - [ ] Chapter 12. Feature Flag Management
   - [ ] Chapter 13. Infrastructure as Code
 

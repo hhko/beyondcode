@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement", "Backends\G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Adapters.Infrastructure", "Backends\GymManagement\Src\GymManagement.Adapters.Infrastructure\GymManagement.Adapters.Infrastructure.csproj", "{F9C5B6DB-9D47-413F-81E2-55D8BCF7BAE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Adapters.Presentation", "Backends\GymManagement\Src\GymManagement.Adapters.Presentation\GymManagement.Adapters.Presentation.csproj", "{CFE9B6AD-0AC1-4AE9-A3A6-2B5EA89060FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{F9C5B6DB-9D47-413F-81E2-55D8BCF7BAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9C5B6DB-9D47-413F-81E2-55D8BCF7BAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9C5B6DB-9D47-413F-81E2-55D8BCF7BAE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFE9B6AD-0AC1-4AE9-A3A6-2B5EA89060FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFE9B6AD-0AC1-4AE9-A3A6-2B5EA89060FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFE9B6AD-0AC1-4AE9-A3A6-2B5EA89060FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFE9B6AD-0AC1-4AE9-A3A6-2B5EA89060FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,5 +91,6 @@ Global
 		{6DF1C67C-040D-4F4E-9422-AD5784832E55} = {87C2D21A-B236-4F54-87F6-EF8D242E2C6A}
 		{713C2D56-F062-47DC-8716-BB6CD8FDF07D} = {DFAA6735-A0E0-4224-943B-8D212833BD67}
 		{F9C5B6DB-9D47-413F-81E2-55D8BCF7BAE8} = {DFAA6735-A0E0-4224-943B-8D212833BD67}
+		{CFE9B6AD-0AC1-4AE9-A3A6-2B5EA89060FB} = {DFAA6735-A0E0-4224-943B-8D212833BD67}
 	EndGlobalSection
 EndGlobal

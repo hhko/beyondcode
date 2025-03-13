@@ -1,5 +1,23 @@
 <Project>
-    <PropertyGroup>
+  <PropertyGroup>
+    <!-- 공통 속성 -->
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!--
+    분석: 코드 스타일 분석(code-style analysis)
+    이름: csharp_style_ 또는 dotnet_style_
+    코드: IDExxxx
+          https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/
+    예제:
+        csharp_style_namespace_declarations = file_scoped:error
+          file_scoped 기본 템플릿
+          file_scoped이 아닐 때 error
+    -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
         <!--
         https://www.youtube.com/watch?v=QRgtcbxJlo0
         -->
@@ -15,10 +33,4 @@
         <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
         -->
 
-        <!--
-        EnforceCodeStyleInBuild은 빌드 과정에 .editorconfig 파일 설정을 적용합니다.
-         - 예. csharp_style_namespace_declarations = file_scoped:error
-        -->
-        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    </PropertyGroup>
 </Project>
