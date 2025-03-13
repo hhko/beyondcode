@@ -20,3 +20,16 @@ services
   .AddControllers()
   .AddApplicationPart(AssemblyReference.Assembly);
 ```
+
+## TODO
+- [ ] WebApi
+- [ ] MediatR pipeline
+- [ ] Validation
+---
+- [ ] OpenTelemetry Logs
+- [ ] OpenTelemetry Serilog
+- [ ] OpenTelemetry Metrics
+- [ ] OpenTelemetry Traces
+---
+- [ ] 트랜잭션 파이프라인???(이벤트 전달)
+- [ ] DTO???
