@@ -25,6 +25,11 @@
 - [ ] 도메인 레이어 구조화 | ...
 - [ ] 애플리케이션 레이어 구조화 | ...
 ---
+- [ ] 호스트 | IOption
+- [ ] 호스트 | IOption Validation
+- [ ] 호스트 | Scheduler
+- [ ] 호스트 | Message Handler
+---
 - [x] 유스케이스 | AssemblyReference.cs
 - [ ] 유스케이스 | Request/Response???
 - [ ] 유스케이스 | DTO
