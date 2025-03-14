@@ -61,7 +61,7 @@ I have restructured it based on **the design principles I defined**, using '[Get
 > | Down        | Domain Concern(Finite)      | Layer Main Goal(Finite)                         |
 >
 > - To transform the infinite nature of layer sub-goals into a finite structure, an `Abstractions` top-level folder is introduced, with layer sub-goals placed in sub-folders beneath it.
-> - This ensures a clear separation between layer sub-goals and the layer main goal, making all folders, except for the `Abstractions` folder at the top, more intuitively understood as part of the layer main goal.
+> - This ensures a clear separation between layer sub-goals and the layer main goal, making all folders, except for the `Abstractions` folder at the top, more intuitively understood the layer main goal.
 
 ```shell
 {T}
