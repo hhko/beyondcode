@@ -1,5 +1,6 @@
 - [x] 설정 | .gitignore
 - [ ] 설정 | .gitattributes
+- [ ] 설정 | .dockerignore
 - [x] 설정 | global.json
 - [x] 설정 | nuget.config
 - [x] 설정 | .editorconfig
@@ -8,6 +9,7 @@
 - [ ] 설정 | .runsettings
 - [ ] 설정 | local build script: code coverage
 - [ ] 설정 | appsettings.json 복수개
+- [ ] 설정 | Dockerization
 ---
 - [ ] 빌드 | 코드 커버리지
 - [ ] 빌드 | 클래스 다이어그램
@@ -15,30 +17,35 @@
 - [ ] 빌드 | 순환 복잡도
 - [ ] 빌드 | 코드 유사성
 ---
-- [x] 구조화 | Abstractions
-- [ ] 구조화 | Regstrations
-- [ ] 구조화 | AggregateRoots    // Domain Layer
-- [ ] 구조화 | Usecases          // Application Layer
-- [ ] 구조화 | LayerTests
+- [x] 솔루션 구조화 | Abstractions
+- [ ] 솔루션 구조화 | Regstrations
+- [ ] 솔루션 구조화 | AggregateRoots    // Domain Layer
+- [ ] 솔루션 구조화 | Usecases          // Application Layer
+- [ ] 솔루션 구조화 | LayerTests
+- [ ] 도메인 레이어 구조화 | ...
+- [ ] 애플리케이션 레이어 구조화 | ...
 ---
 - [x] 유스케이스 | AssemblyReference.cs
 - [ ] 유스케이스 | Request/Response???
 - [ ] 유스케이스 | DTO
-- [x] 유스케이스 | ICommand & ICommandUsecase
-- [x] 유스케이스 | IQuery & IQueryUsecase
+- [x] 유스케이스 | ICommand/ICommandUsecase
+- [x] 유스케이스 | IQuery/IQueryUsecase
 - [x] 유스케이스 | IResponse
 - [x] 유스케이스 | IDomainEvent & IDomainEventUsecase
 - [ ] 유스케이스 | 통합 DomainEvent
 - [ ] 유스케이스 | 1.  Usecase Input Pipeline Validation
-- [ ] 유스케이스 | 2.1  Usecase Input Pipeline OpenTelemetry Logs
+- [ ] 유스케이스 | 2.1 Usecase Input Pipeline OpenTelemetry Logs
 - [ ] 유스케이스 | 2.2 Usecase Input Pipeline OpenTelemetry Traces
 - [ ] 유스케이스 | 2.3 Usecase Input Pipeline OpenTelemetry Metrics
 - [ ] 유스케이스 | 3.  Usecase Input Pipeline Transaction
 - [ ] 유스케이스 | 4.  Usecase Input Pipeline Cache
-- [ ] 유스케이스 | 5.  Usecase Input Pipeline Exception
+- [ ] 유스케이스 | 5.  Usecase Input Pipeline
+- [ ] 유스케이스 | Compile-time logging source generation
 - [ ] 유스케이스 | Result
 - [ ] 유스케이스 | Error
 - [ ] 유스케이스 | Validation
+---
+- [ ] 어댑터 | IAdapter source generator
 ---
 - [ ] 에러코드 | DomainErrors.{AggregateRoot}.{Reason}
   ```cs

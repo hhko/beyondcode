@@ -1,8 +1,8 @@
 [![build](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml/badge.svg)](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml)
 
-> A beautiful journey to writing wise code
-> - **`The source code structure`** should be as clear as **`a table of contents in a book`** to help understand the system.
-> - **`Test code`** should serve as **`a manual`** for understanding business rules.
+A beautiful journey to writing wise code
+- **`The source code structure`** should be as clear as **`a table of contents in a book`** to help understand the system.
+- **`Test code`** should serve as **`a manual`** for understanding business rules.
 
 <br/>
 
@@ -17,7 +17,7 @@
 <br/>
 
 ## Domain-Driven Design Tutorial
-> I have restructured it based on **the design principles I defined**, using '[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)' as a foundation.
+I have restructured it based on **the design principles I defined**, using '[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)' as a foundation.
 
 ### Goal
 - Understand code structuring for sustainable software development.
