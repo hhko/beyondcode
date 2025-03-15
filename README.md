@@ -48,37 +48,36 @@ I have restructured it based on **the design principles I defined**, using '[Get
 
 1. **Separation**
    - **Concern**: `Domain Concern` vs `Technical Concern`
-   - **Goal**: `Main Goal` vs `Sub-Goal`(something supplementary to the main goal, 부수 목표: 주가 되는 것에 붙어 따르는 것)
+   - **Goal**: `Main Goal` vs `Accompanying Goal`(It refers to a goal that is naturally carried out or plays a supporting role in the process of achieving the main goal. 부수 목표: 주가 되는 것에 붙어 따르는 것)
 1. **Direction**
-   - **Up**: The more important thing from a technical aspect(Sub-Goal)
+   - **Top**: The more important thing from a technical aspect(Accompanying Goal)
    - **Down**: The more important thing from a business aspect(Main Goal)
 
 <br/>
 
-> | `Direction` | `Separation` of Concerns    | `Separation` of Layer Goals                     |
+> | `Direction` | Separation of `Concerns`    | Separation of `Goals`                     |
 > | ---         | ---                         | ---                                             |
-> | Up          | Technical Concern(Infinite) | Layer Sub-Goal(Infinite -Abstractions-> Finite) |
-> | Down        | Domain Concern(Finite)      | Layer Main Goal(Finite)                         |
+> | Top         | Technical Concern(Infinite) | Accompanying Goal(Infinite -Abstractions-> Finite) |
+> | Down        | Domain Concern(Finite)      | Main Goal(Finite)                         |
 >
-> - To transform the infinite nature of layer sub-goals into a finite structure, an `Abstractions` top-level folder is introduced, with layer sub-goals placed in sub-folders beneath it.
-> - This ensures a clear separation between layer sub-goals and the layer main goal
-> - Since all folders, except the Abstraction folder, are the layer main goals, the goals of each layer can be understood more clearly.
+> - To intuitively understand the main and  goals of a layer, accompanying goals are placed inside the Abstractions folder, leaving only the main goals at the top level.
+> - This helps clearly distinguish between the main and accompanying goals, making them easier to understand.
 
 ```shell
 {T}
 ├─Src
-│  ├─{T}                          // Host               > Up: The more important thing from a technical aspect(Sub-Goal)
+│  ├─{T}                          // Host               > Top: The more important thing from a technical aspect(Accompanying Goal)
 │  ├─{T}.Adapters.Infrastructure  // Adapter Layer      > │
 │  ├─{T}.Adapters.Persistence     // Adapter Layer      > │
 │  ├─{T}.Application              // Application Layer  > ↓
 │  └─{T}.Domain                   // Domain Layer       > Down: he more important thing from a business aspect(Main Goal)
 │     │
-│     ├─Abstractions                                    > Up: The more important thing from a technical aspect(Sub-Goal)
+│     ├─Abstractions                                    > Top: The more important thing from a technical aspect(Accompanying Goal)
 │     │                                                 > ↓
 │     └─AggregateRoots                                  > Down: he more important thing from a business aspect(Main Goal)
 │
 └─Tests
-   ├─{T}.Tests.Integration        // Integration Test   > Up: The more important thing from a technical aspect(Sub-Goal)
+   ├─{T}.Tests.Integration        // Integration Test   > Top: The more important thing from a technical aspect(Accompanying Goal)
    ├─{T}.Tests.Performance        // Performance Test   > ↓
    └─{T}.Tests.Unit               // Unit Test          > Down: he more important thing from a business aspect(Main Goal)
 ```
