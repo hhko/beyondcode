@@ -11,13 +11,18 @@ internal static class MediatRRegistration
         {
             cfg.RegisterServicesFromAssemblies(AssemblyReference.Assembly);
 
-            // IPipelineBehavior 호출 순서는 중요하다: 데코레이터 순서
-            //cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
+            //// IPipelineBehavior 호출 순서는 중요하다: 데코레이터 순서
+            ////cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
 
-            cfg.AddOpenBehavior(typeof(FluentValidationPipeline<,>));
-            cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
-            //cfg.AddOpenBehavior(typeof(QueryCachingPipeline<,>));
-            //cfg.AddBehavior<CreateOrderHeaderOpenTelemetryPipeline>();
+            //cfg.AddOpenBehavior(typeof(FluentValidationPipeline<,>));
+            //cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
+            ////cfg.AddOpenBehavior(typeof(QueryCachingPipeline<,>));
+            ////cfg.AddBehavior<CreateOrderHeaderOpenTelemetryPipeline>();
+
+            ////configuration.AddOpenBehavior(typeof(FluentValidationPipeline<,>));
+            ////configuration.AddOpenBehavior(typeof(LoggingPipeline<,>));
+            ////configuration.AddOpenBehavior(typeof(QueryCachingPipeline<,>));
+            ////configuration.AddBehavior<CreateOrderHeaderOpenTelemetryPipeline>();
         });
 
         return services;

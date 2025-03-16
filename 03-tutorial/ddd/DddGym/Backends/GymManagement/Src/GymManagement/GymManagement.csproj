@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GymManagement.Adapters.Infrastructure\GymManagement.Adapters.Infrastructure.csproj" />
+    <ProjectReference Include="..\GymManagement.Adapters.Persistence\GymManagement.Adapters.Persistence.csproj" />
     <ProjectReference Include="..\GymManagement.Adapters.Presentation\GymManagement.Adapters.Presentation.csproj" />
   </ItemGroup>
 

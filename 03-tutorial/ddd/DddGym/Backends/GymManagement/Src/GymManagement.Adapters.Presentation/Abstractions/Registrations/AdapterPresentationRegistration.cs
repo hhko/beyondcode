@@ -2,15 +2,12 @@
 
 namespace GymManagement.Adapters.Presentation.Abstractions.Registrations;
 
-public static class PresentationRegistration
+public static class AdapterPresentationRegistration
 {
-    public static IServiceCollection RegisterPresentation
-    (
-        this IServiceCollection services
-    )
+    public static IServiceCollection RegisterAdapterPresentation(this IServiceCollection services)
     {
         services.RegisterControllers();
-        
+
         return services;
     }
 }

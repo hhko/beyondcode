@@ -28,7 +28,9 @@
 - [ ] 호스트 | IOption
 - [ ] 호스트 | IOption Validation
 - [ ] 호스트 | Scheduler
-- [ ] 호스트 | Message Handler
+- [ ] 호스트 | Message
+---
+- [ ] Presentation | Host에서 WebApi 분리
 ---
 - [x] 유스케이스 | AssemblyReference.cs
 - [ ] 유스케이스 | Request/Response???
@@ -81,6 +83,9 @@
 - [ ] 테스트 | ICommand/ICommandUsecase NamingConventions
 - [ ] 테스트 | iQuery/IQueryUsecase NamingConventions
 - [ ] 테스트 | IDomainEvent/IDomainEventUsecase NamingConventions
+- [ ] 테스트 | BDD
+- [ ] 테스트 | 성능
+- [ ] 테스트 | 컨테이너
 
 
 ## 지식
@@ -101,3 +106,26 @@
 - 열거형
 - var vs. 타입
   - "타입" 코드 지저분??? 개선 방법?
+
+
+### Presentation | Host에서 WebApi 분리
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+```
+```xml
+<ItemGroup>
+  <FrameworkReference Include="Microsoft.AspNetCore.App" />
+</ItemGroup>
+```
+
+```cs
+services
+  .AddControllers()
+  .AddApplicationPart(AssemblyReference.Assembly);
+```
+
+```
+System.AggregateException: 'Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[GymManagement.Application.Usecases.Participants.Commands.CancelReservation.CancelReservationCommand,ErrorOr.IErrorOr]
+ Lifetime: Transient ImplementationType: GymManagement.Application.Usecases.Participants.Commands.CancelReservation.CancelReservationCommandUsecase':
+  Unable to resolve service for type 'GymManagement.Domain.AggregateRoots.Sessions.IDateTimeProvider' while attempting to activate 'GymManagement.Application.Usecases.Participants.Commands.CancelReservation.CancelReservationCommandUsecase'.) (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[GymManagement.Application.Usecases.Authentication.Queries.Login.LoginQuery,ErrorOr.IErrorOr`1[GymManagement.Application.Usecases.Authentication.Queries.Login.LoginResponse]] Lifetime: Transient ImplementationType: GymManagement.Application.Usecases.Authentication.Queries.Login.LoginQueryUsecase': Unable to resolve service for type 'GymManagement.Application.Abstractions.Tokens.IJwtTokenGenerator' while attempting to activate 'GymManagement.Application.Usecases.Authentication.Queries.Login.LoginQueryUsecase'.) (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[GymManagement.Application.Usecases.Authentication.Commands.Register.RegisterCommand,ErrorOr.IErrorOr`1[GymManagement.Application.Usecases.Authentication.Commands.Register.RegisterResponse]] Lifetime: Transient ImplementationType: GymManagement.Application.Usecases.Authentication.Commands.Register.RegisterCommandUsecase': Unable to resolve service for type 'GymManagement.Application.Abstractions.Tokens.IJwtTokenGenerator' while attempting to activate 'GymManagement.Application.Usecases.Authentication.Commands.Register.RegisterCommandUsecase'.)'
+```
