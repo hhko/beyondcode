@@ -1,5 +1,4 @@
-﻿using GymManagement.Application.Abstractions.Repositories;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace GymManagement.Application.Abstractions.Registrations;
 

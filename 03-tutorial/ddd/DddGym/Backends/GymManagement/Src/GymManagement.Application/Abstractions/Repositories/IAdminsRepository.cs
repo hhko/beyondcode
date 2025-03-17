@@ -1,13 +1,13 @@
-﻿using GymManagement.Domain.AggregateRoots.Admins;
+﻿//using GymManagement.Domain.AggregateRoots.Admins;
 
-namespace GymManagement.Application.Abstractions.Repositories;
+//namespace GymManagement.Application.Abstractions.Repositories;
 
-public interface IAdminsRepository
-{
-    Task AddAdminAsync(Admin participant);
+//public interface IAdminsRepository
+//{
+//    Task AddAdminAsync(Admin participant);
 
-    //Task<Profile?> GetProfileByUserIdAsync(Guid userId);
-    Task<Admin?> GetByIdAsync(Guid adminId);
+//    //Task<Profile?> GetProfileByUserIdAsync(Guid userId);
+//    Task<Admin?> GetByIdAsync(Guid adminId);
 
-    Task UpdateAsync(Admin admin);
-}
+//    Task UpdateAsync(Admin admin);
+//}

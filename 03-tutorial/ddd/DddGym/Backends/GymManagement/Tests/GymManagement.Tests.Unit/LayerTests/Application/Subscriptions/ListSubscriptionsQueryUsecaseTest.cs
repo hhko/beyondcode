@@ -23,7 +23,7 @@ public class ListSubscriptionsQueryUsecaseTest
 
         // Arrange: Persistance 레이어 의존성 주입
         //  - ISubscriptionRepository
-        ISubscriptionRepository subscriptionRepository = Substitute.For<ISubscriptionRepository>();
+        ISubscriptionsRepository subscriptionRepository = Substitute.For<ISubscriptionsRepository>();
         subscriptionRepository.ListAsync().Returns([
             SubscriptionFactory.CreateSubscription()
         ]);

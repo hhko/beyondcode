@@ -254,7 +254,8 @@ upgrade-assistant upgrade
 
 ---------------------------------------
 - [x] webapi controller 분리
-- [ ] 의존성 등록
+- [x] 의존성 등록
+- [ ] 의존성 정리
 ---
 - [ ] webapi 통합 테스트
 - [ ] webapi 통합 테스트 스냅샷
@@ -262,3 +263,15 @@ upgrade-assistant upgrade
 ---
 - [ ] 비즈니스 이해
 ---
+- [ ] 시나리오 기반 테스트트
+---
+- [ ] OpenTelemetry: 로그
+- [ ] OpenTelemetry: 추적
+- [ ] OpenTelemetry: 지표
+---
+- [ ] Validation???
+- [ ] 에러 코드 개선???
+---
+- [ ] SQLite
+- [ ] Docker화
+- [ ] Cache

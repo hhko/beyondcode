@@ -1,5 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
-using GymManagement.Application.Abstractions.Repositories;
+using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Rooms.Events;
 using Throw;
 

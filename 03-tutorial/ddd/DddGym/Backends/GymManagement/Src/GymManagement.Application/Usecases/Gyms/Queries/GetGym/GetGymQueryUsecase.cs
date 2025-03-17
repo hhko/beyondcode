@@ -1,7 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
 using ErrorOr;
-using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Gyms;
+using GymManagement.Domain.AggregateRoots.Subscriptions;
 
 namespace GymManagement.Application.Usecases.Gyms.Queries.GetGym;
 

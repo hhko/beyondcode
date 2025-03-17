@@ -1,6 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
 using ErrorOr;
-using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Gyms;
 
 namespace GymManagement.Application.Usecases.Rooms.Commands.DeleteRoom;

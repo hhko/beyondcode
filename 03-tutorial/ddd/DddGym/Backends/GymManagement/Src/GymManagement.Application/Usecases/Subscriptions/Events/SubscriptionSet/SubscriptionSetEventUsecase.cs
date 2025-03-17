@@ -1,6 +1,6 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
-using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Admins.Events;
+using GymManagement.Domain.AggregateRoots.Subscriptions;
 
 namespace GymManagement.Application.Usecases.Subscriptions.Events.SubscriptionSet;
 

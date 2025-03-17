@@ -124,6 +124,35 @@ services
   .AddApplicationPart(AssemblyReference.Assembly);
 ```
 
+### 레포지토리 인터페이스 정의
+1. 입력 -DTO-> 도메인 모델 -DTO-> 출력(영속성 모델)
+1. 입력 -DTO-> 도메인 모델 -----> 출력(도메인 모델)
+1. 입력 -DTO-> 도메인 모델 -DTO-> 출력(영속성 모델: Command)
+1. 입력 -DTO-> 도메인 모델 -----> 출력(영속성 모델: Query)
+
+> - 도메인 격리: DTO 사용
+> - ?
+>
+> - 애플리케이션 서비스 레이어는 도메인 모델과 외부 시스템 간의 상호 작용을 조율하는 역할
+> - 도메인 레이어는 순수한 도메인 로직만 포함
+>
+> - DTO은 기술적인 요구사항에 따라 변경될 수 있습니다.
+> - 애그리거트 루트
+
+- 레포지토리는 애그리거트의 영속성을 관리하며, 도메인 모델의 일부로 간주할 때(일반적으로는 도메인 타입을 직접 사용하는 것이 권장)
+  - 도메인 타입 사용 시:
+    - 레포지토리 인터페이스는 도메인 레이어에 정의합니다.
+    - 이는 레포지토리가 도메인 모델의 일부로 간주되고, 도메인 로직과 밀접하게 관련되기 때문입니다.
+    - 도메인 레이어는 순수한 도메인 로직만 포함해야 하므로, DTO와 같은 기술적인 세부 사항은 포함하지 않습니다.
+- 레포지토리는 영속성 역시 기술로 간주할 때
+  - DTO 타입 사용 시:
+    - 레포지토리 인터페이스는 애플리케이션 서비스 레이어에 정의합니다.
+    - DTO는 데이터 전송을 위한 객체이며, 기술적인 세부 사항을 포함합니다.
+    - 따라서 DTO는 도메인 레이어가 아닌 애플리케이션 서비스 레이어에 정의하는 것이 적절합니다.
+    - 애플리케이션 서비스 레이어는 도메인 모델과 외부 시스템 간의 상호 작용을 조율하는 역할을 수행하므로, DTO를 사용하여 데이터를 주고받는 것이 자연스럽습니다.
+
+
+
 ```
 System.AggregateException: 'Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: MediatR.IRequestHandler`2[GymManagement.Application.Usecases.Participants.Commands.CancelReservation.CancelReservationCommand,ErrorOr.IErrorOr]
  Lifetime: Transient ImplementationType: GymManagement.Application.Usecases.Participants.Commands.CancelReservation.CancelReservationCommandUsecase':

@@ -1,5 +1,4 @@
-﻿using GymManagement.Application.Abstractions.Repositories;
-using GymManagement.Domain.AggregateRoots.Rooms;
+﻿using GymManagement.Domain.AggregateRoots.Rooms;
 
 namespace GymManagement.Adapters.Persistence.Repositories;
 

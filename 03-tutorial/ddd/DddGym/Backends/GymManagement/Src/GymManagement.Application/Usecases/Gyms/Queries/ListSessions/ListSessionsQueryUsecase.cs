@@ -1,6 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
 using ErrorOr;
-using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Sessions;
 
 namespace GymManagement.Application.Usecases.Gyms.Queries.ListSessions;

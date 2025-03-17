@@ -1,5 +1,4 @@
-﻿using GymManagement.Application.Abstractions.Repositories;
-using GymManagement.Domain.AggregateRoots.Subscriptions;
+﻿using GymManagement.Domain.AggregateRoots.Subscriptions;
 
 namespace GymManagement.Adapters.Persistence.Repositories;
 
@@ -16,6 +15,11 @@ public class SubscriptionsRepository : ISubscriptionsRepository
     }
 
     public Task<Subscription?> GetByIdAsync(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Subscription>> ListAsync()
     {
         throw new NotImplementedException();
     }

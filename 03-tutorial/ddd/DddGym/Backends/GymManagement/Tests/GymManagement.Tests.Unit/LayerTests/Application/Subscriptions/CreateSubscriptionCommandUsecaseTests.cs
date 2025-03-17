@@ -1,5 +1,4 @@
 ﻿using GymManagement.Application.Abstractions.Registrations;
-using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Application.Usecases.Subscriptions.Commands.CreateSubscription;
 using GymManagement.Domain.AggregateRoots.Admins;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;

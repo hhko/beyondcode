@@ -1,6 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
 using ErrorOr;
-using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Sessions.Events;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainEventErrors;
