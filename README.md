@@ -29,20 +29,21 @@ I have restructured it based on **the design principles I defined**, using '[Get
   - [x] Chapter 02. [Domain Structuring](./03-tutorial/ddd/ch02-domain-structuring/)
   - [x] Chapter 03. [Usecase Exploration](./03-tutorial/ddd/ch03-usecase-exploration/)
   - [ ] Chapter 04. Usecase Pipeline
+  - [ ] Chapter 05. Cucumber
 - Part 2. Monolithic
-  - [ ] Chapter 05. WebApi
-  - [ ] Chapter 06. OpenTelemetry
-  - [ ] Chapter 07. PostgreSQL
-  - [ ] Chapter 08. Cache
-  - [ ] Chapter 09. Containerization
+  - [ ] Chapter 06. WebApi
+  - [ ] Chapter 07. OpenTelemetry
+  - [ ] Chapter 08. PostgreSQL
+  - [ ] Chapter 09. Cache
+  - [ ] Chapter 10. Containerization
 - Part 3. Microservices
-  - [ ] Chapter 10. RabbitMQ
-  - [ ] Chapter 11. Reverse Proxy
-  - [ ] Chapter 12. Resilience
-  - [ ] Chapter 13. Chaos Engineering
+  - [ ] Chapter 11. RabbitMQ
+  - [ ] Chapter 12. Reverse Proxy
+  - [ ] Chapter 13. Resilience
+  - [ ] Chapter 14. Chaos Engineering
 - Part 4. Deployment
-  - [ ] Chapter 14. Feature Flag Management
-  - [ ] Chapter 15. Infrastructure as Code
+  - [ ] Chapter 15. Feature Flag Management
+  - [ ] Chapter 16. Infrastructure as Code
 
 ### Solution Design Principles
 

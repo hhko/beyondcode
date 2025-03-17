@@ -253,12 +253,12 @@ upgrade-assistant upgrade
 
 
 ---------------------------------------
-
-- webapi
-  - openapi
-  - 통합 테스트
-
-  - 버전
-  - 그룹??
-  - 권한/...
-- fastendpoints
+- [x] webapi controller 분리
+- [ ] 의존성 등록
+---
+- [ ] webapi 통합 테스트
+- [ ] webapi 통합 테스트 스냅샷
+- [ ] webapi openapi
+---
+- [ ] 비즈니스 이해
+---
