@@ -1,7 +1,7 @@
 using ErrorOr;
 using GymManagement.Domain.AggregateRoots.Users;
 
-namespace GymManagement.Adapters.Presentation.Abstractions;
+namespace GymManagement.Adapters.Infrastructure.Authentication.PasswordHasher;
 
 public class PasswordHasher : IPasswordHasher
 {

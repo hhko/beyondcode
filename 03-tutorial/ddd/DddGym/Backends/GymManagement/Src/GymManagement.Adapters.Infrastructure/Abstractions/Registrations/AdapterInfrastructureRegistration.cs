@@ -6,6 +6,9 @@ public static class AdapterInfrastructureRegistration
 {
     public static IServiceCollection RegisterAdapterInfrastructure(this IServiceCollection services)
     {
+        services.RegisterSystem();
+        services.RegisterAuthentication();
+
         return services;
     }
 }

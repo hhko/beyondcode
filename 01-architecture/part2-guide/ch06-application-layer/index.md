@@ -2,21 +2,13 @@
 outline: deep
 ---
 
-# Application 레이어
+# 애플리케이션 레이어 폴더 구성
 
-## Application 레이어 패키지
-- MediatR
-- FluentValidation
-- Riok.Mapperly
-- ErrorOr
-- Throw
-
-## Application 레이어 템플릿
 ```shell
 └─ {Corporation}.{Solution}.{Service}.Application
-   ├─ Abstractions                                      // 부수 목표
-   │  ├─ Registrations                                  // - 의존성 등록
-   │  ├─ Pipelines                                      // - MediatR 파이프라인
+   ├─ Abstractions                                          // 부수 목표
+   │  ├─ Registrations                                      // - 의존성 등록
+   │  ├─ Pipelines                                          // - MediatR 파이프라인
    │  └─ ...
    │
    ├─ Usecases                                              // 주 목표
@@ -32,6 +24,7 @@ outline: deep
    │  │   ├─ Errors                                         // - Error
    │  │   │  ├─ ApplicationErrors.{CommandName}Errors.cs    //   - CommandName 에러
    │  │   │  ├─ ApplicationErrors.{QueryName}Errors.cs      //   - QueryName 에러
+   │  │   │  ├─ ApplicationErrors.{EventName}Errors.cs      //   - EventName 에러
    │  │   │  └─ ...
    │  │   │
    │  │   ├─ Events                                         // - Event 유스케이스

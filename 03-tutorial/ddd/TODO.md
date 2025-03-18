@@ -255,15 +255,16 @@ upgrade-assistant upgrade
 ---------------------------------------
 - [x] webapi controller 분리
 - [x] 의존성 등록
-- [ ] 의존성 정리
----
-- [ ] webapi 통합 테스트
-- [ ] webapi 통합 테스트 스냅샷
-- [ ] webapi openapi
+- [x] 의존성 정리
 ---
 - [ ] 비즈니스 이해
+- [ ] webapi 통합 테스트
+- [ ] Application 시나리오 테스트
+- [ ] 아키텍처 테스트: 의존성
+- [ ] 아키텍처 테스트: CQRS 네이밍컨벤션
 ---
-- [ ] 시나리오 기반 테스트트
+- [ ] webapi 통합 테스트 스냅샷
+- [ ] webapi openapi
 ---
 - [ ] OpenTelemetry: 로그
 - [ ] OpenTelemetry: 추적
@@ -273,5 +274,10 @@ upgrade-assistant upgrade
 - [ ] 에러 코드 개선???
 ---
 - [ ] SQLite
+- [ ] Command 도메인 타입이 노출된 EFCore: DTO x
+- [ ] Command 도메인 타입이 노출안된 EFCore: DTO o  <---
+- [ ] Query Dapper: DTO x
+---
 - [ ] Docker화
 - [ ] Cache
+---

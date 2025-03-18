@@ -1,7 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
 using ErrorOr;
 //using GymManagement.Application.Abstractions.Repositories;
-using GymManagement.Application.Abstractions.Tokens;
+using GymManagement.Application.Abstractions.TokenGenerator;
 using GymManagement.Domain.AggregateRoots.Users;
 using static GymManagement.Application.Usecases.Authentication.Errors.ApplicationErrors;
 

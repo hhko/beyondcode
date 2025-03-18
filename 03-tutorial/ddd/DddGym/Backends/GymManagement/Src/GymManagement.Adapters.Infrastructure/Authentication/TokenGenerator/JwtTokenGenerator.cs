@@ -1,7 +1,7 @@
-using GymManagement.Application.Abstractions.Tokens;
+using GymManagement.Application.Abstractions.TokenGenerator;
 using GymManagement.Domain.AggregateRoots.Users;
 
-namespace GymManagement.Adapters.Presentation.Abstractions.JwtToken;
+namespace GymManagement.Adapters.Infrastructure.Authentication.TokenGenerator;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {

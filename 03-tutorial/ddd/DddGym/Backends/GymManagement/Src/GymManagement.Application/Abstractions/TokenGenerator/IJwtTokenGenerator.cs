@@ -1,6 +1,6 @@
 ﻿using GymManagement.Domain.AggregateRoots.Users;
 
-namespace GymManagement.Application.Abstractions.Tokens;
+namespace GymManagement.Application.Abstractions.TokenGenerator;
 
 public interface IJwtTokenGenerator
 {
