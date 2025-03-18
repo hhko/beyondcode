@@ -41,9 +41,10 @@ I have restructured it based on **the design principles I defined**, using '[Get
   - [ ] Chapter 12. Reverse Proxy
   - [ ] Chapter 13. Resilience
   - [ ] Chapter 14. Chaos Engineering
-- Part 4. Deployment
+- Part 4. Operations
   - [ ] Chapter 15. Feature Flag Management
-  - [ ] Chapter 16. Infrastructure as Code
+  - [ ] Chapter 16. Observability System
+  - [ ] Chapter 17. Infrastructure as Code
 
 ### Solution Design Principles
 
