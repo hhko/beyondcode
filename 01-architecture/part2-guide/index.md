@@ -4,7 +4,7 @@ outline: deep
 
 # Internal 아키텍처 가이드
 
-## 패키지지
+## 패키지
 - [ ] 프레임워크 | ErrorOr
 - [ ] 프레임워크 | Throw
 - [ ] 프레임워크 | MediatR
