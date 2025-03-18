@@ -94,18 +94,18 @@ function sidebar(): DefaultTheme.Sidebar {
             text: '가이드',
             items: [
               {
-                text: '목록', link: '/01-architecture/part2-guide',
+                text: '목록', link: '/01-architecture/part2-guide/',
                 items: [
-                  { text: '솔루션 프로젝트', link: '/01-architecture/part2-guide/ch02-solution-projects' },
-                  { text: '솔루션 빌드', link: '/01-architecture/part2-guide/ch03-solution-build' },
+                  { text: '솔루션 프로젝트', link: '/01-architecture/part2-guide/ch02-solution-projects/' },
+                  { text: '솔루션 빌드', link: '/01-architecture/part2-guide/ch03-solution-build/' },
                 ]
               },
               {
                 text: '비즈니스 관심사 코드화',
                 items: [
-                  { text: '단위 테스트', link: '/01-architecture/part2-guide/ch04-unit-test' },
-                  { text: 'Domain 레이어', link: '/01-architecture/part2-guide/ch05-domain-layer' },
-                  { text: 'Application 레이어', link: '/01-architecture/part2-guide/ch06-application-layer' }
+                  { text: '단위 테스트', link: '/01-architecture/part2-guide/ch04-unit-test/' },
+                  { text: 'Domain 레이어', link: '/01-architecture/part2-guide/ch05-domain-layer/' },
+                  { text: 'Application 레이어', link: '/01-architecture/part2-guide/ch06-application-layer/' }
                 ]
               }
             ]
