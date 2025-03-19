@@ -4,7 +4,7 @@ outline: deep
 
 # Internal 아키텍처 가이드
 
-![](./01-architecture/part1-overview/ch04-internal-architecture/.images/Architecture.Internal.png)
+![hexagonal architecture](./../../part1-overview/ch04-internal-architecture/.images/Architecture.Internal.Hexagonal.png)
 
 ## 패키지
 - [ ] 프레임워크 | ErrorOr
