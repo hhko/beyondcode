@@ -100,7 +100,7 @@ function sidebar(): DefaultTheme.Sidebar {
                     text: '설정',
                     items: [
                       { text: '.gitignore', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/solution-gitignore.md' },
-                      { text: '.gitattributes', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/solution-gitattributes.md' }
+                      { text: '.gitattributes', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/solution-gitattributes.md' },
                       { text: 'global.json', link: '01-architecture/part2-guide/ch01-internal-architecture/settings/solution-globaljson.md' }
                     ]
                   }
