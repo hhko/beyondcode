@@ -43,7 +43,7 @@ outline: deep
 - [x] 솔루션 설정 | [.gitattributes](./settings/solution-gitattributes.md)
 - [ ] 솔루션 설정 | .dockerignore
 - [ ] 솔루션 설정 | 전역 버전(도커 이미지 버전)
-- [x] 솔루션 설정 | global.json
+- [x] 솔루션 설정 | [global.json](./settings/solution-globaljson.md)
 - [ ] 솔루션 설정 | nuget.config
 - [ ] 솔루션 설정 | .editorconfig
 - [ ] 솔루션 설정 | Directory.Build.props

@@ -1,6 +1,10 @@
 # 솔루션 설정 .gitattributes
+
+## 개요
+> [!WARNING]
 > OS 간 라인 엔딩 문제를 해결하기 위해 사용됩니다.
 
+## 예제
 ```
 # Verify 검증 파일 변환
 *.verified.txt text eol=lf working-tree-encoding=UTF-8

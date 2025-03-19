@@ -1,6 +1,11 @@
 # 솔루션 설정, global.json
+
+## 개요
+> [!WARNING]
 >  .NET CLI 명령을 실행할 때 어떤 .NET SDK 버전을 사용할지 지정합니다.
 
+## 명령
+### 생성 명령
 ```shell
 dotnet new global.json --sdk-version 8.0.102 --roll-forward latestPatch
 ```
@@ -22,6 +27,7 @@ dotnet new global.json --sdk-version 8.0.102 --roll-forward latestPatch
   - `z`는 기능 밴드입니다.
   - `nn`은 패치 버전입니다.
 
+### 확인 명령
 ```shell
 # 사용 가능한 모든 .NET SDK 버전 확인
 dotnet --list-sdks
