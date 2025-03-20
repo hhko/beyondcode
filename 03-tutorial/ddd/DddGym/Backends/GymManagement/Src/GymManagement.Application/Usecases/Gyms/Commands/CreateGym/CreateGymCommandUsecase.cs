@@ -1,7 +1,8 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
 using ErrorOr;
-//using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Gyms;
+
+//using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
 
 namespace GymManagement.Application.Usecases.Gyms.Commands.CreateGym;
@@ -18,7 +19,8 @@ internal sealed class CreateGymCommandUsecase
 
     public async Task<IErrorOr<CreateGymResponse>> Handle(CreateGymCommand command, CancellationToken cancellationToken)
     {
-        if (await _subscriptionsRepository.GetByIdAsync(command.SubscriptionId) is not Subscription subscription)
+        Subscription? subscription = await _subscriptionsRepository.GetByIdAsync(command.SubscriptionId);
+        if (subscription == null)
         {
             return Error
                 .NotFound(description: "Subscription not found")

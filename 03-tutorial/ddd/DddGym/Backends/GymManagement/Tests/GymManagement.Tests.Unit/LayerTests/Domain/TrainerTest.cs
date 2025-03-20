@@ -2,7 +2,6 @@
 using GymManagement.Domain.AggregateRoots.Trainers;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
 using GymManagement.Tests.Unit.LayerTests.Domain.Factories;
-using Shouldly;
 using static GymManagement.Domain.AggregateRoots.Trainers.Errors.DomainErrors;
 using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
 

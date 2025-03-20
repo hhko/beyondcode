@@ -1,4 +1,4 @@
-# 공통 Pure Function
+# 공통 순수 함수수
 
 ```cs
 using System.Diagnostics.Contracts;

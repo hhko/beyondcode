@@ -63,6 +63,20 @@ public sealed class Gym : AggregateRoot
     {
     }
 
+    public static Gym Create(
+        string name,
+        int maxRooms,
+        Guid subscriptionId,
+        Guid? id = null)
+    {
+        Error error = Error.Forbidden();
+        return new Gym(
+            name,
+            maxRooms,
+            subscriptionId,
+            id);
+    }
+
     public ErrorOr<Success> AddRoom(Room room)
     {
         // 규칙 생략: Id 중복

@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Adapters.Pres
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Adapters.Persistence", "Backends\GymManagement\Src\GymManagement.Adapters.Persistence\GymManagement.Adapters.Persistence.csproj", "{78ECE679-FFA3-4FFF-BCB2-E44652589F0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Tests.Integration", "Backends\GymManagement\Tests\GymManagement.Tests.Integration\GymManagement.Tests.Integration.csproj", "{C34086B5-DF73-47D6-883A-D8959016B7A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{78ECE679-FFA3-4FFF-BCB2-E44652589F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78ECE679-FFA3-4FFF-BCB2-E44652589F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78ECE679-FFA3-4FFF-BCB2-E44652589F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C34086B5-DF73-47D6-883A-D8959016B7A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C34086B5-DF73-47D6-883A-D8959016B7A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C34086B5-DF73-47D6-883A-D8959016B7A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C34086B5-DF73-47D6-883A-D8959016B7A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,5 +105,6 @@ Global
 		{F9C5B6DB-9D47-413F-81E2-55D8BCF7BAE8} = {DFAA6735-A0E0-4224-943B-8D212833BD67}
 		{CFE9B6AD-0AC1-4AE9-A3A6-2B5EA89060FB} = {DFAA6735-A0E0-4224-943B-8D212833BD67}
 		{78ECE679-FFA3-4FFF-BCB2-E44652589F0F} = {DFAA6735-A0E0-4224-943B-8D212833BD67}
+		{C34086B5-DF73-47D6-883A-D8959016B7A6} = {FEB78779-8A86-4409-86B0-02D8E234F4A2}
 	EndGlobalSection
 EndGlobal

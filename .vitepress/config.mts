@@ -101,7 +101,15 @@ function sidebar(): DefaultTheme.Sidebar {
                     items: [
                       { text: '.gitignore', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/solution-gitignore.md' },
                       { text: '.gitattributes', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/solution-gitattributes.md' },
-                      { text: 'global.json', link: '01-architecture/part2-guide/ch01-internal-architecture/settings/solution-globaljson.md' }
+                      { text: 'global.json', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/solution-globaljson.md' }
+                    ]
+                  },
+                  {
+                    text: '레이어',
+                    items: [
+                      { text: 'AssemblyReference.cs', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-assemblyreference.md' },
+                      { text: '접근 제어자', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-access-modifiers.md' },
+                      { text: '순수 함수', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-pure-function.md' }
                     ]
                   }
                 ]

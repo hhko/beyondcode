@@ -1,9 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -11,14 +8,16 @@
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="NSubstitute" />
-    <PackageReference Include="Shouldly" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="Shouldly" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
+    <Using Include="NSubstitute" />
+    <Using Include="Shouldly" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +28,7 @@
   <ItemGroup>
     <None Remove="TestResults\**" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Src\GymManagement.Application\GymManagement.Application.csproj" />
     <ProjectReference Include="..\..\Src\GymManagement.Domain\GymManagement.Domain.csproj" />

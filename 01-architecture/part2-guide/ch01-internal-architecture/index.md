@@ -93,8 +93,8 @@ outline: deep
 
 ## 레이어
 - [x] 공통 | [AssemblyReference.cs](./layers/common-assemblyreference.md)
-- [x] 공통 | [클래스 접근 제어자](./layers//common-access-modifiers.md)
-- [x] 공통 | [순수 함수](./layers/common-pure-function.md)
+- [x] 공통 | [접근 제어자](./layers//common-access-modifiers.md)
+- [x] 공통 | [Pure Function](./layers/common-pure-function.md)
 ---
 - [ ] 호스트 | Dump 파이프라인
 - [ ] 호스트 | 로그(예외 처리)

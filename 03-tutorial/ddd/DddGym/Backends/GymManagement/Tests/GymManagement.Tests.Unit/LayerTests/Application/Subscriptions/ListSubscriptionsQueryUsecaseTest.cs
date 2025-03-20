@@ -5,8 +5,6 @@ using GymManagement.Domain.AggregateRoots.Subscriptions;
 using GymManagement.Tests.Unit.LayerTests.Domain.Factories;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using NSubstitute;
-using Shouldly;
 using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
 
 namespace GymManagement.Tests.Unit.LayerTests.Application.Subscriptions;
