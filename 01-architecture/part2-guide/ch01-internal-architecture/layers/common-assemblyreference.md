@@ -3,7 +3,8 @@
 ```cs
 using System.Reflection;
 
-namespace GymManagement.Adapters.Persistence;           // TODO: 네임스페이스만 조정합니다.
+// TODO: 네임스페이스만 조정합니다.
+namespace GymManagement.Adapters.Persistence;
 
 public static class AssemblyReference
 {
