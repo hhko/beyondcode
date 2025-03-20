@@ -1,7 +1,6 @@
-# 솔루션 설정, global.json
+# 솔루션 설정 global.json
 
 ## 개요
-> [!WARNING]
 >  .NET CLI 명령을 실행할 때 어떤 .NET SDK 버전을 사용할지 지정합니다.
 
 ## 명령
