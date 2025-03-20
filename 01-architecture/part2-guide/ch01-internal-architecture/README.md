@@ -92,8 +92,9 @@ outline: deep
 - [ ] 에러 코드 | AdapterErrors.{범주}Errors.{이유}
 
 ## 레이어
-- [ ] 공통 | AssemblyReference.cs
-- [ ] 공통 | 클래스 접근 제어자자
+- [x] 공통 | [AssemblyReference.cs](./layers/common-assemblyreference.md)
+- [x] 공통 | [클래스 접근 제어자](./layers//common-access-modifiers.md)
+- [x] 공통 | [순수 함수](./layers/common-pure-function.md)
 ---
 - [ ] 호스트 | Dump 파이프라인
 - [ ] 호스트 | 로그(예외 처리)
@@ -132,6 +133,7 @@ outline: deep
 - [ ] 어댑터 레이어 | Resilience, Saga 패턴: 데이터 일관성 유지, Saga 패턴을 활용하여 장애 발생 시 트랜잭션 보장
 - [ ] 어댑터 레이어 | Resilience, 컨테이너 Health Check
 ---
+- [ ] 애플리케이션 레이어 | CQRS
 - [ ] 애플리케이션 레이어 | ICommand/ICommandUsecase
 - [ ] 애플리케이션 레이어 | IQuery/IQueryUsecase
 - [ ] 애플리케이션 레이어 | IResponse
