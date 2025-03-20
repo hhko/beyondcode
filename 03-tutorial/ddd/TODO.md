@@ -257,14 +257,16 @@ upgrade-assistant upgrade
 - [x] 의존성 등록
 - [x] 의존성 정리
 ---
-- [ ] 비즈니스 이해
 - [ ] webapi 통합 테스트
-- [ ] Application 시나리오 테스트
+- [ ] 비즈니스 이해
+- [ ] webapi 통합 테스트 비즈니스 테스트
+---
 - [ ] 아키텍처 테스트: 의존성
 - [ ] 아키텍처 테스트: CQRS 네이밍컨벤션
 ---
 - [ ] webapi 통합 테스트 스냅샷
 - [ ] webapi openapi
+- [ ] Application 시나리오 테스트
 ---
 - [ ] OpenTelemetry: 로그
 - [ ] OpenTelemetry: 추적
