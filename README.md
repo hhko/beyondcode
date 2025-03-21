@@ -1,10 +1,16 @@
 [![build](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml/badge.svg)](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml)
 
+```
+clean code that works
+동작하는 클린 코드
+```
+
 A beautiful journey to writing wise code
 - **`The source code structure`** should be as clear as **`a table of contents in a book`** to help understand the system.
 - **`Test code`** should serve as **`a manual`** for understanding business rules.
 
 <br/>
+
 
 ## Application Architecture
 
