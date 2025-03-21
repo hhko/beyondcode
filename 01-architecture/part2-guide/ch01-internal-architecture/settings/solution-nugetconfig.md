@@ -31,7 +31,9 @@ dotnet nuget list source
 등록된 소스:
   1.  nuget [사용]
       https://api.nuget.org/v3/index.json
+```
 
+```shell
 # http 요청 캐시, 패키지 폴더, 플러그 인 작업 캐시 또는 시스템 전체의 전역 패키지 폴더와 같은
 # 로컬 NuGet 리소스를 지우거나 나열합니다.
 dotnet nuget locals all --list
