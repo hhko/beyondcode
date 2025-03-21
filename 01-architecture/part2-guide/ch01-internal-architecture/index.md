@@ -44,7 +44,7 @@ outline: deep
 - [ ] 솔루션 설정 | .dockerignore
 - [ ] 솔루션 설정 | 전역 버전(도커 이미지 버전)
 - [x] 솔루션 설정 | [global.json](./settings/solution-globaljson.md)
-- [ ] 솔루션 설정 | nuget.config
+- [x] 솔루션 설정 | [nuget.config](./settings/solution-nugetconfig.md)
 - [ ] 솔루션 설정 | .editorconfig
 - [ ] 솔루션 설정 | Directory.Build.props
 - [ ] 솔루션 설정 | Directory.Packages.props
@@ -99,6 +99,7 @@ outline: deep
 - [ ] 호스트 | Dump 파이프라인
 - [ ] 호스트 | 로그(예외 처리)
 - [ ] 호스트 | 윈도우 서비스
+- [ ] 호스트 | 컨테이너화
 ---
 - [ ] 어댑터 레이어 | IOption
 - [ ] 어댑터 레이어 | IOption Validation
