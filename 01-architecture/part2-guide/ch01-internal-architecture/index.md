@@ -27,7 +27,7 @@ outline: deep
 - [ ] 영속성 | EFCore
 - [ ] 영속성 | Dapper
 ---
-- [ ] 테스트 | xUnit
+- [ ] 테스트 | xUnit.v3
 - [ ] 테스트 | NSubstitute
 - [ ] 테스트 | Shoudly
 - [ ] 테스트 | NBomber(k6)
