@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: "wise code that works = (VOC |> DDD |> Architecture) |> ..."
+  name: "wise code that works VOC |> DDD |> Architecture"
   tagline: 배움은 설렘이다. 배움은 겸손이다. 배움은 이타심이다.
   # image:
   #   src: /.images/InternalArchitecture.png
