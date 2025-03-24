@@ -51,18 +51,18 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 ### Solution Design Principles
 
 1. Separation
-   - **`Concern`**: Business Concern vs Technical Concern
-   - **`Goal`**: Main Goal vs Accompanying Goal(It refers to a goal that is naturally carried out or plays a supporting role in the process of achieving the main goal. 부수 목표: 주가 되는 것에 붙어 따르는 것)
+   - **`Concern`**: `Business Concerns` vs `Technical Concerns`
+   - **`Goal`**: `Main Goals` vs `Accompanying Goals` (It refers to a goal that is naturally carried out or plays a supporting role in the process of achieving the main goal. 부수 목표: 주가 되는 것에 붙어 따르는 것)
 1. Direction
    - **`Top`**: The more important thing from a technical concern(Accompanying Goal).
    - **`Down`**: The more important thing from a business concern(Main Goal).
 
 <br/>
 
-| Direction | Separation of `Concerns`      | Separation of `Goals`                                         |
-| ---       | ---                           | ---                                                           |
-| `Top`     | Technical Concern(_Infinite_) | Accompanying Goal(_Infinite_ -**_Abstractions_**-> _Finite_)  |
-| `Down`    | Business Concern(_Finite_)    | Main Goal(_Finite_)                                           |
+| Direction | Separation of `Concerns`        | Separation of `Goals`                                           |
+| ---       | ---                             | ---                                                             |
+| `Top`     | Technical Concerns (_Infinite_) | Accompanying Goals (_Infinite_ -**_Abstractions_**-> _Finite_)  |
+| `Down`    | Business Concerns (_Finite_)    | Main Goals (_Finite_)                                           |
 
 - To intuitively understand the main goals of a layer, accompanying goals are placed inside the Abstractions folder, leaving only the main goals at the top level.
 - This helps clearly distinguish between the main and accompanying goals, making them easier to understand.
