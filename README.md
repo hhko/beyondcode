@@ -9,7 +9,7 @@ A beautiful journey to writing **wise code that works**
 
 ## Application Architecture
 
-### Internal Architecture(Hexagonal Architecture)
+### Internal Architecture (Hexagonal Architecture)
 ![hexagonal architecture](./01-architecture/part1-overview/ch04-internal-architecture/.images/Architecture.Internal.Hexagonal.png)
 
 ### External Architecture
@@ -17,7 +17,7 @@ A beautiful journey to writing **wise code that works**
 
 <br/>
 
-## Domain-Driven Design Tutorial
+## Hands-on Labs
 I have restructured it based on **the design principles I defined**, using '[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)' as a foundation.
 
 ### Goal
