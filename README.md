@@ -61,8 +61,8 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 
 > | `Direction` | Separation of `Concerns`    | Separation of `Goals`                               |
 > | ---         | ---                         | ---                                                 |
-> | Top         | Technical Concern(__Infinite__) | Accompanying Goal(__Infinite__ -**Abstractions**-> __Finite__)  |
-> | Down        | Business Concern(__Finite__)    | Main Goal(__Finite__)                                   |
+> | Top         | Technical Concern(_Infinite_) | Accompanying Goal(_Infinite_ -**Abstractions**-> _Finite_)  |
+> | Down        | Business Concern(_Finite_)    | Main Goal(_Finite_)                                   |
 >
 > - To intuitively understand the main goals of a layer, accompanying goals are placed inside the Abstractions folder, leaving only the main goals at the top level.
 > - This helps clearly distinguish between the main and accompanying goals, making them easier to understand.
