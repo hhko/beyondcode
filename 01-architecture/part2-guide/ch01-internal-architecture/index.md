@@ -49,7 +49,7 @@ outline: deep
 - [ ] 솔루션 설정 | Directory.Build.props
 - [ ] 솔루션 설정 | Directory.Packages.props
 ---
-- [ ] 프로젝트 설정 | [appsettings.json 그룹화](./settings/project-appsettings.md)
+- [ ] 프로젝트 설정 | [appsettings.json](./settings/project-appsettings.md)
 - [ ] 프로젝트 설정 | InternalsVisibleTo
 ---
 - [ ] WebApi 프로젝트 설정 | Microsoft.NET.Sdk.Web
