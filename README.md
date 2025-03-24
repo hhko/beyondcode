@@ -38,14 +38,15 @@ I have restructured it based on **the design principles I defined**, using '[Get
   - [ ] Chapter 09. Cache
   - [ ] Chapter 10. Containerization
 - Part 3. Microservices
-  - [ ] Chapter 11. RabbitMQ
-  - [ ] Chapter 12. Reverse Proxy
+  - [ ] Chapter 11. Aspire
+  - [ ] Chapter 12. RabbitMQ
   - [ ] Chapter 13. Resilience
-  - [ ] Chapter 14. Chaos Engineering
+  - [ ] Chapter 14. Reverse Proxy
+  - [ ] Chapter 15. Chaos Engineering
 - Part 4. Operations
-  - [ ] Chapter 15. Feature Flag Management
-  - [ ] Chapter 16. Observability System
-  - [ ] Chapter 17. Infrastructure as Code
+  - [ ] Chapter 16. Feature Flag Management
+  - [ ] Chapter 17. Observability System
+  - [ ] Chapter 18. Infrastructure as Code
 
 ### Solution Design Principles
 
