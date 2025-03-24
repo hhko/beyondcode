@@ -71,18 +71,18 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 {T}
 ├─Src
 │  ├─{T}                          // Host               > Top: Technical Concern(Accompanying Goal)
-│  ├─{T}.Adapters.Infrastructure  // Adapter Layer      > │
-│  ├─{T}.Adapters.Persistence     // Adapter Layer      > │
-│  ├─{T}.Application              // Application Layer  > ↓
+│  ├─{T}.Adapters.Infrastructure  // Adapter Layer      >  │
+│  ├─{T}.Adapters.Persistence     // Adapter Layer      >  │
+│  ├─{T}.Application              // Application Layer  >  ↓
 │  └─{T}.Domain                   // Domain Layer       > Down: Business Concern(Main Goal)
 │     │
 │     ├─Abstractions                                    > Top: Technical Concern(Accompanying Goal)
-│     │                                                 > ↓
+│     │                                                 >  ↓
 │     └─AggregateRoots                                  > Down: Business Concern(Main Goal)
 │
 └─Tests
    ├─{T}.Tests.Integration        // Integration Test   > Top: Technical Concern(Accompanying Goal)
-   ├─{T}.Tests.Performance        // Performance Test   > ↓
+   ├─{T}.Tests.Performance        // Performance Test   >  ↓
    └─{T}.Tests.Unit               // Unit Test          > Down: Business Concern(Main Goal)
 ```
 
