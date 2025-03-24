@@ -50,12 +50,12 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 
 ### Solution Design Principles
 
-1. **Separation**
-   - **Concern**: `Business Concern` vs `Technical Concern`
-   - **Goal**: `Main Goal` vs `Accompanying Goal`(It refers to a goal that is naturally carried out or plays a supporting role in the process of achieving the main goal. 부수 목표: 주가 되는 것에 붙어 따르는 것)
-1. **Direction**
-   - **Top**: The more important thing from a technical concern(Accompanying Goal).
-   - **Down**: The more important thing from a business concern(Main Goal).
+1. Separation
+   - **`Concern`**: Business Concern vs Technical Concern
+   - **`Goal`**: Main Goal vs Accompanying Goal(It refers to a goal that is naturally carried out or plays a supporting role in the process of achieving the main goal. 부수 목표: 주가 되는 것에 붙어 따르는 것)
+1. Direction
+   - **`Top`**: The more important thing from a technical concern(Accompanying Goal).
+   - **`Down`**: The more important thing from a business concern(Main Goal).
 
 <br/>
 
