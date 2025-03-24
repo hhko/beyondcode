@@ -258,6 +258,7 @@ upgrade-assistant upgrade
 - [x] 의존성 정리
 ---
 - [ ] webapi 통합 테스트
+- [ ] appsettings.json 설정???
 - [ ] 비즈니스 이해
 - [ ] webapi 통합 테스트 비즈니스 테스트
 ---

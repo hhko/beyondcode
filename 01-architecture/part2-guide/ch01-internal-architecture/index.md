@@ -49,11 +49,11 @@ outline: deep
 - [ ] 솔루션 설정 | Directory.Build.props
 - [ ] 솔루션 설정 | Directory.Packages.props
 ---
+- [ ] 프로젝트 설정 | [appsettings.json 그룹화](./settings/project-appsettings.md)
 - [ ] 프로젝트 설정 | InternalsVisibleTo
 ---
 - [ ] WebApi 프로젝트 설정 | Microsoft.NET.Sdk.Web
 ---
-- [ ] 테스트 프로젝트 설정 | appsettings.json 그룹화
 - [ ] 테스트 프로젝트 설정 | Dockerization
 - [ ] 테스트 프로젝트 설정 | xunit.runner.json
 - [ ] 테스트 프로젝트 설정 | .runsettings

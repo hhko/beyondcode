@@ -43,7 +43,7 @@ outline: deep
   DDD 역사
   ```
 
-## 기술술
+## 기술
 - [x] [Bulletproof Your Software Architecture With ArchUnitNET](https://www.youtube.com/watch?v=R_srbvA6IQM)
   ```
   ArchUnitNET 패키지를 이용한 프로젝트 참조 테스트

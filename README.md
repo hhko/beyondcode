@@ -6,14 +6,13 @@ A beautiful journey to writing **wise code that works**
 
 <br/>
 
-
 ## Application Architecture
 
 ### Internal Architecture (Hexagonal Architecture)
 ![hexagonal architecture](./01-architecture/part1-overview/ch04-internal-architecture/.images/Architecture.Internal.Hexagonal.png)
 
 ### External Architecture
-> TODO
+![](./.images/ExternalArchitecture.png)
 
 <br/>
 

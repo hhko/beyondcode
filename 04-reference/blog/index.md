@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# BLOG
+# Blog
 
 ## 아키텍처
 - [ ] [1/5 Hexagonal Architecture – What Is It? Why Should You Use It?](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture/): hexagonal-architecture 체계적 설명, dto 경우의 수 표현, 클린아키텍처와 비교

@@ -49,5 +49,3 @@ outline: deep
 - [ ] https://github.com/dotnet-presentations/eshop-app-workshop/tree/main: eShop
   - https://github.com/dotnet/eshop
 - [ ] https://github.com/henriquelourente/Domain-Driven-Design-Sample: DDD 예제
-
-
