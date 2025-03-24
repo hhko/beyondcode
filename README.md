@@ -70,20 +70,20 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 ```shell
 {T}
 ├─Src
-│  ├─{T}                          // Host               > Top: The more important thing from a technical aspect(Accompanying Goal)
+│  ├─{T}                          // Host               > Top: Technical Concern(Accompanying Goal)
 │  ├─{T}.Adapters.Infrastructure  // Adapter Layer      > │
 │  ├─{T}.Adapters.Persistence     // Adapter Layer      > │
 │  ├─{T}.Application              // Application Layer  > ↓
-│  └─{T}.Domain                   // Domain Layer       > Down: he more important thing from a business aspect(Main Goal)
+│  └─{T}.Domain                   // Domain Layer       > Down: Business Concern(Main Goal)
 │     │
-│     ├─Abstractions                                    > Top: The more important thing from a technical aspect(Accompanying Goal)
+│     ├─Abstractions                                    > Top: Technical Concern(Accompanying Goal)
 │     │                                                 > ↓
-│     └─AggregateRoots                                  > Down: he more important thing from a business aspect(Main Goal)
+│     └─AggregateRoots                                  > Down: Business Concern(Main Goal)
 │
 └─Tests
-   ├─{T}.Tests.Integration        // Integration Test   > Top: The more important thing from a technical aspect(Accompanying Goal)
+   ├─{T}.Tests.Integration        // Integration Test   > Top: Technical Concern(Accompanying Goal)
    ├─{T}.Tests.Performance        // Performance Test   > ↓
-   └─{T}.Tests.Unit               // Unit Test          > Down: he more important thing from a business aspect(Main Goal)
+   └─{T}.Tests.Unit               // Unit Test          > Down: Business Concern(Main Goal)
 ```
 
 ![](./03-tutorial/ddd/.images/SolutionDesignExample.png)
