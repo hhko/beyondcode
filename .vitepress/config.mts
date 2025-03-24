@@ -72,6 +72,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '아키텍처', link: '/01-architecture/part1-overview/ch02-architecture/'},
     { text: '세미나', link: '/02-seminar/ch01-internal-architecture/'},
     { text: '튜토리얼', link: '/03-tutorial/ddd/ch01-domain-exploration/' },
+    { text: '참고', link: '/04-reference/youtube/' },
   ];
 }
 function sidebar(): DefaultTheme.Sidebar {
@@ -140,6 +141,16 @@ function sidebar(): DefaultTheme.Sidebar {
               { text: '유스케이스 탐색', link: '/03-tutorial/ddd/ch03-usecase-exploration/'}
             ]
           }
+        ]
+      }
+    ],
+    '/04-reference/': [
+      {
+        text: '참고',
+        items: [
+          { text: 'Youtube', link: '/04-reference/youtube/' },
+          { text: 'Blog', link: '/04-reference/blog/' },
+          { text: 'GitHub', link: '/04-reference/github/' }
         ]
       }
     ]

@@ -10,52 +10,10 @@
 - [ ] https://www.inflearn.com/course/%EC%A7%80%EC%86%8D-%EC%84%B1%EC%9E%A5-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4: 비즈니스 로직 비교 코드
 
 ## 아키텍처
-- [ ] [1/5 Hexagonal Architecture – What Is It? Why Should You Use It?](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture/): hexagonal-architecture 체계적 설명, dto 경우의 수 표현, 클린아키텍처와 비교
-- [ ] [2/5 Hexagonal Architecture with Java – Tutorial](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture-java/)
-- [ ] [3/5 Ports and Adapters Java Tutorial: Adding a Database Adapter](https://www.happycoders.eu/software-craftsmanship/ports-and-adapters-java-tutorial-db/)
-- [ ] [4/5 Hexagonal Architecture With Quarkus](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture-quarkus/)
-- [ ] [5/5 Hexagonal Architecture with Spring Boot](https://www.happycoders.eu/software-craftsmanship/hexagonal-architecture-spring-boot/)
-- [ ] [Moving IO to the edges of your app: Functional Core, Imperative Shell - Scott Wlaschin](https://www.youtube.com/watch?v=P1vES9AgfC4)
-- [ ] [Exposing the not-so-secret practices of the cult of DDD](https://www.youtube.com/watch?v=ESPnfFT6iD0)
 
 ## 학습
-- [x] https://www.youtube.com/watch?v=DOpt6IWU6LU: DDD 역사
-- [x] https://www.youtube.com/watch?v=P1vES9AgfC4: Moving IO to the edges of your app: Functional Core, Imperative Shell
-- [x] https://www.youtube.com/watch?v=R_srbvA6IQM: ArchUnitNET 패키지
-- [x] https://liftio.org/2021/files/jisoo-park-ppt.pdf: ADT 자료 구조 장점 소개 한글 ppt
----
-- [ ] https://github.com/Dometrain/getting-started-domain-driven-design
-- [ ] https://github.com/Dometrain/deep-dive-domain-driven-design
-- [ ] https://github.com/kgrzybek/ing-ddd
----
-- [ ] https://github.com/Dometrain/from-zero-to-hero-open-telemetry-in-dotnet
----
-- [ ] https://github.com/Dometrain/from-zero-to-hero-vertical-slice-architecture
-- [ ] https://github.com/Dometrain/zero-to-hero-event-driven-architecture
----
-- [ ] https://github.com/Dometrain/from-zero-to-hero-test-driven-development-tdd-csharp
-- [ ] https://github.com/Dometrain/from-zero-to-hero-clean-code-with-csharp
-- [ ] https://github.com/Dometrain/from-zero-to-hero-asynchronous-programming-in-csharp
-- [ ] https://github.com/ardalis/ddd-guestbook
 
-## 템플릿
-- [ ] **[SSW.CleanArchitecture](https://github.com/SSWConsulting/SSW.CleanArchitecture)**
-- [ ] **[ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)**
-- [ ] **[ardalis | CleanArchitecture.WorkerService](https://github.com/ardalis/CleanArchitecture.WorkerService/tree/main)**
-- [ ] **[amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)**
-- [ ] https://github.com/samanazadi1996/Sam.CleanArchitecture: Localization, Functional Tests
-- [ ] https://github.com/babaktaremi/Clean-Architecture-Template : 도커 self-signed SSL certificate
-- [ ] https://github.com/ivanpaulovich/dotnet-new-caju: dotnet template 조건
-- [ ] https://github.com/Genocs/clean-architecture-template: worker
-- [ ] https://github.com/Hona/VerticalSliceArchitecture
-- [ ] https://github.com/Hona/VerticalSliceArchitecture.Samples.Todos
-- [ ] https://github.com/stphnwlsh/CleanMinimalApi: MinimalWebApi
-
-## 예제
-- [ ] https://github.com/dotnet-presentations/eshop-app-workshop/tree/main: eShop
-  - https://github.com/dotnet/eshop
-- [ ] https://github.com/henriquelourente/Domain-Driven-Design-Sample: DDD 예제
-- [ ] https://github.com/kgrzybek/hotels-manager/tree/main: DDD 예제
+---
 
 ## 문서
 - [ ] [Feature Flag - 안전하고 신뢰할 수 있는 배포로 나아가는 열쇠](https://11st-tech.github.io/2023/11/07/openfeature/)
@@ -66,23 +24,7 @@
 <br/>
 <br/>
 
-## 템플릿
-- [ ] **[SSW.CleanArchitecture](https://github.com/SSWConsulting/SSW.CleanArchitecture)**
-- [ ] **[ardalis | CleanArchitecture](https://github.com/ardalis/CleanArchitecture)**
-- [ ] **[ardalis | CleanArchitecture.WorkerService](https://github.com/ardalis/CleanArchitecture.WorkerService/tree/main)**
-- [ ] **[amantinband | clean-architecture](https://github.com/amantinband/clean-architecture)**
-- [ ] https://github.com/samanazadi1996/Sam.CleanArchitecture: Localization, Functional Tests
-- [ ] https://github.com/babaktaremi/Clean-Architecture-Template : 도커 self-signed SSL certificate
-- [ ] https://github.com/ivanpaulovich/dotnet-new-caju: dotnet template 조건
-- [ ] https://github.com/Genocs/clean-architecture-template: worker
-- [ ] https://github.com/Hona/VerticalSliceArchitecture
-- [ ] https://github.com/Hona/VerticalSliceArchitecture.Samples.Todos
-- [ ] https://github.com/stphnwlsh/CleanMinimalApi: MinimalWebApi
 
-## 예제
-- [ ] https://github.com/dotnet-presentations/eshop-app-workshop/tree/main: eShop
-  - https://github.com/dotnet/eshop
-- [ ] https://github.com/henriquelourente/Domain-Driven-Design-Sample: DDD 예제  
 
 <br/>
 <br/>
@@ -168,35 +110,13 @@
 ### Authentication
 - [ ] [Token Authentication In ASP.NET Core 7 With JWT | Clean Architecture](https://www.youtube.com/watch?v=4cFhYUK8wnc)
 
-## 컨테이너
-### Health Check
-- [ ] [Mastering Custom Health Checks in ASP.NET Core for Robust and Reliable Applications](https://programmingpulse.vercel.app/blog/mastering-custom-health-checks-in-aspnet-core)
-
-### Podman
-- [ ] [Start Podman on WSL2 in 4 steps](https://dev.to/thangchung/start-podman-on-wsl2-in-4-steps-3jn9)
-- [ ] [.NET 8 Integration Tests on Podman Desktop (Windows 11 - WSL2 Ubuntu 23)](https://dev.to/thangchung/net-8-integration-tests-on-podman-desktop-windows-11-wsl2-ubuntu-23-4hpo)
 
 ## DDD
 ### 문서
 - [ ] [Clean Domain-Driven Design in 10 minutes](https://medium.com/hackernoon/clean-domain-driven-design-in-10-minutes-6037a59c8b7b)
 
-### 소스
-- [ ] **[ing-ddd](https://github.com/kgrzybek/ing-ddd)**
-- [ ] **[ddd-guestbook](https://github.com/ardalis/ddd-guestbook)**
-- [ ] [ValueObjectsDemo](https://github.com/ardalis/ValueObjectsDemo)
-- [ ] [ValueObjectsDemo](https://github.com/ardalis/ValueObjectsDemo)
-  - [treat-primitive-obsession-with-value-objects.pdf](https://github.com/codemash-conference/session-slides/blob/main/2025/slides/treat-primitive-obsession-with-value-objects.pdf)
-
-<br/>
-<br/>
 
 # 정리 중
-### 테스트
-- [ ] [Configure unit tests by using a .runsettings file](https://learn.microsoft.com/en-us/visualstudio/test/configure-unit-tests-by-using-a-dot-runsettings-file?view=vs-2022)
-- [x] [Code Coverage Reports for .NET Projects](https://knowyourtoolset.com/2024/01/coverage-reports/)
-- [ ] [Integration Testing for ASP.NET APIs (1/3) - Basics](https://knowyourtoolset.com/2024/01/integration-testing/)
-- [ ] [Integration Testing for ASP.NET APIs (2/3) - Data](https://knowyourtoolset.com/2024/01/integration-testing-data/)
-- [ ] [Integration Testing for ASP.NET APIs (3/3) - Auth](https://knowyourtoolset.com/2024/01/integration-testing-auth/)
 
 
 ## 아키텍처
