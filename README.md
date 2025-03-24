@@ -18,7 +18,7 @@ A beautiful journey to writing **wise code that works**
 <br/>
 
 ## Hands-on Labs
-I have restructured it based on **the design principles I defined**, using '[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)' as a foundation.
+I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)' based on the design principles and practices I defined.
 
 ### Goal
 - Understand code structuring for sustainable software development.
