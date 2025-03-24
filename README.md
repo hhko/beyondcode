@@ -1,8 +1,8 @@
 [![build](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml/badge.svg)](https://github.com/hhko/better-code-with-ddd/actions/workflows/build.yml)
 
 A beautiful journey to writing **wise code that works**
-- **`The source code structure`** should be as clear as **`a book’s table of contents`**, making it easy to `understand the domain and system`.
-- **`Test code`** should act as **`a manual`** for understanding `business rules`.
+- **`The source code structure`** should be as clear as **`a book’s table of contents`**, making it easy to understand the domain and system.
+- **`Test code`** should act as **`a manual`** for understanding business rules.
 
 <br/>
 
