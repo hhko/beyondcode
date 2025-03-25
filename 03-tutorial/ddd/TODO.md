@@ -270,6 +270,7 @@ C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warnin
 ```
 
 ---
+- [ ] 테스트 경고 2개 범주
 - [ ] dotnet test 세부 출력 cli
 - [ ] xunit 어셈블리 공유
 - [ ] xuint 어셈블리 공유일 때 전체 순차 실행???
