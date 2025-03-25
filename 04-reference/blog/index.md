@@ -34,3 +34,8 @@ outline: deep
 - [ ] [Integration Testing for ASP.NET APIs (1/3) - Basics](https://knowyourtoolset.com/2024/01/integration-testing/)
 - [ ] [Integration Testing for ASP.NET APIs (2/3) - Data](https://knowyourtoolset.com/2024/01/integration-testing-data/)
 - [ ] [Integration Testing for ASP.NET APIs (3/3) - Auth](https://knowyourtoolset.com/2024/01/integration-testing-auth/)
+
+### WebApi
+- [x] [Integration tests in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-9.0)
+- [x] [Integration Testing in ASP.NET Core](https://code-maze.com/aspnet-core-integration-testing/)
+

@@ -45,7 +45,5 @@ outline: deep
 - [ ] https://github.com/henriquelourente/Domain-Driven-Design-Sample: DDD 예제
 - [ ] https://github.com/kgrzybek/hotels-manager/tree/main: DDD 예제
 
-## 예제
-- [ ] https://github.com/dotnet-presentations/eshop-app-workshop/tree/main: eShop
-  - https://github.com/dotnet/eshop
-- [ ] https://github.com/henriquelourente/Domain-Driven-Design-Sample: DDD 예제
+## 테스트
+- [ ] https://github.com/dotnet/AspNetCore.Docs.Samples/tree/main/test/integration-tests/9.x/IntegrationTestsSample

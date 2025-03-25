@@ -72,7 +72,8 @@ reportgenerator `
   -targetdir:$coverageDir `
   -reporttypes:"Html;TextSummary;MarkdownSummaryGithub;MarkdownAssembliesSummary" `
   -verbosity:Info `
-  -assemblyfilters:-*.Tests.*
+  -assemblyfilters:-*.Tests.* `
+  -filters:"-*.g.cs"
 
 #
 # 5. Code Coverage Report

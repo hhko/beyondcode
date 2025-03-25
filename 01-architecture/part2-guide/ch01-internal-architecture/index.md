@@ -171,7 +171,7 @@ outline: deep
 - [ ] 단위 테스트(레이어 테스트) | 애플리케이션 레이어
 - [ ] 단위 테스트(레이어 테스트) | 애플리케이션 레이어(시나리오, Cucumber)
 ---
-- [ ] 통합 테스트 | WebApi
+- [ ] 통합 테스트 | [WebApi](./testing/integration-webapi.md)
 - [ ] 통합 테스트 | Quartz
 - [ ] 통합 테스트 | RabbitMQ
 - [ ] 통합 테스트 | gRPC

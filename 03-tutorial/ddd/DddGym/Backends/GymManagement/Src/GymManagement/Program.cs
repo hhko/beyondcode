@@ -22,3 +22,5 @@ WebApplication webApplication = builder.Build();
 webApplication.MapControllers();
 
 webApplication.Run();
+
+sealed partial class Program;

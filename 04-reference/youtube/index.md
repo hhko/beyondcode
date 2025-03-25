@@ -42,6 +42,10 @@ outline: deep
   ```
   DDD 역사
   ```
+- [x] [지속 가능한 소프트웨어 개발을 위한 경험과 통찰 | 인프콘2023](https://www.youtube.com/watch?v=ouE2fYUgYLc)
+  ```
+  - 작게 짧게 make it work, make it right.
+  ```
 
 ## 기술
 - [x] [Bulletproof Your Software Architecture With ArchUnitNET](https://www.youtube.com/watch?v=R_srbvA6IQM)

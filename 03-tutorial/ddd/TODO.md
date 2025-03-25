@@ -257,8 +257,24 @@ upgrade-assistant upgrade
 - [x] 의존성 등록
 - [x] 의존성 정리
 ---
-- [ ] webapi 통합 테스트
-- [ ] appsettings.json 설정???
+- [x] webapi 통합 테스트
+- [x] appsettings.json 설정???
+
+```
+C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warning : C:\Workspace\Github\beyondcode\03-tutorial\ddd\DddGym\Abstractions\Frameworks\Tests\DddGym.Framework.Tests.Unit\bin\Release\net9.0\DddGym.Framework.Tests.Unit.dll에서 테스트를 사용할 수 없습니다. 테스트 Discoverer 및 Executor가 등록되고 플랫폼 및 프레임워크 버전 설정이 적절한지 확인하고 다시 시도하세요.
+C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warning : C:\Workspace\Github\beyondcode\03-tutorial\ddd\DddGym\Backends\GymManagement\Tests\GymManagement.Tests.Unit\bin\Release\net9.0\GymManagement.Tests.Unit.dll에서 테스트를 사용할 수 없습니다. 테스트 Discoverer 및 Executor가 등 록되고 플랫폼 및 프레임워크 버전 설정이 적절한지 확인하고 다시 시도하세요.
+C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warning : C:\Workspace\Github\beyondcode\03-tutorial\ddd\DddGym\Backends\GymManagement\Tests\GymManagement.Tests.Integration\bin\Release\net9.0\GymManagement.Tests.Integration.dll에서 테스트를 사용할 수 없습니다. 테스트 Discoverer 및 Executor가 등록되고 플랫폼 및 프레임워크 버전 설정이 적절한지 확인하고 다시 시도하세요.
+```
+```
+2025-03-25T23:44:10: File 'C:\Workspace\Github\beyondcode\03-tutorial\ddd\DddGym\Backends\GymManagement\Src\GymManagement.Application\obj\Release\net9.0\Microsoft.Extensions.Logging.Generators\Microsoft.Extensions.Logging.Generators.LoggerMessageGenerator\LoggerMessage.g.cs' does not exist (any more).
+```
+
+---
+- [ ] dotnet test 세부 출력 cli
+- [ ] xunit 어셈블리 공유
+- [ ] xuint 어셈블리 공유일 때 전체 순차 실행???
+- [ ] webapi 통합 테스트 문서화화
+---
 - [ ] 비즈니스 이해
 - [ ] webapi 통합 테스트 비즈니스 테스트
 ---

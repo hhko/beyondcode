@@ -114,6 +114,12 @@ function sidebar(): DefaultTheme.Sidebar {
                       { text: '접근 제어자', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-access-modifiers.md' },
                       { text: '순수 함수', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-pure-function.md' }
                     ]
+                  },
+                  {
+                    text: '테스트',
+                    items: [
+                      { text: 'WebApi', link: '/01-architecture/part2-guide/ch01-internal-architecture/testing/integration-webapi.md' }
+                    ]
                   }
                 ]
               }
