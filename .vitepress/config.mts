@@ -120,7 +120,7 @@ function sidebar(): DefaultTheme.Sidebar {
                   {
                     text: '테스트',
                     items: [
-                      { text: '단위 테스트', link: '/01-architecture/part2-guide/ch01-internal-architecture/testing/unit-testing.md' }
+                      { text: '단위 테스트', link: '/01-architecture/part2-guide/ch01-internal-architecture/testing/unit-testing.md' },
                       { text: 'WebApi 통합 테스트트', link: '/01-architecture/part2-guide/ch01-internal-architecture/testing/integration-webapi.md' }
                     ]
                   }
