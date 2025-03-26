@@ -90,4 +90,4 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
    └─{T}.Tests.Unit               // Unit Test          > Down: Business Concerns (Main Goal)
 ```
 
-![](./03-tutorial/ddd/.images/SolutionDesignExample.png)
+![](./02-tutorial/ddd/.images/SolutionDesignExample.png)
