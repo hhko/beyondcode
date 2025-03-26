@@ -30,9 +30,9 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 
 ### Table of Contents
 - Part 1. VOC
-  - [x] Chapter 01. [Domain Exploration](./03-tutorial/ddd/ch01-domain-exploration/)
-  - [x] Chapter 02. [Domain Structuring](./03-tutorial/ddd/ch02-domain-structuring/)
-  - [x] Chapter 03. [Usecase Exploration](./03-tutorial/ddd/ch03-usecase-exploration/)
+  - [x] Chapter 01. [Domain Exploration](./03-tutorial/ddd/ch01-domain-exploration/index.md)
+  - [ ] Chapter 02. Domain Structuring
+  - [ ] Chapter 03. Usecase Exploration
   - [ ] Chapter 04. Usecase Pipeline
   - [ ] Chapter 05. Cucumber
 - Part 2. Monolithic
