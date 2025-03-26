@@ -66,15 +66,21 @@ export default defineConfig({
   }
 })
 
+//
+// 상단 메뉴
+//
 function nav(): DefaultTheme.NavItem[] {
   return [
     { text: '홈', link: '/' },
     { text: '아키텍처', link: '/01-architecture/part1-overview/ch02-architecture/'},
-    { text: '세미나', link: '/02-seminar/ch01-internal-architecture/'},
-    { text: '튜토리얼', link: '/03-tutorial/ddd/ch01-domain-exploration/' },
+    { text: '튜토리얼', link: '/02-tutorial/ddd/ch01-domain-exploration/' },
     { text: '참고', link: '/04-reference/youtube/' },
   ];
 }
+
+//
+// 사이드 메뉴
+//
 function sidebar(): DefaultTheme.Sidebar {
   return {
     '/01-architecture/': [
