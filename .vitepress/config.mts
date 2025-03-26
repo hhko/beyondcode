@@ -139,8 +139,6 @@ function sidebar(): DefaultTheme.Sidebar {
             text: '도메인 주도 설계', link: '/02-tutorial/ddd/',
             items: [
               { text: '도메인 탐색', link: '/02-tutorial/ddd/ch01-domain-exploration/'},
-              { text: '도메인 구조화', link: '/02-tutorial/ddd/ch02-domain-structuring/'},
-              { text: '유스케이스 탐색', link: '/02-tutorial/ddd/ch03-usecase-exploration/'}
             ]
           }
         ]
