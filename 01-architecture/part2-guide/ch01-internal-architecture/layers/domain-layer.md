@@ -10,7 +10,7 @@ outline: deep
 - ErrorOr
 - Throw
 
-## Domain 레이어 템플릿
+## Domain 레이어 솔루션 구성
 ```shell
 └─ {Corporation}.{Solution}.{Service}.Domain
    ├─ Abstractions               // 부수 목표
@@ -37,7 +37,7 @@ outline: deep
    └─ AssemblyReference.cs
 ```
 
-## Errors
+## 에러 처리
 
 ### 에러 코드
 > `DomainErrors.{AggregateRoot}.{Reason}`
@@ -76,5 +76,3 @@ Sessions                                        # Aggregate Root
    ├─ DomainErrors.CancelReservationErrors.cs   # MethodName: CancelReservation
    └─ DomainErrors.ReserveSpotErrors.cs         # MethodName: ReserveSpot
 ```
-
-## Domain 레이어 단위 테스트

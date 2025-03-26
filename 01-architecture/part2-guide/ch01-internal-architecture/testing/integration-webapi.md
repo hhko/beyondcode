@@ -1,15 +1,26 @@
+---
+outline: deep
+---
+
+# WebApi 통합 테스트
+
+## 패키지
 - Microsoft.AspNetCore.Mvc.Testing
 
+## WebApi Host 프로젝트
 ```cs
 public interface IAppMarker;
 ```
 
+## Integration 테스트 프로젝트
+### appsettings.json
 ```xml
 <ItemGroup>
     <Content Include="appsettings.Integration.json" CopyToOutputDirectory="PreserveNewest" />
 </ItemGroup>
 ```
 
+### WebApplicationFactory
 ```cs
 // CollectionAttribute
 // CollectionDefinitionAttribute    : WebAppFactoryCollectionDefinition
@@ -40,9 +51,9 @@ public sealed class WebAppFactoryFixture
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        // ConfigureLogging             // 로그
-        // ConfigureAppConfiguration    // IConfiguration
-        // ConfigureTestServices        // IServiceCollection
+        // ConfigureLogging             // Logging 재정의의
+        // ConfigureAppConfiguration    // IConfiguration 재정의
+        // ConfigureTestServices        // IServiceCollection 재정의
 
         builder.ConfigureAppConfiguration(context =>
         {
@@ -67,6 +78,8 @@ public sealed class WebAppFactoryFixture
     }
 }
 ```
+
+### Controller 테스트 클래스
 
 ```cs
 public abstract class ControllerTestsBase

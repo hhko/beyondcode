@@ -2,7 +2,15 @@
 outline: deep
 ---
 
-# 애플리케이션 레이어 폴더 구성
+# Application 레이어
+
+## Application 레이어 패키지
+- MediatR
+- FluentValidation
+- ErrorOr
+- OpenTelemetry
+
+## Application 레이어 솔루션 구성
 
 ```shell
 └─ {Corporation}.{Solution}.{Service}.Application
@@ -247,5 +255,3 @@ Authentication
 └─ Errors
    └─ ApplicationErrors.LoginQueryErrors.cs   # QueryName: LoginQuery
 ```
-
-## Application 단위 테스트

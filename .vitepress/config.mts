@@ -112,13 +112,16 @@ function sidebar(): DefaultTheme.Sidebar {
                     items: [
                       { text: 'AssemblyReference.cs', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-assemblyreference.md' },
                       { text: '접근 제어자', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-access-modifiers.md' },
-                      { text: '순수 함수', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-pure-function.md' }
+                      { text: '순수 함수', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-pure-function.md' },
+                      { text: 'Domain 레이어', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/domain-layer.md' },
+                      { text: 'Application 레이어어', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/application-layer.md' }
                     ]
                   },
                   {
                     text: '테스트',
                     items: [
-                      { text: 'WebApi', link: '/01-architecture/part2-guide/ch01-internal-architecture/testing/integration-webapi.md' }
+                      { text: '단위 테스트', link: '/01-architecture/part2-guide/ch01-internal-architecture/testing/unit-testing.md' }
+                      { text: 'WebApi 통합 테스트트', link: '/01-architecture/part2-guide/ch01-internal-architecture/testing/integration-webapi.md' }
                     ]
                   }
                 ]
@@ -128,24 +131,16 @@ function sidebar(): DefaultTheme.Sidebar {
         ],
       },
     ],
-    '/02-seminar/': [
-      {
-        text: '세미나',
-        items: [
-          { text: 'Internal 아키텍처', link: '/02-seminar/ch01-internal-architecture/'}
-        ]
-      }
-    ],
-    '/03-tutorial/': [
+    '/02-tutorial/': [
       {
         text: '튜토리얼',
         items: [
           {
-            text: '도메인 주도 설계', link: '/03-tutorial/ddd/',
+            text: '도메인 주도 설계', link: '/02-tutorial/ddd/',
             items: [
-              { text: '도메인 탐색', link: '/03-tutorial/ddd/ch01-domain-exploration/'},
-              { text: '도메인 구조화', link: '/03-tutorial/ddd/ch02-domain-structuring/'},
-              { text: '유스케이스 탐색', link: '/03-tutorial/ddd/ch03-usecase-exploration/'}
+              { text: '도메인 탐색', link: '/02-tutorial/ddd/ch01-domain-exploration/'},
+              { text: '도메인 구조화', link: '/02-tutorial/ddd/ch02-domain-structuring/'},
+              { text: '유스케이스 탐색', link: '/02-tutorial/ddd/ch03-usecase-exploration/'}
             ]
           }
         ]

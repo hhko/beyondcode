@@ -8,7 +8,7 @@ outline: deep
 - xUnit
 - Shouldly
 
-## 단위 테스트 템플릿
+## 단위 테스트 솔루션 구성
 ```shell
 └─ {Service}
     ├─ Src
@@ -27,7 +27,7 @@ outline: deep
            ├─ Abstractions
            │  └─ Constants
            │
-           │  # 주 목표
+           │  # 주요 목표: 레이어 단위 테스트
            └─ LayerTests
                ├─ Application                          # Application 레이어
                │  └─ {Usecase}Tests.cs                 # Usecase 테스트
@@ -37,5 +37,3 @@ outline: deep
                    ├─ Factories
                    └─ {AggregateRoot}Tests.cs          # Aggregate Root 테스트
 ```
-
-## 단위 테스트 그룹화
