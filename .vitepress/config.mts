@@ -89,7 +89,6 @@ function sidebar(): DefaultTheme.Sidebar {
         items: [
           {
             text: '개요', link: '/01-architecture/part1-overview/',
-            collapsed: false,
             items: [
               { text: '아키텍처', link: '/01-architecture/part1-overview/ch01-architecture/' },
               { text: '아키텍처 진단', link: '/01-architecture/part1-overview/ch02-architecture-diagnosis/' },
@@ -99,7 +98,6 @@ function sidebar(): DefaultTheme.Sidebar {
           },
           {
             text: 'Internal 아키텍처 가이드', link: '/01-architecture/part2-internal-architecture/',
-            collapsed: false,
             items: [
               {
                 text: '설치',
@@ -143,7 +141,6 @@ function sidebar(): DefaultTheme.Sidebar {
           },
           {
             text: 'External 아키텍처 가이드', link: '/01-architecture/part3-external-architecture/',
-            collapsed: false,
             items: [
               {
                 text: '관찰 가능성',
