@@ -10,6 +10,17 @@ outline: deep
 - **소스 코드 구조는** 책의 목차처럼 명확하게 도메인과 시스템을 쉽게 이해할 수 있어야 합니다.
 - **테스트 코드는** 비즈니스 규칙을 이해하기 위한 매뉴얼 역할을 해야 합니다.
 
+## Application 아키텍처
+
+### 아키텍처 기술 맵
+![](./../../.images/ArchitectureTechMap.png)
+
+### Internal 아키텍처 (Hexagonal Architecture)
+![hexagonal architecture](./ch03-internal-architecture/.images/Architecture.Internal.Hexagonal.png)
+
+### External 아키텍처
+> TODO
+
 ## 분리
 ### 관심사의 분리
 - 기술 관심사: 기술 레이어(Adapter Layer)
