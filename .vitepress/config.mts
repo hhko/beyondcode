@@ -88,7 +88,7 @@ function sidebar(): DefaultTheme.Sidebar {
         text: '아키텍처',
         items: [
           {
-            text: '개요', link: '/01-architecture/part1-overview/',
+            text: '아키텍처 개요', link: '/01-architecture/part1-overview/',
             items: [
               { text: '아키텍처', link: '/01-architecture/part1-overview/ch01-architecture/' },
               { text: '아키텍처 진단', link: '/01-architecture/part1-overview/ch02-architecture-diagnosis/' },
@@ -181,45 +181,6 @@ function sidebar(): DefaultTheme.Sidebar {
     ]
   }
 }
-
-//       {
-//         text: 'TUTORIAL',
-//         items: [
-//           {
-//             text: 'Observability',
-//             items: [
-//               { text: '로그', link: 'tutorials/observability/logs/readme' }
-//             ]
-//           },
-//         ]
-//       },
-//       {
-//         text: 'INFRA',
-//         items: [
-//           {
-//             text: 'Docker',
-//             items: [
-//               { text: '설치', link: 'infra/docker/install/readme' }
-//             ]
-//           },
-//           {
-//             text: 'Observability',
-//             items: [
-//               { text: 'Aspire', link: 'infra/observability/aspire/readme' },
-//               { text: 'Otel-Collector', link: 'infra/observability/otel-collector/readme' }
-//             ]
-//           },
-//           {
-//             text: '사이트 생성기',
-//             items: [
-//               { text: 'Docusaurus', link: '/infra/ssg/docusaurus/readme' }
-//             ]
-//           }
-//         ]
-//       }
-//     ]
-//   ];
-// }
 
 export const search: DefaultTheme.LocalSearchOptions["locales"] = {
   root: {

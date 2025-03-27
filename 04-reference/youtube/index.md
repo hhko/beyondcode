@@ -4,9 +4,9 @@ outline: deep
 
 # Youtube
 
-## 삶
-- [x] [꿈을 현실로 만든 10년의 여정 | 이승건 토스팀 리더](https://www.youtube.com/watch?v=UogHHGN3U3Q)
+## 두려움
 - [x] [나는 언제 행복한 사람인가?](https://www.youtube.com/watch?v=1zmnoElezRg)
+- [x] [꿈을 현실로 만든 10년의 여정 | 이승건 토스팀 리더](https://www.youtube.com/watch?v=UogHHGN3U3Q)
 
 ## 개념
 - [x] [Moving IO to the edges of your app: Functional Core, Imperative Shell - Scott Wlaschin](https://www.youtube.com/watch?v=P1vES9AgfC4)
@@ -46,11 +46,23 @@ outline: deep
   ```
   DDD 역사
   ```
-- [x] [지속 가능한 소프트웨어 개발을 위한 경험과 통찰 | 인프콘2023](https://www.youtube.com/watch?v=ouE2fYUgYLc)
+- [x] [우리는 이렇게 모듈을 나눴어요: 멀티 모듈을 설계하는 또 다른 관점 | 인프콘2023](https://www.youtube.com/watch?v=uvG-amw2u2s)
   ```
-  - make it work, make it right.
+  - Domain과 Infra 영역은 다른 수준(Level) 
+    = 다른 변경의 속도
+      - Domain: 비즈니스 요구사항에 의해 변경
+      - Infra: 기능 요구사항에 의해 변경
+    = 다른 성질(순수성 vs. 비순수성)     
+  - 좋은 시스템은 제약이 많은 시스템
+  - A good architecture allows you to defer critical decisions.
+    좋은 아키텍처는 중요한 결정을 미룰 수 있도록 해준다.
+  - 신뢰 자본
   ```
-- [ ] [Navigating complexity in event-driven architectures: A domain-driven approach](https://www.youtube.com/watch?v=HpFWRpyyvrk)
+- [x] [소프트웨어 설계를 위한 추상적, 구조적 사고│인프콘2023](https://www.youtube.com/watch?v=EgLxbFmPRoU)
+  ```
+  - 도메인: 우리가 해결할 '문제'에 대한 비즈니스 전문 지식
+  - 도메인 모델링: 비즈니스를 프로그램 세계로 표현한 것
+  ```
 
 ## 기술
 - [x] [Bulletproof Your Software Architecture With ArchUnitNET](https://www.youtube.com/watch?v=R_srbvA6IQM)
