@@ -126,7 +126,7 @@ function sidebar(): DefaultTheme.Sidebar {
                   { text: '접근 제어자', link: '/01-architecture/part2-internal-architecture/layers/common-access-modifiers.md' },
                   { text: '순수 함수', link: '/01-architecture/part2-internal-architecture/layers/common-pure-function.md' },
                   { text: 'Domain 레이어', link: '/01-architecture/part2-internal-architecture/layers/domain-layer.md' },
-                  { text: 'Application 레이어어', link: '/01-architecture/part2-internal-architecture/layers/application-layer.md' }
+                  { text: 'Application 레이어', link: '/01-architecture/part2-internal-architecture/layers/application-layer.md' }
                 ]
               },
               {
