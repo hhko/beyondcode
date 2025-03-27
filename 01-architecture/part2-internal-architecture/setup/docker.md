@@ -61,31 +61,6 @@ apt download \
       | grep "^\w" \
       | sort -u)
 ```
-- 다운로드 파일
-  - containerd.io_1.7.22-1_amd64.deb
-  - docker-ce-cli_5%3a27.3.1-1~ubuntu.22.04~jammy_amd64.deb
-  - docker-ce_5%3a27.3.1-1~ubuntu.22.04~jammy_amd64.deb
-  - gcc-12-base_12.3.0-1ubuntu1~22.04_amd64.deb
-  - iptables_1.8.7-1ubuntu5.2_amd64.deb
-  - libc6_2.35-0ubuntu3.8_amd64.deb
-  - libcap2_1%3a2.44-1ubuntu0.22.04.1_amd64.deb
-  - libcrypt1_1%3a4.4.27-1_amd64.deb
-  - libgcc-s1_12.3.0-1ubuntu1~22.04_amd64.deb
-  - libgcrypt20_1.9.4-3ubuntu3_amd64.deb
-  - libgpg-error0_1.43-3_amd64.deb
-  - libip4tc2_1.8.7-1ubuntu5.2_amd64.deb
-  - libip6tc2_1.8.7-1ubuntu5.2_amd64.deb
-  - liblz4-1_1.9.3-2build2_amd64.deb
-  - liblzma5_5.2.5-2ubuntu1_amd64.deb
-  - libmnl0_1.0.4-3build2_amd64.deb
-  - libnetfilter-conntrack3_1.0.9-1_amd64.deb
-  - libnfnetlink0_1.0.1-3build3_amd64.deb
-  - libnftnl11_1.2.1-1build1_amd64.deb
-  - libseccomp2_2.5.3-2ubuntu2_amd64.deb
-  - libsystemd0_249.11-0ubuntu3.12_amd64.deb
-  - libxtables12_1.8.7-1ubuntu5.2_amd64.deb
-  - libzstd1_1.4.8+dfsg-3build1_amd64.deb
-  - netbase_6.3_all.deb
 
 ### 도커 Plugin 파일 다운로드
 ```shell
@@ -99,12 +74,6 @@ sudo curl -L "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/a
 sudo curl -L "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb" -o ./docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb
 ```
 
-- 다운로드 파일
-  - docker-buildx-plugin_0.17.1-1~ubuntu.22.04~jammy_amd64.deb
-  - docker-ce-rootless-extras_27.3.1-1~ubuntu.22.04~jammy_amd64.deb
-  - docker-compose-plugin_2.29.7-1~ubuntu.22.04~jammy_amd64.deb
-  - docker-scan-plugin_0.23.0~ubuntu-jammy_amd64.deb
-
 ### 도커 컴포즈 파일 다운로드
 ```shell
 #
@@ -114,9 +83,6 @@ sudo curl -L "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/a
 https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-linux-x86_64
 sudo curl -L "https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-$(uname -s)-$(uname -m)" -o ./docker-compose
 ```
-- 다운로드 파일
-  - docker-compose
-
 
 ## 오프라인 도커 설치
 ### 도커 설치

@@ -88,7 +88,7 @@ function sidebar(): DefaultTheme.Sidebar {
         text: '아키텍처',
         items: [
           {
-            text: '개요',
+            text: '개요', link: '/01-architecture/part1-overview/',
             items: [
               { text: '아키텍처', link: '/01-architecture/part1-overview/ch01-architecture/' },
               { text: '아키텍처 진단', link: '/01-architecture/part1-overview/ch02-architecture-diagnosis/' },
@@ -133,6 +133,18 @@ function sidebar(): DefaultTheme.Sidebar {
                   { text: 'WebApi 통합 테스트트', link: '/01-architecture/part2-internal-architecture/testing/integration-webapi.md' }
                 ]
               }
+            ]
+          },
+          {
+            text: 'External 아키텍처 가이드', link: '/01-architecture/part3-external-architecture/',
+            items: [
+              {
+                text: '관찰 가능성',
+                items: [
+                  { text: 'Aspire 대시보드', link: '/01-architecture/part3-external-architecture/observability/aspire-dashboard/' },
+                  { text: 'otel-collector', link: '/01-architecture/part3-external-architecture/observability/otel-collector/' },
+                ]
+              },
             ]
           }
         ],
