@@ -23,9 +23,13 @@ outline: deep
 
 ## 분리
 ### 관심사의 분리
-- 기술 관심사: 기술 레이어(Adapter Layer)
-- 비즈니스 흐름 관심사: 애플리케이션 레이어(Application Layer)
-- 비즈니스 단위 관심사: 도메인 레이어(Domain Layer)
+- 비즈니스 관심사
+  - 비즈니스 흐름 관심사: 애플리케이션 레이어(Application Layer)
+  - 비즈니스 단위 관심사: 도메인 레이어(Domain Layer)
+- 기술 관심사
+  - 인프라 관심사: 기술 레이어(Adapter Layer: Infrastructure)
+  - 영속성 관심사: 기술 레이어(Adapter Layer: Persistence)
+  - 화면 관심사: 기술 레이어(Adapter Layer: Presentation)
 
 ### 목표의 분리
 - 주요 목표
