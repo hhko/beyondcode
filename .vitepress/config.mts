@@ -103,7 +103,7 @@ function sidebar(): DefaultTheme.Sidebar {
             items: [
               {
                 text: '설치',
-                collapsed: false,
+                collapsed: true,
                 items: [
                   { text: '개발 환경', link: '/01-architecture/part2-internal-architecture/setup/dev-environment.md' },
                   { text: '도커', link: '/01-architecture/part2-internal-architecture/setup/docker.md' },
@@ -111,7 +111,7 @@ function sidebar(): DefaultTheme.Sidebar {
               },
               {
                 text: '설정',
-                collapsed: false,
+                collapsed: true,
                 items: [
                   { text: '.gitignore', link: '/01-architecture/part2-internal-architecture/settings/solution-gitignore.md' },
                   { text: '.gitattributes', link: '/01-architecture/part2-internal-architecture/settings/solution-gitattributes.md' },
@@ -122,7 +122,7 @@ function sidebar(): DefaultTheme.Sidebar {
               },
               {
                 text: '레이어',
-                collapsed: false,
+                collapsed: true,
                 items: [
                   { text: 'AssemblyReference.cs', link: '/01-architecture/part2-internal-architecture/layers/common-assemblyreference.md' },
                   { text: '접근 제어자', link: '/01-architecture/part2-internal-architecture/layers/common-access-modifiers.md' },
@@ -133,7 +133,7 @@ function sidebar(): DefaultTheme.Sidebar {
               },
               {
                 text: '테스트',
-                collapsed: false,
+                collapsed: true,
                 items: [
                   { text: '단위 테스트', link: '/01-architecture/part2-internal-architecture/testing/unit-testing.md' },
                   { text: 'WebApi 통합 테스트트', link: '/01-architecture/part2-internal-architecture/testing/integration-webapi.md' }
@@ -147,7 +147,7 @@ function sidebar(): DefaultTheme.Sidebar {
             items: [
               {
                 text: '관찰 가능성',
-                collapsed: false,
+                collapsed: true,
                 items: [
                   { text: 'Aspire 대시보드', link: '/01-architecture/part3-external-architecture/observability/aspire-dashboard/' },
                   { text: 'otel-collector', link: '/01-architecture/part3-external-architecture/observability/otel-collector/' },
