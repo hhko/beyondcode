@@ -99,7 +99,13 @@ function sidebar(): DefaultTheme.Sidebar {
           {
             text: 'Internal 아키텍처 가이드', link: '/01-architecture/part3-internal-architecture/',
             items: [
-              { text: '개발 환경', link: '/01-architecture/part3-internal-architecture/dev-environment' },
+              {
+                text: '설치',
+                items: [
+                  { text: '개발 환경', link: '/01-architecture/part3-internal-architecture/setup/dev-environment.md' },
+                  { text: '도커', link: '/01-architecture/part3-internal-architecture/setup/docker.md' },
+                ]
+              },
               {
                 text: '설정',
                 items: [

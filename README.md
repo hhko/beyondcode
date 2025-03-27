@@ -14,7 +14,7 @@ A beautiful journey to writing **wise code that works**
 ![](./.images/ArchitectureTechMap.png)
 
 ### Internal Architecture (Hexagonal Architecture)
-![hexagonal architecture](./01-architecture/part1-overview/ch04-internal-architecture/.images/Architecture.Internal.Hexagonal.png)
+![hexagonal architecture](./01-architecture/part1-overview/ch03-internal-architecture/.images/Architecture.Internal.Hexagonal.png)
 
 ### External Architecture
 > TODO
