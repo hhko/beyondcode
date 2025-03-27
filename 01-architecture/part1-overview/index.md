@@ -1,6 +1,10 @@
+---
+outline: deep
+---
+
 # 아키텍처
 
-> wise code that works = VOC |> DDD |> Architecture
+> wise code that works = `VOC` |> `DDD` |> `Architecture`  
 > 동작하는 지혜로운 코드를 만들기 위한 아름다운 여정
 
 - **소스 코드 구조는** 책의 목차처럼 명확하게 도메인과 시스템을 쉽게 이해할 수 있어야 합니다.
