@@ -72,7 +72,7 @@ export default defineConfig({
 function nav(): DefaultTheme.NavItem[] {
   return [
     { text: '홈', link: '/' },
-    { text: '아키텍처', link: '/01-architecture/part1-overview/ch02-architecture/'},
+    { text: '아키텍처', link: '/01-architecture/part1-overview/ch01-architecture/'},
     { text: '튜토리얼', link: '/02-tutorial/ddd/ch01-domain-exploration/' },
     { text: '참고', link: '/04-reference/youtube/' },
   ];
