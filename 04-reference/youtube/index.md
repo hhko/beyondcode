@@ -4,6 +4,10 @@ outline: deep
 
 # Youtube
 
+## 삶
+- [x] [꿈을 현실로 만든 10년의 여정 | 이승건 토스팀 리더](https://www.youtube.com/watch?v=UogHHGN3U3Q)
+- [x] [나는 언제 행복한 사람인가?](https://www.youtube.com/watch?v=1zmnoElezRg)
+
 ## 개념
 - [x] [Moving IO to the edges of your app: Functional Core, Imperative Shell - Scott Wlaschin](https://www.youtube.com/watch?v=P1vES9AgfC4)
   ```

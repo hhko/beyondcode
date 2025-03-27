@@ -90,46 +90,41 @@ function sidebar(): DefaultTheme.Sidebar {
           {
             text: '개요',
             items: [
-              { text: '개발 환경', link: '/01-architecture/part1-overview/ch01-prerequisite/' },
-              { text: '아키텍처', link: '/01-architecture/part1-overview/ch02-architecture/' },
-              { text: '아키텍처 진단', link: '/01-architecture/part1-overview/ch03-architecture-diagnosis/' },
-              { text: 'Internal 아키텍처', link: '/01-architecture/part1-overview/ch04-internal-architecture/' },
-              { text: 'External 아키텍처', link: '/01-architecture/part1-overview/ch05-external-architecture/' }
+              { text: '아키텍처', link: '/01-architecture/part1-overview/ch01-architecture/' },
+              { text: '아키텍처 진단', link: '/01-architecture/part1-overview/ch02-architecture-diagnosis/' },
+              { text: 'Internal 아키텍처', link: '/01-architecture/part1-overview/ch03-internal-architecture/' },
+              { text: 'External 아키텍처', link: '/01-architecture/part1-overview/ch04-external-architecture/' }
             ],
           },
           {
-            text: '가이드',
+            text: 'Internal 아키텍처 가이드', link: '/01-architecture/part3-internal-architecture/',
             items: [
+              { text: '개발 환경', link: '/01-architecture/part3-internal-architecture/dev-environment' },
               {
-                text: 'Internal 아키텍처', link: '/01-architecture/part2-guide/ch01-internal-architecture/',
+                text: '설정',
                 items: [
-                  {
-                    text: '설정',
-                    items: [
-                      { text: '.gitignore', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/solution-gitignore.md' },
-                      { text: '.gitattributes', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/solution-gitattributes.md' },
-                      { text: 'global.json', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/solution-globaljson.md' },
-                      { text: 'nuget.config', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/solution-nugetconfig.md' },
-                      { text: 'appsettings.json', link: '/01-architecture/part2-guide/ch01-internal-architecture/settings/project-appsettings.md' }
-                    ]
-                  },
-                  {
-                    text: '레이어',
-                    items: [
-                      { text: 'AssemblyReference.cs', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-assemblyreference.md' },
-                      { text: '접근 제어자', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-access-modifiers.md' },
-                      { text: '순수 함수', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/common-pure-function.md' },
-                      { text: 'Domain 레이어', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/domain-layer.md' },
-                      { text: 'Application 레이어어', link: '/01-architecture/part2-guide/ch01-internal-architecture/layers/application-layer.md' }
-                    ]
-                  },
-                  {
-                    text: '테스트',
-                    items: [
-                      { text: '단위 테스트', link: '/01-architecture/part2-guide/ch01-internal-architecture/testing/unit-testing.md' },
-                      { text: 'WebApi 통합 테스트트', link: '/01-architecture/part2-guide/ch01-internal-architecture/testing/integration-webapi.md' }
-                    ]
-                  }
+                  { text: '.gitignore', link: '/01-architecture/part3-internal-architecture/settings/solution-gitignore.md' },
+                  { text: '.gitattributes', link: '/01-architecture/part3-internal-architecture/settings/solution-gitattributes.md' },
+                  { text: 'global.json', link: '/01-architecture/part3-internal-architecture/settings/solution-globaljson.md' },
+                  { text: 'nuget.config', link: '/01-architecture/part3-internal-architecture/settings/solution-nugetconfig.md' },
+                  { text: 'appsettings.json', link: '/01-architecture/part3-internal-architecture/settings/project-appsettings.md' }
+                ]
+              },
+              {
+                text: '레이어',
+                items: [
+                  { text: 'AssemblyReference.cs', link: '/01-architecture/part3-internal-architecture/layers/common-assemblyreference.md' },
+                  { text: '접근 제어자', link: '/01-architecture/part3-internal-architecture/layers/common-access-modifiers.md' },
+                  { text: '순수 함수', link: '/01-architecture/part3-internal-architecture/layers/common-pure-function.md' },
+                  { text: 'Domain 레이어', link: '/01-architecture/part3-internal-architecture/layers/domain-layer.md' },
+                  { text: 'Application 레이어어', link: '/01-architecture/part3-internal-architecture/layers/application-layer.md' }
+                ]
+              },
+              {
+                text: '테스트',
+                items: [
+                  { text: '단위 테스트', link: '/01-architecture/part3-internal-architecture/testing/unit-testing.md' },
+                  { text: 'WebApi 통합 테스트트', link: '/01-architecture/part3-internal-architecture/testing/integration-webapi.md' }
                 ]
               }
             ]
