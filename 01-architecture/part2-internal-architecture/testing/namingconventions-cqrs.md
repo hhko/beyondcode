@@ -9,6 +9,14 @@
   - 클래스: internal, sealed
 
 ## 테스트
+```xml
+<ItemGroup>
+	<InternalsVisibleTo Include="{T}.Tests.Unit" />
+	<InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+</ItemGroup>
+```
+- 테스트 프로젝트에서 Application 프로젝트의 `internal` 클래스를 접근하기 위해 `InternalsVisibleTo`을 지정합니다.
+
 ```cs
 public static partial class Constants
 {
