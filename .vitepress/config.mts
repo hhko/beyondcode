@@ -134,6 +134,7 @@ function sidebar(): DefaultTheme.Sidebar {
                 collapsed: true,
                 items: [
                   { text: '단위 테스트', link: '/01-architecture/part2-internal-architecture/testing/unit-testing.md' },
+                  { text: '프로젝트 의존성 테스트', link: '/01-architecture/part2-internal-architecture/testing/dependency-testing.md' },
                   { text: 'WebApi 통합 테스트트', link: '/01-architecture/part2-internal-architecture/testing/integration-webapi.md' }
                 ]
               }
