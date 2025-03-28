@@ -1,5 +1,21 @@
+# 프로젝트 의존성 테스트
 
+## 패키지
+- xUnit.v3
 - ArchUnitNET.xUnit
+
+## 테스트
+```cs
+using System.Reflection;
+
+namespace GymManagement.Adapters.Persistence;
+
+public static class AssemblyReference
+{
+    public static readonly Assembly Assembly = typeof(AssemblyReference).Assembly;
+}
+```
+- 어셈블리 단위로 `AssemblyReference` 클래스를 구현합니다.
 
 ```cs
 public abstract class ArchitectureTestBase
