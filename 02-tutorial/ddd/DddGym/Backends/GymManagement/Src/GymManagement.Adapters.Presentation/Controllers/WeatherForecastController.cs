@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace GymManagement.Adapters.Presentation.Controllers;
 
@@ -16,10 +17,10 @@ namespace GymManagement.Adapters.Presentation.Controllers;
 
 public sealed partial class WeatherForecastController : ApiController
 {
-    public WeatherForecastController(ISender sender)
+    public WeatherForecastController(ISender sender, IOptions<ExampleOptions> exampleOptions)
         : base(sender)
     {
-
+        ExampleOptions exampleOptions1 = exampleOptions.Value;
     }
 
     private static readonly string[] Summaries = new[]

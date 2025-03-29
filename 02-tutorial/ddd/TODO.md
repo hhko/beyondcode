@@ -304,10 +304,15 @@ C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warnin
 
 <br/>
 
-- [ ] IOptions + Fluent Validation
+- [x] IOptions + Fluent Validation
+- [ ] 복수개 IOptions 처리
+- [ ] FluentValidation ErrorMessage 영문 기본값
+- [ ] FluentValidation Json 로그 통합?
+- [ ] IOption 테스트
 ---
 - [ ] Serilog + OpenTelemetry + Aspire Dashboard
 - [ ] OpenSearch
+- [ ] 시작 로그(로그 초기화 전전)
 ---
 - [ ] Source Generator
 - [ ] Decorator 패턴(Pipeline)
@@ -324,3 +329,4 @@ C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warnin
 - [ ] Domain Event
 - [ ] Audit 로그?
 ---
+- [ ] 회복력
