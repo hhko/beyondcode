@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 단위 테스트
+# 단위 테스트 구성
 
 ## 단위 테스트 패키지
 - xUnit
@@ -48,7 +48,7 @@ public static partial class Constants
     {
         public const string Architecture = nameof(Architecture);
 
-        // 레이어어
+        // 레이어
         public const string Domain = nameof(Domain);
         public const string Application = nameof(Application);
         public const string Persistence = nameof(Persistence);

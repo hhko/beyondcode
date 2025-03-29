@@ -274,7 +274,7 @@ C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warnin
 - [ ] dotnet test 세부 출력 cli
 - [ ] xunit 어셈블리 공유
 - [ ] xuint 어셈블리 공유일 때 전체 순차 실행???
-- [ ] webapi 통합 테스트 문서화화
+- [ ] webapi 통합 테스트 문서화
 ---
 - [ ] 비즈니스 이해
 - [ ] webapi 통합 테스트 비즈니스 테스트
@@ -300,4 +300,27 @@ C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warnin
 ---
 - [ ] Docker화
 - [ ] Cache
+---
+
+<br/>
+
+- [ ] IOptions + Fluent Validation
+---
+- [ ] Serilog + OpenTelemetry + Aspire Dashboard
+- [ ] OpenSearch
+---
+- [ ] Source Generator
+- [ ] Decorator 패턴(Pipeline)
+---
+- [ ] Result
+- [ ] Domain Error
+- [ ] Application Error
+- [ ] Adapter Error
+- [ ] Exception
+---
+- [ ] Entity
+- [ ] ValueObject
+- [ ] Aggregate Root
+- [ ] Domain Event
+- [ ] Audit 로그?
 ---

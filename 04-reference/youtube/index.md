@@ -68,7 +68,28 @@ outline: deep
   ```
 
 ## 기술
+### 단위 테스트
 - [x] [Bulletproof Your Software Architecture With ArchUnitNET](https://www.youtube.com/watch?v=R_srbvA6IQM)
   ```
   ArchUnitNET 패키지를 이용한 프로젝트 참조 테스트
+  ```
+
+### IOption
+- [x] [The Best Way to Validate Your Settings in .NET](https://www.youtube.com/watch?v=jblRYDMTtvg)
+  ```
+  IValidateOptions<T>   // .NET
+  IValidator<T>         // Fluent Validation
+
+  var config = builder.Configuration;
+  
+  builder.Services
+    // Case 1.
+    .AddOptions<T>()
+    .Bind(config.GetSection({T}.ConfigurationSectionName))
+
+    // Case 2.
+    .BindConfiguration({T}.ConfigurationSectionName)
+
+    ...
+    .ValidateOnStart();
   ```
