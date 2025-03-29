@@ -37,3 +37,31 @@ outline: deep
                    ├─ Factories
                    └─ {AggregateRoot}Tests.cs          # Aggregate Root 테스트
 ```
+
+## 단위 테스트 범주화
+![](./.images/testing-category.png)
+
+```cs
+public static partial class Constants
+{
+    public static class UnitTest
+    {
+        public const string Architecture = nameof(Architecture);
+
+        // 레이어어
+        public const string Domain = nameof(Domain);
+        public const string Application = nameof(Application);
+        public const string Persistence = nameof(Persistence);
+        public const string Infrastructure = nameof(Infrastructure);
+        public const string Presentation = nameof(Presentation);
+    }
+}
+```
+
+```cs
+[Trait(nameof(UnitTest), UnitTest.Architecture)]
+public class LayerDependencyTests : ArchitectureTestBase
+
+[Trait(nameof(UnitTest), UnitTest.Domain)]
+public sealed class GymTests
+```

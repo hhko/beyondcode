@@ -29,28 +29,31 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 - Learn tactical design that express domain knowledge as code.
 
 ### Table of Contents
-- Part 1. VOC
+- Part 1. Domain
   - [x] Chapter 01. [Domain Exploration](./02-tutorial/ddd/ch01-domain-exploration/index.md)
   - [ ] Chapter 02. Domain Structuring
-  - [ ] Chapter 03. Usecase Exploration
-  - [ ] Chapter 04. Usecase Pipeline
-  - [ ] Chapter 05. Cucumber
+  - [ ] Chapter 03. Domain Glossary
+  - [ ] Chapter 04. Domain Test
+- Part 2. Use Case
+  - [ ] Chapter 05. Use Case Exploration
+  - [ ] Chapter 06. Use Case Pipeline
+  - [ ] Chapter 07. Use Case Test(Cucumber)
 - Part 2. Monolithic
-  - [ ] Chapter 06. WebApi
-  - [ ] Chapter 07. OpenTelemetry
-  - [ ] Chapter 08. PostgreSQL
-  - [ ] Chapter 09. Cache
-  - [ ] Chapter 10. Containerization
+  - [ ] Chapter 08. WebApi
+  - [ ] Chapter 09. OpenTelemetry
+  - [ ] Chapter 10. PostgreSQL
+  - [ ] Chapter 11. Cache
+  - [ ] Chapter 12. Containerization
 - Part 3. Microservices
-  - [ ] Chapter 11. Aspire
-  - [ ] Chapter 12. RabbitMQ
-  - [ ] Chapter 13. Resilience
-  - [ ] Chapter 14. Reverse Proxy
-  - [ ] Chapter 15. Chaos Engineering
+  - [ ] Chapter 13. Aspire
+  - [ ] Chapter 14. RabbitMQ
+  - [ ] Chapter 15. Resilience
+  - [ ] Chapter 16. Reverse Proxy
+  - [ ] Chapter 17. Chaos Engineering
 - Part 4. Operations
-  - [ ] Chapter 16. Feature Flag Management
-  - [ ] Chapter 17. Observability System
-  - [ ] Chapter 18. Infrastructure as Code
+  - [ ] Chapter 18. Feature Flag Management
+  - [ ] Chapter 19. Observability System
+  - [ ] Chapter 20. Infrastructure as Code
 
 ### Solution Design Principles
 

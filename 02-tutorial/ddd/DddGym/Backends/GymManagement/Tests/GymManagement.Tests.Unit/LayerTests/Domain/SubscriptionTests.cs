@@ -3,7 +3,7 @@ using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
 using GymManagement.Tests.Unit.LayerTests.Domain.Factories;
 using static GymManagement.Domain.AggregateRoots.Subscriptions.Errors.DomainErrors;
-using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
+using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain;
 

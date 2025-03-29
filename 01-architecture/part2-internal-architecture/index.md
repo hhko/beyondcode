@@ -28,12 +28,13 @@ outline: deep
 - [ ] 영속성 | Dapper
 ---
 - [ ] 테스트 | xUnit.v3
-- [ ] 테스트 | NSubstitute
-- [ ] 테스트 | Shoudly
+- [x] 테스트 | NSubstitute
+- [x] 테스트 | ArchUnit
+- [x] 테스트 | Shoudly
 - [ ] 테스트 | NBomber(k6)
 - [ ] 테스트 | Reqnroll
-- [ ] 테스트 | coverlet
-- [ ] 테스트 | ReportGenerator
+- [x] 테스트 | coverlet
+- [x] 테스트 | ReportGenerator
 - [ ] 테스트 | BenchmarkDotNet
 - [ ] 테스트 | Testcontainers
 - [ ] 테스트 | Verify
@@ -49,7 +50,7 @@ outline: deep
 - [ ] 솔루션 설정 | Directory.Build.props
 - [ ] 솔루션 설정 | Directory.Packages.props
 ---
-- [ ] 프로젝트 설정 | [appsettings.json](./settings/project-appsettings.md)
+- [x] 프로젝트 설정 | [appsettings.json](./settings/project-appsettings.md)
 - [ ] 프로젝트 설정 | InternalsVisibleTo
 ---
 - [ ] WebApi 프로젝트 설정 | Microsoft.NET.Sdk.Web
@@ -95,6 +96,20 @@ outline: deep
 - [x] 공통 | [AssemblyReference.cs](./layers/common-assemblyreference.md)
 - [x] 공통 | [접근 제어자](./layers//common-access-modifiers.md)
 - [x] 공통 | [Pure Function](./layers/common-pure-function.md)
+---
+- [x] 도메인 레이어 | [도메인 레이어 구성](./layers/domain-layer-structure.md)
+- [x] 도메인 레이어 | [도메인 에러](./layers/docmain-error.md)
+- [ ] 도메인 레이어 | Enumerations
+- [ ] 도메인 레이어 | Entity
+- [ ] 도메인 레이어 | Value Object
+- [ ] 도메인 레이어 | Factory
+- [ ] 도메인 레이어 | Domain Service
+- [ ] 도메인 레이어 | Aggregate Root
+---
+- [x] 애플리케이션 레이어 | [애플리케이션 레이어 구성](./layers/application-layer-structure.md)
+
+
+## 레이어
 ---
 - [ ] 호스트 | Dump 파이프라인
 - [ ] 호스트 | 로그(예외 처리)
@@ -153,18 +168,11 @@ outline: deep
 - [ ] 애플리케이션 레이어 | Result 타입
 - [ ] 애플리케이션 레이어 | Error 타입
 - [ ] 애플리케이션 레이어 | Validation
----
-- [ ] 도메인 레이어 | Enumerations
-- [ ] 도메인 레이어 | Entity
-- [ ] 도메인 레이어 | Value Object
-- [ ] 도메인 레이어 | Factory
-- [ ] 도메인 레이어 | Domain Service
-- [ ] 도메인 레이어 | Aggregate Root
 
 ## 테스트
-- [ ] 단위 테스트(아키텍처 테스트) | Layer Dependency Test
-- [ ] 단위 테스트(아키텍처 테스트) | ICommand/ICommandUsecase NamingConventions
-- [ ] 단위 테스트(아키텍처 테스트) | iQuery/IQueryUsecase NamingConventions
+- [x] 단위 테스트 | [단위 테스트 구성](./testing/unit-testing-structure.md)
+- [x] 단위 테스트(아키텍처 테스트) | [Layer Dependency Test](./testing/architecture-layer-dependency.md)
+- [x] 단위 테스트(아키텍처 테스트) | [Naming Conventions CQRS Test](./testing/architecture-namingconventions-cqrs.md)
 - [ ] 단위 테스트(아키텍처 테스트) | IDomainEvent/IDomainEventUsecase NamingConventions
 ---
 - [ ] 단위 테스트(레이어 테스트) | 도메인 레이어
@@ -182,3 +190,8 @@ outline: deep
 ---
 - [ ] 성능 테스트 | WebApi
 - [ ] 성능 테스트 | ...
+
+## 설치
+- [x] 개발 환경 설치
+- [x] docker 설치
+- [ ] ...

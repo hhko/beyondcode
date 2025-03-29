@@ -125,17 +125,18 @@ function sidebar(): DefaultTheme.Sidebar {
                   { text: 'AssemblyReference.cs', link: '/01-architecture/part2-internal-architecture/layers/common-assemblyreference.md' },
                   { text: '접근 제어자', link: '/01-architecture/part2-internal-architecture/layers/common-access-modifiers.md' },
                   { text: '순수 함수', link: '/01-architecture/part2-internal-architecture/layers/common-pure-function.md' },
-                  { text: 'Domain 레이어', link: '/01-architecture/part2-internal-architecture/layers/domain-layer.md' },
-                  { text: 'Application 레이어', link: '/01-architecture/part2-internal-architecture/layers/application-layer.md' }
+                  { text: 'Domain 레이어 구성', link: '/01-architecture/part2-internal-architecture/layers/domain-layer-structure.md' },
+                  { text: 'Domain 에러', link: '/01-architecture/part2-internal-architecture/layers/domain-error.md' },
+                  { text: 'Application 레이어 구성성', link: '/01-architecture/part2-internal-architecture/layers/application-layer-structure.md' }
                 ]
               },
               {
                 text: '테스트',
                 collapsed: true,
                 items: [
-                  { text: '단위 테스트', link: '/01-architecture/part2-internal-architecture/testing/unit-testing.md' },
-                  { text: '프로젝트 의존성 테스트', link: '/01-architecture/part2-internal-architecture/testing/dependency-testing.md' },
-                  { text: 'CQRS 네이밍컨벤션 테스트', link: '/01-architecture/part2-internal-architecture/testing/namingconventions-cqrs.md' },
+                  { text: '단위 테스트 구성', link: '/01-architecture/part2-internal-architecture/testing/unit-testing-structure.md' },
+                  { text: '레이어 의존성 테스트', link: '/01-architecture/part2-internal-architecture/testing/architecture-layer-dependency.md' },
+                  { text: 'CQRS 네이밍컨벤션 테스트', link: '/01-architecture/part2-internal-architecture/testing/architecture-namingconventions-cqrs.md' },
                   { text: 'WebApi 통합 테스트트', link: '/01-architecture/part2-internal-architecture/testing/integration-webapi.md' }
                 ]
               }

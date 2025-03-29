@@ -11,6 +11,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NSubstitute" />
     <PackageReference Include="Shouldly" />
+    <PackageReference Include="TngTech.ArchUnitNET.xUnit" />
     <PackageReference Include="xunit.v3" />
   </ItemGroup>
 
@@ -30,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Src\GymManagement.Adapters.Infrastructure\GymManagement.Adapters.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Src\GymManagement.Adapters.Persistence\GymManagement.Adapters.Persistence.csproj" />
+    <ProjectReference Include="..\..\Src\GymManagement.Adapters.Presentation\GymManagement.Adapters.Presentation.csproj" />
     <ProjectReference Include="..\..\Src\GymManagement.Application\GymManagement.Application.csproj" />
     <ProjectReference Include="..\..\Src\GymManagement.Domain\GymManagement.Domain.csproj" />
   </ItemGroup>

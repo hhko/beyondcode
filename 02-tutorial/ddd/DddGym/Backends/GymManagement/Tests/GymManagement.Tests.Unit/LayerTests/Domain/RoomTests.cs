@@ -4,7 +4,7 @@ using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
 using GymManagement.Tests.Unit.LayerTests.Domain.Factories;
 using static GymManagement.Domain.AggregateRoots.Rooms.Errors.DomainErrors;
-using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
+using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain;
 
