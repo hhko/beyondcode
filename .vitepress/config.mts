@@ -74,7 +74,7 @@ function nav(): DefaultTheme.NavItem[] {
     { text: '홈', link: '/' },
     { text: '아키텍처', link: '/01-architecture/part1-overview/ch01-architecture/'},
     { text: '튜토리얼', link: '/02-tutorial/ddd/ch01-domain-exploration/' },
-    { text: '참고', link: '/04-reference/youtube/' },
+    { text: '참고', link: '/04-reference/' },
   ];
 }
 
@@ -172,16 +172,6 @@ function sidebar(): DefaultTheme.Sidebar {
         ]
       }
     ],
-    '/04-reference/': [
-      {
-        text: '참고',
-        items: [
-          { text: 'Youtube', link: '/04-reference/youtube/' },
-          { text: 'Blog', link: '/04-reference/blog/' },
-          { text: 'GitHub', link: '/04-reference/github/' }
-        ]
-      }
-    ]
   }
 }
 
