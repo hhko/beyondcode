@@ -308,7 +308,7 @@ C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warnin
 - [ ] 복수개 IOptions 처리
 - [ ] FluentValidation ErrorMessage 영문 기본값
 - [ ] FluentValidation Json 로그 통합?
-- [ ] IOption 테스트
+- [ ] IOption 테스트트
 ---
 - [ ] Serilog + OpenTelemetry + Aspire Dashboard
 - [ ] OpenSearch
