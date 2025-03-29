@@ -132,7 +132,7 @@ outline: deep
     ...
     .ValidateOnStart();
   ```
-- [ ] Youtube | [Easily Validate the Options Pattern with FluentValidation](https://www.youtube.com/watch?v=I0YPTeCYvrE)
+- [x] Youtube | [Easily Validate the Options Pattern with FluentValidation](https://www.youtube.com/watch?v=I0YPTeCYvrE)
 - [ ] Blog | [Adding validation to strongly typed configuration objects using FluentValidation](https://andrewlock.net/adding-validation-to-strongly-typed-configuration-objects-using-flentvalidation/)
 
 ## 아키텍처 템플릿
@@ -163,6 +163,7 @@ outline: deep
 - [ ] GitHub | https://github.com/Dometrain/from-zero-to-hero-asynchronous-programming-in-csharp
 - [ ] GitHub | https://github.com/ardalis/ddd-guestbook
 
+```
 ## Result
 - [ ] [Part 1 - Replacing Exceptions-as-flow-control with the result pattern](https://andrewlock.net/working-with-the-result-pattern-part-1-replacing-exceptions-as-control-flow/)
 - [ ] [Part 2 - Safety and simplicity with LINQ](https://andrewlock.net/working-with-the-result-pattern-part-2-safety-and-simplicity-with-linq/)
@@ -172,3 +173,4 @@ outline: deep
 ## 컨테이너
 ### Health Check
 - [ ] Blog | [Mastering Custom Health Checks in ASP.NET Core for Robust and Reliable Applications](https://programmingpulse.vercel.app/blog/mastering-custom-health-checks-in-aspnet-core)
+```

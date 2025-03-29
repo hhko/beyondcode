@@ -330,3 +330,7 @@ C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warnin
 - [ ] Audit 로그?
 ---
 - [ ] 회복력
+---
+- [ ] contextiv
+- [ ] backstage
+- [ ] komodo
