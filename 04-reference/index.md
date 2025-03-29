@@ -2,6 +2,8 @@
 outline: deep
 ---
 
+# 참고 자료료
+
 ## 도전
 - [x] Youtube | [나는 언제 행복한 사람인가?](https://www.youtube.com/watch?v=1zmnoElezRg)
 - [x] Youtube | [꿈을 현실로 만든 10년의 여정 | 이승건 토스팀 리더](https://www.youtube.com/watch?v=UogHHGN3U3Q)
@@ -163,7 +165,7 @@ outline: deep
 
 ## Result
 - [ ] [Part 1 - Replacing Exceptions-as-flow-control with the result pattern](https://andrewlock.net/working-with-the-result-pattern-part-1-replacing-exceptions-as-control-flow/)
-- [ ] [Part 2 - Safety and simplicity with LINQ](https://andrewlock.net/working-with-the-result-pattern-part-2-safety-and-simplicity-with-linq/
+- [ ] [Part 2 - Safety and simplicity with LINQ](https://andrewlock.net/working-with-the-result-pattern-part-2-safety-and-simplicity-with-linq/)
 - [ ] [Part 3 - Adding more extensions to Result<T>](https://andrewlock.net/working-with-the-result-pattern-part-3-adding-more-extensions/)
 - [ ] [Part 4 - Is the result pattern worth it?](https://andrewlock.net/working-with-the-result-pattern-part-4-is-the-result-pattern-worth-it/)
 
