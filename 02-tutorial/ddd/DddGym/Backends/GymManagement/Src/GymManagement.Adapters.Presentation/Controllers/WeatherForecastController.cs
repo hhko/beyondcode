@@ -1,4 +1,5 @@
-﻿using GymManagement.Adapters.Presentation.Abstractions;
+﻿using GymManagement.Adapters.Infrastructure.Abstractions.Options.Example;
+using GymManagement.Adapters.Presentation.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

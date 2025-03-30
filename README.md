@@ -30,9 +30,9 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 
 ### Table of Contents
 - Part 1. Domain
-  - [x] Chapter 01. [Domain Exploration](./02-tutorial/ddd/ch01-domain-exploration/index.md)
-  - [ ] Chapter 02. Domain Structuring
-  - [ ] Chapter 03. Domain Glossary
+  - [ ] Chapter 01. [Domain Glossary](./02-tutorial/ddd/ch01-domain-glossary/index.md)
+  - [x] Chapter 02. [Domain Exploration](./02-tutorial/ddd/ch01-domain-exploration/index.md)
+  - [ ] Chapter 03. Domain Structuring
   - [ ] Chapter 04. Domain Test
 - Part 2. Use Case
   - [ ] Chapter 05. Use Case Exploration

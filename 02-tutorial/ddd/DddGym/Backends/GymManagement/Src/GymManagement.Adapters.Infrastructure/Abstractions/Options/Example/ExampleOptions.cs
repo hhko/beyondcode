@@ -1,7 +1,6 @@
-﻿using FluentValidation;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
-namespace GymManagement.Adapters.Presentation;
+namespace GymManagement.Adapters.Infrastructure.Abstractions.Options.Example;
 
 public class ExampleOptions
 {
@@ -15,14 +14,5 @@ public class ExampleOptions
 
     public required LogLevel LogLevel { get; init; }
 
-    public required int Retries {  get; init; }
-}
-
-internal sealed class ExampleOptionsValidator : AbstractValidator<ExampleOptions>
-{
-    public ExampleOptionsValidator()
-    {
-        RuleFor(x => x.Retries)
-            .InclusiveBetween(1, 9);
-    }
+    public required int Retries { get; init; }
 }
