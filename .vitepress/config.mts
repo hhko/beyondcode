@@ -119,6 +119,15 @@ function sidebar(): DefaultTheme.Sidebar {
                 ]
               },
               {
+                text: '기본',
+                collapsed: true,
+                items: [
+                  { text: 'AssemblyReference.cs', link: '/01-architecture/part2-internal-architecture/layers/common-assemblyreference.md' },
+                  { text: '접근 제어자', link: '/01-architecture/part2-internal-architecture/layers/common-access-modifiers.md' },
+                  { text: '순수 함수', link: '/01-architecture/part2-internal-architecture/layers/common-pure-function.md' },
+                ]
+              },
+              {
                 text: 'Domain 레이어',
                 collapsed: true,
                 items: [
@@ -138,15 +147,6 @@ function sidebar(): DefaultTheme.Sidebar {
                 collapsed: true,
                 items: [
                   { text: '옵션 유효성 검사', link: '/01-architecture/part2-internal-architecture/layers/infra-options-validator.md' }
-                ]
-              },
-              {
-                text: '기본',
-                collapsed: true,
-                items: [
-                  { text: 'AssemblyReference.cs', link: '/01-architecture/part2-internal-architecture/layers/common-assemblyreference.md' },
-                  { text: '접근 제어자', link: '/01-architecture/part2-internal-architecture/layers/common-access-modifiers.md' },
-                  { text: '순수 함수', link: '/01-architecture/part2-internal-architecture/layers/common-pure-function.md' },
                 ]
               },
               {
