@@ -306,6 +306,8 @@ C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warnin
 
 - [x] IOptions + Fluent Validation
 - [x] 복수개 IOptions 처리
+- [ ] IOptions + Fluent Validation 규칙 테스트
+---
 - [ ] FluentValidation ErrorMessage 영문 기본값
 - [ ] FluentValidation Json 로그 통합?
 - [ ] IOption 테스트

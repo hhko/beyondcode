@@ -1,11 +1,6 @@
 ﻿using ArchUnitNET.Fluent;
 using ArchUnitNET.xUnit;
 using DddGym.Framework.BaseTypes.Cqrs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests.NamingConventions;
@@ -63,7 +58,7 @@ public sealed partial class NamingConventionsTests : ArchitectureTestBase
     public void CommandUsecases_ShouldComplyWith_DesignRules()
     {
         var suts = ArchRuleDefinition
-        .Classes()
+            .Classes()
             .That()
             .ImplementInterface(typeof(ICommandUsecase<>));
 
@@ -80,7 +75,7 @@ public sealed partial class NamingConventionsTests : ArchitectureTestBase
     public void CommandUsecasesT_ShouldComplyWith_DesignRules()
     {
         var suts = ArchRuleDefinition
-        .Classes()
+            .Classes()
             .That()
             .ImplementInterface(typeof(ICommandUsecase<,>));
 
@@ -115,7 +110,7 @@ public sealed partial class NamingConventionsTests : ArchitectureTestBase
     public void QueryUsecasesT_ShouldComplyWith_DesignRules()
     {
         var suts = ArchRuleDefinition
-        .Classes()
+            .Classes()
             .That()
             .ImplementInterface(typeof(IQueryUsecase<,>));
 

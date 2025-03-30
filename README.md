@@ -51,10 +51,10 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
   - [ ] Chapter 16. Reverse Proxy
   - [ ] Chapter 17. Chaos Engineering
 - Part 4. Operations
-  - [ ] Chapter 18. Feature Flag Management
-  - [ ] Chapter 19. Observability System
-  - [ ] Chapter 20. Infrastructure as Code(Ansible, WinRM)
-  - [ ] Chapter 21. building developer portals(Backstage)
+  - [ ] Chapter 18. OpenFeature(Feature Flag Management)
+  - [ ] Chapter 19. OpenSearch(Observability System)
+  - [ ] Chapter 20. Ansible(Infrastructure as Code)
+  - [ ] Chapter 21. Backstage(Building developer portals)
 
 ### Solution Design Principles
 

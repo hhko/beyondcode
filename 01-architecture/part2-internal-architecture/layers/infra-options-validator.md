@@ -1,9 +1,78 @@
-﻿using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+# 옵션 유효성 검사
 
-namespace DddGym.Framework.Options;
+## 옵션 유효성 검사 등록
+```cs
+services.AddConfigureOptions<ExampleOptions, ExampleOptionsValidator>(ExampleOptions.SectionName);
+```
 
+## 옵션 예.
+### 옵션
+```cs
+public class ExampleOptions
+{
+    public const string SectionName = "Example";
+
+    public required LogLevel LogLevel { get; init; }
+
+    public required int Retries { get; init; }
+}
+```
+
+### 옵션 유효성 검사
+```cs
+internal sealed class ExampleOptionsValidator : AbstractValidator<ExampleOptions>
+{
+    public ExampleOptionsValidator()
+    {
+        RuleFor(x => x.Retries)
+            .InclusiveBetween(1, 9);
+    }
+}
+```
+
+## 옵션 유효성 검사 구현
+### 옵션 및 유효성 검사 등록
+```cs
+public static class FluentValidationOptionsExtensions
+{
+    public static OptionsBuilder<TOptions> AddConfigureOptions<TOptions, TValidator>(
+        this IServiceCollection services,
+        string configurationSectionName)
+            where TOptions : class
+            where TValidator : class, IValidator<TOptions>
+    {
+        // TOptions의 IValidator 등록
+        services.AddScoped<IValidator<TOptions>, TValidator>();
+
+        // TOptions의 IValidator 검사
+        return services.AddOptions<TOptions>()
+            .BindConfiguration(configurationSectionName)    // appsettings.json의 Section 이름
+            .ValidateFluentValidation()                     // OptionsBuilder<TOptions>
+            .ValidateOnStart();
+    }
+}
+```
+
+### 옵션과 유효성 검사 매핑
+- IValidateOptions<TOptions>
+- FluentValidationOptions<TOptions>
+
+```cs
+internal static class OptionsBuilderFluentValidationExtensions
+{
+    public static OptionsBuilder<TOptions> ValidateFluentValidation<TOptions>(this OptionsBuilder<TOptions> optionsBuilder) where TOptions : class
+    {
+        optionsBuilder.Services.AddSingleton<IValidateOptions<TOptions>>(
+            provider => new FluentValidationOptions<TOptions>(
+                optionsBuilder.Name,
+                provider));
+
+        return optionsBuilder;
+    }
+}
+```
+
+```cs
 internal sealed class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
 {
     private readonly IServiceProvider _serviceProvider;
@@ -64,3 +133,4 @@ internal sealed class FluentValidationOptions<TOptions> : IValidateOptions<TOpti
         return ValidateOptionsResult.Fail(errors);
     }
 }
+```
