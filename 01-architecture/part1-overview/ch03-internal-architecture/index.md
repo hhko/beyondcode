@@ -11,11 +11,21 @@ outline: deep
 - **유스케이스(Application 레이어: 비즈니스 흐름)가 모든 레이어를 주관합니다.**
 
 ### 특징
-- 도메인인 용어
-- CQRS 성능(불필요한 DTO 최소화)
-- Adapter 레이어 인터페이스 Pipeline 코드 생성기
+- 도메인 용어
+- 비즈니스 유스케이스 Command/Query/Event 분리
+- Query 성능 극대화(불필요한 DTO 최소화)
+- Cross Cutting Concerns을 파이프라인화
+  - 로그
+  - 예외
+  - 관찰 가능성
+  - 캐시
+  - 트랜잭션
+- 레이어별 에러 코드
+  - Domain 레이어
+  - Application 레이어
+  - Adapter 레이어
+- Adapter 레이어 인터페이스 파이프라인 코드 생성기
 - 비즈니스 관찰 가능성
-  - 레이어별 에러 코드
   - Application 레이어 유스케이스 단위
   - Adapter 레이어 인터페이스 단위
 
