@@ -127,7 +127,7 @@ function sidebar(): DefaultTheme.Sidebar {
                   { text: '순수 함수', link: '/01-architecture/part2-internal-architecture/layers/common-pure-function.md' },
                   { text: 'Domain 레이어 구성', link: '/01-architecture/part2-internal-architecture/layers/domain-layer-structure.md' },
                   { text: 'Domain 에러', link: '/01-architecture/part2-internal-architecture/layers/domain-error.md' },
-                  { text: 'Application 레이어 구성성', link: '/01-architecture/part2-internal-architecture/layers/application-layer-structure.md' }
+                  { text: 'Application 레이어 구성', link: '/01-architecture/part2-internal-architecture/layers/application-layer-structure.md' }
                 ]
               },
               {
