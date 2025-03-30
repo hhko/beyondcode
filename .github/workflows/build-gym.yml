@@ -114,9 +114,16 @@ jobs:
             --no-restore \
             --no-build \
             --verbosity q \
-            --settings ${{ env.solution_dir }}/.runsettings
-            # --collect "XPlat Code Coverage" \
-            # --logger "trx;LogFileName=logs.trx" \
+            --collect "XPlat Code Coverage" \
+            --logger "trx;LogFileName=logs.trx"
+
+            # .runsettings 설정 파일 사용할 때
+            #   --settings ${{ env.solution_dir }}/.runsettings
+            # vs.
+            # .runsettings 설정 파일 사용하지 않을 때
+            #   --collect "XPlat Code Coverage" \
+            #   --logger "trx;LogFileName=logs.trx"
+            
       # 코드 커버리지
       #  - https://github.com/danielpalme/ReportGenerator-GitHub-Action
       #
