@@ -1,0 +1,240 @@
+name: Build C# Gym
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    # paths: [ 'src/**', 'tests/**', '.github/workflows/dotnet-ci.yml' ]
+    paths-ignore:
+      - '**.md'
+      - '**.pptx'
+      - '**.png'
+      - '**.ps1'
+      #- '.github/workflows/build-docs.yml'
+  # pull_request:
+  #   branches: [ main ]
+
+
+# 1. publish-unit-test-result-action: 솔루션 테스트 결과 trx 추가: Summary
+#  - https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
+# 2. dorny/test-reporter: 솔루션 테스트 메서드 목록
+#   - https://github.com/dorny/test-reporter
+permissions:
+  checks: write
+  pull-requests: write
+  # contents: read
+  # actions: read
+
+jobs:
+  build:
+    name: Build
+
+    # 빌드 환경 경우의 수 정의
+    strategy:
+      matrix:
+        dotnet-version: [ '9.0.x' ]
+        configuration: [ Release ]
+        os: [ ubuntu-24.04 ]
+
+    # 빌드 환경 지정
+    runs-on: ${{ matrix.os }}
+
+    # $GITHUB_OUTPUT
+    # $GITHUB_STEP_SUMMARY
+
+    # 환경 변수
+    #  - 규칙: ${{ env.환경_변수_이름 }}
+    #  - 예제: ${{ env.solution_dir }}
+    # 예약 변수
+    #  - ${{ github.workspace }}
+    #  - ${{ github.run_number }}
+    #  - ${{ github.run_id }}
+    env:
+      solution_dir:       ./02-tutorial/ddd/DddGym
+      build_dir:          ./02-tutorial/ddd/DddGym/.build
+      solution_filename:  DddGym.sln
+
+    steps:
+      # 형상관리 최신 소스 받기
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Git Commit SHA 얻기
+      #   - Deprecating save-state and set-output commands: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+      #   - GitHub Actions에서 output 변수의 문법 변경: https://blog.outsider.ne.kr/1651
+      #   - Github Actions and creating a short SHA hash: https://dev.to/hectorleiva/github-actions-and-creating-a-short-sha-hash-8b7
+      #
+      # 동적 변수 만들기
+      # 규칙 1. $GITHUB_OUTPUT은 "steps.vars.outputs"을 지정한다.
+      # 규칙 2. "키=값" 형식으로 outputs을 정의한다.
+      # 예. ${{ steps.vars.outputs.short_sha }}
+      - name: Set Short Git Commit SHA
+        id: vars
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "short_sha=$calculatedSha" >> $GITHUB_OUTPUT
+
+      # .NET SDK 설치
+      - name: Setup .NET SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      # 솔루션 패키지 복원
+      - name: Restore NuGet Packages
+        run: |
+          dotnet restore ${{ env.solution_dir }}/${{ env.solution_filename }} \
+            --verbosity q
+
+      # 솔루션 빌드
+      - name: Build
+        run: |
+          dotnet build ${{ env.solution_dir }}/${{ env.solution_filename }} \
+            --no-restore \
+            --configuration ${{ matrix.configuration }} \
+            --verbosity q
+
+      # 솔루션 테스트
+      #
+      # 결과: coverage.cobertura.xml, logs.trx
+      #   {테스트 프로젝트}
+      #     └─TestResults
+      #         ├─0ca60e99-32fb-43ac-bbd3-01f5a5ef6886        : XPlat Code Coverage 폴더
+      #         │   └─coverage.cobertura.xml                  : 코드 커버리지 파일(dotnet-coverage merge 대상)
+      #         ├─{username}_{hostname}_2024-03-14_15_16_30   : trx 로그 폴더
+      #         │   └─In
+      #         │       └─{hostname}
+      #         │           └─coverage.cobertura.xml          : 코드 커버리지 파일(사용 안함, Junit 로그 생성시 자동 생성됨)
+      #         └─logs.trx                                    : trx 로그 파일
+      - name: Test
+        run: |
+          dotnet test ${{ env.solution_dir }}/${{ env.solution_filename }} \
+            --configuration ${{ matrix.configuration }} \
+            --no-restore \
+            --no-build \
+            --verbosity q \
+            --settings ${{ env.solution_dir }}/.runsettings
+            # --collect "XPlat Code Coverage" \
+            # --logger "trx;LogFileName=logs.trx" \
+      # 코드 커버리지
+      #  - https://github.com/danielpalme/ReportGenerator-GitHub-Action
+      #
+      # 결과: Cobertura.xml, SummaryGithub.md
+      #   {솔루션}
+      #    └─.build
+      #        └─coverage
+      #             ├─Cobertura.xml
+      #             └─SummaryGithub.md
+      - name: Generate Coverage Reports
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.4.1
+        if: always()
+        with:
+          reports: ${{ env.solution_dir }}/**/*.cobertura.xml
+          targetdir: ${{ env.build_dir }}/coverage
+          reporttypes: 'Cobertura;MarkdownSummaryGithub'
+          verbosity: "Warning"
+          title: "Code Coverage"
+          tag: "${{ github.run_number }}_${{ github.run_id }}"
+          customSettings: ""                # https://github.com/danielpalme/ReportGenerator/wiki/Settings.
+          toolpath: "reportgeneratortool"   # dotnet tool.
+
+      # 코드 커버러지 $GITHUB_STEP_SUMMARY에 추가
+      - name: Publish Coverage Reports in Build Summary
+        if: always()
+        run: cat "${{ env.build_dir }}/coverage/SummaryGithub.md" >> $GITHUB_STEP_SUMMARY
+        shell: bash
+
+      # 테스트 보고서
+      #  - https://github.com/dorny/test-reporter?tab=readme-ov-file
+      #
+      # 결과: Test Report
+      #   23 passed, 0 failed and 0 skipped
+      #   Report	                                                                                Passed	Failed	Skipped	Time
+      #   ./template/Assets/Domains/Tests/Crop.Hello.Domain.Unit/TestResults/logs.trx	               1✅                   3s
+      #   ./template/Assets/Frameworks/Tests/Crop.Hello.Framework.Tests.Unit/TestResults/logs.trx	   7✅                   4s
+      #   ./template/Backend/Api/Tests/Crop.Hello.Api.Tests.Integration/TestResults/logs.trx	       2✅                   4s
+      #   ./template/Backend/Api/Tests/Crop.Hello.Api.Tests.Unit/TestResults/logs.trx	              12✅      1            4s
+      - name: Publish Test Report
+        uses: dorny/test-reporter@v1.9.1
+        if: always()
+        with:
+          name: Test Report
+          path: "${{ env.solution_dir }}/**/*.trx"
+          reporter: dotnet-trx
+
+      # # Publish-Unit-Test-Result-Action: https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions
+      # #
+      # # 결과: GitHub Summary
+      # #   Test Results
+      # #    4 files   4 suites   1s ⏱️
+      # #   22 tests 22 ✅ 0 💤 0 ❌
+      # #   23 runs  23 ✅ 0 💤 0 ❌
+      # - name: Publish Test Summary
+      #   uses: EnricoMi/publish-unit-test-result-action@v2.18.0
+      #   if: always()
+      #   with:
+      #     files: |
+      #       ${{ env.solution_dir }}/**/*.trx
+      #     check_name: "Test Summary"
+
+      # # CodeCoverageSummary: https://github.com/irongut/CodeCoverageSummary
+      # #
+      # # 결과: code-coverage-results.md
+      # #   Package                                 | Line Rate | Branch Rate | Complexity  | Health
+      # #   --------                                | --------- | ----------- | ----------  | ------
+      # #   Crop.Hello.Api                          | 74%       | 88%         | 11          | ➖
+      # #   Crop.Hello.Api.Adapters.Infrastructure  | 51%       | 57%         | 39          | ➖
+      # #   Crop.Hello.Api.Adapters.Persistence     | 50%       | 100%        | 2           | ➖
+      # #   Crop.Hello.Api.Application              | 50%       | 100%        | 2           | ➖
+      # #   Crop.Hello.Api.Domain                   | 100%      | 100%        | 1           | ✔
+      # #   Crop.Hello.Framework                    | 71%       | 50%         | 7           | ➖
+      # #   Crop.Hello.Framework.Contracts          | 43%       | 38%         | 64          | ❌
+      # #   **Summary**                             | **52%** (107 / 205) | **52%** (26 / 50) | **126** | ➖
+      # - name: Publish Code Coverage Report
+      #   uses: irongut/CodeCoverageSummary@v1.3.0
+      #   with:
+      #     filename: "${{ env.build_dir }}/coverage/Cobertura.xml"     # 머지된 Cobertura.xml 파일
+      #     badge: true
+      #     fail_below_min: false # just informative for now
+      #     format: markdown
+      #     hide_branch_rate: false
+      #     hide_complexity: false
+      #     indicators: true
+      #     output: both
+      #     #thresholds: "10 30"
+      #
+      # # - name: "출력"
+      # #   run: |
+      # #     #find "$(pwd)/.build"
+      # #     find . -type f -name "code-coverage-results.md"
+      #
+      # - name: Publish Coverage Reports in Build Summary
+      #   run: cat ./code-coverage-results.md >> $GITHUB_STEP_SUMMARY
+      #   shell: bash
+
+      # - name: Add Coverage PR Comment
+      #   uses: marocchino/sticky-pull-request-comment@v2
+      #   if: github.event_name == 'pull_request'
+      #   with:
+      #     recreate: true
+      #     path: code-coverage-results.md
+
+      # # https://github.com/irongut/CodeCoverageSummary
+      # - name: Publish Code Coverage Report
+      #   uses: irongut/CodeCoverageSummary@v1.3.0
+      #   with:
+      #     filename: ${{ env.coverage_out_cobertura_file }}
+      #     badge: true
+      #     fail_below_min: false # just informative for now
+      #     format: markdown
+      #     hide_branch_rate: false
+      #     hide_complexity: false
+      #     indicators: true
+      #     output: both
+      #     #thresholds: "10 30"
+
+      # 테스트와 코드 커버리지 coverage.cobertura.xml 파일 생성
+      #   - name: Find coverage output path
+      #     run: |
+      #       cp $(find . -name "coverage.cobertura.xml") .
