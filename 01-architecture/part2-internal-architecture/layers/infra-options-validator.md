@@ -1,12 +1,16 @@
+---
+outline: deep
+---
+
 # 옵션 유효성 검사
 
-## 옵션 유효성 검사 등록
+## 등록
 ```cs
-services.AddConfigureOptions<ExampleOptions, ExampleOptionsValidator>(ExampleOptions.SectionName);
+services
+    .AddConfigureOptions<ExampleOptions, ExampleOptionsValidator>(
+        ExampleOptions.SectionName);
 ```
 
-## 옵션 예.
-### 옵션
 ```cs
 public class ExampleOptions
 {
@@ -18,7 +22,6 @@ public class ExampleOptions
 }
 ```
 
-### 옵션 유효성 검사
 ```cs
 internal sealed class ExampleOptionsValidator : AbstractValidator<ExampleOptions>
 {
@@ -30,8 +33,8 @@ internal sealed class ExampleOptionsValidator : AbstractValidator<ExampleOptions
 }
 ```
 
-## 옵션 유효성 검사 구현
-### 옵션 및 유효성 검사 등록
+## 구현
+### 등록 확장 메서드
 ```cs
 public static class FluentValidationOptionsExtensions
 {
@@ -53,7 +56,7 @@ public static class FluentValidationOptionsExtensions
 }
 ```
 
-### 옵션과 유효성 검사 매핑
+### 매핑 확장 메서드
 - `IValidateOptions<TOptions>`
 - `FluentValidationOptions<TOptions>`
 
@@ -72,6 +75,7 @@ internal static class OptionsBuilderFluentValidationExtensions
 }
 ```
 
+### 유효성 검사사
 ```cs
 internal sealed class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
 {

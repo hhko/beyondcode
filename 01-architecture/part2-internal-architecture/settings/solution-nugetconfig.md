@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # 솔루션 설정 nuget.config
 
 ## 개요

@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # 공통 AssemblyReference
 
 ```cs
