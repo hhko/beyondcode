@@ -5,7 +5,6 @@ outline: deep
 # 참고 자료료
 
 ## 도전
-- [x] Youtube | [나는 언제 행복한 사람인가?](https://www.youtube.com/watch?v=1zmnoElezRg)
 - [x] Youtube | [꿈을 현실로 만든 10년의 여정 | 이승건 토스팀 리더](https://www.youtube.com/watch?v=UogHHGN3U3Q)
 
 ## 객체지향

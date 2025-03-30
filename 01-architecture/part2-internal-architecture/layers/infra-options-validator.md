@@ -11,17 +11,26 @@ services
         ExampleOptions.SectionName);
 ```
 
+### appsettings.json
+```json
+{
+  "Example": {
+    "Retries":  -1
+  },
+}
+```
+
+### 옵션 자료구조
 ```cs
 public class ExampleOptions
 {
     public const string SectionName = "Example";
 
-    public required LogLevel LogLevel { get; init; }
-
     public required int Retries { get; init; }
 }
 ```
 
+### 옵션 유효성 검사
 ```cs
 internal sealed class ExampleOptionsValidator : AbstractValidator<ExampleOptions>
 {
@@ -57,8 +66,9 @@ public static class FluentValidationOptionsExtensions
 ```
 
 ### 매핑 확장 메서드
-- `IValidateOptions<TOptions>`
-- `FluentValidationOptions<TOptions>`
+- `IValidateOptions<TOptions>`  
+  -> `FluentValidationOptions<TOptions>`  
+     -> `IValidator<TOptions>`
 
 ```cs
 internal static class OptionsBuilderFluentValidationExtensions
@@ -75,7 +85,7 @@ internal static class OptionsBuilderFluentValidationExtensions
 }
 ```
 
-### 유효성 검사사
+### 유효성 검사
 ```cs
 internal sealed class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
 {
@@ -138,3 +148,56 @@ internal sealed class FluentValidationOptions<TOptions> : IValidateOptions<TOpti
     }
 }
 ```
+
+## 단위 테스트
+
+- TOptions의 Validator 클래스를 직접 생성해서 테스트합니다.
+
+```cs
+[Trait(nameof(UnitTest), UnitTest.Infrastructure)]
+public class ExampleOptionsTests
+{
+    private readonly ExampleOptionsValidator _validator = new();
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(5)]
+    [InlineData(9)]
+    public void Validator_Should_Succeed_For_Valid_Retries(int retries)
+    {
+        // Arrange
+        var options = new ExampleOptions
+        {
+            Retries = retries,
+        };
+
+        // Act
+        var result = _validator.Validate(options);
+
+        // Assert
+        result.IsValid.ShouldBeTrue();
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(0)]
+    [InlineData(10)]
+    public void Validator_Should_Fail_For_Invalid_Retries(int retries)
+    {
+        // Arrange
+        var options = new ExampleOptions
+        {
+            Retries = retries,
+        };
+
+        // Act
+        var result = _validator.Validate(options);
+
+        // Assert
+        result.IsValid.ShouldBeFalse();
+    }
+}
+```
+
+## 통합 테스트
+- TODO
