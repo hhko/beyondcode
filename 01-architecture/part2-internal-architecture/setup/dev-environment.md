@@ -48,7 +48,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco -v
 ```
 
-## 프로그램 설치 명령령
+## 프로그램 설치 명령
 ```shell
 # 1. Powershell-Core: https://community.chocolatey.org/packages/powershell-core/7.4.4#versionhistory
 choco install powershell-core --version 7.4.4 -y
