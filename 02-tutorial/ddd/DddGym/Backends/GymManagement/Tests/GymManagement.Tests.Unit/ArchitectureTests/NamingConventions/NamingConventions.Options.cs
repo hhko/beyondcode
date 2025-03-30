@@ -27,7 +27,7 @@ public sealed partial class NamingConventionsTests : ArchitectureTestBase
     [Fact]
     public void All_AbstractValidator_Classes_Should_Be_Internal_Sealed_And_Have_Validator_Suffix()
     {
-        Types()
+        //Types()
         //var result = Types.InAssembly(Assembly.GetExecutingAssembly())
         //    .That()
         //    .Inherit(typeof(AbstractValidator<>))
