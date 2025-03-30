@@ -313,7 +313,7 @@ C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warnin
 ---
 - [ ] Serilog + OpenTelemetry + Aspire Dashboard
 - [ ] OpenSearch
-- [ ] 시작 로그(로그 초기화 전전)
+- [ ] 시작 로그(로그 초기화 전): appsettings.json 형식 에러러
 ---
 - [ ] Source Generator
 - [ ] Decorator 패턴(Pipeline)

@@ -73,7 +73,7 @@ function nav(): DefaultTheme.NavItem[] {
   return [
     { text: '홈', link: '/' },
     { text: '아키텍처', link: '/01-architecture/part1-overview/ch01-architecture/'},
-    { text: '튜토리얼', link: '/02-tutorial/ddd/ch01-domain-exploration/' },
+    { text: '튜토리얼', link: '/02-tutorial/ddd/ch01-domain-glossary/' },
     { text: '참고', link: '/04-reference/' },
   ];
 }
