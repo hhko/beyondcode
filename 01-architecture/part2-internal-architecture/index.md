@@ -98,7 +98,7 @@ outline: deep
 - [x] 공통 | [Pure Function](./layers/common-pure-function.md)
 ---
 - [x] 도메인 레이어 | [도메인 레이어 구성](./layers/domain-layer-structure.md)
-- [x] 도메인 레이어 | [도메인 에러](./layers/docmain-error.md)
+- [x] 도메인 레이어 | [도메인 에러](./layers/domain-error.md)
 - [ ] 도메인 레이어 | Enumerations
 - [ ] 도메인 레이어 | Entity
 - [ ] 도메인 레이어 | Value Object
