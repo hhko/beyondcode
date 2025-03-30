@@ -54,8 +54,8 @@ public static class FluentValidationOptionsExtensions
 ```
 
 ### 옵션과 유효성 검사 매핑
-- IValidateOptions<TOptions>
-- FluentValidationOptions<TOptions>
+- `IValidateOptions<TOptions>`
+- `FluentValidationOptions<TOptions>`
 
 ```cs
 internal static class OptionsBuilderFluentValidationExtensions
