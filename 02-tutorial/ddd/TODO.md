@@ -304,36 +304,3 @@ C:\Program Files\dotnet\sdk\9.0.100\Microsoft.TestPlatform.targets(48,5): warnin
 
 <br/>
 
-- [x] IOptions + Fluent Validation
-- [x] 복수개 IOptions 처리
-- [ ] IOptions + Fluent Validation 규칙 테스트
----
-- [ ] FluentValidation ErrorMessage 영문 기본값
-- [ ] FluentValidation Json 로그 통합?
-- [ ] IOption 테스트
-- [ ] Domain Type Validation 활용
----
-- [ ] Serilog + OpenTelemetry + Aspire Dashboard
-- [ ] OpenSearch
-- [ ] 시작 로그(로그 초기화 전): appsettings.json 형식 에러러
----
-- [ ] Source Generator
-- [ ] Decorator 패턴(Pipeline)
----
-- [ ] Result
-- [ ] Domain Error
-- [ ] Application Error
-- [ ] Adapter Error
-- [ ] Exception
----
-- [ ] Entity
-- [ ] ValueObject
-- [ ] Aggregate Root
-- [ ] Domain Event
-- [ ] Audit 로그?
----
-- [ ] 회복력
----
-- [ ] contextiv
-- [ ] backstage
-- [ ] komodo
