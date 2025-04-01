@@ -172,7 +172,7 @@ outline: deep
 ## 테스트
 - [x] 단위 테스트 | [단위 테스트 구성](./testing/unit-testing-structure.md)
 - [x] 단위 테스트(아키텍처 테스트) | [Layer Dependency Test](./testing/architecture-layer-dependency.md)
-- [x] 단위 테스트(아키텍처 테스트) | [Naming Conventions CQRS Test](./testing/architecture-namingconventions-cqrs.md)
+- [x] 단위 테스트(아키텍처 테스트) | [Naming Conventions Test](./testing/architecture-namingconventions.md)
 - [ ] 단위 테스트(아키텍처 테스트) | IDomainEvent/IDomainEventUsecase NamingConventions
 ---
 - [ ] 단위 테스트(레이어 테스트) | 도메인 레이어
