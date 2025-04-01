@@ -4,13 +4,13 @@ outline: deep
 
 # Application 레이어
 
-## Application 레이어 패키지
+## 패키지
 - MediatR
 - FluentValidation
 - ErrorOr
 - OpenTelemetry
 
-## Application 레이어 솔루션 구성
+## 솔루션 구성
 
 ```shell
 └─ {Corporation}.{Solution}.{Service}.Application

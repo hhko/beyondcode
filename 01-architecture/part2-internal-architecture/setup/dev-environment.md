@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 프로그램 환경
+# 개발 환경 설치
 
 ## 프로그램 목록
 1. chocolately

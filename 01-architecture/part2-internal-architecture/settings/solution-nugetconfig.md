@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 솔루션 설정 nuget.config
+# nuget.config
 
 ## 개요
 - NuGet 패키지 관리자의 동작을 설정하는 XML 기반 구성 파일입니다.

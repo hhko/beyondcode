@@ -4,13 +4,13 @@ outline: deep
 
 # Domain 레이어
 
-## Domain 레이어 패키지
+## 패키지
 - Ardalis.SmartEnum
 - MediatR.Contracts
 - ErrorOr
 - Throw
 
-## Domain 레이어 솔루션 구성
+## 솔루션 구성
 ```shell
 └─ {Corporation}.{Solution}.{Service}.Domain
    ├─ Abstractions                          // 도메인 레이어 부수 목표

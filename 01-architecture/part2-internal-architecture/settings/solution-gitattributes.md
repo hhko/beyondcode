@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 솔루션 설정 .gitattributes
+# .gitattributes
 
 ## 개요
 > OS 간 라인 엔딩 문제를 해결하기 위해 사용됩니다.

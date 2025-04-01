@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 공통 AssemblyReference
+# AssemblyReference
 
 ```cs
 using System.Reflection;

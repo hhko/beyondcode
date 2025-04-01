@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 프로젝트 설정 appsettings.json
+# appsettings.json
 
 ## appsettings.json 그룹화
 ```shell

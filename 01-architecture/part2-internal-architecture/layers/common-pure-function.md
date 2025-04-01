@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 공통 순수 함수수
+# 순수 함수
 
 ```cs
 using System.Diagnostics.Contracts;

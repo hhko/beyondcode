@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 솔루션 설정 .gitignore
+# .gitignore
 
 ## 개요
 > Git이 추적하지 않도록 제외할 파일 목록을 지정하는 역할을 합니다.

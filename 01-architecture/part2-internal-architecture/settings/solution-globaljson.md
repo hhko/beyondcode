@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 솔루션 설정 global.json
+# global.json
 
 ## 개요
 >  .NET CLI 명령을 실행할 때 어떤 .NET SDK 버전을 사용할지 지정합니다.

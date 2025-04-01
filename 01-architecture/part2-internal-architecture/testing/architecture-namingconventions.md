@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 네이밍컨벤션
+# 네이밍컨벤션 테스트트
 
 ## 테스트 준비
 ### NamingConvention
@@ -57,7 +57,7 @@ public void AllMethods_ShouldStartWith_CapitalLetter()
 {
     ArchRuleDefinition
         .MethodMembers()
-        
+
         // 제외
         .That().DoNotHaveNameStartingWith(".ctor")      // 클래스 생성자
         .And().DoNotHaveNameStartingWith(".cctor")      // 정적 클래스 생성자
@@ -85,7 +85,7 @@ public void ValidatorClasses_ShouldBe_InternalSealed_And_Have_ValidatorSuffix()
         .Classes()
         .That()
         .ImplementInterface(typeof(IValidator<>));
-    
+
     if (!sut.GetObjects(Architecture).Any())
         return;
 
