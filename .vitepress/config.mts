@@ -155,7 +155,7 @@ function sidebar(): DefaultTheme.Sidebar {
                 items: [
                   { text: '단위 테스트 구성', link: '/01-architecture/part2-internal-architecture/testing/unit-testing-structure.md' },
                   { text: '레이어 의존성 테스트', link: '/01-architecture/part2-internal-architecture/testing/architecture-layer-dependency.md' },
-                  { text: 'CQRS 네이밍컨벤션 테스트', link: '/01-architecture/part2-internal-architecture/testing/architecture-namingconventions-cqrs.md' },
+                  { text: '네이밍컨벤션 테스트', link: '/01-architecture/part2-internal-architecture/testing/architecture-namingconventions.md' },
                   { text: 'WebApi 통합 테스트', link: '/01-architecture/part2-internal-architecture/testing/integration-webapi.md' }
                 ]
               }
