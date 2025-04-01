@@ -95,6 +95,7 @@ outline: deep
   ```
   ArchUnitNET 패키지를 이용한 프로젝트 참조 테스트
   ```
+- [x] [Unit Test your Architecture (and more) with ArchUnit](https://goatreview.com/unit-test-architecture-with-archunit/amp/)
 
 ### 설정
 - [ ] [Configure unit tests by using a .runsettings file](https://learn.microsoft.com/en-us/visualstudio/test/configure-unit-tests-by-using-a-dot-runsettings-file?view=vs-2022)
