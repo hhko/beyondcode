@@ -1,4 +1,5 @@
 ﻿using GymManagement.Tests.Integration.Abstractions.Fixtures;
+using Xunit.Abstractions;
 using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
 
 namespace GymManagement.Tests.Integration;
@@ -9,8 +10,8 @@ public abstract class ControllerTestsBase
 
     public ControllerTestsBase(WebAppFactoryFixture webAppFactory)
     {
-        // 1. CreateClient 메서드를 호출하면 Program 인스턴스를 생성합니다.
-        // 2. CreateClient N번 호출해도 Program 인스턴스는 1번만 생성합니다.
+        // 1. CreateClient 메서드를 호출하면 IAppMarker 인스턴스를 생성합니다.
+        // 2. CreateClient N번 호출해도 IAppMarker 인스턴스는 1번만 생성합니다.
         _sut = webAppFactory.CreateClient();
         //var _sut = webAppFactory.CreateClient(new WebApplicationFactoryClientOptions
         //{
@@ -37,7 +38,7 @@ public sealed partial class WeatherForecastControllerTests : ControllerTestsBase
     public async Task Index_WhenCalled_ReturnsApplicationForm()
     {
         _testOutputHelper.WriteLine($"{Thread.CurrentThread.ManagedThreadId}: 1");
-        var response = await _sut.GetAsync("/api/weatherforecast/", TestContext.Current.CancellationToken);
+        var response = await _sut.GetAsync("/api/weatherforecast/"); //, TestContext.Current.CancellationToken);
 
         response.EnsureSuccessStatusCode();
 
@@ -74,10 +75,10 @@ public sealed partial class WeatherForecastControllerTests2 : ControllerTestsBas
         _testOutputHelper.WriteLine($"{Thread.CurrentThread.ManagedThreadId}: 2, 생성자");
     }
 
-    [Fact]
-    public async Task Index_WhenCalled_ReturnsApplicationForm()
-    {
-        _testOutputHelper.WriteLine($"{Thread.CurrentThread.ManagedThreadId}: 2");
-        await Task.CompletedTask;
-    }
+    //[Fact]
+    //public async Task Index_WhenCalled_ReturnsApplicationForm()
+    //{
+    //    _testOutputHelper.WriteLine($"{Thread.CurrentThread.ManagedThreadId}: 2");
+    //    await Task.CompletedTask;
+    //}
 }

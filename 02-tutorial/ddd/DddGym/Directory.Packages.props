@@ -27,6 +27,8 @@
     <PackageVersion Include="Shouldly" Version="4.3.0" />
     <PackageVersion Include="Throw" Version="1.4.0" />
     <PackageVersion Include="TngTech.ArchUnitNET.xUnit" Version="0.11.3" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
     <PackageVersion Include="xunit.v3" Version="2.0.0" />
   </ItemGroup>
 </Project>

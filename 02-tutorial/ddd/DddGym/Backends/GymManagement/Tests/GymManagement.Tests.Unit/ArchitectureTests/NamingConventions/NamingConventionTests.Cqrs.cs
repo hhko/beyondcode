@@ -6,10 +6,10 @@ using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 namespace GymManagement.Tests.Unit.ArchitectureTests.NamingConventions;
 
 [Trait(nameof(UnitTest), UnitTest.Architecture)]
-public sealed partial class NamingConventionsTests : ArchitectureTestBase
+public sealed partial class NamingConventionTests_Cqrs : ArchitectureTestBase
 {
 
-    // 네이밍컨벤션 CQRS 규칙
+    // CQRS 네이밍컨벤션
     //
     // - 메시지
     //   - 접미사: Command, Query
@@ -21,15 +21,15 @@ public sealed partial class NamingConventionsTests : ArchitectureTestBase
     [Fact]
     public void CommandMessages_ShouldComplyWith_DesignRules()
     {
-        var suts = ArchRuleDefinition
+        var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(ICommand));
 
-        if (!suts.GetObjects(Architecture).Any())
+        if (!sut.GetObjects(Architecture).Any())
             return;
 
-        suts.Should().BePublic()
+        sut.Should().BePublic()
             .AndShould().BeSealed()
             .AndShould().BeRecord()
             .AndShould().HaveNameEndingWith(NamingConvention.Command)
@@ -39,15 +39,15 @@ public sealed partial class NamingConventionsTests : ArchitectureTestBase
     [Fact]
     public void CommandMessagesT_ShouldComplyWith_DesignRules()
     {
-        var suts = ArchRuleDefinition
+        var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(ICommand<>));
 
-        if (!suts.GetObjects(Architecture).Any())
+        if (!sut.GetObjects(Architecture).Any())
             return;
 
-        suts.Should().BePublic()
+        sut.Should().BePublic()
             .AndShould().BeSealed()
             .AndShould().BeRecord()
             .AndShould().HaveNameEndingWith(NamingConvention.Command)
@@ -57,15 +57,15 @@ public sealed partial class NamingConventionsTests : ArchitectureTestBase
     [Fact]
     public void CommandUsecases_ShouldComplyWith_DesignRules()
     {
-        var suts = ArchRuleDefinition
+        var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(ICommandUsecase<>));
 
-        if (!suts.GetObjects(Architecture).Any())
+        if (!sut.GetObjects(Architecture).Any())
             return;
 
-        suts.Should().BeInternal()
+        sut.Should().BeInternal()
             .AndShould().BeSealed()
             .AndShould().HaveNameEndingWith(NamingConvention.CommandUsecase)
             .Check(Architecture);
@@ -74,15 +74,15 @@ public sealed partial class NamingConventionsTests : ArchitectureTestBase
     [Fact]
     public void CommandUsecasesT_ShouldComplyWith_DesignRules()
     {
-        var suts = ArchRuleDefinition
+        var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(ICommandUsecase<,>));
 
-        if (!suts.GetObjects(Architecture).Any())
+        if (!sut.GetObjects(Architecture).Any())
             return;
 
-        suts.Should().BeInternal()
+        sut.Should().BeInternal()
             .AndShould().BeSealed()
             .AndShould().HaveNameEndingWith(NamingConvention.CommandUsecase)
             .Check(Architecture);
@@ -91,15 +91,15 @@ public sealed partial class NamingConventionsTests : ArchitectureTestBase
     [Fact]
     public void QueryMessagesT_ShouldComplyWith_DesignRules()
     {
-        var suts = ArchRuleDefinition
+        var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(IQuery<>));
 
-        if (!suts.GetObjects(Architecture).Any())
+        if (!sut.GetObjects(Architecture).Any())
             return;
 
-        suts.Should().BePublic()
+        sut.Should().BePublic()
             .AndShould().BeSealed()
             .AndShould().BeRecord()
             .AndShould().HaveNameEndingWith(NamingConvention.Query)
@@ -109,15 +109,15 @@ public sealed partial class NamingConventionsTests : ArchitectureTestBase
     [Fact]
     public void QueryUsecasesT_ShouldComplyWith_DesignRules()
     {
-        var suts = ArchRuleDefinition
+        var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(IQueryUsecase<,>));
 
-        if (!suts.GetObjects(Architecture).Any())
+        if (!sut.GetObjects(Architecture).Any())
             return;
 
-        suts.Should().BeInternal()
+        sut.Should().BeInternal()
             .AndShould().BeSealed()
             .AndShould().HaveNameEndingWith(NamingConvention.QueryUsecase)
             .Check(Architecture);

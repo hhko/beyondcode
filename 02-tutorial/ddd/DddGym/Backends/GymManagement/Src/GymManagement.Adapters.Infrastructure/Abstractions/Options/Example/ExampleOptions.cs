@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace GymManagement.Adapters.Infrastructure.Abstractions.Options.Example;
+﻿namespace GymManagement.Adapters.Infrastructure.Abstractions.Options.Example;
 
 public sealed class ExampleOptions
 {

@@ -22,13 +22,7 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="GymManagement.Tests.Unit" />
-
-    <!--
-    Microsoft.Extensions.Logging.ILogger`1 because type is not accessible. Make it public, 
-      or internal and mark your assembly with [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2, ...] attribute, 
-      because assembly Microsoft.Extensions.Logging.Abstractions is strong-named. (Parameter 'additionalInterfacesToProxy')
-    -->
-    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+    <!-- <InternalsVisibleTo Include="DynamicProxyGenAssembly2" /> -->
   </ItemGroup>
 
 </Project>

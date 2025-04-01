@@ -10,7 +10,12 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NSubstitute" />
     <PackageReference Include="Shouldly" />
-    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="TngTech.ArchUnitNET.xUnit" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +31,9 @@
   <!-- 솔루션 탐색기에서 TestResults 폴더 제외 -->
   <ItemGroup>
     <None Remove="TestResults\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\DddGym.Framework\DddGym.Framework.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,3 +10,12 @@ internal sealed class ExampleOptionsValidator : AbstractValidator<ExampleOptions
             .InclusiveBetween(1, 9);
     }
 }
+
+//public sealed class ExampleOptionValidator : AbstractValidator<ExampleOptions>
+//{
+//    public ExampleOptionValidator()
+//    {
+//        RuleFor(x => x.Retries)
+//            .InclusiveBetween(1, 9);
+//    }
+//}
