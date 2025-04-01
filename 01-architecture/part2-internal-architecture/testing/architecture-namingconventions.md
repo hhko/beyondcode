@@ -4,6 +4,8 @@ outline: deep
 
 # 네이밍컨벤션
 
+## 테스트 준비
+### NamingConvention
 ```cs
 public static partial class Constants
 {
@@ -19,6 +21,16 @@ public static partial class Constants
     }
 }
 ```
+
+### Internal 접근 허용
+```xml
+<ItemGroup>
+	<InternalsVisibleTo Include="{T}.Tests.Unit" />
+	<InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+</ItemGroup>
+```
+- 테스트 프로젝트에서 Application 프로젝트의 `internal` 클래스를 접근하기 위해 `InternalsVisibleTo`을 지정합니다.
+
 
 ## C# 네이밍컨벤션
 ### 규칙
@@ -61,7 +73,7 @@ public void AllMethods_ShouldStartWith_CapitalLetter()
 
 ## Validator 네이밍컨벤션
 ### 규칙
-- IValidator<T> 을 상속받는 모든 클래스는 internal sealed 이어야 한다.
+- `IValidator<T>` 을 상속받는 모든 클래스는 internal sealed 이어야 한다.
 - 클래스 이름은 반드시 Validator 접미사를 가져야 한다.
 
 ### 테스트
@@ -87,7 +99,7 @@ public void ValidatorClasses_ShouldBe_InternalSealed_And_Have_ValidatorSuffix()
 ## Options 네이밍컨벤션
 
 ### 규칙
-- "OptionsValidator : Options = 1 : 1" 관계이다.
+- `OptionsValidator : Options = 1 : 1` 관계이다.
 - Options 클래스는 public sealed 클래스이다.
 - public const string SectionName 필드를 갖는다.
 
@@ -152,27 +164,6 @@ private static Class? GetCorrespondingOptionsClass(Class optionsValidatorClass)
   - 클래스: internal, sealed
 
 ### 테스트
-```xml
-<ItemGroup>
-	<InternalsVisibleTo Include="{T}.Tests.Unit" />
-	<InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
-</ItemGroup>
-```
-- 테스트 프로젝트에서 Application 프로젝트의 `internal` 클래스를 접근하기 위해 `InternalsVisibleTo`을 지정합니다.
-
-```cs
-public static partial class Constants
-{
-    public static class NamingConvention
-    {
-        public const string Command = nameof(Command);
-        public const string CommandUsecase = nameof(CommandUsecase);
-        public const string Query = nameof(Query);
-        public const string QueryUsecase = nameof(QueryUsecase);
-    }
-}
-```
-
 ```cs
 [Trait(nameof(UnitTest), UnitTest.Architecture)]
 public sealed partial class NamingConventionsTests : ArchitectureTestBase
