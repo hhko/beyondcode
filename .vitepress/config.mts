@@ -122,31 +122,31 @@ function sidebar(): DefaultTheme.Sidebar {
                 text: '기본',
                 collapsed: true,
                 items: [
-                  { text: 'AssemblyReference.cs', link: '/01-architecture/part2-internal-architecture/layers/common-assemblyreference.md' },
-                  { text: '접근 제어자', link: '/01-architecture/part2-internal-architecture/layers/common-access-modifiers.md' },
-                  { text: '순수 함수', link: '/01-architecture/part2-internal-architecture/layers/common-pure-function.md' },
+                  { text: 'AssemblyReference.cs', link: '/01-architecture/part2-internal-architecture/basic/assemblyreference.md' },
+                  { text: '접근 제어자', link: '/01-architecture/part2-internal-architecture/basic/access-modifiers.md' },
+                  { text: '순수 함수', link: '/01-architecture/part2-internal-architecture/basic/pure-function.md' },
                 ]
               },
               {
                 text: 'Domain 레이어',
                 collapsed: true,
                 items: [
-                  { text: 'Domain 레이어 구성', link: '/01-architecture/part2-internal-architecture/layers/domain-layer-structure.md' },
-                  { text: 'Domain 에러', link: '/01-architecture/part2-internal-architecture/layers/domain-error.md' },
+                  { text: 'Domain 레이어 구성', link: '/01-architecture/part2-internal-architecture/domain-layer/domain-layer-structure.md' },
+                  { text: 'Domain 에러', link: '/01-architecture/part2-internal-architecture/domain-layer/domain-error.md' },
                 ]
               },
               {
                 text: 'Application 레이어',
                 collapsed: true,
                 items: [
-                  { text: 'Application 레이어 구성', link: '/01-architecture/part2-internal-architecture/layers/application-layer-structure.md' }
+                  { text: 'Application 레이어 구성', link: '/01-architecture/part2-internal-architecture/application-layer/application-layer-structure.md' }
                 ]
               },
               {
                 text: 'Adapter 레이어',
                 collapsed: true,
                 items: [
-                  { text: '옵션 유효성 검사', link: '/01-architecture/part2-internal-architecture/layers/infra-options-validator.md' }
+                  { text: '옵션 유효성 검사', link: '/01-architecture/part2-internal-architecture/infrastructure-layers/options-validator.md' }
                 ]
               },
               {
@@ -156,7 +156,8 @@ function sidebar(): DefaultTheme.Sidebar {
                   { text: '단위 테스트 구성', link: '/01-architecture/part2-internal-architecture/testing/unit-testing-structure.md' },
                   { text: '레이어 의존성 테스트', link: '/01-architecture/part2-internal-architecture/testing/architecture-layer-dependency.md' },
                   { text: '네이밍컨벤션 테스트', link: '/01-architecture/part2-internal-architecture/testing/architecture-namingconventions.md' },
-                  { text: 'WebApi 통합 테스트', link: '/01-architecture/part2-internal-architecture/testing/integration-webapi.md' }
+                  { text: 'WebApi 통합 테스트', link: '/01-architecture/part2-internal-architecture/testing/integration-webapi.md' },
+                  { text: '유효성 검사 테스트', link: '/01-architecture/part2-internal-architecture/testing/infra-validator.md' }
                 ]
               }
             ]
