@@ -15,6 +15,14 @@
 - [ ] 테스트 수행이 안됨
 
 ---
+- [x] C# -> otel-collector
+- [x] C# -> otel-collector -> kafka
+- [x] C# -> otel-collector -> opensearch
+- [x] opensearch ppl 이해
+- [ ] ppl 인식 데이터 타입?
+- [ ] metricbeat ppl?
+- [ ] C# -> otel-collector -> kafka -> {logstash ->} opensearch
+---
 - [ ] Serilog + OpenTelemetry + Aspire Dashboard
 - [ ] OpenSearch
 - [ ] 시작 로그(로그 초기화 전): appsettings.json 형식 에러러
