@@ -122,9 +122,9 @@ function sidebar(): DefaultTheme.Sidebar {
                 text: '기본',
                 collapsed: true,
                 items: [
-                  { text: 'AssemblyReference.cs', link: '/01-architecture/part2-internal-architecture/basic/assemblyreference.md' },
-                  { text: '접근 제어자', link: '/01-architecture/part2-internal-architecture/basic/access-modifiers.md' },
-                  { text: '순수 함수', link: '/01-architecture/part2-internal-architecture/basic/pure-function.md' },
+                  { text: 'AssemblyReference.cs', link: '/01-architecture/part2-internal-architecture/foundation/assemblyreference.md' },
+                  { text: '접근 제어자', link: '/01-architecture/part2-internal-architecture/foundation/access-modifiers.md' },
+                  { text: '순수 함수', link: '/01-architecture/part2-internal-architecture/foundation/pure-function.md' },
                 ]
               },
               {
@@ -146,7 +146,7 @@ function sidebar(): DefaultTheme.Sidebar {
                 text: 'Adapter 레이어',
                 collapsed: true,
                 items: [
-                  { text: '옵션 유효성 검사', link: '/01-architecture/part2-internal-architecture/infrastructure-layers/options-validator.md' }
+                  { text: '옵션 유효성 검사', link: '/01-architecture/part2-internal-architecture/infrastructure-layer/options-validator.md' }
                 ]
               },
               {
