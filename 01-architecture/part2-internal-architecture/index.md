@@ -40,17 +40,17 @@ outline: deep
 - [ ] 테스트 | Verify
 
 ## 설정
-- [x] 솔루션 설정 | [.gitignore](./settings/solution-gitignore.md)
-- [x] 솔루션 설정 | [.gitattributes](./settings/solution-gitattributes.md)
+- [x] 솔루션 설정 | gitignore
+- [x] 솔루션 설정 | gitattributes
 - [ ] 솔루션 설정 | .dockerignore
 - [ ] 솔루션 설정 | 전역 버전(도커 이미지 버전)
-- [x] 솔루션 설정 | [global.json](./settings/solution-globaljson.md)
-- [x] 솔루션 설정 | [nuget.config](./settings/solution-nugetconfig.md)
+- [x] 솔루션 설정 | global.json
+- [x] 솔루션 설정 | nuget.config
 - [ ] 솔루션 설정 | .editorconfig
 - [ ] 솔루션 설정 | Directory.Build.props
 - [ ] 솔루션 설정 | Directory.Packages.props
 ---
-- [x] 프로젝트 설정 | [appsettings.json](./settings/project-appsettings.md)
+- [x] 프로젝트 설정 | appsettings.json
 - [ ] 프로젝트 설정 | InternalsVisibleTo
 ---
 - [ ] WebApi 프로젝트 설정 | Microsoft.NET.Sdk.Web
@@ -93,12 +93,12 @@ outline: deep
 - [ ] 에러 코드 | AdapterErrors.{범주}Errors.{이유}
 
 ## 레이어
-- [x] 공통 | [AssemblyReference.cs](./layers/common-assemblyreference.md)
-- [x] 공통 | [접근 제어자](./layers//common-access-modifiers.md)
-- [x] 공통 | [Pure Function](./layers/common-pure-function.md)
+- [x] 공통 | AssemblyReference.cs
+- [x] 공통 | 접근 제어자
+- [x] 공통 | Pure Function
 ---
-- [x] 도메인 레이어 | [도메인 레이어 구성](./layers/domain-layer-structure.md)
-- [x] 도메인 레이어 | [도메인 에러](./layers/domain-error.md)
+- [x] 도메인 레이어 | 도메인 레이어 구성
+- [x] 도메인 레이어 | 도메인 에러
 - [ ] 도메인 레이어 | Enumerations
 - [ ] 도메인 레이어 | Entity
 - [ ] 도메인 레이어 | Value Object
@@ -106,7 +106,7 @@ outline: deep
 - [ ] 도메인 레이어 | Domain Service
 - [ ] 도메인 레이어 | Aggregate Root
 ---
-- [x] 애플리케이션 레이어 | [애플리케이션 레이어 구성](./layers/application-layer-structure.md)
+- [x] 애플리케이션 레이어 | 애플리케이션 레이어 구성
 
 
 ## 레이어
@@ -170,16 +170,16 @@ outline: deep
 - [ ] 애플리케이션 레이어 | Validation
 
 ## 테스트
-- [x] 단위 테스트 | [단위 테스트 구성](./testing/unit-testing-structure.md)
-- [x] 단위 테스트(아키텍처 테스트) | [Layer Dependency Test](./testing/architecture-layer-dependency.md)
-- [x] 단위 테스트(아키텍처 테스트) | [Naming Conventions Test](./testing/architecture-namingconventions.md)
-- [ ] 단위 테스트(아키텍처 테스트) | IDomainEvent/IDomainEventUsecase NamingConventions
+- [x] 단위 테스트 | [단위 테스트 구성
+- [x] 단위 테스트(아키텍처 테스트) | Layer Dependency Test
+- [x] 단위 테스트(아키텍처 테스트) | Naming Conventions Test
+- [ ] 단위 테스트(아키텍처 테스트) | DomainEvent/IDomainEventUsecase NamingConventions
 ---
 - [ ] 단위 테스트(레이어 테스트) | 도메인 레이어
 - [ ] 단위 테스트(레이어 테스트) | 애플리케이션 레이어
 - [ ] 단위 테스트(레이어 테스트) | 애플리케이션 레이어(시나리오, Cucumber)
 ---
-- [ ] 통합 테스트 | [WebApi](./testing/integration-webapi.md)
+- [ ] 통합 테스트 | WebApi
 - [ ] 통합 테스트 | Quartz
 - [ ] 통합 테스트 | RabbitMQ
 - [ ] 통합 테스트 | gRPC
