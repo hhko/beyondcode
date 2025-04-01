@@ -7,12 +7,12 @@ outline: deep
 ## 패키지
 - Microsoft.AspNetCore.Mvc.Testing
 
-## WebApi Host 프로젝트
+## WebApi 프로젝트
 ```cs
 public interface IAppMarker;
 ```
 
-## Integration 테스트 프로젝트
+## WebApi 테스트 프로젝트
 ### appsettings.json
 ```xml
 <ItemGroup>
@@ -23,11 +23,11 @@ public interface IAppMarker;
 ### WebApplicationFactory
 ```cs
 // CollectionAttribute
-// CollectionDefinitionAttribute    : WebAppFactoryCollectionDefinition
+// CollectionDefinitionAttribute    : WebAppFactoryCollectionDefinition   <- 테스트 클래스 어트리뷰트
 //                                      ↓
 // ICollectionFixture               : WebAppFactoryCollectionFixture
 //                                      ↓
-// Fixture                          : WebAppFactoryFixture
+// Fixture                          : WebAppFactoryFixture                <- 주입 클래스
 
 [CollectionDefinition(CollectionName.WebAppFactoryCollectionDefinition)]
 public sealed class WebAppFactoryCollectionFixture
@@ -37,29 +37,19 @@ public sealed class WebAppFactoryCollectionFixture
 
 public sealed class WebAppFactoryFixture
     : WebApplicationFactory<IAppMarker>
-    , IAsyncLifetime
 {
-    public async ValueTask InitializeAsync()
-    {
-        await Task.CompletedTask;
-    }
-
-    public async override ValueTask DisposeAsync()
-    {
-        await base.DisposeAsync();
-    }
-
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        // ConfigureLogging             // Logging 재정의의
-        // ConfigureAppConfiguration    // IConfiguration 재정의
-        // ConfigureTestServices        // IServiceCollection 재정의
+        // ConfigureLogging             // 로그
+        // ConfigureAppConfiguration    // IConfiguration
+        // ConfigureTestServices        // IServiceCollection
 
         builder.ConfigureAppConfiguration(context =>
         {
-            // appsettings.Test.json
-            //  - Content
-            //  - PreserveNewest
+            // appsettings.json과 appsettings.Development.json 제거
+            RemoveJsonConfigurationSources(context);
+
+            // appsettings.Integration.json 추가
             IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile(IntegrationTest.Appsettings_Integration_Json)
                 .AddEnvironmentVariables()
@@ -76,6 +66,19 @@ public sealed class WebAppFactoryFixture
         // Environment
         //builder.UseEnvironment("Development");
     }
+
+    private static void RemoveJsonConfigurationSources(IConfigurationBuilder context)
+    {
+        var filteredSources = context.Sources
+            .Where(source => source is not JsonConfigurationSource)
+            .ToList();
+
+        context.Sources.Clear();
+        foreach (var source in filteredSources)
+        {
+            context.Sources.Add(source);
+        }
+    }
 }
 ```
 
@@ -88,8 +91,8 @@ public abstract class ControllerTestsBase
 
     public ControllerTestsBase(WebAppFactoryFixture webAppFactory)
     {
-        // 1. CreateClient 메서드를 호출하면 Program 인스턴스를 생성합니다.
-        // 2. CreateClient N번 호출해도 Program 인스턴스는 1번만 생성합니다.
+        // 1. CreateClient 메서드를 호출하면 IAppMarker 인스턴스를 생성합니다.
+        // 2. CreateClient N번 호출해도 IAppMarker 인스턴스는 1번만 생성합니다.
         _sut = webAppFactory.CreateClient();
     }
 }
