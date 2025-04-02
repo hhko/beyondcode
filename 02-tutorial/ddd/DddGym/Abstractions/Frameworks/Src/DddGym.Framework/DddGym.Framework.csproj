@@ -3,6 +3,7 @@
   <ItemGroup>
     <PackageReference Include="ErrorOr" />
     <PackageReference Include="FluentValidation" />
+    <PackageReference Include="LanguageExt.Core" />
     <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.Extensions.Options" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />

@@ -1,12 +1,38 @@
 ﻿
+using LanguageExt;
 using LanguageExt.Common;
 
-Error r = Error.New("hello");
-Expected x = new Expected("xyz", 101);
+using static LanguageExt.Prelude;
 
-r.Append(x);
+//Validation<Error, Seq<int>> ma = Fail<Error, Seq<int>>(Error.New("alt"));
+//var ma = Fail<Seq<Error>, Seq<int>>([Error.New("alt")]);
+//Seq<Validation<Error, int>> mb = ma.Traverse(mx => mx).As();
 
-int x2 = 2;
+Validation<Error, int> success = Validation<Error, int>.Success(42);
+Validation<Error, int> failure = Validation<Error, int>.Fail(Error.New("Invalid number"));
+
+Validation<Seq<Error>, int> succes1 = Validation<Seq<Error>, int>.Success(1);
+
+Validation<Seq<Error>, int> fail1 = Validation<Seq<Error>, int>.Fail([Error.New("1"), Error.New("2")]);
+
+
+//Validation<Seq<string>, int> ValidatePositive(int x) =>
+//    x > 0 ? Success<Seq<Error>, int>(x) : Fail<Seq<Error>, int>(Seq1("Must be positive"));
+
+//Validation<Seq<string>, int> ValidateEven(int x) =>
+//    x % 2 == 0 ? Success<Seq<string>, int>(x) : Fail<Seq<string>, int>(Seq1("Must be even"));
+
+//var result = ValidatePositive(-2)
+//             .Apply(ValidateEven(-2).Map(_ => Func<int, int>(x => x)));
+
+int x = 3;
+//Error r = Error.New("hello");
+//Expected x = new Expected("xyz", 101);
+
+//r + x;
+////r.Append(x);
+
+//int x2 = 2;
 // public abstract record   Error : Monoid<Error>
 // public record            Expected(string Message, int Code, Option<Error> Inner = default) : Error
 // public record            Exceptional(string Message, int Code) : Error

@@ -1,4 +1,5 @@
 ﻿using DddGym.Framework.Utilites;
+using LanguageExt;
 using LanguageExt.Common;
 using System.Diagnostics;
 
@@ -6,9 +7,9 @@ namespace DddGym.Framework.BaseTypes.V2;
 
 public interface IValueObject
 {
-    const string SingleValueName = "Value";
-    const string ValidateMethodName = "Validate";
-    const string CreateMethodName = "Create";
+    //const string SingleValueName = "Value";
+    //const string ValidateMethodName = "Validate";
+    //const string CreateMethodName = "Create";
 }
 
 [DebuggerDisplay("{Value}")]
@@ -133,23 +134,75 @@ public abstract class ValueObject : IEquatable<ValueObject>, IValueObject
 
 public sealed record class FirstName : ValueObject<string>
 {
+    public const int MaxLength = 3;
+
+    public static readonly Error Empty = Error.New(
+        0,
+        $"{nameof(FirstName)} is empty.");
+
+    public static readonly Error TooLong = Error.New(
+        //$"{nameof(FirstName)}.{nameof(TooLong)}",
+        1,
+        $"{nameof(FirstName)} must be at most {MaxLength} characters long.");
+
+    public static readonly Error TooLong2 = Error.New(
+        //$"{nameof(FirstName)}.{nameof(TooLong)}",
+        2,
+        $"{nameof(FirstName)} must be at most {MaxLength} characters long.2");
+
     private FirstName(string firstName) : base(firstName)
     {
-        var y = ListUtilities.EmptyList<int>();
     }
 
-    //public static ValidationResult<FirstName> Create(string firstName)
-    //{
-    //    var errors = Validate(firstName);
-    //    return errors.CreateValidationResult(() => new FirstName(firstName));
-    //}
-
-    public static IList<Error> Validate(string firstName)
+    public static Validation<Error, FirstName> Create(string firstName)
     {
-        return EmptyList<Error>()
-            .If(firstName.IsNullOrEmptyOrWhiteSpace(), Empty)
+        ManyErrors errors = Validate(firstName);
+        return errors.CreateValidation(() => new FirstName(firstName));
+    }
+
+    public static ManyErrors Validate(string firstName)
+    {
+        // public new static Error Empty { get; } = new ManyErrors(Seq.empty<Error>());
+        return ((ManyErrors)ManyErrors.Empty)
+            .If(string.IsNullOrWhiteSpace(firstName), Empty)
             .If(firstName.Length > MaxLength, TooLong)
-            .If(firstName.ContainsIllegalCharacter(), ContainsIllegalCharacter)
-            .If(firstName.ContainsDigit(), ContainsDigit);
+            .If(firstName.Length > MaxLength, TooLong2);
+    }
+}
+
+public static class ManyErrorsUtilities
+{
+    public static ManyErrors If(
+        this ManyErrors error,
+        bool condition,
+        params Error[] errorsToAdd)
+    {
+        if (condition)
+        {
+            foreach (Error errorToAdd in errorsToAdd)
+            {
+                return new ManyErrors([error, errorToAdd]);
+            }
+        }
+
+        return error;
+    }
+
+    public static Validation<Error, TValueObject> CreateValidation<TValueObject>(
+        this ManyErrors errors,
+        Func<TValueObject> createValueObject)
+        where TValueObject : IValueObject
+    {
+        if (errors is null)
+        {
+            throw new ArgumentNullException($"{nameof(errors)} must not be null");
+        }
+
+        if (errors.Count != 0)
+        {
+            return errors;
+        }
+
+        return createValueObject.Invoke();
     }
 }
