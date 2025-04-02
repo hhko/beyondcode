@@ -1,5 +1,9 @@
 ﻿namespace DddGym.Framework.Utilites;
 
-internal class ListUtilities
+public static class ListUtilities
 {
+    public static List<TValue> EmptyList<TValue>()
+    {
+        return [];
+    }
 }

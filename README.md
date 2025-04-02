@@ -12,7 +12,7 @@ A beautiful journey to writing **wise code that works**
 
 ## Application Architecture
 
-### Architecture Tech. Map
+### Architecture Technical Map
 ![](./.images/ArchitectureTechMap.png)
 
 ### Internal Architecture (Hexagonal Architecture)

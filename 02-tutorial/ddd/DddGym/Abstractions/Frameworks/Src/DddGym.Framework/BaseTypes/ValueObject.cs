@@ -1,4 +1,6 @@
-﻿namespace DddGym.Framework.BaseTypes;
+﻿using System.Diagnostics;
+
+namespace DddGym.Framework.BaseTypes;
 
 public abstract class ValueObject
 {
@@ -23,3 +25,6 @@ public abstract class ValueObject
             .Aggregate((x, y) => x ^ y);
     }
 }
+
+
+

@@ -36,7 +36,7 @@ public sealed class WebAppFactoryFixture
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        // ConfigureLogging             // 로그
+        // ConfigureLogging             // ILoggingBuilder
         // ConfigureAppConfiguration    // IConfiguration
         // ConfigureTestServices        // IServiceCollection
 
