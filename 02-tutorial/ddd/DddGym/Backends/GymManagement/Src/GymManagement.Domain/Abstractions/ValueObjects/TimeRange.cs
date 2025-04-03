@@ -9,7 +9,13 @@ public sealed class TimeRange : ValueObject
     public TimeOnly Start { get; init; }
     public TimeOnly End { get; init; }
 
-    public TimeRange(TimeOnly start, TimeOnly end)
+    //public TimeRange(TimeOnly start, TimeOnly end)
+    //{
+    //    Start = start.Throw().IfGreaterThanOrEqualTo(end);
+    //    End = end;
+    //}
+
+    private TimeRange(TimeOnly start, TimeOnly end)
     {
         Start = start.Throw().IfGreaterThanOrEqualTo(end);
         End = end;
@@ -54,7 +60,7 @@ public sealed class TimeRange : ValueObject
         return true;
     }
 
-    public override IEnumerable<object?> GetEqualityComponents()
+    public override IEnumerable<object> GetAtomicValues()
     {
         yield return Start;
         yield return End;
