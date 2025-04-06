@@ -8,6 +8,10 @@ public class ValueObjectTests
     [Fact]
     public void FistNameTest()
     {
+        // Functional approach to try-catch-finally
+        // https://github.com/louthy/language-ext/issues/1108
+
+        // Higher Kinds in C# with language-ext [Part 5 - validation]
         // https://paullouth.com/higher-kinds-in-c-with-language-ext-part-5-validation/
         Validation<Error, int> x1 = 1;
         Validation<Error, int> x2 = Error.New("xxx");
