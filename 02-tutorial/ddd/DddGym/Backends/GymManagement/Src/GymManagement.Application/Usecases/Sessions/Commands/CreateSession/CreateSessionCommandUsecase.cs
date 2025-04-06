@@ -6,6 +6,8 @@ using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Trainers;
 using LanguageExt;
 using LanguageExt.Common;
+using System.Collections.Frozen;
+using static LanguageExt.Fin;
 
 namespace GymManagement.Application.Usecases.Sessions.Commands.CreateSession;
 
@@ -50,7 +52,6 @@ internal sealed class CreateSessionCommandUsecase
         Fin<TimeRange> createTimeRangeResult = TimeRange.Create(
             TimeOnly.FromDateTime(command.StartDateTime),
             TimeOnly.FromDateTime(command.EndDateTime));
-
         //if (createTimeRangeResult.IsError)
         //        if (createTimeRangeResult.IsError && createTimeRangeResult.FirstError.Type == ErrorType.Validation)
         //        {
@@ -67,7 +68,9 @@ internal sealed class CreateSessionCommandUsecase
         //}
         if (createTimeRangeResult.IsFail)
         {
-            Error x = (Error)createTimeRangeResult;
+            //createTimeRangeResult.ToFin<CreateSessionResponse>();
+            //return createTimeRangeResult;
+            //Error x = (Error)createTimeRangeResult;
             //return 
             // Fin<A> 실패일 때 -?-> Fin<B>
         }
@@ -77,6 +80,8 @@ internal sealed class CreateSessionCommandUsecase
             //return Error
             //    .Conflict(description: "Trainer's calendar is not free for the entire session duration")
             //    .ToErrorOr<CreateSessionResponse>();
+
+            return Error.New("Trainer's calendar is not free for the entire session duration");
         }
 
         Session session = new(

@@ -3,6 +3,7 @@
 using LanguageExt;
 using LanguageExt.Common;
 using Throw;
+using static LanguageExt.Fin;
 
 namespace GymManagement.Domain.Abstractions.ValueObjects;
 
@@ -23,18 +24,18 @@ public sealed class TimeRange : ValueObject
         End = end;
     }
 
-    public static Fin<TimeRange> Create(TimeOnly start, TimeOnly end)
+    public static Succ<TimeRange> Create(TimeOnly start, TimeOnly end)
     {
         if (start >= end)
         {
             //return Error.Validation(description: "End time must be greater than the start time.");
             //return Error.New(message: "End time must be greater than the start time.");
-            return Errors.ValidationFailed;
+            return Fin.Fail<TimeRange>(Errors.ValidationFailed);
         }
 
-        return new TimeRange(
+        return Fin.Succ<TimeRange>(new TimeRange(
             start: start,
-            end: end);
+            end: end));
     }
 
     //public static ErrorOr<TimeRange> FromDateTimes(DateTime start, DateTime end)
