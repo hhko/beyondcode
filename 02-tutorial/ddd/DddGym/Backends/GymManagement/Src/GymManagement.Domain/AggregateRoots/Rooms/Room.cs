@@ -1,8 +1,9 @@
 ﻿using DddGym.Framework.BaseTypes;
-using ErrorOr;
-using GymManagement.Domain.Abstractions.Entities;
+//using ErrorOr;
 using GymManagement.Domain.AggregateRoots.Rooms.Events;
 using GymManagement.Domain.AggregateRoots.Sessions;
+using LanguageExt;
+using LanguageExt.Common;
 using static GymManagement.Domain.AggregateRoots.Rooms.Errors.DomainErrors;
 
 namespace GymManagement.Domain.AggregateRoots.Rooms;
@@ -20,7 +21,7 @@ namespace GymManagement.Domain.AggregateRoots.Rooms;
 public sealed class Room : AggregateRoot
 {
     private readonly int _maxDailySessions;
-    private readonly Schedule _schedule = Schedule.Empty();
+    private readonly Abstractions.Entities.Schedule _schedule = Abstractions.Entities.Schedule.Empty();
 
     public Guid GymId { get; }
 
@@ -49,13 +50,13 @@ public sealed class Room : AggregateRoot
         string name,
         int maxDailySessions,
         Guid gymId,
-        Schedule? schedule = null,
+        Abstractions.Entities.Schedule? schedule = null,
         Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         Name = name;
         _maxDailySessions = maxDailySessions;
         GymId = gymId;
-        _schedule = schedule ?? Schedule.Empty();
+        _schedule = schedule ?? Abstractions.Entities.Schedule.Empty();
     }
 
     // TODO: 존재 이유 ???
@@ -95,12 +96,14 @@ public sealed class Room : AggregateRoot
     //    return Result.Success;
     //}
 
-    public ErrorOr<Success> ScheduleSession(Session session)
+    //public ErrorOr<Success> ScheduleSession(Session session)
+    public Fin<Unit> ScheduleSession(Session session)
     {
         // 규칙 생략: Id 중복
         if (SessionIds.Any(id => id == session.Id))
         {
-            return Error.Conflict(description: "Session already exists in room");
+            //return Error.Conflict(description: "Session already exists in room");
+            return Error.New("Session already exists in room");
         }
 
 
@@ -127,18 +130,20 @@ public sealed class Room : AggregateRoot
         //  방은 두 개 이상의 겹치는 세션을 가질 수 없다.
         //  A room cannot have two or more overlapping sessions
         var bookTimeSlotResult = _schedule.BookTimeSlot(session.Date, session.Time);
-        if (bookTimeSlotResult.IsError)
+        if (bookTimeSlotResult.IsFail)
         {
-            return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
-                ? ScheduleSessionErrors.CannotHaveTwoOrMoreOverlappingSessions
-                : bookTimeSlotResult.Errors;
+            //return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
+            //    ? ScheduleSessionErrors.CannotHaveTwoOrMoreOverlappingSessions
+            //    : bookTimeSlotResult.Errors;
+            return (Error)bookTimeSlotResult;
         }
 
         dailySessions.Add(session.Id);
 
         _domainEvents.Add(new SessionScheduledEvent(Id, session));
 
-        return Result.Success;
+        //return Result.Success;
+        return Unit.Default;
     }
 
     public bool HasSession(Guid sessionId)

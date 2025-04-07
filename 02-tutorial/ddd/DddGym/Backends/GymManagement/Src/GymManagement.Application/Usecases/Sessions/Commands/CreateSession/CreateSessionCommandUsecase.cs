@@ -34,6 +34,7 @@ internal sealed class CreateSessionCommandUsecase
             //return Error
             //    .NotFound(description: "Room not found")
             //    .ToErrorOr<CreateSessionResponse>();
+            return Error.New("Room not found");
         }
 
         Trainer? trainer = await _trainersRepository.GetByIdAsync(command.TrainerId);
@@ -68,6 +69,7 @@ internal sealed class CreateSessionCommandUsecase
         //}
         if (createTimeRangeResult.IsFail)
         {
+            return (Error)createTimeRangeResult;
             //createTimeRangeResult.ToFin<CreateSessionResponse>();
             //return createTimeRangeResult;
             //Error x = (Error)createTimeRangeResult;
@@ -75,7 +77,8 @@ internal sealed class CreateSessionCommandUsecase
             // Fin<A> 실패일 때 -?-> Fin<B>
         }
 
-        if (!trainer.IsTimeSlotFree(DateOnly.FromDateTime(command.StartDateTime), createTimeRangeResult.Value))
+
+        if (!trainer.IsTimeSlotFree(DateOnly.FromDateTime(command.StartDateTime), (TimeRange)createTimeRangeResult))
         {
             //return Error
             //    .Conflict(description: "Trainer's calendar is not free for the entire session duration")
@@ -91,15 +94,16 @@ internal sealed class CreateSessionCommandUsecase
             roomId: command.RoomId,
             trainerId: command.TrainerId,
             date: DateOnly.FromDateTime(command.StartDateTime),
-            time: createTimeRangeResult.Value,          // TODO: 성공일 때 값 접근
+            time: (TimeRange)createTimeRangeResult,          // TODO: 성공일 때 값 접근
             categories: command.Categories);
 
         var scheduleSessionResult = room.ScheduleSession(session);
-        if (scheduleSessionResult.IsError)
+        if (scheduleSessionResult.IsFail)
         {
             //return scheduleSessionResult
             //    .Errors
             //    .ToErrorOr<CreateSessionResponse>();
+            return (Error)scheduleSessionResult;
         }
 
         await _roomsRepository.UpdateAsync(room);

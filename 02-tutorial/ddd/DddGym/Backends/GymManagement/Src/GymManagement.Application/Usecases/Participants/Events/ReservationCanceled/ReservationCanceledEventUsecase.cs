@@ -1,7 +1,8 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
-using ErrorOr;
 using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Sessions.Events;
+using LanguageExt;
+using LanguageExt.Common;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainEventErrors;
 
 namespace GymManagement.Application.Usecases.Participants.Events.ReservationCanceled;
@@ -24,13 +25,17 @@ internal sealed class ReservationCanceledEventUsecase
         Participant participant = await _participantsRepository.GetByIdAsync(domainEvent.Reservation.ParticipantId)
             ?? throw new DomainEventException(ReservationCanceledEventErrors.ParticipantNotFound);
 
-        ErrorOr<Success> removeBookingResult = participant.RemoveFromSchedule(domainEvent.Session);
+        //ErrorOr<Success> removeBookingResult = participant.RemoveFromSchedule(domainEvent.Session);
+        Fin<Unit> removeBookingResult = participant.RemoveFromSchedule(domainEvent.Session);
 
-        if (removeBookingResult.IsError)
+        if (removeBookingResult.IsFail)
         {
+            //throw new DomainEventException(
+            //    ReservationCanceledEventErrors.ParticipantScheduleUpdateFailed,
+            //    removeBookingResult.Errors);
             throw new DomainEventException(
                 ReservationCanceledEventErrors.ParticipantScheduleUpdateFailed,
-                removeBookingResult.Errors);
+                (Error)removeBookingResult);
         }
 
         await _participantsRepository.UpdateAsync(participant);

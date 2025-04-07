@@ -1,8 +1,10 @@
 ﻿using DddGym.Framework.BaseTypes;
-using ErrorOr;
+//using ErrorOr;
 using GymManagement.Domain.Abstractions.Entities;
 using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Sessions;
+using LanguageExt;
+using LanguageExt.Common;
 using static GymManagement.Domain.AggregateRoots.Trainers.Errors.DomainErrors;
 
 namespace GymManagement.Domain.AggregateRoots.Trainers;
@@ -20,7 +22,7 @@ namespace GymManagement.Domain.AggregateRoots.Trainers;
 public sealed class Trainer : AggregateRoot
 {
     private readonly List<Guid> _sessionIds = [];
-    private readonly Schedule _schedule = Schedule.Empty();
+    private readonly Abstractions.Entities.Schedule _schedule = Abstractions.Entities.Schedule.Empty();
 
     // ---------------------
 
@@ -31,11 +33,11 @@ public sealed class Trainer : AggregateRoot
 
     public Trainer(
         Guid userId,
-        Schedule? schedule = null,
+        Abstractions.Entities.Schedule? schedule = null,
         Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         UserId = userId;
-        _schedule = schedule ?? Schedule.Empty();
+        _schedule = schedule ?? Abstractions.Entities.Schedule.Empty();
     }
 
     // TODO: 존재 이유 ???
@@ -43,49 +45,56 @@ public sealed class Trainer : AggregateRoot
     {
     }
 
-    public ErrorOr<Success> AddSessionToSchedule(Session session)
+    //public ErrorOr<Success> AddSessionToSchedule(Session session)
+    public Fin<Unit> AddSessionToSchedule(Session session)
     {
         // 규칙 생략
         if (_sessionIds.Contains(session.Id))
         {
-            return Error.Conflict(description: "Session already exists in trainer's schedule");
+            //return Error.Conflict(description: "Session already exists in trainer's schedule");
+            return Error.New("Session already exists in trainer's schedule");
         }
 
         // 규칙
         //  트레이너는 두 개 이상의 겹치는 세션을 가르칠 수 없다.
         //  A trainer cannot teach two or more overlapping sessions
         var bookTimeSlotResult = _schedule.BookTimeSlot(session.Date, session.Time);
-        if (bookTimeSlotResult.IsError)
+        if (bookTimeSlotResult.IsFail)
         {
-            return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
-                ? AddSessionToScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions
-                : bookTimeSlotResult.Errors;
+            //return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
+            //    ? AddSessionToScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions
+            //    : bookTimeSlotResult.Errors;
+            return (Error)bookTimeSlotResult;
         }
 
         _sessionIds.Add(session.Id);
 
-        return Result.Success;
+        //return Result.Success;
+        return Unit.Default;
     }
 
     // 추가
-    public ErrorOr<Success> RemoveFromSchedule(Session session)
+    //public ErrorOr<Success> RemoveFromSchedule(Session session)
+    public Fin<Unit> RemoveFromSchedule(Session session)
     {
         if (!_sessionIds.Contains(session.Id))
         {
             //return Error.Conflict("Trainer already assigned to teach session");
-            return Error.NotFound(description: "session not found");
+            //return Error.NotFound(description: "session not found");
+            return Error.New("session not found");
         }
 
         var removeBookingResult = _schedule.RemoveBooking(session.Date, session.Time);
-        if (removeBookingResult.IsError)
+        if (removeBookingResult.IsFail)
         {
             //return removeBookingResult.Errors;
-            return removeBookingResult;
+            return (Error)removeBookingResult;
         }
 
         _sessionIds.Remove(session.Id);
 
-        return Result.Success;
+        //return Result.Success;
+        return Unit.Default;
     }
 
     // 추가

@@ -1,4 +1,5 @@
-﻿using ErrorOr;
+﻿
+using LanguageExt.Common;
 
 namespace DddGym.Framework.BaseTypes.Events;
 
@@ -11,14 +12,26 @@ namespace DddGym.Framework.BaseTypes.Events;
 public class DomainEventException : Exception
 {
     public Error DomainEventError { get; }
-    public List<Error> UnderlyingErrors { get; }
+    //public List<Error> UnderlyingErrors { get; }
+
+
+    //public DomainEventException(
+    //    Error domainEventError,
+    //    List<Error>? underlyingErrors = null)
+    //    : base(message: domainEventError.Description)
+    //{
+    //    DomainEventError = domainEventError;
+    //    UnderlyingErrors = underlyingErrors ?? new();
+    //}
+
+    public Error UnderlyingErrors { get; }
 
     public DomainEventException(
         Error domainEventError,
-        List<Error>? underlyingErrors = null)
-        : base(message: domainEventError.Description)
+        Error? underlyingErrors = null)
+        : base(message: domainEventError.Message)
     {
         DomainEventError = domainEventError;
-        UnderlyingErrors = underlyingErrors ?? new();
+        UnderlyingErrors = underlyingErrors ?? Error.Empty;
     }
 }

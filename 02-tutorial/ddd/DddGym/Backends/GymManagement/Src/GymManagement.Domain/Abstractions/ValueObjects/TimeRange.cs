@@ -24,18 +24,18 @@ public sealed class TimeRange : ValueObject
         End = end;
     }
 
-    public static Succ<TimeRange> Create(TimeOnly start, TimeOnly end)
+    public static Fin<TimeRange> Create(TimeOnly start, TimeOnly end)
     {
         if (start >= end)
         {
             //return Error.Validation(description: "End time must be greater than the start time.");
-            //return Error.New(message: "End time must be greater than the start time.");
-            return Fin.Fail<TimeRange>(Errors.ValidationFailed);
+            return Error.New(message: "End time must be greater than the start time.");
+            //return Errors.ValidationFailed;
         }
 
-        return Fin.Succ<TimeRange>(new TimeRange(
+        return new TimeRange(
             start: start,
-            end: end));
+            end: end);
     }
 
     //public static ErrorOr<TimeRange> FromDateTimes(DateTime start, DateTime end)

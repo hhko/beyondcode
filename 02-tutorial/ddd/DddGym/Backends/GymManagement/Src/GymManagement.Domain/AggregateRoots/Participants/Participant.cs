@@ -1,8 +1,10 @@
 ﻿using DddGym.Framework.BaseTypes;
-using ErrorOr;
+//using ErrorOr;
 using GymManagement.Domain.Abstractions.Entities;
 using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Sessions;
+using LanguageExt;
+using LanguageExt.Common;
 using static GymManagement.Domain.AggregateRoots.Participants.Errors.DomainErrors;
 
 namespace GymManagement.Domain.AggregateRoots.Participants;
@@ -27,7 +29,7 @@ namespace GymManagement.Domain.AggregateRoots.Participants;
 
 public sealed class Participant : AggregateRoot
 {
-    private readonly Schedule _schedule = Schedule.Empty();
+    private readonly Abstractions.Entities.Schedule _schedule = Abstractions.Entities.Schedule.Empty();
     private readonly List<Guid> _sessionIds = [];
 
     // ---------------------
@@ -42,11 +44,11 @@ public sealed class Participant : AggregateRoot
 
     public Participant(
         Guid userId,
-        Schedule? schedule = null,
+        Abstractions.Entities.Schedule? schedule = null,
         Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         UserId = userId;
-        _schedule = schedule ?? Schedule.Empty();
+        _schedule = schedule ?? Abstractions.Entities.Schedule.Empty();
     }
 
     // TODO: 존재 이유 ???
@@ -54,47 +56,55 @@ public sealed class Participant : AggregateRoot
     {
     }
 
-    public ErrorOr<Success> AddToSchedule(Session session)
+    //public ErrorOr<Success> AddToSchedule(Session session)
+    public Fin<Unit> AddToSchedule(Session session)
     {
         // 규칙 생략: Id 중복
         if (_sessionIds.Contains(session.Id))
         {
-            return Error.Conflict(description: "Session already exists in participant's schedule");
+            //return Error.Conflict(description: "Session already exists in participant's schedule");
+            return Error.New("Session already exists in participant's schedule");
         }
 
         // 규칙
         //  참가자는 겹치는 세션을 예약할 수 없다.
         //  A participant cannot reserve overlapping sessions
         var bookTimeSlotResult = _schedule.BookTimeSlot(session.Date, session.Time);
-        if (bookTimeSlotResult.IsError)
+        if (bookTimeSlotResult.IsFail)
         {
-            return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
-                ? AddToScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions
-                : bookTimeSlotResult.Errors;
+            //return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
+            //    ? AddToScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions
+            //    : bookTimeSlotResult.Errors;
+            return (Error)bookTimeSlotResult;
         }
 
         _sessionIds.Add(session.Id);
 
-        return Result.Success;
+        //return Result.Success;
+        return Unit.Default;
     }
 
     // 추가
-    public ErrorOr<Success> RemoveFromSchedule(Session session)
+    //public ErrorOr<Success> RemoveFromSchedule(Session session)
+    public Fin<Unit> RemoveFromSchedule(Session session)
     {
         if (!_sessionIds.Contains(session.Id))
         {
-            return Error.NotFound(description: "Session not found");
+            //return Error.NotFound(description: "Session not found");
+            return Error.New("Session not found");
         }
 
         var removeBookingResult = _schedule.RemoveBooking(session.Date, session.Time);
-        if (removeBookingResult.IsError)
+        if (removeBookingResult.IsFail)
         {
-            return removeBookingResult.Errors;
+            //return removeBookingResult.Errors;
+            return (Error)removeBookingResult;
         }
 
         _sessionIds.Remove(session.Id);
 
-        return Result.Success;
+        //return Result.Success;
+        return Unit.Default;
     }
 
     // 추가

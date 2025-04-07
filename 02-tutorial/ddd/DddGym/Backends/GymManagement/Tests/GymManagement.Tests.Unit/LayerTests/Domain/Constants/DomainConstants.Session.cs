@@ -14,9 +14,9 @@ public static partial class DomainConstants
         //    TimeOnly.MinValue.AddHours(8),
         //    TimeOnly.MinValue.AddHours(9));
 
-        public static readonly TimeRange Time = TimeRange.Create(
+        public static readonly TimeRange Time = (TimeRange)TimeRange.Create(
             TimeOnly.MinValue.AddHours(8),
-            TimeOnly.MinValue.AddHours(9)).Value;
+            TimeOnly.MinValue.AddHours(9));
 
         public static readonly List<SessionCategory> Categories = [];
 

@@ -16,7 +16,7 @@ internal static class TimeRangeFactory
             .IfLessThan(1)
             .IfGreaterThan(24);
 
-        return new TimeRange(
+        return (TimeRange)TimeRange.Create(
             start: TimeOnly.MinValue.AddHours(startHour),
             end: TimeOnly.MinValue.AddHours(endHour));
     }
