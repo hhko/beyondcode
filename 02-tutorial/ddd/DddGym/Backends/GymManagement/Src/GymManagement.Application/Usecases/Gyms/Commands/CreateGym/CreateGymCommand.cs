@@ -5,4 +5,4 @@ namespace GymManagement.Application.Usecases.Gyms.Commands.CreateGym;
 public sealed record CreateGymCommand(
     string Name,
     Guid SubscriptionId)
-    : ICommand<CreateGymResponse>;
+    : ICommand2<CreateGymResponse>;

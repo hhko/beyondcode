@@ -1,5 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
-using ErrorOr;
+using LanguageExt.Common;
 
 namespace GymManagement.Domain.AggregateRoots.Gyms.Errors;
 
@@ -7,8 +7,12 @@ public static class DomainEventErrors
 {
     public static class RoomRemovedErrors
     {
+        //public static readonly Error RoomNotFound = DomainEventError.From(
+        //    code: $"{nameof(DomainEventErrors)}.{nameof(Gym)}.{nameof(RoomNotFound)}",
+        //    description: "Room not found");
+
         public static readonly Error RoomNotFound = DomainEventError.From(
-            code: $"{nameof(DomainEventErrors)}.{nameof(Gym)}.{nameof(RoomNotFound)}",
-            description: "Room not found");
+            //code: $"{nameof(DomainEventErrors)}.{nameof(Gym)}.{nameof(RoomNotFound)}",
+            "Room not found");
     }
 }

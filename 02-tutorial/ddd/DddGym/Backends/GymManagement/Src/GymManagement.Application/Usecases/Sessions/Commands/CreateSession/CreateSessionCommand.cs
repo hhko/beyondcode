@@ -11,7 +11,7 @@ public sealed record CreateSessionCommand(
     DateTime StartDateTime,
     DateTime EndDateTime,
     Guid TrainerId,
-    List<SessionCategory> Categories) : ICommand<CreateSessionResponse>;
+    List<SessionCategory> Categories) : ICommand2<CreateSessionResponse>;
 
 public sealed record CreateSessionCommand2(
     Guid RoomId,

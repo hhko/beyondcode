@@ -1,5 +1,5 @@
-﻿namespace GymManagement.Application.Usecases.Sessions.Commands.CreateSession;
+﻿//namespace GymManagement.Application.Usecases.Sessions.Commands.CreateSession;
 
-internal sealed class CreateSessionCommandTelemetry
-{
-}
+//internal sealed class CreateSessionCommandTelemetry
+//{
+//}

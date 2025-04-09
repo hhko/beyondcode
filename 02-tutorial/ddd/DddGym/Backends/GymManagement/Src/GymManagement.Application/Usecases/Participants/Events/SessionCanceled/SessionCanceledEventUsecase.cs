@@ -5,31 +5,32 @@ using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainEventErro
 
 namespace GymManagement.Application.Usecases.Participants.Events.SessionCanceled;
 
-internal sealed class SessionCanceledEventUsecase
-    : IDomainEventUsecase<SessionCanceledEvent>
-{
-    private readonly IParticipantsRepository _participantsRepository;
+// TODO: LanguageExt
+//internal sealed class SessionCanceledEventUsecase
+//    : IDomainEventUsecase<SessionCanceledEvent>
+//{
+//    private readonly IParticipantsRepository _participantsRepository;
 
-    public SessionCanceledEventUsecase(IParticipantsRepository participantsRepository)
-    {
-        _participantsRepository = participantsRepository;
-    }
+//    public SessionCanceledEventUsecase(IParticipantsRepository participantsRepository)
+//    {
+//        _participantsRepository = participantsRepository;
+//    }
 
-    public async Task Handle(SessionCanceledEvent domainEvent, CancellationToken cancellationToken)
-    {
-        List<Participant> participants = await _participantsRepository.ListByIds(domainEvent.Session.GetParticipantIds());
+//    public async Task Handle(SessionCanceledEvent domainEvent, CancellationToken cancellationToken)
+//    {
+//        List<Participant> participants = await _participantsRepository.ListByIds(domainEvent.Session.GetParticipantIds());
 
-        participants.ForEach(participant =>
-        {
-            var removeFromScheduleResult = participant.RemoveFromSchedule(domainEvent.Session);
-            if (removeFromScheduleResult.IsError)
-            {
-                throw new DomainEventException(
-                    SessionCanceledEventErrors.ParticipantScheduleUpdateFailed,
-                    removeFromScheduleResult.Errors);
-            }
-        });
+//        participants.ForEach(participant =>
+//        {
+//            var removeFromScheduleResult = participant.RemoveFromSchedule(domainEvent.Session);
+//            if (removeFromScheduleResult.IsError)
+//            {
+//                throw new DomainEventException(
+//                    SessionCanceledEventErrors.ParticipantScheduleUpdateFailed,
+//                    removeFromScheduleResult.Errors);
+//            }
+//        });
 
-        await _participantsRepository.UpdateRangeAsync(participants);
-    }
-}
+//        await _participantsRepository.UpdateRangeAsync(participants);
+//    }
+//}

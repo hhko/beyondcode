@@ -1,31 +1,31 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
-using ErrorOr;
 using GymManagement.Domain.AggregateRoots.Users;
 
 namespace GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
 
-internal sealed class GetProfileQueryUsecase
-    : IQueryUsecase<GetProfileQuery, GetProfileResponse>
-{
-    private readonly IUsersRepository _usersRepository;
+//// TODO: LanguageExt
+//internal sealed class GetProfileQueryUsecase
+//    : IQueryUsecase<GetProfileQuery, GetProfileResponse>
+//{
+//    private readonly IUsersRepository _usersRepository;
 
-    public GetProfileQueryUsecase(IUsersRepository usersRepository)
-    {
-        _usersRepository = usersRepository;
-    }
+//    public GetProfileQueryUsecase(IUsersRepository usersRepository)
+//    {
+//        _usersRepository = usersRepository;
+//    }
 
-    public async Task<IErrorOr<GetProfileResponse>> Handle(GetProfileQuery query, CancellationToken cancellationToken)
-    {
-        User? user = await _usersRepository.GetByIdAsync(query.UserId);
-        if (user is null)
-        {
-            return Error
-                .NotFound(description: "User not found")
-                .ToErrorOr<GetProfileResponse>();
-        }
+//    public async Task<IErrorOr<GetProfileResponse>> Handle(GetProfileQuery query, CancellationToken cancellationToken)
+//    {
+//        User? user = await _usersRepository.GetByIdAsync(query.UserId);
+//        if (user is null)
+//        {
+//            return Error
+//                .NotFound(description: "User not found")
+//                .ToErrorOr<GetProfileResponse>();
+//        }
 
-        return user
-            .ToResponse()
-            .ToErrorOr();
-    }
-}
+//        return user
+//            .ToResponse()
+//            .ToErrorOr();
+//    }
+//}

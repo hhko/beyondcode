@@ -1,5 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes;
-//using ErrorOr;
+//
 using GymManagement.Domain.Abstractions.Entities;
 using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Sessions;
@@ -45,13 +45,13 @@ public sealed class Trainer : AggregateRoot
     {
     }
 
-    //public ErrorOr<Success> AddSessionToSchedule(Session session)
+    //public Fin<Unit> AddSessionToSchedule(Session session)
     public Fin<Unit> AddSessionToSchedule(Session session)
     {
         // 규칙 생략
         if (_sessionIds.Contains(session.Id))
         {
-            //return Error.Conflict(description: "Session already exists in trainer's schedule");
+            //return Error.New("Session already exists in trainer's schedule");
             return Error.New("Session already exists in trainer's schedule");
         }
 
@@ -69,18 +69,18 @@ public sealed class Trainer : AggregateRoot
 
         _sessionIds.Add(session.Id);
 
-        //return Result.Success;
+        //return Unit.Default;
         return Unit.Default;
     }
 
     // 추가
-    //public ErrorOr<Success> RemoveFromSchedule(Session session)
+    //public Fin<Unit> RemoveFromSchedule(Session session)
     public Fin<Unit> RemoveFromSchedule(Session session)
     {
         if (!_sessionIds.Contains(session.Id))
         {
             //return Error.Conflict("Trainer already assigned to teach session");
-            //return Error.NotFound(description: "session not found");
+            //return Error.New( "session not found");
             return Error.New("session not found");
         }
 
@@ -93,7 +93,7 @@ public sealed class Trainer : AggregateRoot
 
         _sessionIds.Remove(session.Id);
 
-        //return Result.Success;
+        //return Unit.Default;
         return Unit.Default;
     }
 

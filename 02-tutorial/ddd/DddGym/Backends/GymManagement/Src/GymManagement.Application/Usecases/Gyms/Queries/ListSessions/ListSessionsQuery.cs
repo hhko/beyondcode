@@ -8,4 +8,4 @@ public sealed record ListSessionsQuery(
     DateTime? StartDateTime = null,
     DateTime? EndDateTime = null,
     List<SessionCategory>? Categories = null)
-    : IQuery<ListSessionsResponse>;
+    : IQuery2<ListSessionsResponse>;

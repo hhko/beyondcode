@@ -1,9 +1,11 @@
 ﻿using DddGym.Framework.BaseTypes;
-using ErrorOr;
+
 using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
 using GymManagement.Domain.AggregateRoots.Sessions.Events;
+using LanguageExt;
+using LanguageExt.Common;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainErrors;
 
 namespace GymManagement.Domain.AggregateRoots.Sessions;
@@ -96,12 +98,12 @@ public sealed class Session : AggregateRoot
     {
     }
 
-    //public ErrorOr<Success> ReserveSpot(Participant participant)
+    //public Fin<Unit> ReserveSpot(Participant participant)
     //{
     //    if (_participantIds.Contains(participant.Id))
     //    {
-    //        //return Error.Conflict(description: "Participant already exists in session");
-    //        return Error.Conflict(description: "Participants cannot reserve twice to the same session");
+    //        //return Error.New("Participant already exists in session");
+    //        return Error.New("Participants cannot reserve twice to the same session");
     //    }
 
     //    // 규칙
@@ -114,12 +116,12 @@ public sealed class Session : AggregateRoot
 
     //    _participantIds.Add(participant.Id);
 
-    //    return Result.Success;
+    //    return Unit.Default;
     //}
 
     // 변경
     // TODO? Guid participantId???
-    public ErrorOr<Success> ReserveSpot(Participant participant)
+    public Fin<Unit> ReserveSpot(Participant participant)
     {
         // 규칙
         //  세션은 최대 참가자 수를 초과할 수 없다.
@@ -131,8 +133,8 @@ public sealed class Session : AggregateRoot
 
         if (_reservations.Any(reservation => reservation.ParticipantId == participant.Id))
         {
-            //return Error.Conflict(description: "Participant already exists in session");
-            return Error.Conflict(description: "Participants cannot reserve twice to the same session");
+            //return Error.New("Participant already exists in session");
+            return Error.New("Participants cannot reserve twice to the same session");
         }
 
         var reservation = new Reservation(participant.Id);
@@ -140,7 +142,7 @@ public sealed class Session : AggregateRoot
 
         _domainEvents.Add(new SessionSpotReservedEvent(this, reservation));
 
-        return Result.Success;
+        return Unit.Default;
     }
 
     // 추가
@@ -169,7 +171,7 @@ public sealed class Session : AggregateRoot
         _domainEvents.Add(new SessionCanceledEvent(this));
     }
 
-    //public ErrorOr<Success> CancelReservation(Participant participant, IDateTimeProvider dateTimeProvider)
+    //public Fin<Unit> CancelReservation(Participant participant, IDateTimeProvider dateTimeProvider)
     //{
     //    // 규칙
     //    //  세션 시작 24시간 이내에는 무료로 예약을 취소할 수 없다.
@@ -181,14 +183,14 @@ public sealed class Session : AggregateRoot
 
     //    if (!_participantIds.Remove(participant.Id))
     //    {
-    //        return Error.NotFound(description: "Participant not found");
+    //        return Error.New( "Participant not found");
     //    }
 
-    //    return Result.Success;
+    //    return Unit.Default;
     //}
 
     // 변경
-    public ErrorOr<Success> CancelReservation(Guid participantId, IDateTimeProvider dateTimeProvider)
+    public Fin<Unit> CancelReservation(Guid participantId, IDateTimeProvider dateTimeProvider)
     {
         // 규칙
         //  세션 시작 24시간 이내에는 무료로 예약을 취소할 수 없다.
@@ -217,7 +219,7 @@ public sealed class Session : AggregateRoot
 
         _domainEvents.Add(new ReservationCanceledEvent(this, reservation));
 
-        return Result.Success;
+        return Unit.Default;
     }
 
     private bool IsTooCloseToSession(DateTime utcNow)

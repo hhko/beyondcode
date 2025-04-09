@@ -1,4 +1,5 @@
-﻿using ErrorOr;
+﻿
+using LanguageExt.Common;
 
 namespace DddGym.Framework.BaseTypes.Events;
 
@@ -12,11 +13,17 @@ public static class DomainEventError
 {
     public const int DomainEventType = 200;
 
-    public static Error From(string code, string description)
+    //public static Error From(string code, string description)
+    //{
+    //    return Error.Custom(
+    //        type: DomainEventType,
+    //        code: code,
+    //        description: description);
+    //}
+
+    public static Error From(string message)
     {
-        return Error.Custom(
-            type: DomainEventType,
-            code: code,
-            description: description);
+        return Error.New(
+            message);
     }
 }

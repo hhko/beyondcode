@@ -1,8 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="ErrorOr" />
+    <!--<PackageReference Include="ErrorOr" />-->
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="LanguageExt.Core" />
+    <!--<PackageReference Include="LanguageExt.Pipes" />-->
     <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="Riok.Mapperly" />

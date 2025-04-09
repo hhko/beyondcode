@@ -1,53 +1,53 @@
-﻿using ErrorOr;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
 
 namespace GymManagement.Application.Abstractions.Pipelines;
 
-// https://github.com/amantinband/error-or/issues/10
+// TODO: LanguageExt IErrorOr
+//// https://github.com/amantinband/error-or/issues/10
 
-// TODO: FluentValidationPipeline 전용 테스트 작성
+//// TODO: FluentValidationPipeline 전용 테스트 작성
 
-// https://github.com/amantinband/error-or?tab=readme-ov-file#mediator--fluentvalidation--erroror-
-public class FluentValidationPipeline<TRequest, TResponse>(IValidator<TRequest>? validator = null)
-    : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest<TResponse>
-        where TResponse : IErrorOr
+//// https://github.com/amantinband/error-or?tab=readme-ov-file#mediator--fluentvalidation--erroror-
+//public class FluentValidationPipeline<TRequest, TResponse>(IValidator<TRequest>? validator = null)
+//    : IPipelineBehavior<TRequest, TResponse>
+//        where TRequest : IRequest<TResponse>
+//        where TResponse : IErrorOr
 
-{
-    private readonly IValidator<TRequest>? _validator = validator;
+//{
+//    private readonly IValidator<TRequest>? _validator = validator;
 
-    public async Task<TResponse> Handle(
-        TRequest request,
-        RequestHandlerDelegate<TResponse> next,
-        CancellationToken cancellationToken)
-    {
-        if (_validator is null)
-        {
-            return await next();
-        }
+//    public async Task<TResponse> Handle(
+//        TRequest request,
+//        RequestHandlerDelegate<TResponse> next,
+//        CancellationToken cancellationToken)
+//    {
+//        if (_validator is null)
+//        {
+//            return await next();
+//        }
 
-        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+//        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
-        if (validationResult.IsValid)
-        {
-            return await next();
-        }
+//        if (validationResult.IsValid)
+//        {
+//            return await next();
+//        }
 
-        var errors = validationResult.Errors
-            .ConvertAll(error => Error.Validation(
-                code: error.PropertyName,
-                description: error.ErrorMessage));
+//        var errors = validationResult.Errors
+//            .ConvertAll(error => Error.Validation(
+//                code: error.PropertyName,
+//                description: error.ErrorMessage));
 
-        // TODO: 타입 변환
-        // 에러
-        //  'Cannot implicitly convert type 'System.Collections.Generic.List <ErrorOr.Error>'
-        //      to 'ErrorOr.IErrorOr<GymManagement.Application.Usecases.Subscriptions.Commands.CreateSubscription.CreateSubscriptionResponse>'.
-        //   An explicit conversion exists (are you missing a cast?)'
-        return (dynamic)errors;
-        //return ErrorOr<TResponse>.From(errors);
-    }
-}
+//        // TODO: 타입 변환
+//        // 에러
+//        //  'Cannot implicitly convert type 'System.Collections.Generic.List <ErrorOr.Error>'
+//        //      to 'ErrorOr.IErrorOr<GymManagement.Application.Usecases.Subscriptions.Commands.CreateSubscription.CreateSubscriptionResponse>'.
+//        //   An explicit conversion exists (are you missing a cast?)'
+//        return (dynamic)errors;
+//        //return ErrorOr<TResponse>.From(errors);
+//    }
+//}
 
 //public sealed class FluentValidationPipeline<TRequest, TResponse>(
 //    IEnumerable<IValidator<TRequest>> validators)

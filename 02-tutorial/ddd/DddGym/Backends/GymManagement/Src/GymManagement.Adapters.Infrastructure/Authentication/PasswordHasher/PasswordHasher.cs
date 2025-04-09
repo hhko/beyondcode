@@ -1,11 +1,11 @@
-using ErrorOr;
 using GymManagement.Domain.AggregateRoots.Users;
+using LanguageExt;
 
 namespace GymManagement.Adapters.Infrastructure.Authentication.PasswordHasher;
 
 public class PasswordHasher : IPasswordHasher
 {
-    public ErrorOr<string> HashPassword(string password)
+    public Fin<string> HashPassword(string password)
     {
         return string.Empty;
     }

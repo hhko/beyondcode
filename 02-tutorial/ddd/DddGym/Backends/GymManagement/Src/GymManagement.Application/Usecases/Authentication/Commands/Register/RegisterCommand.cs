@@ -6,4 +6,4 @@ public sealed record RegisterCommand(
     string FirstName,
     string LastName,
     string Email,
-    string Password) : ICommand<RegisterResponse>;
+    string Password) : ICommand2<RegisterResponse>; //ICommand<RegisterResponse>;

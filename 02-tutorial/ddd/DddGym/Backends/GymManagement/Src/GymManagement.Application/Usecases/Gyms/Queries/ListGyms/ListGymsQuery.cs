@@ -4,4 +4,4 @@ namespace GymManagement.Application.Usecases.Gyms.Queries.ListGyms;
 
 public sealed record ListGymsQuery(
     Guid SubscriptionId)
-    : IQuery<ListGymsResponse>;
+    : IQuery2<ListGymsResponse>;

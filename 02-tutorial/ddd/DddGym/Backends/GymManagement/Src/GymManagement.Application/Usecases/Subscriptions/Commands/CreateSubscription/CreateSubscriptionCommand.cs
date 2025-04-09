@@ -6,4 +6,4 @@ namespace GymManagement.Application.Usecases.Subscriptions.Commands.CreateSubscr
 public sealed record CreateSubscriptionCommand(
     SubscriptionType SubscriptionType,
     Guid AddminId)
-    : ICommand<CreateSubscriptionResponse>;
+    : ICommand2<CreateSubscriptionResponse>;

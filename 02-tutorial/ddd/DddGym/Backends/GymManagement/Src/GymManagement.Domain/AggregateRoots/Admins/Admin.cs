@@ -1,7 +1,9 @@
 ﻿using DddGym.Framework.BaseTypes;
-using ErrorOr;
+
 using GymManagement.Domain.AggregateRoots.Admins.Events;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
+using LanguageExt;
+using LanguageExt.Common;
 
 namespace GymManagement.Domain.AggregateRoots.Admins;
 
@@ -25,17 +27,17 @@ public sealed class Admin : AggregateRoot
     {
     }
 
-    public ErrorOr<Success> SetSubscription(Subscription subscription)
+    public Fin<Unit> SetSubscription(Subscription subscription)
     {
         if (SubscriptionId.HasValue)
         {
-            return Error.Conflict(description: "Admin already has an active subscription");
+            return Error.New("Admin already has an active subscription");
         }
 
         SubscriptionId = subscription.Id;
 
         _domainEvents.Add(new SubscriptionSetEvent(this, subscription));
 
-        return Result.Success;
+        return Unit.Default;
     }
 }

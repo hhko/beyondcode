@@ -6,4 +6,4 @@ public sealed record ListParticipantSessionsQuery(
     Guid ParticipantId,
     DateTime? StartDateTime = null,
     DateTime? EndDateTime = null)
-    : IQuery<ListParticipantSessionsResponse>;
+    : IQuery2<ListParticipantSessionsResponse>;

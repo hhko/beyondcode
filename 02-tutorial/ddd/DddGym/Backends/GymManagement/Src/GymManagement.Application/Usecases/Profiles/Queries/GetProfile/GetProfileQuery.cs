@@ -4,4 +4,4 @@ namespace GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
 
 public sealed record GetProfileQuery(
     Guid UserId)
-    : IQuery<GetProfileResponse>;
+    : IQuery2<GetProfileResponse>;

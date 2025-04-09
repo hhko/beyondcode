@@ -1,4 +1,6 @@
-﻿using ErrorOr;
+﻿
+
+using LanguageExt.Common;
 
 namespace GymManagement.Domain.AggregateRoots.Participants.Errors;
 
@@ -6,8 +8,11 @@ public static partial class DomainErrors
 {
     public static class AddToScheduleErrors
     {
-        public static readonly Error CannotHaveTwoOrMoreOverlappingSessions = Error.Validation(
-            code: $"{nameof(DomainErrors)}.{nameof(Participant)}.{nameof(CannotHaveTwoOrMoreOverlappingSessions)}",
-            description: "A participant cannot have two or more overlapping sessions");
+        //public static readonly Error CannotHaveTwoOrMoreOverlappingSessions = Error.Validation(
+        //    code: $"{nameof(DomainErrors)}.{nameof(Participant)}.{nameof(CannotHaveTwoOrMoreOverlappingSessions)}",
+        //    description: "A participant cannot have two or more overlapping sessions");
+
+        public static readonly Error CannotHaveTwoOrMoreOverlappingSessions = Error.New(
+            "A participant cannot have two or more overlapping sessions");
     }
 }

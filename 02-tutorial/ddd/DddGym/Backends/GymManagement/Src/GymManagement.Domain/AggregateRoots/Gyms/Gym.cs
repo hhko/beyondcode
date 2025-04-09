@@ -1,7 +1,8 @@
 ﻿using DddGym.Framework.BaseTypes;
-using ErrorOr;
 using GymManagement.Domain.AggregateRoots.Gyms.Events;
 using GymManagement.Domain.AggregateRoots.Rooms;
+using LanguageExt;
+using LanguageExt.Common;
 using static GymManagement.Domain.AggregateRoots.Gyms.Errors.DomainErrors;
 
 namespace GymManagement.Domain.AggregateRoots.Gyms;
@@ -69,7 +70,7 @@ public sealed class Gym : AggregateRoot
         Guid subscriptionId,
         Guid? id = null)
     {
-        Error error = Error.Forbidden();
+        //Error error = Error.Forbidden();
         return new Gym(
             name,
             maxRooms,
@@ -77,12 +78,12 @@ public sealed class Gym : AggregateRoot
             id);
     }
 
-    public ErrorOr<Success> AddRoom(Room room)
+    public Fin<Unit> AddRoom(Room room)
     {
         // 규칙 생략: Id 중복
         if (_roomIds.Contains(room.Id))
         {
-            return Error.Conflict(description: "Room already exists in gym");
+            return Error.New("Room already exists in gym");
         }
 
         // 규칙
@@ -102,22 +103,22 @@ public sealed class Gym : AggregateRoot
             GymId: Id,
             MaxDailySessions: room.MaxDailySessions));
 
-        return Result.Success;
+        return Unit.Default;
     }
 
     // 추가
-    public ErrorOr<Success> RemoveRoom(Guid roomId)
+    public Fin<Unit> RemoveRoom(Guid roomId)
     {
         if (!_roomIds.Contains(roomId))
         {
-            return Error.NotFound(description: "Room not found");
+            return Error.New("Room not found");
         }
 
         _roomIds.Remove(roomId);
 
         _domainEvents.Add(new RoomRemovedEvent(this, roomId));
 
-        return Result.Success;
+        return Unit.Default;
     }
 
     // 추가
@@ -127,28 +128,28 @@ public sealed class Gym : AggregateRoot
     }
 
     // 추가
-    //public ErrorOr<Success> AddTrainer(Trainer trainer)
+    //public Fin<Unit> AddTrainer(Trainer trainer)
     //{
     //    if (_trainerIds.Contains(trainer.Id))
     //    {
-    //        return Error.Conflict(description: "Trainer already assigned to gym");
+    //        return Error.New("Trainer already assigned to gym");
     //    }
 
     //    _trainerIds.Add(trainer.Id);
 
-    //    return Result.Success;
+    //    return Unit.Default;
     //}
 
-    public ErrorOr<Success> AddTrainer(Guid trainerId)
+    public Fin<Unit> AddTrainer(Guid trainerId)
     {
         if (_trainerIds.Contains(trainerId))
         {
-            return Error.Conflict(description: "Trainer already assigned to gym");
+            return Error.New("Trainer already assigned to gym");
         }
 
         _trainerIds.Add(trainerId);
 
-        return Result.Success;
+        return Unit.Default;
     }
 
     // 추가

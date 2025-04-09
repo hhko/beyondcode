@@ -5,4 +5,4 @@ namespace GymManagement.Application.Usecases.Rooms.Commands.CreateRoom;
 public sealed record CreateRoomCommand(
     Guid GymId,
     string RoomName)
-    : ICommand<CreateRoomResponse>;
+    : ICommand2<CreateRoomResponse>;

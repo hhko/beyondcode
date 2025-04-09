@@ -1,4 +1,5 @@
 ﻿using GymManagement.Domain.AggregateRoots.Rooms;
+using LanguageExt;
 
 namespace GymManagement.Adapters.Persistence.Repositories;
 
@@ -9,7 +10,8 @@ public class RoomsRepository : IRoomsRepository
         throw new NotImplementedException();
     }
 
-    public Task<Room?> GetByIdAsync(Guid id)
+    //public Task<Room?> GetByIdAsync(Guid id)
+    public Task<Fin<Room>> GetByIdAsync(Guid id)
     {
         throw new NotImplementedException();
     }

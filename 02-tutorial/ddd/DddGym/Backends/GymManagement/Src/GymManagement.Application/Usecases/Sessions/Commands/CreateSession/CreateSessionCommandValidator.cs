@@ -1,10 +1,10 @@
-﻿using FluentValidation;
+﻿//using FluentValidation;
 
-namespace GymManagement.Application.Usecases.Sessions.Commands.CreateSession;
+//namespace GymManagement.Application.Usecases.Sessions.Commands.CreateSession;
 
-internal sealed class CreateSessionCommandValidator : AbstractValidator<CreateSessionCommand>
-{
-    public CreateSessionCommandValidator()
-    {
-    }
-}
+//internal sealed class CreateSessionCommandValidator : AbstractValidator<CreateSessionCommand>
+//{
+//    public CreateSessionCommandValidator()
+//    {
+//    }
+//}

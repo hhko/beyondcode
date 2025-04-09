@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <PackageReference Include="Ardalis.SmartEnum" />
-    <PackageReference Include="ErrorOr" />
+    <PackageReference Include="LanguageExt.Core" />
     <PackageReference Include="MediatR.Contracts" />
     <PackageReference Include="Throw" />
   </ItemGroup>

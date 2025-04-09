@@ -1,5 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes;
-//using ErrorOr;
+//
 using GymManagement.Domain.Abstractions.ValueObjects;
 using LanguageExt;
 using LanguageExt.Common;
@@ -32,13 +32,13 @@ public sealed class Schedule : Entity
         return !timeSlots.Any(timeSlot => timeSlot.OverlapsWith(time));
     }
 
-    //internal ErrorOr<Success> BookTimeSlot(DateOnly date, TimeRange time)
+    //internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange time)
     internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange time)
     {
         if (!_calendar.TryGetValue(date, out var timeSlots))
         {
             _calendar[date] = [time];
-            //return Result.Success;
+            //return Unit.Default;
             return Unit.Default;
         }
 
@@ -49,16 +49,16 @@ public sealed class Schedule : Entity
         }
 
         timeSlots.Add(time);
-        //return Result.Success;
+        //return Unit.Default;
         return Unit.Default;
     }
 
-    //internal ErrorOr<Success> RemoveBooking(DateOnly date, TimeRange time)
+    //internal Fin<Unit> RemoveBooking(DateOnly date, TimeRange time)
     internal Fin<Unit> RemoveBooking(DateOnly date, TimeRange time)
     {
         if (!_calendar.TryGetValue(date, out var timeSlots) || !timeSlots.Contains(time))
         {
-            //return Error.NotFound(description: "Booking not found");
+            //return Error.New( "Booking not found");
             return Error.New("Booking not found");
         }
 
@@ -68,7 +68,7 @@ public sealed class Schedule : Entity
             return Error.New("Unexpected");
         }
 
-        //return Result.Success;
+        //return Unit.Default;
         return Unit.Default;
     }
 }

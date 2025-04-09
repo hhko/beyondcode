@@ -5,4 +5,4 @@ namespace GymManagement.Application.Usecases.Rooms.Commands.DeleteRoom;
 public sealed record DeleteRoomCommand(
     Guid GymId,
     Guid RoomId)
-    : ICommand<DeleteRoomResponse>;
+    : ICommand2<DeleteRoomResponse>;

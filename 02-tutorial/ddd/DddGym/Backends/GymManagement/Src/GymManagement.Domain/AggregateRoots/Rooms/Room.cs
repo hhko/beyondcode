@@ -1,5 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes;
-//using ErrorOr;
+//
 using GymManagement.Domain.AggregateRoots.Rooms.Events;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using LanguageExt;
@@ -64,12 +64,12 @@ public sealed class Room : AggregateRoot
     {
     }
 
-    //public ErrorOr<Success> ScheduleSession(Session session)
+    //public Fin<Unit> ScheduleSession(Session session)
     //{
     //    // 규칙 생략: Id 중복
     //    if (_sessionIds.Any(id => id == session.Id))
     //    {
-    //        return Error.Conflict(description: "Session already exists in room");
+    //        return Error.New("Session already exists in room");
     //    }
 
     //    // 규칙
@@ -93,16 +93,17 @@ public sealed class Room : AggregateRoot
 
     //    _sessionIds.Add(session.Id);
 
-    //    return Result.Success;
+    //    return Unit.Default;
     //}
 
-    //public ErrorOr<Success> ScheduleSession(Session session)
+
+    //public Fin<Unit> ScheduleSession(Session session)
     public Fin<Unit> ScheduleSession(Session session)
     {
         // 규칙 생략: Id 중복
         if (SessionIds.Any(id => id == session.Id))
         {
-            //return Error.Conflict(description: "Session already exists in room");
+            //return Error.New("Session already exists in room");
             return Error.New("Session already exists in room");
         }
 
@@ -142,8 +143,9 @@ public sealed class Room : AggregateRoot
 
         _domainEvents.Add(new SessionScheduledEvent(Id, session));
 
-        //return Result.Success;
+        //return Unit.Default;
         return Unit.Default;
+        //return session;
     }
 
     public bool HasSession(Guid sessionId)

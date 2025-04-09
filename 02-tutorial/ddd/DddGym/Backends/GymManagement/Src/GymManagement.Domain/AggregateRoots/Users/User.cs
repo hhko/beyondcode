@@ -1,6 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes;
-using ErrorOr;
 using GymManagement.Domain.AggregateRoots.Users.Events;
+using LanguageExt;
+using LanguageExt.Common;
 
 namespace GymManagement.Domain.AggregateRoots.Users;
 
@@ -41,11 +42,13 @@ public sealed class User : AggregateRoot
         return passwordHasher.IsCorrectPassword(password, _passwordHash);
     }
 
-    public ErrorOr<Guid> CreateAddminProfile()
+    //public Fin<Guid> CreateAddminProfile()
+    public Fin<Guid> CreateAddminProfile()
     {
         if (AdminId is not null)
         {
-            return Error.Conflict(description: "User already has an admin profile");
+            //return Error.New("User already has an admin profile");
+            return Error.New("User already has an admin profile");
         }
 
         AdminId = Guid.NewGuid();
@@ -55,11 +58,13 @@ public sealed class User : AggregateRoot
         return AdminId.Value;
     }
 
-    public ErrorOr<Guid> CreateParticipantProfile()
+    //public Fin<Guid> CreateParticipantProfile()
+    public Fin<Guid> CreateParticipantProfile()
     {
         if (ParticipantId is not null)
         {
-            return Error.Conflict(description: "User already has a participant profile");
+            //return Error.New("User already has a participant profile");
+            return Error.New("User already has a participant profile");
         }
 
         ParticipantId = Guid.NewGuid();
@@ -69,11 +74,11 @@ public sealed class User : AggregateRoot
         return ParticipantId.Value;
     }
 
-    public ErrorOr<Guid> CreateTrainerProfile()
+    public Fin<Guid> CreateTrainerProfile()
     {
         if (TrainerId is not null)
         {
-            return Error.Conflict(description: "User already has a trainer profile");
+            return Error.New("User already has a trainer profile");
         }
 
         TrainerId = Guid.NewGuid();

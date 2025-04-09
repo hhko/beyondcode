@@ -1,5 +1,4 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
-//using GymManagement.Application.Abstractions.Repositories;
 using GymManagement.Domain.AggregateRoots.Admins;
 using GymManagement.Domain.AggregateRoots.Users.Events;
 

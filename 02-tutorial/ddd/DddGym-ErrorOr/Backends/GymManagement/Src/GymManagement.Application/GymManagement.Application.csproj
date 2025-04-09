@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="ErrorOr" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="Riok.Mapperly" />
+    <PackageReference Include="Throw" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Abstractions\Frameworks\Src\DddGym.Framework\DddGym.Framework.csproj" />
+    <ProjectReference Include="..\GymManagement.Domain\GymManagement.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Usecases\Authentication\Commands\" />
+    <Folder Include="Usecases\Profiles\Commands\" />
+    <Folder Include="Usecases\Reservations\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="GymManagement.Tests.Unit" />
+    <!-- <InternalsVisibleTo Include="DynamicProxyGenAssembly2" /> -->
+  </ItemGroup>
+
+</Project>

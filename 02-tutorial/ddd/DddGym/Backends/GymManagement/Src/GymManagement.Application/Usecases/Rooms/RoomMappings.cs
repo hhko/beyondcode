@@ -13,10 +13,10 @@ internal static class RoomMappings
         return new CreateRoomResponse(room);
     }
 
-    public static DeleteRoomResponse ToResponseDeleted(this ErrorOr.Deleted _)
-    {
-        return new DeleteRoomResponse();
-    }
+    //public static DeleteRoomResponse ToResponseDeleted(this ErrorOr.Deleted _)
+    //{
+    //    return new DeleteRoomResponse();
+    //}
 
     public static ListRoomsResponse ToResponse(this List<Room> rooms)
     {

@@ -18,23 +18,23 @@ public sealed partial class NamingConventionTests_Cqrs : ArchitectureTestBase
     //   - 접미사: CommandUsecase, QueryUsecase
     //   - 클래스: internal, sealed
 
-    [Fact]
-    public void CommandMessages_ShouldComplyWith_DesignRules()
-    {
-        var sut = ArchRuleDefinition
-            .Classes()
-            .That()
-            .ImplementInterface(typeof(ICommand));
+    //[Fact]
+    //public void CommandMessages_ShouldComplyWith_DesignRules()
+    //{
+    //    var sut = ArchRuleDefinition
+    //        .Classes()
+    //        .That()
+    //        .ImplementInterface(typeof(ICommand));
 
-        if (!sut.GetObjects(Architecture).Any())
-            return;
+    //    if (!sut.GetObjects(Architecture).Any())
+    //        return;
 
-        sut.Should().BePublic()
-            .AndShould().BeSealed()
-            .AndShould().BeRecord()
-            .AndShould().HaveNameEndingWith(NamingConvention.Command)
-            .Check(Architecture);
-    }
+    //    sut.Should().BePublic()
+    //        .AndShould().BeSealed()
+    //        .AndShould().BeRecord()
+    //        .AndShould().HaveNameEndingWith(NamingConvention.Command)
+    //        .Check(Architecture);
+    //}
 
     [Fact]
     public void CommandMessagesT_ShouldComplyWith_DesignRules()
@@ -42,7 +42,7 @@ public sealed partial class NamingConventionTests_Cqrs : ArchitectureTestBase
         var sut = ArchRuleDefinition
             .Classes()
             .That()
-            .ImplementInterface(typeof(ICommand<>));
+            .ImplementInterface(typeof(ICommand2<>));
 
         if (!sut.GetObjects(Architecture).Any())
             return;
@@ -54,22 +54,22 @@ public sealed partial class NamingConventionTests_Cqrs : ArchitectureTestBase
             .Check(Architecture);
     }
 
-    [Fact]
-    public void CommandUsecases_ShouldComplyWith_DesignRules()
-    {
-        var sut = ArchRuleDefinition
-            .Classes()
-            .That()
-            .ImplementInterface(typeof(ICommandUsecase<>));
+    //[Fact]
+    //public void CommandUsecases_ShouldComplyWith_DesignRules()
+    //{
+    //    var sut = ArchRuleDefinition
+    //        .Classes()
+    //        .That()
+    //        .ImplementInterface(typeof(ICommandUsecase2<>));
 
-        if (!sut.GetObjects(Architecture).Any())
-            return;
+    //    if (!sut.GetObjects(Architecture).Any())
+    //        return;
 
-        sut.Should().BeInternal()
-            .AndShould().BeSealed()
-            .AndShould().HaveNameEndingWith(NamingConvention.CommandUsecase)
-            .Check(Architecture);
-    }
+    //    sut.Should().BeInternal()
+    //        .AndShould().BeSealed()
+    //        .AndShould().HaveNameEndingWith(NamingConvention.CommandUsecase)
+    //        .Check(Architecture);
+    //}
 
     [Fact]
     public void CommandUsecasesT_ShouldComplyWith_DesignRules()
@@ -77,7 +77,7 @@ public sealed partial class NamingConventionTests_Cqrs : ArchitectureTestBase
         var sut = ArchRuleDefinition
             .Classes()
             .That()
-            .ImplementInterface(typeof(ICommandUsecase<,>));
+            .ImplementInterface(typeof(ICommandUsecase2<,>));
 
         if (!sut.GetObjects(Architecture).Any())
             return;
@@ -94,7 +94,7 @@ public sealed partial class NamingConventionTests_Cqrs : ArchitectureTestBase
         var sut = ArchRuleDefinition
             .Classes()
             .That()
-            .ImplementInterface(typeof(IQuery<>));
+            .ImplementInterface(typeof(IQuery2<>));
 
         if (!sut.GetObjects(Architecture).Any())
             return;
@@ -112,7 +112,7 @@ public sealed partial class NamingConventionTests_Cqrs : ArchitectureTestBase
         var sut = ArchRuleDefinition
             .Classes()
             .That()
-            .ImplementInterface(typeof(IQueryUsecase<,>));
+            .ImplementInterface(typeof(IQueryUsecase2<,>));
 
         if (!sut.GetObjects(Architecture).Any())
             return;

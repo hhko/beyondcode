@@ -1,8 +1,10 @@
 ﻿using DddGym.Framework.BaseTypes;
-using ErrorOr;
+
 using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Events;
+using LanguageExt;
+using LanguageExt.Common;
 using static GymManagement.Domain.AggregateRoots.Subscriptions.Errors.DomainErrors;
 
 namespace GymManagement.Domain.AggregateRoots.Subscriptions;
@@ -70,14 +72,14 @@ public sealed class Subscription : AggregateRoot
         _ => throw new InvalidOperationException()
     };
 
-    public ErrorOr<Success> AddGym(Gym gym)
+    public Fin<Unit> AddGym(Gym gym)
     {
         // TODO: IValidator
 
         // 규칙 생략: Id 중복
         if (_gymIds.Contains(gym.Id))
         {
-            return Error.Conflict(description: "Gym already exists in subscription");
+            return Error.New("Gym already exists in subscription");
         }
 
         // 규칙
@@ -92,7 +94,7 @@ public sealed class Subscription : AggregateRoot
 
         _domainEvents.Add(new GymAddedEvent(this, gym));
 
-        return Result.Success;
+        return Unit.Default;
     }
 
     // 추가

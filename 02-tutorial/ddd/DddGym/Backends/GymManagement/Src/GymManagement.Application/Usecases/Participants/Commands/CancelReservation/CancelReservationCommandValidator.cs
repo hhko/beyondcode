@@ -2,9 +2,9 @@
 
 namespace GymManagement.Application.Usecases.Participants.Commands.CancelReservation;
 
-internal sealed class CancelReservationCommandValidator : AbstractValidator<CancelReservationCommand>
-{
-    public CancelReservationCommandValidator()
-    {
-    }
-}
+//internal sealed class CancelReservationCommandValidator : AbstractValidator<CancelReservationCommand>
+//{
+//    public CancelReservationCommandValidator()
+//    {
+//    }
+//}

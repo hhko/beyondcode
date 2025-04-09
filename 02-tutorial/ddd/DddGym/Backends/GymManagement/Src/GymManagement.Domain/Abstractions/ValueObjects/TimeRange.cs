@@ -1,9 +1,8 @@
 ﻿using DddGym.Framework.BaseTypes;
-//using ErrorOr;
+//
 using LanguageExt;
 using LanguageExt.Common;
 using Throw;
-using static LanguageExt.Fin;
 
 namespace GymManagement.Domain.Abstractions.ValueObjects;
 
@@ -38,7 +37,7 @@ public sealed class TimeRange : ValueObject
             end: end);
     }
 
-    //public static ErrorOr<TimeRange> FromDateTimes(DateTime start, DateTime end)
+    //public static Fin<TimeRange> FromDateTimes(DateTime start, DateTime end)
     //{
     //    //if (start.Date != end.Date || start >= end)
     //    //{
