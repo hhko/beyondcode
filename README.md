@@ -106,63 +106,72 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 ## Functional DDD 리팩토링
 ### Case 1. Imperative Guard 스타일
 ```cs
-public Fin<Unit> RemoveFromSchedule(Session session)
+public sealed class Trainer : AggregateRoot
 {
-  if (!_sessionIds.Contains(session.Id))
+  public Fin<Unit> RemoveFromSchedule(Session session)
   {
-      return TrainerErrors.SessionNotFound;
+    if (!_sessionIds.Contains(session.Id))
+    {
+        return TrainerErrors.SessionNotFound;
+    }
+
+    var removeBookingResult = _schedule.RemoveBooking(session.Date, session.Time);
+    if (removeBookingResult.IsFail)
+    {
+        return (Error)removeBookingResult;
+    }
+
+    _sessionIds.Remove(session.Id);
+
+    return Unit.Default;
   }
-
-  var removeBookingResult = _schedule.RemoveBooking(session.Date, session.Time);
-  if (removeBookingResult.IsFail)
-  {
-      return (Error)removeBookingResult;
-  }
-
-  _sessionIds.Remove(session.Id);
-
-  return Unit.Default;
 }
 ```
 
 ### Case 2. Monadic 스타일
 ```cs
-private Fin<Unit> ValidateSessionExists(Guid sessionId) =>
-    _sessionIds.Contains(sessionId)
-        ? Unit.Default
-        : TrainerErrors.SessionNotFound;
-
-private Unit RemoveSessionId(Guid sessionId)
+public sealed class Trainer : AggregateRoot
 {
-    _sessionIds.Remove(sessionId);
-    return Unit.Default;
-}
+  private Fin<Unit> ValidateSessionExists(Guid sessionId) =>
+      _sessionIds.Contains(sessionId)
+          ? Unit.Default
+          : TrainerErrors.SessionNotFound;
 
-public Fin<Unit> RemoveFromSchedule(Session session)
-{
-  return ValidateSessionExists(session.Id)
-      .Bind(_ => _schedule.RemoveBooking(session.Date, session.Time))
-      .Map(_ => RemoveSessionId(session.Id));
+  private Unit RemoveSessionId(Guid sessionId)
+  {
+      _sessionIds.Remove(sessionId);
+      return Unit.Default;
+  }
+
+  public Fin<Unit> RemoveFromSchedule(Session session)
+  {
+    return ValidateSessionExists(session.Id)
+        .Bind(_ => _schedule.RemoveBooking(session.Date, session.Time))
+        .Map(_ => RemoveSessionId(session.Id));
+  }
 }
 ```
 
 ### Case 3. Monadic LINQ 스타일
 ```cs
-private Fin<Unit> ValidateSessionExists(Guid sessionId) =>
-    _sessionIds.Contains(sessionId)
-        ? Unit.Default
-        : TrainerErrors.SessionNotFound;
-
-private Unit RemoveSessionId(Guid sessionId)
+public sealed class Trainer : AggregateRoot
 {
-    _sessionIds.Remove(sessionId);
-    return Unit.Default;
-}
+  private Fin<Unit> ValidateSessionExists(Guid sessionId) =>
+      _sessionIds.Contains(sessionId)
+          ? Unit.Default
+          : TrainerErrors.SessionNotFound;
 
-public Fin<Unit> RemoveFromSchedule(Session session)
-{
-  return from _1 in ValidateSessionExists(session.Id)
-         from _2 in _schedule.RemoveBooking(session.Date, session.Time)
-         select RemoveSessionId(session.Id);
+  private Unit RemoveSessionId(Guid sessionId)
+  {
+      _sessionIds.Remove(sessionId);
+      return Unit.Default;
+  }
+
+  public Fin<Unit> RemoveFromSchedule(Session session)
+  {
+    return from _1 in ValidateSessionExists(session.Id)
+          from _2 in _schedule.RemoveBooking(session.Date, session.Time)
+          select RemoveSessionId(session.Id);
+  }
 }
 ```
