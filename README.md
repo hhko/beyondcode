@@ -170,8 +170,8 @@ public sealed class Trainer : AggregateRoot
   public Fin<Unit> RemoveFromSchedule(Session session)
   {
     return from _1 in ValidateSessionExists(session.Id)
-          from _2 in _schedule.RemoveBooking(session.Date, session.Time)
-          select RemoveSessionId(session.Id);
+           from _2 in _schedule.RemoveBooking(session.Date, session.Time)
+           select RemoveSessionId(session.Id);
   }
 }
 ```
