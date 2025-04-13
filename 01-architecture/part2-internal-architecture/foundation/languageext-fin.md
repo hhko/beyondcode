@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# 성공/실패 타입 Fin<T>
+# 성공/실패 타입 Fin&lt;T&gt;
 
 - language-ext 패키지
 - Fin<A> 추상 타입을 통해 성공/실패을 처리합니다.

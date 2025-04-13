@@ -81,29 +81,55 @@ public sealed class Trainer : AggregateRoot
         return Unit.Default;
     }
 
+    private Fin<Unit> ValidateSessionExists(Guid sessionId) =>
+        _sessionIds.Contains(sessionId)
+            ? Unit.Default
+            : TrainerErrors.SessionNotFound;
+
+    private Unit RemoveSessionId(Guid sessionId)
+    {
+        _sessionIds.Remove(sessionId);
+        return Unit.Default;
+    }
+
     // 추가
     //public Fin<Unit> RemoveFromSchedule(Session session)
     public Fin<Unit> RemoveFromSchedule(Session session)
     {
-        if (!_sessionIds.Contains(session.Id))
-        {
-            //return Error.NotFound(description: "Session not found in trainer's schedule");
-            //return Error.Conflict("Trainer already assigned to teach session");
-            //return Error.New( "session not found");
-            return Error.New("session not found");
-        }
+        //
+        // Case 1: Imperative Guard Flow (명령형 제어 흐름)
+        //
 
-        var removeBookingResult = _schedule.RemoveBooking(session.Date, session.Time);
-        if (removeBookingResult.IsFail)
-        {
-            //return removeBookingResult.Errors;
-            return (Error)removeBookingResult;
-        }
-
-        _sessionIds.Remove(session.Id);
-
+        //if (!_sessionIds.Contains(session.Id))
+        //{
+        //    return TrainerErrors.SessionNotFound;
+        //}
+        //
+        //var removeBookingResult = _schedule.RemoveBooking(session.Date, session.Time);
+        //if (removeBookingResult.IsFail)
+        //{
+        //    return (Error)removeBookingResult;
+        //}
+        //
+        //_sessionIds.Remove(session.Id);
+        //
         //return Unit.Default;
-        return Unit.Default;
+
+        //
+        // Case 2: Monadic Style (모나딕 체이닝 스타일)
+        //
+
+        //return ValidateSessionExists(session.Id)
+        //    .Bind(_ => _schedule.RemoveBooking(session.Date, session.Time))
+        //    .Map(_ => RemoveSessionId(session.Id));
+
+        //
+        // Case 3: Monadic LINQ Style (모나딕 LINQ 스타일)
+        //
+
+        return from _1 in ValidateSessionExists(session.Id)
+               from _2 in _schedule.RemoveBooking(session.Date, session.Time)
+               select RemoveSessionId(session.Id);
     }
 
     // 추가
@@ -112,3 +138,4 @@ public sealed class Trainer : AggregateRoot
         return _schedule.CanBookTimeSlot(date, timeRange);
     }
 }
+
