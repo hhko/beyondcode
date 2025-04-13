@@ -70,6 +70,7 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
     - 목표의 분리는 배치 방향으로 구분됩니다.
       - 위쪽: 기술적인 측면에서 더 중요한 것(부수 목표: Abstractions)을 배치합니다.
       - 아래쪽: 비즈니스 측면에서 더 중요한 것(주요 목표)을 배치합니다.
+        
   | 방향     | 관심사의 분리           | 목표의 분리                                 |
   | ---     | ---                             | ---                               |
   | 위쪽    | 기술 관심사 (무한)       | 부수 목표 (무한 -**_Abstractions_**-> 유한)  |
