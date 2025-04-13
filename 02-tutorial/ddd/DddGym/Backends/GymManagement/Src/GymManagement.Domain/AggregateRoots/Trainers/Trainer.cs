@@ -31,13 +31,21 @@ public sealed class Trainer : AggregateRoot
 
     // ---------------------
 
-    public Trainer(
+    private Trainer(
         Guid userId,
-        Abstractions.Entities.Schedule? schedule = null,
+        Abstractions.Entities.Schedule? schedule,
         Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         UserId = userId;
         _schedule = schedule ?? Abstractions.Entities.Schedule.Empty();
+    }
+
+    public static Trainer Create(
+        Guid userId,
+        Abstractions.Entities.Schedule? schedule = null,
+        Guid? id = null)
+    {
+        return new Trainer(userId, schedule, id);
     }
 
     // TODO: 존재 이유 ???
@@ -79,6 +87,7 @@ public sealed class Trainer : AggregateRoot
     {
         if (!_sessionIds.Contains(session.Id))
         {
+            //return Error.NotFound(description: "Session not found in trainer's schedule");
             //return Error.Conflict("Trainer already assigned to teach session");
             //return Error.New( "session not found");
             return Error.New("session not found");

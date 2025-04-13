@@ -9,7 +9,11 @@ internal static class TrainerFactory
         Guid? userId = null,
         Guid? id = null)
     {
-        return new Trainer(
+        //return new Trainer(
+        //    userId: userId ?? DomainConstants.User.Id,
+        //    id: id ?? DomainConstants.Trainer.Id);
+
+        return Trainer.Create(
             userId: userId ?? DomainConstants.User.Id,
             id: id ?? DomainConstants.Trainer.Id);
     }

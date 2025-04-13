@@ -4,6 +4,7 @@ using GymManagement.Domain.AggregateRoots.Admins.Events;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
 using LanguageExt;
 using LanguageExt.Common;
+using static GymManagement.Domain.AggregateRoots.Admins.Errors.DomainErrors;
 
 namespace GymManagement.Domain.AggregateRoots.Admins;
 
@@ -13,13 +14,24 @@ public sealed class Admin : AggregateRoot
 
     public Guid? SubscriptionId { get; private set; }
 
-    public Admin(
+    private Admin(
         Guid userId,
-        Guid? subscriptionId = null,
-        Guid? id = null) : base(id ?? Guid.NewGuid())
+        Guid? subscriptionId,
+        Guid? id) : base(id ?? Guid.NewGuid())
     {
         UserId = userId;
         SubscriptionId = subscriptionId;
+    }
+
+    public static Admin Create(
+        Guid userId,
+        Guid? subscriptionId = null,
+        Guid? id = null)
+    {
+        return new Admin(
+            userId,
+            subscriptionId,
+            id);
     }
 
     // TODO: 존재 이유 ???
@@ -31,7 +43,7 @@ public sealed class Admin : AggregateRoot
     {
         if (SubscriptionId.HasValue)
         {
-            return Error.New("Admin already has an active subscription");
+            return AdminErrors.AlreadyExitSubscription;
         }
 
         SubscriptionId = subscription.Id;

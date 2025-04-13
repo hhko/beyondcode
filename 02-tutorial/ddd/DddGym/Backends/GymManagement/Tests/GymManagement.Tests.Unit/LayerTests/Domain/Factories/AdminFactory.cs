@@ -10,7 +10,13 @@ internal static class AdminFactory
         Guid? subscriptionId = null,
         Guid? id = null)
     {
-        return new Admin(
+        //return new Admin(
+        //    userId: userId ?? DomainConstants.User.Id,
+        //    //subscriptionId ?? DomainConstants.Subscription.Id,
+        //    subscriptionId: subscriptionId,
+        //    id: id ?? DomainConstants.Admin.Id);
+
+        return Admin.Create(
             userId: userId ?? DomainConstants.User.Id,
             //subscriptionId ?? DomainConstants.Subscription.Id,
             subscriptionId: subscriptionId,

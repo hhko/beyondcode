@@ -1,31 +1,31 @@
 ﻿using DddGym.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Users.Events;
 using LanguageExt;
-using LanguageExt.Common;
+using static GymManagement.Domain.AggregateRoots.Users.Errors.DomainErrors;
 
 namespace GymManagement.Domain.AggregateRoots.Users;
 
 public sealed class User : AggregateRoot
 {
-    public string FirstName { get; } = null!;
-    public string LastName { get; } = null!;
+    public string FirstName { get; init; }
+    public string LastName { get; init; }
+    public string Email { get; init; }
 
-    public string Email { get; } = null!;
     public Guid? AdminId { get; private set; }
     public Guid? ParticipantId { get; private set; }
     public Guid? TrainerId { get; private set; }
 
-    private readonly string _passwordHash = null!;
+    private readonly string _passwordHash;
 
-    public User(
+    private User(
         string firstName,
         string lastName,
         string email,
         string passwordHash,
-        Guid? adminId = null,
-        Guid? participantId = null,
-        Guid? trainerId = null,
-        Guid? id = null) : base(id ?? Guid.NewGuid())
+        Guid? adminId,
+        Guid? participantId,
+        Guid? trainerId,
+        Guid? id) : base(id ?? Guid.NewGuid())
     {
         FirstName = firstName;
         LastName = lastName;
@@ -37,18 +37,40 @@ public sealed class User : AggregateRoot
         TrainerId = trainerId;
     }
 
+    public static User Create(
+        string firstName,
+        string lastName,
+        string email,
+        string passwordHash,
+        Guid? adminId = null,
+        Guid? participantId = null,
+        Guid? trainerId = null,
+        Guid? id = null)
+    {
+        return new User(
+            firstName,
+            lastName,
+            email,
+            passwordHash,
+            adminId,
+            participantId,
+            trainerId,
+            id);
+    }
+    
+
+    // TODO?: IPasswordHasher 인터페이스를 도메인 레이어에서 정의해야 하나?
+    // TODO?: 이 함수의 구현 위치가 도메인 레이어???
     public bool IsCorrectPasswordHash(string password, IPasswordHasher passwordHasher)
     {
         return passwordHasher.IsCorrectPassword(password, _passwordHash);
     }
 
-    //public Fin<Guid> CreateAddminProfile()
     public Fin<Guid> CreateAddminProfile()
     {
         if (AdminId is not null)
         {
-            //return Error.New("User already has an admin profile");
-            return Error.New("User already has an admin profile");
+            return UserErrors.AlreadyExistAdminProfile;
         }
 
         AdminId = Guid.NewGuid();
@@ -58,13 +80,11 @@ public sealed class User : AggregateRoot
         return AdminId.Value;
     }
 
-    //public Fin<Guid> CreateParticipantProfile()
     public Fin<Guid> CreateParticipantProfile()
     {
         if (ParticipantId is not null)
         {
-            //return Error.New("User already has a participant profile");
-            return Error.New("User already has a participant profile");
+            return UserErrors.AlreadyExistParticipantProfile;
         }
 
         ParticipantId = Guid.NewGuid();
@@ -78,7 +98,7 @@ public sealed class User : AggregateRoot
     {
         if (TrainerId is not null)
         {
-            return Error.New("User already has a trainer profile");
+            return UserErrors.AlreadyExistTrainerProfile;
         }
 
         TrainerId = Guid.NewGuid();

@@ -16,7 +16,11 @@ internal sealed class AdminProfileCreatedEventUsecase
 
     public async Task Handle(AdminProfileCreatedEvent domainEvent, CancellationToken cancellationToken)
     {
-        var admin = new Admin(domainEvent.UserId, domainEvent.AdminId);
+        // TODO?: domainEvent.AdminId -> subscriptionId
+        //var admin = new Admin(domainEvent.UserId, domainEvent.AdminId);
+        Admin admin = Admin.Create(
+            userId: domainEvent.UserId, 
+            id: domainEvent.AdminId);
 
         await _adminsRepository.AddAdminAsync(admin);
     }

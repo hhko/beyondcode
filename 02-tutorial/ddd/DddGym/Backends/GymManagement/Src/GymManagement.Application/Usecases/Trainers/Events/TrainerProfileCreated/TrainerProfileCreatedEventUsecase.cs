@@ -16,7 +16,10 @@ internal sealed class TrainerProfileCreatedEventUsecase
 
     public async Task Handle(TrainerProfileCreatedEvent domainEvent, CancellationToken cancellationToken)
     {
-        var trainer = new Trainer(domainEvent.UserId, id: domainEvent.TrainerId);
+        //var trainer = new Trainer(
+        Trainer trainer = Trainer.Create(
+            userId: domainEvent.UserId,
+            id: domainEvent.TrainerId);
         await _trainersRepository.AddTrainerAsync(trainer);
     }
 }
