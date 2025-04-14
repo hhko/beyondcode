@@ -101,74 +101,195 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 <br/>
 
 ## Functional DDD 리팩토링
-### Case 1. Imperative Guard 스타일
-```cs
-public sealed class Trainer : AggregateRoot
-{
-  public Fin<Unit> RemoveFromSchedule(Session session)
+
+### 도메인 의도를 표현하는 메서드 이름 만들기
+
+개선 전(기술적 의도) | 개선 후(도메인 의도) | 설명
+--- | --- | ---
+CreateTrainerProfile | `PromoteToTrainer` | 기존 사용자를 트레이너로 승격
+EnsureTrainerNotExist | `EnsureTrainerNotPromoted` | 사용자가 이미 트레이너로 승격되지 않았는지 확인
+
+### 하나의 논리적 작업 단위로 메서드 만들기
+- 도메인 행동과 도메인 이벤트는 하나의 논리적 작업 단위로 만들기
+  ```cs
+  private Fin<Guid> ApplyTrainerPromotion(Guid newTrainerId)
   {
-    if (!_sessionIds.Contains(session.Id))
-    {
-        return TrainerErrors.SessionNotFound;
-    }
+    TrainerId = newTrainerId;
+    _domainEvents.Add(new TrainerPromotedEvent(Id, newTrainerId));
 
-    var removeBookingResult = _schedule.RemoveBooking(session.Date, session.Time);
-    if (removeBookingResult.IsFail)
-    {
-        return (Error)removeBookingResult;
-    }
-
-    _sessionIds.Remove(session.Id);
-
-    return Unit.Default;
+    return newTrainerId;
   }
+  ```
+  - 예를 들어, *"트레이너 프로필을 생성한다"*는 도메인 행동은 단순히 TrainerId를 할당하는 것에 그치지 않고,
+  - 그 결과로 도메인 이벤트(TrainerProfileCreatedEvent)가 함께 발생하는 것은 불가분의 관계입니다.
+  - 따라서 이 둘은 하나의 메서드(ApplyTrainerProfile) 내에서 함께 처리하는 것이 자연스럽습니다.
+- Map과 Bind의 차이 이해하기
+  ```cs
+  .Map(_ => NewTrainerId())
+  .Bind(newTrainerId => ApplyTrainerPromotion(newTrainerId));
+  ```
+  - Map은 순수한 값 변환 함수 (T → R)에 사용하는 함수입니다.
+  - 예: NewTrainerId()는 실패하지 않는 순수 함수이므로 Map의 입력값으로 적합합니다.
+  - 반면 Bind는 부수 효과를 포함한 함수 (T → Fin<R>)에 사용해야 합니다.
+  - 예: ApplyTrainerPromotion()은 내부 상태를 변경하고 도메인 이벤트를 추가하는 부수 효과 함수이므로 Bind를 통해 연결하는 것이 적절합니다.
+- 순수 함수를 Pure 모나드로 만들기
+  ```cs
+  // 일반 메서드
+  [Pure]
+  Guid NewTrainerId()
+
+  Pure<Guid> monad = Pure(NewTrainerId())
+  ```
+  - 다른 모나드(예. Fin, Option, ...)들과 함수 체이닝하기 위해 순수한 값을 리프팅(pure lifted values)합니다.
+
+```cs
+// Case 1: Imperative Guard 스타일
+public Fin<Guid> PromoteToTrainer()
+{
+  if (TrainerId is not null)
+      return UserErrors.TrainerAlreadyPromoted(TrainerId.Value);
+
+  Guid newTrainerId = Guid.NewGuid();
+
+  TrainerId = newTrainerId;
+  _domainEvents.Add(new TrainerPromotedEvent(Id, newTrainerId));
+
+  return TrainerId.Value;
+}
+
+// Case 2. Monadic 스타일
+public Fin<Guid> PromoteToTrainer()
+{
+  return EnsureTrainerNotPromoted(TrainerId)
+    .Map(_ => NewTrainerId())
+    .Bind(newTrainerId => ApplyTrainerPromotion(newTrainerId));
+}
+
+// Case 3. Monadic LINQ 스타일
+public Fin<Guid> PromoteToTrainer()
+{
+  return from _1 in EnsureTrainerNotPromoted(TrainerId)
+         from newTrainerId in Pure(NewTrainerId())
+         from _2 in ApplyTrainerPromotion(newTrainerId)
+         select newTrainerId;
+}
+
+[Pure]
+private Fin<Unit> EnsureTrainerNotPromoted(Guid? trainerId) =>
+  trainerId.HasValue
+    ? UserErrors.TrainerAlreadyPromoted(trainerId.Value)
+    : unit;
+
+[Pure]
+private Guid NewTrainerId() =>
+  Guid.NewGuid();
+
+private Fin<Guid> ApplyTrainerPromotion(Guid newTrainerId)
+{
+  // 하나의 논리적 작업: TrainerId 설정과 이벤트 발생은 불가분의 도메인 행동이다
+  //
+  // "프로필을 생성한다"는 하나의 도메인 행동이자,
+  // 그 결과로 TrainerId가 할당되고 이벤트가 생성되는 것은 불가분 관계입니다.
+
+  TrainerId = newTrainerId;
+  _domainEvents.Add(new TrainerPromotedEvent(Id, newTrainerId));
+
+  return newTrainerId;
 }
 ```
 
-### Case 2. Monadic 스타일
+### void 메서드 제거하기
+- Unit을 반환하는 함수로 개선하기
+  ```cs
+  // 개선 전
+  // void UnregisterSession(Guid sessionId)
+
+  // 개선 후
+  Unit UnregisterSession(Guid sessionId)
+  ```
+  - void를 반환하는 함수는 Unit을 반환하도록 변경하여, 함수 체이닝이 가능하도록 합니다.
+- Bind 메서드 이해하기
+  ```cs
+  Fin<Unit> UnregisterSession(Guid sessionId)
+  ```
+  - 부수 효과가 있는 함수는 실패 가능성과 무관하더라도,
+  - 함수형 체이닝(Bind) 안에서 일관되게 Fin<Unit>을 반환하는 것이 좋습니다.
+
 ```cs
-public sealed class Trainer : AggregateRoot
+// Case 1. Imperative Guard 스타일
+public Fin<Unit> UnscheduleSession(Session session)
 {
-  private Fin<Unit> ValidateSessionExists(Guid sessionId) =>
-      _sessionIds.Contains(sessionId)
-          ? Unit.Default
-          : TrainerErrors.SessionNotFound;
-
-  private Unit RemoveSessionId(Guid sessionId)
+  if (!_sessionIds.Contains(session.Id))
   {
-      _sessionIds.Remove(sessionId);
-      return Unit.Default;
+      return TrainerErrors.SessionNotScheduled;
   }
 
-  public Fin<Unit> RemoveFromSchedule(Session session)
+  var unbookTimeSlotResult = _schedule.UnbookTimeSlot(session.Date, session.Time);
+  if (unbookTimeSlotResult.IsFail)
   {
-    return ValidateSessionExists(session.Id)
-        .Bind(_ => _schedule.RemoveBooking(session.Date, session.Time))
-        .Map(_ => RemoveSessionId(session.Id));
+      return (Error)unbookTimeSlotResult;
   }
+
+  _sessionIds.Remove(session.Id);
+
+  return unit;
+}
+
+// Case 2. Monadic 스타일
+public Fin<Unit> UnscheduleSession(Session session)
+{
+  return EnsureSessionScheduled(session.Id)
+      .Bind(_ => _schedule.UnbookTimeSlot(session.Date, session.Time))
+      .Map(_ => UnregisterSession(session.Id));
+}
+
+// Case 3. Monadic LINQ 스타일
+public Fin<Unit> UnscheduleSession(Session session)
+{
+  return from _1 in EnsureSessionScheduled(session.Id)
+         from _2 in _schedule.UnbookTimeSlot(session.Date, session.Time)
+         from _3 in UnregisterSession(session.Id)
+         select unit;
+}
+
+private Fin<Unit> EnsureSessionScheduled(Guid sessionId) =>
+    _sessionIds.Contains(sessionId)
+        ? unit
+        : TrainerErrors.SessionNotScheduled(sessionId);
+
+private Fin<Unit> UnregisterSession(Guid sessionId)
+{
+    _sessionIds.Remove(sessionId);    // 부수 효과
+    return unit;
 }
 ```
 
-### Case 3. Monadic LINQ 스타일
+### 에러 재포장하기
+
+- AggregateRoot는 Entity에서 발생한 에러를, 상위 도메인 맥락에 맞게 의미 있는 도메인 언어로 포장해주는 것이 더 적절할 수 있습니다.
+  ```cs
+  .MapFail(error =>
+    error.Combine(
+      TrainerErrors.CannotHaveTwoOrMoreOverlappingSessions(
+  ```
+
 ```cs
-public sealed class Trainer : AggregateRoot
+public Fin<Unit> ScheduleSession(Session session)
 {
-  private Fin<Unit> ValidateSessionExists(Guid sessionId) =>
-      _sessionIds.Contains(sessionId)
-          ? Unit.Default
-          : TrainerErrors.SessionNotFound;
+  // 에러 재포장 전
+  //return from _1 in EnsureSessionNotScheduled(session.Id)
+  //       from _2 in _schedule.BookTimeSlot(session.Date, session.Time)
+  //       from _3 in RegisterSession(session.Id)
+  //       select unit;
 
-  private Unit RemoveSessionId(Guid sessionId)
-  {
-      _sessionIds.Remove(sessionId);
-      return Unit.Default;
-  }
-
-  public Fin<Unit> RemoveFromSchedule(Session session)
-  {
-    return from _1 in ValidateSessionExists(session.Id)
-           from _2 in _schedule.RemoveBooking(session.Date, session.Time)
-           select RemoveSessionId(session.Id);
-  }
-}
+  // 에러 재포한 후
+  return from _1 in EnsureSessionNotScheduled(session.Id)
+         from _2 in _schedule.BookTimeSlot(session.Date, session.Time)
+          .MapFail(error =>
+            error.Combine(
+              TrainerErrors.CannotHaveTwoOrMoreOverlappingSessions(
+                session.Date,
+                session.Time)))
+         from _3 in RegisterSession(session.Id)
+         select unit;
 ```
