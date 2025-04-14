@@ -4,33 +4,28 @@
 
 > Make It Work, Make It Right, Make It Fast
 
-A beautiful journey to writing **wise code that works**
-- **`The source code structure`** should be as clear as **`a book’s table of contents`**, making it easy to understand the domain and system.
-- **`Test code`** should act as **`a manual`** for understanding business rules.
+## 목표
+- 소스 코드의 구조는 책의 목차처럼 명료해야 하며, 이를 통해 도메인과 시스템의 이해가 자연스럽게 이루어져야 한다.
+- 테스트 코드는 검증 도구를 넘어, 비즈니스 규칙을 이해하는 데 핵심적인 가이드가 되어야 한다.
 
 <br/>
 
 ## 도메인 주도 설계와 함수형 프로그래밍
 
-도메인 주도 설계의 '무엇을 표현할지'와 함수형 프로그래밍의 '어떻게 표현할지'가 만나서, 변경에 강하고, 테스트 가능하고, 명확한 의도를 가진 코드를 만듭니다.
-
-- DDD란?
+도메인 주도 설계의 '무엇을 표현할지'와 함수형 프로그래밍의 '어떻게 표현할지'가 만나서, 변경에 강하고, 테스트 가능하고, 명확한 의도를 가진 코드를 만듭니다.  
+- **무엇을 표현할지: 복잡성 분리**
   - 복잡한 비즈니스 로직을 도메인 모델 중심으로 풀어나가는 설계 방법입니다.
   - 도메인 전문가의 언어(Ubiquitous Language) 로 시스템을 설계하는 것이 핵심입니다.
-- Function Programming란?
+- **어떻게 표현할지: 부작용 최소화**
   - 함수(수학적인 함수)에 기반한 프로그래밍 방식입니다.
   - 상태 변경 없이, 입력에 따라 일관된 출력을 보장합니다.
 
- **DDD 개념**                    | **FP 접근 방식**                                 | **공통 목표(장점)**
+ **DDD 가치**                    | **FP 가치**                                       | **공통 목표(장점)**
 ------------------------------- |---------------------------------------------------|----------------------------------
 복잡성 분리                      | 부작용 최소화 (부작용 없는 순수 함수 구성)           | 변경에 강한 모델
-명확한 경계 (Bounded Context)    | 순수 함수 중심 (상태 변화는 명시적 함수 결과로 표현)   | 명확한 책임 분리, 테스트 용이성
-명확한 의미 부여 (유비쿼터스 언어) | 타입 기반 설계                                     | 도메인 언어와 코드가 일치
-명확한 상태 전이                  | 상태마다 구체적인 타입으로 표현 (`Union Type`)      | 불가능한 상태 방지, 검증된 상태 흐름
-도메인 규칙 불변성 유지           | 불변 객체 사용 (데이터는 항상 새로운 구조로 복사)     | 상태 일관성 보장, 디버깅 용이
-도메인 이벤트 사용                | 이벤트를 값으로 함께 반환                           | 부작용 분리, 이벤트 소싱에 유리
-일관된 로직 흐름                 | `Map`, `Bind`, `LINQ`, `Pipeline` 등으로 체이닝     | 읽기 쉬운 흐름, 변경 시 영향 최소화
-실패를 도메인의 일부로 처리       | `Fin`, `Option`, `Either` 등으로 실패를 값으로 표현  | 명시적인 에러 흐름, 예외 최소화
+명확한 경계 (Bounded Context)    | 순수 함수 중심 (상태 변화는 명시적 함수 결과로 표현)   | 예측 가능한 동작 (명확한 책임 분리, 테스트 용이성)
+명확한 의미 부여 (유비쿼터스 언어) | 타입 기반 설계                                     | 정확한 도메인 표현 (도메인 언어와 코드가 일치)
+
 
 <br/>
 
@@ -316,4 +311,53 @@ public Fin<Unit> ScheduleSession(Session session)
                 session.Time)))
          from _3 in RegisterSession(session.Id)
          select unit;
+```
+
+### 에러 범주 구분하기
+
+기준              | Validation                 | Operation
+ --- | --- | ---
+무엇을 검사하는가?	| 사전에 조건을 점검(상태 검증)  | 실제 동작 실행 중 실패
+언제 실패하는가?   | 아직 아무 일도 일어나기 전     | 시스템 또는 도메인 로직 수행 중
+예시              | 이미 예약된 세션인가?         | 예약 시도했지만 시간이 겹쳤다
+
+```cs
+public static partial class DomainErrors
+{
+  public static class TrainerErrors
+  {
+    // Validation
+    public static Error SessionNotScheduled(Guid sessionId) =>
+      ErrorCode.Validation(
+        $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(SessionNotScheduled)}",
+        $"Session '{sessionId}' not found in trainer's schedule");
+
+    // Operation
+    public static Error CannotHaveTwoOrMoreOverlappingSessions(DateOnly date, TimeRange timeRange) =>
+      ErrorCode.Operation(
+        $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(CannotHaveTwoOrMoreOverlappingSessions)}",
+        $"A trainer cannot have two or more overlapping sessions '{date}', '{timeRange}'");
+  }
+}
+```
+
+```cs
+public Fin<Unit> ScheduleSession(Session session)
+{
+  return from _1 in EnsureSessionNotScheduled(session.Id)
+         from _2 in _schedule.BookTimeSlot(session.Date, session.Time)
+              .MapFail(error => error.Combine(
+                // Error Operation
+                TrainerErrors.CannotHaveTwoOrMoreOverlappingSessions(
+                  session.Date, 
+                  session.Time)))
+         from _3 in RegisterSession(session.Id)
+         select unit;
+}
+
+// Error Validation
+private Fin<Unit> EnsureSessionNotScheduled(Guid sessionId) =>
+  !_sessionIds.Contains(sessionId)
+    ? unit
+    : TrainerErrors.SessionAlreadyScheduled(sessionId);
 ```

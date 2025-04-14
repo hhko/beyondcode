@@ -1,10 +1,11 @@
-﻿using DddGym.Framework.BaseTypes;
+using DddGym.Framework.BaseTypes;
+
 //
 using LanguageExt;
 using LanguageExt.Common;
 using Throw;
 
-namespace GymManagement.Domain.Abstractions.ValueObjects;
+namespace GymManagement.Domain.SharedTypes.ValueObjects;
 
 public sealed class TimeRange : ValueObject
 {

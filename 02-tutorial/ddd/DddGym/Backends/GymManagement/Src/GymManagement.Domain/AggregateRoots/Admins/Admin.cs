@@ -1,10 +1,10 @@
 ﻿using DddGym.Framework.BaseTypes;
-
 using GymManagement.Domain.AggregateRoots.Admins.Events;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
 using LanguageExt;
-using LanguageExt.Common;
+using System.Diagnostics.Contracts;
 using static GymManagement.Domain.AggregateRoots.Admins.Errors.DomainErrors;
+using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Admins;
 
@@ -39,17 +39,45 @@ public sealed class Admin : AggregateRoot
     {
     }
 
-    public Fin<Unit> SetSubscription(Subscription subscription)
+    // SetSubscription      : 기술적 용어
+    // AssignSubscription   : 비즈니스적 용어
+    public Fin<Unit> AssignSubscription(Subscription subscription)
     {
-        if (SubscriptionId.HasValue)
-        {
-            return AdminErrors.AlreadyExitSubscription;
-        }
+        // =========================================
+        // Monadic LINQ 스타일
+        // =========================================
 
-        SubscriptionId = subscription.Id;
+        return from _1 in EnsureSubscriptionNotAssigned(SubscriptionId)
+               from _2 in ApplySubscription(subscription)
+               select unit;
 
-        _domainEvents.Add(new SubscriptionSetEvent(this, subscription));
+        // =========================================
+        // Imperative Guard 스타일
+        // =========================================
 
-        return Unit.Default;
+        //if (SubscriptionId.HasValue)
+        //{
+        //    return AdminErrors.AlreadyExitSubscription;
+        //}
+        //
+        //SubscriptionId = subscription.Id;
+        //
+        //_domainEvents.Add(new SubscriptionSetEvent(this, subscription));
+        //
+        //return Unit.Default;
+    }
+
+    [Pure]
+    private Fin<Unit> EnsureSubscriptionNotAssigned(Guid? subscriptionId) =>
+        !subscriptionId.HasValue
+            ? unit
+            : AdminErrors.AlreadyExitSubscription(subscriptionId.Value);
+
+    private Fin<Unit> ApplySubscription(Subscription newSubscription)
+    {
+        SubscriptionId = newSubscription.Id;
+        _domainEvents.Add(new SubscriptionAssignedEvent(this, newSubscription));
+
+        return unit;
     }
 }

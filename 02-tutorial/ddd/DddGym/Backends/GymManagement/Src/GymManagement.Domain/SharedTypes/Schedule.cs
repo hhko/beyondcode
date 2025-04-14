@@ -1,10 +1,12 @@
-﻿using DddGym.Framework.BaseTypes;
+using DddGym.Framework.BaseTypes;
+
+
 //
-using GymManagement.Domain.Abstractions.ValueObjects;
+using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using LanguageExt.Common;
 
-namespace GymManagement.Domain.Abstractions.Entities;
+namespace GymManagement.Domain.SharedTypes;
 
 public sealed class Schedule : Entity
 {
@@ -54,7 +56,7 @@ public sealed class Schedule : Entity
     }
 
     //internal Fin<Unit> RemoveBooking(DateOnly date, TimeRange time)
-    internal Fin<Unit> RemoveBooking(DateOnly date, TimeRange time)
+    internal Fin<Unit> UnbookTimeSlot(DateOnly date, TimeRange time)
     {
         if (!_calendar.TryGetValue(date, out var timeSlots) || !timeSlots.Contains(time))
         {
