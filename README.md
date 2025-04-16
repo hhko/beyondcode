@@ -50,12 +50,13 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
 - Learn tactical design that express domain knowledge as code.
 
 ### 목차
-- Part 1. Domain
-  - [ ] Chapter 01. [Domain Glossary](./02-tutorial/ddd/ch01-domain-glossary/index.md)
-  - [x] Chapter 02. [Domain Exploration](./02-tutorial/ddd/ch02-domain-exploration/index.md)
-  - [ ] Chapter 03. Domain Structuring
-  - [ ] Chapter 04. Domain Test
-- Part 2. Use Case
+- Part 1. 도메인
+  - [ ] Chapter 01. [도메인 용어집](./02-tutorial/ddd/ch01-domain-glossary/index.md)
+  - [x] Chapter 02. [도메인 탐색](./02-tutorial/ddd/ch02-domain-exploration/index.md)
+  - [ ] Chapter 03. 도메인 구조화
+  - [ ] Chapter 04. 도메인 함수화
+  - [ ] Chapter xx. 도메인 테스트
+- Part 2. 유스케이스
   - [ ] Chapter 05. Use Case Exploration
   - [ ] Chapter 06. Use Case Pipeline
   - [ ] Chapter 07. Use Case Test(Cucumber)
@@ -71,7 +72,7 @@ I restructured '[Getting Started: Domain-Driven Design](https://dometrain.com/co
   - [ ] Chapter 15. Resilience
   - [ ] Chapter 16. Reverse Proxy
   - [ ] Chapter 17. Chaos Engineering
-- Part 4. Operations
+- Part 4. 운영
   - [ ] Chapter 18. OpenFeature(Feature Flag Management)
   - [ ] Chapter 19. OpenSearch(Observability System)
   - [ ] Chapter 20. Ansible(Infrastructure as Code)
@@ -162,7 +163,9 @@ EnsureTrainerNotExist | `EnsureTrainerNotPromoted` | 사용자가 이미 트레�
   - 다른 모나드(예. Fin, Option, ...)들과 함수 체이닝하기 위해 순수한 값을 리프팅(pure lifted values)합니다.
 
 ```cs
-// Case 1: Imperative Guard 스타일
+//
+// 적용 전, Case 1: Imperative Guard 스타일
+//
 public Fin<Guid> PromoteToTrainer()
 {
   if (TrainerId is not null)
@@ -176,7 +179,9 @@ public Fin<Guid> PromoteToTrainer()
   return TrainerId.Value;
 }
 
-// Case 2. Monadic 스타일
+//
+// 적용 전, Case 2. Monadic 스타일
+//
 public Fin<Guid> PromoteToTrainer()
 {
   return EnsureTrainerNotPromoted(TrainerId)
@@ -184,7 +189,9 @@ public Fin<Guid> PromoteToTrainer()
     .Bind(newTrainerId => ApplyTrainerPromotion(newTrainerId));
 }
 
-// Case 3. Monadic LINQ 스타일
+//
+// 적용 후, Case 3. Monadic LINQ 스타일
+//
 public Fin<Guid> PromoteToTrainer()
 {
   return from _1 in EnsureTrainerNotPromoted(TrainerId)
@@ -220,10 +227,10 @@ private Fin<Guid> ApplyTrainerPromotion(Guid newTrainerId)
 ### void 메서드 제거하기
 - Unit을 반환하는 함수로 개선하기
   ```cs
-  // 개선 전
+  // 적용 전
   // void UnregisterSession(Guid sessionId)
 
-  // 개선 후
+  // 적용 후
   Unit UnregisterSession(Guid sessionId)
   ```
   - void를 반환하는 함수는 Unit을 반환하도록 변경하여, 함수 체이닝이 가능하도록 합니다.
@@ -235,7 +242,9 @@ private Fin<Guid> ApplyTrainerPromotion(Guid newTrainerId)
   - 함수형 체이닝(Bind) 안에서 일관되게 Fin<Unit>을 반환하는 것이 좋습니다.
 
 ```cs
-// Case 1. Imperative Guard 스타일
+//
+// 적용 전, Case 1. Imperative Guard 스타일
+//
 public Fin<Unit> UnscheduleSession(Session session)
 {
   if (!_sessionIds.Contains(session.Id))
@@ -254,7 +263,9 @@ public Fin<Unit> UnscheduleSession(Session session)
   return unit;
 }
 
-// Case 2. Monadic 스타일
+//
+// 적용 전, Case 2. Monadic 스타일
+//
 public Fin<Unit> UnscheduleSession(Session session)
 {
   return EnsureSessionScheduled(session.Id)
@@ -262,7 +273,9 @@ public Fin<Unit> UnscheduleSession(Session session)
       .Map(_ => UnregisterSession(session.Id));
 }
 
-// Case 3. Monadic LINQ 스타일
+//
+// 적용 후, Case 3. Monadic LINQ 스타일
+//
 public Fin<Unit> UnscheduleSession(Session session)
 {
   return from _1 in EnsureSessionScheduled(session.Id)
@@ -280,6 +293,64 @@ private Fin<Unit> UnregisterSession(Guid sessionId)
 {
     _sessionIds.Remove(sessionId);    // 부수 효과
     return unit;
+}
+```
+
+### 조기 반환 적용하기
+```cs
+//
+// 적용 전: Imperative Guard 스타일
+//
+internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange newTimeSlot)
+{
+  if (!_calendar.TryGetValue(date, out var timeSlots))
+  {
+      _calendar[date] = [time];
+      return unit;
+  }
+
+  if (timeSlots.Any(timeSlot => timeSlot.OverlapsWith(time)))
+  {
+      return ScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions(date, time);
+  }
+
+  timeSlots.Add(time);
+  return unit;
+}
+
+//
+// 적용 후: Monadic LINQ 스타일
+//
+internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange newTimeSlot)
+{
+  return from timeSlots in GetOrCreateTimeSlots(date)
+         from _1 in CheckOverlap(date, timeSlots, newTimeSlot)
+         from _2 in ApplyTimeSlotToCalendar(timeSlots, newTimeSlot)
+         select unit;
+}
+
+// 실패 가능성은 없지만, 내부 상태를 변경하는 부수 효과가 있기 때문에 Fin 모나드를 사용
+private Fin<List<TimeRange>> GetOrCreateTimeSlots(DateOnly date)
+{
+  if (!_calendar.TryGetValue(date, out var slots))
+  {
+    slots = new List<TimeRange>();
+    _calendar[date] = slots;
+  }
+
+  return slots;
+}
+
+private Fin<Unit> CheckOverlap(DateOnly date, List<TimeRange> timeSlots, TimeRange newTimeSlot) =>
+  timeSlots.Any(existingTimeSlot => timeSlot.OverlapsWith(newTimeSlot))
+    ? ScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions(date, newTimeSlot)
+    : unit;
+
+// 실패 가능성은 없지만, 내부 상태를 변경하는 부수 효과가 있기 때문에 Fin 모나드를 사용
+private Fin<Unit> ApplyTimeSlotToCalendar(List<TimeRange> timeSlots, TimeRange newTimeSlot)
+{
+  timeSlots.Add(newTimeSlot);
+  return unit;
 }
 ```
 
