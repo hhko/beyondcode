@@ -7,19 +7,25 @@ public static partial class DomainErrors
 {
     public static class UserErrors
     {
-        public static Error AdminAlreadyPromoted(Guid adminId) =>
-            ErrorCode.Validation(
-                $"{nameof(DomainErrors)}.{nameof(UserErrors)}.{nameof(AdminAlreadyPromoted)}",
-                $"User '{adminId}' already has a admin profile");
+        public static Error AdminAlreadyCreated(Guid userId, Guid adminId) =>
+            ErrorCodeFactory.New(
+                $"{nameof(DomainErrors)}.{nameof(UserErrors)}.{nameof(AdminAlreadyCreated)}",
+                $"User '{userId}' already has a admin profile '{adminId}'");
 
-        public static Error TrainerAlreadyPromoted(Guid trainerId) =>
-            ErrorCode.Validation(
-                $"{nameof(DomainErrors)}.{nameof(UserErrors)}.{nameof(TrainerAlreadyPromoted)}",
-                $"User '{trainerId}' already has a trainer profile");
+        public static Error TrainerAlreadyCreated(Guid userId, Guid trainerId) =>
+            ErrorCodeFactory.New(
+                $"{nameof(DomainErrors)}.{nameof(UserErrors)}.{nameof(TrainerAlreadyCreated)}",
+                $"User '{userId}' already has a trainer profile '{trainerId}'");
 
-        public static Error ParticipantAlreadyPromoted(Guid participantId) =>
-            ErrorCode.Validation(
-                $"{nameof(DomainErrors)}.{nameof(UserErrors)}.{nameof(ParticipantAlreadyPromoted)}",
-                $"User '{participantId}' already has a participant profile");
+        public static Error ParticipantAlreadyCreated(Guid userId, Guid participantId) =>
+            ErrorCodeFactory.New(
+                $"{nameof(DomainErrors)}.{nameof(UserErrors)}.{nameof(ParticipantAlreadyCreated)}",
+                $"User '{userId}' already has a participant profile '{participantId}'");
     }
 }
+
+// AlreadyExist         vs    NotFound
+// AlreadyCreated
+//
+// Max{N}sNotExceeded   vs    Max{N}xExceeded
+// TimeSlotOverlapped

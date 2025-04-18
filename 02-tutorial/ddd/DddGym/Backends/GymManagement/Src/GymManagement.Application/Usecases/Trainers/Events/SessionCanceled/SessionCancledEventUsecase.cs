@@ -1,9 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Events;
-using GymManagement.Domain.AggregateRoots.Sessions.Events;
-using GymManagement.Domain.AggregateRoots.Trainers;
-using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainEventErrors;
-
-namespace GymManagement.Application.Usecases.Trainers.Events.SessionCanceled;
+﻿namespace GymManagement.Application.Usecases.Trainers.Events.SessionCanceled;
 
 //// TODO: LanguageExt
 //internal sealed class SessionCanceledEventUsecase

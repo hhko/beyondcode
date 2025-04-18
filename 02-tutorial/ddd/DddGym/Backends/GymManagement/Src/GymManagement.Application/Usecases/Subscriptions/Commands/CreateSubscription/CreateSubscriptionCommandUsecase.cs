@@ -1,8 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Admins;
-using GymManagement.Domain.AggregateRoots.Subscriptions;
-
-namespace GymManagement.Application.Usecases.Subscriptions.Commands.CreateSubscription;
+﻿namespace GymManagement.Application.Usecases.Subscriptions.Commands.CreateSubscription;
 
 //// TODO: LanguageExt
 //internal sealed class CreateSubscriptionCommandUsecase

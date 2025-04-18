@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace GymManagement.Application.Usecases.Gyms.Commands.AddTrainer;
+﻿namespace GymManagement.Application.Usecases.Gyms.Commands.AddTrainer;
 
 //internal sealed class AddTrainerCommandValidator : AbstractValidator<AddTrainerCommand>
 //{

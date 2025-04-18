@@ -1,11 +1,12 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
 using GymManagement.Domain.AggregateRoots.Gyms.Events;
 using GymManagement.Domain.AggregateRoots.Sessions;
+using static GymManagement.Domain.AggregateRoots.Gyms.Events.DomainEvents;
 
 namespace GymManagement.Application.Usecases.Sessions.Events.RoomRemoved;
 
 internal sealed class RoomRemovedEventUsecase
-    : IDomainEventUsecase<RoomRemovedEvent>
+    : IDomainEventUsecase<GymEvents.RoomRemovedEvent>
 {
     private readonly ISessionsRepository _sessionsRepository;
 
@@ -14,7 +15,7 @@ internal sealed class RoomRemovedEventUsecase
         _sessionsRepository = sessionsRepository;
     }
 
-    public async Task Handle(RoomRemovedEvent domainEvent, CancellationToken cancellationToken)
+    public async Task Handle(GymEvents.RoomRemovedEvent domainEvent, CancellationToken cancellationToken)
     {
         List<Session> sessions = await _sessionsRepository.ListByRoomIdAsync(domainEvent.RoomId);
 

@@ -10,7 +10,7 @@ internal static class GymFactory
         int maxRooms = DomainConstants.Subscription.MaxRoomsFreeTier,
         Guid? id = null)
     {
-        return new Gym(
+        return Gym.Create(
             name,
             maxRooms,
             subscriptionId: DomainConstants.Subscription.Id,

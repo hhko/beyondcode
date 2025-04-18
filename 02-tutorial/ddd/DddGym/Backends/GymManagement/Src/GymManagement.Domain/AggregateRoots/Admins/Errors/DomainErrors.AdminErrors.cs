@@ -7,9 +7,9 @@ public static partial class DomainErrors
 {
     public static class AdminErrors
     {
-        public static Error AlreadyExitSubscription(Guid subscriptionId) =>
-            ErrorCode.Validation(
-                $"{nameof(DomainErrors)}.{nameof(AdminErrors)}.{nameof(AlreadyExitSubscription)}",
-                $"Admin '{subscriptionId}' already has an active subscription");
+        public static Error SubscriptionAlreadySet(Guid adminId, Guid subscriptionId) =>
+            ErrorCodeFactory.New(
+                $"{nameof(DomainErrors)}.{nameof(AdminErrors)}.{nameof(SubscriptionAlreadySet)}",
+                $"Admin '{adminId}' already has an active subscription ''{subscriptionId}");
     }
 }

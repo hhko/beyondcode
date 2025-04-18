@@ -1,9 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Gyms;
-
-//using GymManagement.Application.Abstractions.Repositories;
-using GymManagement.Domain.AggregateRoots.Subscriptions;
-
+﻿//using GymManagement.Application.Abstractions.Repositories;
 namespace GymManagement.Application.Usecases.Gyms.Commands.CreateGym;
 
 //// TODO: LanguageExt

@@ -11,8 +11,4 @@
     <ProjectReference Include="..\..\..\..\Abstractions\Frameworks\Src\DddGym.Framework\DddGym.Framework.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Abstractions\Error\" />
-  </ItemGroup>
-
 </Project>

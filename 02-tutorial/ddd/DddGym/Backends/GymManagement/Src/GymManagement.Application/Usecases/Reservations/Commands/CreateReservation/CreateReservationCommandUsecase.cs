@@ -1,8 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Participants;
-using GymManagement.Domain.AggregateRoots.Sessions;
-
-namespace GymManagement.Application.Usecases.Reservations.Commands.CreateReservation;
+﻿namespace GymManagement.Application.Usecases.Reservations.Commands.CreateReservation;
 
 //// TODO: LanguageExt
 //internal sealed class CreateReservationCommandUsecase

@@ -1,7 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Gyms;
-
-namespace GymManagement.Application.Usecases.Rooms.Commands.DeleteRoom;
+﻿namespace GymManagement.Application.Usecases.Rooms.Commands.DeleteRoom;
 
 //// TODO: LanguageExt
 //internal sealed class DeleteRoomCommandUsecase

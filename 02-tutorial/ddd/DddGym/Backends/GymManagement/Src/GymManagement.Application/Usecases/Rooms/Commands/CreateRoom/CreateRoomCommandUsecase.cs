@@ -1,9 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Gyms;
-using GymManagement.Domain.AggregateRoots.Rooms;
-using GymManagement.Domain.AggregateRoots.Subscriptions;
-
-namespace GymManagement.Application.Usecases.Rooms.Commands.CreateRoom;
+﻿namespace GymManagement.Application.Usecases.Rooms.Commands.CreateRoom;
 
 //// TODO: LanguageExt
 //internal sealed class CreateRoomCommandUsecase

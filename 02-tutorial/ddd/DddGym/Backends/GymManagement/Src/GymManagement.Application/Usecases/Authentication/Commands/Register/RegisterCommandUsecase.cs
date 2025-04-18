@@ -1,8 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Application.Abstractions.TokenGenerator;
-using GymManagement.Domain.AggregateRoots.Users;
-
-namespace GymManagement.Application.Usecases.Authentication.Commands.Register;
+﻿namespace GymManagement.Application.Usecases.Authentication.Commands.Register;
 
 //// TODO: LanguageExt
 //internal sealed class RegisterCommandUsecase

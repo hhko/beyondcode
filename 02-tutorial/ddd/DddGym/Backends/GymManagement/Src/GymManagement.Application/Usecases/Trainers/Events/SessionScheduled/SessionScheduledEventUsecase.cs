@@ -1,9 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Events;
-using GymManagement.Domain.AggregateRoots.Rooms.Events;
-using GymManagement.Domain.AggregateRoots.Trainers;
-using static GymManagement.Domain.AggregateRoots.Rooms.Errors.DomainEventErrors;
-
-namespace GymManagement.Application.Usecases.Trainers.Events.SessionScheduled;
+﻿namespace GymManagement.Application.Usecases.Trainers.Events.SessionScheduled;
 
 //// TODO: LanguageExt
 //internal sealed class SessionScheduledEventUsecase

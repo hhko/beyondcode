@@ -1,5 +1,4 @@
 ﻿using GymManagement.Application.Usecases.Rooms.Commands.CreateRoom;
-using GymManagement.Application.Usecases.Rooms.Commands.DeleteRoom;
 using GymManagement.Application.Usecases.Rooms.Queries.GetRoom;
 using GymManagement.Application.Usecases.Rooms.Queries.ListRooms;
 using GymManagement.Domain.AggregateRoots.Rooms;

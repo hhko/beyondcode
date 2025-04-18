@@ -1,7 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Sessions;
-
-namespace GymManagement.Application.Usecases.Gyms.Queries.ListSessions;
+﻿namespace GymManagement.Application.Usecases.Gyms.Queries.ListSessions;
 
 //// TODO: LanguageExt
 //internal sealed class ListSessionsQueryUsecase

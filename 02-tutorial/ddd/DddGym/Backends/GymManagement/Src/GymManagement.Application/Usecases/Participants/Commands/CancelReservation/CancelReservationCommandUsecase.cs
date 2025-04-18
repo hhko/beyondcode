@@ -1,9 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Application.Usecases.Participants.Queries.ListParticipantSessions;
-using GymManagement.Domain.AggregateRoots.Participants;
-using GymManagement.Domain.AggregateRoots.Sessions;
-
-namespace GymManagement.Application.Usecases.Participants.Commands.CancelReservation;
+﻿namespace GymManagement.Application.Usecases.Participants.Commands.CancelReservation;
 
 //// TODO: LanguageExt
 //internal sealed class CancelReservationCommandUsecase

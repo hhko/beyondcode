@@ -1,10 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Events;
-using GymManagement.Domain.AggregateRoots.Participants;
-using GymManagement.Domain.AggregateRoots.Sessions.Events;
-using Throw;
-using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainEventErrors;
-
-namespace GymManagement.Application.Usecases.Participants.Events.SessionSpotReserved;
+﻿namespace GymManagement.Application.Usecases.Participants.Events.SessionSpotReserved;
 
 // TODO: LanguageExt
 //internal sealed class SessionSpotReservedEventUsecase

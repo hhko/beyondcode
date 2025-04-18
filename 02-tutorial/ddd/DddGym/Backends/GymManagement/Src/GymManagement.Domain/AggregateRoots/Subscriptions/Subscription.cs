@@ -5,7 +5,10 @@ using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Events;
 using LanguageExt;
 using LanguageExt.Common;
+using static LanguageExt.Prelude;
 using static GymManagement.Domain.AggregateRoots.Subscriptions.Errors.DomainErrors;
+using System;
+using static GymManagement.Domain.AggregateRoots.Subscriptions.Events.DomainEvents;
 
 namespace GymManagement.Domain.AggregateRoots.Subscriptions;
 
@@ -25,17 +28,12 @@ public sealed class Subscription : AggregateRoot
     private readonly List<Guid> _gymIds = [];
     private readonly int _maxGyms;
 
-    // ---------------------
-
-    // 변경: private readonly SubscriptionType _subscriptionType;
     private SubscriptionType SubscriptionType { get; }
 
-    // ---------------------
-
-    public Subscription(
+    private Subscription(
         SubscriptionType subscriptionType,
         Guid adminId,
-        Guid? id = null) : base(id ?? Guid.NewGuid())
+        Guid? id) : base(id ?? Guid.NewGuid())
     {
         SubscriptionType = subscriptionType;
         _adminId = adminId;
@@ -43,9 +41,16 @@ public sealed class Subscription : AggregateRoot
         _maxGyms = GetMaxGyms();
     }
 
-    // TODO: 존재 이유 ???
     private Subscription()
     {
+    }
+
+    public static Subscription Create(
+        SubscriptionType subscriptionType,
+        Guid adminId,
+        Guid? id = null)
+    {
+        return new Subscription(subscriptionType, adminId, id);
     }
 
     public int GetMaxGyms() => SubscriptionType.Name switch
@@ -74,30 +79,62 @@ public sealed class Subscription : AggregateRoot
 
     public Fin<Unit> AddGym(Gym gym)
     {
-        // TODO: IValidator
+        return from _1 in EnsureGymNotFound(gym.Id)
+               from _2 in EnsureMaxGymsNotExceeded()
+               from _3 in ApplyGymAddition(gym)
+               select unit;
+
+        // =========================================
+        // Monadic 스타일
+        // =========================================
+
+        //return EnsureGymNotAdded(gym.Id)
+        //    .Bind(_ => EnsureMaxGymsNotExceeded())
+        //    .Bind(_ => RegisterGym(gym));
+
+        // =========================================
+        // Imperative Guard 스타일
+        // =========================================
 
         // 규칙 생략: Id 중복
-        if (_gymIds.Contains(gym.Id))
-        {
-            return Error.New("Gym already exists in subscription");
-        }
+        //if (_gymIds.Contains(gym.Id))
+        //{
+        //    return Error.New("Gym already exists in subscription");
+        //}
 
         // 규칙
         //  구독은 구독(구독 등급)이 허용된 개수보다 더 많은 헬스장을 가질 수 없다.
         //  A subscription cannot have more gyms than the subscription allows
-        if (_gymIds.Count >= _maxGyms)
-        {
-            return AddGymErrors.CannotHaveMoreGymsThanSubscriptionAllows;
-        }
-
-        _gymIds.Add(gym.Id);
-
-        _domainEvents.Add(new GymAddedEvent(this, gym));
-
-        return Unit.Default;
+        //if (_gymIds.Count >= _maxGyms)
+        //{
+        //    return SubscriptionErrors.CannotHaveMoreGymsThanSubscriptionAllows(_maxGyms);
+        //}
+        //
+        //_gymIds.Add(gym.Id);
+        //
+        //_domainEvents.Add(new GymAddedEvent(this, gym));
+        //
+        //return Unit.Default;
     }
 
-    // 추가
+    private Fin<Unit> EnsureGymNotFound(Guid gymId) =>
+        !_gymIds.Contains(gymId)
+            ? unit
+            : SubscriptionErrors.GymAlreadyExist(Id, gymId);
+
+    private Fin<Unit> EnsureMaxGymsNotExceeded() =>
+        (_gymIds.Count < _maxGyms)
+            ? unit
+            : SubscriptionErrors.MaxGymsExceeded(Id, _maxGyms);
+
+    private Fin<Unit> ApplyGymAddition(Gym gym)
+    {
+        _gymIds.Add(gym.Id);
+        _domainEvents.Add(new SubscriptionEvents.GymAddedEvent(this, gym));
+
+        return unit;
+    }
+
     public bool HasGym(Guid gymId)
     {
         return _gymIds.Contains(gymId);

@@ -1,8 +1,10 @@
 ﻿using DddGym.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Users.Events;
 using LanguageExt;
+using System;
 using System.Diagnostics.Contracts;
 using static GymManagement.Domain.AggregateRoots.Users.Errors.DomainErrors;
+using static GymManagement.Domain.AggregateRoots.Users.Events.DomainEvents;
 using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Users;
@@ -68,18 +70,24 @@ public sealed class User : AggregateRoot
         return passwordHasher.IsCorrectPassword(password, _passwordHash);
     }
 
-    // CreateAddminProfile  : 기술적 용어
-    // PromoteToAddmin      : 비즈니스적 용어(기존 사용자을 Admin으로 승격)
-    public Fin<Guid> PromoteToAddmin()
+    public Fin<Guid> CreateAdminProfile()
     {
         // =========================================
         // Monadic LINQ 스타일
         // =========================================
 
-        return from _1 in EnsureAdminNotPromoted(AdminId)
-               from newAdminId in Pure(NewAdminId())
-               from _2 in ApplyAdminPromotion(newAdminId)
+        return from _1 in EnsureAdminNotCreated(AdminId)
+               from newAdminId in Pure(NewAdminId())            // Map
+               from _2 in ApplyAdminProfile(newAdminId)         // Bind
                select newAdminId;
+
+        // =========================================
+        // Monadic 스타일
+        // =========================================
+
+        //return EnsureAdminNotCreated(AdminId)
+        //    .Map(_ => NewAdminId())
+        //    .Bind(newAdminId => ApplyAdminProfile(newAdminId));
 
         // =========================================
         // Imperative Guard 스타일
@@ -97,41 +105,37 @@ public sealed class User : AggregateRoot
         //return AdminId.Value;
     }
 
-    // EnsureAddminNotExist     : 기술적 용어
-    // EnsureAdminNotPromoted   : 비즈니스적 용어
     [Pure]
-    private Fin<Unit> EnsureAdminNotPromoted(Guid? adminId) =>
+    private Fin<Unit> EnsureAdminNotCreated(Guid? adminId) =>
         !adminId.HasValue
             ? unit
-            : UserErrors.AdminAlreadyPromoted(adminId.Value);
+            : UserErrors.AdminAlreadyCreated(Id, adminId.Value);
 
     [Pure]
     private Guid NewAdminId() =>
         Guid.NewGuid();
 
-    private Fin<Guid> ApplyAdminPromotion(Guid newAdminId)
+    private Fin<Guid> ApplyAdminProfile(Guid newAdminId)
     {
         AdminId = newAdminId;
-        _domainEvents.Add(new AdminPromotedEvent(Id, newAdminId));
+        _domainEvents.Add(new UserEvents.AdminProfileCreatedEvent(Id, newAdminId));
 
         return newAdminId;
     }
 
-    // CreateParticipantProfile : 기술적 용어
-    // PromoteToParticipant     : 비즈니스적 용어(기존 사용자을 Participant으로 승격)
-    public Fin<Guid> PromoteToParticipant()
+    public Fin<Guid> CreateParticipantProfile()
     {
         // =========================================
-        // Monadic LINQ 스타일
+        // Case 3. Monadic LINQ 스타일
         // =========================================
 
-        return from _1 in EnsureParticipantNotPromoted(ParticipantId)
+        return from _1 in EnsureParticipantNotCreated(ParticipantId)
                from newParticipantId in Pure(NewParticipantId())
-               from _2 in ApplyParticipantPromotion(newParticipantId)
+               from _2 in ApplyParticipantProfile(newParticipantId)
                select newParticipantId;
 
         // =========================================
-        // Imperative Guard 스타일
+        // Case 1. Imperative Guard 스타일
         // =========================================
 
         //if (ParticipantId is not null)
@@ -146,29 +150,25 @@ public sealed class User : AggregateRoot
         //return ParticipantId.Value;
     }
 
-    // EnsureParticipantNotExist    : 기술적 용어
-    // EnsureParticipantNotPromoted : 비즈니스적 용어
     [Pure]
-    private Fin<Unit> EnsureParticipantNotPromoted(Guid? participantId) =>
+    private Fin<Unit> EnsureParticipantNotCreated(Guid? participantId) =>
         !participantId.HasValue
             ? unit
-            : UserErrors.ParticipantAlreadyPromoted(participantId.Value);
+            : UserErrors.ParticipantAlreadyCreated(Id, participantId.Value);
 
     [Pure]
     private Guid NewParticipantId() =>
         Guid.NewGuid();
 
-    private Fin<Guid> ApplyParticipantPromotion(Guid newParticipantId)
+    private Fin<Guid> ApplyParticipantProfile(Guid newParticipantId)
     {
         ParticipantId = newParticipantId;
-        _domainEvents.Add(new ParticipantPromotedEvent(Id, newParticipantId));
+        _domainEvents.Add(new UserEvents.ParticipantProfileCreatedEvent(Id, newParticipantId));
 
         return newParticipantId;
     }
 
-    // CreateTrainerProfile : 기술적 용어
-    // PromoteToTrainer     : 비즈니스적 용어(기존 사용자을 Trainer로 승격)
-    public Fin<Guid> PromoteToTrainer()
+    public Fin<Guid> CreateTrainerProfile()
     {
         // =========================================
         // Case 3. Monadic LINQ 스타일
@@ -181,9 +181,9 @@ public sealed class User : AggregateRoot
         //       from _2 in SetTrainerProfile(newTrainerId)
         //       select newTrainerId;
 
-        return from _1 in EnsureTrainerNotPromoted(TrainerId)
+        return from _1 in EnsureTrainerNotCreated(TrainerId)
                from newTrainerId in Pure(NewTrainerId())
-               from _2 in ApplyTrainerPromotion(newTrainerId)
+               from _2 in ApplyTrainerProfile(newTrainerId)
                select newTrainerId;
 
         // =========================================
@@ -209,26 +209,24 @@ public sealed class User : AggregateRoot
         //return TrainerId.Value;
     }
 
-    // EnsureTrainerNotExist    : 기술적 용어
-    // EnsureTrainerNotPromoted : 비즈니스적 용어
     [Pure]
-    private Fin<Unit> EnsureTrainerNotPromoted(Guid? trainerId) =>
+    private Fin<Unit> EnsureTrainerNotCreated(Guid? trainerId) =>
       !trainerId.HasValue
           ? unit
-          : UserErrors.TrainerAlreadyPromoted(trainerId.Value);
+          : UserErrors.TrainerAlreadyCreated(Id, trainerId.Value);
 
     [Pure]
     private Guid NewTrainerId() =>
         Guid.NewGuid();
 
     // Map은 순수한 값 변환용 함수 (T -> R)에 쓰입니다.
-    // 그러나 SetTrainerProfile은 내부 상태를 변경하는 부수 효과 함수 (T -> Fin<R>)이기 때문에 Bind가 더 적절합니다.
+    // 그러나 ApplyTrainerProfile은 내부 상태를 변경하는 부수 효과 함수 (T -> Fin<R>)이기 때문에 Bind가 더 적절합니다.
     //  - Map: 순수 함수
     //  - Bind: 부수 효과 함수
     //
-    // X: .Map(id => SetTrainerProfile(id)     : private Guid SetTrainerProfile(Guid newTrainerId)
-    // O: .Bind(id => SetTrainerProfile(id)    : private Fin<Guid> SetTrainerProfile(Guid newTrainerId)
-    private Fin<Guid> ApplyTrainerPromotion(Guid newTrainerId)
+    // X: .Map(id => ApplyTrainerProfile(id)     : private Guid ApplyTrainerProfile(Guid newTrainerId)
+    // O: .Bind(id => ApplyTrainerProfile(id)    : private Fin<Guid> ApplyTrainerProfile(Guid newTrainerId)
+    private Fin<Guid> ApplyTrainerProfile(Guid newTrainerId)
     {
         // TrainerId 설정과 이벤트 발생은 불가분의 도메인 행동이다
         //
@@ -236,7 +234,7 @@ public sealed class User : AggregateRoot
         // 그 결과로 TrainerId가 할당되고 이벤트가 생성되는 것은 불가분 관계입니다.
 
         TrainerId = newTrainerId;
-        _domainEvents.Add(new TrainerPromotedEvent(Id, newTrainerId));
+        _domainEvents.Add(new UserEvents.TrainerProfileCreatedEvent(Id, newTrainerId));
 
         return newTrainerId;
     }

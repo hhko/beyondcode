@@ -1,5 +1,5 @@
-﻿using GymManagement.Domain.Abstractions.ValueObjects;
-using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
+﻿using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
+using GymManagement.Domain.SharedTypes.ValueObjects;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain.Constants;
 
@@ -14,7 +14,7 @@ public static partial class DomainConstants
         //    TimeOnly.MinValue.AddHours(8),
         //    TimeOnly.MinValue.AddHours(9));
 
-        public static readonly TimeRange Time = (TimeRange)TimeRange.Create(
+        public static readonly TimeSlot Time = (TimeSlot)TimeSlot.Create(
             TimeOnly.MinValue.AddHours(8),
             TimeOnly.MinValue.AddHours(9));
 

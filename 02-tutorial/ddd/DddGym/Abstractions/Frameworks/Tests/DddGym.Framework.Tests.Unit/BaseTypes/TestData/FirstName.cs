@@ -1,7 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes;
-using LanguageExt.Common;
-using LanguageExt;
 using DddGym.Framework.BaseTypes.Utilities;
+using LanguageExt;
+using LanguageExt.Common;
 
 namespace DddGym.Framework.Tests.Unit.BaseTypes.TestData;
 

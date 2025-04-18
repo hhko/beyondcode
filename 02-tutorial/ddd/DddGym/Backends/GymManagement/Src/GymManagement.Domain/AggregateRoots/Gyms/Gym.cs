@@ -2,8 +2,9 @@
 using GymManagement.Domain.AggregateRoots.Gyms.Events;
 using GymManagement.Domain.AggregateRoots.Rooms;
 using LanguageExt;
-using LanguageExt.Common;
+using static LanguageExt.Prelude;
 using static GymManagement.Domain.AggregateRoots.Gyms.Errors.DomainErrors;
+using static GymManagement.Domain.AggregateRoots.Gyms.Events.DomainEvents;
 
 namespace GymManagement.Domain.AggregateRoots.Gyms;
 
@@ -28,38 +29,26 @@ public sealed class Gym : AggregateRoot
 {
     // TODO: _maxTrainers
 
+    private readonly List<Guid> _roomIds = [];
+    private readonly List<Guid> _trainerIds = [];
     private readonly int _maxRooms;
 
-    private readonly List<Guid> _roomIds = [];
-
-    // ---------------------
-
-    // 추가
-    private readonly List<Guid> _trainerIds = [];
-
-    // 추가
     public string Name { get; } = null!;
-
-    // 변경: private readonly List<Guid> _roomIds = [];
-    public IReadOnlyList<Guid> RoomIds => _roomIds;
-
-    // 변경: private readonly Guid _subscriptionId;
     public Guid SubscriptionId { get; }
 
-    // ---------------------
+    public IReadOnlyList<Guid> RoomIds => _roomIds;
 
-    public Gym(
+    private Gym(
         string name,
         int maxRooms,
         Guid subscriptionId,
-        Guid? id = null) : base(id ?? Guid.NewGuid())
+        Guid? id) : base(id ?? Guid.NewGuid())
     {
         Name = name;
         _maxRooms = maxRooms;
         SubscriptionId = subscriptionId;
     }
 
-    // TODO: 존재 이유 ???
     private Gym()
     {
     }
@@ -70,55 +59,102 @@ public sealed class Gym : AggregateRoot
         Guid subscriptionId,
         Guid? id = null)
     {
-        //Error error = Error.Forbidden();
-        return new Gym(
-            name,
-            maxRooms,
-            subscriptionId,
-            id);
+        return new Gym(name, maxRooms, subscriptionId, id);
     }
 
     public Fin<Unit> AddRoom(Room room)
     {
-        // 규칙 생략: Id 중복
-        if (_roomIds.Contains(room.Id))
-        {
-            return Error.New("Room already exists in gym");
-        }
+        return from _1 in EnsureRoomNotFound(room.Id)
+               from _2 in EnsureMaxRoomsNotExceeded()
+               from _3 in ApplayRoomAddition(room)
+               select unit;
 
+        // =========================================
+        // Imperative Guard 스타일
+        // =========================================
+
+        // 규칙 생략: Id 중복
+        //if (_roomIds.Contains(room.Id))
+        //{
+        //    return Error.New("Room already exists in gym");
+        //}
+        //
         // 규칙
         //  헬스장은 구독(구독 등급)이 허용하는 개수보다 더 많은 방을 가질 수 없다.
         //  A gym cannot have more rooms than the subscription allows
-        if (_roomIds.Count >= _maxRooms)
-        {
-            return AddRoomErrors.CannotHaveMoreRoomsThanSubscriptionAllows;
-        }
+        //if (_roomIds.Count >= _maxRooms)
+        //{
+        //    return AddRoomErrors.CannotHaveMoreRoomsThanSubscriptionAllows;
+        //}
+        //
+        //_roomIds.Add(room.Id);
+        //
+        //_domainEvents.Add(new RoomAddedEvent(
+        //    Name: room.Name,
+        //    RoomId: room.Id,
+        //    GymId: Id,
+        //    MaxDailySessions: room.MaxDailySessions));
+        //
+        //return unit;
+    }
 
+    private Fin<Unit> EnsureRoomNotFound(Guid roomId) =>
+        !_roomIds.Contains(roomId)
+            ? unit
+            : GymErrors.RoomAlreadyExist(Id, roomId);
+
+    private Fin<Unit> EnsureMaxRoomsNotExceeded() =>
+        (_roomIds.Count < _maxRooms)
+            ? unit
+            : GymErrors.MaxRoomsExceeded(Id, _maxRooms);
+
+    private Fin<Unit> ApplayRoomAddition(Room room)
+    {
         _roomIds.Add(room.Id);
 
-        //_domainEvents.Add(new RoomAddedEvent(this, room));
-        _domainEvents.Add(new RoomAddedEvent(
+        _domainEvents.Add(new GymEvents.RoomAddedEvent(
             Name: room.Name,
             RoomId: room.Id,
             GymId: Id,
             MaxDailySessions: room.MaxDailySessions));
 
-        return Unit.Default;
+        return unit;
     }
 
     // 추가
     public Fin<Unit> RemoveRoom(Guid roomId)
     {
-        if (!_roomIds.Contains(roomId))
-        {
-            return Error.New("Room not found");
-        }
+        return from _1 in EnsureRoomAlreadyExist(roomId)
+               from _2 in ApplyRoomRemoval(roomId)
+               select unit;
 
+        // =========================================
+        // Imperative Guard 스타일
+        // =========================================
+
+        //if (!_roomIds.Contains(roomId))
+        //{
+        //    return Error.New("Room not found");
+        //}
+        //
+        //_roomIds.Remove(roomId);
+        //
+        //_domainEvents.Add(new RoomRemovedEvent(this, roomId));
+        //
+        //return unit;
+    }
+
+    private Fin<Unit> EnsureRoomAlreadyExist(Guid roomId) =>
+        _roomIds.Contains(roomId)
+            ? unit
+            : GymErrors.RoomNotFound(Id, roomId);
+
+    private Fin<Unit> ApplyRoomRemoval(Guid roomId)
+    {
         _roomIds.Remove(roomId);
+        _domainEvents.Add(new GymEvents.RoomRemovedEvent(this, roomId));
 
-        _domainEvents.Add(new RoomRemovedEvent(this, roomId));
-
-        return Unit.Default;
+        return unit;
     }
 
     // 추가
@@ -127,36 +163,42 @@ public sealed class Gym : AggregateRoot
         return _roomIds.Contains(roomId);
     }
 
-    // 추가
-    //public Fin<Unit> AddTrainer(Trainer trainer)
-    //{
-    //    if (_trainerIds.Contains(trainer.Id))
-    //    {
-    //        return Error.New("Trainer already assigned to gym");
-    //    }
-
-    //    _trainerIds.Add(trainer.Id);
-
-    //    return Unit.Default;
-    //}
-
     public Fin<Unit> AddTrainer(Guid trainerId)
     {
-        if (_trainerIds.Contains(trainerId))
-        {
-            return Error.New("Trainer already assigned to gym");
-        }
+        return from _1 in EnsureTrainerNotFound(trainerId)
+               from _2 in ApplyTrainerAddition(trainerId)
+               select unit;
 
-        _trainerIds.Add(trainerId);
+        // =========================================
+        // Imperative Guard 스타일
+        // =========================================
 
-        return Unit.Default;
+        //if (_trainerIds.Contains(trainerId))
+        //{
+        //    return Error.New("Trainer already assigned to gym");
+        //}
+        //
+        //_trainerIds.Add(trainerId);
+        //
+        //return unit;
     }
 
-    // 추가
+    private Fin<Unit> EnsureTrainerNotFound(Guid trainerId) =>
+        !_trainerIds.Contains(trainerId)
+            ? unit
+            : GymErrors.TrainerAlreadyExist(Id, trainerId);
+
+    private Fin<Unit> ApplyTrainerAddition(Guid trainerId)
+    {
+        _trainerIds.Add(trainerId);
+
+        return unit;
+    }
+
+    // TODO: RemoveTrainer
+
     public bool HasTrainer(Guid trainerId)
     {
         return _trainerIds.Contains(trainerId);
     }
-
-    // TODO: RemoveTrainer
 }

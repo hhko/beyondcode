@@ -1,4 +1,4 @@
-using DddGym.Framework.BaseTypes;
+﻿using DddGym.Framework.BaseTypes;
 using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using System.Diagnostics.Contracts;
@@ -7,12 +7,12 @@ using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.SharedTypes;
 
-public sealed class Schedule : Entity
+public sealed partial class Schedule : Entity
 {
-    private readonly Dictionary<DateOnly, List<TimeRange>> _calendar = [];
+    private readonly Dictionary<DateOnly, List<TimeSlot>> _calendar = [];
 
     private Schedule(
-        Dictionary<DateOnly, List<TimeRange>>? calendar = null,
+        Dictionary<DateOnly, List<TimeSlot>>? calendar = null,
         Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         _calendar = calendar ?? [];
@@ -23,7 +23,7 @@ public sealed class Schedule : Entity
         return new Schedule(id: Guid.NewGuid());
     }
 
-    internal bool CanBookTimeSlot(DateOnly date, TimeRange time)
+    internal bool CanBookTimeSlot(DateOnly date, TimeSlot time)
     {
         if (!_calendar.TryGetValue(date, out var timeSlots))
         {
@@ -33,13 +33,20 @@ public sealed class Schedule : Entity
         return !timeSlots.Any(timeSlot => timeSlot.OverlapsWith(time));
     }
 
-    //internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange time)
-    internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange newTimeSlot)
+    internal Fin<Unit> AddTimeSlot(DateOnly date, TimeSlot newTimeSlot)
     {
         return from timeSlots in GetOrCreateTimeSlots(date)
-               from _1 in CheckOverlap(date, timeSlots, newTimeSlot)
-               from _2 in ApplyTimeSlotToCalendar(timeSlots, newTimeSlot)
+               from _1 in EnsureTimeSlotNotOverlapped(date, timeSlots, newTimeSlot)
+               from _2 in ApplyTimeSlotAddition(timeSlots, newTimeSlot)
                select unit;
+
+        // =========================================
+        // Monadic 스타일
+        // =========================================
+
+        //return GetOrCreateTimeSlots(date)
+        //    .Bind(timeSlots => CheckOverlappingTimeSlot(date, timeSlots, newTimeSlot))      // Unit -> List<TimeSlot> 변경 필요
+        //    .Bind(timeSlots => ApplyTimeSlotToCalendar(timeSlots, newTimeSlot);
 
         // =========================================
         // Imperative Guard 스타일
@@ -61,34 +68,44 @@ public sealed class Schedule : Entity
     }
 
     // 실패 가능성은 없지만, 내부 상태를 변경하는 부수 효과가 있기 때문에 Fin 모나드를 사용
-    private Fin<List<TimeRange>> GetOrCreateTimeSlots(DateOnly date)
+    private Fin<List<TimeSlot>> GetOrCreateTimeSlots(DateOnly date)
     {
         if (!_calendar.TryGetValue(date, out var slots))
         {
-            slots = new List<TimeRange>();
+            slots = new List<TimeSlot>();
             _calendar[date] = slots;
         }
 
         return slots;
     }
 
-    private Fin<Unit> CheckOverlap(DateOnly date, List<TimeRange> timeSlots, TimeRange newTimeSlot) =>
-        timeSlots.Any(timeSlot => timeSlot.OverlapsWith(newTimeSlot))
-            ? ScheduleErrors.CannotHaveTwoOrMoreOverlappingTimeSlot(date, newTimeSlot)
-            : unit;
+    [Pure]
+    private Fin<Unit> EnsureTimeSlotNotOverlapped(DateOnly date, List<TimeSlot> timeSlots, TimeSlot newTimeSlot) =>
+        !timeSlots.Any(timeSlot => timeSlot.OverlapsWith(newTimeSlot))
+            ? unit
+            : ScheduleErrors.TimeSlotOverlapped(date, newTimeSlot);
 
     // 실패 가능성은 없지만, 내부 상태를 변경하는 부수 효과가 있기 때문에 Fin 모나드를 사용
-    private Fin<Unit> ApplyTimeSlotToCalendar(List<TimeRange> timeSlots, TimeRange newTimeSlot)
+    private static Fin<Unit> ApplyTimeSlotAddition(List<TimeSlot> timeSlots, TimeSlot newTimeSlot)
     {
         timeSlots.Add(newTimeSlot);
         return unit;
     }
 
-    internal Fin<Unit> UnbookTimeSlot(DateOnly date, TimeRange timeRange)
+    internal Fin<Unit> RemoveTimeSlot(DateOnly date, TimeSlot timeRange)
     {
-        return from timeSlots in GetTimeSlots(date, timeRange)
-               from _ in RemoveFromCalendar(timeSlots, timeRange)
+        return from _1 in EnsureTimeSlotsAlreadyExit(date, timeRange)
+               from timeSlots in Pure(GetTimeSlots(date))                     // Map
+               from _2 in ApplyTimeSlotRemoval(timeSlots, timeRange)
                select unit;
+
+        // =========================================
+        // Monadic 스타일
+        // =========================================
+
+        //return EnsureTimeSlotsAlreadyExit(date, timeRange)
+        //    .Map(_ => GetTimeSlots(date))
+        //    .Bind(timeSlots => ApplyTimeSlotRemoval(timeSlots, timeRange));
 
         // =========================================
         // Imperative Guard 스타일
@@ -105,13 +122,16 @@ public sealed class Schedule : Entity
         //return unit;
     }
 
-    private Fin<List<TimeRange>> GetTimeSlots(DateOnly date, TimeRange timeRange) =>
-        (!_calendar.TryGetValue(date, out var timeSlots) || !timeSlots.Contains(timeRange))
-            ? ScheduleErrors.CannotFindTheTimeSlot(date, timeRange)
-            : timeSlots;
+    private Fin<Unit> EnsureTimeSlotsAlreadyExit(DateOnly date, TimeSlot timeRange) =>
+        (_calendar.TryGetValue(date, out var timeSlots) && timeSlots.Contains(timeRange))
+            ? unit
+            : ScheduleErrors.TimeSlotNotFound(date, timeRange);
 
-    [Pure]
-    private Fin<Unit> RemoveFromCalendar(List<TimeRange> timeSlots, TimeRange timeRange)
+
+    private List<TimeSlot> GetTimeSlots(DateOnly date) =>
+        _calendar.GetValueOrDefault(date)!;
+
+    private static Fin<Unit> ApplyTimeSlotRemoval(List<TimeSlot> timeSlots, TimeSlot timeRange)
     {
         timeSlots.Remove(timeRange);
         return unit;

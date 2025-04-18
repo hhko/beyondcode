@@ -1,9 +1,8 @@
 ﻿using DddGym.Framework.BaseTypes;
-
-using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
 using GymManagement.Domain.AggregateRoots.Sessions.Events;
+using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using LanguageExt.Common;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainErrors;
@@ -27,7 +26,7 @@ public sealed class Session : AggregateRoot
 {
     public DateOnly Date { get; }
 
-    public TimeRange Time { get; }
+    public TimeSlot Time { get; }
 
     // 제거: private readonly List<Guid> _participantIds = [];
     //  _participantIds -> _reservations
@@ -75,7 +74,7 @@ public sealed class Session : AggregateRoot
         Guid trainerId,
 
         DateOnly date,
-        TimeRange time,
+        TimeSlot time,
 
         List<SessionCategory> categories,
         Guid? id = null) : base(id ?? Guid.NewGuid())
@@ -137,7 +136,7 @@ public sealed class Session : AggregateRoot
             return Error.New("Participants cannot reserve twice to the same session");
         }
 
-        var reservation = new Reservation(participant.Id);
+        var reservation = Reservation.Create(participant.Id);
         _reservations.Add(reservation);
 
         _domainEvents.Add(new SessionSpotReservedEvent(this, reservation));

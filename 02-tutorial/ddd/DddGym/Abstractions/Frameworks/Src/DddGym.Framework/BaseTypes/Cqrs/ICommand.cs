@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace DddGym.Framework.BaseTypes.Cqrs;
+﻿namespace DddGym.Framework.BaseTypes.Cqrs;
 
 //public interface ICommand : IRequest<IErrorOr>;
 

@@ -1,10 +1,9 @@
 ﻿using DddGym.Framework.BaseTypes;
-//
-using GymManagement.Domain.Abstractions.Entities;
-using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Sessions;
+using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using LanguageExt.Common;
+using static LanguageExt.Prelude;
 using static GymManagement.Domain.AggregateRoots.Participants.Errors.DomainErrors;
 
 namespace GymManagement.Domain.AggregateRoots.Participants;
@@ -29,92 +28,147 @@ namespace GymManagement.Domain.AggregateRoots.Participants;
 
 public sealed class Participant : AggregateRoot
 {
-    private readonly Abstractions.Entities.Schedule _schedule = Abstractions.Entities.Schedule.Empty();
+    private readonly SharedTypes.Schedule _schedule = SharedTypes.Schedule.Empty();
     private readonly List<Guid> _sessionIds = [];
 
-    // ---------------------
-
-    // 변경: private readonly Guid _userId;
     public Guid UserId { get; }
 
     // 추가
     public IReadOnlyList<Guid> SessionIds => _sessionIds;
 
-    // ---------------------
-
-    public Participant(
+    private Participant(
         Guid userId,
-        Abstractions.Entities.Schedule? schedule = null,
-        Guid? id = null) : base(id ?? Guid.NewGuid())
+        SharedTypes.Schedule? schedule,
+        Guid? id) : base(id ?? Guid.NewGuid())
     {
         UserId = userId;
-        _schedule = schedule ?? Abstractions.Entities.Schedule.Empty();
+        _schedule = schedule ?? SharedTypes.Schedule.Empty();
     }
 
-    // TODO: 존재 이유 ???
+    public static Participant Create(
+        Guid userId,
+        SharedTypes.Schedule? schedule = null,
+        Guid? id = null)
+    {
+        return new Participant(userId, schedule, id);
+    }
+
     private Participant()
     {
     }
 
-    //public Fin<Unit> AddToSchedule(Session session)
     public Fin<Unit> AddToSchedule(Session session)
     {
-        // 규칙 생략: Id 중복
-        if (_sessionIds.Contains(session.Id))
-        {
-            //return Error.New("Session already exists in participant's schedule");
-            return Error.New("Session already exists in participant's schedule");
-        }
+        return from _1 in EnsureSessionNotFound(session.Id)
+               from _2 in _schedule.AddTimeSlot(session.Date, session.Time)
+               from _3 in ApplySessionAddition(session.Id)
+               select unit;
 
+
+        // =========================================
+        // Monadic 스타일
+        // =========================================
+
+        //return EnsureSessionNotScheduled(session.Id)
+        //    .Bind(_ => _schedule.AddTimeSlot(session.Date, session.Time))
+        //    .Bind(_ => RegisterSession(session.Id));
+
+
+        // =========================================
+        // Imperative Guard 스타일
+        // =========================================
+
+        // 규칙 생략: Id 중복
+        //if (_sessionIds.Contains(session.Id))
+        //{
+        //    return Error.New("Session already exists in participant's schedule");
+        //}
+        //
         // 규칙
         //  참가자는 겹치는 세션을 예약할 수 없다.
         //  A participant cannot reserve overlapping sessions
-        var bookTimeSlotResult = _schedule.BookTimeSlot(session.Date, session.Time);
-        if (bookTimeSlotResult.IsFail)
-        {
-            //return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
-            //    ? AddToScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions
-            //    : bookTimeSlotResult.Errors;
-            return (Error)bookTimeSlotResult;
-        }
+        //var bookTimeSlotResult = _schedule.AddTimeSlot(session.Date, session.Time);
+        //if (bookTimeSlotResult.IsFail)
+        //{
+        //    //return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
+        //    //    ? AddToScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions
+        //    //    : bookTimeSlotResult.Errors;
+        //    return (Error)bookTimeSlotResult;
+        //}
+        //
+        //_sessionIds.Add(session.Id);
+        //
+        //return unit;
+    }
 
-        _sessionIds.Add(session.Id);
+    private Fin<Unit> EnsureSessionNotFound(Guid sessionId) =>
+        !_sessionIds.Contains(sessionId)
+            ? unit
+            : ParticipantErrors.SessionAlreadyExist(Id, sessionId);
 
-        //return Unit.Default;
-        return Unit.Default;
+    private Fin<Unit> ApplySessionAddition(Guid sessionId)
+    {
+        _sessionIds.Add(sessionId);
+        return unit;
     }
 
     // 추가
     //public Fin<Unit> RemoveFromSchedule(Session session)
     public Fin<Unit> RemoveFromSchedule(Session session)
     {
-        if (!_sessionIds.Contains(session.Id))
-        {
-            //return Error.New( "Session not found");
-            return Error.New("Session not found");
-        }
+        return from _1 in EnsureSessionAlreadyExist(session.Id)
+               from _2 in _schedule.RemoveTimeSlot(session.Date, session.Time)
+               from _3 in ApplySessionRemoval(session.Id)
+               select unit;
 
-        var removeBookingResult = _schedule.RemoveBooking(session.Date, session.Time);
-        if (removeBookingResult.IsFail)
-        {
-            //return removeBookingResult.Errors;
-            return (Error)removeBookingResult;
-        }
 
-        _sessionIds.Remove(session.Id);
+        // =========================================
+        // Monadic 스타일
+        // =========================================
 
-        //return Unit.Default;
-        return Unit.Default;
+        //return EnsureSessionScheduled(session.Id)
+        //    .Bind(_ => _schedule.RemoveTimeSlot(session.Date, session.Time))
+        //    .Bind(_ => UnregisterSession(session.Id));
+
+        // =========================================
+        // Imperative Guard 스타일
+        // =========================================
+
+        //if (!_sessionIds.Contains(session.Id))
+        //{
+        //    //return Error.New( "Session not found");
+        //    return Error.New("Session not found");
+        //}
+        //
+        //var removeBookingResult = _schedule.RemoveTimeSlot(session.Date, session.Time);
+        //if (removeBookingResult.IsFail)
+        //{
+        //    //return removeBookingResult.Errors;
+        //    return (Error)removeBookingResult;
+        //}
+        //
+        //_sessionIds.Remove(session.Id);
+        //
+        //return unit;
     }
 
-    // 추가
+    private Fin<Unit> EnsureSessionAlreadyExist(Guid sessionId) =>
+        _sessionIds.Contains(sessionId)
+            ? unit
+            : ParticipantErrors.SessionNotFound(Id, sessionId);
+
+    private Fin<Unit> ApplySessionRemoval(Guid sessionId)
+    {
+        _sessionIds.Remove(sessionId);
+        return unit;
+    }
+
     public bool HasReservationForSession(Guid sessionId)
     {
         return _sessionIds.Contains(sessionId);
     }
 
-    // 추가
-    public bool IsTimeShotFree(DateOnly date, TimeRange time)
+    public bool IsTimeShotFree(DateOnly date, TimeSlot time)
     {
         return _schedule.CanBookTimeSlot(date, time);
     }

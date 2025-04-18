@@ -4,6 +4,7 @@ using GymManagement.Domain.AggregateRoots.Subscriptions;
 using LanguageExt;
 using System.Diagnostics.Contracts;
 using static GymManagement.Domain.AggregateRoots.Admins.Errors.DomainErrors;
+using static GymManagement.Domain.AggregateRoots.Admins.Events.DomainEvents;
 using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Admins;
@@ -28,26 +29,16 @@ public sealed class Admin : AggregateRoot
         Guid? subscriptionId = null,
         Guid? id = null)
     {
-        return new Admin(
-            userId,
-            subscriptionId,
-            id);
+        return new Admin(userId, subscriptionId, id);
     }
 
-    // TODO: 존재 이유 ???
     private Admin()
     {
     }
 
-    // SetSubscription      : 기술적 용어
-    // AssignSubscription   : 비즈니스적 용어
-    public Fin<Unit> AssignSubscription(Subscription subscription)
+    public Fin<Unit> SetSubscription(Subscription subscription)
     {
-        // =========================================
-        // Monadic LINQ 스타일
-        // =========================================
-
-        return from _1 in EnsureSubscriptionNotAssigned(SubscriptionId)
+        return from _1 in EnsureSubscriptionNotSet(SubscriptionId)
                from _2 in ApplySubscription(subscription)
                select unit;
 
@@ -68,15 +59,15 @@ public sealed class Admin : AggregateRoot
     }
 
     [Pure]
-    private Fin<Unit> EnsureSubscriptionNotAssigned(Guid? subscriptionId) =>
+    private Fin<Unit> EnsureSubscriptionNotSet(Guid? subscriptionId) =>
         !subscriptionId.HasValue
             ? unit
-            : AdminErrors.AlreadyExitSubscription(subscriptionId.Value);
+            : AdminErrors.SubscriptionAlreadySet(Id, subscriptionId.Value);
 
     private Fin<Unit> ApplySubscription(Subscription newSubscription)
     {
         SubscriptionId = newSubscription.Id;
-        _domainEvents.Add(new SubscriptionAssignedEvent(this, newSubscription));
+        _domainEvents.Add(new AdminEvents.SubscriptionSetEvent(this, newSubscription));
 
         return unit;
     }

@@ -1,7 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Users;
-
-namespace GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
+﻿namespace GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
 
 //// TODO: LanguageExt
 //internal sealed class GetProfileQueryUsecase

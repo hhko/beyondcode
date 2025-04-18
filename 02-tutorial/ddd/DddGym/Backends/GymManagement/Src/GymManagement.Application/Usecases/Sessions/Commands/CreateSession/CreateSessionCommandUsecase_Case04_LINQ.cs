@@ -1,14 +1,11 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Rooms;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Trainers;
+using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using LanguageExt.Common;
-using LanguageExt.Traits;
 using System.Diagnostics.Contracts;
-using static LanguageExt.Fin;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Application.Usecases.Sessions.Commands.CreateSession;
 
@@ -28,7 +25,7 @@ internal sealed class CreateSessionCommandUsecase_Case04_LINQ
     }
 
     [Pure]
-    private Fin<TimeRange> ValidateTrainerAvailability(Trainer trainer, CreateSessionCommand2 command, TimeRange timeRange)
+    private Fin<TimeSlot> ValidateTrainerAvailability(Trainer trainer, CreateSessionCommand2 command, TimeSlot timeRange)
     {
         return trainer.IsTimeSlotFree(DateOnly.FromDateTime(command.StartDateTime), timeRange)
             ? timeRange
@@ -36,7 +33,7 @@ internal sealed class CreateSessionCommandUsecase_Case04_LINQ
     }
 
     [Pure]
-    private Session CreateSession(CreateSessionCommand2 command, TimeRange timeRange)
+    private Session CreateSession(CreateSessionCommand2 command, TimeSlot timeRange)
     {
         var session = new Session(
             name: command.Name,
@@ -72,7 +69,7 @@ internal sealed class CreateSessionCommandUsecase_Case04_LINQ
 
         Fin<Trainer> trainerResult = await _trainersRepository.GetByIdAsync(command.TrainerId);
 
-        Fin<TimeRange> timeRangeResult = TimeRange.Create(
+        Fin<TimeSlot> timeRangeResult = TimeSlot.Create(
             TimeOnly.FromDateTime(command.StartDateTime),
             TimeOnly.FromDateTime(command.EndDateTime));
 
@@ -101,7 +98,7 @@ internal sealed class CreateSessionCommandUsecase_Case04_LINQ
             from _ in ValidateTrainerAvailability(trainer, command, timeRange)
             let session = CreateSession(command, timeRange)
             select (room, session);
-            //select (room, CreateSession(command, timeRange));
+        //select (room, CreateSession(command, timeRange));
 
         return await result.MapAsync(
             async tuple =>
@@ -116,7 +113,7 @@ internal sealed class CreateSessionCommandUsecase_Case04_LINQ
 public static class FinExtension
 {
     public static async Task<Fin<B>> MapAsync<A, B>(
-        this Fin<A> fin, 
+        this Fin<A> fin,
         Func<A, Task<B>> mapAsync)
     {
         if (fin.IsFail)
@@ -127,7 +124,7 @@ public static class FinExtension
             var b = await mapAsync((A)fin);
             return Fin<B>.Succ(b);
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             return Fin<B>.Fail(Error.New(ex));
         }

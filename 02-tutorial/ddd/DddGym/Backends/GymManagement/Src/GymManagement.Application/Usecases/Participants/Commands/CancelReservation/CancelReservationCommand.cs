@@ -1,6 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-
-namespace GymManagement.Application.Usecases.Participants.Commands.CancelReservation;
+﻿namespace GymManagement.Application.Usecases.Participants.Commands.CancelReservation;
 
 //public sealed record CancelReservationCommand(
 //    Guid ParticipantId,

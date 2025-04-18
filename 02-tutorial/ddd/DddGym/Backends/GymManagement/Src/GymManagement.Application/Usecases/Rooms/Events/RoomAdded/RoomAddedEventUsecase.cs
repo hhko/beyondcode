@@ -1,11 +1,11 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
-using GymManagement.Domain.AggregateRoots.Gyms.Events;
 using GymManagement.Domain.AggregateRoots.Rooms;
+using static GymManagement.Domain.AggregateRoots.Gyms.Events.DomainEvents;
 
 namespace GymManagement.Application.Usecases.Rooms.Events.RoomAdded;
 
 internal sealed class RoomAddedEventUsecase
-    : IDomainEventUsecase<RoomAddedEvent>
+    : IDomainEventUsecase<GymEvents.RoomAddedEvent>
 {
     private readonly IRoomsRepository _roomsRepository;
 
@@ -14,7 +14,7 @@ internal sealed class RoomAddedEventUsecase
         _roomsRepository = roomsRepository;
     }
 
-    public async Task Handle(RoomAddedEvent domainEvent, CancellationToken cancellationToken)
+    public async Task Handle(GymEvents.RoomAddedEvent domainEvent, CancellationToken cancellationToken)
     {
         Room room = new Room(
             domainEvent.Name,

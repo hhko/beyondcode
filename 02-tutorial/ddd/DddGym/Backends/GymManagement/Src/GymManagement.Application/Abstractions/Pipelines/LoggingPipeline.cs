@@ -1,7 +1,4 @@
-﻿using MediatR;
-using Microsoft.Extensions.Logging;
-
-namespace GymManagement.Application.Abstractions.Pipelines;
+﻿namespace GymManagement.Application.Abstractions.Pipelines;
 
 //// TODO: LanguageExt
 //public sealed class LoggingPipeline<TRequest, TResponse>(ILogger<LoggingPipeline<TRequest, TResponse>> logger)

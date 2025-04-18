@@ -2,20 +2,25 @@
 
 namespace GymManagement.Domain.AggregateRoots.Sessions;
 
-// 추가
 public sealed class Reservation : Entity
 {
     public Guid ParticipantId { get; }
 
-    public Reservation(
+    private Reservation(
         Guid participantId,
-        Guid? id = null) : base(id ?? Guid.NewGuid())
+        Guid? id) : base(id ?? Guid.NewGuid())
     {
         ParticipantId = participantId;
     }
 
-    // TODO: 존재 이유 ???
     private Reservation()
     {
+    }
+
+    public static Reservation Create(
+        Guid participantId,
+        Guid? id = null)
+    {
+        return new Reservation(participantId, id);
     }
 }

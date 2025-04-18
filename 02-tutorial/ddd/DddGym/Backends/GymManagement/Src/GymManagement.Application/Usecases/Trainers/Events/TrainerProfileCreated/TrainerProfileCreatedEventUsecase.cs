@@ -1,11 +1,11 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
 using GymManagement.Domain.AggregateRoots.Trainers;
-using GymManagement.Domain.AggregateRoots.Users.Events;
+using static GymManagement.Domain.AggregateRoots.Users.Events.DomainEvents;
 
 namespace GymManagement.Application.Usecases.Trainers.Events.TrainerProfileCreated;
 
 internal sealed class TrainerProfileCreatedEventUsecase
-    : IDomainEventUsecase<TrainerProfileCreatedEvent>
+    : IDomainEventUsecase<UserEvents.TrainerProfileCreatedEvent>
 {
     private readonly ITrainersRepository _trainersRepository;
 
@@ -14,7 +14,7 @@ internal sealed class TrainerProfileCreatedEventUsecase
         _trainersRepository = trainersRepository;
     }
 
-    public async Task Handle(TrainerProfileCreatedEvent domainEvent, CancellationToken cancellationToken)
+    public async Task Handle(UserEvents.TrainerProfileCreatedEvent domainEvent, CancellationToken cancellationToken)
     {
         //var trainer = new Trainer(
         Trainer trainer = Trainer.Create(

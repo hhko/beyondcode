@@ -1,12 +1,10 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Rooms;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Trainers;
+using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using LanguageExt.Common;
-using LanguageExt.Traits;
-using System.Diagnostics.Contracts;
 
 namespace GymManagement.Application.Usecases.Sessions.Commands.CreateSession;
 
@@ -31,7 +29,7 @@ internal sealed class CreateSessionCommandUsecase_Case02_Bind
 
         Fin<Trainer> trainerResult = await _trainersRepository.GetByIdAsync(command.TrainerId);
 
-        Fin<TimeRange> timeRangeResult = TimeRange.Create(
+        Fin<TimeSlot> timeRangeResult = TimeSlot.Create(
             TimeOnly.FromDateTime(command.StartDateTime),
             TimeOnly.FromDateTime(command.EndDateTime));
 

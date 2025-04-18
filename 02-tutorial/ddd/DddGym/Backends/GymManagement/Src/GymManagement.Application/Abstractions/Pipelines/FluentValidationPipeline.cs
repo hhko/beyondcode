@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
-
-namespace GymManagement.Application.Abstractions.Pipelines;
+﻿namespace GymManagement.Application.Abstractions.Pipelines;
 
 // TODO: LanguageExt IErrorOr
 //// https://github.com/amantinband/error-or/issues/10

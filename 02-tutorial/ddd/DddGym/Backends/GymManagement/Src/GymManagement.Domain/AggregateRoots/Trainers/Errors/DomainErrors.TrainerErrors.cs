@@ -1,6 +1,4 @@
 ﻿using DddGym.Framework.BaseTypes;
-using GymManagement.Domain.AggregateRoots.Sessions;
-using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt.Common;
 
 namespace GymManagement.Domain.AggregateRoots.Trainers.Errors;
@@ -9,19 +7,19 @@ public static partial class DomainErrors
 {
     public static class TrainerErrors
     {
-        public static Error SessionNotScheduled(Guid sessionId) =>
-            ErrorCode.Validation(
-                $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(SessionNotScheduled)}",
-                $"Session '{sessionId}' not found in trainer's schedule");
+        public static Error SessionNotFound(Guid trainerId, Guid sessionId) =>
+            ErrorCodeFactory.New(
+                $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(SessionNotFound)}",
+                $"Session '{sessionId}' not found in trainer's schedule '{trainerId}'");
 
-        public static Error SessionAlreadyScheduled(Guid sessionId) =>
-            ErrorCode.Validation(
-                $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(SessionAlreadyScheduled)}",
-                $"Session '{sessionId}' already exists in trainer's schedule");
+        public static Error SessionAlreadyExist(Guid trainerId, Guid sessionId) =>
+            ErrorCodeFactory.New(
+                $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(SessionAlreadyExist)}",
+                $"Session '{sessionId}' already exists in trainer's schedule '{trainerId}'");
 
-        public static Error CannotHaveTwoOrMoreOverlappingSessions(DateOnly date, TimeRange timeRange) =>
-            ErrorCode.Validation(
-                $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(CannotHaveTwoOrMoreOverlappingSessions)}",
-                $"A trainer cannot have two or more overlapping sessions '{date}', '{timeRange}'");
+        //public static Error CannotHaveTwoOrMoreOverlappingSessions(DateOnly date, TimeRange timeRange) =>
+        //    ErrorCode.Operation(
+        //        $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(CannotHaveTwoOrMoreOverlappingSessions)}",
+        //        $"A trainer cannot have two or more overlapping sessions '{date}', '{timeRange}'");
     }
 }

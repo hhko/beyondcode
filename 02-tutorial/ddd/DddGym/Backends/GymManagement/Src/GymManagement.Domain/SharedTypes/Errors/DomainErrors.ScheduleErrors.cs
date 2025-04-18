@@ -1,4 +1,4 @@
-using DddGym.Framework.BaseTypes;
+﻿using DddGym.Framework.BaseTypes;
 using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt.Common;
 
@@ -8,14 +8,14 @@ public static partial class DomainErrors
 {
     public static class ScheduleErrors
     {
-        public static Error CannotHaveTwoOrMoreOverlappingTimeSlot(DateOnly date, TimeRange timeRange) =>
-            ErrorCode.Operation(
-                $"{nameof(DomainErrors)}.{nameof(Schedule)}.{nameof(CannotHaveTwoOrMoreOverlappingTimeSlot)}",
+        public static Error TimeSlotOverlapped(DateOnly date, TimeSlot timeRange) =>
+            ErrorCodeFactory.New(
+                $"{nameof(DomainErrors)}.{nameof(Schedule)}.{nameof(TimeSlotOverlapped)}",
                 $"Schedule cannot have two or more overlapping sessions '{date}', '{timeRange}'");
 
-        public static Error CannotFindTheTimeSlot(DateOnly date, TimeRange timeRange) =>
-            ErrorCode.Operation(
-                $"{nameof(DomainErrors)}.{nameof(Schedule)}.{nameof(CannotFindTheTimeSlot)}",
+        public static Error TimeSlotNotFound(DateOnly date, TimeSlot timeRange) =>
+            ErrorCodeFactory.New(
+                $"{nameof(DomainErrors)}.{nameof(Schedule)}.{nameof(TimeSlotNotFound)}",
                 $"The timeslot can not be found in the schedule '{date}', '{timeRange}'");
     }
 }

@@ -1,7 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Users;
-
-namespace GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfile;
+﻿namespace GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfile;
 
 //// TODO: LanguageExt
 //internal sealed class CreateTrainerProfileCommandUsecase

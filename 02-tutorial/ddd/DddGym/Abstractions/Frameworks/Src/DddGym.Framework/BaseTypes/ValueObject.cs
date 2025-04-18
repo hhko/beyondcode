@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using DddGym.Framework.Utilites;
+﻿using DddGym.Framework.Utilites;
+using System.Diagnostics;
 
 namespace DddGym.Framework.BaseTypes;
 

@@ -21,11 +21,14 @@ namespace GymManagement.Domain.AggregateRoots.Rooms;
 public sealed class Room : AggregateRoot
 {
     private readonly int _maxDailySessions;
-    private readonly Abstractions.Entities.Schedule _schedule = Abstractions.Entities.Schedule.Empty();
+    private readonly SharedTypes.Schedule _schedule = SharedTypes.Schedule.Empty();
 
     public Guid GymId { get; }
+    public int MaxDailySessions
+    {
+        get { return _maxDailySessions; }
+    }
 
-    // ---------------------
 
     // 변경: private readonly List<Guid> _sessionIds = [];
     private readonly Dictionary<DateOnly, List<Guid>> _sessionIdsByDate = [];
@@ -34,10 +37,7 @@ public sealed class Room : AggregateRoot
     public string Name { get; }
 
     // 추가
-    public int MaxDailySessions
-    {
-        get { return _maxDailySessions; }
-    }
+    
 
     // ---------------------
 
@@ -50,13 +50,13 @@ public sealed class Room : AggregateRoot
         string name,
         int maxDailySessions,
         Guid gymId,
-        Abstractions.Entities.Schedule? schedule = null,
+        SharedTypes.Schedule? schedule = null,
         Guid? id = null) : base(id ?? Guid.NewGuid())
     {
         Name = name;
         _maxDailySessions = maxDailySessions;
         GymId = gymId;
-        _schedule = schedule ?? Abstractions.Entities.Schedule.Empty();
+        _schedule = schedule ?? SharedTypes.Schedule.Empty();
     }
 
     // TODO: 존재 이유 ???
@@ -130,7 +130,7 @@ public sealed class Room : AggregateRoot
         // 규칙
         //  방은 두 개 이상의 겹치는 세션을 가질 수 없다.
         //  A room cannot have two or more overlapping sessions
-        var bookTimeSlotResult = _schedule.BookTimeSlot(session.Date, session.Time);
+        var bookTimeSlotResult = _schedule.AddTimeSlot(session.Date, session.Time);
         if (bookTimeSlotResult.IsFail)
         {
             //return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict

@@ -1,6 +1,4 @@
-﻿using GymManagement.Application.Usecases.Authentication.Queries.Login;
-
-namespace GymManagement.Application.Usecases.Authentication.Errors;
+﻿namespace GymManagement.Application.Usecases.Authentication.Errors;
 
 //// TODO: LanguageExt
 //public static partial class ApplicationErrors

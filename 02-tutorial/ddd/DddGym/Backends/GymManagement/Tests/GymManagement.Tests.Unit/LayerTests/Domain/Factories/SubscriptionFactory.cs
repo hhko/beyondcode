@@ -11,7 +11,7 @@ internal static class SubscriptionFactory
         Guid? adminId = null,
         Guid? id = null)
     {
-        return new Subscription(
+        return Subscription.Create(
             subscriptionType: subscriptionType ?? DomainConstants.Subscription.DefaultSubscriptionType,
             adminId ?? DomainConstants.Admin.Id,
             id ?? DomainConstants.Subscription.Id);

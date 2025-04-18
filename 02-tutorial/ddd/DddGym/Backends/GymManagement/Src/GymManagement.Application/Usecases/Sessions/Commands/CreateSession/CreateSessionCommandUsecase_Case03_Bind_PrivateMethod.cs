@@ -1,13 +1,11 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Rooms;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Trainers;
+using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using LanguageExt.Common;
-using LanguageExt.Traits;
 using System.Diagnostics.Contracts;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Application.Usecases.Sessions.Commands.CreateSession;
 
@@ -27,7 +25,7 @@ internal sealed class CreateSessionCommandUsecase_Case03_Bind_PrivateMethod
     }
 
     [Pure]
-    private Fin<TimeRange> ValidateTrainerAvailability(Trainer trainer, CreateSessionCommand2 command, TimeRange timeRange)
+    private Fin<TimeSlot> ValidateTrainerAvailability(Trainer trainer, CreateSessionCommand2 command, TimeSlot timeRange)
     {
         return trainer.IsTimeSlotFree(DateOnly.FromDateTime(command.StartDateTime), timeRange)
             ? timeRange
@@ -35,7 +33,7 @@ internal sealed class CreateSessionCommandUsecase_Case03_Bind_PrivateMethod
     }
 
     [Pure]
-    private Session CreateSession(CreateSessionCommand2 command, TimeRange timeRange)
+    private Session CreateSession(CreateSessionCommand2 command, TimeSlot timeRange)
     {
         var session = new Session(
             name: command.Name,
@@ -71,7 +69,7 @@ internal sealed class CreateSessionCommandUsecase_Case03_Bind_PrivateMethod
 
         Fin<Trainer> trainerResult = await _trainersRepository.GetByIdAsync(command.TrainerId);
 
-        Fin<TimeRange> timeRangeResult = TimeRange.Create(
+        Fin<TimeSlot> timeRangeResult = TimeSlot.Create(
             TimeOnly.FromDateTime(command.StartDateTime),
             TimeOnly.FromDateTime(command.EndDateTime));
 

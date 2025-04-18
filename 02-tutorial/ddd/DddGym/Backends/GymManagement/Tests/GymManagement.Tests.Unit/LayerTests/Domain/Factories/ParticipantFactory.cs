@@ -9,7 +9,7 @@ internal static class ParticipantFactory
         Guid? userId = null,
         Guid? id = null)
     {
-        return new Participant(
+        return Participant.Create(
             userId: userId ?? DomainConstants.User.Id,
             id: id ?? DomainConstants.Participant.Id);
     }

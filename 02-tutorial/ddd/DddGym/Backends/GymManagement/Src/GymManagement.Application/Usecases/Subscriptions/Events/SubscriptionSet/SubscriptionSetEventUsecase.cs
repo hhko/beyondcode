@@ -1,11 +1,11 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
-using GymManagement.Domain.AggregateRoots.Admins.Events;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
+using static GymManagement.Domain.AggregateRoots.Admins.Events.DomainEvents;
 
 namespace GymManagement.Application.Usecases.Subscriptions.Events.SubscriptionSet;
 
 internal sealed class SubscriptionSetEventUsecase
-    : IDomainEventUsecase<SubscriptionSetEvent>
+    : IDomainEventUsecase<AdminEvents.SubscriptionSetEvent>
 {
     private readonly ISubscriptionsRepository _subscriptionsRepository;
 
@@ -14,7 +14,7 @@ internal sealed class SubscriptionSetEventUsecase
         _subscriptionsRepository = subscriptionsRepository;
     }
 
-    public async Task Handle(SubscriptionSetEvent domainEvent, CancellationToken cancellationToken)
+    public async Task Handle(AdminEvents.SubscriptionSetEvent domainEvent, CancellationToken cancellationToken)
     {
         await _subscriptionsRepository.AddSubscriptionAsync(domainEvent.Subscription);
     }

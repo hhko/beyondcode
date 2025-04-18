@@ -1,11 +1,10 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.Abstractions.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Rooms;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Trainers;
+using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using LanguageExt.Common;
-using System.Diagnostics.Contracts;
 
 namespace GymManagement.Application.Usecases.Sessions.Commands.CreateSession;
 
@@ -38,7 +37,7 @@ internal sealed class CreateSessionCommandUsecase_Case01_If
             return (Error)trainerResult;
         }
 
-        Fin<TimeRange> timeRangeResult = TimeRange.Create(
+        Fin<TimeSlot> timeRangeResult = TimeSlot.Create(
             TimeOnly.FromDateTime(command.StartDateTime),
             TimeOnly.FromDateTime(command.EndDateTime));
         if (timeRangeResult.IsFail)
@@ -46,7 +45,7 @@ internal sealed class CreateSessionCommandUsecase_Case01_If
             return (Error)timeRangeResult;
         }
 
-        if (!((Trainer)trainerResult).IsTimeSlotFree(DateOnly.FromDateTime(command.StartDateTime), (TimeRange)timeRangeResult))
+        if (!((Trainer)trainerResult).IsTimeSlotFree(DateOnly.FromDateTime(command.StartDateTime), (TimeSlot)timeRangeResult))
         {
             return Error.New("Trainer's calendar is not free for the entire session duration");
         }
@@ -58,7 +57,7 @@ internal sealed class CreateSessionCommandUsecase_Case01_If
             roomId: command.RoomId,
             trainerId: command.TrainerId,
             date: DateOnly.FromDateTime(command.StartDateTime),
-            time: (TimeRange)timeRangeResult,
+            time: (TimeSlot)timeRangeResult,
             categories: command.Categories);
 
         var scheduleSessionResult = ((Room)roomResult).ScheduleSession(session);

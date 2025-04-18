@@ -1,10 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Events;
-using GymManagement.Domain.AggregateRoots.Gyms.Events;
-using GymManagement.Domain.AggregateRoots.Rooms;
-using static GymManagement.Domain.AggregateRoots.Gyms.Errors.DomainEventErrors;
-
-
-namespace GymManagement.Application.Usecases.Rooms.Events.RoomRemoved;
+﻿namespace GymManagement.Application.Usecases.Rooms.Events.RoomRemoved;
 
 // TODO: LanguageExt
 //internal sealed class RoomRemovedEventUsecase

@@ -1,11 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Events;
-using GymManagement.Domain.AggregateRoots.Participants;
-using GymManagement.Domain.AggregateRoots.Sessions.Events;
-using LanguageExt;
-using LanguageExt.Common;
-using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainEventErrors;
-
-namespace GymManagement.Application.Usecases.Participants.Events.ReservationCanceled;
+﻿namespace GymManagement.Application.Usecases.Participants.Events.ReservationCanceled;
 
 // TODO: LanguageExt
 //internal sealed class ReservationCanceledEventUsecase

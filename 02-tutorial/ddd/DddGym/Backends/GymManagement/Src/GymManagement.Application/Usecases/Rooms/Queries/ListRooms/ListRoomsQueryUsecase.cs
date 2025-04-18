@@ -1,7 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Rooms;
-
-namespace GymManagement.Application.Usecases.Rooms.Queries.ListRooms;
+﻿namespace GymManagement.Application.Usecases.Rooms.Queries.ListRooms;
 
 //// TODO: LanguageExt
 //internal sealed class ListRoomsQueryUsecase
