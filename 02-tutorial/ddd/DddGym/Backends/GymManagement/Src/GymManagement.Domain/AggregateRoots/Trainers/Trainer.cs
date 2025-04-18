@@ -2,7 +2,6 @@
 using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
-using LanguageExt.Common;
 using static GymManagement.Domain.AggregateRoots.Trainers.Errors.DomainErrors;
 using static LanguageExt.Prelude;
 

@@ -1,5 +1,4 @@
 ﻿using DddGym.Framework.BaseTypes;
-using GymManagement.Domain.AggregateRoots.Admins.Events;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
 using LanguageExt;
 using System.Diagnostics.Contracts;

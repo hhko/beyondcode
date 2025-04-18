@@ -1,14 +1,10 @@
 ﻿using DddGym.Framework.BaseTypes;
-
 using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;
-using GymManagement.Domain.AggregateRoots.Subscriptions.Events;
 using LanguageExt;
-using LanguageExt.Common;
-using static LanguageExt.Prelude;
 using static GymManagement.Domain.AggregateRoots.Subscriptions.Errors.DomainErrors;
-using System;
 using static GymManagement.Domain.AggregateRoots.Subscriptions.Events.DomainEvents;
+using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Subscriptions;
 

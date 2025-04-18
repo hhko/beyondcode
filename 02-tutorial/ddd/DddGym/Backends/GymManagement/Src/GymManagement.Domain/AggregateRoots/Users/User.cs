@@ -1,7 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes;
-using GymManagement.Domain.AggregateRoots.Users.Events;
 using LanguageExt;
-using System;
 using System.Diagnostics.Contracts;
 using static GymManagement.Domain.AggregateRoots.Users.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Users.Events.DomainEvents;

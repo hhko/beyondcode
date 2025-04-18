@@ -31,7 +31,7 @@ public sealed class TimeSlot : ValueObject
             .If(start >= end, TimeSlotErrors.InvalidTimeRange(start, end));
 
         return error.CreateValueObject(() => new TimeSlot(start, end));
-        
+
         //if (start >= end)
         //{
         //    //return Error.Validation(description: "End time must be greater than the start time.");
