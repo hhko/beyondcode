@@ -98,14 +98,14 @@ public sealed class Gym : AggregateRoot
     }
 
     private Fin<Unit> EnsureRoomNotFound(Guid roomId) =>
-        !_roomIds.Contains(roomId)
-            ? unit
-            : GymErrors.RoomAlreadyExist(Id, roomId);
+        _roomIds.Contains(roomId)
+            ? GymErrors.RoomAlreadyExist(Id, roomId)
+            : unit;
 
     private Fin<Unit> EnsureMaxRoomsNotExceeded() =>
-        (_roomIds.Count < _maxRooms)
-            ? unit
-            : GymErrors.MaxRoomsExceeded(Id, _maxRooms);
+        (_roomIds.Count >= _maxRooms)
+            ? GymErrors.MaxRoomsExceeded(Id, _maxRooms)
+            : unit;
 
     private Fin<Unit> ApplayRoomAddition(Room room)
     {

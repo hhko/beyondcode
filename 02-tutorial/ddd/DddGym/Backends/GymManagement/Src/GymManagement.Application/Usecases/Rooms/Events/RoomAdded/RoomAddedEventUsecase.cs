@@ -16,7 +16,7 @@ internal sealed class RoomAddedEventUsecase
 
     public async Task Handle(GymEvents.RoomAddedEvent domainEvent, CancellationToken cancellationToken)
     {
-        Room room = new Room(
+        Room room = Room.Create(
             domainEvent.Name,
             domainEvent.MaxDailySessions,
             domainEvent.GymId,

@@ -11,7 +11,7 @@ internal class RoomFactory
         Guid? gymId = null,
         Guid? id = null)
     {
-        return new Room(
+        return Room.Create(
             name,
             maxDailySessions: maxDailySessions,
             gymId: gymId ?? DomainConstants.Gym.Id,
