@@ -23,17 +23,17 @@ public sealed partial class Schedule : Entity
         return new Schedule(id: Guid.NewGuid());
     }
 
-    internal bool CanBookTimeSlot(DateOnly date, TimeSlot time)
+    internal bool CanBookTimeSlot(DateOnly date, TimeSlot timeSlot)
     {
         if (!_calendar.TryGetValue(date, out var timeSlots))
         {
             return true;
         }
 
-        return !timeSlots.Any(timeSlot => timeSlot.OverlapsWith(time));
+        return !timeSlots.Any(timeSlot => timeSlot.OverlapsWith(timeSlot));
     }
 
-    internal Fin<Unit> AddTimeSlot(DateOnly date, TimeSlot newTimeSlot)
+    internal Fin<Unit> BookTimeSlot(DateOnly date, TimeSlot newTimeSlot)
     {
         return from timeSlots in GetOrCreateTimeSlots(date)
                from _1 in EnsureTimeSlotNotOverlapped(date, timeSlots, newTimeSlot)
@@ -70,9 +70,10 @@ public sealed partial class Schedule : Entity
     // 실패 가능성은 없지만, 내부 상태를 변경하는 부수 효과가 있기 때문에 Fin 모나드를 사용
     private Fin<List<TimeSlot>> GetOrCreateTimeSlots(DateOnly date)
     {
-        if (!_calendar.TryGetValue(date, out var slots))
+        if (!_calendar.TryGetValue(date, out List<TimeSlot>? slots))
         {
-            slots = new List<TimeSlot>();
+            //slots = new List<TimeSlot>();
+            slots = [];
             _calendar[date] = slots;
         }
 
@@ -81,9 +82,9 @@ public sealed partial class Schedule : Entity
 
     [Pure]
     private Fin<Unit> EnsureTimeSlotNotOverlapped(DateOnly date, List<TimeSlot> timeSlots, TimeSlot newTimeSlot) =>
-        !timeSlots.Any(timeSlot => timeSlot.OverlapsWith(newTimeSlot))
-            ? unit
-            : ScheduleErrors.TimeSlotOverlapped(date, newTimeSlot);
+        timeSlots.Any(timeSlot => timeSlot.OverlapsWith(newTimeSlot))
+            ? ScheduleErrors.TimeSlotOverlapped(date, newTimeSlot)
+            : unit;
 
     // 실패 가능성은 없지만, 내부 상태를 변경하는 부수 효과가 있기 때문에 Fin 모나드를 사용
     private static Fin<Unit> ApplyTimeSlotAddition(List<TimeSlot> timeSlots, TimeSlot newTimeSlot)
@@ -92,7 +93,7 @@ public sealed partial class Schedule : Entity
         return unit;
     }
 
-    internal Fin<Unit> RemoveTimeSlot(DateOnly date, TimeSlot timeRange)
+    internal Fin<Unit> UnbookTimeSlot(DateOnly date, TimeSlot timeRange)
     {
         return from _1 in EnsureTimeSlotsAlreadyExit(date, timeRange)
                from timeSlots in Pure(GetTimeSlots(date))                     // Map
@@ -123,9 +124,9 @@ public sealed partial class Schedule : Entity
     }
 
     private Fin<Unit> EnsureTimeSlotsAlreadyExit(DateOnly date, TimeSlot timeRange) =>
-        (_calendar.TryGetValue(date, out var timeSlots) && timeSlots.Contains(timeRange))
-            ? unit
-            : ScheduleErrors.TimeSlotNotFound(date, timeRange);
+        (!_calendar.TryGetValue(date, out var timeSlots) || !timeSlots.Contains(timeRange))
+            ? ScheduleErrors.TimeSlotNotFound(date, timeRange)
+            : unit;
 
 
     private List<TimeSlot> GetTimeSlots(DateOnly date) =>

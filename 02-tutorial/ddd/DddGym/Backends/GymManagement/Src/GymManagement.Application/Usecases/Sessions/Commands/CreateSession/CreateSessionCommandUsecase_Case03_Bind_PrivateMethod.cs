@@ -35,14 +35,14 @@ internal sealed class CreateSessionCommandUsecase_Case03_Bind_PrivateMethod
     [Pure]
     private Session CreateSession(CreateSessionCommand2 command, TimeSlot timeRange)
     {
-        var session = new Session(
+        Session session = Session.Create(
             name: command.Name,
             description: command.Description,
             maxParticipants: command.MaxParticipants,
             roomId: command.RoomId,
             trainerId: command.TrainerId,
             date: DateOnly.FromDateTime(command.StartDateTime),
-            time: timeRange,
+            timeSlot: timeRange,
             categories: command.Categories);
 
         return session;

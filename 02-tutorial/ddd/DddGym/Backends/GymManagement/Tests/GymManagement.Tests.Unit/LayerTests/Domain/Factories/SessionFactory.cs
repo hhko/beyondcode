@@ -18,14 +18,14 @@ internal static class SessionFactory
         List<SessionCategory>? categories = null,
         Guid? id = null)
     {
-        return new Session(
+        return Session.Create(
             name: name,
             description: description,
             maxParticipants: maxParticipants,
             roomId: roomId ?? DomainConstants.Room.Id,
             trainerId: trainerId ?? DomainConstants.Trainer.Id,
             date: date ?? DomainConstants.Session.Date,
-            time: time ?? DomainConstants.Session.Time,
+            timeSlot: time ?? DomainConstants.Session.Time,
             categories: categories ?? DomainConstants.Session.Categories,
             id: id ?? DomainConstants.Session.Id);
     }

@@ -50,14 +50,14 @@ internal sealed class CreateSessionCommandUsecase_Case01_If
             return Error.New("Trainer's calendar is not free for the entire session duration");
         }
 
-        Session session = new(
+        Session session = Session.Create(
             name: command.Name,
             description: command.Description,
             maxParticipants: command.MaxParticipants,
             roomId: command.RoomId,
             trainerId: command.TrainerId,
             date: DateOnly.FromDateTime(command.StartDateTime),
-            time: (TimeSlot)timeRangeResult,
+            timeSlot: (TimeSlot)timeRangeResult,
             categories: command.Categories);
 
         var scheduleSessionResult = ((Room)roomResult).ScheduleSession(session);

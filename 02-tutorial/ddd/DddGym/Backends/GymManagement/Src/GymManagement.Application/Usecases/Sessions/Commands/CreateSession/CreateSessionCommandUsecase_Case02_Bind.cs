@@ -85,14 +85,14 @@ internal sealed class CreateSessionCommandUsecase_Case02_Bind
                                 if (!trainer.IsTimeSlotFree(DateOnly.FromDateTime(command.StartDateTime), timeRange))
                                     return Fin<(Room, Session)>.Fail(Error.New("Trainer's calendar is not free for the entire session duration"));
 
-                                var session = new Session(
+                                Session session = Session.Create(
                                     name: command.Name,
                                     description: command.Description,
                                     maxParticipants: command.MaxParticipants,
                                     roomId: command.RoomId,
                                     trainerId: command.TrainerId,
                                     date: DateOnly.FromDateTime(command.StartDateTime),
-                                    time: timeRange,
+                                    timeSlot: timeRange,
                                     categories: command.Categories);
 
                                 return Fin<(Room, Session)>.Succ((room, session));

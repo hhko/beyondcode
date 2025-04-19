@@ -8,12 +8,12 @@ public static partial class DomainErrors
     public static class SubscriptionErrors
     {
         public static Error GymAlreadyExist(Guid subscriptionId, Guid gymId) =>
-            ErrorCodeFactory.New(
+            ErrorCodeFactory.Create(
                $"{nameof(DomainErrors)}.{nameof(SubscriptionErrors)}.{nameof(GymAlreadyExist)}",
                $"Subscription '{subscriptionId}' already has a gym '{gymId}'");
 
         public static Error MaxGymsExceeded(Guid subscriptionId, int maxGyms) =>
-            ErrorCodeFactory.New(
+            ErrorCodeFactory.Create(
                 $"{nameof(DomainErrors)}.{nameof(SubscriptionErrors)}.{nameof(MaxGymsExceeded)}",
                 $"A subscription '{subscriptionId}' cannot have more gyms than the subscription allows {maxGyms}");
     }

@@ -8,12 +8,12 @@ public static partial class DomainErrors
     public static class ParticipantErrors
     {
         public static Error SessionNotFound(Guid participantId, Guid sessionId) =>
-            ErrorCodeFactory.New(
+            ErrorCodeFactory.Create(
                 $"{nameof(DomainErrors)}.{nameof(ParticipantErrors)}.{nameof(SessionNotFound)}",
                 $"Session '{sessionId}' not found in participant's schedule '{participantId}'");
 
         public static Error SessionAlreadyExist(Guid participantId, Guid sessionId) =>
-            ErrorCodeFactory.New(
+            ErrorCodeFactory.Create(
                 $"{nameof(DomainErrors)}.{nameof(ParticipantErrors)}.{nameof(SessionAlreadyExist)}",
                 $"Session '{sessionId}' already exists in participant's schedule '{participantId}'");
 

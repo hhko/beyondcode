@@ -104,7 +104,7 @@ public sealed class Gym : AggregateRoot
 
     private Fin<Unit> EnsureMaxRoomsNotExceeded() =>
         (_roomIds.Count >= _maxRooms)
-            ? GymErrors.MaxRoomsExceeded(Id, _maxRooms)
+            ? GymErrors.MaxRoomsExceeded(Id, _roomIds.Count, _maxRooms)
             : unit;
 
     private Fin<Unit> ApplayRoomAddition(Room room)

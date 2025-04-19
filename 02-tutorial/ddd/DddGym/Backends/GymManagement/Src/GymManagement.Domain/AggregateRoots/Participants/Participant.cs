@@ -56,10 +56,10 @@ public sealed class Participant : AggregateRoot
     {
     }
 
-    public Fin<Unit> AddToSchedule(Session session)
+    public Fin<Unit> ScheduleSession(Session session)
     {
         return from _1 in EnsureSessionNotFound(session.Id)
-               from _2 in _schedule.AddTimeSlot(session.Date, session.Time)
+               from _2 in _schedule.BookTimeSlot(session.Date, session.TimeSlot)
                from _3 in ApplySessionAddition(session.Id)
                select unit;
 
@@ -101,9 +101,9 @@ public sealed class Participant : AggregateRoot
     }
 
     private Fin<Unit> EnsureSessionNotFound(Guid sessionId) =>
-        !_sessionIds.Contains(sessionId)
-            ? unit
-            : ParticipantErrors.SessionAlreadyExist(Id, sessionId);
+        _sessionIds.Contains(sessionId)
+            ? ParticipantErrors.SessionAlreadyExist(Id, sessionId)
+            : unit;
 
     private Fin<Unit> ApplySessionAddition(Guid sessionId)
     {
@@ -113,10 +113,10 @@ public sealed class Participant : AggregateRoot
 
     // 추가
     //public Fin<Unit> RemoveFromSchedule(Session session)
-    public Fin<Unit> RemoveFromSchedule(Session session)
+    public Fin<Unit> UnscheduleSession(Session session)
     {
         return from _1 in EnsureSessionAlreadyExist(session.Id)
-               from _2 in _schedule.RemoveTimeSlot(session.Date, session.Time)
+               from _2 in _schedule.UnbookTimeSlot(session.Date, session.TimeSlot)
                from _3 in ApplySessionRemoval(session.Id)
                select unit;
 
@@ -152,9 +152,9 @@ public sealed class Participant : AggregateRoot
     }
 
     private Fin<Unit> EnsureSessionAlreadyExist(Guid sessionId) =>
-        _sessionIds.Contains(sessionId)
-            ? unit
-            : ParticipantErrors.SessionNotFound(Id, sessionId);
+        !_sessionIds.Contains(sessionId)
+            ? ParticipantErrors.SessionNotFound(Id, sessionId)
+            : unit;
 
     private Fin<Unit> ApplySessionRemoval(Guid sessionId)
     {
@@ -167,8 +167,8 @@ public sealed class Participant : AggregateRoot
         return _sessionIds.Contains(sessionId);
     }
 
-    public bool IsTimeShotFree(DateOnly date, TimeSlot time)
+    public bool IsTimeShotFree(DateOnly date, TimeSlot timeSlot)
     {
-        return _schedule.CanBookTimeSlot(date, time);
+        return _schedule.CanBookTimeSlot(date, timeSlot);
     }
 }

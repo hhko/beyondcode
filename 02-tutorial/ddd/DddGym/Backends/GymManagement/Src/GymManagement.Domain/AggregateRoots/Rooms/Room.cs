@@ -1,6 +1,11 @@
 ﻿using DddGym.Framework.BaseTypes;
+using GymManagement.Domain.AggregateRoots.Rooms.Events;
 using GymManagement.Domain.AggregateRoots.Sessions;
+using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
+using OneOf.Types;
+using System.Globalization;
+using static GymManagement.Domain.AggregateRoots.Gyms.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Rooms.Errors.DomainErrors;
 using static LanguageExt.Prelude;
 
@@ -64,66 +69,19 @@ public sealed class Room : AggregateRoot
         return new Room(name, maxDailySessions, gymId, schedule, id);
     }
 
-    // 원본 코드
-    //public ErrorOr<Success> ScheduleSession(Session session)
-    //{
-    //    _sessionIds.Throw()
-    //        .IfTrue(ids => ids.Any(id => id == session.Id));
-
-    //    if (_sessionIds.Count >= _maxSessions)
-    //    {
-    //        return RoomErrors.CannotHaveMoreSessionThanSubscriptionAllows;
-    //    }
-
-    //    var addEventResult = _schedule.BookTimeSlot(session.Date, session.Time);
-
-    //    if (addEventResult.IsError && addEventResult.FirstError.Type == ErrorType.Conflict)
-    //    {
-    //        return RoomErrors.CannotHaveTwoOrMoreOverlappingSessions;
-    //    }
-
-    //    _sessionIds.Add(session.Id);
-    //    _domainEvents.Add(new SessionScheduledEvent(this, session));
-
-    //    return Result.Success;
-    //}
-
-    //public Fin<Unit> ScheduleSession(Session session)
-    //{
-    //    // 규칙 생략: Id 중복
-    //    if (_sessionIds.Any(id => id == session.Id))
-    //    {
-    //        return Error.New("Session already exists in room");
-    //    }
-
-    //    // 규칙
-    //    //  방은 구독(구독 등급)이 허용하는 개수보다 더 많은 세션을 가질 수 없다.
-    //    //  A room cannot have more sessions than the subscription allows
-    //    if (_sessionIds.Count >= _maxDailySessions)
-    //    {
-    //        return ScheduleSessionErrors.CannotHaveMoreSessionThanSubscriptionAllows;
-    //    }
-
-    //    // 규칙
-    //    //  방은 두 개 이상의 겹치는 세션을 가질 수 없다.
-    //    //  A room cannot have two or more overlapping sessions
-    //    var bookTimeSlotResult = _schedule.BookTimeSlot(session.Date, session.Time);
-    //    if (bookTimeSlotResult.IsError)
-    //    {
-    //        return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
-    //            ? ScheduleSessionErrors.CannotHaveTwoOrMoreOverlappingSessions
-    //            : bookTimeSlotResult.Errors;
-    //    }
-
-    //    _sessionIds.Add(session.Id);
-
-    //    return Unit.Default;
-    //}
-
-
-    //public Fin<Unit> ScheduleSession(Session session)
     public Fin<Unit> ScheduleSession(Session session)
     {
+        return from _1 in EnsureSeesionNotFound(session.Id)
+               from dailySessionIds in GetOrCreateDailySessionIds(session.Date)
+               from _2 in EnsureMaxSessionsNotExceeded(dailySessionIds.Count)
+               from _3 in _schedule.BookTimeSlot(session.Date, session.TimeSlot)
+               from _4 in ApplaySessionAddition(dailySessionIds, session)
+               select unit;
+
+        // =========================================
+        // Imperative Guard 스타일
+        // =========================================
+
         //// 규칙 생략: Id 중복
         //if (SessionIds.Any(id => id == session.Id))
         //{
@@ -141,18 +99,18 @@ public sealed class Room : AggregateRoot
         ////    _sessionIdsByDate[session.Date] = [];
         ////}
         //
-        //////규칙
-        ////// 방은 구독(구독 등급)이 허용하는 개수보다 더 많은 세션을 가질 수 없다.
-        ////// A room cannot have more sessions than the subscription allows
-        ////var dailySessions = _sessionIdsByDate[session.Date];
+        ///규칙
+        //  방은 구독(구독 등급)이 허용하는 개수보다 더 많은 세션을 가질 수 없다.
+        //  A room cannot have more sessions than the subscription allows
+        //var dailySessions = _sessionIdsByDate[session.Date];
         //if (dailySessions.Count >= _maxDailySessions)
         //{
         //    return ScheduleSessionErrors.CannotHaveMoreSessionThanSubscriptionAllows;
         //}
-
-        //// 규칙
-        ////  방은 두 개 이상의 겹치는 세션을 가질 수 없다.
-        ////  A room cannot have two or more overlapping sessions
+        //
+        // 규칙
+        //  방은 두 개 이상의 겹치는 세션을 가질 수 없다.
+        //  A room cannot have two or more overlapping sessions
         //var bookTimeSlotResult = _schedule.AddTimeSlot(session.Date, session.Time);
         //if (bookTimeSlotResult.IsFail)
         //{
@@ -161,27 +119,108 @@ public sealed class Room : AggregateRoot
         //    //    : bookTimeSlotResult.Errors;
         //    return (Error)bookTimeSlotResult;
         //}
-
+        //
         //dailySessions.Add(session.Id);
-
+        //
         //_domainEvents.Add(new SessionScheduledEvent(Id, session));
-
-        ////return Unit.Default;
-        //return Unit.Default;
-        ////return session;
-
-        return unit;
+        //return unit;
     }
+
+    // ---------------------------
+    // 원본 코드: Ch06: dailySessions 有
+    // ---------------------------
+    //public ErrorOr<Success> ScheduleSession(Session session)
+    //{
+    //    if (SessionIds.Any(id => id == session.Id))
+    //    {
+    //        return Error.Conflict(description: "Session already exists in room");
+    //    }
+    //
+    //    if (!_sessionIdsByDate.ContainsKey(session.Date))
+    //    {
+    //        _sessionIdsByDate[session.Date] = [];
+    //    }
+    //
+    //    var dailySessions = _sessionIdsByDate[session.Date];
+    //
+    //    if (dailySessions.Count >= _maxDailySessions)
+    //    {
+    //        return RoomErrors.CannotHaveMoreSessionThanSubscriptionAllows;
+    //    }
+    //
+    //    var addEventResult = _schedule.BookTimeSlot(session.Date, session.Time);
+    //
+    //    if (addEventResult.IsError && addEventResult.FirstError.Type == ErrorType.Conflict)
+    //    {
+    //        return RoomErrors.CannotHaveTwoOrMoreOverlappingSessions;
+    //    }
+    //
+    //    dailySessions.Add(session.Id);
+    //
+    //    _domainEvents.Add(new SessionScheduledEvent(this, session));
+    //
+    //    return Result.Success;
+    //}
+
+    // ---------------------------
+    // 원본 코드: Ch10: dailySessions 無
+    // ---------------------------
+    //public ErrorOr<Success> ScheduleSession(Session session)
+    //{
+    //    _sessionIds.Throw()
+    //        .IfTrue(ids => ids.Any(id => id == session.Id));
+    //
+    //    if (_sessionIds.Count >= _maxSessions)
+    //    {
+    //        return RoomErrors.CannotHaveMoreSessionThanSubscriptionAllows;
+    //    }
+    //
+    //    var addEventResult = _schedule.BookTimeSlot(session.Date, session.Time);
+    //
+    //    if (addEventResult.IsError && addEventResult.FirstError.Type == ErrorType.Conflict)
+    //    {
+    //        return RoomErrors.CannotHaveTwoOrMoreOverlappingSessions;
+    //    }
+    //
+    //    _sessionIds.Add(session.Id);
+    //    _domainEvents.Add(new SessionScheduledEvent(this, session));
+    //
+    //    return Result.Success;
+    //}
 
     private Fin<Unit> EnsureSeesionNotFound(Guid sessionId) =>
         SessionIds.Contains(sessionId)
             ? RoomErrors.SessionAlreadyExist(Id, sessionId)
             : unit;
 
+    private Fin<List<Guid>> GetOrCreateDailySessionIds(DateOnly date)
+    {
+        if (!_sessionIdsByDate.TryGetValue(date, out List<Guid>? dailySessionIds))
+        {
+            dailySessionIds = [];
+            _sessionIdsByDate[date] = dailySessionIds;
+        }
+
+        return dailySessionIds;
+    }
+
+    private Fin<Unit> EnsureMaxSessionsNotExceeded(int numSessions) =>
+        (numSessions >= _maxDailySessions)
+            ? RoomErrors.MaxRoomsExceeded(Id, numSessions, _maxDailySessions)
+            : unit;
+
+    private Fin<Unit> ApplaySessionAddition(List<Guid> dailySessionIds, Session session)
+    {
+        dailySessionIds.Add(session.Id);
+        _domainEvents.Add(new SessionScheduledEvent(Id, session));
+
+        return unit;
+    }
+
+    // TODO: UnscheduleSession(RemoveSession)
+
     public bool HasSession(Guid sessionId)
     {
         return SessionIds.Contains(sessionId);
     }
-
-    // TODO: RemoveSession
 }

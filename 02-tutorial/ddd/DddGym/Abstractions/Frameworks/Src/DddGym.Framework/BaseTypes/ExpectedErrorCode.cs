@@ -10,7 +10,7 @@ namespace DddGym.Framework.BaseTypes;
 public static class ErrorCodeFactory
 {
     [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Error New(string errorCode, string message) =>
+    public static Error Create(string errorCode, string message) =>
         new ExpectedErrorCode(errorCode, -1000, message);
 }
 
