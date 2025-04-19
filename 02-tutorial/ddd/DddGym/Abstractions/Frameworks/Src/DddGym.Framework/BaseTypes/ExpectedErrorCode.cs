@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 
 namespace DddGym.Framework.BaseTypes;
 
-// TODO?: 
 public static class ErrorCodeFactory
 {
     [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]

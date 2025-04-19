@@ -14,7 +14,7 @@ internal static class SessionFactory
         Guid? trainerId = null,
         int maxParticipants = DomainConstants.Session.MaxParticipants,
         DateOnly? date = null,
-        TimeSlot? time = null,
+        TimeSlot? timeSlot = null,
         List<SessionCategory>? categories = null,
         Guid? id = null)
     {
@@ -25,7 +25,7 @@ internal static class SessionFactory
             roomId: roomId ?? DomainConstants.Room.Id,
             trainerId: trainerId ?? DomainConstants.Trainer.Id,
             date: date ?? DomainConstants.Session.Date,
-            timeSlot: time ?? DomainConstants.Session.Time,
+            timeSlot: timeSlot ?? DomainConstants.Session.TimeSlot,
             categories: categories ?? DomainConstants.Session.Categories,
             id: id ?? DomainConstants.Session.Id);
     }

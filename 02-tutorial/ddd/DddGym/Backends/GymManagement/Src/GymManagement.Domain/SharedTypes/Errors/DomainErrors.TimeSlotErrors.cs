@@ -7,7 +7,7 @@ public static partial class DomainErrors
 {
     public static class TimeSlotErrors
     {
-        public static Error InvalidTimeRange(TimeOnly start, TimeOnly end) =>
+        public static Error InvalidTimeSlot(TimeOnly start, TimeOnly end) =>
             ErrorCodeFactory.Create(
                 $"",
                 $"Start time '{start}' must be earlier than the end time '{end}'.");

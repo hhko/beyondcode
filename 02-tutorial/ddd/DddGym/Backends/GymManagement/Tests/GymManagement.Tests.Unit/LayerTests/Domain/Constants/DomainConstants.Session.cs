@@ -14,7 +14,7 @@ public static partial class DomainConstants
         //    TimeOnly.MinValue.AddHours(8),
         //    TimeOnly.MinValue.AddHours(9));
 
-        public static readonly TimeSlot Time = (TimeSlot)TimeSlot.Create(
+        public static readonly TimeSlot TimeSlot = (TimeSlot)TimeSlot.Create(
             TimeOnly.MinValue.AddHours(8),
             TimeOnly.MinValue.AddHours(9));
 

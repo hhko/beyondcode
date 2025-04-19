@@ -28,7 +28,7 @@ public sealed class TimeSlot : ValueObject
     public static Fin<TimeSlot> Create(TimeOnly start, TimeOnly end)
     {
         Error error = Error.Empty
-            .If(start >= end, TimeSlotErrors.InvalidTimeRange(start, end));
+            .If(start >= end, TimeSlotErrors.InvalidTimeSlot(start, end));
 
         return error.CreateValueObject(() => new TimeSlot(start, end));
 

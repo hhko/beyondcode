@@ -147,9 +147,9 @@ public sealed class Trainer : AggregateRoot
         //return unit;
     }
 
-    public bool IsTimeSlotFree(DateOnly date, TimeSlot timeRange)
+    public bool IsTimeSlotFree(DateOnly date, TimeSlot timeSlot)
     {
-        return _schedule.CanBookTimeSlot(date, timeRange);
+        return _schedule.CanBookTimeSlot(date, timeSlot);
     }
 }
 

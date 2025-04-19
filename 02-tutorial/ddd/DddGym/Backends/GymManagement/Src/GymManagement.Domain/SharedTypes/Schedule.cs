@@ -100,41 +100,47 @@ public sealed partial class Schedule : Entity
                from _2 in ApplyTimeSlotRemoval(timeSlots, timeRange)
                select unit;
 
-        // =========================================
-        // Monadic 스타일
-        // =========================================
+        //Fin<Unit> EnsureTimeSlotsAlreadyExit(DateOnly date, TimeSlot timeRange) =>
+        //    (!_calendar.TryGetValue(date, out var timeSlots) || !timeSlots.Contains(timeRange))
+        //        ? ScheduleErrors.TimeSlotNotFound(date, timeRange)
+        //        : unit;
 
-        //return EnsureTimeSlotsAlreadyExit(date, timeRange)
-        //    .Map(_ => GetTimeSlots(date))
-        //    .Bind(timeSlots => ApplyTimeSlotRemoval(timeSlots, timeRange));
+        Fin<Unit> EnsureTimeSlotsAlreadyExit(DateOnly date, TimeSlot timeRange) =>
+            !_calendar.TryGetValue(date, out var timeSlots)
+                ? ScheduleErrors.DateNotFound(date)
+                : !timeSlots.Contains(timeRange)
+                    ? ScheduleErrors.TimeSlotNotFound(date, timeRange)
+                    : unit;
 
-        // =========================================
-        // Imperative Guard 스타일
-        // =========================================
+        List <TimeSlot> GetTimeSlots(DateOnly date) =>
+            _calendar.GetValueOrDefault(date)!;
 
-        //if (!_calendar.TryGetValue(date, out var timeSlots) || !timeSlots.Contains(time))
-        //{
-        //    return Error.New("Booking not found");
-        //}
-        //
-        //timeSlots.Remove(time);
-        //return unit;
-        //
-        //return unit;
-    }
+        Fin<Unit> ApplyTimeSlotRemoval(List<TimeSlot> timeSlots, TimeSlot timeRange)
+        {
+            timeSlots.Remove(timeRange);
+            return unit;
+        }
 
-    private Fin<Unit> EnsureTimeSlotsAlreadyExit(DateOnly date, TimeSlot timeRange) =>
-        (!_calendar.TryGetValue(date, out var timeSlots) || !timeSlots.Contains(timeRange))
-            ? ScheduleErrors.TimeSlotNotFound(date, timeRange)
-            : unit;
+    // =========================================
+    // Monadic 스타일
+    // =========================================
 
+    //return EnsureTimeSlotsAlreadyExit(date, timeRange)
+    //    .Map(_ => GetTimeSlots(date))
+    //    .Bind(timeSlots => ApplyTimeSlotRemoval(timeSlots, timeRange));
 
-    private List<TimeSlot> GetTimeSlots(DateOnly date) =>
-        _calendar.GetValueOrDefault(date)!;
+    // =========================================
+    // Imperative Guard 스타일
+    // =========================================
 
-    private static Fin<Unit> ApplyTimeSlotRemoval(List<TimeSlot> timeSlots, TimeSlot timeRange)
-    {
-        timeSlots.Remove(timeRange);
-        return unit;
-    }
+    //if (!_calendar.TryGetValue(date, out var timeSlots) || !timeSlots.Contains(time))
+    //{
+    //    return Error.New("Booking not found");
+    //}
+    //
+    //timeSlots.Remove(time);
+    //return unit;
+    //
+    //return unit;
+}
 }

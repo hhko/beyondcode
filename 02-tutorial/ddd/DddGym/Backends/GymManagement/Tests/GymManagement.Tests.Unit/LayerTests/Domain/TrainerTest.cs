@@ -1,4 +1,14 @@
-﻿using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
+﻿using DddGym.Framework.BaseTypes;
+using GymManagement.Domain.AggregateRoots.Sessions;
+using GymManagement.Domain.AggregateRoots.Trainers;
+using GymManagement.Tests.Unit.LayerTests.Domain.Factories;
+using LanguageExt.Common;
+using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
+using GymManagement.Domain.SharedTypes.Errors;
+using static GymManagement.Domain.SharedTypes.Errors.DomainErrors;
+using GymManagement.Domain.SharedTypes.ValueObjects;
+using LanguageExt;
+using LanguageExt.Traits;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain;
 
@@ -45,21 +55,87 @@ public sealed class TrainerTest
     //    addSession2Result.FirstError.ShouldBe(AddSessionToScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions);
     //}
 
-    //[Fact]
-    //public void RemoveFromSchedule_When_ShouldFail()
-    //{
-    //    // Arrange
-    //    Trainer sut = TrainerFactory.CreateTrainer();
-    //    Session session = SessionFactory.CreateSession();
-    //    Session wrongSession = SessionFactory.CreateSession(
-    //        id: session.Id,
-    //        date: session.Date.AddDays(1));
 
-    //    // Act
-    //    var addSessionToScheduleResult = sut.AddSessionToSchedule(session);
+    // 트레이너는 존재하지 않는 날짜의 세션을 해제할 수 없습니다.
+    // A trainer cannot unschedule sessions if the date does not exist.
+    [Fact]
+    public void Trainer_Cannot_UnscheduleSession_When_DateNotFound()
+    {
+        // Arrange
+        Trainer sut = TrainerFactory.CreateTrainer();
+        Session session = SessionFactory.CreateSession();
+        Session wrongSession = SessionFactory.CreateSession(
+            id: session.Id,
+            date: session.Date.AddDays(1));     // 다른 날짜 Session
 
-    //    var removeFromScheduleResult = sut.RemoveFromSchedule(wrongSession);
-    //    removeFromScheduleResult.IsError.ShouldBeTrue();
-    //    //removeFromScheduleResult.FirstError.ShouldBe(Error.NotFound);
-    //}
+        var addSessionToScheduleResult = sut.ScheduleSession(session);
+
+        // Act: 다른 날짜의 세션은 삭제할 수 없습니다.
+        var actual = sut.UnscheduleSession(wrongSession);
+
+        // Assert
+        actual.IsFail.ShouldBeTrue();
+
+        actual.ShouldBeErrorCode($"{nameof(DomainErrors)}.{nameof(ScheduleErrors)}.{nameof(ScheduleErrors.DateNotFound)}");
+    }
+
+    // 트레이너는 존재하지 않는 날짜의 세션을 해제할 수 없습니다.
+    // A trainer cannot unschedule sessions if the date does not exist.
+    [Fact]
+    public void Trainer_Cannot_UnscheduleSession_When_TimeSlotNotFound()
+    {
+        // Arrange
+        Trainer sut = TrainerFactory.CreateTrainer();
+        Session session = SessionFactory.CreateSession();
+        Session wrongSession = SessionFactory.CreateSession(
+            id: session.Id,
+            timeSlot: (TimeSlot)TimeSlot.Create(        // 다른 TimeSlot Session
+                session.TimeSlot.Start,
+                session.TimeSlot.End.AddHours(3))); 
+
+        var addSessionToScheduleResult = sut.ScheduleSession(session);
+
+        // Act: 다른 날짜의 세션은 삭제할 수 없습니다.
+        var actual = sut.UnscheduleSession(wrongSession);
+
+        // Assert
+        actual.IsFail.ShouldBeTrue();
+        actual.ShouldBeErrorCode($"{nameof(DomainErrors)}.{nameof(ScheduleErrors)}.{nameof(ScheduleErrors.TimeSlotNotFound)}");
+    }
 }
+
+
+
+//internal static class Common
+//{
+//    internal static void ThrowIfSome<T>(T _)
+//        => throw new Exception("Expected None, got Some instead.");
+
+//    internal static void ThrowIfNone()
+//        => throw new Exception("Expected Some, got None instead.");
+
+//    internal static void ThrowIfFail<T>(T _)
+//        => throw new Exception("Expected Success, got Fail instead.");
+
+//    internal static void ThrowIfSuccess<T>(T _)
+//        => throw new Exception("Expected Fail, got Success instead.");
+
+//    internal static void ThrowIfRight<T>(T _)
+//        => throw new Exception("Expected Left, got Right instead.");
+
+//    internal static void ThrowIfLeft<T>(T _)
+//        => throw new Exception("Expected Right, got Left instead.");
+
+//    internal static void ThrowExpectedFailGotSome<T>(T _)
+//        => throw new Exception("Expected Fail, got Some instead.");
+
+//    internal static void ThrowExpectedFailGotNone()
+//        => throw new Exception("Expected Fail, got None instead.");
+
+//    internal static void SuccessfulNone()
+//    {
+//        /* we should end up in here*/
+//    }
+
+//    internal static void Noop<T>(T _) { }
+//}
