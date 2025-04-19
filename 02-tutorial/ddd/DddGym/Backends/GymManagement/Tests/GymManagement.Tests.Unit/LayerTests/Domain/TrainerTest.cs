@@ -9,6 +9,7 @@ using static GymManagement.Domain.SharedTypes.Errors.DomainErrors;
 using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using LanguageExt.Traits;
+using GymManagement.Tests.Unit.Abstractions;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain;
 
