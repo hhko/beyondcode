@@ -17,9 +17,9 @@ public static partial class DomainErrors
                 $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(SessionAlreadyExist)}",
                 $"Session '{sessionId}' already exists in trainer's schedule '{trainerId}'");
 
-        //public static Error CannotHaveTwoOrMoreOverlappingSessions(DateOnly date, TimeRange timeRange) =>
-        //    ErrorCode.Operation(
-        //        $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(CannotHaveTwoOrMoreOverlappingSessions)}",
-        //        $"A trainer cannot have two or more overlapping sessions '{date}', '{timeRange}'");
+        public static Error SessionNotScheduled() =>
+            ErrorCodeFactory.Create(
+                $"{nameof(DomainErrors)}.{nameof(TrainerErrors)}.{nameof(SessionNotScheduled)}",
+                $"A trainer cannot schedule a session");
     }
 }

@@ -1,11 +1,8 @@
 ﻿using DddGym.Framework.BaseTypes;
-using GymManagement.Domain.AggregateRoots.Participants;
-using GymManagement.Domain.AggregateRoots.Trainers;
 using LanguageExt.Common;
-using static GymManagement.Domain.AggregateRoots.Gyms.Errors.DomainErrors;
 
 namespace GymManagement.Domain.AggregateRoots.Sessions.Errors;
-public static partial class DoaminErrors
+public static partial class DomainErrors
 {
     public static class SessionErrors
     {

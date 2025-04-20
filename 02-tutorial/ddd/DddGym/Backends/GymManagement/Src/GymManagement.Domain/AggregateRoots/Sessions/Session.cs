@@ -4,9 +4,8 @@ using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
 using GymManagement.Domain.AggregateRoots.Sessions.Events;
 using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
-using static LanguageExt.Prelude;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainErrors;
-using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DoaminErrors;
+using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Sessions;
 
@@ -174,11 +173,11 @@ public sealed class Session : AggregateRoot
     // TODO?: 취소하기 위해서는 participantId가 sessionId로 변경해야 하지 않을까?
     //      - 하나의 Participant가 여러 Session을 예약할 수 있기 때문에
     //      - 예. 같은 날에 다른 Session 여러개?
-    public Fin<Unit> CancelReservation(Guid participantId, IDateTimeProvider dateTimeProvider)
+    public Fin<Unit> CancelReservation(Guid participantId, DateTime utcNow)
     {
         return from _1 in EnsureParticipantAlreadyExist(participantId)
-               from _2 in EnsureReservationInFuture(dateTimeProvider.UtcNow)
-               from _3 in EnsureReservationNotTooClose(dateTimeProvider.UtcNow)
+               from _2 in EnsureReservationInFuture(utcNow)
+               from _3 in EnsureReservationNotTooClose(utcNow)
                from _4 in ApplyReservationRemoval(participantId)
                select unit;
 

@@ -68,6 +68,29 @@ public sealed class Gym : AggregateRoot
                from _3 in ApplayRoomAddition(room)
                select unit;
 
+        Fin<Unit> EnsureRoomNotFound(Guid roomId) =>
+            _roomIds.Contains(roomId)
+                ? GymErrors.RoomAlreadyExist(Id, roomId)
+                : unit;
+
+        Fin<Unit> EnsureMaxRoomsNotExceeded() =>
+            (_roomIds.Count >= _maxRooms)
+                ? GymErrors.MaxRoomsExceeded(Id, _roomIds.Count, _maxRooms)
+                : unit;
+
+        Fin<Unit> ApplayRoomAddition(Room room)
+        {
+            _roomIds.Add(room.Id);
+
+            _domainEvents.Add(new GymEvents.RoomAddedEvent(
+                Name: room.Name,
+                RoomId: room.Id,
+                GymId: Id,
+                MaxDailySessions: room.MaxDailySessions));
+
+            return unit;
+        }
+
         // =========================================
         // Imperative Guard 스타일
         // =========================================
@@ -97,35 +120,24 @@ public sealed class Gym : AggregateRoot
         //return unit;
     }
 
-    private Fin<Unit> EnsureRoomNotFound(Guid roomId) =>
-        _roomIds.Contains(roomId)
-            ? GymErrors.RoomAlreadyExist(Id, roomId)
-            : unit;
-
-    private Fin<Unit> EnsureMaxRoomsNotExceeded() =>
-        (_roomIds.Count >= _maxRooms)
-            ? GymErrors.MaxRoomsExceeded(Id, _roomIds.Count, _maxRooms)
-            : unit;
-
-    private Fin<Unit> ApplayRoomAddition(Room room)
-    {
-        _roomIds.Add(room.Id);
-
-        _domainEvents.Add(new GymEvents.RoomAddedEvent(
-            Name: room.Name,
-            RoomId: room.Id,
-            GymId: Id,
-            MaxDailySessions: room.MaxDailySessions));
-
-        return unit;
-    }
-
-    // 추가
     public Fin<Unit> RemoveRoom(Guid roomId)
     {
         return from _1 in EnsureRoomAlreadyExist(roomId)
                from _2 in ApplyRoomRemoval(roomId)
                select unit;
+
+        Fin<Unit> EnsureRoomAlreadyExist(Guid roomId) =>
+            !_roomIds.Contains(roomId)
+                ? GymErrors.RoomNotFound(Id, roomId)
+                : unit;
+
+        Fin<Unit> ApplyRoomRemoval(Guid roomId)
+        {
+            _roomIds.Remove(roomId);
+            _domainEvents.Add(new GymEvents.RoomRemovedEvent(this, roomId));
+
+            return unit;
+        }
 
         // =========================================
         // Imperative Guard 스타일
@@ -143,20 +155,6 @@ public sealed class Gym : AggregateRoot
         //return unit;
     }
 
-    private Fin<Unit> EnsureRoomAlreadyExist(Guid roomId) =>
-        _roomIds.Contains(roomId)
-            ? unit
-            : GymErrors.RoomNotFound(Id, roomId);
-
-    private Fin<Unit> ApplyRoomRemoval(Guid roomId)
-    {
-        _roomIds.Remove(roomId);
-        _domainEvents.Add(new GymEvents.RoomRemovedEvent(this, roomId));
-
-        return unit;
-    }
-
-    // 추가
     public bool HasRoom(Guid roomId)
     {
         return _roomIds.Contains(roomId);
@@ -167,6 +165,18 @@ public sealed class Gym : AggregateRoot
         return from _1 in EnsureTrainerNotFound(trainerId)
                from _2 in ApplyTrainerAddition(trainerId)
                select unit;
+
+        Fin<Unit> EnsureTrainerNotFound(Guid trainerId) =>
+            _trainerIds.Contains(trainerId)
+                ? GymErrors.TrainerAlreadyExist(Id, trainerId)
+                : unit;
+
+        Fin<Unit> ApplyTrainerAddition(Guid trainerId)
+        {
+            _trainerIds.Add(trainerId);
+
+            return unit;
+        }
 
         // =========================================
         // Imperative Guard 스타일
@@ -180,18 +190,6 @@ public sealed class Gym : AggregateRoot
         //_trainerIds.Add(trainerId);
         //
         //return unit;
-    }
-
-    private Fin<Unit> EnsureTrainerNotFound(Guid trainerId) =>
-        !_trainerIds.Contains(trainerId)
-            ? unit
-            : GymErrors.TrainerAlreadyExist(Id, trainerId);
-
-    private Fin<Unit> ApplyTrainerAddition(Guid trainerId)
-    {
-        _trainerIds.Add(trainerId);
-
-        return unit;
     }
 
     // TODO: RemoveTrainer

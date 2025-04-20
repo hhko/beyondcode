@@ -1,11 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Rooms.Events;
 using GymManagement.Domain.AggregateRoots.Sessions;
-using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
-using OneOf.Types;
-using System.Globalization;
-using static GymManagement.Domain.AggregateRoots.Gyms.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Rooms.Errors.DomainErrors;
 using static LanguageExt.Prelude;
 
@@ -77,6 +73,35 @@ public sealed class Room : AggregateRoot
                from _3 in _schedule.BookTimeSlot(session.Date, session.TimeSlot)
                from _4 in ApplaySessionAddition(dailySessionIds, session)
                select unit;
+
+        Fin<Unit> EnsureSeesionNotFound(Guid sessionId) =>
+            SessionIds.Contains(sessionId)
+                ? RoomErrors.SessionAlreadyExist(Id, sessionId)
+                : unit;
+
+        Fin<List<Guid>> GetOrCreateDailySessionIds(DateOnly date)
+        {
+            if (!_sessionIdsByDate.TryGetValue(date, out List<Guid>? dailySessionIds))
+            {
+                dailySessionIds = [];
+                _sessionIdsByDate[date] = dailySessionIds;
+            }
+
+            return dailySessionIds;
+        }
+
+        Fin<Unit> EnsureMaxSessionsNotExceeded(int numSessions) =>
+            (numSessions >= _maxDailySessions)
+                ? RoomErrors.MaxRoomsExceeded(Id, numSessions, _maxDailySessions)
+                : unit;
+
+        Fin<Unit> ApplaySessionAddition(List<Guid> dailySessionIds, Session session)
+        {
+            dailySessionIds.Add(session.Id);
+            _domainEvents.Add(new SessionScheduledEvent(Id, session));
+
+            return unit;
+        }
 
         // =========================================
         // Imperative Guard 스타일
@@ -187,35 +212,6 @@ public sealed class Room : AggregateRoot
     //
     //    return Result.Success;
     //}
-
-    private Fin<Unit> EnsureSeesionNotFound(Guid sessionId) =>
-        SessionIds.Contains(sessionId)
-            ? RoomErrors.SessionAlreadyExist(Id, sessionId)
-            : unit;
-
-    private Fin<List<Guid>> GetOrCreateDailySessionIds(DateOnly date)
-    {
-        if (!_sessionIdsByDate.TryGetValue(date, out List<Guid>? dailySessionIds))
-        {
-            dailySessionIds = [];
-            _sessionIdsByDate[date] = dailySessionIds;
-        }
-
-        return dailySessionIds;
-    }
-
-    private Fin<Unit> EnsureMaxSessionsNotExceeded(int numSessions) =>
-        (numSessions >= _maxDailySessions)
-            ? RoomErrors.MaxRoomsExceeded(Id, numSessions, _maxDailySessions)
-            : unit;
-
-    private Fin<Unit> ApplaySessionAddition(List<Guid> dailySessionIds, Session session)
-    {
-        dailySessionIds.Add(session.Id);
-        _domainEvents.Add(new SessionScheduledEvent(Id, session));
-
-        return unit;
-    }
 
     // TODO: UnscheduleSession(RemoveSession)
 

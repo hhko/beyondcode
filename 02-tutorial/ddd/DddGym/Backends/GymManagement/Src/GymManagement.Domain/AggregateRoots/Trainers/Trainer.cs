@@ -51,7 +51,9 @@ public sealed class Trainer : AggregateRoot
         //  - 트레이너는 두 개 이상의 겹치는 세션을 가르칠 수 없다.
         //    A trainer cannot teach two or more overlapping sessions
         return from _1 in EnsureSessionNotFound(session.Id)
-               from _2 in _schedule.BookTimeSlot(session.Date, session.TimeSlot)
+               from _2 in _schedule
+                            .BookTimeSlot(session.Date, session.TimeSlot)
+                            .CombineErrors(TrainerErrors.SessionNotScheduled())
                from _3 in ApplySessionAddition(session.Id)
                select unit;
 
@@ -103,14 +105,16 @@ public sealed class Trainer : AggregateRoot
     public Fin<Unit> UnscheduleSession(Session session)
     {
         return from _1 in EnsureSessionAlreadyExist(session.Id)
-               from _2 in _schedule.UnbookTimeSlot(session.Date, session.TimeSlot)
+               from _2 in _schedule
+                            .UnbookTimeSlot(session.Date, session.TimeSlot)
+                            .CombineErrors(TrainerErrors.SessionNotFound(Id, session.Id))
                from _3 in ApplySessionRemoval(session.Id)
                select unit;
 
         Fin<Unit> EnsureSessionAlreadyExist(Guid sessionId) =>
-            _sessionIds.Contains(sessionId)
-                ? unit
-                : TrainerErrors.SessionNotFound(Id, sessionId);
+            !_sessionIds.Contains(sessionId)
+                ? TrainerErrors.SessionNotFound(Id, sessionId)
+                : unit;
 
         Fin<Unit> ApplySessionRemoval(Guid sessionId)
         {

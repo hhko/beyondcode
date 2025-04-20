@@ -1,4 +1,4 @@
-﻿using GymManagement.Domain.AggregateRoots.Sessions;
+﻿using GymManagement.Application.Usecases.Sessions.Ports;
 
 namespace GymManagement.Tests.Unit.Abstractions.Providers;
 

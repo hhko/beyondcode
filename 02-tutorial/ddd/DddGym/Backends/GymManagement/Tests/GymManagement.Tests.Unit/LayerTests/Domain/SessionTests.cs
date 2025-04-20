@@ -3,7 +3,7 @@
 namespace GymManagement.Tests.Unit.LayerTests.Domain;
 
 [Trait(nameof(UnitTest), UnitTest.Domain)]
-public sealed class SessionTest
+public sealed class SessionTests
 {
     // TODO: LanguageExt
     //// 규칙

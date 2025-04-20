@@ -1,5 +1,5 @@
 ﻿using GymManagement.Adapters.Presentation.Abstractions;
-using GymManagement.Domain.AggregateRoots.Sessions;
+using GymManagement.Application.Usecases.Sessions.Ports;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GymManagement.Adapters.Infrastructure.Abstractions.Registrations;

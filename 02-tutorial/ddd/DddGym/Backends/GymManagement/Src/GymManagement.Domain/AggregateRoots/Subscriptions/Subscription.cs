@@ -80,6 +80,24 @@ public sealed class Subscription : AggregateRoot
                from _3 in ApplyGymAddition(gym)
                select unit;
 
+        Fin<Unit> EnsureGymNotFound(Guid gymId) =>
+            _gymIds.Contains(gymId)
+                ? SubscriptionErrors.GymAlreadyExist(Id, gymId)
+                : unit;
+
+        Fin<Unit> EnsureMaxGymsNotExceeded() =>
+            (_gymIds.Count >= _maxGyms)
+                ? SubscriptionErrors.MaxGymsExceeded(Id, _maxGyms)
+                : unit;
+
+        Fin<Unit> ApplyGymAddition(Gym gym)
+        {
+            _gymIds.Add(gym.Id);
+            _domainEvents.Add(new SubscriptionEvents.GymAddedEvent(this, gym));
+
+            return unit;
+        }
+
         // =========================================
         // Monadic 스타일
         // =========================================
@@ -111,24 +129,6 @@ public sealed class Subscription : AggregateRoot
         //_domainEvents.Add(new GymAddedEvent(this, gym));
         //
         //return Unit.Default;
-    }
-
-    private Fin<Unit> EnsureGymNotFound(Guid gymId) =>
-        !_gymIds.Contains(gymId)
-            ? unit
-            : SubscriptionErrors.GymAlreadyExist(Id, gymId);
-
-    private Fin<Unit> EnsureMaxGymsNotExceeded() =>
-        (_gymIds.Count < _maxGyms)
-            ? unit
-            : SubscriptionErrors.MaxGymsExceeded(Id, _maxGyms);
-
-    private Fin<Unit> ApplyGymAddition(Gym gym)
-    {
-        _gymIds.Add(gym.Id);
-        _domainEvents.Add(new SubscriptionEvents.GymAddedEvent(this, gym));
-
-        return unit;
     }
 
     public bool HasGym(Guid gymId)

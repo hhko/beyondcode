@@ -1,6 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes;
 using LanguageExt;
-using System.Diagnostics.Contracts;
 using static GymManagement.Domain.AggregateRoots.Users.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Users.Events.DomainEvents;
 using static LanguageExt.Prelude;
@@ -79,6 +78,22 @@ public sealed class User : AggregateRoot
                from _2 in ApplyAdminProfile(newAdminId)         // Bind
                select newAdminId;
 
+        Fin<Unit> EnsureAdminNotCreated(Guid? adminId) =>
+            adminId.HasValue
+                ? UserErrors.AdminAlreadyCreated(Id, adminId.Value)
+                : unit;
+
+        Guid NewAdminId() =>
+            Guid.NewGuid();
+
+        Fin<Guid> ApplyAdminProfile(Guid newAdminId)
+        {
+            AdminId = newAdminId;
+            _domainEvents.Add(new UserEvents.AdminProfileCreatedEvent(Id, newAdminId));
+
+            return newAdminId;
+        }
+
         // =========================================
         // Monadic 스타일
         // =========================================
@@ -103,24 +118,6 @@ public sealed class User : AggregateRoot
         //return AdminId.Value;
     }
 
-    [Pure]
-    private Fin<Unit> EnsureAdminNotCreated(Guid? adminId) =>
-        !adminId.HasValue
-            ? unit
-            : UserErrors.AdminAlreadyCreated(Id, adminId.Value);
-
-    [Pure]
-    private Guid NewAdminId() =>
-        Guid.NewGuid();
-
-    private Fin<Guid> ApplyAdminProfile(Guid newAdminId)
-    {
-        AdminId = newAdminId;
-        _domainEvents.Add(new UserEvents.AdminProfileCreatedEvent(Id, newAdminId));
-
-        return newAdminId;
-    }
-
     public Fin<Guid> CreateParticipantProfile()
     {
         // =========================================
@@ -131,6 +128,22 @@ public sealed class User : AggregateRoot
                from newParticipantId in Pure(NewParticipantId())
                from _2 in ApplyParticipantProfile(newParticipantId)
                select newParticipantId;
+
+        Fin<Unit> EnsureParticipantNotCreated(Guid? participantId) =>
+            participantId.HasValue
+                ? UserErrors.ParticipantAlreadyCreated(Id, participantId.Value)
+                : unit;
+
+        Guid NewParticipantId() =>
+            Guid.NewGuid();
+
+        Fin<Guid> ApplyParticipantProfile(Guid newParticipantId)
+        {
+            ParticipantId = newParticipantId;
+            _domainEvents.Add(new UserEvents.ParticipantProfileCreatedEvent(Id, newParticipantId));
+
+            return newParticipantId;
+        }
 
         // =========================================
         // Case 1. Imperative Guard 스타일
@@ -146,24 +159,6 @@ public sealed class User : AggregateRoot
         //_domainEvents.Add(new ParticipantProfileCreatedEvent(Id, ParticipantId.Value));
         //
         //return ParticipantId.Value;
-    }
-
-    [Pure]
-    private Fin<Unit> EnsureParticipantNotCreated(Guid? participantId) =>
-        !participantId.HasValue
-            ? unit
-            : UserErrors.ParticipantAlreadyCreated(Id, participantId.Value);
-
-    [Pure]
-    private Guid NewParticipantId() =>
-        Guid.NewGuid();
-
-    private Fin<Guid> ApplyParticipantProfile(Guid newParticipantId)
-    {
-        ParticipantId = newParticipantId;
-        _domainEvents.Add(new UserEvents.ParticipantProfileCreatedEvent(Id, newParticipantId));
-
-        return newParticipantId;
     }
 
     public Fin<Guid> CreateTrainerProfile()
@@ -183,6 +178,34 @@ public sealed class User : AggregateRoot
                from newTrainerId in Pure(NewTrainerId())
                from _2 in ApplyTrainerProfile(newTrainerId)
                select newTrainerId;
+
+        Fin<Unit> EnsureTrainerNotCreated(Guid? trainerId) =>
+            trainerId.HasValue
+                ? UserErrors.TrainerAlreadyCreated(Id, trainerId.Value)
+                : unit;
+
+        Guid NewTrainerId() =>
+            Guid.NewGuid();
+
+        // Map은 순수한 값 변환용 함수 (T -> R)에 쓰입니다.
+        // 그러나 ApplyTrainerProfile은 내부 상태를 변경하는 부수 효과 함수 (T -> Fin<R>)이기 때문에 Bind가 더 적절합니다.
+        //  - Map: 순수 함수
+        //  - Bind: 부수 효과 함수
+        //
+        // X: .Map(id => ApplyTrainerProfile(id)     : private Guid ApplyTrainerProfile(Guid newTrainerId)
+        // O: .Bind(id => ApplyTrainerProfile(id)    : private Fin<Guid> ApplyTrainerProfile(Guid newTrainerId)
+        Fin<Guid> ApplyTrainerProfile(Guid newTrainerId)
+        {
+            // TrainerId 설정과 이벤트 발생은 불가분의 도메인 행동이다
+            //
+            // "프로필을 생성한다"는 하나의 도메인 행동이자,
+            // 그 결과로 TrainerId가 할당되고 이벤트가 생성되는 것은 불가분 관계입니다.
+
+            TrainerId = newTrainerId;
+            _domainEvents.Add(new UserEvents.TrainerProfileCreatedEvent(Id, newTrainerId));
+
+            return newTrainerId;
+        }
 
         // =========================================
         // Case 2: Monadic 스타일
@@ -205,35 +228,5 @@ public sealed class User : AggregateRoot
         //_domainEvents.Add(new TrainerProfileCreatedEvent(Id, newTrainerId));
         //
         //return TrainerId.Value;
-    }
-
-    [Pure]
-    private Fin<Unit> EnsureTrainerNotCreated(Guid? trainerId) =>
-      !trainerId.HasValue
-          ? unit
-          : UserErrors.TrainerAlreadyCreated(Id, trainerId.Value);
-
-    [Pure]
-    private Guid NewTrainerId() =>
-        Guid.NewGuid();
-
-    // Map은 순수한 값 변환용 함수 (T -> R)에 쓰입니다.
-    // 그러나 ApplyTrainerProfile은 내부 상태를 변경하는 부수 효과 함수 (T -> Fin<R>)이기 때문에 Bind가 더 적절합니다.
-    //  - Map: 순수 함수
-    //  - Bind: 부수 효과 함수
-    //
-    // X: .Map(id => ApplyTrainerProfile(id)     : private Guid ApplyTrainerProfile(Guid newTrainerId)
-    // O: .Bind(id => ApplyTrainerProfile(id)    : private Fin<Guid> ApplyTrainerProfile(Guid newTrainerId)
-    private Fin<Guid> ApplyTrainerProfile(Guid newTrainerId)
-    {
-        // TrainerId 설정과 이벤트 발생은 불가분의 도메인 행동이다
-        //
-        // "프로필을 생성한다"는 하나의 도메인 행동이자,
-        // 그 결과로 TrainerId가 할당되고 이벤트가 생성되는 것은 불가분 관계입니다.
-
-        TrainerId = newTrainerId;
-        _domainEvents.Add(new UserEvents.TrainerProfileCreatedEvent(Id, newTrainerId));
-
-        return newTrainerId;
     }
 }

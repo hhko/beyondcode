@@ -63,6 +63,16 @@ public sealed class Participant : AggregateRoot
                from _3 in ApplySessionAddition(session.Id)
                select unit;
 
+        Fin<Unit> EnsureSessionNotFound(Guid sessionId) =>
+            _sessionIds.Contains(sessionId)
+                ? ParticipantErrors.SessionAlreadyExist(Id, sessionId)
+                : unit;
+
+        Fin<Unit> ApplySessionAddition(Guid sessionId)
+        {
+            _sessionIds.Add(sessionId);
+            return unit;
+        }
 
         // =========================================
         // Monadic 스타일
@@ -100,17 +110,6 @@ public sealed class Participant : AggregateRoot
         //return unit;
     }
 
-    private Fin<Unit> EnsureSessionNotFound(Guid sessionId) =>
-        _sessionIds.Contains(sessionId)
-            ? ParticipantErrors.SessionAlreadyExist(Id, sessionId)
-            : unit;
-
-    private Fin<Unit> ApplySessionAddition(Guid sessionId)
-    {
-        _sessionIds.Add(sessionId);
-        return unit;
-    }
-
     // 추가
     //public Fin<Unit> RemoveFromSchedule(Session session)
     public Fin<Unit> UnscheduleSession(Session session)
@@ -120,6 +119,16 @@ public sealed class Participant : AggregateRoot
                from _3 in ApplySessionRemoval(session.Id)
                select unit;
 
+        Fin<Unit> EnsureSessionAlreadyExist(Guid sessionId) =>
+            !_sessionIds.Contains(sessionId)
+                ? ParticipantErrors.SessionNotFound(Id, sessionId)
+                : unit;
+
+        Fin<Unit> ApplySessionRemoval(Guid sessionId)
+        {
+            _sessionIds.Remove(sessionId);
+            return unit;
+        }
 
         // =========================================
         // Monadic 스타일
@@ -149,17 +158,6 @@ public sealed class Participant : AggregateRoot
         //_sessionIds.Remove(session.Id);
         //
         //return unit;
-    }
-
-    private Fin<Unit> EnsureSessionAlreadyExist(Guid sessionId) =>
-        !_sessionIds.Contains(sessionId)
-            ? ParticipantErrors.SessionNotFound(Id, sessionId)
-            : unit;
-
-    private Fin<Unit> ApplySessionRemoval(Guid sessionId)
-    {
-        _sessionIds.Remove(sessionId);
-        return unit;
     }
 
     public bool HasReservationForSession(Guid sessionId)

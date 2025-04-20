@@ -1,4 +1,4 @@
-﻿namespace GymManagement.Domain.AggregateRoots.Sessions;
+﻿namespace GymManagement.Application.Usecases.Sessions.Ports;
 
 public interface IDateTimeProvider
 {
