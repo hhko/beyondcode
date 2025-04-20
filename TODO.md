@@ -1,32 +1,40 @@
 ## 규칙
+1. 전역 버전(docker 이미지 버전 포함)
+1. global.json
+1. nuget.config
+1. Directory.Build.props
+1. Directory.Package.props
+---
 1. 클래스 sealed
 1. 클래스 상속
 ---
 1. 생성사 private
 1. 생성 Create
 1. ValueObject 생성
-	Error.Empty.If(조건, 에러 코드)
-	Error CreateValueObject
+   - Error.Empty.If(조건, 에러 코드)
+   - Error CreateValueObject
 ---
 1. 로컬 function
    - https://learn.microsoft.com/ko-kr/dotnet/csharp/programming-guide/classes-and-structs/local-functions
    - https://www.geeksforgeeks.org/local-function-in-c-sharp/
 1. Apply 함수 1개(로컬 function -{x}-> 로컬 function)
-1. 순수 함수: A -> B
-1. 부수 효과 함수: A -> Fin<B> (실패가 존재하지 않아도)
+1. 순수 함수: `A -> B`
+1. 부수 효과 함수: `A -> Fin<B>` (실패가 존재하지 않아도)
 ---
 1. 에러 코드: {레이어Errors}.{대상Errors}.{에러_원인}
 1. 에러 코드 생성: ErrorCodeFactory.Create
 1. 에러 코드 포맷: ErrorCodeFactory.Format
-1. 에러 추가: 		Fin<T> .CombinErrors
+1. 에러 추가: `Fin<T> .CombinErrors`
 ---
 1. 이벤트 이름
 1. 이벤트 출처 확인인
 ---
 1. Ensure 참조건
-	거짓조건
+   ```
+   거짓조건
 		? 참(에러)
 		: 거짓(성공)		// unit
+   ```
 ---
 1. appsettings
 ---
@@ -37,6 +45,8 @@
 
 ## 할일
 ### 할일 1.
+- [x] 에러 클래스 분리
+- [x] 이벤트 클래스 분리
 - [ ] https://github.com/dev-cycles/contextive 용어집
 - [ ] Ensure -> Validate
 - [ ] ? -> Option
@@ -110,7 +120,7 @@ RabbitMQ 연동
 
 ## PR
 - dailySession
-- Session에서 List<T> 리턴함수 -> IReadOnlyList<T>
+- Session에서 `List<T> -> IReadOnlyList<T>`
 - Loing과 Register 변경
 
 <br/>
