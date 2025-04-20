@@ -1,77 +1,125 @@
-```
-ValueObject         -> Error -> Result(Fin)                 -> Pipeline: 로그, 지표, 추적  -> OpenSearch
-Entity              -> Source Generator: Id, IAdapter
-Aggregate Root
-```
+## 규칙
+1. 클래스 sealed
+1. 클래스 상속
+---
+1. 생성사 private
+1. 생성 Create
+1. ValueObject 생성
+	Error.Empty.If(조건, 에러 코드)
+	Error CreateValueObject 
+---
+1. 로컬 function
+   - https://learn.microsoft.com/ko-kr/dotnet/csharp/programming-guide/classes-and-structs/local-functions
+   - https://www.geeksforgeeks.org/local-function-in-c-sharp/
+1. Apply 함수 1개(로컬 function -{x}-> 로컬 function)
+1. 순수 함수: A -> B
+1. 부수 효과 함수: A -> Fin<B> (실패가 존재하지 않아도)
+---
+1. 에러 코드: {레이어Errors}.{대상Errors}.{에러_원인}
+1. 에러 코드 생성: ErrorCodeFactory.Create
+1. 에러 코드 포맷: ErrorCodeFactory.Format
+1. 에러 추가: 		Fin<T> .CombinErrors
+---
+1. Ensure 참조건
+	거짓조건
+		? 참(에러)
+		: 거짓(성공)		// unit
+---
+1. appsettings
+---
+1. 의존성 등록
+---
+1. 테스트 코드 범주화
 
-## Error/Validation/ValueObject
-- [x] Error, ManyErrors, Validation
-- [ ] Fin?
-- [ ] 연속 함수: 생성 이후 사용 방법???
-----
-- [ ] ValueObject 구현 이해
-- [ ] public static ManyErrors Validate(string firstName) public한 이유
-- [ ] 도메인 에러 가이드
-- [ ] 도메인 네이밍컨벤션 규칙 테스트
-  - public sealed record? 클래스
-  - private 생성사
-  - public static ManyErrors Validate 메서드
+
+## 할일
+### 할일 1.
+- [ ] https://github.com/dev-cycles/contextive 용어집
+- [ ] Ensure -> Validate
+- [ ] ? -> Option
+
+### 할일 2.
+- [ ] User Register
+- [ ] User Login
+- [ ] Application -> Domain 연동 이해
+  -	Domain 테스트 코드
+  - Application 테스트 코드
+
+### 할일 3.
+- [ ] Reqnroll 테스트
+
+### 할일 4.
+- ] ] ValueObject 코딩 규칙 테스트
+- ] ] Entity 기본 구현
+- ] ] Entity 코딩 규칙 테스트
+- ] ] AggregateRoot 기본 구현
+
+### 할일 5.
+RabbitMQ 연동
+
+### 할일 6.
+- [ ] Pipeline
+  - 유효성 검사
+  - 도메인 Validate 메서드를 이용한 파이프라인 Validation
+  - OpenTelemetry 로그
+  - OpenTelemetry 추적
+  - OpenTelemetry 지표
+  - 예외
+  - 트랜잭션? 시점
+  - 캐시
+
+### 할일 7.
+- [ ] dapper(query) / ef core(command)
+
+### 할일 8.
+- [ ] Id 타입
+- [ ] IAdapter Pipeline
+
+### 할일 9.
+- [ ] Exception 호스트 에러
+- [ ] 컨테이너화
+- [ ] Container HealthCheck
+- [ ] Audit
+- [ ] Specification???
+
+### 할일 10.
+- [ ] 회복력 adapter 레이어
+
+### 할일 11.
+- [ ] https://github.com/backstage/backstage 개발 포탈 사이트
+- [ ] https://github.com/moghtech/komodo 배포
+- [ ] openfeature
 
 <br/>
+
+## 고민
+- 메서드 이름
+  - HasReservationForParticipant(Guid participantId)
+  - HasReservationBy(Guid participantId)
+- 생성 이름 구분
+  - New			// 자동(외부): EFCore ???
+  - Create		// 직접
+- 이벤트 ?
+  - 데이터 전달 대상: id, 객체?
+  - 시점: 객체 생성?, 데이터 저장?
+
 <br/>
+
+## PR
+- dailySession
+- Session에서 List<T> 리턴함수 -> IReadOnlyList<T>
+- Loing과 Register 변경
+
 <br/>
 
-## appsettings.json IOptions | 필수
-- [x] IOptions + Fluent Validation
-- [x] 복수개 IOptions 처리
-- [x] IOptions + Fluent Validation 단위 테스트
-- [ ] IOptions + Fluent Validation 통합 테스트
-- [ ] IOptions + Fluent Validation 네이밍컨벤션 테스트
+## 학습
+- value task vs task
+- 험블객체
+- mock, ...
 
-## appsettings.json IOptions | 개선
-- [ ] FluentValidation ErrorMessage 영문 기본값
-- [ ] Domain Type Validation 활용
+<br/>
 
-## CI
-- [ ] .runsettings 정리
-- [ ] trx 생성 위치 버그
-- [ ] 테스트 수행이 안됨
-
----
-- [x] C# -> otel-collector
-- [x] C# -> otel-collector -> kafka
-- [x] C# -> otel-collector -> opensearch
-- [x] opensearch ppl 이해
-- [ ] ppl 인식 데이터 타입?
-- [ ] metricbeat ppl?
-- [ ] C# -> otel-collector -> kafka -> {logstash ->} opensearch
----
-- [ ] Serilog + OpenTelemetry + Aspire Dashboard
-- [ ] OpenSearch
-- [ ] 시작 로그(로그 초기화 전): appsettings.json 형식 에러러
----
-- [ ] Source Generator
-- [ ] Decorator 패턴(Pipeline)
----
-- [ ] Result
-- [ ] Domain Error
-- [ ] Application Error
-- [ ] Adapter Error
-- [ ] Exception
----
-- [ ] Entity
-- [ ] ValueObject
-- [ ] Aggregate Root
-- [ ] Domain Event
-- [ ] Audit 로그?
----
-- [ ] 회복력
----
-- [ ] contextiv
-- [ ] backstage
-- [ ] komodo
-
-
+## IAdapter 파이프라인 소스 생성기
 ```cs
 // https://chatgpt.com/c/67ed3c20-6f64-800f-9bc0-e10aed627fdc
 using System;
