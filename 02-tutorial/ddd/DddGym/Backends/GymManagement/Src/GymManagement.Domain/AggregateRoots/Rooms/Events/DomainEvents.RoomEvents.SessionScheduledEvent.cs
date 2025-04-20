@@ -11,9 +11,15 @@ namespace GymManagement.Domain.AggregateRoots.Rooms.Events;
 //    Guid RoomId,
 //    Guid TrainerId) : IDomainEvent;
 
-public sealed record SessionScheduledEvent(
-    Guid RoomId,
-    Session Session) : IDomainEvent;
+public static partial class DomainEvents
+{
+    public static partial class RoomEvents
+    {
+        public sealed record SessionScheduledEvent(
+            Guid RoomId,
+            Session Session) : IDomainEvent;
+    }
+}
 
 //{
 //    //public static readonly Error TrainerNotFound = EventualConsistencyError.From(

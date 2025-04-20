@@ -5,7 +5,7 @@ namespace GymManagement.Domain.AggregateRoots.Subscriptions.Events;
 
 public static partial class DomainEvents
 {
-    public static class SubscriptionEvents
+    public static partial class SubscriptionEvents
     {
         public sealed record GymAddedEvent(
             Subscription Subscription,

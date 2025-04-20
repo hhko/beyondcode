@@ -11,7 +11,7 @@ namespace GymManagement.Domain.AggregateRoots.Admins.Events;
 
 public static partial class DomainEvents
 {
-    public static class AdminEvents
+    public static partial class AdminEvents
     {
         public sealed record SubscriptionSetEvent(
             Admin Admin,

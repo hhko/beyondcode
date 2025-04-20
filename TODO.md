@@ -6,7 +6,7 @@
 1. 생성 Create
 1. ValueObject 생성
 	Error.Empty.If(조건, 에러 코드)
-	Error CreateValueObject 
+	Error CreateValueObject
 ---
 1. 로컬 function
    - https://learn.microsoft.com/ko-kr/dotnet/csharp/programming-guide/classes-and-structs/local-functions
@@ -19,6 +19,9 @@
 1. 에러 코드 생성: ErrorCodeFactory.Create
 1. 에러 코드 포맷: ErrorCodeFactory.Format
 1. 에러 추가: 		Fin<T> .CombinErrors
+---
+1. 이벤트 이름
+1. 이벤트 출처 확인인
 ---
 1. Ensure 참조건
 	거짓조건

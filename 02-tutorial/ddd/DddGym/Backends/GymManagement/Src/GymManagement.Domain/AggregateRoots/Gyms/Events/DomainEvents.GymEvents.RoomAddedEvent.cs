@@ -3,7 +3,7 @@
 namespace GymManagement.Domain.AggregateRoots.Gyms.Events;
 public static partial class DomainEvents
 {
-    public static class GymEvents
+    public static partial class GymEvents
     {
         //public sealed record RoomAddedEvent(
         //    Gym Gym,
@@ -22,9 +22,5 @@ public static partial class DomainEvents
             Guid RoomId,
             Guid GymId,
             int MaxDailySessions) : IDomainEvent;
-
-        public sealed record RoomRemovedEvent(
-            Gym Gym,
-            Guid RoomId) : IDomainEvent;
     }
 }

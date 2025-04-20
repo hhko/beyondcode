@@ -5,6 +5,7 @@ using GymManagement.Domain.AggregateRoots.Sessions.Events;
 using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainErrors;
+using static GymManagement.Domain.AggregateRoots.Sessions.Events.DomainEvents.SessionEvents;
 using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Sessions;
