@@ -432,3 +432,51 @@ private Fin<Unit> EnsureSessionNotScheduled(Guid sessionId) =>
     ? unit
     : TrainerErrors.SessionAlreadyScheduled(sessionId);
 ```
+
+## 패키지 리팩토링
+### Scrutor | 인터페이만으로 의존성 등록하기
+```cs
+//
+// 적용 전: Scrutor 패키지
+//
+internal static class RepositoryRegistration
+{
+  internal static IServiceCollection RegisterRepository(this IServiceCollection services)
+  {
+    services.AddScoped<IAdminsRepository, AdminsRepository>();
+    services.AddScoped<IGymsRepository, GymsRepository>();
+    services.AddScoped<IParticipantsRepository, ParticipantsRepository>();
+    services.AddScoped<IRoomsRepository, RoomsRepository>();
+    services.AddScoped<ISessionsRepository, SessionsRepository>();
+    services.AddScoped<ISubscriptionsRepository, SubscriptionsRepository>();
+    services.AddScoped<ITrainersRepository, TrainersRepository>();
+    services.AddScoped<IUsersRepository, UsersRepository>();
+  }
+}
+```
+```cs
+//
+// 적용 후: Scrutor 패키지
+//
+internal static class RepositoryRegistration
+{
+  internal static IServiceCollection RegisterRepository(this IServiceCollection services)
+  {
+    services.Scan(scan => scan
+      .FromAssemblies(AssemblyReference.Assembly)
+      .AddClasses(classes => classes.AssignableToAny(
+        typeof(IAdminsRepository),
+        typeof(IGymsRepository),
+        typeof(IParticipantsRepository),
+        typeof(IRoomsRepository),
+        typeof(ISessionsRepository),
+        typeof(ISubscriptionsRepository),
+        typeof(ITrainersRepository),
+        typeof(IUsersRepository)))
+      .AsImplementedInterfaces()
+      .WithScopedLifetime());
+
+    return services;
+  }
+}
+```
