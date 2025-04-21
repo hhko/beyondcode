@@ -4,3 +4,6 @@ GET {{WebApplication1_HostAddress}}/api/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{WebApplication1_HostAddress}}/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles
+Accept: application/json

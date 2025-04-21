@@ -1,5 +1,6 @@
 ﻿using DddGym.Framework.BaseTypes;
 using LanguageExt;
+using System;
 using static GymManagement.Domain.AggregateRoots.Users.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Users.Events.DomainEvents;
 using static LanguageExt.Prelude;
@@ -12,9 +13,9 @@ public sealed class User : AggregateRoot
     public string LastName { get; init; }
     public string Email { get; init; }
 
-    public Guid? AdminId { get; private set; }
-    public Guid? ParticipantId { get; private set; }
-    public Guid? TrainerId { get; private set; }
+    public Option<Guid> AdminId { get; private set; }
+    public Option<Guid> ParticipantId { get; private set; }
+    public Option<Guid> TrainerId { get; private set; }
 
     private readonly string _passwordHash;
 
@@ -23,10 +24,10 @@ public sealed class User : AggregateRoot
         string lastName,
         string email,
         string passwordHash,
-        Guid? adminId,
-        Guid? participantId,
-        Guid? trainerId,
-        Guid? id) : base(id ?? Guid.NewGuid())
+        Option<Guid> adminId,
+        Option<Guid> participantId,
+        Option<Guid> trainerId,
+        Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         FirstName = firstName;
         LastName = lastName;
@@ -43,10 +44,10 @@ public sealed class User : AggregateRoot
         string lastName,
         string email,
         string passwordHash,
-        Guid? adminId = null,
-        Guid? participantId = null,
-        Guid? trainerId = null,
-        Guid? id = null)
+        Option<Guid> adminId = default,
+        Option<Guid> participantId = default,
+        Option<Guid> trainerId = default,
+        Option<Guid> id = default)
     {
         return new User(
             firstName,
@@ -74,13 +75,14 @@ public sealed class User : AggregateRoot
         // =========================================
 
         return from _1 in EnsureAdminNotCreated(AdminId)
-               from newAdminId in Pure(NewAdminId())            // Map
+                   //from newAdminId in Pure(NewAdminId())            // Map
+               let newAdminId = NewAdminId()
                from _2 in ApplyAdminProfile(newAdminId)         // Bind
                select newAdminId;
 
-        Fin<Unit> EnsureAdminNotCreated(Guid? adminId) =>
-            adminId.HasValue
-                ? UserErrors.AdminAlreadyCreated(Id, adminId.Value)
+        Fin<Unit> EnsureAdminNotCreated(Option<Guid> adminId) =>
+            adminId.IsSome
+                ? UserErrors.AdminAlreadyCreated(Id, (Guid)adminId)
                 : unit;
 
         Guid NewAdminId() =>
@@ -125,13 +127,14 @@ public sealed class User : AggregateRoot
         // =========================================
 
         return from _1 in EnsureParticipantNotCreated(ParticipantId)
-               from newParticipantId in Pure(NewParticipantId())
+               //from newParticipantId in Pure(NewParticipantId())
+               let newParticipantId = NewParticipantId()
                from _2 in ApplyParticipantProfile(newParticipantId)
                select newParticipantId;
 
-        Fin<Unit> EnsureParticipantNotCreated(Guid? participantId) =>
-            participantId.HasValue
-                ? UserErrors.ParticipantAlreadyCreated(Id, participantId.Value)
+        Fin<Unit> EnsureParticipantNotCreated(Option<Guid> participantId) =>
+            participantId.IsSome
+                ? UserErrors.ParticipantAlreadyCreated(Id, (Guid)participantId)
                 : unit;
 
         Guid NewParticipantId() =>
@@ -175,13 +178,14 @@ public sealed class User : AggregateRoot
         //       select newTrainerId;
 
         return from _1 in EnsureTrainerNotCreated(TrainerId)
-               from newTrainerId in Pure(NewTrainerId())
+               //from newTrainerId in Pure(NewTrainerId())
+               let newTrainerId = NewTrainerId()
                from _2 in ApplyTrainerProfile(newTrainerId)
                select newTrainerId;
 
-        Fin<Unit> EnsureTrainerNotCreated(Guid? trainerId) =>
-            trainerId.HasValue
-                ? UserErrors.TrainerAlreadyCreated(Id, trainerId.Value)
+        Fin<Unit> EnsureTrainerNotCreated(Option<Guid> trainerId) =>
+            trainerId.IsSome
+                ? UserErrors.TrainerAlreadyCreated(Id, (Guid)trainerId)
                 : unit;
 
         Guid NewTrainerId() =>

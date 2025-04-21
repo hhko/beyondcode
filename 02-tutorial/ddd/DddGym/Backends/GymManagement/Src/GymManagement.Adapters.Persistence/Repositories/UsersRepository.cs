@@ -1,4 +1,5 @@
 ﻿using GymManagement.Domain.AggregateRoots.Users;
+using LanguageExt;
 
 namespace GymManagement.Adapters.Persistence.Repositories;
 
@@ -19,7 +20,7 @@ public class UsersRepository : IUsersRepository
         throw new NotImplementedException();
     }
 
-    public Task<User?> GetByIdAsync(Guid userId)
+    public Task<Fin<User>> GetByIdAsync(Guid userId)
     {
         throw new NotImplementedException();
     }

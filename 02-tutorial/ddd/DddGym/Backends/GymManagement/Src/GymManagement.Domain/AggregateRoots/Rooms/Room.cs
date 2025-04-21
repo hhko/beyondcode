@@ -43,13 +43,13 @@ public sealed class Room : AggregateRoot
         string name,
         int maxDailySessions,
         Guid gymId,
-        SharedTypes.Schedule? schedule,
-        Guid? id) : base(id ?? Guid.NewGuid())
+        Option<SharedTypes.Schedule> schedule,
+        Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         Name = name;
         _maxDailySessions = maxDailySessions;
         GymId = gymId;
-        _schedule = schedule ?? SharedTypes.Schedule.Empty();
+        _schedule = schedule.IfNone(SharedTypes.Schedule.Empty());
     }
 
     private Room()
@@ -60,8 +60,8 @@ public sealed class Room : AggregateRoot
         string name,
         int maxDailySessions,
         Guid gymId,
-        SharedTypes.Schedule? schedule = null,
-        Guid? id = null)
+        Option<SharedTypes.Schedule> schedule = default,
+        Option<Guid> id = default)
     {
         return new Room(name, maxDailySessions, gymId, schedule, id);
     }

@@ -1,16 +1,17 @@
 ﻿using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
+using LanguageExt;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain.Factories;
 
 internal static class ParticipantFactory
 {
     public static Participant CreateParticipant(
-        Guid? userId = null,
-        Guid? id = null)
+        Option<Guid> userId = default,
+        Option<Guid> id = default)
     {
         return Participant.Create(
-            userId: userId ?? DomainConstants.User.Id,
-            id: id ?? DomainConstants.Participant.Id);
+            userId: userId.IfNone(DomainConstants.User.Id),
+            id: id.IfNone(DomainConstants.Participant.Id));
     }
 }

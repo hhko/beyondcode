@@ -5,7 +5,12 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
   <ItemGroup>
+    <PackageReference Include="Bogus" />
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
@@ -38,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Src\GymManagement\GymManagement.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LayerTests\Adapters.Presentation\Repositories\" />
   </ItemGroup>
 
 </Project>

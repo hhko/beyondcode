@@ -3,16 +3,17 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.DependencyInjection;
 using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
 
 namespace GymManagement.Tests.Integration.Abstractions.Fixtures;
 
-// CollectionAttribute
-// CollectionDefinitionAttribute    : WebAppFactoryCollectionDefinition   <- 테스트 클래스 어트리뷰트
+// CollectionAttribute                                                    <- 컬랙션 어튜리뷰트 사용
+// CollectionDefinitionAttribute    : WebAppFactoryCollectionDefinition   <- Collection 어트리뷰트 정의
 //                                      ↓
-// ICollectionFixture               : WebAppFactoryCollectionFixture
+// ICollectionFixture               : WebAppFactoryCollectionFixture      <- Collection Fixture
 //                                      ↓
-// Fixture                          : WebAppFactoryFixture                <- 주입 클래스
+// {Fixture}                        : WebAppFactoryFixture                <- Fixture
 
 [CollectionDefinition(CollectionName.WebAppFactoryCollectionDefinition)]
 public sealed class WebAppFactoryCollectionFixture
@@ -75,4 +76,12 @@ public sealed class WebAppFactoryFixture
             context.Sources.Add(source);
         }
     }
+
+    //public WebApplicationFactory<IAppMarker> WithMockService(Action<IServiceCollection> overrideServices)
+    //{
+    //    return WithWebHostBuilder(builder =>
+    //    {
+    //        builder.ConfigureTestServices(overrideServices);
+    //    });
+    //}
 }

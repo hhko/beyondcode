@@ -41,7 +41,7 @@ public sealed class Gym : AggregateRoot
         string name,
         int maxRooms,
         Guid subscriptionId,
-        Guid? id) : base(id ?? Guid.NewGuid())
+        Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         Name = name;
         _maxRooms = maxRooms;
@@ -56,7 +56,7 @@ public sealed class Gym : AggregateRoot
         string name,
         int maxRooms,
         Guid subscriptionId,
-        Guid? id = null)
+        Option<Guid> id = default)
     {
         return new Gym(name, maxRooms, subscriptionId, id);
     }

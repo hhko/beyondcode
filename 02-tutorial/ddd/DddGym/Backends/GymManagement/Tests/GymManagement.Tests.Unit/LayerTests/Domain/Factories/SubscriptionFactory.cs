@@ -1,19 +1,20 @@
 ﻿using GymManagement.Domain.AggregateRoots.Subscriptions;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
+using LanguageExt;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain.Factories;
 
 internal static class SubscriptionFactory
 {
     public static Subscription CreateSubscription(
-        SubscriptionType? subscriptionType = null,
-        Guid? adminId = null,
-        Guid? id = null)
+        Option<SubscriptionType> subscriptionType = default,
+        Option<Guid> adminId = default,
+        Option<Guid> id = default)
     {
         return Subscription.Create(
-            subscriptionType: subscriptionType ?? DomainConstants.Subscription.DefaultSubscriptionType,
-            adminId ?? DomainConstants.Admin.Id,
-            id ?? DomainConstants.Subscription.Id);
+            subscriptionType: subscriptionType.IfNone(DomainConstants.Subscription.DefaultSubscriptionType),
+            adminId.IfNone(DomainConstants.Admin.Id),
+            id.IfNone(DomainConstants.Subscription.Id));
     }
 }

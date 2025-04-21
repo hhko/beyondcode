@@ -18,7 +18,7 @@ public abstract class AggregateRoot : Entity
 
     public List<IDomainEvent> PopDomainEvents()
     {
-        var copy = _domainEvents.ToList();
+        List<IDomainEvent> copy = _domainEvents.ToList();
         _domainEvents.Clear();
 
         return copy;

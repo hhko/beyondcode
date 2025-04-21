@@ -62,7 +62,7 @@ public sealed class Session : AggregateRoot
         TimeSlot timeSlot,
 
         List<SessionCategory> categories,
-        Guid? id = null) : base(id ?? Guid.NewGuid())
+        Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         Name = name;
         Description = description;
@@ -93,7 +93,7 @@ public sealed class Session : AggregateRoot
         TimeSlot timeSlot,
 
         List<SessionCategory> categories,
-        Guid? id = null)
+        Option<Guid> id = default)
     {
         return new Session(name, description, maxParticipants, roomId, trainerId, date, timeSlot, categories, id);
     }

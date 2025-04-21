@@ -1,4 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes;
+using LanguageExt;
 
 namespace GymManagement.Domain.AggregateRoots.Sessions;
 
@@ -8,7 +9,7 @@ public sealed class Reservation : Entity
 
     private Reservation(
         Guid participantId,
-        Guid? id) : base(id ?? Guid.NewGuid())
+        Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         ParticipantId = participantId;
     }
@@ -19,7 +20,7 @@ public sealed class Reservation : Entity
 
     public static Reservation Create(
         Guid participantId,
-        Guid? id = null)
+        Option<Guid> id = default)
     {
         return new Reservation(participantId, id);
     }

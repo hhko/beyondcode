@@ -17,22 +17,9 @@ builder.Services
     .RegisterAdapterPresentation()
     .RegisterApplication();
 
-//builder.Services
-//    .AddOptions<ExampleOptions>()
-//    .BindConfiguration(ExampleOptions.SectionName)
-//    //.Bind(builder.Configuration.GetSection(ExampleOptions.SectionName))
-//    .ValidateFluently()
-//    .ValidateOnStart();
-
 WebApplication webApplication = builder.Build();
 
 webApplication.MapControllers();
-
-webApplication.Run();
-
-//sealed partial class Program;
-
-
-
+await webApplication.RunAsync();
 
 

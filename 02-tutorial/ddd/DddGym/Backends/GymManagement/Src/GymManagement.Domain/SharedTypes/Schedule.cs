@@ -1,7 +1,6 @@
 ﻿using DddGym.Framework.BaseTypes;
 using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
-using System.Diagnostics.Contracts;
 using static GymManagement.Domain.SharedTypes.Errors.DomainErrors;
 using static LanguageExt.Prelude;
 
@@ -12,10 +11,10 @@ public sealed partial class Schedule : Entity
     private readonly Dictionary<DateOnly, List<TimeSlot>> _calendar = [];
 
     private Schedule(
-        Dictionary<DateOnly, List<TimeSlot>>? calendar = null,
-        Guid? id = null) : base(id ?? Guid.NewGuid())
+        Option<Dictionary<DateOnly, List<TimeSlot>>> calendar = default,
+        Option<Guid> id = default) : base(id.IfNone(Guid.NewGuid()))
     {
-        _calendar = calendar ?? [];
+        _calendar = calendar.IfNone([]);
     }
 
     public static Schedule Empty()
@@ -95,7 +94,8 @@ public sealed partial class Schedule : Entity
     internal Fin<Unit> UnbookTimeSlot(DateOnly date, TimeSlot timeRange)
     {
         return from _1 in EnsureTimeSlotsAlreadyExit(date, timeRange)
-               from timeSlots in Pure(GetTimeSlots(date))                     // Map
+               //from timeSlots in Pure(GetTimeSlots(date))                     // Map
+               let timeSlots = GetTimeSlots(date)
                from _2 in ApplyTimeSlotRemoval(timeSlots, timeRange)
                select unit;
 

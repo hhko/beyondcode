@@ -29,7 +29,7 @@ public sealed class Subscription : AggregateRoot
     private Subscription(
         SubscriptionType subscriptionType,
         Guid adminId,
-        Guid? id) : base(id ?? Guid.NewGuid())
+        Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         SubscriptionType = subscriptionType;
         _adminId = adminId;
@@ -44,7 +44,7 @@ public sealed class Subscription : AggregateRoot
     public static Subscription Create(
         SubscriptionType subscriptionType,
         Guid adminId,
-        Guid? id = null)
+        Option<Guid> id = default)
     {
         return new Subscription(subscriptionType, adminId, id);
     }

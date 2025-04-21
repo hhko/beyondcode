@@ -16,6 +16,7 @@ namespace GymManagement.Adapters.Presentation.Controllers;
 //public class WeatherForecastController : ControllerBase
 //{
 
+[Route("api/[controller]")]
 public sealed partial class WeatherForecastController : ApiController
 {
     public WeatherForecastController(ISender sender, IOptions<ExampleOptions> exampleOptions)

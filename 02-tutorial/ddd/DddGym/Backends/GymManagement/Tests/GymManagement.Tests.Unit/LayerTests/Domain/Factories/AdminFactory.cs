@@ -1,25 +1,19 @@
 ﻿using GymManagement.Domain.AggregateRoots.Admins;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
+using LanguageExt;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain.Factories;
 
 internal static class AdminFactory
 {
     public static Admin CreateAdmin(
-        Guid? userId = null,
-        Guid? subscriptionId = null,
-        Guid? id = null)
+        Option<Guid> userId = default,
+        Option<Guid> subscriptionId = default,
+        Option<Guid> id = default)
     {
-        //return new Admin(
-        //    userId: userId ?? DomainConstants.User.Id,
-        //    //subscriptionId ?? DomainConstants.Subscription.Id,
-        //    subscriptionId: subscriptionId,
-        //    id: id ?? DomainConstants.Admin.Id);
-
         return Admin.Create(
-            userId: userId ?? DomainConstants.User.Id,
-            //subscriptionId ?? DomainConstants.Subscription.Id,
-            subscriptionId: subscriptionId,
-            id: id ?? DomainConstants.Admin.Id);
+            userId: userId.IfNone(DomainConstants.User.Id),
+            subscriptionId: subscriptionId.IfNone(DomainConstants.Subscription.Id),
+            id: id.IfNone(DomainConstants.Admin.Id));
     }
 }

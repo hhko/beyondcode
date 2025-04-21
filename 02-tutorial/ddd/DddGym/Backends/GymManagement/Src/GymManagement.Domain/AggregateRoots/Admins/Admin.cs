@@ -11,12 +11,12 @@ public sealed class Admin : AggregateRoot
 {
     public Guid UserId { get; }
 
-    public Guid? SubscriptionId { get; private set; }
+    public Option<Guid> SubscriptionId { get; private set; }
 
     private Admin(
         Guid userId,
-        Guid? subscriptionId,
-        Guid? id) : base(id ?? Guid.NewGuid())
+        Option<Guid> subscriptionId,
+        Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         UserId = userId;
         SubscriptionId = subscriptionId;
@@ -24,8 +24,8 @@ public sealed class Admin : AggregateRoot
 
     public static Admin Create(
         Guid userId,
-        Guid? subscriptionId = null,
-        Guid? id = null)
+        Option<Guid> subscriptionId = default,
+        Option<Guid> id = default)
     {
         return new Admin(userId, subscriptionId, id);
     }
@@ -40,9 +40,9 @@ public sealed class Admin : AggregateRoot
                from _2 in ApplySubscription(subscription)
                select unit;
 
-        Fin<Unit> EnsureSubscriptionNotSet(Guid? subscriptionId) =>
-            subscriptionId.HasValue
-                ? AdminErrors.SubscriptionAlreadySet(Id, subscriptionId.Value)
+        Fin<Unit> EnsureSubscriptionNotSet(Option<Guid> subscriptionId) =>
+            subscriptionId.IsNone
+                ? AdminErrors.SubscriptionAlreadySet(Id, (Guid)subscriptionId)
                 : unit;
 
         Fin<Unit> ApplySubscription(Subscription newSubscription)

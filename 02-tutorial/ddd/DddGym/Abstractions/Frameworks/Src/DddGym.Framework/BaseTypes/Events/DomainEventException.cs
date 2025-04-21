@@ -1,4 +1,5 @@
 ﻿
+using LanguageExt;
 using LanguageExt.Common;
 
 namespace DddGym.Framework.BaseTypes.Events;
@@ -28,10 +29,10 @@ public class DomainEventException : Exception
 
     public DomainEventException(
         Error domainEventError,
-        Error? underlyingErrors = null)
+        Option<Error> underlyingErrors = default)
         : base(message: domainEventError.Message)
     {
         DomainEventError = domainEventError;
-        UnderlyingErrors = underlyingErrors ?? Error.Empty;
+        UnderlyingErrors = underlyingErrors.IfNone(Error.Empty);
     }
 }

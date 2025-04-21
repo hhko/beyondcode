@@ -1,14 +1,15 @@
 ﻿using GymManagement.Application.Usecases.Sessions.Ports;
+using LanguageExt;
 
 namespace GymManagement.Tests.Unit.Abstractions.Providers;
 
 public sealed class TestDateTimeProvider : IDateTimeProvider
 {
-    private readonly DateTime? _fixedDateTime;
+    private readonly Option<DateTime> _fixedDateTime;
 
-    public DateTime UtcNow => _fixedDateTime ?? DateTime.UtcNow;
+    public DateTime UtcNow => _fixedDateTime.IfNone(DateTime.UtcNow);
 
-    public TestDateTimeProvider(DateTime? fixedDateTime = null)
+    public TestDateTimeProvider(Option<DateTime> fixedDateTime = default)
     {
         _fixedDateTime = fixedDateTime;
     }

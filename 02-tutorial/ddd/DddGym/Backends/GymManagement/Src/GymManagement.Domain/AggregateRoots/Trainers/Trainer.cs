@@ -26,17 +26,17 @@ public sealed class Trainer : AggregateRoot
 
     private Trainer(
         Guid userId,
-        SharedTypes.Schedule? schedule,
-        Guid? id = null) : base(id ?? Guid.NewGuid())
+        Option<SharedTypes.Schedule> schedule,
+        Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         UserId = userId;
-        _schedule = schedule ?? SharedTypes.Schedule.Empty();
+        _schedule = schedule.IfNone(SharedTypes.Schedule.Empty());
     }
 
     public static Trainer Create(
         Guid userId,
-        SharedTypes.Schedule? schedule = null,
-        Guid? id = null)
+        Option<SharedTypes.Schedule> schedule = default,
+        Option<Guid> id = default)
     {
         return new Trainer(userId, schedule, id);
     }

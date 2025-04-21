@@ -1,76 +1,99 @@
 ## 규칙
-1. 전역 버전(docker 이미지 버전 포함)
-1. global.json
-1. nuget.config
-1. Directory.Build.props
-1. Directory.Package.props
+- [ ] 전역 버전(docker 이미지 버전 포함)
+- [ ] global.json
+- [ ] nuget.config
+- [ ] Directory.Build.props
+   - 정적 분석
+- [ ] Directory.Package.props
 ---
-1. 클래스 sealed
-1. 클래스 상속
+- [ ] 클래스 다이어그램
+- [ ] ER 다이어그램
+- [ ] 프로젝트 의존성 다이어그램
+- [ ] 정적 분석?
+- [ ] 코드 커버리지
+- [ ] 컨테이너 배포
 ---
-1. 생성사 private
-1. 생성 Create
-1. ValueObject 생성
+- [x] 클래스 internal sealed
+---
+- [ ] 생성사 private
+- [ ] 생성 Create
+- [ ] ValueObject 생성
    - Error.Empty.If(조건, 에러 코드)
    - Error CreateValueObject
 ---
-1. 로컬 function
+- [ ] 로컬 function
    - https://learn.microsoft.com/ko-kr/dotnet/csharp/programming-guide/classes-and-structs/local-functions
    - https://www.geeksforgeeks.org/local-function-in-c-sharp/
-1. Apply 함수 1개(로컬 function -{x}-> 로컬 function)
-1. 순수 함수: `A -> B`
-1. 부수 효과 함수: `A -> Fin<B>` (실패가 존재하지 않아도)
+- [ ] Apply 함수 1개(로컬 function -{x}-> 로컬 function)
+- [ ] 순수 함수: `A -> B`
+- [ ] 부수 효과 함수: `A -> Fin<B>` (실패가 존재하지 않아도)
 ---
-1. 에러 코드: {레이어Errors}.{대상Errors}.{에러_원인}
-1. 에러 코드 생성: ErrorCodeFactory.Create
-1. 에러 코드 포맷: ErrorCodeFactory.Format
-1. 에러 추가: `Fin<T> .CombinErrors`
+- [ ] 에러 코드: {레이어Errors}.{대상Errors}.{에러_원인}
+- [ ] 에러 코드 생성: ErrorCodeFactory.Create
+- [ ] 에러 코드 포맷: ErrorCodeFactory.Format
+- [ ] 에러 추가: `Fin<T> .CombinErrors`
 ---
-1. 이벤트 이름
-1. 이벤트 출처 확인인
+- [ ] 이벤트 이름
+- [ ] 이벤트 출처 확인인
 ---
-1. Ensure 참조건
+- [ ] Ensure 참조건
    ```
    거짓조건
 		? 참(에러)
 		: 거짓(성공)		// unit
    ```
 ---
-1. appsettings
+- [ ] appsettings
 ---
-1. 의존성 등록
+- [ ] 의존성 등록: 클래스 이름/메서드 이름
+- [ ] 인터페이스 기준 클래스 등록 자동화
 ---
-1. 테스트 코드 범주화
+- [ ] 테스트 코드 범주화
 
 
 ## 할일
-### 할일 1.
-- [x] 에러 클래스 분리
-- [x] 이벤트 클래스 분리
-- [ ] https://github.com/dev-cycles/contextive 용어집
-- [ ] Ensure -> Validate
-- [ ] ? -> Option
+
+- [x] 할일 1.
+  - [x] 에러 클래스 분리
+  - [x] 이벤트 클래스 분리
+  - [ ] https://github.com/dev-cycles/contextive 용어집
+  - [ ] Ensure -> Validate
+  - [x] ? -> Option
 
 ### 할일 2.
+- [x] User Contoller 클래스
+- [x] User Controller 통합 테스트 기본 구현
+- [x] Bogus 기반 Fake 데이터 생성
+  ```
+  var faker = new Faker<User>()
+            .CustomInstantiator(f => User.Create( ... );
+  var fakerUser = faker.Generate();
+  ```
+- [x] 인터페이스 기준 의존성 등록 개선
 - [ ] User Register
 - [ ] User Login
+- [ ] User 그 외
+
+### 할일 3.
 - [ ] Application -> Domain 연동 이해
   -	Domain 테스트 코드
   - Application 테스트 코드
+- [ ] 이벤트 활용 방법 학습
+- [ ] Repository 활용 방법 학습  
 
 ### 할일 3.
 - [ ] Reqnroll 테스트
 
-### 할일 4.
+### 할일 5.
 - ] ] ValueObject 코딩 규칙 테스트
 - ] ] Entity 기본 구현
 - ] ] Entity 코딩 규칙 테스트
 - ] ] AggregateRoot 기본 구현
 
-### 할일 5.
-RabbitMQ 연동
-
 ### 할일 6.
+- [ ] RabbitMQ 연동
+
+### 할일 7.
 - [ ] Pipeline
   - 유효성 검사
   - 도메인 Validate 메서드를 이용한 파이프라인 Validation
@@ -81,27 +104,35 @@ RabbitMQ 연동
   - 트랜잭션? 시점
   - 캐시
 
-### 할일 7.
+### 할일 8.
 - [ ] dapper(query) / ef core(command)
 
-### 할일 8.
+### 할일 9.
 - [ ] Id 타입
 - [ ] IAdapter Pipeline
 
-### 할일 9.
+### 할일 10.
 - [ ] Exception 호스트 에러
 - [ ] 컨테이너화
 - [ ] Container HealthCheck
 - [ ] Audit
 - [ ] Specification???
 
-### 할일 10.
+### 할일 11.
 - [ ] 회복력 adapter 레이어
 
-### 할일 11.
+### 할일 12.
 - [ ] https://github.com/backstage/backstage 개발 포탈 사이트
 - [ ] https://github.com/moghtech/komodo 배포
 - [ ] openfeature
+
+### 할일 패턴
+- [x] Factory: Value Object
+- [ ] Event
+- [ ] Repository
+- [ ] Unit of Work
+- [ ] Outbox
+- [ ] Specification
 
 <br/>
 
@@ -122,13 +153,6 @@ RabbitMQ 연동
 - dailySession
 - Session에서 `List<T> -> IReadOnlyList<T>`
 - Loing과 Register 변경
-
-<br/>
-
-## 학습
-- value task vs task
-- 험블객체
-- mock, ...
 
 <br/>
 
@@ -406,3 +430,17 @@ public class ProgramTests : ConsoleApplicationFactory<Program>
     }
 }
 ```
+
+## 학습
+### 공변성
+- Covariant: 공변성
+  - `co` : 타입 계층 구조에서 같은 방향(하위 → 상위)으로의 변환이 허용되는 것
+- Contravariant: 반공변성
+  - `contra`: 타입 계층 구조에서 반대 방향(상위 → 하위)으로의 변환이 허용되는 것
+- Invariant: 무공변
+  - `in`:  타입 간 형변환을 허용하지 않음
+
+### TODO  
+- value task vs task
+- 험블객체
+- mock, ...
