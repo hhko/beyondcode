@@ -203,7 +203,7 @@ public Fin<Guid> PromoteToTrainer()
 ### void 반환 메서드 개선하기
 ```cs
 // 적용 전
-  void UnregisterSession(Guid sessionId)
+void UnregisterSession(Guid sessionId)
 
 // 적용 후
 Fin<Unit> UnregisterSession(Guid sessionId)
