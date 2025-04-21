@@ -5,9 +5,9 @@
 > Make It Work, Make It Right, Make It Fast
 
 ## 목표
-- 코드는 팀이 함께 완성해 가는 한 편의 글입니다. 우리는 그 글을 차곡차곡 쌓아 시스템을 만들어 갑니다.
-  - 소스 코드의 구조는 **책의 목차처럼** 명확하고 직관적이어야 하며, 이를 통해 도메인과 시스템을 자연스럽게 이해할 수 있어야 합니다.
-  - 테스트 코드는 검증 도구를 넘어, **비즈니스 규칙을 이해하고 학습하는** 데 핵심적인 가이드 역할을 해야 합니다.
+> 코드는 팀이 함께 완성해 가는 한 편의 글입니다. 우리는 그 글을 차곡차곡 쌓아 시스템을 만들어 갑니다.
+- 소스 코드의 구조는 **책의 목차처럼** 명확하고 직관적이어야 하며, 이를 통해 도메인과 시스템을 자연스럽게 이해할 수 있어야 합니다.
+- 테스트 코드는 검증 도구를 넘어, **비즈니스 규칙을 이해하고 학습하는** 데 핵심적인 가이드 역할을 해야 합니다.
 
 <br/>
 
@@ -257,7 +257,7 @@ public Fin<Unit> UnscheduleSession(Session session)
 
 ### 조기 반환 메서드 개선하기
 ```cs
-// 적용 전 1. Imperative Guard 스타일
+// 적용 전. Imperative Guard 스타일
 internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange newTimeSlot)
 {
   if (!_calendar.TryGetValue(date, out var timeSlots))
@@ -275,7 +275,7 @@ internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange newTimeSlot)
   return unit;
 }
 
-// 적용 후 2. Monadic LINQ 스타일
+// 적용 후. Monadic LINQ 스타일
 internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange newTimeSlot)
 {
   return from timeSlots in GetOrCreateTimeSlots(date)
