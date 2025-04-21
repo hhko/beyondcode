@@ -17,21 +17,21 @@
 도메인 주도 설계의 '무엇을 표현할지'와 함수형 프로그래밍의 '어떻게 표현할지'가 만나서, 변경에 강하고, 테스트 가능하고, 명확한 의도를 가진 코드를 만듭니다.
 - **무엇을 표현할지: 복잡성 분리**
   - 복잡한 비즈니스 로직을 도메인 모델 중심으로 풀어나가는 설계 방법입니다.
-  - 도메인 전문가의 언어(Ubiquitous Language) 로 시스템을 설계하는 것이 핵심입니다.
+  - 도메인 전문가의 언어 (Ubiquitous Language) 로 시스템을 설계하는 것이 핵심입니다.
 - **어떻게 표현할지: 부작용 최소화**
   - 함수(수학적인 함수)에 기반한 프로그래밍 방식입니다.
   - 상태 변경 없이, 입력에 따라 일관된 출력을 보장합니다.
 
 ### 공통 목표
 - **변경에 강한 모델**
-  - DDD 방향: 복잡성 분리(관심사의 분리: 도메인과 기술)
-  - FP 방향: 부작용 최소화(합성 함수: 부작용 없는 순수 함수 연결)
+  - DDD: 복잡성 분리 (관심사의 분리: 도메인과 기술)
+  - FP: 부작용 최소화 (합성 함수: 부작용 없는 순수 함수 연결)
 - **예측 가능한 동작**
-  - DDD 방향: 명확한 경계 (Bounded Context)
-  - FP 방향: 순수 함수 지향
+  - DDD: 명확한 경계 (Bounded Context)
+  - FP: 순수 함수 지향
 - **정확한 도메인 표현**
-  - DDD 방향: 명확한 의미 부여 (Ubiquitous Language)
-  - FP 방향: 타입 기반 설계
+  - DDD: 명확한 의미 부여 (Ubiquitous Language)
+  - FP: 타입 기반 설계
 
 <br/>
 
@@ -61,7 +61,7 @@
   - [ ] Chapter 05. 유스케이스 탐험
   - [ ] Chapter 06. 유스케이스 파이프라인
   - [ ] Chapter 07. 유스케이스 단위 테스트
-  - [ ] Chapter 08. 유스케이스 시나리오 테스트(Cucumber)
+  - [ ] Chapter 08. 유스케이스 시나리오 테스트 (Cucumber)
 - Part 3. Monolithic
   - [ ] Chapter 09. WebApi
   - [ ] Chapter 10. 유스케이스 통합 테스트
@@ -76,18 +76,18 @@
   - [ ] Chapter 18. Reverse Proxy
   - [ ] Chapter 19. Chaos Engineering
 - Part 5. 운영
-  - [ ] Chapter 20. OpenFeature(Feature Flag Management)
-  - [ ] Chapter 21. OpenSearch(Observability System)
-  - [ ] Chapter 22. Ansible(Infrastructure as Code)
-  - [ ] Chapter 23. Backstage(Building developer portals)
+  - [ ] Chapter 20. OpenFeature (Feature Flag Management)
+  - [ ] Chapter 21. OpenSearch (Observability System)
+  - [ ] Chapter 22. Ansible (Infrastructure as Code)
+  - [ ] Chapter 23. Backstage (Building developer portals)
 
 ### 소스 폴더 구성 원칙
 
 - **관심사의 분리: 비즈니스 관심사 vs. 기술 관심사**
   - 관심사의 분리는 레이어로 구분됩니다.
     - Adapter 레이어: 기술 관심사
-    - Application 레이어: 비즈니스 관심사(도메인 흐름)
-    - Domain 레이어: 비즈니스 관심사(도메인 단위)
+    - Application 레이어: 비즈니스 관심사 (도메인 흐름)
+    - Domain 레이어: 비즈니스 관심사 (도메인 단위)
 - **목표의 분리: 주요 목표 vs. 부수 목표 (주된 목표에 따르는 부수적인 목표)**
   - 목표의 분리는 배치 방향으로 구분됩니다.
     - 위쪽: 기술적인 측면에서 더 중요한 것(부수 목표: Abstractions)을 배치합니다.
@@ -140,13 +140,13 @@ let y = Pure()
 from _ in SizeEffect(y)
 select unit;
 ```
-- Map은 순수한 값 변환 함수 (`T → R`)에만 사용합니다.
-- 반면에 Bind는 부수 효과를 포함하는 함수(T → Fin<R>)를 연결할 때 사용합니다.
+- Map은 순수한 값 변환 함수(`T → R`)에만 사용합니다.
+- 반면에 Bind는 부수 효과를 포함하는 함수(`T → Fin<R>`)를 연결할 때 사용합니다.
 - 예를 들어, 함수가 실패 가능성과 관계없이 부수 효과(예: 외부 시스템 접근, 상태 변경 등)를 가지고 있다면, Bind로 연결합니다.
 
 ### 합성 함수 만들기
 - 함수를 작게 나누어 마치 레고 블록처럼 연결해서 처리 흐름을 만듭니다.
-- 실패 없이 값이 변환만 필요할 때는 Map(T -> R)을, 실패 가능성을 고려한 처리에는 Bind(T -> Fin<R>)으로 로컬 함수를 구성합니다.
+- 실패 없이 값이 변환만 필요할 때는 Map(T -> R)을, 실패 가능성을 고려한 처리에는 Bind(`T -> Fin<R>`)으로 로컬 함수를 구성합니다.
 
 ```cs
 // 적용 전 1. Imperative Guard 스타일
@@ -211,7 +211,7 @@ Fin<Unit> UnregisterSession(Guid sessionId)
 
 - void를 반환하는 메서드는 값을 전달하지 않기 때문에, 이후에 함수 체인으로 연결할 수 없습니다.
 - 따라서 체인 구성을 가능하게 하기 위해 반환 타입을 Unit으로 변경합니다.
-- 또한 void를 반환하는 메서드는 부수 효과(예: 상태 변경, 외부 시스템 호출 등)를 포함하고 있기 때문에, 반환 타입을 Fin<Unit>으로 변경합니다.
+- 또한 void를 반환하는 메서드는 부수 효과(예: 상태 변경, 외부 시스템 호출 등)를 포함하고 있기 때문에, 반환 타입을 `Fin<Unit>`으로 변경합니다.
 
 ```cs
 // 적용 전. Imperative Guard 스타일
