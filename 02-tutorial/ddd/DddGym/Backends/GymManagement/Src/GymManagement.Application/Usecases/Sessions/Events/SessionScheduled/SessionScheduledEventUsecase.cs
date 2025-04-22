@@ -1,6 +1,6 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
-using static GymManagement.Domain.AggregateRoots.Rooms.Events.DomainEvents;
 using GymManagement.Domain.AggregateRoots.Sessions;
+using static GymManagement.Domain.AggregateRoots.Rooms.Events.DomainEvents;
 
 namespace GymManagement.Application.Usecases.Sessions.Events.SessionScheduled;
 

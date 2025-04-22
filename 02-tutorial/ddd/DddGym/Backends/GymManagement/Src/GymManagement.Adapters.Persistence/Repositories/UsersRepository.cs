@@ -1,4 +1,5 @@
-﻿using GymManagement.Domain.AggregateRoots.Users;
+﻿using Bogus;
+using GymManagement.Domain.AggregateRoots.Users;
 using LanguageExt;
 
 namespace GymManagement.Adapters.Persistence.Repositories;
@@ -20,7 +21,22 @@ public class UsersRepository : IUsersRepository
         throw new NotImplementedException();
     }
 
-    public Task<Fin<User>> GetByIdAsync(Guid userId)
+    public async Task<Fin<User>> GetByIdAsync(Guid userId)
+    {
+        await Task.Delay(3000);
+        await Task.CompletedTask;
+
+        var userFaker = new Faker<User>()
+                        .CustomInstantiator(f => User.Create(
+                            firstName: f.Name.FirstName(),
+                            lastName: f.Name.LastName(),
+                            email: f.Internet.Email(),
+                            passwordHash: f.Internet.Password()));
+
+        return userFaker.Generate();
+    }
+
+    public Fin<User> Test()
     {
         throw new NotImplementedException();
     }

@@ -44,8 +44,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Src\GymManagement\GymManagement.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LayerTests\Adapters.Presentation\Repositories\" />
-  </ItemGroup>
 
 </Project>

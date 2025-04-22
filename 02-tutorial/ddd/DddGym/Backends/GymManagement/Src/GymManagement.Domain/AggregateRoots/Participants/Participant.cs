@@ -75,7 +75,7 @@ public sealed class Participant : AggregateRoot
         }
 
         // =========================================
-        // Monadic 스타일
+        // Monad 스타일
         // =========================================
 
         //return EnsureSessionNotScheduled(session.Id)
@@ -131,7 +131,7 @@ public sealed class Participant : AggregateRoot
         }
 
         // =========================================
-        // Monadic 스타일
+        // Monad 스타일
         // =========================================
 
         //return EnsureSessionScheduled(session.Id)

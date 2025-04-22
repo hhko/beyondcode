@@ -65,7 +65,7 @@ public sealed partial class Schedule : Entity
         }
 
         // =========================================
-        // Monadic 스타일
+        // Monad 스타일
         // =========================================
 
         //return GetOrCreateTimeSlots(date)
@@ -94,8 +94,7 @@ public sealed partial class Schedule : Entity
     internal Fin<Unit> UnbookTimeSlot(DateOnly date, TimeSlot timeRange)
     {
         return from _1 in EnsureTimeSlotsAlreadyExit(date, timeRange)
-               //from timeSlots in Pure(GetTimeSlots(date))                     // Map
-               let timeSlots = GetTimeSlots(date)
+               let timeSlots = GetTimeSlots(date)                     // Map
                from _2 in ApplyTimeSlotRemoval(timeSlots, timeRange)
                select unit;
 
@@ -121,7 +120,7 @@ public sealed partial class Schedule : Entity
         }
 
         // =========================================
-        // Monadic 스타일
+        // Monad 스타일
         // =========================================
 
         //return EnsureTimeSlotsAlreadyExit(date, timeRange)

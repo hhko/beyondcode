@@ -1,6 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes;
 using LanguageExt;
-using System;
 using static GymManagement.Domain.AggregateRoots.Users.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Users.Events.DomainEvents;
 using static LanguageExt.Prelude;
@@ -71,12 +70,11 @@ public sealed class User : AggregateRoot
     public Fin<Guid> CreateAdminProfile()
     {
         // =========================================
-        // Monadic LINQ 스타일
+        // Monad LINQ 스타일
         // =========================================
 
         return from _1 in EnsureAdminNotCreated(AdminId)
-                   //from newAdminId in Pure(NewAdminId())            // Map
-               let newAdminId = NewAdminId()
+               let newAdminId = NewAdminId()            // Map
                from _2 in ApplyAdminProfile(newAdminId)         // Bind
                select newAdminId;
 
@@ -97,7 +95,7 @@ public sealed class User : AggregateRoot
         }
 
         // =========================================
-        // Monadic 스타일
+        // Monad 스타일
         // =========================================
 
         //return EnsureAdminNotCreated(AdminId)
@@ -123,11 +121,10 @@ public sealed class User : AggregateRoot
     public Fin<Guid> CreateParticipantProfile()
     {
         // =========================================
-        // Case 3. Monadic LINQ 스타일
+        // Case 3. Monad LINQ 스타일
         // =========================================
 
         return from _1 in EnsureParticipantNotCreated(ParticipantId)
-               //from newParticipantId in Pure(NewParticipantId())
                let newParticipantId = NewParticipantId()
                from _2 in ApplyParticipantProfile(newParticipantId)
                select newParticipantId;
@@ -167,7 +164,7 @@ public sealed class User : AggregateRoot
     public Fin<Guid> CreateTrainerProfile()
     {
         // =========================================
-        // Case 3. Monadic LINQ 스타일
+        // Case 3. Monad LINQ 스타일
         // =========================================
 
         //return from _ in TrainerId is null 
@@ -178,7 +175,6 @@ public sealed class User : AggregateRoot
         //       select newTrainerId;
 
         return from _1 in EnsureTrainerNotCreated(TrainerId)
-               //from newTrainerId in Pure(NewTrainerId())
                let newTrainerId = NewTrainerId()
                from _2 in ApplyTrainerProfile(newTrainerId)
                select newTrainerId;
@@ -212,7 +208,7 @@ public sealed class User : AggregateRoot
         }
 
         // =========================================
-        // Case 2: Monadic 스타일
+        // Case 2: Monad 스타일
         // =========================================
 
         //return EnsureTrainerNotExist(TrainerId)

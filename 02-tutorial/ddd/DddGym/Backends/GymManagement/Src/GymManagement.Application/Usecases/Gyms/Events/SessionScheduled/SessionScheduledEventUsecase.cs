@@ -1,7 +1,7 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
 using GymManagement.Domain.AggregateRoots.Gyms;
-using static GymManagement.Domain.AggregateRoots.Rooms.Events.DomainEvents;
 using Throw;
+using static GymManagement.Domain.AggregateRoots.Rooms.Events.DomainEvents;
 
 namespace GymManagement.Application.Usecases.Gyms.Events.SessionScheduled;
 

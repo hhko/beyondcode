@@ -1,5 +1,4 @@
 ﻿using DddGym.Framework.BaseTypes;
-using GymManagement.Domain.AggregateRoots.Rooms.Events;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Rooms.Errors.DomainErrors;

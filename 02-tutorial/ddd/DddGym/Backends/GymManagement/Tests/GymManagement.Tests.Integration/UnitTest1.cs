@@ -28,7 +28,7 @@ public sealed partial class WeatherForecastControllerTests : ControllerTestsBase
 
         response.EnsureSuccessStatusCode();
 
-        
+
 
         //var responseString = await response.Content.ReadAsStringAsync();
 

@@ -1,30 +1,55 @@
-﻿namespace GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfile;
+﻿using DddGym.Framework.BaseTypes.Cqrs;
+using GymManagement.Domain.AggregateRoots.Users;
+using LanguageExt;
+using LanguageExt.Common;
 
-//// TODO: LanguageExt
-//internal sealed class CreateParticipantProfileCommandUsecase
-//    : ICommandUsecase<CreateParticipantProfileCommand>
-//{
-//    private readonly IUsersRepository _usersRepository;
+namespace GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfile;
 
-//    public CreateParticipantProfileCommandUsecase(IUsersRepository usersRepository)
-//    {
-//        _usersRepository = usersRepository;
-//    }
+internal sealed class CreateParticipantProfileCommandUsecase(
+    IUsersRepository usersRepository)
+    : ICommandUsecase2<CreateParticipantProfileCommand, CreateParticipantProfileResponse>
+{
+    private readonly IUsersRepository _usersRepository = usersRepository;
 
-//    public async Task<IErrorOr> Handle(CreateParticipantProfileCommand command, CancellationToken cancellationToken)
-//    {
-//        User? user = await _usersRepository.GetByIdAsync(command.UserId);
-//        if (user is null)
-//        {
-//            return Error
-//                .NotFound(description: "User not found")
-//                .ToErrorOr();
-//        }
+    public async Task<Fin<CreateParticipantProfileResponse>> Handle(CreateParticipantProfileCommand request, CancellationToken cancellationToken)
+    {
+        //return from user in await _usersRepository.GetByIdAsync(request.UserId)
+        //       from participantId in user.CreateParticipantProfile()
+        //       select new CreateParticipantProfileResponse(participantId);
 
-//        ErrorOr<Guid> createParticipantProfileResult = user.CreateParticipantProfile();
+        Fin<User> userResult = await _usersRepository.GetByIdAsync(request.UserId);
+        if (userResult.IsFail)
+        {
+            return (Error)userResult;
+        }
+        User user = (User)userResult;
 
-//        await _usersRepository.UpdateAsync(user);
+        Fin<Guid> participantResult = user.CreateParticipantProfile();
+        if (participantResult.IsFail)
+        {
+            return (Error)participantResult;
+        }
+        Guid participantId = (Guid)participantResult;
 
-//        return createParticipantProfileResult;
-//    }
-//}
+        await _usersRepository.UpdateAsync(user);
+
+        return new CreateParticipantProfileResponse(participantId);
+    }
+
+    //public async Task<IErrorOr> Handle(CreateParticipantProfileCommand command, CancellationToken cancellationToken)
+    //{
+    //    User? user = await _usersRepository.GetByIdAsync(command.UserId);
+    //    if (user is null)
+    //    {
+    //        return Error
+    //            .NotFound(description: "User not found")
+    //            .ToErrorOr();
+    //    }
+
+    //    ErrorOr<Guid> createParticipantProfileResult = user.CreateParticipantProfile();
+
+    //    await _usersRepository.UpdateAsync(user);
+
+    //    return createParticipantProfileResult;
+    //}
+}

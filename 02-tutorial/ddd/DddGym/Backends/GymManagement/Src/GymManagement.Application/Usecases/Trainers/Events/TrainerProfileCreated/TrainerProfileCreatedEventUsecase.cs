@@ -1,6 +1,5 @@
 ﻿using DddGym.Framework.BaseTypes.Events;
 using GymManagement.Domain.AggregateRoots.Trainers;
-using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Users.Events.DomainEvents;
 
 namespace GymManagement.Application.Usecases.Trainers.Events.TrainerProfileCreated;

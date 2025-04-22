@@ -1,5 +1,4 @@
-﻿using GymManagement.Adapters.Persistence.Repositories;
-using GymManagement.Domain.AggregateRoots.Admins;
+﻿using GymManagement.Domain.AggregateRoots.Admins;
 using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Rooms;

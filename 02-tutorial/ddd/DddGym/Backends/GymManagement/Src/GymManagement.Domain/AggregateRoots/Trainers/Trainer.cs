@@ -69,7 +69,7 @@ public sealed class Trainer : AggregateRoot
         }
 
         // =========================================
-        // Monadic 스타일
+        // Monad 스타일
         // =========================================
 
         //return EnsureSessionNotScheduled(session.Id)
@@ -123,7 +123,7 @@ public sealed class Trainer : AggregateRoot
         }
 
         // =========================================
-        // Monadic 스타일
+        // Monad 스타일
         // =========================================
 
         //return EnsureSessionExists(session.Id)

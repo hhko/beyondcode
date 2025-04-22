@@ -99,7 +99,7 @@ public sealed class Subscription : AggregateRoot
         }
 
         // =========================================
-        // Monadic 스타일
+        // Monad 스타일
         // =========================================
 
         //return EnsureGymNotAdded(gym.Id)

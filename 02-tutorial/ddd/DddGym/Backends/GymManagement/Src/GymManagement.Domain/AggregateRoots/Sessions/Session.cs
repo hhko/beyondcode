@@ -1,7 +1,6 @@
 ﻿using DddGym.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
-using GymManagement.Domain.AggregateRoots.Sessions.Events;
 using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainErrors;

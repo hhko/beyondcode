@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
-using Microsoft.Extensions.DependencyInjection;
 using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
 
 namespace GymManagement.Tests.Integration.Abstractions.Fixtures;

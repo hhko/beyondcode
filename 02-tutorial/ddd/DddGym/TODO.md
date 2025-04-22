@@ -3,9 +3,10 @@
 - [ ] global.json
 - [ ] nuget.config
 - [ ] Directory.Build.props
-   - 정적 분석
+  - 정적 분석
 - [ ] Directory.Package.props
 ---
+- [ ] GitHub Actions
 - [ ] 클래스 다이어그램
 - [ ] ER 다이어그램
 - [ ] 프로젝트 의존성 다이어그램
@@ -53,14 +54,14 @@
 
 ## 할일
 
-- [x] 할일 1.
+### 할일 1. 함수화
   - [x] 에러 클래스 분리
   - [x] 이벤트 클래스 분리
   - [ ] https://github.com/dev-cycles/contextive 용어집
   - [ ] Ensure -> Validate
   - [x] ? -> Option
 
-### 할일 2.
+### 할일 2. WebApi 함수화
 - [x] User Contoller 클래스
 - [x] User Controller 통합 테스트 기본 구현
 - [x] Bogus 기반 Fake 데이터 생성
@@ -70,30 +71,82 @@
   var fakerUser = faker.Generate();
   ```
 - [x] 인터페이스 기준 의존성 등록 개선
+- [x] CreateProfile 3개 함수 구현
+- [x] CreateProfile 3개 테스트 함수 구현
+- [x] Monad Transformers 필요성 이해: from 구문에서 await 2개 사용할 때
+- [ ] WebApi 결과 Json 구조 개선
+  ```
+  [                        <- 불 필요
+    {                      <- 불 필요
+      "adminId": [
+        "ae5ec89d-7c3a-46b3-bbb8-5c29acc08e17"
+      ]
+    }
+  ]
+  ```
+- [ ] WebApi 실패 결과 Json  변환 에러
+  ```
+  The collection type 'LanguageExt.Option`1[System.Guid]' is abstract, an interface, or is read only, and could not be instantiated and populated. Path: $.adminId | LineNumber: 0 | BytePositionInLine: 12.'
+  ```
+- [ ] Exception 호스트 에러
+
+### 할일 3. 로그인 인증
 - [ ] User Register
 - [ ] User Login
-- [ ] User 그 외
 
-### 할일 3.
+### 할일 4. 함수화 Transformer
+- [ ] 실패 처리(컴파일러 에러)
+  ```cs
+  return from response in await Sender.Send(new CreateAdminProfileCommand(userId))
+       select Ok(response);
+  ```
+- [ ] FinT<Task, Guid>???: from 구문에서는 첫 번째 from에서만 await을 사용할 수 있다.
+  ```
+  Fin<User> userResult = await _usersRepository.GetByIdAsync(request.UserId);	// 첫번째 await
+  if (userResult.IsFail)
+  {
+      return (Error)userResult;
+  }
+  User user = (User)userResult;
+
+  Fin<Guid> adminResult = user.CreateAdminProfile();
+  if (adminResult.IsFail)
+  {
+      return (Error)adminResult;
+  }
+  Guid adminId = (Guid)adminResult;
+
+  await _usersRepository.UpdateAsync(user);				// 두번째 await
+
+  return new CreateAdminProfileResponse(adminId);
+  ```
+
+<br/>
+<br/>
+<br/>
+
+
+### 할일 5. 데이터베이스(CQRS)
+- [ ] EFCore SQL
+- [ ] Dapper 통합 연동
+
+### 할일 6. User 외 구현(DDD 이해)
 - [ ] Application -> Domain 연동 이해
   -	Domain 테스트 코드
   - Application 테스트 코드
 - [ ] 이벤트 활용 방법 학습
-- [ ] Repository 활용 방법 학습  
+- [ ] Repository 활용 방법 학습
+---
+- [ ] ValueObject 코딩 규칙 테스트
+- [ ] Entity 기본 구현
+- [ ] Entity 코딩 규칙 테스트
+- [ ] AggregateRoot 기본 구현
+- [ ] Specification???
 
-### 할일 3.
+### 할일 7. 시나리오 테스트
 - [ ] Reqnroll 테스트
 
-### 할일 5.
-- ] ] ValueObject 코딩 규칙 테스트
-- ] ] Entity 기본 구현
-- ] ] Entity 코딩 규칙 테스트
-- ] ] AggregateRoot 기본 구현
-
-### 할일 6.
-- [ ] RabbitMQ 연동
-
-### 할일 7.
+### 할일 8. OpenTelemetry
 - [ ] Pipeline
   - 유효성 검사
   - 도메인 Validate 메서드를 이용한 파이프라인 Validation
@@ -103,30 +156,32 @@
   - 예외
   - 트랜잭션? 시점
   - 캐시
+- [ ] Audit
 
-### 할일 8.
-- [ ] dapper(query) / ef core(command)
+<br/>
+<br/>
+<br/>
 
-### 할일 9.
+### 할일 9. 소스 생성기
 - [ ] Id 타입
 - [ ] IAdapter Pipeline
 
-### 할일 10.
-- [ ] Exception 호스트 에러
-- [ ] 컨테이너화
-- [ ] Container HealthCheck
-- [ ] Audit
-- [ ] Specification???
+### 할일 10. RabbitMQ
 
-### 할일 11.
+### 할일 11. 컨테이너
+- [ ] Container HealthCheck
+
+### 할일 12. 스케줄러 통합 테스트
+
+### 할일 13. Adapter
 - [ ] 회복력 adapter 레이어
 
-### 할일 12.
+### 할일 14. 기타
 - [ ] https://github.com/backstage/backstage 개발 포탈 사이트
 - [ ] https://github.com/moghtech/komodo 배포
 - [ ] openfeature
 
-### 할일 패턴
+### 패턴
 - [x] Factory: Value Object
 - [ ] Event
 - [ ] Repository
@@ -440,7 +495,23 @@ public class ProgramTests : ConsoleApplicationFactory<Program>
 - Invariant: 무공변
   - `in`:  타입 간 형변환을 허용하지 않음
 
+### 모노이드
+- 결합 법칙이 성립하는 이항 연산(Binary Operation)과 항등원(identity element)을 갖는 구조입니다. 
+  - 폐쇄성 (Closure): a • b ∈ M
+    - 두 원소 a, b가 집합 M에 속해 있다면, 이 둘을 연산 ⊕으로 결합한 결과도 반드시 M에 속해야 한다.
+	- 폐쇄성이 없으면, 연산을 반복할 때 일관성이 없어서 프로그램 로직이 깨질 수 있습니다.
+  - 결합법칙 (Associativity): (a • b) • c = a • (b • c)
+  - 항등원 (Identity): a • e = e • a = a
+
+### 모나드
+- **모나드(Monad)**는 컨텍스트(Context)를 가진 값을 다루는 **연산 규약(패턴)**입니다.
+  - 값을 **랩(wrap)**하거나 **연산을 체이닝(bind)**하는 연산을 정의
+  - 합성 함수을 안전하게 연결해주는 도구
+  - 연산의 순서를 제어하고 부작용을 추상화함
+
 ### TODO  
 - value task vs task
 - 험블객체
 - mock, ...
+
+

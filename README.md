@@ -58,7 +58,7 @@
   - [ ] Chapter 03. 도메인 함수화
   - [ ] Chapter 04. 도메인 단위 테스트
 - Part 2. 유스케이스
-  - [ ] Chapter 05. 유스케이스 탐험
+  - [ ] Chapter 05. 유스케이스 탐험 (CQRS)
   - [ ] Chapter 06. 유스케이스 파이프라인
   - [ ] Chapter 07. 유스케이스 단위 테스트
   - [ ] Chapter 08. 유스케이스 시나리오 테스트 (Cucumber)
@@ -93,8 +93,8 @@
     - 위쪽: 기술적인 측면에서 더 중요한 것(부수 목표: Abstractions)을 배치합니다.
     - 아래쪽: 비즈니스 측면에서 더 중요한 것(주요 목표)을 배치합니다.
 
-| 방향     | 관심사의 분리           | 목표의 분리                                 |
-| ---     | ---                             | ---                               |
+| 방향    | 관심사의 분리           | 목표의 분리                                 |
+| ---    | ---                             | ---                               |
 | 위쪽    | 기술 관심사 (무한)       | 부수 목표 (무한 -**_Abstractions_**-> 유한)  |
 | 아래쪽  | 비즈니스 관심사 (유한)    | 주요 목표 (유한)                            |
 
@@ -104,21 +104,21 @@
 
 ```shell
 {T}
-├─Src
-│  ├─{T}                          // Host               > 위쪽: 기술 관심사 (부수 목표)
-│  ├─{T}.Adapters.Infrastructure  // Adapter Layer      >  │
-│  ├─{T}.Adapters.Persistence     // Adapter Layer      >  │
-│  ├─{T}.Application              // Application Layer  >  ↓
-│  └─{T}.Domain                   // Domain Layer       > 아래쪽: 비즈니스 관심사 (주요 목표)
-│     │
-│     ├─Abstractions                                    > 위쪽: 기술 관심사 (부수 목표)
-│     │                                                 >  ↓
-│     └─AggregateRoots                                  > 아래쪽: 비즈니스 관심사 (주요 목표)
-│
-└─Tests
-   ├─{T}.Tests.Integration        // Integration Test   > 위쪽: 기술 관심사 (부수 목표)
-   ├─{T}.Tests.Performance        // Performance Test   >  ↓
-   └─{T}.Tests.Unit               // Unit Test          > 아래쪽: 비즈니스 관심사 (주요 목표)
+ ├─Src
+ │  ├─{T}                          // Host               > 위쪽: 기술 관심사 (부수 목표)
+ │  ├─{T}.Adapters.Infrastructure  // Adapter Layer      >  │
+ │  ├─{T}.Adapters.Persistence     // Adapter Layer      >  │
+ │  ├─{T}.Application              // Application Layer  >  ↓
+ │  └─{T}.Domain                   // Domain Layer       > 아래쪽: 비즈니스 관심사 (주요 목표)
+ │     │
+ │     ├─Abstractions                                    > 위쪽: 기술 관심사 (부수 목표)
+ │     │                                                 >  ↓
+ │     └─AggregateRoots                                  > 아래쪽: 비즈니스 관심사 (주요 목표)
+ │
+ └─Tests
+    ├─{T}.Tests.Integration        // Integration Test   > 위쪽: 기술 관심사 (부수 목표)
+    ├─{T}.Tests.Performance        // Performance Test   >  ↓
+    └─{T}.Tests.Unit               // Unit Test          > 아래쪽: 비즈니스 관심사 (주요 목표)
 ```
 
 <br/>
@@ -131,22 +131,18 @@
 
 ### Map과 Bind 함수 이해하기
 ```cs
-// Monadic 스타일
+// Monad 스타일
 .Map(_ => Pure(x))
 .Bind(y => SideEffect(y));
 
-// Monadic LINQ 스타일
+// Monad LINQ 스타일
+from x in SizeEffect(y)
 let y = Pure()
-from _ in SizeEffect(y)
 select unit;
 ```
-- Map은 순수한 값 변환 함수(`T → R`)에만 사용합니다.
-- 반면에 Bind는 부수 효과를 포함하는 함수(`T → Fin<R>`)를 연결할 때 사용합니다.
-- 예를 들어, 함수가 실패 가능성과 관계없이 부수 효과(예: 외부 시스템 접근, 상태 변경 등)를 가지고 있다면, Bind로 연결합니다.
 
 ### 합성 함수 만들기
 - 함수를 작게 나누어 마치 레고 블록처럼 연결해서 처리 흐름을 만듭니다.
-- 실패 없이 값이 변환만 필요할 때는 Map(T -> R)을, 실패 가능성을 고려한 처리에는 Bind(`T -> Fin<R>`)으로 로컬 함수를 구성합니다.
 
 ```cs
 // 적용 전 1. Imperative Guard 스타일
@@ -163,7 +159,7 @@ public Fin<Guid> PromoteToTrainer()
   return TrainerId.Value;
 }
 
-// 적용 후 2. Monadic 스타일
+// 적용 후 2. Monad 스타일
 public Fin<Guid> PromoteToTrainer()
 {
   return EnsureTrainerNotPromoted(TrainerId)
@@ -173,7 +169,7 @@ public Fin<Guid> PromoteToTrainer()
   // 로컬 함수: EnsureTrainerNotPromoted, ...
 }
 
-// 적용 후 3. Monadic LINQ 스타일
+// 적용 후 3. Monad LINQ 스타일
 public Fin<Guid> PromoteToTrainer()
 {
   // 합성 함수
@@ -233,7 +229,7 @@ public Fin<Unit> UnscheduleSession(Session session)
   return unit;
 }
 
-// 적용 후. Monadic LINQ 스타일
+// 적용 후. Monad LINQ 스타일
 public Fin<Unit> UnscheduleSession(Session session)
 {
   return from _1 in EnsureSessionScheduled(session.Id)
@@ -275,7 +271,7 @@ internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange newTimeSlot)
   return unit;
 }
 
-// 적용 후. Monadic LINQ 스타일
+// 적용 후. Monad LINQ 스타일
 internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange newTimeSlot)
 {
   return from timeSlots in GetOrCreateTimeSlots(date)
@@ -283,7 +279,7 @@ internal Fin<Unit> BookTimeSlot(DateOnly date, TimeRange newTimeSlot)
          from _2 in ApplyTimeSlotToCalendar(timeSlots, newTimeSlot)
          select unit;
 
-  // 조기 반환을 GetOrCreate로 개선합니다.
+  // 조기 반환을 Get Or Create 동작으로 개선합니다.
   Fin<List<TimeRange>> GetOrCreateTimeSlots(DateOnly date)
   {
     if (!_calendar.TryGetValue(date, out var slots))

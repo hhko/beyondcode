@@ -11,4 +11,6 @@ public interface IUsersRepository
     Task<Fin<User>> GetByIdAsync(Guid userId);
 
     Task UpdateAsync(User user);
+
+    Fin<User> Test();
 }

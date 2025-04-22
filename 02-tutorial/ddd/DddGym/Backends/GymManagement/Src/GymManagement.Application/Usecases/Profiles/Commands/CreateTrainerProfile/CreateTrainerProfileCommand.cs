@@ -1,5 +1,7 @@
-﻿namespace GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfile;
+﻿using DddGym.Framework.BaseTypes.Cqrs;
 
-//public sealed record CreateTrainerProfileCommand(
-//    Guid UserId)
-//    : ICommand;
+namespace GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfile;
+
+public sealed record CreateTrainerProfileCommand(
+    Guid UserId)
+    : ICommand2<CreateTrainerProfileResponse>;
