@@ -6,9 +6,125 @@ using GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
 using LanguageExt;
 using LanguageExt.Common;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using DddGym.Framework.BaseTypes;
 namespace GymManagement.Adapters.Presentation.Controllers;
+
+public static class Xyz
+{
+    // IResult
+    public static Ok<TValue> ToOkResult<TValue>(this Fin<TValue> result)
+    {
+        return result switch
+        {
+            { IsSucc: true } => TypedResults.Ok((TValue)result),
+            _ => throw new InvalidOperationException("Result was failed")
+        };
+    }
+
+    // IResult
+
+    public static ProblemHttpResult ToProblemHttpResult<TValue>(this Fin<TValue> result)
+    {
+        return result switch
+        {
+            { IsSucc: true } => throw new InvalidOperationException("Result was successful"),
+
+            Error error => TypedResults.Problem
+            (
+                ProblemDetailsUtilities.CreateProblemDetails
+                (
+                    "제목",
+                    StatusCodes.Status400BadRequest,
+                    error
+                )
+            ),
+
+            //_ => TypedResults.Problem
+            //(
+            //    CreateProblemDetails
+            //    (
+            //        InvalidRequest,
+            //        StatusCodes.Status400BadRequest,
+            //        result.Error
+            //    )
+            //)
+        };
+    }
+}
+
+public static class ProblemDetailsUtilities
+{
+    //    public static ProblemDetails CreateProblemDetails
+    //    (
+    //        string title,
+    //        int status,
+    //        Error error,
+    //        Error[]? errors = null,
+    //        HttpContext? context = null
+    //    )
+    //    {
+    //        var problemDetails = new ProblemDetails()
+    //        {
+    //            Type = error.Code,
+    //            Title = title,
+    //            Detail = error.Message,
+    //            Status = status,
+    //            Extensions = { { nameof(errors), errors } }
+    //        };
+
+    //        if (context is not null)
+    //        {
+    //            problemDetails.Extensions.Add(RequestId, context.TraceIdentifier);
+    //            problemDetails.Instance = context.Request.Path;
+    //        }
+
+    //        return problemDetails;
+    //    }
+
+    //    public static ProblemDetails CreateProblemDetails
+    //    (
+    //        string type,
+    //        string title,
+    //        int status,
+    //        IList<string> errors
+    //    )
+    //    {
+    //        var problemDetails = new ProblemDetails()
+    //        {
+    //            Type = type,
+    //            Title = title,
+    //            Status = status,
+    //            Extensions = { { nameof(errors), errors } }
+    //        };
+
+    //        return problemDetails;
+    //    }
+
+    public static ProblemDetails CreateProblemDetails
+    (
+        //string type,
+        string title,
+        int status,
+        Error error
+    )
+    {
+        ExpectedErrorCode expectedErrorCode = (ExpectedErrorCode)error;
+
+        var problemDetails = new ProblemDetails()
+        {
+            Type = expectedErrorCode.ErrorCode,
+            Title = title,
+            Status = status,
+            Detail = expectedErrorCode.Message,
+            //Extensions = { { nameof(errors), errors } }
+        };
+
+        return problemDetails;
+    }
+}
 
 [Route("users/{userId:guid}/profiles")]
 public sealed class ProfileController : ApiController
@@ -18,15 +134,17 @@ public sealed class ProfileController : ApiController
     {
     }
 
+    //[HttpPost("[action]")]
+    //[ProducesResponseType(StatusCodes.Status200OK)]
+    //[ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
     [HttpGet]
-    public async Task<IActionResult> GetProfiles(Guid userId)
+    public async Task<Results<Ok<GetProfileResponse>, ProblemHttpResult>> GetProfiles(Guid userId)
     {
         Fin<GetProfileResponse> response = await Sender.Send(new GetProfileQuery(userId));
 
-        if (response.IsSucc)
-            return Ok((GetProfileResponse)response);
-        else
-            return BadRequest((Error)response);
+        return response.Match<Results<Ok<GetProfileResponse>, ProblemHttpResult>>(
+            Succ: _ => Xyz.ToOkResult(response),
+            Fail: _ => Xyz.ToProblemHttpResult(response));
     }
 
     [HttpPost("admin")]

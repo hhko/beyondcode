@@ -64,10 +64,7 @@ public class UserControllerTests : ControllerTestsBase
         //      $.adminId | LineNumber: 0 | BytePositionInLine: 12.
         //Source= System.Text.Json
 
-        var options = new JsonSerializerOptions();
-        options.Converters.Add(new OptionJsonConverter<Guid>());
-
-        var getProfileResponse = await response.Content.ReadFromJsonAsync<GetProfileResponse>(options);
+        var getProfileResponse = await response.Content.ReadFromJsonAsync<GetProfileResponse>();
 
 
         //GetProfileResponse? getProfileResponse = await response.Content.ReadFromJsonAsync<GetProfileResponse>();

@@ -44,6 +44,9 @@
 		: 거짓(성공)		// unit
    ```
 ---
+- [ ] Appliction 반환
+- [ ] Adatper 반환
+===
 - [ ] appsettings
 ---
 - [ ] 의존성 등록: 클래스 이름/메서드 이름

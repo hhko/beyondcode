@@ -1,12 +1,19 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
 using GymManagement.Domain.AggregateRoots.Users;
 using LanguageExt;
-using LanguageExt.Common;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
 
-// TODO: LanguageExt
+public sealed record GetProfileQuery(
+    Guid UserId)
+    : IQuery2<GetProfileResponse>;
+
+public sealed record GetProfileResponse(
+    Option<Guid> AdminId,
+    Option<Guid> ParticipantId,
+    Option<Guid> TrainerId)
+    : IResponse;
+
 internal sealed class GetProfileQueryUsecase(IUsersRepository usersRepository)
     : IQueryUsecase2<GetProfileQuery, GetProfileResponse>
 {
@@ -20,15 +27,9 @@ internal sealed class GetProfileQueryUsecase(IUsersRepository usersRepository)
         //             select GetProfileResponse.Create(user);
         //return result.Run();
 
-        Fin<User> userResult = await _usersRepository.GetByIdAsync(request.UserId);
-        if (userResult.IsSucc)
-            return new GetProfileResponse(
-                ((User)userResult).AdminId,
-                ((User)userResult).ParticipantId,
-                Guid.NewGuid());
-        //((User)userResult).TrainerId);
-        else
-            return (Error)userResult;
+        Fin<User> result = await _usersRepository.GetByIdAsync(request.UserId);
+        return result.ToGetProfileResponse();
+
         //return from user in await _usersRepository.GetByIdAsync(request.UserId)
         //       select GetProfileResponse.Create(user);
 
