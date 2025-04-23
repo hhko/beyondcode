@@ -41,7 +41,7 @@
 ![](./.images/ArchitectureTechMap.png)
 
 ### Internal Architecture (Hexagonal Architecture)
-![hexagonal architecture](./01-architecture/part1-overview/ch03-internal-architecture/.images/Architecture.Internal.Hexagonal.png)
+![](./03-guide/solution/separation_of_concerns.png)
 
 ### External Architecture
 > TODO
