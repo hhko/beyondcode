@@ -40,7 +40,7 @@
 ### 아키텍처 기술 맵
 ![](./.images/ArchitectureTechMap.png)
 
-### Internal 아키텍처 (Hexagonal Architecture)
+### Internal 아키텍처 (Hexagonal 아키텍처)
 ![](./03-guide/solution/separation_of_concerns.png)
 
 ### External 아키텍처
