@@ -35,16 +35,24 @@
 
 <br/>
 
-## Application Architecture
+## Application 아키텍처
 
-### Architecture Technical Map
+### 아키텍처 기술 맵
 ![](./.images/ArchitectureTechMap.png)
 
-### Internal Architecture (Hexagonal Architecture)
+### Internal 아키텍처 (Hexagonal Architecture)
 ![](./03-guide/solution/separation_of_concerns.png)
 
-### External Architecture
+### External 아키텍처
 > TODO
+
+<br/>
+
+## 구현 가이드
+- 001 | [솔루션 | 관심사의 분리 원칙(SoC: Separation of Concerns)](./03-guide/solution/separation_of_concerns.md)
+- 002 | [솔루션 | 폴더 구성 원칙](./03-guide/solution/solution-folder-structure-principle.md)
+- 003 | [솔루션 | .NET SDK 버전](./03-guide/solution/solution-sdk-version.md)
+- ...
 
 <br/>
 
@@ -80,12 +88,6 @@
   - [ ] Chapter 21. OpenSearch (Observability System)
   - [ ] Chapter 22. Ansible (Infrastructure as Code)
   - [ ] Chapter 23. Backstage (Building developer portals)
-
-## 구현 가이드
-- 001 | [솔루션 | 관심사의 분리 원칙(SoC: Separation of Concerns)](./03-guide/solution/separation_of_concerns.md)
-- 002 | [솔루션 | 폴더 구성 원칙](./03-guide/solution/solution-folder-structure-principle.md)
-- 003 | [솔루션 | .NET SDK 버전](./03-guide/solution/solution-sdk-version.md)
-- ...
 
 <br/>
 
