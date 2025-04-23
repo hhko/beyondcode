@@ -35,7 +35,7 @@
 - [ ] 에러 추가: `Fin<T> .CombinErrors`
 ---
 - [ ] 이벤트 이름
-- [ ] 이벤트 출처 확인인
+- [ ] 이벤트 출처 확인
 ---
 - [ ] Ensure 참조건
    ```
@@ -44,9 +44,9 @@
 		: 거짓(성공)		// unit
    ```
 ---
-- [ ] Appliction 반환
-- [ ] Adatper 반환
-===
+- [ ] 결과 Application 레이어 ToResponse 
+- [ ] 결과 Adapter ...ToOkResult, ToProblemHttpResult 
+---
 - [ ] appsettings
 ---
 - [ ] 의존성 등록: 클래스 이름/메서드 이름
