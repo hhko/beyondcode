@@ -35,7 +35,7 @@
 - [ ] 에러 추가: `Fin<T> .CombinErrors`
 ---
 - [ ] 이벤트 이름
-- [ ] 이벤트 출처 확인인
+- [ ] 이벤트 출처 확인
 ---
 - [ ] Ensure 참조건
    ```
@@ -43,6 +43,9 @@
 		? 참(에러)
 		: 거짓(성공)		// unit
    ```
+---
+- [ ] 결과 Application 레이어 ToResponse 
+- [ ] 결과 Adapter ...ToOkResult, ToProblemHttpResult 
 ---
 - [ ] appsettings
 ---
