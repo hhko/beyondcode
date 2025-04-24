@@ -1,6 +1,6 @@
 # 솔루션 테스트 자동화
 
-![](./test_automation.png)
+![](./solution-test-automation.png)
 
 ## 단위 테스트
 - 단위 테스트는 **프로그램의 가장 작은 도메인 단위**(**도메인 관심사: Entity, Value Object, ...**)가 의도한 대로 동작하는지를 검증하는 테스트입니다.

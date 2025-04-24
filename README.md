@@ -35,7 +35,7 @@
 
 <br/>
 
-## Application 아키텍처
+## 애플리케이션 아키텍처
 
 ### 아키텍처 기술 맵
 ![](./.images/ArchitectureTechMap.png)
@@ -50,9 +50,10 @@
 
 ## 구현 가이드
 - 001 | [솔루션 | 관심사의 분리(Separation of Concerns)](./03-guide/solution/separation_of_concerns.md)
-- 002 | [솔루션 | 테스트 자동화](./03-guide/solution/test_automation.md)
+- 002 | [솔루션 | 테스트 자동화](./03-guide/solution/solution-test-automation.md)
 - 003 | [솔루션 | 폴더 구성](./03-guide/solution/solution-structure-principle.md)
 - 004 | [솔루션 | .NET SDK 버전](./03-guide/solution/solution-sdk-version.md)
+- 005 | [솔루션 | NuGet 소스 설정](./03-guide/solution/solution-nuget-config.md)
 - ...
 
 <br/>
@@ -60,24 +61,23 @@
 ## Hands-on Labs
 '[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)' 강의 예제를 Functional 도메인 주도 설계와 Functional 아키텍처로 재구성합니다.
 
-### 목차
 - Part 1. 도메인
   - [ ] Chapter 01. 도메인 탐험
   - [ ] Chapter 02. 도메인 구조화
-  - [ ] Chapter 03. 도메인 함수화
+  - [ ] Chapter 03. 도메인 함수형화
   - [ ] Chapter 04. 도메인 단위 테스트
 - Part 2. 유스케이스
   - [ ] Chapter 05. 유스케이스 탐험 (CQRS)
-  - [ ] Chapter 06. 유스케이스 파이프라인
+  - [ ] Chapter 06. 유스케이스 미들웨어
   - [ ] Chapter 07. 유스케이스 단위 테스트
   - [ ] Chapter 08. 유스케이스 시나리오 테스트 (Cucumber)
 - Part 3. Monolithic
   - [ ] Chapter 09. WebApi
-  - [ ] Chapter 10. 유스케이스 통합 테스트
-  - [ ] Chapter 11. OpenTelemetry
-  - [ ] Chapter 12. PostgreSQL
-  - [ ] Chapter 13. Cache
-  - [ ] Chapter 14. Containerization
+  - [ ] Chapter 10. WebApi 미들웨어 (Observability, Cache)
+  - [ ] Chapter 11. WebApi 통합 테스트
+  - [ ] Chapter 12. WebApi 성능 테스트
+  - [ ] Chapter 13. CQRS (Command: EF Core, Query: Dapper)
+  - [ ] Chapter 14. 컨테이너화
 - Part 4. Microservices
   - [ ] Chapter 15. Aspire
   - [ ] Chapter 16. RabbitMQ
