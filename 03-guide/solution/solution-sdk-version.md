@@ -1,5 +1,6 @@
 # 솔루션 .NET SDK 버전
 
+## 생성 명령
 ```shell
 dotnet new global.json --sdk-version 9.0.100 --roll-forward latestPatch
 ```
@@ -22,7 +23,7 @@ dotnet new global.json --sdk-version 9.0.100 --roll-forward latestPatch
 
 <br/>
 
-## 버전 확인
+## 관리 명령
 ```shell
 # 사용 가능한 모든 .NET SDK 버전 확인
 dotnet --list-sdks
