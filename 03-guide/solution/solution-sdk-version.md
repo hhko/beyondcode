@@ -1,7 +1,6 @@
 # 솔루션 .NET SDK 버전
 
-## 
-```
+```shell
 dotnet new global.json --sdk-version 9.0.100 --roll-forward latestPatch
 ```
 
@@ -12,7 +11,7 @@ dotnet new global.json --sdk-version 9.0.100 --roll-forward latestPatch
     - `z`는 기능 밴드입니다.
     - `nn`은 패치 버전입니다.
 
-```
+```json
 {
   "sdk": {
     "version": "9.0.100",
@@ -21,7 +20,9 @@ dotnet new global.json --sdk-version 9.0.100 --roll-forward latestPatch
 }
 ```
 
-## 확인하기
+<br/>
+
+## 버전 확인
 ```shell
 # 사용 가능한 모든 .NET SDK 버전 확인
 dotnet --list-sdks

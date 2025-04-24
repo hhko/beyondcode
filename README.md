@@ -49,9 +49,9 @@
 <br/>
 
 ## 구현 가이드
-- 001 | [솔루션 | 관심사를 분리하기(Separation of Concerns)](./03-guide/solution/separation_of_concerns.md)
-- 002 | [솔루션 | 테스트 자동화하기](./03-guide/solution/test_automation.md)
-- 003 | [솔루션 | 폴더 구성하기](./03-guide/solution/solution-folder-structure-principle.md)
+- 001 | [솔루션 | 관심사의 분리(Separation of Concerns)](./03-guide/solution/separation_of_concerns.md)
+- 002 | [솔루션 | 테스트 자동화](./03-guide/solution/test_automation.md)
+- 003 | [솔루션 | 폴더 구성](./03-guide/solution/solution-structure-principle.md)
 - 004 | [솔루션 | .NET SDK 버전](./03-guide/solution/solution-sdk-version.md)
 - ...
 
