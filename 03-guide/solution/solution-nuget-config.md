@@ -39,7 +39,7 @@ dotnet nuget list source
 ```
 
 ```shell
-# NuGet이 사용하는 모든 로컬 캐시의 경로를 표시합니다.
+# NuGet이 사용하는 모든 로컬 캐시의 경로 표시
 dotnet nuget locals all --list
 
     http-cache      : C:\Users\{사용자}\AppData\Local\NuGet\v3-cache
