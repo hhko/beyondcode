@@ -1,8 +1,8 @@
 ﻿using DddGym.Framework.BaseTypes.Cqrs;
+using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Rooms;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Trainers;
-using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using LanguageExt.Common;
 using System.Diagnostics.Contracts;

@@ -20,7 +20,7 @@ namespace GymManagement.Domain.AggregateRoots.Rooms;
 public sealed class Room : AggregateRoot
 {
     private readonly int _maxDailySessions;
-    private readonly SharedTypes.Schedule _schedule = SharedTypes.Schedule.Empty();
+    private readonly Abstractions.SharedTypes.Schedule _schedule = Abstractions.SharedTypes.Schedule.Empty();
 
     public Guid GymId { get; }
     public int MaxDailySessions
@@ -42,13 +42,13 @@ public sealed class Room : AggregateRoot
         string name,
         int maxDailySessions,
         Guid gymId,
-        Option<SharedTypes.Schedule> schedule,
+        Option<Abstractions.SharedTypes.Schedule> schedule,
         Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         Name = name;
         _maxDailySessions = maxDailySessions;
         GymId = gymId;
-        _schedule = schedule.IfNone(SharedTypes.Schedule.Empty());
+        _schedule = schedule.IfNone(Abstractions.SharedTypes.Schedule.Empty());
     }
 
     private Room()
@@ -59,7 +59,7 @@ public sealed class Room : AggregateRoot
         string name,
         int maxDailySessions,
         Guid gymId,
-        Option<SharedTypes.Schedule> schedule = default,
+        Option<Abstractions.SharedTypes.Schedule> schedule = default,
         Option<Guid> id = default)
     {
         return new Room(name, maxDailySessions, gymId, schedule, id);

@@ -1,4 +1,4 @@
-﻿using GymManagement.Domain.SharedTypes.ValueObjects;
+﻿using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using Throw;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain.Factories;

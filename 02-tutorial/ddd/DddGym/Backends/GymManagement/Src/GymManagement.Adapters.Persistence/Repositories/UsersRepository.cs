@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using DddGym.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Users;
 using LanguageExt;
 
@@ -23,7 +24,7 @@ public class UsersRepository : IUsersRepository
 
     public async Task<Fin<User>> GetByIdAsync(Guid userId)
     {
-        await Task.Delay(3000);
+        //await Task.Delay(3000);
         await Task.CompletedTask;
 
         var userFaker = new Faker<User>()
@@ -34,6 +35,8 @@ public class UsersRepository : IUsersRepository
                             passwordHash: f.Internet.Password()));
 
         return userFaker.Generate();
+
+        //return Fin<User>.Fail(ErrorCodeFactory.Create("나의 코드", "나의 메시지"));
     }
 
     public Fin<User> Test()
@@ -41,8 +44,9 @@ public class UsersRepository : IUsersRepository
         throw new NotImplementedException();
     }
 
-    public Task UpdateAsync(User user)
+    public async Task UpdateAsync(User user)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        await Task.CompletedTask;
     }
 }

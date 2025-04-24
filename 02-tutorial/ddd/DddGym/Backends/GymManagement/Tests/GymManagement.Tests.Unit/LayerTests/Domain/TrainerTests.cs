@@ -1,8 +1,8 @@
 ﻿using DddGym.Framework.BaseTypes;
+using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Trainers;
 using GymManagement.Domain.SharedTypes.Errors;
-using GymManagement.Domain.SharedTypes.ValueObjects;
 using GymManagement.Tests.Unit.Abstractions;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
 using GymManagement.Tests.Unit.LayerTests.Domain.Factories;

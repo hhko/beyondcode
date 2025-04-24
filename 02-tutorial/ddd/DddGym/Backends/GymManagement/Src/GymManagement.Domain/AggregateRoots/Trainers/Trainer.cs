@@ -1,6 +1,6 @@
 ﻿using DddGym.Framework.BaseTypes;
+using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Sessions;
-using GymManagement.Domain.SharedTypes.ValueObjects;
 using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Trainers.Errors.DomainErrors;
 using static LanguageExt.Prelude;
@@ -20,22 +20,22 @@ namespace GymManagement.Domain.AggregateRoots.Trainers;
 public sealed class Trainer : AggregateRoot
 {
     private readonly List<Guid> _sessionIds = [];
-    private readonly SharedTypes.Schedule _schedule = SharedTypes.Schedule.Empty();
+    private readonly Abstractions.SharedTypes.Schedule _schedule = Abstractions.SharedTypes.Schedule.Empty();
 
     public Guid UserId { get; }
 
     private Trainer(
         Guid userId,
-        Option<SharedTypes.Schedule> schedule,
+        Option<Abstractions.SharedTypes.Schedule> schedule,
         Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         UserId = userId;
-        _schedule = schedule.IfNone(SharedTypes.Schedule.Empty());
+        _schedule = schedule.IfNone(Abstractions.SharedTypes.Schedule.Empty());
     }
 
     public static Trainer Create(
         Guid userId,
-        Option<SharedTypes.Schedule> schedule = default,
+        Option<Abstractions.SharedTypes.Schedule> schedule = default,
         Option<Guid> id = default)
     {
         return new Trainer(userId, schedule, id);

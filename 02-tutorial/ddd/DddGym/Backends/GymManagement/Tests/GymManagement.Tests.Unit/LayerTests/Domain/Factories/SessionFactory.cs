@@ -1,6 +1,6 @@
-﻿using GymManagement.Domain.AggregateRoots.Sessions;
+﻿using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
+using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
-using GymManagement.Domain.SharedTypes.ValueObjects;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
 using LanguageExt;
 

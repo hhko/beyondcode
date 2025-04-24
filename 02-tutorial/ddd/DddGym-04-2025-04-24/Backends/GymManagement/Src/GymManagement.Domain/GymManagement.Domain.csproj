@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Remove="Abstractions\**" />
+    <EmbeddedResource Remove="Abstractions\**" />
+    <None Remove="Abstractions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.SmartEnum" />
+    <PackageReference Include="LanguageExt.Core" />
+    <PackageReference Include="MediatR.Contracts" />
+    <PackageReference Include="Throw" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Abstractions\Frameworks\Src\DddGym.Framework\DddGym.Framework.csproj" />
+  </ItemGroup>
+
+</Project>

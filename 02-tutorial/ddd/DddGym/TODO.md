@@ -1,6 +1,6 @@
 ## 규칙
 - [ ] 전역 버전(docker 이미지 버전 포함)
-- [ ] global.json
+- [x] global.json
 - [ ] nuget.config
 - [ ] Directory.Build.props
   - 정적 분석
@@ -77,10 +77,12 @@
 - [x] CreateProfile 3개 함수 구현
 - [x] CreateProfile 3개 테스트 함수 구현
 - [x] Monad Transformers 필요성 이해: from 구문에서 await 2개 사용할 때
-- [ ] WebApi 결과 Json 구조 개선
+- [x] Application Response DTO 반환 확장 메서드: To{Response 클래스}();, {AggregateRoot}Mapping.cs
+- [x] Adapters.Presentation WebApi Results 반환 확장 메서드: ToResult();
+- [x] WebApi 결과 Json 구조 개선
   ```
   [                        <- 불 필요
-    {                      <- 불 필요
+    {
       "adminId": [
         "ae5ec89d-7c3a-46b3-bbb8-5c29acc08e17"
       ]
