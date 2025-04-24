@@ -69,30 +69,32 @@
   - [ ] Chapter 01. 도메인 탐험
   - [ ] Chapter 02. 도메인 구조화
   - [ ] Chapter 03. 도메인 함수형화
-  - [ ] Chapter 04. 도메인 단위 테스트
+  - [ ] Chapter 04. 도메인 Entity Id 소스 생성기
+  - [ ] Chapter 05. 도메인 단위 테스트
 - Part 2. 유스케이스
-  - [ ] Chapter 05. 유스케이스 탐험 (CQRS)
-  - [ ] Chapter 06. 유스케이스 미들웨어
-  - [ ] Chapter 07. 유스케이스 단위 테스트
-  - [ ] Chapter 08. 유스케이스 시나리오 테스트 (Cucumber)
+  - [ ] Chapter 06. 유스케이스 탐험 (CQRS)
+  - [ ] Chapter 07. 유스케이스 미들웨어 (Observability, ...)
+  - [ ] Chapter 08. 유스케이스 인터페이스 소스 생성기 (Observability, ...)
+  - [ ] Chapter 09. 유스케이스 단위 테스트
+  - [ ] Chapter 10. 유스케이스 시나리오 테스트 (Cucumber)
 - Part 3. Monolithic
-  - [ ] Chapter 09. WebApi
-  - [ ] Chapter 10. WebApi 미들웨어 (Observability, Cache)
-  - [ ] Chapter 11. WebApi 통합 테스트
-  - [ ] Chapter 12. WebApi 성능 테스트
-  - [ ] Chapter 13. CQRS (Command: EF Core, Query: Dapper)
-  - [ ] Chapter 14. 컨테이너화
+  - [ ] Chapter 11. WebApi
+  - [ ] Chapter 12. WebApi 미들웨어 (Observability, ...)
+  - [ ] Chapter 13. WebApi 통합 테스트
+  - [ ] Chapter 14. WebApi 성능 테스트
+  - [ ] Chapter 15. CQRS (Command: EF Core, Query: Dapper)
+  - [ ] Chapter 16. 컨테이너화
 - Part 4. Microservices
-  - [ ] Chapter 15. Aspire
-  - [ ] Chapter 16. RabbitMQ
-  - [ ] Chapter 17. Resilience
-  - [ ] Chapter 18. Reverse Proxy
-  - [ ] Chapter 19. Chaos Engineering
+  - [ ] Chapter 17. Aspire
+  - [ ] Chapter 18. RabbitMQ
+  - [ ] Chapter 19. Resilience
+  - [ ] Chapter 20. Reverse Proxy
+  - [ ] Chapter 21. Chaos Engineering
 - Part 5. 운영
-  - [ ] Chapter 20. OpenFeature (Feature Flag Management)
-  - [ ] Chapter 21. OpenSearch (Observability System)
-  - [ ] Chapter 22. Ansible (Infrastructure as Code)
-  - [ ] Chapter 23. Backstage (Building developer portals)
+  - [ ] Chapter 22. OpenFeature (Feature Flag Management)
+  - [ ] Chapter 23. OpenSearch (Observability System)
+  - [ ] Chapter 24. Ansible (Infrastructure as Code)
+  - [ ] Chapter 25. Backstage (Building developer portals)
 
 <br/>
 
