@@ -3,24 +3,22 @@ using MediatR;
 
 namespace FunctionalDdd.Framework.BaseTypes.Cqrs;
 
-//public interface ICommand : IRequest<IErrorOr>;
-
-//public interface ICommand<out TResponse> : IRequest<IErrorOr<TResponse>>
+//public interface ICommand
+//  : IRequest<IErrorOr>;
+//public interface ICommand<out TResponse>
+//  : IRequest<IErrorOr<TResponse>>
 //    where TResponse : IResponse;
 
 // 반환이 없는 것
-//public interface ICommandUsecase<in TCommand> : IRequestHandler<TCommand, IErrorOr>
+//public interface ICommandUsecase<in TCommand>
+//  : IRequestHandler<TCommand, IErrorOr>
 //    where TCommand : ICommand;
-
 // 반환이 있는 것
-//public interface ICommandUsecase<in TCommand, TResponse> : IRequestHandler<TCommand, IErrorOr<TResponse>>
+//public interface ICommandUsecase<in TCommand, TResponse>
+//  : IRequestHandler<TCommand, IErrorOr<TResponse>>
 //    where TCommand : ICommand<TResponse>
 //    where TResponse : IResponse;
 
-// CS1961
-// Invalid variance:
-//  The type parameter 'TResponse' must be invariantly valid on 'IRequest<Fin<TResponse>>'.
-//  'TResponse' is contravariant.
 public interface ICommand2<TResponse>
     : IRequest<Fin<TResponse>>
       where TResponse : IResponse;

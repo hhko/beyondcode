@@ -6,10 +6,19 @@ namespace GymManagement.Application.Usecases.Profiles.Queries.GetProfiles;
 
 public static class GetProfile
 {
+    //public sealed record Query(
+    //    Guid UserId,
+    //    string? Hello = null)
+    //    //: IQuery2<Response>;
+
     public sealed record Query(
-        Guid UserId,
-        string? Hello = null)
-        : IQuery2<Response>;
+        Guid UserId)
+        : ICachedQuery<Response>
+    {
+        public string CacheKey => UserId.ToString();
+
+        public TimeSpan? Duration => TimeSpan.FromMinutes(1);
+    }
 
     public sealed record Response(
         Option<Guid> AdminId,
@@ -22,9 +31,6 @@ public static class GetProfile
         public Validator()
         {
             RuleFor(x => x.UserId)
-                .NotEmpty();
-
-            RuleFor(x => x.Hello)
                 .NotEmpty();
         }
     }

@@ -114,6 +114,10 @@
 - [ ] 이벤트 활용 방법 학습
 - [ ] Repository 활용 방법 학습
 ---
+- [ ] 파이프라인
+  - Fin 인터페이스화?
+  - TRequest, TResponse 이해 필요, out, in
+---
 - [ ] Application 파이프라인 Cached
 - [ ] WebApi 미들웨어 ErrorHandlingMiddleware
 - [ ] WebApi 미들웨어 RequestTimeMiddleware

@@ -16,7 +16,7 @@ internal static class MediatRRegistration
 
             configuration.AddOpenBehavior(typeof(FluentValidationPipeline<,>));
             //cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
-            ////cfg.AddOpenBehavior(typeof(QueryCachingPipeline<,>));
+            configuration.AddOpenBehavior(typeof(QueryCachingPipeline<,>));
             ////cfg.AddBehavior<CreateOrderHeaderOpenTelemetryPipeline>();
 
             ////configuration.AddOpenBehavior(typeof(FluentValidationPipeline<,>));
