@@ -3,7 +3,7 @@
 ## 개요
 비즈니스을 구현하는 애플리케이션은 다음과 같은 세 가지 관심사로 분리합니다(SoC: Separation of Concerns).
 
-![](./separation_of_concerns-hexagonal_architecture.png)
+![](./solution-separation-of-concerns-hexagonal-architecture.png)
 
 <br/>
 

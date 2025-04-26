@@ -41,7 +41,7 @@
 ![](./.images/ArchitectureTechMap.png)
 
 ### Internal 아키텍처 (Hexagonal 아키텍처)
-![](./03-guide/solution/separation_of_concerns-hexagonal_architecture.png)
+![](./03-guide/solution/solution-separation-of-concerns-hexagonal-architecture.png)
 
 - 함수형: `LanguageExt.Core`
 - 기술과 도메인 느슨한 연결 (Mediator 패턴): `MediatR`
@@ -56,7 +56,7 @@
 <br/>
 
 ## 글쓰기 지침
-- 001 | [솔루션 | 관심사의 분리 (Separation of Concerns)](./03-guide/solution/separation_of_concerns.md)
+- 001 | [솔루션 | 관심사의 분리 (Separation of Concerns)](./03-guide/solution/solution-separation-of-concerns.md)
 - 002 | [솔루션 | 테스트 자동화 (Unit Test, Integration Test)](./03-guide/solution/solution-test-automation.md)
 - 003 | [솔루션 | 폴더 구성](./03-guide/solution/solution-structure-principle.md)
 - 004 | [솔루션 | .NET SDK 버전 (global.json)](./03-guide/solution/solution-sdk-version.md)
