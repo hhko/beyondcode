@@ -20,7 +20,7 @@
 - [ ] 메시지 트랜잭션
 - [ ] 메시지 로그
 - [ ] 메시지 예외 처리
-- ...
+- [ ] ...
 
 ```
 internal static class MediatRRegistration

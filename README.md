@@ -43,6 +43,13 @@
 ### Internal 아키텍처 (Hexagonal 아키텍처)
 ![](./03-guide/solution/separation_of_concerns-hexagonal_architecture.png)
 
+- 함수형: `LanguageExt.Core`
+- 기술과 도메인 느슨한 연결 (Mediator 패턴): `MediatR`
+- 메시지 유효성 검사: `FluentValidation`
+- 열거형 타입 도메인화: `Ardalis.SmartEnum`
+- 캐시: `ZiggyCreatures.FusionCache`
+- 가짜 데이터(fake data) 생성기: `Bogus`
+
 ### External 아키텍처
 > TODO
 
