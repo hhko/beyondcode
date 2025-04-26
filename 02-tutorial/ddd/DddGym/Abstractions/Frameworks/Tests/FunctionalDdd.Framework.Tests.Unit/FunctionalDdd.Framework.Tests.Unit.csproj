@@ -32,6 +32,7 @@
   <ItemGroup>
     <None Remove="TestResults\**" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Src\FunctionalDdd.Framework\FunctionalDdd.Framework.csproj" />
   </ItemGroup>
