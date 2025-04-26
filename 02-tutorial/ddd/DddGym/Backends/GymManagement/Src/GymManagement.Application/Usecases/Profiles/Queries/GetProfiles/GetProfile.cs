@@ -34,4 +34,9 @@ public static class GetProfile
                 .NotEmpty();
         }
     }
+
+    internal sealed class Telemetry
+    {
+
+    }
 }

@@ -104,10 +104,16 @@ namespace FunctionalDdd.Framework.Pipelines;
 //-----------------------------------------
 // 성공
 
-//public sealed class QueryCachingPipeline<TQuery, TResponse>
-//    : IPipelineBehavior<TQuery, TResponse>
-//      where TQuery : class, IRequest<TResponse>, ICachedQuery //IQuery2<IResponse>, ICachedQuery
-//      where TResponse : class, IResponse //, Fin<IResponse>
+//public interface IQuery2<TResponse>
+//    : IRequest<Fin<TResponse>>
+//      where TResponse : IResponse;
+
+// 원본
+//public sealed class QueryCachingPipeline<TRequest, TResponse>(IFusionCache fusionCache)
+//  : IPipelineBehavior<TRequest, TResponse>
+//    where TRequest : class, IRequest<TResponse>, IQuery<IResponse>, ICachedQuery
+//    where TResponse : IResult<IResponse>
+
 public sealed class QueryCachingPipeline<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>
       where TRequest : class, IRequest<TResponse>, ICachedQuery //IQuery2<IResponse>, ICachedQuery
@@ -130,15 +136,15 @@ public sealed class QueryCachingPipeline<TRequest, TResponse>
 
         var result = await next();
 
-        if (result is Fin<TResponse> fin)
-        {
-            if (fin.IsSucc)
-            {
+        //if (result is Fin<TResponse> fin)
+        //{
+        //    if (fin.IsSucc)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
-        Fin<TResponse>? fin2 = result as Fin<TResponse>;
+        //Fin? fin2 = result as Fin;
 
 
         //if (result.IsSucc)
@@ -156,6 +162,26 @@ public sealed class QueryCachingPipeline<TRequest, TResponse>
 
         //var result = await next();
         //return result;
+    }
+}
+
+//public interface IQueryUsecase2<in TQuery, TResponse>
+//    : IRequestHandler<TQuery, Fin<TResponse>>
+//      where TQuery : IQuery2<TResponse>
+//      where TResponse : IResponse;
+
+public sealed class QueryCachingPipeline2<TRequest, TResponse>
+    : IPipelineBehavior<TRequest, TResponse>
+      where TRequest : class, IRequest<TResponse>, ICachedQuery //, IQuery2<IResponse> //, ICachedQuery
+      where TResponse : Fin<IResponse>
+{
+    public async Task<TResponse> Handle(
+        TRequest request,
+        RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
+    {
+        var result = await next();
+        return result;
     }
 }
 

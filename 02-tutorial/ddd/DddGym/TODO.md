@@ -115,10 +115,12 @@
 - [ ] Repository 활용 방법 학습
 ---
 - [ ] 파이프라인
-  - Fin 인터페이스화?
-  - TRequest, TResponse 이해 필요, out, in
+  - where TResponse : Fin<IResponse> 인식하지 못함  ==> 캐시, 로그 성공/실패
 ---
 - [ ] Application 파이프라인 Cached
+- [ ] Application 파이프라인 로그
+- [ ] Application 파이프라인 예외 처리
+- [ ] Application 파이프라인 트랜잭션션
 - [ ] WebApi 미들웨어 ErrorHandlingMiddleware
 - [ ] WebApi 미들웨어 RequestTimeMiddleware
 

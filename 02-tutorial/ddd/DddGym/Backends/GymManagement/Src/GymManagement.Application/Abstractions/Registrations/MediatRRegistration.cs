@@ -1,4 +1,5 @@
 ﻿using FunctionalDdd.Framework.Pipelines;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GymManagement.Application.Abstractions.Registrations;
@@ -17,6 +18,10 @@ internal static class MediatRRegistration
             configuration.AddOpenBehavior(typeof(FluentValidationPipeline<,>));
             //cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
             configuration.AddOpenBehavior(typeof(QueryCachingPipeline<,>));
+
+            configuration.AddOpenBehavior(typeof(QueryCachingPipeline2<,>));
+
+            
             ////cfg.AddBehavior<CreateOrderHeaderOpenTelemetryPipeline>();
 
             ////configuration.AddOpenBehavior(typeof(FluentValidationPipeline<,>));

@@ -22,4 +22,9 @@ public static class CreateAdminProfile
                 .NotEmpty();
         }
     }
+
+    internal sealed class Telemetry
+    {
+
+    }
 }
