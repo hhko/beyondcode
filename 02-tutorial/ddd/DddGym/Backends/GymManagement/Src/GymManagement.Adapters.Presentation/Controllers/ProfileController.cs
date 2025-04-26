@@ -1,11 +1,10 @@
-﻿using GymManagement.Adapters.Presentation.Abstractions;
-using GymManagement.Adapters.Presentation.Abstractions.Utilities;
-using GymManagement.Application.Usecases.Profiles.Commands.CreateAdminProfile;
-using GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfile;
-using GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfile;
-using GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
+﻿using FunctionalDdd.Framework.WebApi.Utilities;
+using GymManagement.Adapters.Presentation.Abstractions;
+using GymManagement.Application.Usecases.Profiles.Commands.CreateAdminProfiles;
+using GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfiles;
+using GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfiles;
+using GymManagement.Application.Usecases.Profiles.Queries.GetProfiles;
 using LanguageExt;
-using LanguageExt.Common;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -24,31 +23,18 @@ public sealed class ProfileController : ApiController
     //[ProducesResponseType(StatusCodes.Status200OK)]
     //[ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
     [HttpGet]
-    public async Task<Results<Ok<GetProfileResponse>, ProblemHttpResult>> GetProfiles(Guid userId)
+    public async Task<Results<Ok<GetProfile.Response>, ProblemHttpResult>> GetProfiles(Guid userId)
     {
-        Fin<GetProfileResponse> response = await Sender.Send(new GetProfileQuery(userId));
+        GetProfile.Query query = new(userId);
+        Fin<GetProfile.Response> response = await Sender.Send(query);
         return response.ToResult();
     }
 
     [HttpPost("admin")]
-    public async Task<Results<Ok<CreateAdminProfileResponse>, ProblemHttpResult>> CreateAdminProfile(Guid userId)
+    public async Task<Results<Ok<CreateAdminProfile.Response>, ProblemHttpResult>> CreateAdminProfile(Guid userId)
     {
-        // TODO: Json 구조 개선
-        // [                        <- 불 필요
-        //   {                      <- 불 필요
-        //     "adminId": [
-        //       "ae5ec89d-7c3a-46b3-bbb8-5c29acc08e17"
-        //     ]
-        //   }
-        // ]
-        // TODO: Json 실패 값
-        //
-        // TODO: 실패 처리(컴파일러 에러)
-        // 
-        //return from response in await Sender.Send(new CreateAdminProfileCommand(userId))
-        //       select Ok(response);
-
-        Fin<CreateAdminProfileResponse> response = await Sender.Send(new CreateAdminProfileCommand(userId));
+        CreateAdminProfile.Command command = new(userId);
+        Fin<CreateAdminProfile.Response> response = await Sender.Send(command);
         return response.ToResult();
 
         //var x = Pure(userId)
@@ -64,16 +50,16 @@ public sealed class ProfileController : ApiController
     }
 
     [HttpPost("trainer")]
-    public async Task<Results<Ok<CreateTrainerProfileResponse>, ProblemHttpResult>> CreateTrainerProfile(Guid userId)
+    public async Task<Results<Ok<CreateTrainerProfile.Response>, ProblemHttpResult>> CreateTrainerProfile(Guid userId)
     {
-        Fin<CreateTrainerProfileResponse> response = await Sender.Send(new CreateTrainerProfileCommand(userId));
+        Fin<CreateTrainerProfile.Response> response = await Sender.Send(new CreateTrainerProfile.Command(userId));
         return response.ToResult();
     }
 
     [HttpPost("participant")]
-    public async Task<Results<Ok<CreateParticipantProfileResponse>, ProblemHttpResult>> CreateParticipantProfile(Guid userId)
+    public async Task<Results<Ok<CreateParticipantProfile.Response>, ProblemHttpResult>> CreateParticipantProfile(Guid userId)
     {
-        Fin<CreateParticipantProfileResponse> response = await Sender.Send(new CreateParticipantProfileCommand(userId));
+        Fin<CreateParticipantProfile.Response> response = await Sender.Send(new CreateParticipantProfile.Command(userId));
         return response.ToResult();
     }
 }

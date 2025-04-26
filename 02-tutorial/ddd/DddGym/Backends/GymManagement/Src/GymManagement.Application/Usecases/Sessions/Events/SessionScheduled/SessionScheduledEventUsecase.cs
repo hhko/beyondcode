@@ -1,4 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Events;
+﻿using FunctionalDdd.Framework.BaseTypes.Events;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using static GymManagement.Domain.AggregateRoots.Rooms.Events.DomainEvents;
 

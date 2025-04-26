@@ -1,5 +1,9 @@
 ﻿using Bogus;
-using GymManagement.Application.Usecases.Profiles.Queries.GetProfile;
+using FunctionalDdd.Framework.BaseTypes.Converters;
+using GymManagement.Application.Usecases.Profiles.Commands.CreateAdminProfiles;
+using GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfiles;
+using GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfiles;
+using GymManagement.Application.Usecases.Profiles.Queries.GetProfiles;
 using GymManagement.Domain.AggregateRoots.Users;
 using GymManagement.Tests.Integration.Abstractions;
 using GymManagement.Tests.Integration.Abstractions.Fixtures;
@@ -9,7 +13,6 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Json;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
 
 namespace GymManagement.Tests.Integration.LayerTests.Adapters.Presentation;
@@ -19,10 +22,15 @@ namespace GymManagement.Tests.Integration.LayerTests.Adapters.Presentation;
 public class UserControllerTests : ControllerTestsBase
 {
     private readonly WebApplicationFactory<IAppMarker> _factory;
+    private readonly JsonSerializerOptions _options;
 
     public UserControllerTests(WebAppFactoryFixture fixture)
         : base(fixture)
     {
+        _options = new();
+        _options.Converters.Add(new OptionJsonConverterFactory());
+        _options.PropertyNameCaseInsensitive = true;
+
         _factory = _webAppFactory
             .WithWebHostBuilder(builder =>
             {
@@ -55,46 +63,16 @@ public class UserControllerTests : ControllerTestsBase
         // Act
         HttpResponseMessage response = await client.GetAsync("/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles");
 
-        // Assert
+        // Assert: HTTP 결과 상태
         response.EnsureSuccessStatusCode();
 
-        // System.NotSupportedException
-        //  Message = The collection type 'LanguageExt.Option`1[System.Guid]' is abstract,
-        //      an interface, or is read only, and could not be instantiated and populated.Path:
-        //      $.adminId | LineNumber: 0 | BytePositionInLine: 12.
-        //Source= System.Text.Json
-
-        var getProfileResponse = await response.Content.ReadFromJsonAsync<GetProfileResponse>();
-
-
-        //GetProfileResponse? getProfileResponse = await response.Content.ReadFromJsonAsync<GetProfileResponse>();
-        //getProfileResponse.ShouldSatisfyAllConditions(
-        //    () => getProfileResponse!.AdminId.IsNone.ShouldBeTrue(),
-        //    () => getProfileResponse!.TrainerId.IsNone.ShouldBeTrue(),
-        //    () => getProfileResponse!.ParticipantId.IsNone.ShouldBeTrue());
+        // Assert: HTTP 결과 값
+        GetProfile.Response? getProfileResponse = await response.Content.ReadFromJsonAsync<GetProfile.Response>(_options);
+        getProfileResponse.ShouldSatisfyAllConditions(
+            () => getProfileResponse!.AdminId.IsNone.ShouldBeTrue(),
+            () => getProfileResponse!.TrainerId.IsNone.ShouldBeTrue(),
+            () => getProfileResponse!.ParticipantId.IsNone.ShouldBeTrue());
     }
-
-    public class OptionJsonConverter<T> : JsonConverter<Option<T>>
-    {
-        public override Option<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            var value = JsonSerializer.Deserialize<T>(ref reader, options);
-            return value == null ? Option<T>.None : Option<T>.Some(value);
-        }
-
-        public override void Write(Utf8JsonWriter writer, Option<T> value, JsonSerializerOptions options)
-        {
-            if (value.IsSome)
-            {
-                JsonSerializer.Serialize(writer, value, options);
-            }
-            else
-            {
-                writer.WriteNullValue();
-            }
-        }
-    }
-
 
     [Fact]
     public async Task User_HaveAdminProfile_When_CreateAdminProfile()
@@ -105,13 +83,14 @@ public class UserControllerTests : ControllerTestsBase
         // Act
         HttpResponseMessage response = await client.PostAsync("/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles/admin", null);
 
-        // Assert
+        // Assert: HTTP 결과 상태
         response.EnsureSuccessStatusCode();
 
-        // 에러
-        //CreateAdminProfileResponse? createAdminProfileResponse = await response.Content.ReadFromJsonAsync<CreateAdminProfileResponse>();
-        //createAdminProfileResponse!.AdminId.IsSome.ShouldBeTrue();
+        // Assert: HTTP 결과 값
+        CreateAdminProfile.Response? createAdminProfileResponse = await response.Content.ReadFromJsonAsync<CreateAdminProfile.Response>(_options)!;
+        createAdminProfileResponse!.AdminId.IsSome.ShouldBeTrue();
     }
+
 
     [Fact]
     public async Task User_HaveTrainerProfile_When_CreateTrainerProfile()
@@ -122,12 +101,12 @@ public class UserControllerTests : ControllerTestsBase
         // Act
         HttpResponseMessage response = await client.PostAsync("/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles/trainer", null);
 
-        // Assert
+        // Assert: HTTP 결과 상태
         response.EnsureSuccessStatusCode();
 
-        // 에러
-        //CreateTrainerProfileResponse? createTrainerProfileResponse = await response.Content.ReadFromJsonAsync<CreateTrainerProfileResponse>();
-        //createTrainerProfileResponse!.TrainerId.IsSome.ShouldBeTrue();
+        // Assert: HTTP 결과 값
+        CreateTrainerProfile.Response? createTrainerProfileResponse = await response.Content.ReadFromJsonAsync<CreateTrainerProfile.Response>(_options)!;
+        createTrainerProfileResponse!.TrainerId.IsSome.ShouldBeTrue();
     }
 
     [Fact]
@@ -139,11 +118,11 @@ public class UserControllerTests : ControllerTestsBase
         // Act
         HttpResponseMessage response = await client.PostAsync("/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles/participant", null);
 
-        // Assert
+        // Assert: HTTP 결과 상태
         response.EnsureSuccessStatusCode();
 
-        // 에러
-        //CreateParticipantProfileResponse? createParticipantProfileResponse = await response.Content.ReadFromJsonAsync<CreateParticipantProfileResponse>();
-        //createParticipantProfileResponse!.ParticipantId.IsSome.ShouldBeTrue();
+        // Assert: HTTP 결과 값
+        CreateParticipantProfile.Response? createParticipantProfileResponse = await response.Content.ReadFromJsonAsync<CreateParticipantProfile.Response>(_options)!;
+        createParticipantProfileResponse!.ParticipantId.IsSome.ShouldBeTrue();
     }
 }

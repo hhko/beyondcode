@@ -1,4 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
+﻿using FunctionalDdd.Framework.BaseTypes.Cqrs;
 
 namespace GymManagement.Application.Usecases.Sessions.Queries.GetSession;
 

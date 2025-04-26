@@ -1,5 +1,4 @@
 ﻿using Bogus;
-using DddGym.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Users;
 using LanguageExt;
 

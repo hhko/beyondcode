@@ -1,4 +1,4 @@
-﻿//using DddGym.Framework.BaseTypes.Cqrs;
+﻿//using FunctionalDdd.Framework.BaseTypes.Cqrs;
 ////using GymManagement.Application.Abstractions.Repositories;
 //using GymManagement.Application.Abstractions.TokenGenerator;
 //using GymManagement.Domain.AggregateRoots.Users;

@@ -1,4 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
+﻿using FunctionalDdd.Framework.BaseTypes.Cqrs;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
 
 namespace GymManagement.Application.Usecases.Subscriptions.Queries.ListSubscriptions;

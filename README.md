@@ -48,9 +48,9 @@
 
 <br/>
 
-## 구현 가이드
+## 글쓰기 지침
 - 001 | [솔루션 | 관심사의 분리 (Separation of Concerns)](./03-guide/solution/separation_of_concerns.md)
-- 002 | [솔루션 | 테스트 자동화](./03-guide/solution/solution-test-automation.md)
+- 002 | [솔루션 | 테스트 자동화 (Unit Test, Integration Test)](./03-guide/solution/solution-test-automation.md)
 - 003 | [솔루션 | 폴더 구성](./03-guide/solution/solution-structure-principle.md)
 - 004 | [솔루션 | .NET SDK 버전 (global.json)](./03-guide/solution/solution-sdk-version.md)
 - 005 | [솔루션 | NuGet 소스 설정 (nuget.config)](./03-guide/solution/solution-nuget-config.md)
@@ -58,7 +58,8 @@
 - 007 | 솔루션 | 빌드 속성 (Directory.Build.props)
 - 008 | 솔루션 | 전역 버전
 - 009 | 프로젝트 | 어셈블리 구분 (AssemblyAssemblyReference.cs)
-- 010 | 프로젝트 | 클래스 기본 접근 제어자
+- 010 | [프로젝트 | 클래스 기본 접근 제어자](./03-guide/project/project-class-access-modifiers.md)
+- 011 | [애플리케이션 레이어 | CQRS 메시지 정의](./03-guide/layer/application-cqrs-message.md)
 - ...
 
 <br/>

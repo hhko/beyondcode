@@ -1,7 +1,7 @@
 ## 규칙
 - [ ] 전역 버전(docker 이미지 버전 포함)
 - [x] global.json
-- [ ] nuget.config
+- [x] nuget.config
 - [ ] Directory.Build.props
   - 정적 분석
 - [ ] Directory.Package.props
@@ -14,6 +14,7 @@
 - [ ] 코드 커버리지
 - [ ] 컨테이너 배포
 ---
+- [ ] 어셈블리
 - [x] 클래스 internal sealed
 ---
 - [ ] 생성사 private
@@ -21,6 +22,8 @@
 - [ ] ValueObject 생성
    - Error.Empty.If(조건, 에러 코드)
    - Error CreateValueObject
+---
+- [X] CQRS 메시지 정의
 ---
 - [ ] 로컬 function
    - https://learn.microsoft.com/ko-kr/dotnet/csharp/programming-guide/classes-and-structs/local-functions
@@ -89,17 +92,74 @@
     }
   ]
   ```
-- [ ] WebApi 실패 결과 Json  변환 에러
+- [x] WebApi 실패 결과 Json  변환 에러
   ```
   The collection type 'LanguageExt.Option`1[System.Guid]' is abstract, an interface, or is read only, and could not be instantiated and populated. Path: $.adminId | LineNumber: 0 | BytePositionInLine: 12.'
   ```
 - [ ] Exception 호스트 에러
 
+### 할일 3.
+- [x] CQRS 메시지 정의 규칙 개선
+- [x] CQRS 메시지 정의 규칙 + Validator 통합
+- [x] MediatR Pipeline과 Error 통합
+- [x] Pipeline Error 클래스 정의
+- [x] 문서화: CQRS 메시지 정의
+- [X] 문서화: 클래스 기본 접근 제어자
+
+### 할일 5. User 외 구현
+- [ ] Application -> Domain 연동 이해
+  -	Domain 테스트 코드
+  - Application 테스트 코드
+- [ ] 이벤트 활용 방법 학습
+- [ ] Repository 활용 방법 학습
+---
+- [ ] Application 파이프라인 Cached
+- [ ] WebApi 미들웨어 ErrorHandlingMiddleware
+- [ ] WebApi 미들웨어 RequestTimeMiddleware
+
+
 ### 할일 3. 로그인 인증
+- [ ] JWT 토큰
 - [ ] User Register
 - [ ] User Login
 
-### 할일 4. 함수화 Transformer
+### 할일 4. 데이터베이스(CQRS)
+- [ ] EFCore SQL
+- [ ] Dapper 통합 연동
+
+
+
+### 할일 6. DDD 기본 타입
+- [ ] ValueObject 코딩 규칙 테스트
+- [ ] Entity 기본 구현
+- [ ] Entity 코딩 규칙 테스트
+- [ ] AggregateRoot 기본 구현
+- [ ] Specification???
+
+### 할일 7. 시나리오 테스트
+- [ ] Reqnroll 테스트
+- [ ] 성능 테스트
+
+### 할일 8. OpenTelemetry
+- [ ] Pipeline
+  - 유효성 검사
+  - 도메인 Validate 메서드를 이용한 파이프라인 Validation
+  - OpenTelemetry 로그
+  - OpenTelemetry 추적
+  - OpenTelemetry 지표
+  - 예외
+  - 트랜잭션? 시점
+  - 캐시
+- [ ] Audit
+
+### 할일 9. 컨테이너
+- [ ] Container HealthCheck
+
+### 할일 10. 소스 생성기
+- [ ] Id 타입
+- [ ] IAdapter Pipeline
+
+### 할일 11. 함수화 Transformer
 - [ ] 실패 처리(컴파일러 에러)
   ```cs
   return from response in await Sender.Send(new CreateAdminProfileCommand(userId))
@@ -130,61 +190,21 @@
 <br/>
 <br/>
 
+### 할일 1. RabbitMQ
 
-### 할일 5. 데이터베이스(CQRS)
-- [ ] EFCore SQL
-- [ ] Dapper 통합 연동
+### 할일 2. 스케줄러 통합 테스트
 
-### 할일 6. User 외 구현(DDD 이해)
-- [ ] Application -> Domain 연동 이해
-  -	Domain 테스트 코드
-  - Application 테스트 코드
-- [ ] 이벤트 활용 방법 학습
-- [ ] Repository 활용 방법 학습
----
-- [ ] ValueObject 코딩 규칙 테스트
-- [ ] Entity 기본 구현
-- [ ] Entity 코딩 규칙 테스트
-- [ ] AggregateRoot 기본 구현
-- [ ] Specification???
-
-### 할일 7. 시나리오 테스트
-- [ ] Reqnroll 테스트
-
-### 할일 8. OpenTelemetry
-- [ ] Pipeline
-  - 유효성 검사
-  - 도메인 Validate 메서드를 이용한 파이프라인 Validation
-  - OpenTelemetry 로그
-  - OpenTelemetry 추적
-  - OpenTelemetry 지표
-  - 예외
-  - 트랜잭션? 시점
-  - 캐시
-- [ ] Audit
-
-<br/>
-<br/>
-<br/>
-
-### 할일 9. 소스 생성기
-- [ ] Id 타입
-- [ ] IAdapter Pipeline
-
-### 할일 10. RabbitMQ
-
-### 할일 11. 컨테이너
-- [ ] Container HealthCheck
-
-### 할일 12. 스케줄러 통합 테스트
-
-### 할일 13. Adapter
+### 할일 3. Adapter
 - [ ] 회복력 adapter 레이어
 
-### 할일 14. 기타
+### 할일 4. 기타
+- [ ] https://fsharpforfunandprofit.com/series/designing-with-types/
+- [ ] https://github.com/swlaschin/DmmfWorkshop
+- [ ] eShop
 - [ ] https://github.com/backstage/backstage 개발 포탈 사이트
 - [ ] https://github.com/moghtech/komodo 배포
 - [ ] openfeature
+- [ ] https://github.com/kgrzybek/hotels-manager/tree/main
 
 ### 패턴
 - [x] Factory: Value Object

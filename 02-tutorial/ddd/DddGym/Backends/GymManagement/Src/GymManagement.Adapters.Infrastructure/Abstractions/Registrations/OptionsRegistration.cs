@@ -1,4 +1,4 @@
-﻿using DddGym.Framework.Options;
+﻿using FunctionalDdd.Framework.Options;
 using GymManagement.Adapters.Infrastructure.Abstractions.Options.Example;
 using Microsoft.Extensions.DependencyInjection;
 

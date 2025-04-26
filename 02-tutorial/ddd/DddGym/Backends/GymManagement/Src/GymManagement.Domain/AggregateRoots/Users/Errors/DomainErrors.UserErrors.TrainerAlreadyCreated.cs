@@ -1,4 +1,4 @@
-﻿using DddGym.Framework.BaseTypes;
+﻿using FunctionalDdd.Framework.BaseTypes;
 using LanguageExt.Common;
 
 namespace GymManagement.Domain.AggregateRoots.Users.Errors;

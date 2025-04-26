@@ -1,6 +1,6 @@
 ﻿using ArchUnitNET.Fluent;
 using ArchUnitNET.xUnit;
-using DddGym.Framework.BaseTypes.Cqrs;
+using FunctionalDdd.Framework.BaseTypes.Cqrs;
 using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests.NamingConventions;

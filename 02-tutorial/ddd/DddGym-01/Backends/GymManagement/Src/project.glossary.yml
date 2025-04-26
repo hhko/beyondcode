@@ -1,5 +1,0 @@
-contexts:
-  - name: Shipping
-    terms:
-      - name: Order
-        definition: A set of parcels with a common delivery destination.

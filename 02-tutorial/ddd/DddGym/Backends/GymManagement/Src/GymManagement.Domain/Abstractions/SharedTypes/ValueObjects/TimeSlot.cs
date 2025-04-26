@@ -1,4 +1,4 @@
-﻿using DddGym.Framework.BaseTypes;
+﻿using FunctionalDdd.Framework.BaseTypes;
 
 
 //
@@ -40,9 +40,9 @@ public sealed class TimeSlot : ValueObject
         //    //return Errors.ValidationFailed;
         //}
 
-        return new TimeSlot(
-            start: start,
-            end: end);
+        //return new TimeSlot(
+        //    start: start,
+        //    end: end);
     }
 
     //public static Fin<TimeRange> FromDateTimes(DateTime start, DateTime end)

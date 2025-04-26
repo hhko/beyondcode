@@ -1,4 +1,4 @@
-﻿using DddGym.Framework.BaseTypes;
+﻿using FunctionalDdd.Framework.BaseTypes;
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using LanguageExt;
 using static GymManagement.Domain.SharedTypes.Errors.DomainErrors;

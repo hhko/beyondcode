@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FunctionalDdd.Framework.Pipelines;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GymManagement.Application.Abstractions.Registrations;
 
@@ -6,14 +7,14 @@ internal static class MediatRRegistration
 {
     internal static IServiceCollection RegisterMediatR(this IServiceCollection services)
     {
-        services.AddMediatR(cfg =>
+        services.AddMediatR(configuration =>
         {
-            cfg.RegisterServicesFromAssemblies(AssemblyReference.Assembly);
+            configuration.RegisterServicesFromAssemblies(AssemblyReference.Assembly);
 
             //// IPipelineBehavior 호출 순서는 중요하다: 데코레이터 순서
             ////cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
 
-            //cfg.AddOpenBehavior(typeof(FluentValidationPipeline<,>));
+            configuration.AddOpenBehavior(typeof(FluentValidationPipeline<,>));
             //cfg.AddOpenBehavior(typeof(LoggingPipeline<,>));
             ////cfg.AddOpenBehavior(typeof(QueryCachingPipeline<,>));
             ////cfg.AddBehavior<CreateOrderHeaderOpenTelemetryPipeline>();

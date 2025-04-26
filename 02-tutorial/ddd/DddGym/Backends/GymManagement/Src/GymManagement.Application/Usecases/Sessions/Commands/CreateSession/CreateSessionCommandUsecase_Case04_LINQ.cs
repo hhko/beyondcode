@@ -1,4 +1,4 @@
-﻿using DddGym.Framework.BaseTypes.Cqrs;
+﻿using FunctionalDdd.Framework.BaseTypes.Cqrs;
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Rooms;
 using GymManagement.Domain.AggregateRoots.Sessions;

@@ -9,8 +9,13 @@ internal static class ControllerRegistration
         services
             .AddControllers()
             .AddApplicationPart(AssemblyReference.Assembly);
-        //    .ConfigureApiBehaviorOptions(options =>
-        //        options.InvalidModelStateResponseFactory = ApiBehaviorOptions.InvalidModelStateResponse);
+        //.AddJsonOptions(options =>
+        //{
+        //    options.JsonSerializerOptions.Converters.Add(new OptionJsonConverterFactory());
+        //    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        //});
+        //.ConfigureApiBehaviorOptions(options =>
+        //    options.InvalidModelStateResponseFactory = ApiBehaviorOptions.InvalidModelStateResponse);
 
         return services;
     }

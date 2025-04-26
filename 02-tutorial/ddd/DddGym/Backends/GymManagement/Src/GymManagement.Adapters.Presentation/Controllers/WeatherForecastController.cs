@@ -2,7 +2,6 @@
 using GymManagement.Adapters.Presentation.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace GymManagement.Adapters.Presentation.Controllers;
@@ -30,7 +29,7 @@ public sealed partial class WeatherForecastController : ApiController
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    //private readonly ILogger<WeatherForecastController> _logger;
 
     //public WeatherForecastController()
     //{
