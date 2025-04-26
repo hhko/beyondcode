@@ -48,7 +48,7 @@
 - `FluentValidation`: 메시지 유효성 검사
 - `Ardalis.SmartEnum`: 열거형 타입 도메인화
 - `ZiggyCreatures.FusionCache`: 메모리 캐시
-- `Bogus`: 가짜 데이터(fake data) 생성기
+- `Bogus`: Fake 데이터 생성기
 
 ### External 아키텍처
 > TODO
