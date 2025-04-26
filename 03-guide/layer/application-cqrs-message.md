@@ -35,6 +35,9 @@ public static class {유스케이스 이름}
 <br/>
 
 ## 적용 예제
+
+![](./application-cqrs-message.png)
+
 ### Command 메시지 예제
 ```cs
 // CreateAdminProfile 유스케이스스
