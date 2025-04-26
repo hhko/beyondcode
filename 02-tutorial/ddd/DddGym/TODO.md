@@ -16,6 +16,7 @@
 ---
 - [ ] 어셈블리
 - [x] 클래스 internal sealed
+- [ ] 로그 [LoggerMessage
 ---
 - [ ] 생성사 private
 - [ ] 생성 Create
