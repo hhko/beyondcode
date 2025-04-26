@@ -60,6 +60,7 @@
 - 009 | 프로젝트 | 어셈블리 구분 (AssemblyAssemblyReference.cs)
 - 010 | [프로젝트 | 클래스 기본 접근 제어자 (internal, sealed)](./03-guide/project/project-class-access-modifiers.md)
 - 011 | [애플리케이션 레이어 | CQRS 메시지 정의](./03-guide/layer/application-cqrs-message.md)
+- 012 | [애플리케이션 레이어 | 파이프라인](./03-guide/layer/application-pipelines.md)
 - ...
 
 <br/>
