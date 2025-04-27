@@ -40,7 +40,7 @@ public static class {유스케이스 이름}
 
 ### Command 메시지 예제
 ```cs
-// CreateAdminProfile 유스케이스스
+// CreateAdminProfile 유스케이스
 public static class CreateAdminProfile
 {
     // 입력: Command
@@ -53,7 +53,7 @@ public static class CreateAdminProfile
         Option<Guid> AdminId)
         : IResponse;
 
-    // 입력 유효성 검사사
+    // 입력 유효성 검사
     internal sealed class Validator : AbstractValidator<Command>
     {
         public Validator()
@@ -64,7 +64,7 @@ public static class CreateAdminProfile
     }
 }
 
-// Command 메시지 사용용
+// Command 메시지 적용용
 CreateAdminProfile.Command command = new(userId);
 Fin<CreateAdminProfile.Response> response = await Sender.Send(command);
 return response.ToResult();
@@ -72,7 +72,7 @@ return response.ToResult();
 
 ### Query 메시지 예제
 ```cs
-// GetProfile 유스케이스스
+// GetProfile 유스케이스
 public static class GetProfile
 {
     // 입력: Query
@@ -98,7 +98,7 @@ public static class GetProfile
     }
 }
 
-// Query 메시지 사용
+// Query 메시지 적용
 GetProfile.Query query = new(userId);
 Fin<GetProfile.Response> response = await Sender.Send(query);
 return response.ToResult();
