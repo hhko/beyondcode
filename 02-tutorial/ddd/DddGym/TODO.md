@@ -4,7 +4,7 @@
 - [x] nuget.config
 - [ ] Directory.Build.props
   - 정적 분석
-- [ ] Directory.Package.props
+- [x] Directory.Package.props
 ---
 - [ ] GitHub Actions
 - [ ] 클래스 다이어그램
@@ -14,12 +14,13 @@
 - [ ] 코드 커버리지
 - [ ] 컨테이너 배포
 ---
-- [ ] 어셈블리
+- [x] 어셈블리
 - [x] 클래스 internal sealed
 - [ ] 로그 [LoggerMessage
 ---
 - [ ] 생성사 private
-- [ ] 생성 Create
+- [x] 생성 Create
+- [ ] StartWithName으로 개선
 - [ ] ValueObject 생성
    - Error.Empty.If(조건, 에러 코드)
    - Error CreateValueObject
