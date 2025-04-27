@@ -6,6 +6,14 @@ namespace FunctionalDdd.Framework.Options;
 
 public static class FluentValidationOptionsExtensions
 {
+    // IServiceCollection 확장 메서드: AddConfigureOptions
+    //  - appsettings.json을 configurationSectionName 기준으로 TOptions 연결
+    //  - OptionsBuilder<TOptions> 확장 메서드 호출
+    //    - IValidateOptions<TOptions> 인터페이스 구현체 FluentValidationOptions<TOptions> 클래스 의존성 주입
+    //      - FluentValidationOptions<TOptions> 클래스 호출
+    //        - 개별 IValidator<TOptions> 상속 클래스의 Validate 메서드 호출
+    //  - 프로그램 시작 시 유효성 감사
+
     // TOptions 유효성 검사 등록
     public static OptionsBuilder<TOptions> AddConfigureOptions<TOptions, TValidator>(
         this IServiceCollection services,
@@ -17,14 +25,15 @@ public static class FluentValidationOptionsExtensions
         services.AddScoped<IValidator<TOptions>, TValidator>();
 
         return services.AddOptions<TOptions>()              // TOptions과
-            .BindConfiguration(configurationSectionName)    //  - 옵션 데이터 연결: appsettings.json -> configurationSectionName 이름으로 연결
+            .BindConfiguration(configurationSectionName)    //  - 옵션 데이터 연결: appsettings.json -> configurationSectionName 이름으로 TOptions 연결
             .ValidateFluentValidation()                     //  - 옵션 유효성 연결: TOptions -> IValidateOptions<TOptions>으로 연결
             .ValidateOnStart();                             //  - 옵션 유효성 검사: 프로그램 시작 시 유효성 감사
     }
 
     // 옵션 유효성 연결: TOptions -> IValidateOptions<TOptions>으로 연결
-    public static OptionsBuilder<TOptions> ValidateFluentValidation<TOptions>(
-        this OptionsBuilder<TOptions> optionsBuilder) where TOptions : class
+    private static OptionsBuilder<TOptions> ValidateFluentValidation<TOptions>(
+        this OptionsBuilder<TOptions> optionsBuilder) 
+        where TOptions : class
     {
         optionsBuilder.Services.AddSingleton<IValidateOptions<TOptions>>(
             provider => new FluentValidationOptions<TOptions>(
@@ -35,7 +44,7 @@ public static class FluentValidationOptionsExtensions
     }
 
     // IValidator<TOptions> 호출
-    sealed class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
+    private sealed class FluentValidationOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly string? _name;
@@ -90,7 +99,7 @@ public static class FluentValidationOptionsExtensions
             string typeName = options.GetType().Name;
             var errors = result
                 .Errors
-                .Select(error => $"Fluent validation failed for '{typeName}.{error.PropertyName}' with the error: {error.ErrorMessage}");
+                .Select(error => $"option validation failed for '{typeName}.{error.PropertyName}' with the error: {error.ErrorMessage}");
 
             return ValidateOptionsResult.Fail(errors);
         }

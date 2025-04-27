@@ -8,10 +8,14 @@
 
 <br/>
 
-## AssemblyReference 코드
+## AssemblyReference 코드 예제
+- Application 레이어의 적용 사례입니다.
+- 각 프로젝트별로 네임스페이스만 다를 뿐, AssemblyReference 정적 클래스의 구현 방식은 동일합니다.
+
 ```cs
 using System.Reflection;
 
+// Application 레이어 프로젝트
 namespace GymManagement.Application;
 
 public static class AssemblyReference

@@ -106,6 +106,9 @@
 - [x] Pipeline Error 클래스 정의
 - [x] 문서화: CQRS 메시지 정의
 - [X] 문서화: 클래스 기본 접근 제어자
+- [x] IValueObject 아키텍처 테스트: static Create 메서드 존재 유/무
+- [ ] IValueObject 아키텍처 테스트: 불변 성질???
+- [ ] IEntity 아키텍처 테스트: static Create 메서드 존재 유/무
 
 ### 할일 5. User 외 구현
 - [ ] Application -> Domain 연동 이해
