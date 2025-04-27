@@ -64,7 +64,7 @@ public static class CreateAdminProfile
     }
 }
 
-// Command 메시지 적용용
+// Command 메시지 적용
 CreateAdminProfile.Command command = new(userId);
 Fin<CreateAdminProfile.Response> response = await Sender.Send(command);
 return response.ToResult();
