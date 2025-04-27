@@ -61,10 +61,10 @@
 - 003 | [솔루션 | 폴더 구성](./03-guide/solution/solution-structure-principle.md)
 - 004 | [솔루션 | .NET SDK 버전 (global.json)](./03-guide/solution/solution-sdk-version.md)
 - 005 | [솔루션 | NuGet 소스 설정 (nuget.config)](./03-guide/solution/solution-nuget-config.md)
-- 006 | 솔루션 | NuGet 패키지 버전 (Directory.Packages.props)
-- 007 | 솔루션 | 빌드 속성 (Directory.Build.props)
+- 006 | [솔루션 | NuGet 패키지 버전 중앙 관리 (Directory.Packages.props)](./03-guide/solution/solution-package-version.md)
+- 007 | 솔루션 | 프로젝트 속성 중앙 관리 (Directory.Build.props)
 - 008 | 솔루션 | 전역 버전
-- 009 | 프로젝트 | 어셈블리 구분 (AssemblyAssemblyReference.cs)
+- 009 | [프로젝트 | 레이어별 어셈블리 정의 (AssemblyReference.cs)](./03-guide/project/project-assemblyreference.md)
 - 010 | [프로젝트 | 클래스 기본 접근 제어자 (internal, sealed)](./03-guide/project/project-class-access-modifiers.md)
 - 011 | [애플리케이션 레이어 | CQRS 메시지 정의](./03-guide/layer/application-cqrs-message.md)
 - 012 | [애플리케이션 레이어 | 파이프라인](./03-guide/layer/application-pipelines.md)
