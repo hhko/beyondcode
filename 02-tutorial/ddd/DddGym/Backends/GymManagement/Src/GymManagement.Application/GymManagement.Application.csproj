@@ -15,11 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Usecases\Authentication\Commands\" />
-    <Folder Include="Usecases\Reservations\Commands\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <InternalsVisibleTo Include="GymManagement.Tests.Unit" />
     <!-- <InternalsVisibleTo Include="DynamicProxyGenAssembly2" /> -->
   </ItemGroup>
