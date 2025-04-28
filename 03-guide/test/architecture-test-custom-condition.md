@@ -90,6 +90,14 @@ internal sealed class HaveStaticMethodCondition<TRuleType> : ICondition<TRuleTyp
 - `HaveStaticMethod` 확장 메서드와 `HaveStaticMethodCondition` 클래스는 `IValueObject` 인터페이스를 구현한 클래스에서 `Create` 및 `Validate` 정적 메서드의 구현 여부를 검증하는 데 활용할 수 있습니다.
 
 ```cs
+public interface IValueObject
+{
+    const string CreateMethodName = "Create";
+    const string ValidateMethodName = "Validate";
+}
+```
+
+```cs
 [Trait(nameof(UnitTest), UnitTest.Architecture)]
 public class ValueObjectTests : ArchitectureTestBase
 {

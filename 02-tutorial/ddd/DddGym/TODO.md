@@ -111,9 +111,7 @@
 - [ ] IValueObject 아키텍처 테스트: 불변 성질???
 - [x] IEntity 아키텍처 테스트: static Create 메서드 존재 유/무
 - [x] ArchUnitNET 커스텀 확장 메서드 만들기
-
-
-
+---
 - [ ] https://github.com/amantinband/clean-architecture
 - [ ] https://github.com/ardalis/CleanArchitecture
 - [ ] https://github.com/mehdihadeli/vertical-slice-api-template
@@ -127,6 +125,7 @@
 ---
 - [ ] 파이프라인
   - where TResponse : Fin<IResponse> 인식하지 못함  ==> 캐시, 로그 성공/실패
+- [ ] 파이프라인 Validate 활용용
 ---
 - [ ] Application 파이프라인 Cached
 - [ ] Application 파이프라인 로그
