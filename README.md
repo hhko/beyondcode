@@ -69,6 +69,9 @@
 - 011 | 애플리케이션 레이어 | [CQRS 메시지 정의](./03-guide/layer/application-cqrs-message.md)
 - 012 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
 - 013 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
+- 014 | 아키텍처 테스트 | 레이어 의존성
+- 015 | 아키텍처 테스트 | 네이밍 컨벤션
+- 016 | 아키텍처 테스트 | [사용자 정의 조건](./03-guide/test/architecture-test-custom-condition.md)
 - ...
 
 <br/>
