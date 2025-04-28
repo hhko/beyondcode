@@ -16,15 +16,18 @@ public class EntityTests : ArchitectureTestBase
     [Fact]
     public void EntityClasses_ShouldBe_Sealed()
     {
+        // Arrange
         var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(IEntity));
 
+        // Act
         var classes = sut.GetObjects(Architecture);
         if (!classes.Any())
             return;
 
+        // Assert
         sut.Should()
             .BeSealed()
             .Check(Architecture);
@@ -34,15 +37,18 @@ public class EntityTests : ArchitectureTestBase
     [InlineData(IEntity.CreateMethodName)]
     public void EntityClasses_ShouldBeSealed_And_HaveStaticMethod(string requiredMethodName)
     {
+        // Arrange
         var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(IEntity));
 
+        // Act
         var classes = sut.GetObjects(Architecture);
         if (!classes.Any())
             return;
 
+        // Assert
         sut.Should().BeSealed()
             .AndShould().HaveStaticMethod(requiredMethodName)
             .Check(Architecture);
@@ -51,15 +57,18 @@ public class EntityTests : ArchitectureTestBase
     [Fact]
     public void EntityClasses_ShouldHave_PrivateParameterlessConstructor()
     {
+        // Arrange
         var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(IEntity));
 
+        // Act
         var classes = sut.GetObjects(Architecture);
         if (!classes.Any())
             return;
 
+        // Assert
         sut.Should()
             .HavePrivateParameterlessConstructor()
             .Check(Architecture);

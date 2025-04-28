@@ -44,15 +44,18 @@ public class ValueObjectTests : ArchitectureTestBase
     [Fact]
     public void ValueObjectClasses_ShouldBe_Sealed()
     {
+        // Arrange
         var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(IValueObject));
 
+        // Act
         var classes = sut.GetObjects(Architecture);
         if (!classes.Any())
             return;
 
+        // Assert
         sut.Should()
             .BeSealed()
             .Check(Architecture);
@@ -63,15 +66,18 @@ public class ValueObjectTests : ArchitectureTestBase
     [InlineData(IValueObject.ValidateMethodName)]
     public void ValueObjectClasses_ShouldHave_StaticMethod(string requiredMethodName)
     {
+        // Arrange
         var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(IValueObject));
 
+        // Act
         var classes = sut.GetObjects(Architecture);
         if (!classes.Any())
             return;
 
+        // Assert
         sut.Should()
             .HaveStaticMethod(requiredMethodName)
             .Check(Architecture);
@@ -80,15 +86,18 @@ public class ValueObjectTests : ArchitectureTestBase
     [Fact]
     public void ValueObjectClasses_ShouldHave_PrivateParameterlessConstructor()
     {
+        // Arrange
         var sut = ArchRuleDefinition
             .Classes()
             .That()
             .ImplementInterface(typeof(IValueObject));
 
+        // Act
         var classes = sut.GetObjects(Architecture);
         if (!classes.Any())
             return;
 
+        // Assert
         sut.Should()
             .HavePrivateParameterlessConstructor()
             .Check(Architecture);
