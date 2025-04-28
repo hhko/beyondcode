@@ -8,6 +8,8 @@
 
 ![](test-category.png)
 
+<br/>
+
 ## 테스트 범주화 정의
 ```cs
 namespace GymManagement.Tests.Unit.Abstractions.Constants;

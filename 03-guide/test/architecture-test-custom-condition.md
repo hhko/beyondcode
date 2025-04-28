@@ -35,7 +35,7 @@ public static partial class ArchitectureUtilities
 <br/>
 
 ## 사용자 정의 조건 구현
-- `ICondition<TRuleType>` 인터페이스를 구현하여, 사용자 정의 조건의 준수 여부를 검증합니다..
+- `ICondition<TRuleType>` 인터페이스를 구현하여, 사용자 정의 조건의 준수 여부를 검증합니다.
 
 ```cs
 internal sealed class HaveStaticMethodCondition<TRuleType> : ICondition<TRuleType>
@@ -81,5 +81,35 @@ internal sealed class HaveStaticMethodCondition<TRuleType> : ICondition<TRuleTyp
 
     public bool CheckEmpty() =>
         true;
+}
+```
+
+<br/>
+
+## 사용자 정의 조건 적용
+- `HaveStaticMethodCondition`은 `IValueObject` 인터페이스를 구현한 클래스에서 `Create` 및 `Validate` 정적 메서드의 구현 여부를 검증하는 데 활용할 수 있습니다.
+
+```cs
+[Trait(nameof(UnitTest), UnitTest.Architecture)]
+public class ValueObjectTests : ArchitectureTestBase
+{
+    [Theory]
+    [InlineData(IValueObject.CreateMethodName)]
+    [InlineData(IValueObject.ValidateMethodName)]
+    public void ValueObjectClasses_ShouldHave_StaticMethod(string requiredMethodName)
+    {
+        var sut = ArchRuleDefinition
+            .Classes()
+            .That()
+            .ImplementInterface(typeof(IValueObject));
+
+        var classes = sut.GetObjects(Architecture);
+        if (!classes.Any())
+            return;
+
+        sut.Should()
+            .HaveStaticMethod(requiredMethodName)       // 사용자 정의 조건건
+            .Check(Architecture);
+    }
 }
 ```
