@@ -1,7 +1,4 @@
 ﻿using FunctionalDdd.Framework.BaseTypes;
-
-
-//
 using LanguageExt;
 using LanguageExt.Common;
 using Throw;
@@ -26,11 +23,14 @@ public sealed class TimeSlot : ValueObject
         End = end;
     }
 
+    private TimeSlot()
+    {
+    }
+
+
     public static Fin<TimeSlot> Create(TimeOnly start, TimeOnly end)
     {
-        Error error = Error.Empty
-            .If(start >= end, TimeSlotErrors.InvalidTimeSlot(start, end));
-
+        Error error = Validate(start, end);
         return error.CreateValueObject(() => new TimeSlot(start, end));
 
         //if (start >= end)
@@ -43,6 +43,12 @@ public sealed class TimeSlot : ValueObject
         //return new TimeSlot(
         //    start: start,
         //    end: end);
+    }
+
+    public static Error Validate(TimeOnly start, TimeOnly end)
+    {
+        return Error.Empty
+            .If(start >= end, TimeSlotErrors.InvalidTimeSlot(start, end));
     }
 
     //public static Fin<TimeRange> FromDateTimes(DateTime start, DateTime end)

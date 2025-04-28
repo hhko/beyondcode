@@ -1,18 +1,48 @@
-﻿using ArchUnitNET.Domain;
-using ArchUnitNET.Fluent;
+﻿using ArchUnitNET.Fluent;
 using FunctionalDdd.Framework.BaseTypes;
 using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
-using ArchUnitNET.Domain.Extensions;
+using ArchUnitNET.xUnit;
+using GymManagement.Tests.Unit.ArchitectureTests.Conditions;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests;
 
 [Trait(nameof(UnitTest), UnitTest.Architecture)]
 public class ValueObjectTests : ArchitectureTestBase
 {
-    [Theory]
-    //[InlineData(IValueObject.ValidateMethodName)]
-    [InlineData(IValueObject.CreateMethodName)]
-    public void IValueObjects_ShouldDefineMethod(string requiredMethodName)
+    //[Fact]
+    //public void IValueObjects_ShouldBe_Immutable()
+    //{
+    //    ////Arrange
+    //    //var assembly = Domain.AssemblyReference.Assembly;
+
+    //    ////Act
+    //    //var result = Types
+    //    //    .InAssembly(assembly)
+    //    //    .That()
+    //    //    .ImplementInterface(typeof(IValueObject))
+    //    //    .And()
+    //    //    .AreNotAbstract()
+    //    //    .Should()
+    //    //    .BeImmutable()
+    //    //    .GetResult();
+
+    //    ////Assert
+    //    //result.IsSuccessful.Should().BeTrue();
+
+    //    var sut = ArchRuleDefinition
+    //        .Classes()
+    //        .That()
+    //        .ImplementInterface(typeof(IValueObject));
+
+    //    var classes = sut.GetObjects(Architecture);
+    //    if (!classes.Any())
+    //        return;
+
+    //    sut.Should().BeImmutable();
+    //}
+
+    [Fact]
+    public void ValueObjectClasses_ShouldBe_Sealed()
     {
         var sut = ArchRuleDefinition
             .Classes()
@@ -23,19 +53,44 @@ public class ValueObjectTests : ArchitectureTestBase
         if (!classes.Any())
             return;
 
-        foreach (var classType in classes)
-        {
-            var hasRequiredMethod = classType.Members
-                .OfType<MethodMember>()
-                .Any(m => 
-                    m.NameStartsWith(requiredMethodName) && 
-                    m.IsStatic.HasValue);
+        sut.Should()
+            .BeSealed()
+            .Check(Architecture);
+    }
 
-            //sut.Should().HaveMethodMemberWithName
-            Assert.True(
-                hasRequiredMethod,
-                $"클래스 '{classType.FullName}'는 메서드 '{requiredMethodName}'를 가지고 있어야 합니다."
-            );
-        }
+    [Theory]
+    [InlineData(IValueObject.CreateMethodName)]
+    [InlineData(IValueObject.ValidateMethodName)]
+    public void ValueObjectClasses_ShouldHave_StaticMethod(string requiredMethodName)
+    {
+        var sut = ArchRuleDefinition
+            .Classes()
+            .That()
+            .ImplementInterface(typeof(IValueObject));
+
+        var classes = sut.GetObjects(Architecture);
+        if (!classes.Any())
+            return;
+
+        sut.Should()
+            .HaveStaticMethod(requiredMethodName)
+            .Check(Architecture);
+    }
+
+    [Fact]
+    public void ValueObjectClasses_ShouldHave_PrivateParameterlessConstructor()
+    {
+        var sut = ArchRuleDefinition
+            .Classes()
+            .That()
+            .ImplementInterface(typeof(IValueObject));
+
+        var classes = sut.GetObjects(Architecture);
+        if (!classes.Any())
+            return;
+
+        sut.Should()
+            .HavePrivateParameterlessConstructor()
+            .Check(Architecture);
     }
 }

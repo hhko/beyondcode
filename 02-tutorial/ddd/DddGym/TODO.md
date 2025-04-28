@@ -109,7 +109,14 @@
 - [X] 문서화: 클래스 기본 접근 제어자
 - [x] IValueObject 아키텍처 테스트: static Create 메서드 존재 유/무
 - [ ] IValueObject 아키텍처 테스트: 불변 성질???
-- [ ] IEntity 아키텍처 테스트: static Create 메서드 존재 유/무
+- [x] IEntity 아키텍처 테스트: static Create 메서드 존재 유/무
+- [x] ArchUnitNET 커스텀 확장 메서드 만들기
+
+
+
+- [ ] https://github.com/amantinband/clean-architecture
+- [ ] https://github.com/ardalis/CleanArchitecture
+- [ ] https://github.com/mehdihadeli/vertical-slice-api-template
 
 ### 할일 5. User 외 구현
 - [ ] Application -> Domain 연동 이해

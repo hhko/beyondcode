@@ -2,7 +2,7 @@
 
 // TODO: Entity 패키지로 대체
 
-public abstract class Entity
+public abstract class Entity : IEntity
 {
     public Guid Id { get; }
 
