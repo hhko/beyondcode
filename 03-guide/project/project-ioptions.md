@@ -1,7 +1,7 @@
 # 프로젝트 IOptions&lt;TOptions&gt;
 
 ## 개요
-- `FluentValidation`을 활용해 `IOptions<T>`의 유효성 검사를 전용 클래스로 분리하여 구성할 수 있습니다.
+- `FluentValidation`을 활용해 `IOptions<T>`의 유효성 검사를 전용 클래스로 분리하여 구성합니다.
 - 이렇게 하면 설정 검증 로직이 명확해지고, 애플리케이션 시작 시점에 자동으로 검사가 수행되어 잘못된 설정을 조기에 감지할 수 있습니다.
   - `FluentValidation` 기반의 옵션 유효성 검사 구성
   - **`AddConfigureOptions<TOptions, TValidator>()`** 메서드를 통해 구성 및 등록 간소화
