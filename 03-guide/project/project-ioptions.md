@@ -9,7 +9,7 @@
 
 <br/>
 
-## IOptions&lt;TOptions&gt; 사용용
+## IOptions&lt;TOptions&gt; 사용
 ### 옵션 클래스 정의
 ```cs
 public class ExampleOptions
