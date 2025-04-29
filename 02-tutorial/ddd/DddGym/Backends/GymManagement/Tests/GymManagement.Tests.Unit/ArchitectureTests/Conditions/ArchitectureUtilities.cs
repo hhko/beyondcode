@@ -27,4 +27,13 @@ public static partial class ArchitectureUtilities
         var condition = new HavePrivateParameterlessConstructorCondition<TRuleType>();
         return should.FollowCustomCondition(condition);
     }
+
+    public static TRuleTypeShouldConjunction HaveSectionNameConstField<TRuleTypeShouldConjunction, TRuleType>(
+        this ObjectsShould<TRuleTypeShouldConjunction, TRuleType> should)
+            where TRuleType : ICanBeAnalyzed
+            where TRuleTypeShouldConjunction : SyntaxElement<TRuleType>
+    {
+        var condition = new HaveSectionNameConstFieldCondition<TRuleType>();
+        return should.FollowCustomCondition(condition);
+    }
 }

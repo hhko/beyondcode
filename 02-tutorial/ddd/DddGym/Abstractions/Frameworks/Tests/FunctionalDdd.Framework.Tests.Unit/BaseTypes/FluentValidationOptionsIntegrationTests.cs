@@ -27,7 +27,7 @@ public class FluentValidationOptionsIntegrationTests
     }
 
     [Fact]
-    public void InvalidOptions_ShouldThrowOptionsValidationException_OnStartup()
+    public void Should_Throw_When_Options_Are_Invalid()
     {
         // Arrange
         var configuration = new ConfigurationBuilder()
@@ -50,12 +50,11 @@ public class FluentValidationOptionsIntegrationTests
                 .GetRequiredService<IOptions<ExampleOptions>>()
                 .Value);
 
-        //exception.Message.ShouldContain("Retries");
-        //exception.Message.ShouldContain("1 이상 9 이하여야 합니다");
+        exception.Message.ShouldContain($"{nameof(ExampleOptions)}.{nameof(ExampleOptions.Retries)}");
     }
 
     [Fact]
-    public void ValidOptions_ShouldBindAndValidateSuccessfully()
+    public void Should_Bind_And_Pass_Validation_When_Options_Are_Valid()
     {
         // Arrange
         var configuration = new ConfigurationBuilder()
