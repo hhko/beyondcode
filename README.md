@@ -45,7 +45,7 @@
 
 - `LanguageExt.Core`: 함수형
 - `MediatR`: 기술과 도메인 레이어 간의 느슨한 결합 (Mediator 패턴)
-- `FluentValidation`: 메시지 유효성 검사
+- `FluentValidation`: 유효성 검사
 - `Ardalis.SmartEnum`: 열거형 타입 도메인화
 - `ZiggyCreatures.FusionCache`: 메모리 캐시
 - `Bogus`: Fake 데이터 생성기
