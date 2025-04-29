@@ -72,6 +72,7 @@
 - 014 | 아키텍처 테스트 | 레이어 의존성
 - 015 | 아키텍처 테스트 | 네이밍 컨벤션
 - 016 | 아키텍처 테스트 | [사용자 정의 조건](./03-guide/test/architecture-test-custom-condition.md)
+- 017 | 단위 테스트 | [IOptions<TOptions> 검증](./03-guide/project/project-ioptions-validator.md)
 - ...
 
 <br/>
