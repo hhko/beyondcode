@@ -2,8 +2,9 @@
 using ArchUnitNET.Domain.Extensions;
 using ArchUnitNET.Fluent.Conditions;
 
-internal sealed class HaveSectionNameConstFieldCondition<TRuleType> : ICondition<TRuleType>
-    where TRuleType : ICanBeAnalyzed
+internal sealed class HaveSectionNameConstFieldCondition<TRuleType>
+    : ICondition<TRuleType>
+      where TRuleType : ICanBeAnalyzed
 {
     public string Description => "does not declare a public const string field named 'SectionName'";
 
@@ -38,5 +39,6 @@ internal sealed class HaveSectionNameConstFieldCondition<TRuleType> : ICondition
         }
     }
 
-    public bool CheckEmpty() => true;
+    public bool CheckEmpty() =>
+        true;
 }

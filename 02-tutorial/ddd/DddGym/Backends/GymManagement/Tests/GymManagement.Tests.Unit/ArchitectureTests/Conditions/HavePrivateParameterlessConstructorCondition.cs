@@ -4,8 +4,9 @@ using ArchUnitNET.Fluent.Conditions;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests.Conditions;
 
-internal sealed class HavePrivateParameterlessConstructorCondition<TRuleType> : ICondition<TRuleType>
-    where TRuleType : ICanBeAnalyzed
+internal sealed class HavePrivateParameterlessConstructorCondition<TRuleType>
+    : ICondition<TRuleType>
+      where TRuleType : ICanBeAnalyzed
 {
     public string Description => $"does not have private parameter less constructor";
 

@@ -4,8 +4,9 @@ using ArchUnitNET.Fluent.Conditions;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests.Conditions;
 
-internal sealed class HaveStaticMethodCondition<TRuleType> : ICondition<TRuleType>
-    where TRuleType : ICanBeAnalyzed
+internal sealed class HaveStaticMethodCondition<TRuleType>
+    : ICondition<TRuleType>
+      where TRuleType : ICanBeAnalyzed
 {
     private readonly string _prefix;
 

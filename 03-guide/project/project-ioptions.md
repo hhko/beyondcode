@@ -1,4 +1,4 @@
-# 프로젝트 IOptions&lt;TOptions&gt; 검증
+# 프로젝트 IOptions&lt;TOptions&gt;
 
 ## 개요
 - `FluentValidation`을 활용해 `IOptions<T>`의 유효성 검사를 전용 클래스로 분리하여 구성할 수 있습니다.
@@ -9,7 +9,7 @@
 
 <br/>
 
-## 사용법
+## IOptions&lt;TOptions&gt; 사용용
 ### 옵션 클래스 정의
 ```cs
 public class ExampleOptions
@@ -54,7 +54,7 @@ builder
 
 <br/>
 
-## 테스트
+## IOptions&lt;TOptions&gt; 단위 테스트
 ```cs
 
 [Trait(nameof(UnitTest), UnitTest.Framework)]
@@ -124,5 +124,75 @@ public class FluentValidationOptionsIntegrationTests
         // Assert
         options.Retries.ShouldBe(5);
     }
+}
+```
+
+<br/>
+
+## IOptions&lt;TOptions&gt; 아키텍처 테스트
+
+```cs
+[Fact]
+public void OptionsClasses_Should_Have_SectionName_ConstField()
+{
+    ArchRuleDefinition
+        .Classes()
+        .That()
+        .HaveNameEndingWith("Options")
+        .Should()
+        .HaveSectionNameConstField()
+        .Check(Architecture);
+}
+```
+
+```cs
+public static partial class ArchitectureUtilities
+{
+    public static TRuleTypeShouldConjunction HaveSectionNameConstField<TRuleTypeShouldConjunction, TRuleType>(
+        this ObjectsShould<TRuleTypeShouldConjunction, TRuleType> should)
+            where TRuleType : ICanBeAnalyzed
+            where TRuleTypeShouldConjunction : SyntaxElement<TRuleType>
+    {
+        var condition = new HaveSectionNameConstFieldCondition<TRuleType>();
+        return should.FollowCustomCondition(condition);
+    }
+}
+
+internal sealed class HaveSectionNameConstFieldCondition<TRuleType>
+    : ICondition<TRuleType>
+      where TRuleType : ICanBeAnalyzed
+{
+    public string Description => "does not declare a public const string field named 'SectionName'";
+
+    public IEnumerable<ConditionResult> Check(IEnumerable<TRuleType> objects, Architecture architecture)
+    {
+        foreach (var @class in objects)
+        {
+            Class? classObject = @class as Class;
+            if (classObject == null)
+            {
+                string actualType = @class?.GetType().FullName ?? "null";
+                string expectedType = typeof(Class).FullName ?? "null";
+
+                throw new InvalidCastException($"Type cast failed: actual type is '{actualType}', expected type was '{expectedType}'.");
+            }
+
+            bool hasConstField = classObject
+                .GetFieldMembers()
+                .Any(f =>
+                    f.Name == "SectionName" &&
+                    f.Visibility == Visibility.Public &&
+                    f.IsStatic == true &&
+                    f.Type.FullName == typeof(string).FullName);
+
+            yield return new ConditionResult(
+                analyzedObject: classObject,
+                pass: hasConstField,
+                failDescription: hasConstField ? null : Description);
+        }
+    }
+
+    public bool CheckEmpty() =>
+        true;
 }
 ```
