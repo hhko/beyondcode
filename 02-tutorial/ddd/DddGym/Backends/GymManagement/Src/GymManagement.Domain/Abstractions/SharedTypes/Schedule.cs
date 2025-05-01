@@ -17,9 +17,18 @@ public sealed partial class Schedule : Entity
         _calendar = calendar.IfNone([]);
     }
 
-    public static Schedule Empty()
+    private Schedule()
+    {
+    }
+
+    public static Schedule Create()
     {
         return new Schedule(id: Guid.NewGuid());
+    }
+
+    public static Schedule Empty()
+    {
+        return Create();
     }
 
     internal bool CanBookTimeSlot(DateOnly date, TimeSlot timeSlot)

@@ -6,7 +6,9 @@ internal sealed class HaveSectionNameFieldCondition<TRuleType>
     : ICondition<TRuleType>
       where TRuleType : ICanBeAnalyzed
 {
-    public string Description => "does not declare a public const string field named 'SectionName'";
+    public const string SectionName = nameof(SectionName);
+
+    public string Description => $"does not declare a public const string field named '{SectionName}'";
 
     public IEnumerable<ConditionResult> Check(IEnumerable<TRuleType> objects, Architecture architecture)
     {
@@ -24,12 +26,9 @@ internal sealed class HaveSectionNameFieldCondition<TRuleType>
             bool hasConstField = classObject
                 .GetFieldMembers()
                 .Any(f =>
-                    f.Name == "SectionName" &&
+                    f.Name == SectionName &&
                     f.Visibility == Visibility.Public &&
                     f.IsStatic == true &&
-                    //f.Visibility == Visibility.Public &&
-                    //f.IsStatic &&
-                    //f.IsConst &&
                     f.Type.FullName == typeof(string).FullName);
 
             yield return new ConditionResult(

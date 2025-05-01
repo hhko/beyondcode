@@ -1,4 +1,4 @@
-﻿using GymManagement.Application.Usecases.Profiles.Queries.GetProfiles;
+﻿using GymManagement.Application.Usecases.Profiles.Queries;
 using GymManagement.Domain.AggregateRoots.Users;
 using LanguageExt;
 

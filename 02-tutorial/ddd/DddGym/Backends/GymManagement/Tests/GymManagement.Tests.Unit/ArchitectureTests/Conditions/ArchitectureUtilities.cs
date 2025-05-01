@@ -1,6 +1,6 @@
 ﻿using ArchUnitNET.Domain;
-using ArchUnitNET.Fluent.Syntax.Elements;
 using ArchUnitNET.Fluent.Syntax;
+using ArchUnitNET.Fluent.Syntax.Elements;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests.Conditions;
 

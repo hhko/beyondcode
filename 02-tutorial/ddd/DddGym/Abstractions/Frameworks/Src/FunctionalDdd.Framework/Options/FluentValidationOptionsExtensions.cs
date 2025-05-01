@@ -32,7 +32,7 @@ public static class FluentValidationOptionsExtensions
 
     // 옵션 유효성 연결: TOptions -> IValidateOptions<TOptions>으로 연결
     private static OptionsBuilder<TOptions> ValidateFluentValidation<TOptions>(
-        this OptionsBuilder<TOptions> optionsBuilder) 
+        this OptionsBuilder<TOptions> optionsBuilder)
         where TOptions : class
     {
         optionsBuilder.Services.AddSingleton<IValidateOptions<TOptions>>(

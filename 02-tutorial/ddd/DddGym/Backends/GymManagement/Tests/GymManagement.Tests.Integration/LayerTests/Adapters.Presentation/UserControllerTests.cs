@@ -3,7 +3,7 @@ using FunctionalDdd.Framework.BaseTypes.Converters;
 using GymManagement.Application.Usecases.Profiles.Commands.CreateAdminProfiles;
 using GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfiles;
 using GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfiles;
-using GymManagement.Application.Usecases.Profiles.Queries.GetProfiles;
+using GymManagement.Application.Usecases.Profiles.Queries;
 using GymManagement.Domain.AggregateRoots.Users;
 using GymManagement.Tests.Integration.Abstractions;
 using GymManagement.Tests.Integration.Abstractions.Fixtures;

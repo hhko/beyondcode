@@ -1,5 +1,4 @@
-﻿using ArchUnitNET.Domain;
-using ArchUnitNET.Fluent;
+﻿using ArchUnitNET.Fluent;
 using ArchUnitNET.xUnit;
 using System.Text.RegularExpressions;
 using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
@@ -20,14 +19,10 @@ public sealed partial class NamingConventionTests_CSharp : ArchitectureTestBase
     [Fact]
     public void Interfaces_ShouldStartWith_I()
     {
-        IEnumerable<Interface> sut = ArchRuleDefinition
+        ArchRuleDefinition
             .Interfaces()
-            .GetObjects(Architecture);
-
-        if (!sut.Any())
-            return;
-
-        sut.ShouldAllBe(i => Regex.IsMatch(i.Name, "^I[A-Z].*"));
+            .GetObjects(Architecture)
+            .ShouldAllBe(i => Regex.IsMatch(i.Name, "^I[A-Z].*"));
     }
 
     [Fact]
@@ -45,6 +40,7 @@ public sealed partial class NamingConventionTests_CSharp : ArchitectureTestBase
 
             // 규칙
             .Should().HaveName(@"^[A-Z]", true)
+            .WithoutRequiringPositiveResults()
             .Check(Architecture);
     }
 }

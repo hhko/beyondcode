@@ -1,6 +1,8 @@
 ﻿using ArchUnitNET.Domain;
+using ArchUnitNET.Domain.Extensions;
 using ArchUnitNET.Fluent;
 using ArchUnitNET.Loader;
+using System.Reflection;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests;
 
@@ -45,4 +47,63 @@ public abstract class ArchitectureTestBase
         .That()
         .ResideInAssembly(Domain.AssemblyReference.Assembly)
         .As("Domain");
+
+    protected record NestedClassRule(string Name, Func<System.Type, System.Type, bool> Predicate);
+
+    private static System.Type? GetSystemTypeFromArchitectureClass(Class @class)
+    {
+        // AssemblyQualifiedName으로 정확한 System.Type 찾기
+        var type = AppDomain.CurrentDomain
+            .GetAssemblies()
+            .Select(a => a.GetType(@class.FullName, false))
+            .FirstOrDefault(t => t != null);
+
+        return type;
+    }
+
+    protected static Dictionary<string, List<string>> CheckNestedClassRules(
+        string classNameEndingWith,
+        IEnumerable<NestedClassRule> nestedClassRules)
+    {
+        var classes = ArchRuleDefinition.Classes()
+            .That()
+            .HaveNameEndingWith(classNameEndingWith);
+
+        Dictionary<string, List<string>> violations = [];
+
+        foreach (Class @class in classes.GetObjects(Architecture))
+        {
+            // Class에서 System.Type 얻기
+            var systemType = GetSystemTypeFromArchitectureClass(@class);
+            if (systemType == null)
+            {
+                violations[@class.FullName!] = ["System.Type not found"];
+                continue;
+            }
+
+            List<string> missing = [];
+            foreach (var nestedClassRule in nestedClassRules)
+            {
+                // Type에서 중첩 클래스 규칙 검증하기
+                var nestedType = systemType
+                    .GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Public)
+                    .FirstOrDefault(n =>
+                        n.Name == nestedClassRule.Name &&
+                        nestedClassRule.Predicate(systemType, n));
+
+                // 중첩 클래스 규칙을 준수하지 않는다면
+                if (nestedType is null)
+                {
+                    missing.Add($"Missing valid nested class '{nestedClassRule.Name}'");
+                }
+            }
+
+            if (missing.Any())
+            {
+                violations[systemType.FullName!] = missing;
+            }
+        }
+
+        return violations;
+    }
 }

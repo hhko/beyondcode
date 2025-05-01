@@ -1,9 +1,6 @@
-﻿using FluentValidation;
-using FunctionalDdd.Framework.BaseTypes.Cqrs;
+﻿using FunctionalDdd.Framework.BaseTypes.Cqrs;
 using LanguageExt;
 using MediatR;
-using Microsoft.Extensions.Logging;
-using ZiggyCreatures.Caching.Fusion;
 
 namespace FunctionalDdd.Framework.Pipelines;
 

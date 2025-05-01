@@ -6,7 +6,7 @@ public interface ICachedQuery
     TimeSpan? Duration { get; }
 }
 
-public interface ICachedQuery<TResponse> 
+public interface ICachedQuery<TResponse>
     : IQuery2<TResponse>
     , ICachedQuery
       where TResponse : IResponse;

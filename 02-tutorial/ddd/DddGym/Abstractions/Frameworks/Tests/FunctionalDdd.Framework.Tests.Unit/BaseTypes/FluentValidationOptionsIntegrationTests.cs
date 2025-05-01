@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FunctionalDdd.Framework.Options;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;

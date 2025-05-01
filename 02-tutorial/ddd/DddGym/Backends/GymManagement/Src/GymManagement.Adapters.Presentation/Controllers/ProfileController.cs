@@ -3,7 +3,7 @@ using GymManagement.Adapters.Presentation.Abstractions;
 using GymManagement.Application.Usecases.Profiles.Commands.CreateAdminProfiles;
 using GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfiles;
 using GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfiles;
-using GymManagement.Application.Usecases.Profiles.Queries.GetProfiles;
+using GymManagement.Application.Usecases.Profiles.Queries;
 using LanguageExt;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;

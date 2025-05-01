@@ -10,6 +10,7 @@ public static partial class Constants
         public const string Query = nameof(Query);
         public const string QueryUsecase = nameof(QueryUsecase);
 
-        public const string ValidatorSuffix = ".*(Command|Query|Options)Validator$";
+        //public const string ValidatorSuffix = ".*(Command|Query|Options)Validator$";
+        public const string ValidatorSuffix = ".*Validator$";
     }
 }

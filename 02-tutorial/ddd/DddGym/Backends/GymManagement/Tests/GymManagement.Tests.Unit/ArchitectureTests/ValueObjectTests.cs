@@ -1,8 +1,8 @@
 ﻿using ArchUnitNET.Fluent;
-using FunctionalDdd.Framework.BaseTypes;
-using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 using ArchUnitNET.xUnit;
+using FunctionalDdd.Framework.BaseTypes;
 using GymManagement.Tests.Unit.ArchitectureTests.Conditions;
+using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests;
 
@@ -44,20 +44,12 @@ public class ValueObjectTests : ArchitectureTestBase
     [Fact]
     public void ValueObjectClasses_ShouldBe_Sealed()
     {
-        // Arrange
-        var sut = ArchRuleDefinition
+        ArchRuleDefinition
             .Classes()
             .That()
-            .ImplementInterface(typeof(IValueObject));
-
-        // Act
-        var classes = sut.GetObjects(Architecture);
-        if (!classes.Any())
-            return;
-
-        // Assert
-        sut.Should()
-            .BeSealed()
+            .ImplementInterface(typeof(IValueObject))
+            .Should().BeSealed()
+            .WithoutRequiringPositiveResults()
             .Check(Architecture);
     }
 
@@ -66,40 +58,24 @@ public class ValueObjectTests : ArchitectureTestBase
     [InlineData(IValueObject.ValidateMethodName)]
     public void ValueObjectClasses_ShouldHave_StaticMethod(string requiredMethodName)
     {
-        // Arrange
-        var sut = ArchRuleDefinition
+        ArchRuleDefinition
             .Classes()
             .That()
-            .ImplementInterface(typeof(IValueObject));
-
-        // Act
-        var classes = sut.GetObjects(Architecture);
-        if (!classes.Any())
-            return;
-
-        // Assert
-        sut.Should()
-            .HaveStaticMethod(requiredMethodName)
+            .ImplementInterface(typeof(IValueObject))
+            .Should().HaveStaticMethod(requiredMethodName)
+            .WithoutRequiringPositiveResults()
             .Check(Architecture);
     }
 
     [Fact]
     public void ValueObjectClasses_ShouldHave_PrivateParameterlessConstructor()
     {
-        // Arrange
-        var sut = ArchRuleDefinition
+        ArchRuleDefinition
             .Classes()
             .That()
-            .ImplementInterface(typeof(IValueObject));
-
-        // Act
-        var classes = sut.GetObjects(Architecture);
-        if (!classes.Any())
-            return;
-
-        // Assert
-        sut.Should()
-            .HavePrivateParameterlessConstructor()
+            .ImplementInterface(typeof(IValueObject))
+            .Should().HavePrivateParameterlessConstructor()
+            .WithoutRequiringPositiveResults()
             .Check(Architecture);
     }
 }

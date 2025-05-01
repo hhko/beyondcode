@@ -1,4 +1,4 @@
-using GymManagement.Adapters.Infrastructure.Abstractions.Options.Example;
+using GymManagement.Adapters.Infrastructure.Abstractions.Options;
 using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 
 namespace GymManagement.Tests.Unit.LayerTests.Adapters.Infrastructure;
@@ -6,7 +6,7 @@ namespace GymManagement.Tests.Unit.LayerTests.Adapters.Infrastructure;
 [Trait(nameof(UnitTest), UnitTest.Infrastructure)]
 public class ExampleOptionsTests
 {
-    private readonly ExampleOptionsValidator _validator = new();
+    private readonly ExampleOptions.Validator _validator = new();
 
     [Theory]
     [InlineData(1)]

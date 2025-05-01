@@ -38,6 +38,10 @@ public sealed class User : AggregateRoot
         TrainerId = trainerId;
     }
 
+    private User()
+    {
+    }
+
     public static User Create(
         string firstName,
         string lastName,

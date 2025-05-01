@@ -25,8 +25,8 @@ internal sealed class HavePrivateParameterlessConstructorCondition<TRuleType>
 
             bool hasPrivateParameterlessConstructor = classObject
                 .GetConstructors()
-                .Any(c => 
-                    !c.Parameters.Any() && 
+                .Any(c =>
+                    !c.Parameters.Any() &&
                     c.Visibility == Visibility.Private);
 
             yield return new ConditionResult(
