@@ -35,8 +35,7 @@ public class ExampleOptions
 
 ### 의존성 등록
 ```cs
-builder
-    .Services
+builder.Services
     .AddConfigureOptions<
         ExampleOptions,                         // 옵션
         ExampleOptions.Validator>(              // 옵션 유효성 검사
