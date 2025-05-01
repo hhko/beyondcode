@@ -46,7 +46,7 @@
 - `ZiggyCreatures.FusionCache`: 메모리 캐시
 - `Bogus`: Fake 데이터 생성기
 
-### External 아키텍처
+### External 아키텍처 (Microservices 아키텍처)
 > TODO
 
 <br/>
@@ -62,7 +62,7 @@
 - 008 | 솔루션 | 전역 버전
 - 009 | 프로젝트 | [어셈블리별 어셈블리 정의 (AssemblyReference.cs)](./03-guide/project/project-assemblyreference.md)
 - 010 | 프로젝트 | [클래스 기본 접근 제어자 (internal, sealed)](./03-guide/project/project-class-access-modifiers.md)
-- 011 | 프로젝트 | [IOptions<TOptions>](./03-guide/project/project-ioptions.md)
+- 011 | 프로젝트 | [IOptions<TOptions> 유효성 검사 및 테스트](./03-guide/project/project-ioptions-validator-and-test.md)
 - 012 | 애플리케이션 레이어 | [CQRS 메시지 정의](./03-guide/layer/application-cqrs-message.md)
 - 013 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
 - 014 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
@@ -76,26 +76,25 @@
 ## 글쓰기 Hands-on Labs
 "[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)" 강의 예제를 Functional 도메인 주도 설계와 아키텍처로 재구성하는 글입니다.
 
-- Part 1. 도메인
+- Part 1. Hexagonal 아키텍처 (도메인 레이어)
   - [ ] Chapter 01. 도메인 탐험
   - [ ] Chapter 02. 도메인 구조화
   - [ ] Chapter 03. 도메인 함수형화
   - [ ] Chapter 04. 도메인 Entity Id 소스 생성기
   - [ ] Chapter 05. 도메인 단위 테스트
-- Part 2. 유스케이스
+- Part 2. Hexagonal 아키텍처 (애플리케이션 레이어)
   - [ ] Chapter 06. 유스케이스 탐험 (CQRS)
-  - [ ] Chapter 07. 유스케이스 미들웨어 (Observability, ...)
-  - [ ] Chapter 08. 유스케이스 인터페이스 소스 생성기 (Observability, ...)
-  - [ ] Chapter 09. 유스케이스 단위 테스트
-  - [ ] Chapter 10. 유스케이스 시나리오 테스트 (Cucumber)
-- Part 3. Monolithic
-  - [ ] Chapter 11. WebApi
-  - [ ] Chapter 12. WebApi 미들웨어 (Observability, ...)
-  - [ ] Chapter 13. WebApi 통합 테스트
-  - [ ] Chapter 14. WebApi 성능 테스트
-  - [ ] Chapter 15. CQRS (Command: EF Core, Query: Dapper)
-  - [ ] Chapter 16. 컨테이너화
-- Part 4. Microservices
+  - [ ] Chapter 07. 유스케이스 미들웨어
+  - [ ] Chapter 08. 유스케이스 단위 테스트
+  - [ ] Chapter 09. 유스케이스 시나리오 테스트 (Cucumber)
+- Part 3. Hexagonal 아키텍처 (어댑터 레이어)
+  - [ ] Chapter 10. WebApi
+  - [ ] Chapter 12. IAdapter 인터페이스 소스 생성기
+  - [ ] Chapter 13. 저장소 CQRS (Command: EF Core, Query: Dapper)
+  - [ ] Chapter 14. 컨테이너화
+  - [ ] Chapter 15. 통합 테스트
+  - [ ] Chapter 16. 성능 테스트
+- Part 4. Microservices 아키텍처
   - [ ] Chapter 17. Aspire
   - [ ] Chapter 18. RabbitMQ
   - [ ] Chapter 19. Resilience

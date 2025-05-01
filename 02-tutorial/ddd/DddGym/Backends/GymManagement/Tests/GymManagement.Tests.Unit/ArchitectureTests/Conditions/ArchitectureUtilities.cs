@@ -28,12 +28,12 @@ public static partial class ArchitectureUtilities
         return should.FollowCustomCondition(condition);
     }
 
-    public static TRuleTypeShouldConjunction HaveSectionNameConstField<TRuleTypeShouldConjunction, TRuleType>(
+    public static TRuleTypeShouldConjunction HaveSectionNameField<TRuleTypeShouldConjunction, TRuleType>(
         this ObjectsShould<TRuleTypeShouldConjunction, TRuleType> should)
             where TRuleType : ICanBeAnalyzed
             where TRuleTypeShouldConjunction : SyntaxElement<TRuleType>
     {
-        var condition = new HaveSectionNameConstFieldCondition<TRuleType>();
+        var condition = new HaveSectionNameFieldCondition<TRuleType>();
         return should.FollowCustomCondition(condition);
     }
 }

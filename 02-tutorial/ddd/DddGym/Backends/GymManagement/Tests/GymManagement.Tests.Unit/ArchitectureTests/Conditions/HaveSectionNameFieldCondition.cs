@@ -2,7 +2,7 @@
 using ArchUnitNET.Domain.Extensions;
 using ArchUnitNET.Fluent.Conditions;
 
-internal sealed class HaveSectionNameConstFieldCondition<TRuleType>
+internal sealed class HaveSectionNameFieldCondition<TRuleType>
     : ICondition<TRuleType>
       where TRuleType : ICanBeAnalyzed
 {

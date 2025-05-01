@@ -1,4 +1,4 @@
-# 프로젝트 IOptions&lt;TOptions&gt;
+# 프로젝트 IOptions&lt;TOptions&gt; 유효성 검사 및 테스트
 
 ## 개요
 - `FluentValidation`을 활용해 `IOptions<T>`의 유효성 검사를 전용 클래스로 분리하여 구성합니다.
@@ -130,6 +130,7 @@ public class FluentValidationOptionsIntegrationTests
 <br/>
 
 ## IOptions&lt;TOptions&gt; 아키텍처 테스트
+- `Options` 접미사를 가진 설정 클래스은 `public const string SectionName` 필드 존재를 테스트합니다.
 
 ```cs
 [Fact]
@@ -140,7 +141,7 @@ public void OptionsClasses_Should_Have_SectionName_ConstField()
         .That()
         .HaveNameEndingWith("Options")
         .Should()
-        .HaveSectionNameConstField()
+        .HaveSectionNameField()
         .Check(Architecture);
 }
 ```
@@ -148,17 +149,17 @@ public void OptionsClasses_Should_Have_SectionName_ConstField()
 ```cs
 public static partial class ArchitectureUtilities
 {
-    public static TRuleTypeShouldConjunction HaveSectionNameConstField<TRuleTypeShouldConjunction, TRuleType>(
+    public static TRuleTypeShouldConjunction HaveSectionNameField<TRuleTypeShouldConjunction, TRuleType>(
         this ObjectsShould<TRuleTypeShouldConjunction, TRuleType> should)
             where TRuleType : ICanBeAnalyzed
             where TRuleTypeShouldConjunction : SyntaxElement<TRuleType>
     {
-        var condition = new HaveSectionNameConstFieldCondition<TRuleType>();
+        var condition = new HaveSectionNameFieldCondition<TRuleType>();
         return should.FollowCustomCondition(condition);
     }
 }
 
-internal sealed class HaveSectionNameConstFieldCondition<TRuleType>
+internal sealed class HaveSectionNameFieldCondition<TRuleType>
     : ICondition<TRuleType>
       where TRuleType : ICanBeAnalyzed
 {

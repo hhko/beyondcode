@@ -17,7 +17,7 @@ public class OptionsClassTests : ArchitectureTestBase
             .That()
             .HaveNameEndingWith("Options")
             .Should()
-            .HaveSectionNameConstField()
+            .HaveSectionNameField()
             .Check(Architecture);
     }
 }
