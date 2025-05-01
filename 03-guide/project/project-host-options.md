@@ -1,4 +1,4 @@
-# 프로젝트 IOptions&lt;TOptions&gt; 유효성 검사 및 테스트
+# 프로젝트 호스트 옵션
 
 ## 개요
 - `FluentValidation`을 활용해 `IOptions<T>`의 유효성 검사를 전용 클래스로 분리하여 구성합니다.
@@ -9,7 +9,12 @@
 
 <br/>
 
-## IOptions&lt;TOptions&gt; 사용
+## 옵션 클래스
+
+- `Options`: 옵션 클래스 접미사
+- `SectionName`: 옵션 섹션 이름(appsettings.json)
+- `Validator`: 옵션 유효성 검사
+
 ### 옵션 클래스 정의
 ```cs
 public class ExampleOptions
@@ -33,7 +38,7 @@ public class ExampleOptions
 }
 ```
 
-### 의존성 등록
+### 옵션 클래스 의존성 등록
 ```cs
 builder.Services
     .AddConfigureOptions<
@@ -42,7 +47,7 @@ builder.Services
             ExampleOptions.SectionName);        // 옵션 섹션 이름
 ```
 
-### appsettings.json 설정
+### appsettings.json 옵션
 ```json
 {
   "Example": {
@@ -53,7 +58,7 @@ builder.Services
 
 <br/>
 
-## IOptions&lt;TOptions&gt; 단위 테스트
+## 옵션 클래스 단위 테스트
 ```cs
 [Trait(nameof(UnitTest), UnitTest.Framework)]
 public class FluentValidationOptionsIntegrationTests
@@ -130,7 +135,7 @@ public class FluentValidationOptionsIntegrationTests
 
 <br/>
 
-## IOptions&lt;TOptions&gt; 아키텍처 테스트
+## 옵션 클래스 아키텍처 테스트
 - `Options` 접미사를 가진 설정 클래스는 `public const string SectionName` 필드를 포함해야 합니다.
 - `Options` 접미사를 가진 설정 클래스는 `Validator`라는 이름의 중첩 클래스(nested class)를 포함해야 합니다.
 
