@@ -12,5 +12,9 @@ public static partial class Constants
 
         //public const string ValidatorSuffix = ".*(Command|Query|Options)Validator$";
         public const string ValidatorSuffix = ".*Validator$";
+
+        public const string Options = nameof(Options);
+        public const string SectionName = nameof(SectionName);
+        public const string Validator = nameof(Validator);
     }
 }

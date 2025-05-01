@@ -14,21 +14,21 @@
 ```cs
 public class ExampleOptions
 {
+    // 옵션 섹션 이름
     public const string SectionName = "Example";
 
+    // 옵션
     public int Retries { get; set; }
-}
-```
 
-### FluentValidation 유효성 검사 정의
-```cs
-public class ExampleOptionsValidator : AbstractValidator<ExampleOptions>
-{
-    public ExampleOptionsValidator()
+    // 옵션 유효성 검사
+    internal class Validator : AbstractValidator<ExampleOptions>
     {
-        RuleFor(x => x.Retries)
-            .InclusiveBetween(1, 9)
-            .WithMessage("Retries는 1 이상 9 이하여야 합니다.");
+        public Validator()
+        {
+            RuleFor(x => x.Retries)
+                .InclusiveBetween(1, 9)
+                .WithMessage("Retries는 1 이상 9 이하여야 합니다.");
+        }
     }
 }
 ```
@@ -39,7 +39,7 @@ builder
     .Services
     .AddConfigureOptions<
         ExampleOptions,                         // 옵션
-        ExampleOptionsValidator>(               // 옵션 유효성 검사
+        ExampleOptions.Validator>(              // 옵션 유효성 검사
             ExampleOptions.SectionName);        // 옵션 섹션 이름
 ```
 
@@ -56,24 +56,26 @@ builder
 
 ## IOptions&lt;TOptions&gt; 단위 테스트
 ```cs
-
 [Trait(nameof(UnitTest), UnitTest.Framework)]
 public class FluentValidationOptionsIntegrationTests
 {
     public class ExampleOptions
     {
-        public int Retries { get; set; }
-    }
+        public const string SectionName = "Example";
 
-    public class ExampleOptionsValidator : AbstractValidator<ExampleOptions>
-    {
-        public ExampleOptionsValidator()
+        public int Retries { get; set; }
+
+        public class Validator : AbstractValidator<ExampleOptions>
         {
-            RuleFor(x => x.Retries)
-                .InclusiveBetween(1, 9)
-                .WithMessage("Retries는 1 이상 9 이하여야 합니다.");
+            public Validator()
+            {
+                RuleFor(x => x.Retries)
+                    .InclusiveBetween(1, 9)
+                    .WithMessage("Retries는 1 이상 9 이하여야 합니다.");
+            }
         }
     }
+
 
     [Fact]
     public void Should_Throw_When_Options_Are_Invalid()
@@ -88,7 +90,7 @@ public class FluentValidationOptionsIntegrationTests
 
         var services = new ServiceCollection();
         services.AddSingleton<IConfiguration>(configuration);
-        services.AddConfigureOptions<ExampleOptions, ExampleOptionsValidator>("Example");
+        services.AddConfigureOptions<ExampleOptions, ExampleOptions.Validator>(ExampleOptions.SectionName);
 
         // Act
         using var provider = services.BuildServiceProvider(validateScopes: true);
@@ -115,7 +117,7 @@ public class FluentValidationOptionsIntegrationTests
 
         var services = new ServiceCollection();
         services.AddSingleton<IConfiguration>(configuration);
-        services.AddConfigureOptions<ExampleOptions, ExampleOptionsValidator>("Example");
+        services.AddConfigureOptions<ExampleOptions, ExampleOptions.Validator>(ExampleOptions.SectionName);
 
         // Act
         var provider = services.BuildServiceProvider();
@@ -130,70 +132,50 @@ public class FluentValidationOptionsIntegrationTests
 <br/>
 
 ## IOptions&lt;TOptions&gt; 아키텍처 테스트
-- `Options` 접미사를 가진 설정 클래스은 `public const string SectionName` 필드 존재를 테스트합니다.
+- `Options` 접미사를 가진 설정 클래스는 `public const string SectionName` 필드를 포함해야 합니다.
+- `Options` 접미사를 가진 설정 클래스는 `Validator`라는 이름의 중첩 클래스(nested class)를 포함해야 합니다.
 
 ```cs
-[Fact]
-public void OptionsClasses_Should_Have_SectionName_ConstField()
+[Trait(nameof(UnitTest), UnitTest.Architecture)]
+public class OptionsClassTests : ArchitectureTestBase
 {
-    ArchRuleDefinition
-        .Classes()
-        .That()
-        .HaveNameEndingWith("Options")
-        .Should()
-        .HaveSectionNameField()
-        .Check(Architecture);
-}
-```
-
-```cs
-public static partial class ArchitectureUtilities
-{
-    public static TRuleTypeShouldConjunction HaveSectionNameField<TRuleTypeShouldConjunction, TRuleType>(
-        this ObjectsShould<TRuleTypeShouldConjunction, TRuleType> should)
-            where TRuleType : ICanBeAnalyzed
-            where TRuleTypeShouldConjunction : SyntaxElement<TRuleType>
+    [Fact]
+    public void OptionsClasses_ShouldHave_SectionName()
     {
-        var condition = new HaveSectionNameFieldCondition<TRuleType>();
-        return should.FollowCustomCondition(condition);
+        ArchRuleDefinition
+            .Classes()
+            .That()
+            .HaveNameEndingWith(NamingConvention.Options)
+            .And().AreSealed()
+            .And().ArePublic()
+            .Should()
+            .HaveFieldMemberWithName(NamingConvention.SectionName)
+            .WithoutRequiringPositiveResults()
+            .Check(Architecture);
     }
-}
 
-internal sealed class HaveSectionNameFieldCondition<TRuleType>
-    : ICondition<TRuleType>
-      where TRuleType : ICanBeAnalyzed
-{
-    public string Description => "does not declare a public const string field named 'SectionName'";
-
-    public IEnumerable<ConditionResult> Check(IEnumerable<TRuleType> objects, Architecture architecture)
+    [Fact]
+    public void OptionsClass_ShouldHave_NestedValidator()
     {
-        foreach (var @class in objects)
+        // Arrange
+        var rules = new[]
         {
-            Class? classObject = @class as Class;
-            if (classObject == null)
-            {
-                string actualType = @class?.GetType().FullName ?? "null";
-                string expectedType = typeof(Class).FullName ?? "null";
+            new NestedClassRule(
+                NamingConvention.Validator,
+                (outer, nested) =>
+                    !nested.IsNestedPublic &&               // internal
+                    nested.IsSealed &&                      // sealed
+                    nested.GetInterfaces().Any(i =>
+                        i.IsGenericType &&
+                        i.GetGenericTypeDefinition().Name == typeof(IValidator<>).Name &&   // "IValidator`1"
+                        i.GenericTypeArguments[0] == outer)),                               // IValidator<Outer>
+        };
 
-                throw new InvalidCastException($"Type cast failed: actual type is '{actualType}', expected type was '{expectedType}'.");
-            }
+        // Act
+        var violations = CheckNestedClassRules(NamingConvention.Options, rules);
 
-            bool hasConstField = classObject
-                .GetFieldMembers()
-                .Any(f =>
-                    f.Name == "SectionName" &&
-                    f.Visibility == Visibility.Public &&
-                    f.IsStatic == true &&
-                    f.Type.FullName == typeof(string).FullName);
-
-            yield return new ConditionResult(
-                analyzedObject: classObject,
-                pass: hasConstField,
-                failDescription: hasConstField ? null : Description);
-        }
+        // Assert
+        violations.ShouldBeEmpty("All Options classes must have required nested classes that fulfill the design rules.");
     }
-
-    public bool CheckEmpty() =>
-        true;
 }
 ```

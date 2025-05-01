@@ -12,18 +12,21 @@ public class FluentValidationOptionsIntegrationTests
 {
     public class ExampleOptions
     {
-        public int Retries { get; set; }
-    }
+        public const string SectionName = "Example";
 
-    public class ExampleOptionsValidator : AbstractValidator<ExampleOptions>
-    {
-        public ExampleOptionsValidator()
+        public int Retries { get; set; }
+
+        public class Validator : AbstractValidator<ExampleOptions>
         {
-            RuleFor(x => x.Retries)
-                .InclusiveBetween(1, 9)
-                .WithMessage("Retries는 1 이상 9 이하여야 합니다.");
+            public Validator()
+            {
+                RuleFor(x => x.Retries)
+                    .InclusiveBetween(1, 9)
+                    .WithMessage("Retries는 1 이상 9 이하여야 합니다.");
+            }
         }
     }
+
 
     [Fact]
     public void Should_Throw_When_Options_Are_Invalid()
@@ -38,7 +41,7 @@ public class FluentValidationOptionsIntegrationTests
 
         var services = new ServiceCollection();
         services.AddSingleton<IConfiguration>(configuration);
-        services.AddConfigureOptions<ExampleOptions, ExampleOptionsValidator>("Example");
+        services.AddConfigureOptions<ExampleOptions, ExampleOptions.Validator>(ExampleOptions.SectionName);
 
         // Act
         using var provider = services.BuildServiceProvider(validateScopes: true);
@@ -65,7 +68,7 @@ public class FluentValidationOptionsIntegrationTests
 
         var services = new ServiceCollection();
         services.AddSingleton<IConfiguration>(configuration);
-        services.AddConfigureOptions<ExampleOptions, ExampleOptionsValidator>("Example");
+        services.AddConfigureOptions<ExampleOptions, ExampleOptions.Validator>(ExampleOptions.SectionName);
 
         // Act
         var provider = services.BuildServiceProvider();
