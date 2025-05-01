@@ -76,31 +76,31 @@
 ## 글쓰기 Hands-on Labs
 "[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)" 강의 예제를 Functional 도메인 주도 설계와 아키텍처로 재구성하는 글입니다.
 
-- Part 1. Hexagonal 아키텍처 (도메인 레이어)
+- **Part 1. Hexagonal 아키텍처 (도메인 레이어)**
   - [ ] Chapter 01. 도메인 탐험
   - [ ] Chapter 02. 도메인 구조화
   - [ ] Chapter 03. 도메인 함수형화
   - [ ] Chapter 04. 도메인 Entity Id 소스 생성기
   - [ ] Chapter 05. 도메인 단위 테스트
-- Part 2. Hexagonal 아키텍처 (애플리케이션 레이어)
+- **Part 2. Hexagonal 아키텍처 (애플리케이션 레이어)**
   - [ ] Chapter 06. 유스케이스 탐험 (CQRS)
   - [ ] Chapter 07. 유스케이스 미들웨어
   - [ ] Chapter 08. 유스케이스 단위 테스트
   - [ ] Chapter 09. 유스케이스 시나리오 테스트 (Cucumber)
-- Part 3. Hexagonal 아키텍처 (어댑터 레이어)
+- **Part 3. Hexagonal 아키텍처 (어댑터 레이어)**
   - [ ] Chapter 10. WebApi
   - [ ] Chapter 12. IAdapter 인터페이스 소스 생성기
   - [ ] Chapter 13. 저장소 CQRS (Command: EF Core, Query: Dapper)
   - [ ] Chapter 14. 컨테이너화
   - [ ] Chapter 15. 통합 테스트
   - [ ] Chapter 16. 성능 테스트
-- Part 4. Microservices 아키텍처
+- **Part 4. Microservices 아키텍처**
   - [ ] Chapter 17. Aspire
   - [ ] Chapter 18. RabbitMQ
   - [ ] Chapter 19. Resilience
   - [ ] Chapter 20. Reverse Proxy
   - [ ] Chapter 21. Chaos Engineering
-- Part 5. 운영
+- **Part 5. 운영**
   - [ ] Chapter 22. OpenFeature (Feature Flag Management)
   - [ ] Chapter 23. OpenSearch (Observability System)
   - [ ] Chapter 24. Ansible (Infrastructure as Code)
