@@ -42,7 +42,7 @@ public static class GetProfile
     }
 
     internal sealed class Usecase(IUsersRepository usersRepository)
-    : IQueryUsecase2<Query, Response>
+        : IQueryUsecase2<Query, Response>
     {
         private readonly IUsersRepository _usersRepository = usersRepository;
 
