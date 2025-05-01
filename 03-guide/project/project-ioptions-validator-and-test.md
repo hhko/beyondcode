@@ -160,14 +160,14 @@ public class OptionsClassTests : ArchitectureTestBase
         var rules = new[]
         {
             new NestedClassRule(
-                NamingConvention.Validator,
+                NamingConvention.Validator,                 // Validator 클래스 이름
                 (outer, nested) =>
                     !nested.IsNestedPublic &&               // internal
                     nested.IsSealed &&                      // sealed
                     nested.GetInterfaces().Any(i =>
                         i.IsGenericType &&
-                        i.GetGenericTypeDefinition().Name == typeof(IValidator<>).Name &&   // "IValidator`1"
-                        i.GenericTypeArguments[0] == outer)),                               // IValidator<Outer>
+                        i.GetGenericTypeDefinition().Name == typeof(IValidator<>).Name &&   // IValidator<T> 상속
+                        i.GenericTypeArguments[0] == outer)),                               // IValidator<T>의 T 타입
         };
 
         // Act
