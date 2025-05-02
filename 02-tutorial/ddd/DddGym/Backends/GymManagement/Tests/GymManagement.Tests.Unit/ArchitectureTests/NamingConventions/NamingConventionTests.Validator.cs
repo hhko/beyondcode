@@ -1,7 +1,4 @@
-﻿using ArchUnitNET.Fluent;
-using ArchUnitNET.xUnit;
-using FluentValidation;
-using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
+﻿using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests.NamingConventions;
 
