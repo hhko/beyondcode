@@ -106,4 +106,79 @@ public abstract class ArchitectureTestBase
 
         return violations;
     }
+
+    protected static class NestedClassPredicates
+    {
+        public static Func<System.Type, System.Type, bool> IsPublic() =>
+            (_, nested) => nested.IsNestedPublic;
+
+        public static Func<System.Type, System.Type, bool> IsInternal() =>
+            (_, nested) => !nested.IsNestedPublic;
+
+        public static Func<System.Type, System.Type, bool> IsSealed() =>
+            (_, nested) => nested.IsSealed;
+
+        public static Func<System.Type, System.Type, bool> ImplementsGenericInterface(System.Type type) =>
+            (outer, nested) =>
+                nested.GetInterfaces().Any(i =>
+                    i.IsGenericType &&
+                    i.GetGenericTypeDefinition() == type); // &&
+                                                           //i.GenericTypeArguments[0] == outer);
+
+        public static Func<System.Type, System.Type, bool> ImplementsInterface(System.Type type) =>
+            (outer, nested) =>
+                nested.GetInterfaces().Any(i =>
+                    !i.IsGenericType &&
+                    i.Name == type.Name);           // i.FullName은 어셈블리 세부 정보까지 포함되어 이써 i.Name으로 비교합니다.
+
+        public static Func<System.Type, System.Type, bool> AllOf(params Func<System.Type, System.Type, bool>[] predicates) =>
+            (outer, nested) => predicates.All(p => p(outer, nested));
+    }
+
+
+    protected class NestedClassRuleBuilder
+    {
+        private readonly string _name;
+        private readonly List<Func<System.Type, System.Type, bool>> _predicates = [];
+
+        public NestedClassRuleBuilder(string name)
+        {
+            _name = name;
+        }
+
+        public NestedClassRuleBuilder MustBePublic()
+        {
+            _predicates.Add(NestedClassPredicates.IsPublic());
+            return this;
+        }
+
+        public NestedClassRuleBuilder MustBeInternal()
+        {
+            _predicates.Add(NestedClassPredicates.IsInternal());
+            return this;
+        }
+
+        public NestedClassRuleBuilder MustBeSealed()
+        {
+            _predicates.Add(NestedClassPredicates.IsSealed());
+            return this;
+        }
+
+        public NestedClassRuleBuilder MustImplementsGenericInterface(System.Type type)
+        {
+            _predicates.Add(NestedClassPredicates.ImplementsGenericInterface(type));
+            return this;
+        }
+
+        public NestedClassRuleBuilder MustImplementsInterface(System.Type type)
+        {
+            _predicates.Add(NestedClassPredicates.ImplementsInterface(type));
+            return this;
+        }
+
+        public NestedClassRule Build()
+        {
+            return new NestedClassRule(_name, NestedClassPredicates.AllOf(_predicates.ToArray()));
+        }
+    }
 }

@@ -1,8 +1,6 @@
 ﻿using FunctionalDdd.Framework.WebApi.Utilities;
 using GymManagement.Adapters.Presentation.Abstractions;
-using GymManagement.Application.Usecases.Profiles.Commands.CreateAdminProfiles;
-using GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfiles;
-using GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfiles;
+using GymManagement.Application.Usecases.Profiles.Commands;
 using GymManagement.Application.Usecases.Profiles.Queries;
 using LanguageExt;
 using MediatR;
@@ -23,18 +21,18 @@ public sealed class ProfileController : ApiController
     //[ProducesResponseType(StatusCodes.Status200OK)]
     //[ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest)]
     [HttpGet]
-    public async Task<Results<Ok<GetProfile.Response>, ProblemHttpResult>> GetProfiles(Guid userId)
+    public async Task<Results<Ok<GetProfileQuery.Response>, ProblemHttpResult>> GetProfiles(Guid userId)
     {
-        GetProfile.Query query = new(userId);
-        Fin<GetProfile.Response> response = await Sender.Send(query);
+        GetProfileQuery.Request query = new(userId);
+        Fin<GetProfileQuery.Response> response = await Sender.Send(query);
         return response.ToResult();
     }
 
     [HttpPost("admin")]
-    public async Task<Results<Ok<CreateAdminProfile.Response>, ProblemHttpResult>> CreateAdminProfile(Guid userId)
+    public async Task<Results<Ok<CreateAdminProfileCommand.Response>, ProblemHttpResult>> CreateAdminProfile(Guid userId)
     {
-        CreateAdminProfile.Command command = new(userId);
-        Fin<CreateAdminProfile.Response> response = await Sender.Send(command);
+        CreateAdminProfileCommand.Request command = new(userId);
+        Fin<CreateAdminProfileCommand.Response> response = await Sender.Send(command);
         return response.ToResult();
 
         //var x = Pure(userId)
@@ -50,16 +48,16 @@ public sealed class ProfileController : ApiController
     }
 
     [HttpPost("trainer")]
-    public async Task<Results<Ok<CreateTrainerProfile.Response>, ProblemHttpResult>> CreateTrainerProfile(Guid userId)
+    public async Task<Results<Ok<CreateTrainerProfileCommand.Response>, ProblemHttpResult>> CreateTrainerProfile(Guid userId)
     {
-        Fin<CreateTrainerProfile.Response> response = await Sender.Send(new CreateTrainerProfile.Command(userId));
+        Fin<CreateTrainerProfileCommand.Response> response = await Sender.Send(new CreateTrainerProfileCommand.Request(userId));
         return response.ToResult();
     }
 
     [HttpPost("participant")]
-    public async Task<Results<Ok<CreateParticipantProfile.Response>, ProblemHttpResult>> CreateParticipantProfile(Guid userId)
+    public async Task<Results<Ok<CreateParticipantProfileCommand.Response>, ProblemHttpResult>> CreateParticipantProfile(Guid userId)
     {
-        Fin<CreateParticipantProfile.Response> response = await Sender.Send(new CreateParticipantProfile.Command(userId));
+        Fin<CreateParticipantProfileCommand.Response> response = await Sender.Send(new CreateParticipantProfileCommand.Request(userId));
         return response.ToResult();
     }
 }

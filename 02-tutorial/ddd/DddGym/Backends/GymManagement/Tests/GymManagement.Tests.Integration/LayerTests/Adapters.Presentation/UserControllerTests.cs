@@ -1,8 +1,6 @@
 ﻿using Bogus;
 using FunctionalDdd.Framework.BaseTypes.Converters;
-using GymManagement.Application.Usecases.Profiles.Commands.CreateAdminProfiles;
-using GymManagement.Application.Usecases.Profiles.Commands.CreateParticipantProfiles;
-using GymManagement.Application.Usecases.Profiles.Commands.CreateTrainerProfiles;
+using GymManagement.Application.Usecases.Profiles.Commands;
 using GymManagement.Application.Usecases.Profiles.Queries;
 using GymManagement.Domain.AggregateRoots.Users;
 using GymManagement.Tests.Integration.Abstractions;
@@ -67,7 +65,7 @@ public class UserControllerTests : ControllerTestsBase
         response.EnsureSuccessStatusCode();
 
         // Assert: HTTP 결과 값
-        GetProfile.Response? getProfileResponse = await response.Content.ReadFromJsonAsync<GetProfile.Response>(_options);
+        GetProfileQuery.Response? getProfileResponse = await response.Content.ReadFromJsonAsync<GetProfileQuery.Response>(_options);
         getProfileResponse.ShouldSatisfyAllConditions(
             () => getProfileResponse!.AdminId.IsNone.ShouldBeTrue(),
             () => getProfileResponse!.TrainerId.IsNone.ShouldBeTrue(),
@@ -87,7 +85,7 @@ public class UserControllerTests : ControllerTestsBase
         response.EnsureSuccessStatusCode();
 
         // Assert: HTTP 결과 값
-        CreateAdminProfile.Response? createAdminProfileResponse = await response.Content.ReadFromJsonAsync<CreateAdminProfile.Response>(_options)!;
+        CreateAdminProfileCommand.Response? createAdminProfileResponse = await response.Content.ReadFromJsonAsync<CreateAdminProfileCommand.Response>(_options)!;
         createAdminProfileResponse!.AdminId.IsSome.ShouldBeTrue();
     }
 
@@ -105,7 +103,7 @@ public class UserControllerTests : ControllerTestsBase
         response.EnsureSuccessStatusCode();
 
         // Assert: HTTP 결과 값
-        CreateTrainerProfile.Response? createTrainerProfileResponse = await response.Content.ReadFromJsonAsync<CreateTrainerProfile.Response>(_options)!;
+        CreateTrainerProfileCommand.Response? createTrainerProfileResponse = await response.Content.ReadFromJsonAsync<CreateTrainerProfileCommand.Response>(_options)!;
         createTrainerProfileResponse!.TrainerId.IsSome.ShouldBeTrue();
     }
 
@@ -122,7 +120,7 @@ public class UserControllerTests : ControllerTestsBase
         response.EnsureSuccessStatusCode();
 
         // Assert: HTTP 결과 값
-        CreateParticipantProfile.Response? createParticipantProfileResponse = await response.Content.ReadFromJsonAsync<CreateParticipantProfile.Response>(_options)!;
+        CreateParticipantProfileCommand.Response? createParticipantProfileResponse = await response.Content.ReadFromJsonAsync<CreateParticipantProfileCommand.Response>(_options)!;
         createParticipantProfileResponse!.ParticipantId.IsSome.ShouldBeTrue();
     }
 }

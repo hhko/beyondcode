@@ -7,7 +7,7 @@ namespace FunctionalDdd.Framework.BaseTypes.Cqrs;
 //  : IRequest<IResult<TResponse>>                      <-- IResult : Fin
 //    where TResponse : IResponse;
 
-public interface IQuery2<TResponse>
+public interface IQuery<TResponse>
     : IRequest<Fin<TResponse>>
       where TResponse : IResponse;
 
@@ -18,9 +18,9 @@ public interface IQuery2<TResponse>
 //{
 //}
 
-public interface IQueryUsecase2<in TQuery, TResponse>
+public interface IQueryUsecase<in TQuery, TResponse>
     : IRequestHandler<TQuery, Fin<TResponse>>
-      where TQuery : IQuery2<TResponse>
+      where TQuery : IQuery<TResponse>
       where TResponse : IResponse;
 
 

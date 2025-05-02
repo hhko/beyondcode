@@ -7,6 +7,6 @@ public interface ICachedQuery
 }
 
 public interface ICachedQuery<TResponse>
-    : IQuery2<TResponse>
+    : IQuery<TResponse>
     , ICachedQuery
       where TResponse : IResponse;

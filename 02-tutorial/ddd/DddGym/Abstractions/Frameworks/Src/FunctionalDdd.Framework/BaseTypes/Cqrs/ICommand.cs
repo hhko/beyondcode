@@ -19,7 +19,7 @@ namespace FunctionalDdd.Framework.BaseTypes.Cqrs;
 //    where TCommand : ICommand<TResponse>
 //    where TResponse : IResponse;
 
-public interface ICommand2<TResponse>
+public interface ICommand<TResponse>
     : IRequest<Fin<TResponse>>
       where TResponse : IResponse;
 
@@ -28,7 +28,7 @@ public interface ICommand2<TResponse>
 //    where TCommand : ICommand2;
 
 // 반환이 있는 것
-public interface ICommandUsecase2<in TCommand, TResponse>
+public interface ICommandUsecase<in TCommand, TResponse>
     : IRequestHandler<TCommand, Fin<TResponse>>
-      where TCommand : ICommand2<TResponse>
+      where TCommand : ICommand<TResponse>
       where TResponse : IResponse;

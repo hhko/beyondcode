@@ -1,15 +1,14 @@
-﻿using GymManagement.Application.Usecases.Rooms.Commands.CreateRoom;
-using GymManagement.Application.Usecases.Rooms.Queries.GetRoom;
-using GymManagement.Application.Usecases.Rooms.Queries.ListRooms;
+﻿using GymManagement.Application.Usecases.Rooms.Commands;
+using GymManagement.Application.Usecases.Rooms.Queries;
 using GymManagement.Domain.AggregateRoots.Rooms;
 
 namespace GymManagement.Application.Usecases.Rooms;
 
 internal static class RoomMappings
 {
-    public static CreateRoomResponse ToResponseCreated(this Room room)
+    public static CreateRoomCommand.Response ToCreateRoomResponse(this Room room)
     {
-        return new CreateRoomResponse(room);
+        return new CreateRoomCommand.Response(room);
     }
 
     //public static DeleteRoomResponse ToResponseDeleted(this ErrorOr.Deleted _)
@@ -17,13 +16,13 @@ internal static class RoomMappings
     //    return new DeleteRoomResponse();
     //}
 
-    public static ListRoomsResponse ToResponse(this List<Room> rooms)
+    public static ListRoomsQuery.Response ToListRoomsResponse(this List<Room> rooms)
     {
-        return new ListRoomsResponse(rooms);
+        return new ListRoomsQuery.Response(rooms);
     }
 
-    public static GetRoomResponse ToResponse(this Room room)
+    public static GetRoomQuery.Response ToGetRoomResponse(this Room room)
     {
-        return new GetRoomResponse(room);
+        return new GetRoomQuery.Response(room);
     }
 }
