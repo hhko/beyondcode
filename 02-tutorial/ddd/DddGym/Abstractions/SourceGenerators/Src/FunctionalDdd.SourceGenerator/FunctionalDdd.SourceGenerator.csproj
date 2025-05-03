@@ -4,16 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
 
-      <!-- 👇 We don't want to reference the source generator dll directly in consuming projects --><!--
-      <IncludeBuildOutput>false</IncludeBuildOutput>-->
+      <!-- 👇 We don't want to reference the source generator dll directly in consuming projects -->
+      <IncludeBuildOutput>false</IncludeBuildOutput>
+
+      <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
 
-    <!--
-    <ItemGroup>
+    <!--<ItemGroup>
         <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true"
             PackagePath="analyzers/dotnet/cs" Visible="false" />
-    </ItemGroup>
-    -->
+    </ItemGroup>-->
 
     <!--
     <PropertyGroup>
@@ -32,11 +32,6 @@
         <Nullable>enable</Nullable>
         <LangVersion>Latest</LangVersion>
     </PropertyGroup>
-
-    <ItemGroup>
-        --><!-- This ensures the library will be packaged as a source generator when we use "dotnet pack" --><!--
-        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-    </ItemGroup>
     -->
 
   <ItemGroup>

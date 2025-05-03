@@ -397,10 +397,16 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# --------------------------------------
 # 사용자 정의
+# --------------------------------------
 .build/
 .logs/
 
 # vitepress
 .vitepress/cache
 .vitepress/dist
+
+# Verify
+*.received.*
+*.received/

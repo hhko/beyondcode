@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A2ADC783
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalDdd.SourceGenerator", "Abstractions\SourceGenerators\Src\FunctionalDdd.SourceGenerator\FunctionalDdd.SourceGenerator.csproj", "{7251B6D7-C0EC-4D20-8703-F7CE8B95F198}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalDdd.SourceGenerator.Tests.Unit", "Abstractions\SourceGenerators\Tests\FunctionalDdd.SourceGenerator.Tests.Unit\FunctionalDdd.SourceGenerator.Tests.Unit.csproj", "{373AD61C-3270-4B3E-A54D-31242CA249F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{7251B6D7-C0EC-4D20-8703-F7CE8B95F198}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7251B6D7-C0EC-4D20-8703-F7CE8B95F198}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7251B6D7-C0EC-4D20-8703-F7CE8B95F198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{373AD61C-3270-4B3E-A54D-31242CA249F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{373AD61C-3270-4B3E-A54D-31242CA249F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{373AD61C-3270-4B3E-A54D-31242CA249F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{373AD61C-3270-4B3E-A54D-31242CA249F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,5 +135,6 @@ Global
 		{3B7915A3-0C54-4DA6-B44D-DE2E5BDD2450} = {F55E7B07-7054-471D-B480-FEE6D4477B59}
 		{A2ADC783-004A-496F-926F-C557D71F5FF6} = {F55E7B07-7054-471D-B480-FEE6D4477B59}
 		{7251B6D7-C0EC-4D20-8703-F7CE8B95F198} = {3B7915A3-0C54-4DA6-B44D-DE2E5BDD2450}
+		{373AD61C-3270-4B3E-A54D-31242CA249F5} = {A2ADC783-004A-496F-926F-C557D71F5FF6}
 	EndGlobalSection
 EndGlobal
