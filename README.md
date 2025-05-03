@@ -44,14 +44,15 @@
   - `MediatR`: 기술 관심사와 도메인 관심사 간의 느슨한 결합 (Mediator 패턴)
   - `FluentValidation`: 유효성 검사
   - `Ardalis.SmartEnum`: 열거형 도메인 타입
+  - `Ulid`: 고유 ID
 - 테스트
-  - `xUnit`
-  - `coverlet`
-  - `Shouldly`
-  - `TngTech.ArchUnitNET.xUnit`
-  - `NSubstitute`
+  - `xUnit`: 테스트
+  - `coverlet`: 코드 커버리지
+  - `Shouldly`: Fluent 테스트 검증
+  - `TngTech.ArchUnitNET`: 아키텍처 테스트
+  - `NSubstitute`: Mocking
   - `Bogus`: Fake 데이터 생성기
-  - `Verify.SourceGenerators`
+  - `Verify`: 스냅샷 테스트
 - 기술
   - `ZiggyCreatures.FusionCache`: 메모리 캐시
 
