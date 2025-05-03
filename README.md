@@ -68,7 +68,7 @@
 - 014 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
 - 015 | 아키텍처 테스트 | 레이어 의존성
 - 016 | 아키텍처 테스트 | 사용자 정의 규칙
-- 017 | 아키텍처 테스트 | 도메인 타입(정적 메서드: Create, Validate, 생성자: private, Parameter less)
+- 017 | 아키텍처 테스트 | 도메인 타입 규칙(정적 메서드: Create, Validate, 생성자: private, Parameter less)
 - 018 | 아키텍처 테스트 | 중첩 클래스 규칙
 - ...
 
