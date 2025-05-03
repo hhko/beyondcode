@@ -25,23 +25,23 @@ public static class TestGeneratorUtilities
             references,                 // 참조
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
-        // 컴파일
+        // 컴파일: 소스 생성기 호출출
         CSharpGeneratorDriver
             .Create(generator)
             .RunGeneratorsAndUpdateCompilation(
                 compilation,
-                out var outputCompilation,
-                out var diagnostics);
+                out var outputCompilation,          // 소스 생성기 결과: 소스
+                out var diagnostics);               // 소스 생성기 진단: 경고, 에러
 
-        // 컴파일러 에러
+        // 소스 생성기 진단(컴파일러 에러)
         diagnostics
             .Where(d => d.Severity == DiagnosticSeverity.Error)
             .ShouldBeEmpty();
 
-        // 컴파일러 결과
+        // 소스 생성기 결과(컴파일러 결과)
         return outputCompilation
             .SyntaxTrees
-            .Skip(1)                // [0] 원본 소스의 SyntaxTree 제외 
+            .Skip(1)                // [0] 원본 소스 SyntaxTree 제외
             .LastOrDefault()?
             .ToString();
     }
