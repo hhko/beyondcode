@@ -5,14 +5,14 @@ using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests.NamingConventions;
 
+// C# 규칙
+//
+// - 인터페이스: I로 시작한다.
+// - 메서드: 대문자로 시작한다.
+
 [Trait(nameof(UnitTest), UnitTest.Architecture)]
 public sealed partial class NamingConventionTestsCSharp : ArchitectureTestBase
 {
-    // C# 네이밍 컨벤션
-    //
-    // - 인터페이스: I로 시작한다.
-    // - 메서드: 대문자로 시작한다.
-
     [Fact]
     public void Interfaces_ShouldStartWith_I()
     {

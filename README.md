@@ -63,12 +63,13 @@
 - 009 | 프로젝트 | [어셈블리별 어셈블리 정의 (AssemblyReference.cs)](./03-guide/project/project-assemblyreference.md)
 - 010 | 프로젝트 | [클래스 기본 접근 제어자 (internal, sealed)](./03-guide/project/project-class-access-modifiers.md)
 - 011 | 프로젝트 | [호스트 옵션](./03-guide/project/project-host-options.md)
-- 012 | 애플리케이션 레이어 | [CQRS 메시지 정의](./03-guide/layer/application-cqrs-message.md)
+- 012 | 애플리케이션 레이어 | [CQRS 메시지](./03-guide/layer/application-cqrs-message.md)
 - 013 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
 - 014 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
 - 015 | 아키텍처 테스트 | 레이어 의존성
-- 016 | 아키텍처 테스트 | 네이밍 컨벤션
-- 017 | 아키텍처 테스트 | [사용자 정의 조건](./03-guide/test/architecture-test-custom-condition.md)
+- 016 | 아키텍처 테스트 | 사용자 정의 규칙
+- 017 | 아키텍처 테스트 | 도메인 타입(정적 메서드: Create, Validate, 생성자: private, Parameter less)
+- 018 | 아키텍처 테스트 | 중첩 클래스 규칙
 - ...
 
 <br/>

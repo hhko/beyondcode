@@ -1,9 +1,126 @@
 ﻿using ArchUnitNET.Domain;
 using ArchUnitNET.Fluent;
 using ArchUnitNET.Loader;
+using FluentValidation;
+using System.Linq;
 using System.Reflection;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests;
+
+public interface IRule<T>
+{
+    bool IsSatisfiedBy(T item);
+    string Name { get; }
+}
+
+public record StaticMethodRule(
+    string Name, 
+    Func<System.Type, bool> Predicate) : IRule<System.Type>
+{
+    public bool IsSatisfiedBy(System.Type type) => 
+        Predicate(type);
+}
+
+public static class StaticMethodPredicates
+{
+    public static Func<System.Type, bool> HasStaticMethod(string methodName, System.Type returnType, params System.Type[] parameters)
+    {
+        return type =>
+        {
+            return type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+                       .Any(m =>
+                           m.Name == methodName &&
+                           m.ReturnType == returnType &&
+                           m.GetParameters().Select(p => p.ParameterType).SequenceEqual(parameters));
+        };
+    }
+
+    public static Func<System.Type, bool> HasStaticMethod(string methodName)
+    {
+        return type =>
+            type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+                .Any(m => m.Name == methodName);
+    }
+}
+
+
+
+
+// 중첩 클래스 규칙
+public record NestedClassRule(
+    string Name,
+    Func<System.Type, System.Type, bool> Predicate) : IRule<(System.Type Outer, System.Type Nested)>
+{
+    public bool IsSatisfiedBy((System.Type Outer, System.Type Nested) item) => 
+        Predicate(item.Outer, item.Nested);
+}
+
+// 중첩 클래스 규칙 집합
+public class NestedClassRuleBuilder
+{
+    private readonly string _nestedClassName;
+    private readonly List<Func<System.Type, System.Type, bool>> _predicates = [];
+
+    public NestedClassRuleBuilder(string nestedClassName)
+    {
+        _nestedClassName = nestedClassName;
+    }
+
+    public NestedClassRuleBuilder MustBePublic()
+    {
+        _predicates.Add((_, nested) => nested.IsNestedPublic);
+        return this;
+    }
+
+    public NestedClassRuleBuilder MustBeInternal()
+    {
+        _predicates.Add((_, nested) => !nested.IsNestedPublic);
+        return this;
+    }
+
+    public NestedClassRuleBuilder MustBeSealed()
+    {
+        _predicates.Add((_, nested) => nested.IsSealed);
+        return this;
+    }
+
+    public NestedClassRuleBuilder MustImplementsGenericInterface(System.Type type)
+    {
+        _predicates.Add((outer, nested) =>
+            nested.GetInterfaces().Any(i =>
+                i.IsGenericType &&
+                i.GetGenericTypeDefinition() == type));     // nested : type<?>
+        return this;
+    }
+
+    public NestedClassRuleBuilder MustImplementsGenericInterfaceWithOuterTypeArguments(System.Type type)
+    {
+        _predicates.Add((outer, nested) =>
+            nested.GetInterfaces().Any(i =>
+                i.IsGenericType &&
+                i.GetGenericTypeDefinition() == type &&
+                i.GenericTypeArguments[0] == outer));       // nested : type<outer>
+        return this;
+    }
+
+    public NestedClassRuleBuilder MustImplementsInterface(System.Type type)
+    {
+        _predicates.Add((outer, nested) =>
+            nested.GetInterfaces().Any(i =>
+                !i.IsGenericType &&                         // nested : type
+                
+                // i.FullName은 어셈블리 세부 정보까지 포함되어 이써 i.Name으로 비교합니다.
+                i.Name == type.Name));
+        return this;
+    }
+
+    public NestedClassRule Build()
+    {
+        return new NestedClassRule(
+            Name: _nestedClassName, 
+            Predicate: (outer, nested) => _predicates.All(predicate => predicate(outer, nested)));
+    }
+}
 
 public abstract class ArchitectureTestBase
 {
@@ -47,8 +164,6 @@ public abstract class ArchitectureTestBase
         .ResideInAssembly(Domain.AssemblyReference.Assembly)
         .As("Domain");
 
-    protected record NestedClassRule(string Name, Func<System.Type, System.Type, bool> Predicate);
-
     private static System.Type? GetSystemTypeFromArchitectureClass(Class @class)
     {
         // AssemblyQualifiedName으로 정확한 System.Type 찾기
@@ -66,13 +181,14 @@ public abstract class ArchitectureTestBase
     {
         var classes = ArchRuleDefinition.Classes()
             .That()
-            .HaveNameEndingWith(classNameEndingWith);
+            .HaveNameEndingWith(classNameEndingWith)
+            .GetObjects(Architecture);
 
         Dictionary<string, List<string>> violations = [];
 
-        foreach (Class @class in classes.GetObjects(Architecture))
+        foreach (var @class in classes)
         {
-            // Class에서 System.Type 얻기
+            // ArchUnitNET 'Class'에서 'System.Type' 얻기
             var systemType = GetSystemTypeFromArchitectureClass(@class);
             if (systemType == null)
             {
@@ -80,104 +196,30 @@ public abstract class ArchitectureTestBase
                 continue;
             }
 
-            List<string> missing = [];
+            List<string> missingRules = [];
+
+            // Type에서 중첩 클래스 얻기
+            var nestedTypes = systemType.GetNestedTypes(BindingFlags.Public | BindingFlags.NonPublic);
+
             foreach (var nestedClassRule in nestedClassRules)
             {
-                // Type에서 중첩 클래스 규칙 검증하기
-                var nestedType = systemType
-                    .GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Public)
-                    .FirstOrDefault(n =>
-                        n.Name == nestedClassRule.Name &&
-                        nestedClassRule.Predicate(systemType, n));
+                // 중첩 클래스 검증하기
+                var valid = nestedTypes.Any(nested =>
+                    nested.Name == nestedClassRule.Name &&
+                    nestedClassRule.IsSatisfiedBy((systemType, nested)));
 
-                // 중첩 클래스 규칙을 준수하지 않는다면
-                if (nestedType is null)
+                if (!valid)
                 {
-                    missing.Add($"Missing valid nested class '{nestedClassRule.Name}'");
+                    missingRules.Add($"Missing valid nested class '{nestedClassRule.Name}'");
                 }
             }
 
-            if (missing.Any())
+            if (missingRules.Any())
             {
-                violations[systemType.FullName!] = missing;
+                violations[systemType.FullName!] = missingRules;
             }
         }
 
         return violations;
-    }
-
-    protected static class NestedClassPredicates
-    {
-        public static Func<System.Type, System.Type, bool> IsPublic() =>
-            (_, nested) => nested.IsNestedPublic;
-
-        public static Func<System.Type, System.Type, bool> IsInternal() =>
-            (_, nested) => !nested.IsNestedPublic;
-
-        public static Func<System.Type, System.Type, bool> IsSealed() =>
-            (_, nested) => nested.IsSealed;
-
-        public static Func<System.Type, System.Type, bool> ImplementsGenericInterface(System.Type type) =>
-            (outer, nested) =>
-                nested.GetInterfaces().Any(i =>
-                    i.IsGenericType &&
-                    i.GetGenericTypeDefinition() == type); // &&
-                                                           //i.GenericTypeArguments[0] == outer);
-
-        public static Func<System.Type, System.Type, bool> ImplementsInterface(System.Type type) =>
-            (outer, nested) =>
-                nested.GetInterfaces().Any(i =>
-                    !i.IsGenericType &&
-                    i.Name == type.Name);           // i.FullName은 어셈블리 세부 정보까지 포함되어 이써 i.Name으로 비교합니다.
-
-        public static Func<System.Type, System.Type, bool> AllOf(params Func<System.Type, System.Type, bool>[] predicates) =>
-            (outer, nested) => predicates.All(p => p(outer, nested));
-    }
-
-
-    protected class NestedClassRuleBuilder
-    {
-        private readonly string _name;
-        private readonly List<Func<System.Type, System.Type, bool>> _predicates = [];
-
-        public NestedClassRuleBuilder(string name)
-        {
-            _name = name;
-        }
-
-        public NestedClassRuleBuilder MustBePublic()
-        {
-            _predicates.Add(NestedClassPredicates.IsPublic());
-            return this;
-        }
-
-        public NestedClassRuleBuilder MustBeInternal()
-        {
-            _predicates.Add(NestedClassPredicates.IsInternal());
-            return this;
-        }
-
-        public NestedClassRuleBuilder MustBeSealed()
-        {
-            _predicates.Add(NestedClassPredicates.IsSealed());
-            return this;
-        }
-
-        public NestedClassRuleBuilder MustImplementsGenericInterface(System.Type type)
-        {
-            _predicates.Add(NestedClassPredicates.ImplementsGenericInterface(type));
-            return this;
-        }
-
-        public NestedClassRuleBuilder MustImplementsInterface(System.Type type)
-        {
-            _predicates.Add(NestedClassPredicates.ImplementsInterface(type));
-            return this;
-        }
-
-        public NestedClassRule Build()
-        {
-            return new NestedClassRule(_name, NestedClassPredicates.AllOf(_predicates.ToArray()));
-        }
     }
 }

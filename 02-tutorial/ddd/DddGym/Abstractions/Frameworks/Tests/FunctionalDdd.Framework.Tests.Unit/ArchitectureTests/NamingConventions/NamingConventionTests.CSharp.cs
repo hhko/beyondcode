@@ -7,7 +7,7 @@ using static FunctionalDdd.Framework.Tests.Unit.Abstractions.Constants.Constants
 namespace FunctionalDdd.Framework.Tests.Unit.ArchitectureTests.NamingConventions;
 
 [Trait(nameof(UnitTest), UnitTest.Architecture)]
-public sealed partial class NamingConventionTests_CSharp : ArchitectureTestBase
+public sealed partial class NamingConventionTestsCSharp : ArchitectureTestBase
 {
     // C# 네이밍컨벤션
     //

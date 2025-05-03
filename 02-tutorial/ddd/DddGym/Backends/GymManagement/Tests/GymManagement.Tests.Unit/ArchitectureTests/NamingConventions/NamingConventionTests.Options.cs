@@ -5,6 +5,23 @@ using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;
 
 namespace GymManagement.Tests.Unit.ArchitectureTests.NamingConventions;
 
+// Options 규칙
+//
+//public sealed class {섹션이름}Options
+//{
+//    public const string SectionName = "{섹션이름}";
+//
+//    public required {옵션_타입} {옵션} { get; init; }
+//
+//    internal sealed class Validator : AbstractValidator<{섹션이름}Options>
+//    {
+//        public Validator()
+//        {
+//            {옵션_유효성검사}
+//        }
+//    }
+//}
+
 [Trait(nameof(UnitTest), UnitTest.Architecture)]
 public class NamingConventionOptionsTests : ArchitectureTestBase
 {
@@ -15,10 +32,9 @@ public class NamingConventionOptionsTests : ArchitectureTestBase
             .Classes()
             .That()
             .HaveNameEndingWith(NamingConvention.Options)
-            .And().AreSealed()
-            .And().ArePublic()
-            .Should()
-            .HaveFieldMemberWithName(NamingConvention.SectionName)
+            .Should().BePublic()
+            .AndShould().BeSealed()
+            .AndShould().HaveFieldMemberWithName(NamingConvention.SectionName)
             .WithoutRequiringPositiveResults()
             .Check(Architecture);
     }
@@ -29,15 +45,11 @@ public class NamingConventionOptionsTests : ArchitectureTestBase
         // Arrange
         var rules = new[]
         {
-            new NestedClassRule(
-                NamingConvention.Validator,                 // Validator 클래스 이름
-                (outer, nested) =>
-                    !nested.IsNestedPublic &&               // internal
-                    nested.IsSealed &&                      // sealed
-                    nested.GetInterfaces().Any(i =>
-                        i.IsGenericType &&
-                        i.GetGenericTypeDefinition().Name == typeof(IValidator<>).Name &&   // IValidator<T> 상속
-                        i.GenericTypeArguments[0] == outer)),                               // IValidator<T>의 T 타입
+            new NestedClassRuleBuilder(NamingConvention.Validator)
+                .MustBeInternal()
+                .MustBeSealed()
+                .MustImplementsGenericInterfaceWithOuterTypeArguments(typeof(IValidator<>))
+                .Build(),
         };
 
         // Act
