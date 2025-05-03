@@ -9,6 +9,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Abstractions\Frameworks\Src\FunctionalDdd.Framework\FunctionalDdd.Framework.csproj" />
+    <ProjectReference Include="..\..\..\..\Abstractions\SourceGenerators\Src\FunctionalDdd.SourceGenerator\FunctionalDdd.SourceGenerator.csproj" 
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false" />
+                      <!--
+                      ReferenceOutputAssembly="false"
+                      ReferenceOutputAssembly="true"    <- 디버그 목적
+                      -->
   </ItemGroup>
+
+  <PropertyGroup>
+    <!-- 소스 생성기 파일 저장: obj/Debug/net9.0/generated -->
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+  </PropertyGroup>
 
 </Project>

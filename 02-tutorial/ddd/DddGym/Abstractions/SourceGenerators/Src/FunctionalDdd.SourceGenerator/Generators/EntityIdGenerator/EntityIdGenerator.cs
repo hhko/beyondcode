@@ -32,8 +32,10 @@ public class GenerateEntityIdAttribute : global::System.Attribute;
         IncrementalGeneratorInitializationContext context)
     {
         // 
-        // [GenerateEntityId]
-        // GenerateEntityIdAttribute.g.cs 파일을 생성합니다
+        // 1단계: GenerateEntityId 속성 생성
+        //
+        // Source Generator가 실행될 때 가장 먼저 [GenerateEntityId]라는 커스텀 속성(Attribute)을 생성하도록 합니다.
+        // 이 코드는 실제 소스 코드에 해당 속성이 없어도 컴파일러가 이 속성을 인식하게 해 줍니다.
         //
         context.RegisterPostInitializationOutput(ctx =>
             ctx.AddSource(
@@ -41,7 +43,9 @@ public class GenerateEntityIdAttribute : global::System.Attribute;
                 sourceText: SourceText.From(GenerateEntityIdAttribute, Encoding.UTF8)));  // 생성할 파일 소스
 
         //
-        // [GenerateEntityId]이 있는 클래스를 EntityIdToGenerateEntry과 매핑합니다.
+        // 2단계: GenerateEntityId 속성이 있는 클래스 대상으로 소스 생성
+        //
+        // [GenerateEntityId] 속성이 있는 클래스를 EntityIdToGenerateEntry과 매핑합니다.
         // 
         return context
             .SyntaxProvider
@@ -49,29 +53,30 @@ public class GenerateEntityIdAttribute : global::System.Attribute;
                 fullyQualifiedMetadataName: GenerateEntityIdAttributeMetadataName,      // [GenerateEntityId] 이름이 붙은 구문 노드(Syntax)를 필터링합니다.
                 predicate: Selectors.IsClass,                                           // [GenerateEntityId]가 클래스에 붙었는지 확인합니다
                 transform: MapToEntityIdToGenerate)                                     // 추출된 클래스 정보를 EntityIdToGenerateEntry로 매핑합니다
+            .Where(classDeclaration => classDeclaration != null)
             .Where(x => x != EntityIdToGenerateEntry.None);
+    }
 
-        EntityIdToGenerateEntry MapToEntityIdToGenerate(GeneratorAttributeSyntaxContext context, CancellationToken cancellationToken)
+    private static EntityIdToGenerateEntry MapToEntityIdToGenerate(GeneratorAttributeSyntaxContext context, CancellationToken cancellationToken)
+    {
+        // 클래스가 없을 때
+        if (context.TargetSymbol is not INamedTypeSymbol entitySymbol)
         {
-            // 클래스가 없을 때
-            if (context.TargetSymbol is not INamedTypeSymbol entitySymbol)
-            {
-                return EntityIdToGenerateEntry.None;
-            }
-
-            cancellationToken.ThrowIfCancellationRequested();
-
-            // 클래스가 있을 때
-
-            // 클래스 이름
-            string name = entitySymbol.Name + "Id";
-            // 클래스 네임스페이스
-            string @namespace = entitySymbol.ContainingNamespace.IsGlobalNamespace
-                ? string.Empty
-                : entitySymbol.ContainingNamespace.ToString();
-
-            return new EntityIdToGenerateEntry(name, @namespace);
+            return EntityIdToGenerateEntry.None;
         }
+
+        cancellationToken.ThrowIfCancellationRequested();
+
+        // 클래스가 있을 때
+
+        // 클래스 이름
+        string name = entitySymbol.Name + "Id";
+        // 클래스 네임스페이스
+        string @namespace = entitySymbol.ContainingNamespace.IsGlobalNamespace
+            ? string.Empty
+            : entitySymbol.ContainingNamespace.ToString();
+
+        return new EntityIdToGenerateEntry(name, @namespace);
     }
 
     // 매핑된 EntityIdToGenerateEntry로부터 소스 파일을 생성합니다.

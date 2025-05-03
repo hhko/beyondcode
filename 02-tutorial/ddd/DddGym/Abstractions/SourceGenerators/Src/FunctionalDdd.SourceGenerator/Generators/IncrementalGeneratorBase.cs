@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using static FunctionalDdd.SourceGenerator.Abstractions.Constants;
 
 namespace FunctionalDdd.SourceGenerator.Generators;
 

@@ -3,43 +3,42 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 
-      <!-- 👇 We don't want to reference the source generator dll directly in consuming projects -->
-      <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
 
-      <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <Description>source generator for generating entity ids</Description>
+    <PackageId>FunctionalDdd.SourceGenerator</PackageId>
+    <Version>1.0.3</Version>
+    <Authors>고형호</Authors>
   </PropertyGroup>
 
-    <!--<ItemGroup>
-        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true"
-            PackagePath="analyzers/dotnet/cs" Visible="false" />
-    </ItemGroup>-->
+  <!--
+  .nupkg 내부에서 분석기(Analyzer)로 인식시키기 위해 NuGet이 요구하는 경로에 어셈블리를 배포합니다.
 
-    <!--
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <LangVersion>latest</LangVersion>
-        -->
-        <!-- We do not want to reference the source generator dll directly in consuming projects  -->
-        <!--
-        <IncludeBuildOutput>false</IncludeBuildOutput>
-        <Description>dr-marek-jaskula source generator for generating entity ids</Description>
-        <PackageId>Shopway.SourceGenerator</PackageId>
-        <Version>4.0.2</Version>
-        <Authors>dr-marek-jaskula</Authors>
-        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <LangVersion>Latest</LangVersion>
-    </PropertyGroup>
-    -->
+  YourPackage.nupkg
+  ├── analyzers
+  │   └── dotnet
+  │       └── cs
+  │           └── YourAnalyzer.dll   👈 여기 위치해야 인식됨
+  -->
+  <ItemGroup>
+    <None Include="$(OutputPath)\$(AssemblyName).dll"
+      Pack="true"
+      PackagePath="analyzers/dotnet/cs"
+      Visible="false" />
+  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers">
-      <PrivateAssets>all</PrivateAssets>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" >
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="bin\**" />
   </ItemGroup>
 
 </Project>

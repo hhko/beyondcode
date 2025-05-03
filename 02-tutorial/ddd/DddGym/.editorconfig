@@ -3,7 +3,7 @@ root = true
 [*]
 indent_style = space
 
-[*.{props,cspro,md,config}]
+[*.{props,csproj,md,config}]
 indent_size = 2
 
 [*.cs]

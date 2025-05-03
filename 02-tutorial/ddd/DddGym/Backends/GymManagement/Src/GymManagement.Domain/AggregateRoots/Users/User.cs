@@ -6,6 +6,7 @@ using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Users;
 
+//[GenerateEntityId]
 public sealed class User : AggregateRoot
 {
     public string FirstName { get; init; }
