@@ -11,7 +11,7 @@ public readonly record struct EntityIdToGenerateEntry
     /// More generic approach would be to accept an namespace at EntityIdAttribute as string or to introduce generic parameter for IEntityId on EntityIdAttribute.
     /// That would allow to read the namespace where generic IEntityId is. 
     /// </summary>
-    private const string GenericIEntityIdNamespace = "using Shopway.Domain.Common.BaseTypes.Abstractions;";
+    //private const string GenericIEntityIdNamespace = "using Shopway.Domain.Common.BaseTypes.Abstractions;";
     private const string DiagnosticsNamespace = "using System.Diagnostics;";
     private const string DiagnosticCodeAnalysisNamespace = "using System.Diagnostics.CodeAnalysis;";
     private const string TestJsonNamespace = "using System.Text.Json;";
@@ -35,7 +35,7 @@ public readonly record struct EntityIdToGenerateEntry
         return stringBuilder
             .Append(Header)
             .AppendLine()
-            .AppendLine(GenericIEntityIdNamespace)
+            //.AppendLine(GenericIEntityIdNamespace)
             .AppendLine(DiagnosticsNamespace)
             .AppendLine(DiagnosticCodeAnalysisNamespace)
             .AppendLine(TestJsonNamespace)

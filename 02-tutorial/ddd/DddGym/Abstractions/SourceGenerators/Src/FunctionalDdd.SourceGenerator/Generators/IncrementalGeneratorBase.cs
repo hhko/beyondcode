@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using static FunctionalDdd.SourceGenerator.Abstractions.Constants;
 
 namespace FunctionalDdd.SourceGenerator.Generators;
 
@@ -12,9 +11,9 @@ public abstract class IncrementalGeneratorBase<TValue>(
     bool AttachDebugger = false) : IIncrementalGenerator
 {
     protected const string ClassEntityName = "class";
-    protected const string MethodEntityName = "method";
-    protected const string PropertyEntityName = "property";
-    protected const string FieldEntityName = "field";
+    //protected const string MethodEntityName = "method";
+    //protected const string PropertyEntityName = "property";
+    //protected const string FieldEntityName = "field";
 
     private readonly bool _attachDebugger = AttachDebugger;
     private readonly Func<IncrementalGeneratorInitializationContext, IncrementalValuesProvider<TValue>> _registerSourceProvider = registerSourceProvider;
@@ -33,16 +32,17 @@ public abstract class IncrementalGeneratorBase<TValue>(
             context.RegisterPostInitializationOutput(_registerPostInitializationSourceOutput);
         }
 
-        var provider = _registerSourceProvider(context)
-            .WithTrackingName(TrackingNames.InitialValues)
-            .Where(static m => m is not null)
-            .WithTrackingName(TrackingNames.NotNullValues);
+        IncrementalValuesProvider<TValue> provider = _registerSourceProvider(context)
+            //.WithTrackingName(TrackingNames.InitialValues)
+            .Where(static m => m is not null);
+            //.WithTrackingName(TrackingNames.NotNullValues);
 
         context.RegisterSourceOutput(provider.Collect(), Execute);
     }
 
     private void Execute(SourceProductionContext context, ImmutableArray<TValue> displayValues)
     {
+        // 생성할 클래스가 없을 때: 경고 메시지
         if (displayValues.Length is 0)
         {
             ReportNoValueFound(
@@ -51,21 +51,22 @@ public abstract class IncrementalGeneratorBase<TValue>(
                 $"No {ClassEntityName} declared in the actual scope. ");
         }
 
+        // 소스 생성
         _generate(context, displayValues);
-    }
 
-    private static void ReportNoValueFound(SourceProductionContext context, string entityName, string warning)
-    {
-        var diagnosticDescription = new DiagnosticDescriptor
-        (
-            "SG0001",
-            $"No {entityName} Found",
-            warning,
-            "Problem",
-            DiagnosticSeverity.Warning,
-            true
-        );
+        void ReportNoValueFound(SourceProductionContext context, string entityName, string warning)
+        {
+            var diagnosticDescription = new DiagnosticDescriptor
+            (
+                "SG0001",
+                $"No {entityName} Found",
+                warning,
+                "Problem",
+                DiagnosticSeverity.Warning,
+                true
+            );
 
-        context.ReportDiagnostic(Diagnostic.Create(diagnosticDescription, Location.None));
+            context.ReportDiagnostic(Diagnostic.Create(diagnosticDescription, Location.None));
+        }
     }
 }

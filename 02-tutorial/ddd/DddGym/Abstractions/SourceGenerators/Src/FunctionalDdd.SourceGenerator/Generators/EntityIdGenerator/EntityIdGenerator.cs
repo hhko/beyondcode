@@ -8,7 +8,7 @@ using static FunctionalDdd.SourceGenerator.Abstractions.Constants;
 namespace FunctionalDdd.SourceGenerator.Generators.EntityIdGenerator;
 
 [Generator(LanguageNames.CSharp)]
-public sealed class EntityIdGenerator() 
+public sealed class EntityIdGenerator()
     : IncrementalGeneratorBase<EntityIdToGenerateEntry>(
         RegisterSourceProvider,
         Generate)
@@ -31,21 +31,29 @@ public class GenerateEntityIdAttribute : global::System.Attribute;
     private static IncrementalValuesProvider<EntityIdToGenerateEntry> RegisterSourceProvider(
         IncrementalGeneratorInitializationContext context)
     {
-        context.RegisterPostInitializationOutput(ctx => 
+        // 
+        // [GenerateEntityId]
+        // GenerateEntityIdAttribute.g.cs 파일을 생성합니다
+        //
+        context.RegisterPostInitializationOutput(ctx =>
             ctx.AddSource(
-                GenerateEntityIdAttributeFileName,
-                SourceText.From(GenerateEntityIdAttribute, Encoding.UTF8)));
+                hintName: GenerateEntityIdAttributeFileName,                              // 생성할 파일 이름
+                sourceText: SourceText.From(GenerateEntityIdAttribute, Encoding.UTF8)));  // 생성할 파일 소스
 
+        //
+        // [GenerateEntityId]이 있는 클래스를 EntityIdToGenerateEntry과 매핑합니다.
+        // 
         return context
             .SyntaxProvider
             .ForAttributeWithMetadataName(
-                fullyQualifiedMetadataName: GenerateEntityIdAttributeMetadataName,
-                predicate: Selectors.IsClass,
-                transform: MapToEntityIdToGenerate)
+                fullyQualifiedMetadataName: GenerateEntityIdAttributeMetadataName,      // [GenerateEntityId] 이름이 붙은 구문 노드(Syntax)를 필터링합니다.
+                predicate: Selectors.IsClass,                                           // [GenerateEntityId]가 클래스에 붙었는지 확인합니다
+                transform: MapToEntityIdToGenerate)                                     // 추출된 클래스 정보를 EntityIdToGenerateEntry로 매핑합니다
             .Where(x => x != EntityIdToGenerateEntry.None);
 
         EntityIdToGenerateEntry MapToEntityIdToGenerate(GeneratorAttributeSyntaxContext context, CancellationToken cancellationToken)
         {
+            // 클래스가 없을 때
             if (context.TargetSymbol is not INamedTypeSymbol entitySymbol)
             {
                 return EntityIdToGenerateEntry.None;
@@ -53,22 +61,29 @@ public class GenerateEntityIdAttribute : global::System.Attribute;
 
             cancellationToken.ThrowIfCancellationRequested();
 
+            // 클래스가 있을 때
+
+            // 클래스 이름
             string name = entitySymbol.Name + "Id";
+            // 클래스 네임스페이스
             string @namespace = entitySymbol.ContainingNamespace.IsGlobalNamespace
                 ? string.Empty
                 : entitySymbol.ContainingNamespace.ToString();
 
-            return new(name, @namespace);
+            return new EntityIdToGenerateEntry(name, @namespace);
         }
     }
 
+    // 매핑된 EntityIdToGenerateEntry로부터 소스 파일을 생성합니다.
     private static void Generate(SourceProductionContext context, ImmutableArray<EntityIdToGenerateEntry> entityIdToGenerateEntries)
     {
         foreach (var entityIdToGenerateEntry in entityIdToGenerateEntries)
         {
             StringBuilder sb = new();
-            var result = entityIdToGenerateEntry.Generate(sb);
-            context.AddSource(entityIdToGenerateEntry.Name + ".g.cs", SourceText.From(result, Encoding.UTF8));
+            string source = entityIdToGenerateEntry.Generate(sb);   // 파일 소스 생성
+            context.AddSource(
+                entityIdToGenerateEntry.Name + ".g.cs",             // 생성할 파일 이름
+                SourceText.From(source, Encoding.UTF8));            // 생성할 파일 소스
         }
     }
 }
