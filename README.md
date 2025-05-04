@@ -50,7 +50,7 @@
   - `coverlet`: 코드 커버리지
   - `Shouldly`: Fluent 테스트 검증
   - `TngTech.ArchUnitNET`: 아키텍처 테스트
-  - `NSubstitute`: Mocking
+  - `NSubstitute`: 인터페이스 Mocking
   - `Bogus`: Fake 데이터 생성기
   - `Verify`: 스냅샷 테스트
 - 기술
