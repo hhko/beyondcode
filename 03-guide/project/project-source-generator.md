@@ -15,7 +15,7 @@
 
 ## 소스 생성기 개발
 
-### 개발
+### 소스 생성 절차
 ```cs
 // 소스 생성기 인터페이스: C# 컴파일러가 호출하는 진입점
 public interface IIncrementalGenerator
@@ -43,26 +43,9 @@ return context
     .Where(x => x != EntityIdToGenerateEntry.None);             // 변환 실패 or 무시할 항목은 필터링
 ```
 
-### 패키징
-- .nupkg 내부에서 분석기(Analyzer)로 인식시키기 위해 NuGet이 요구하는 경로에 어셈블리를 배포합니다.
-
-```xml
-<ItemGroup>
-  <None Include="$(OutputPath)\$(AssemblyName).dll"
-        Pack="true"
-        PackagePath="analyzers/dotnet/cs"
-        Visible="false" />
-</ItemGroup>
-```
-```
-YourPackage.nupkg
- ├── analyzers
- │   └── dotnet
- │       └── cs
- │           └── YourAnalyzer.dll   👈 여기 위치해야 인식됨
-```
-
 ### 테스트
+- 테스트는 메모리 상에서 컴파일 단계를 시뮬레이션하여 소스 생성기의 출력 결과를 생성하고, 해당 결과가 기대한 대로 생성되었는지를 스냅샷 기반으로 검증합니다.
+
 ```cs
 [Fact]
 public Task EntityIdGenerator_ShouldGenerate_EntityIdAttribute()
@@ -120,6 +103,25 @@ public static class TestGeneratorUtilities
             .ToString();
     }
 }
+```
+
+### 패키징
+- .nupkg 내부에서 분석기(Analyzer)로 인식시키기 위해 NuGet이 요구하는 경로에 어셈블리를 배포합니다.
+
+```xml
+<ItemGroup>
+  <None Include="$(OutputPath)\$(AssemblyName).dll"
+        Pack="true"
+        PackagePath="analyzers/dotnet/cs"
+        Visible="false" />
+</ItemGroup>
+```
+```
+YourPackage.nupkg
+ ├── analyzers
+ │   └── dotnet
+ │       └── cs
+ │           └── YourAnalyzer.dll   👈 여기 위치해야 인식됨
 ```
 
 <br/>
