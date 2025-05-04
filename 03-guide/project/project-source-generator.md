@@ -1,14 +1,15 @@
 # 소스 생성기
 
 ## 개요
-- C# 소스 생성기(Source Generator)는 템플릿을 기반으로 소스 코드를 컴파일 타임에 자동으로 생성하는 기능입니다.
+- C# **소스 생성기(Source Generator)**는 컴파일 타임에 코드를 자동으로 생성하는 기능으로, 반복적인 코딩 작업을 줄이고 강력한 정적 분석 기반 코드 자동화를 가능하게 합니다.
+- 기본적으로 템플릿 또는 메타데이터 기반으로 코드 파일(.g.cs)을 생성하며, 이는 최종 어셈블리에 포함됩니다.
 
 <br/>
 
 ## 지침
 - 소스 생성기는 `IIncrementalGenerator` 인터페이스를 상속받아 구현합니다.
 - 소스 생성기로 생성되는 파일은 `.g.cs` 로 확장자가 붙은 파일로 `obj\generated\...`에 출력됩니다.
-- 패키지화 시 `analyzers/dotnet/cs` 구조 안에 DLL이 있어야 VS/MSBuild가 자동 인식합니다.
+- 패키지화 시 `analyzers/dotnet/cs` 구조 안에 DLL이 있어야 Visual Studio/MSBuild가 자동 인식합니다.
 
 <br/>
 
