@@ -9,7 +9,7 @@
 
 ## 테스트 확장 메서드 구현
 - ArchUnitNET 패키지의 Assert 구문을 Fluent 스타일로 확장하여, 테스트 코드를 더 읽기 쉽고 직관적으로 작성할 수 있도록 ObjectsShould 확장 메서드를 정의합니다.
-- 기본 제공 규칙 외에도 필요한 아키텍처 규칙을 만들기 위해, ICondition<TRuleType> 인터페이스를 구현한 클래스를 작성하고, 이를 FollowCustomCondition 메서드를 통해 테스트에 적용합니다.
+- 기본 제공 규칙 외에도 필요한 아키텍처 규칙을 만들기 위해, `ICondition<TRuleType>` 인터페이스를 구현한 클래스를 작성하고, 이를 `FollowCustomCondition` 메서드를 통해 테스트에 적용합니다.
 
 ```cs
 using ArchUnitNET.Domain;
