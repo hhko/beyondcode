@@ -47,6 +47,7 @@
   - `Ulid`: 고유 ID
 - 테스트
   - `xUnit`: 테스트
+  - `Reqnroll`: BDD 테스트
   - `coverlet`: 코드 커버리지
   - `Shouldly`: Fluent 테스트 검증
   - `TngTech.ArchUnitNET`: 아키텍처 테스트
