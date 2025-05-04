@@ -15,7 +15,7 @@
 도메인 주도 설계의 '무엇을 표현할지'와 함수형 프로그래밍의 '어떻게 표현할지'가 만나서, 변경에 강하고, 테스트 가능하고, 명확한 의도를 가진 코드를 만듭니다.
 - **무엇을 표현할지: 복잡성 분리**
   - 복잡한 비즈니스 로직을 도메인 모델 중심으로 풀어나가는 설계 방법입니다.
-  - 도메인 전문가의 언어 (Ubiquitous Language) 로 시스템을 설계하는 것이 핵심입니다.
+  - 도메인 전문가의 언어(Ubiquitous Language)로 시스템을 설계하는 것이 핵심입니다.
 - **어떻게 표현할지: 부작용 최소화**
   - 함수(수학적인 함수)에 기반한 프로그래밍 방식입니다.
   - 상태 변경 없이, 입력에 따라 일관된 출력을 보장합니다.
@@ -50,8 +50,8 @@
 - 테스트
   - `xUnit`: 테스트
   - `TngTech.ArchUnitNET`: 아키텍처 테스트
-  - `Reqnroll`: BDD(Behavior-Driven Development) 테스트
-  - `Verify`: Snapshot 테스트
+  - `Reqnroll`: BDD (Behavior-Driven Development) 테스트
+  - `Verify`: 스냅샷샷 테스트
   - `Testcontainers`: 컨테이너 테스트
   - `NBomber`: 부하 테스트
   - `coverlet`: 코드 커버리지
@@ -66,6 +66,7 @@
   - `MassTransit`: RabbitMQ
   - `Entity Framework Core`: Command ORM
   - `Dapper`: Query ORM
+  - `Polly`: Resilience
 
 ### External 아키텍처 (Microservices 아키텍처)
 > TODO
@@ -89,11 +90,11 @@
 - 014 | 애플리케이션 레이어 | 이벤트 메시지
 - 015 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
 - 016 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
-- 017 | 테스트 | [스냅샷(Snapshot)](./03-guide/test/test-snapshot.md)
+- 017 | 테스트 | [스냅샷 (Snapshot)](./03-guide/test/test-snapshot.md)
 - 018 | 테스트 | 행위 주도(BDD: Behavior-Driven Development)
 - 019 | 아키텍처 테스트 | 레이어 의존성
 - 020 | 아키텍처 테스트 | 사용자 정의 규칙
-- 021 | 아키텍처 테스트 | 도메인 타입 규칙(정적 메서드: Create, Validate, 생성자: private, Parameter less)
+- 021 | 아키텍처 테스트 | 도메인 타입 규칙 (정적 메서드: Create, Validate, 생성자: private, Parameter less)
 - 022 | 아키텍처 테스트 | 중첩 클래스 규칙
 - ...
 
@@ -107,27 +108,26 @@
   - [ ] Chapter 02. 도메인 구조화
   - [ ] Chapter 03. 도메인 함수형화
   - [ ] Chapter 04. 도메인 Entity Id 소스 생성기
-  - [ ] Chapter 05. 도메인 단위 테스트
+  - [ ] Chapter 05. 도메인 시나리오 테스트 (BDD: Cucumber)
 - **Part 2. Hexagonal 아키텍처 (애플리케이션 레이어)**
-  - [ ] Chapter 06. 유스케이스 탐험 (CQRS)
+  - [ ] Chapter 06. 유스케이스 CQRS/Event
   - [ ] Chapter 07. 유스케이스 미들웨어
-  - [ ] Chapter 08. 유스케이스 단위 테스트
-  - [ ] Chapter 09. 유스케이스 시나리오 테스트 (Cucumber)
+  - [ ] Chapter 08. 유스케이스 시나리오 테스트 (BDD: Cucumber)
 - **Part 3. Hexagonal 아키텍처 (어댑터 레이어)**
-  - [ ] Chapter 10. WebApi
-  - [ ] Chapter 12. IAdapter 인터페이스 소스 생성기
-  - [ ] Chapter 13. 저장소 CQRS (Command: EF Core, Query: Dapper)
-  - [ ] Chapter 14. 컨테이너화
-  - [ ] Chapter 15. 통합 테스트
-  - [ ] Chapter 16. 성능 테스트
+  - [ ] Chapter 09. Web API
+  - [ ] Chapter 10. IAdapter 인터페이스 소스 생성기
+  - [ ] Chapter 11. 저장소 CQRS (Command: EF Core, Query: Dapper)
+  - [ ] Chapter 12. 컨테이너화
+  - [ ] Chapter 13. 통합 테스트
+  - [ ] Chapter 14. 부하 테스트
 - **Part 4. Microservices 아키텍처**
-  - [ ] Chapter 17. Aspire
-  - [ ] Chapter 18. RabbitMQ
-  - [ ] Chapter 19. Resilience
-  - [ ] Chapter 20. Reverse Proxy
-  - [ ] Chapter 21. Chaos Engineering
+  - [ ] Chapter 15. Aspire
+  - [ ] Chapter 16. RabbitMQ
+  - [ ] Chapter 17. Resilience
+  - [ ] Chapter 18. Reverse Proxy
+  - [ ] Chapter 19. Chaos Engineering
 - **Part 5. 운영**
-  - [ ] Chapter 22. OpenFeature (Feature Flag Management)
-  - [ ] Chapter 23. OpenSearch (Observability System)
-  - [ ] Chapter 24. Ansible (Infrastructure as Code)
-  - [ ] Chapter 25. Backstage (Building developer portals)
+  - [ ] Chapter 20. OpenFeature (Feature Flag Management)
+  - [ ] Chapter 21. OpenSearch (Observability System)
+  - [ ] Chapter 22. Ansible (Infrastructure as Code)
+  - [ ] Chapter 23. Backstage (Building developer portals)
