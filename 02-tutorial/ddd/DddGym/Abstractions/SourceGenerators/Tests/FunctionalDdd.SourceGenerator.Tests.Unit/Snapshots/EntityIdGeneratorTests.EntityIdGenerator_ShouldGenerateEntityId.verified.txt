@@ -8,6 +8,7 @@
 
 #nullable enable
 
+using FunctionalDdd.Framework.BaseTypes;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
@@ -49,10 +50,11 @@ public readonly record struct ProductId : IEntityId<ProductId>, IParsable<Produc
         throw new InvalidOperationException($"'{id}' cannot be parsed to Ulid");
     }
 
-    public override int GetHashCode()
-    {
-        return Value.GetHashCode();
-    }
+    // record struct는 자동으로 Value 기반의 Equals/GetHashCode()를 생성합니다
+    //public override int GetHashCode()
+    //{
+    //    return Value.GetHashCode();
+    //}
 
     public override string ToString()
     {
@@ -68,7 +70,7 @@ public readonly record struct ProductId : IEntityId<ProductId>, IParsable<Produc
 
         if (other is not ProductId otherId)
         {
-            throw new ArgumentNullException($"IEntity is not {GetType().FullName}");
+            throw new ArgumentException($"other must be of type {typeof(UserId)}, but was {other.GetType()}");
         }
 
         return Value.CompareTo(otherId.Value);
@@ -83,7 +85,8 @@ public readonly record struct ProductId : IEntityId<ProductId>, IParsable<Produc
     {
         if (entityIdAsString is null)
         {
-            throw new InvalidOperationException($"'{entityIdAsString}' cannot be null");
+            result = default;
+            return false;
         }
 
         result = Create(entityIdAsString);
@@ -101,6 +104,11 @@ public sealed class ProductIdJsonConverter : JsonConverter<ProductId>
     public override ProductId Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var entityIdAsString = reader.GetString();
+
+        if (string.IsNullOrWhiteSpace(entityIdAsString))
+        {
+            throw new JsonException("The UserId string is null or empty.");
+        }
 
         if (Ulid.TryParse(entityIdAsString, out var ulid))
         {

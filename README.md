@@ -79,11 +79,12 @@
 - 014 | 애플리케이션 레이어 | 이벤트 메시지
 - 015 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
 - 016 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
-- 017 | 테스트 | [스냅샷(Snapshot)](./03-guide/solution/solution-test-snapshot.md)
-- 018 | 아키텍처 테스트 | 레이어 의존성
-- 019 | 아키텍처 테스트 | 사용자 정의 규칙
-- 020 | 아키텍처 테스트 | 도메인 타입 규칙(정적 메서드: Create, Validate, 생성자: private, Parameter less)
-- 021 | 아키텍처 테스트 | 중첩 클래스 규칙
+- 017 | 테스트 | [스냅샷(Snapshot)](./03-guide/test/test-snapshot.md)
+- 018 | 테스트 | 행위 주도(BDD: Behavior-Driven Development)
+- 019 | 아키텍처 테스트 | 레이어 의존성
+- 020 | 아키텍처 테스트 | 사용자 정의 규칙
+- 021 | 아키텍처 테스트 | 도메인 타입 규칙(정적 메서드: Create, Validate, 생성자: private, Parameter less)
+- 022 | 아키텍처 테스트 | 중첩 클래스 규칙
 - ...
 
 <br/>
