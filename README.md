@@ -91,7 +91,7 @@
 - 015 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
 - 016 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
 - 017 | 테스트 | [스냅샷 (Snapshot)](./03-guide/test/test-snapshot.md)
-- 018 | 테스트 | 행위 주도(BDD: Behavior-Driven Development)
+- 018 | 테스트 | 행위 주도 (BDD: Behavior-Driven Development)
 - 019 | 아키텍처 테스트 | 레이어 의존성
 - 020 | 아키텍처 테스트 | 사용자 정의 규칙
 - 021 | 아키텍처 테스트 | 도메인 타입 규칙 (정적 메서드: Create, Validate, 생성자: private, Parameter less)
@@ -110,7 +110,7 @@
   - [ ] Chapter 04. 도메인 Entity Id 소스 생성기
   - [ ] Chapter 05. 도메인 시나리오 테스트 (BDD: Cucumber)
 - **Part 2. Hexagonal 아키텍처 (애플리케이션 레이어)**
-  - [ ] Chapter 06. 유스케이스 CQRS/Event
+  - [ ] Chapter 06. 유스케이스 CQRS & Event
   - [ ] Chapter 07. 유스케이스 미들웨어
   - [ ] Chapter 08. 유스케이스 시나리오 테스트 (BDD: Cucumber)
 - **Part 3. Hexagonal 아키텍처 (어댑터 레이어)**
@@ -127,7 +127,7 @@
   - [ ] Chapter 18. Reverse Proxy
   - [ ] Chapter 19. Chaos Engineering
 - **Part 5. 운영**
-  - [ ] Chapter 20. OpenFeature (Feature Flag Management)
-  - [ ] Chapter 21. OpenSearch (Observability System)
+  - [ ] Chapter 20. OpenFeature (Feature Flag 관리)
+  - [ ] Chapter 21. OpenSearch (Observability 시스템)
   - [ ] Chapter 22. Ansible (Infrastructure as Code)
-  - [ ] Chapter 23. Backstage (Building developer portals)
+  - [ ] Chapter 23. Backstage (Building Developer Portals)
