@@ -49,13 +49,13 @@
   - `Ulid`: 고유 ID
 - 테스트
   - `xUnit`: 테스트
+  - `TngTech.ArchUnitNET`: 아키텍처 테스트
   - `Reqnroll`: BDD(Behavior-Driven Development) 테스트
+  - `Verify`: Snapshot 테스트
   - `coverlet`: 코드 커버리지
   - `Shouldly`: Fluent 테스트 검증
-  - `TngTech.ArchUnitNET`: 아키텍처 테스트
   - `NSubstitute`: 인터페이스 Mocking
   - `Bogus`: Fake 데이터 생성기
-  - `Verify`: Snapshot 테스트
 - 기술
   - `ZiggyCreatures.FusionCache`: 메모리 캐시
 
