@@ -1,6 +1,6 @@
 > Make It Work, Make It Right, Make It Fast
 
-<a href=./README.wav>저장소 소개 오디오 파일 (by 노트북LM)</a>
+[저장소 소개 오디오 .wav 파일 by 노트북LM](./README.wav)
 
 ## 목표
 > 코드는 팀이 함께 완성해 가는 한 편의 글입니다. 우리는 그 글을 차곡차곡 쌓아 시스템을 만들어 갑니다.
