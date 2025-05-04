@@ -51,7 +51,7 @@
   - `xUnit`: 테스트
   - `TngTech.ArchUnitNET`: 아키텍처 테스트
   - `Reqnroll`: BDD (Behavior-Driven Development) 테스트
-  - `Verify`: 스냅샷샷 테스트
+  - `Verify`: 스냅샷 테스트
   - `Testcontainers`: 컨테이너 테스트
   - `NBomber`: 부하 테스트
   - `coverlet`: 코드 커버리지
