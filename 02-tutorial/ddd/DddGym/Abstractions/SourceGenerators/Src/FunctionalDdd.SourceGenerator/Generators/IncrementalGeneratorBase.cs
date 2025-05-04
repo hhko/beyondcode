@@ -8,7 +8,7 @@ namespace FunctionalDdd.SourceGenerator.Generators;
 public abstract class IncrementalGeneratorBase<TValue>(
     Func<IncrementalGeneratorInitializationContext, IncrementalValuesProvider<TValue>> registerSourceProvider,
     Action<SourceProductionContext, ImmutableArray<TValue>> generate,
-    Action<IncrementalGeneratorPostInitializationContext>? registerPostInitializationSourceOutput = null,
+    //Action<IncrementalGeneratorPostInitializationContext>? registerPostInitializationSourceOutput = null,
     bool AttachDebugger = false) : IIncrementalGenerator
 {
     protected const string ClassEntityName = "class";
@@ -19,7 +19,7 @@ public abstract class IncrementalGeneratorBase<TValue>(
     private readonly bool _attachDebugger = AttachDebugger;
     private readonly Func<IncrementalGeneratorInitializationContext, IncrementalValuesProvider<TValue>> _registerSourceProvider = registerSourceProvider;
     private readonly Action<SourceProductionContext, ImmutableArray<TValue>> _generate = generate;
-    private readonly Action<IncrementalGeneratorPostInitializationContext>? _registerPostInitializationSourceOutput = registerPostInitializationSourceOutput;
+    //private readonly Action<IncrementalGeneratorPostInitializationContext>? _registerPostInitializationSourceOutput = registerPostInitializationSourceOutput;
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -28,10 +28,10 @@ public abstract class IncrementalGeneratorBase<TValue>(
             Debugger.Launch();
         }
 
-        if (_registerPostInitializationSourceOutput is not null)
-        {
-            context.RegisterPostInitializationOutput(_registerPostInitializationSourceOutput);
-        }
+        //if (_registerPostInitializationSourceOutput is not null)
+        //{
+        //    context.RegisterPostInitializationOutput(_registerPostInitializationSourceOutput);
+        //}
 
         IncrementalValuesProvider<TValue> provider = _registerSourceProvider(context)
             //.WithTrackingName(TrackingNames.InitialValues)
@@ -43,31 +43,31 @@ public abstract class IncrementalGeneratorBase<TValue>(
 
     private void Execute(SourceProductionContext context, ImmutableArray<TValue> displayValues)
     {
-        // 생성할 클래스가 없을 때: 경고 메시지
-        if (displayValues.Length is 0)
-        {
-            ReportNoValueFound(
-                context,
-                ClassEntityName,
-                $"No {ClassEntityName} declared in the actual scope. ");
-        }
+        //// 생성할 클래스가 없을 때: 경고 메시지
+        //if (displayValues.Length is 0)
+        //{
+        //    ReportNoValueFound(
+        //        context,
+        //        ClassEntityName,
+        //        $"No {ClassEntityName} declared in the actual scope. ");
+        //}
 
         // 소스 생성
         _generate(context, displayValues);
 
-        void ReportNoValueFound(SourceProductionContext context, string entityName, string warning)
-        {
-            var diagnosticDescription = new DiagnosticDescriptor
-            (
-                "SG0001",
-                $"No {entityName} Found",
-                warning,
-                "Problem",
-                DiagnosticSeverity.Warning,
-                true
-            );
+        //void ReportNoValueFound(SourceProductionContext context, string entityName, string warning)
+        //{
+        //    var diagnosticDescription = new DiagnosticDescriptor
+        //    (
+        //        "SG0001",
+        //        $"No {entityName} Found",
+        //        warning,
+        //        "Problem",
+        //        DiagnosticSeverity.Warning,
+        //        true
+        //    );
 
-            context.ReportDiagnostic(Diagnostic.Create(diagnosticDescription, Location.None));
-        }
+        //    context.ReportDiagnostic(Diagnostic.Create(diagnosticDescription, Location.None));
+        //}
     }
 }

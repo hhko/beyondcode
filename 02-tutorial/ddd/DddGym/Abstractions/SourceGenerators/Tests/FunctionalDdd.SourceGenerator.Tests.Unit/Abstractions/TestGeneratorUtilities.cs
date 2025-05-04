@@ -25,7 +25,7 @@ public static class TestGeneratorUtilities
             references,                 // 참조
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
-        // 컴파일: 소스 생성기 호출출
+        // 컴파일: IIncrementalGenerator 소스 생성기 호출
         CSharpGeneratorDriver
             .Create(generator)
             .RunGeneratorsAndUpdateCompilation(

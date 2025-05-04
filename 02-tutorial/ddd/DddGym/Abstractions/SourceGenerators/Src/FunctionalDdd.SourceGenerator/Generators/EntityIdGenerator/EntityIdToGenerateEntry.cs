@@ -77,10 +77,11 @@ public readonly record struct EntityIdToGenerateEntry
                     throw new InvalidOperationException($"'{id}' cannot be parsed to Ulid");
                 }
 
-                public override int GetHashCode()
-                {
-                    return Value.GetHashCode();
-                }
+                // record struct는 자동으로 Value 기반의 Equals/GetHashCode()를 생성합니다
+                //public override int GetHashCode()
+                //{
+                //    return Value.GetHashCode();
+                //}
 
                 public override string ToString()
                 {
@@ -96,7 +97,7 @@ public readonly record struct EntityIdToGenerateEntry
 
                     if (other is not {{{Name}}} otherId)
                     {
-                        throw new ArgumentNullException($"IEntity is not {GetType().FullName}");
+                        throw new ArgumentException($"other must be of type {typeof(UserId)}, but was {other.GetType()}");
                     }
 
                     return Value.CompareTo(otherId.Value);
@@ -111,7 +112,8 @@ public readonly record struct EntityIdToGenerateEntry
                 {
                     if (entityIdAsString is null)
                     {
-                        throw new InvalidOperationException($"'{entityIdAsString}' cannot be null");
+                        result = default;
+                        return false;
                     }
 
                     result = Create(entityIdAsString);
@@ -129,6 +131,11 @@ public readonly record struct EntityIdToGenerateEntry
                 public override {{{Name}}} Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
                 {
                     var entityIdAsString = reader.GetString();
+
+                    if (string.IsNullOrWhiteSpace(entityIdAsString))
+                    {
+                        throw new JsonException("The UserId string is null or empty.");
+                    }
 
                     if (Ulid.TryParse(entityIdAsString, out var ulid))
                     {
