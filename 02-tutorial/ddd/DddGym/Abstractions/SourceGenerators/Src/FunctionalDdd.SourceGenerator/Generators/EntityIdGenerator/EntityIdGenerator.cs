@@ -31,30 +31,33 @@ public class GenerateEntityIdAttribute : global::System.Attribute;
     private static IncrementalValuesProvider<EntityIdToGenerateEntry> RegisterSourceProvider(
         IncrementalGeneratorInitializationContext context)
     {
-        // 
-        // 1단계: GenerateEntityId 속성 생성
+        //
+        // 1단계: 고정 코드 생성 (Post-initialization)
+        //  - 소스 코드 분석과 무관하게 항상 생성되는 코드 등록 (예: Attribute 정의)
+        //  - 컴파일 초기 단계에 한 번만 실행됨
         //
         // Source Generator가 실행될 때 가장 먼저 [GenerateEntityId]라는 커스텀 속성(Attribute)을 생성하도록 합니다.
         // 이 코드는 실제 소스 코드에 해당 속성이 없어도 컴파일러가 이 속성을 인식하게 해 줍니다.
         //
         context.RegisterPostInitializationOutput(ctx =>
             ctx.AddSource(
-                hintName: GenerateEntityIdAttributeFileName,                              // 생성할 파일 이름
-                sourceText: SourceText.From(GenerateEntityIdAttribute, Encoding.UTF8)));  // 생성할 파일 소스
+                hintName: GenerateEntityIdAttributeFileName,                        // 생성될 파일 이름 (예: "GenerateEntityIdAttribute.g.cs")
+        sourceText: SourceText.From(GenerateEntityIdAttribute, Encoding.UTF8)));    // 파일에 포함될 코드 내용 (예: [GenerateEntityId] 특성 정의)
 
         //
-        // 2단계: GenerateEntityId 속성이 있는 클래스 대상으로 소스 생성
+        // 2단계: 대상 필터링 및 코드 생성 준비
+        //  - [GenerateEntityId] 같은 특성이 붙은 "클래스"만 대상으로 삼음
+        //  - 이후 코드 생성에 필요한 정보 구조로 변환
         //
         // [GenerateEntityId] 속성이 있는 클래스를 EntityIdToGenerateEntry과 매핑합니다.
-        // 
+        //
         return context
             .SyntaxProvider
             .ForAttributeWithMetadataName(
-                fullyQualifiedMetadataName: GenerateEntityIdAttributeMetadataName,      // [GenerateEntityId] 이름이 붙은 구문 노드(Syntax)를 필터링합니다.
-                predicate: Selectors.IsClass,                                           // [GenerateEntityId]가 클래스에 붙었는지 확인합니다
-                transform: MapToEntityIdToGenerate)                                     // 추출된 클래스 정보를 EntityIdToGenerateEntry로 매핑합니다
-            .Where(classDeclaration => classDeclaration != null)
-            .Where(x => x != EntityIdToGenerateEntry.None);
+                fullyQualifiedMetadataName: GenerateEntityIdAttributeMetadataName,  // System.GenerateEntityIdAttribute
+                predicate: Selectors.IsClass,                                       // 클래스 선언인지 확인 (예: class Foo { })
+                transform: MapToEntityIdToGenerate)                                 // 클래스 → 소스 생성 입력 모델로 변환
+        .   Where(x => x != EntityIdToGenerateEntry.None);                          // 변환 실패 or 무시할 항목은 필터링
     }
 
     private static EntityIdToGenerateEntry MapToEntityIdToGenerate(GeneratorAttributeSyntaxContext context, CancellationToken cancellationToken)
