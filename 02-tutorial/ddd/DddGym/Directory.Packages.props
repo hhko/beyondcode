@@ -8,8 +8,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Ardalis.SmartEnum" Version="8.2.0" />
-    <PackageVersion Include="Bogus" Version="35.6.3" />
-    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
     <PackageVersion Include="FluentValidation" Version="11.11.0" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageVersion Include="FunctionalDdd.SourceGenerator" Version="1.0.3" />
@@ -26,16 +24,22 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.2" />
     <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.3" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-    <PackageVersion Include="NSubstitute" Version="5.3.0" />
     <PackageVersion Include="Scrutor" Version="6.0.1" />
-    <PackageVersion Include="Shouldly" Version="4.3.0" />
     <PackageVersion Include="Throw" Version="1.4.0" />
-    <PackageVersion Include="TngTech.ArchUnitNET.xUnit" Version="0.11.3" />
     <PackageVersion Include="Ulid" Version="1.3.4" />
-    <PackageVersion Include="Verify.Xunit" Version="30.0.0" />
-    <PackageVersion Include="xunit" Version="2.9.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
     <PackageVersion Include="ZiggyCreatures.FusionCache" Version="2.2.0" />
   </ItemGroup>
+
+  <ItemGroup Label="Test">
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+    <PackageVersion Include="Shouldly" Version="4.3.0" />
+    <PackageVersion Include="TngTech.ArchUnitNET.xUnit" Version="0.11.3" />
+    <PackageVersion Include="NSubstitute" Version="5.3.0" />
+    <PackageVersion Include="Verify.Xunit" Version="30.0.0" />
+    <PackageVersion Include="Bogus" Version="35.6.3" />
+  </ItemGroup>
+
 </Project>
