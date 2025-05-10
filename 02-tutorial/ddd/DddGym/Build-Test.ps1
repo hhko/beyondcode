@@ -44,7 +44,7 @@ Run-Step "Deleting existing .allure-results folder (if exists)" {
 
 $allureUsed = $false  # 전체 실행에서 Allure 적용 여부 추적
 
-Run-Step "Cleaning the solution" { dotnet clean }
+#Run-Step "Cleaning the solution" { dotnet clean }
 
 # WarningLevel
 # https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/errors-warnings#warninglevel

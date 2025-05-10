@@ -100,39 +100,13 @@ allure --version
 
 <br/>
 
-## 솔루션 설정
-
-### .runsettings-allurereport
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<RunSettings>
-  <RunConfiguration>
-    <ReporterSwitch>allure</ReporterSwitch>
-  </RunConfiguration>
-</RunSettings>
-```
-
-- `.runsettings` 파일을 이용하여 reporter을 `xunit.runner.visualstudio`에서 `allure`으로 변경합니다.
-  - .runsettings-allurereport 대신 `dotnet test -- RunConfiguration.ReporterSwitch=allure` 명령으로 대체할 수 있습니다.
-  - https://xunit.net/docs/runsettings#ReporterSwitch
-
-### .gitignore
-```.gitignore
-.allure-results/
-.allure-report/
-```
-
-- Allure에서 생성하는 결과 파일은 형상관리 대상에서 제외 시킵니다.
-
-<br/>
-
-## xUnit 테스트 프로젝트
+## xUnit 테스트 프로젝트 설정정
 ### Allure.Xunt 패키지
-  - Allure.Xunit: `2.12.1`
-  - **System.Text.Json: `9.0.4`** (Allure.Xunit 2.12.1 버전에서 System.Text.Json 8.0.1 버전(vulnerability)을 사용하고 있기 때문에 업그레이드합니다)
-  - xunit: `2.9.3`
-  - **xunit.runner.visualstudio: `2.8.2`**
-    - **.NET 9.0과 Allure.Xunit 2.12.1 버전에서는 xunit.runner.visualstudio 3.x.x 버전일 때는 정상동작하지 않습니다.**
+- Allure.Xunit: `2.12.1`
+- **System.Text.Json: `9.0.4`** (Allure.Xunit 2.12.1 버전에서 System.Text.Json 8.0.1 버전(vulnerability)을 사용하고 있기 때문에 업그레이드합니다)
+- xunit: `2.9.3`
+- **xunit.runner.visualstudio: `2.8.2`**
+  - **.NET 9.0과 Allure.Xunit 2.12.1 버전에서는 xunit.runner.visualstudio 3.x.x 버전일 때는 정상동작하지 않습니다.**
 
 ### Allure Results 생성
 ```json
@@ -150,6 +124,22 @@ allure --version
 ```
 - `allureConfig.json` 파일을 통해 테스트 실행 시 생성되는 Allure 파일의 저장 위치를 `.allure-results` 폴더로 설정합니다.
 
+## 솔루션 설정
+
+### .runsettings-allurereport
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <RunConfiguration>
+    <ReporterSwitch>allure</ReporterSwitch>
+  </RunConfiguration>
+</RunSettings>
+```
+
+- `.runsettings` 파일을 이용하여 reporter을 `xunit.runner.visualstudio`에서 `allure`으로 변경합니다.
+  - .runsettings-allurereport 대신 `dotnet test -- RunConfiguration.ReporterSwitch=allure` 명령으로 대체할 수 있습니다.
+  - https://xunit.net/docs/runsettings#ReporterSwitch
+
 ### Allure Report 생성
 
 ```shell
@@ -159,6 +149,14 @@ allure generate .\.allure-results\ --clean -o .\.allure-report
 # Allure Report 웹사이트 열기
 allure open .\.allure-report
 ```
+
+### .gitignore
+```.gitignore
+.allure-results/
+.allure-report/
+```
+
+- Allure에서 생성하는 결과 파일은 형상관리 대상에서 제외 시킵니다.
 
 <br/>
 
