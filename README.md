@@ -93,11 +93,10 @@
 - 017 | 테스트 | [테스트 보고서 (Allure Report)](./03-guide/test/test-allurereport.md)
 - 018 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./03-guide/test/test-reqnroll.md)
 - 019 | 테스트 | [스냅샷 (Snapshot)](./03-guide/test/test-snapshot.md)
-- 020 | 테스트 | 행위 주도 (BDD: Behavior-Driven Development)
-- 021 | 아키텍처 테스트 | 레이어 의존성
-- 022 | 아키텍처 테스트 | 사용자 정의 규칙
-- 023 | 아키텍처 테스트 | 도메인 타입 규칙 (정적 메서드: Create, Validate, 생성자: private, Parameter less)
-- 024 | 아키텍처 테스트 | 중첩 클래스 규칙
+- 020 | 아키텍처 테스트 | 레이어 의존성
+- 021 | 아키텍처 테스트 | 사용자 정의 규칙
+- 022 | 아키텍처 테스트 | 도메인 타입 규칙 (정적 메서드: Create, Validate, 생성자: private, Parameter less)
+- 023 | 아키텍처 테스트 | 중첩 클래스 규칙
 - ...
 
 <br/>
