@@ -97,7 +97,6 @@
 - 021 | 애플리케이션 레이어 | [CQRS 메시지](./03-guide/layer/application-cqrs-message.md)
 - 022 | 애플리케이션 레이어 | 이벤트 메시지
 - 023 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
-
 - ...
 
 <br/>
