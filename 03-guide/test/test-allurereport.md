@@ -100,7 +100,7 @@ allure --version
 
 <br/>
 
-## 솔루션 설정정
+## 솔루션 설정
 
 ### .runsettings-allurereport
 ```xml
@@ -126,7 +126,7 @@ allure --version
 
 <br/>
 
-## 테스트 프로젝트
+## xUnit 테스트 프로젝트
 ### Allure.Xunt 패키지
   - Allure.Xunit: `2.12.1`
   - **System.Text.Json: `9.0.4`** (Allure.Xunit 2.12.1 버전에서 System.Text.Json 8.0.1 버전(vulnerability)을 사용하고 있기 때문에 업그레이드합니다)
@@ -162,22 +162,24 @@ allure open .\.allure-report
 
 <br/>
 
-## 테스트 실행행 스크립트
+## 테스트 실행 스크립트
+
+### Build-Test.bat
 ```bat
 @echo off
 setlocal
 
-REM === 설정 ===
-set "SCRIPT=Build-Test.ps1"
+:: 설정
 set "ROOT_PATH=./"
 set "RUNSETTINGS_PATH=.\.runsettings-allurereport"
 
-REM === PowerShell 실행 ===
-powershell -NoProfile -ExecutionPolicy Bypass -File "%SCRIPT%" -RootPath "%ROOT_PATH%" -RunSettingsPath "%RUNSETTINGS_PATH%"
+:: 현재 디렉터리 기준 PowerShell 스크립트 실행
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Build-Test.ps1" -RootPath "%ROOT_PATH%" -RunSettingsPath "%RUNSETTINGS_PATH%"
 
 endlocal
 ```
 
+### Build-Test.ps1
 ```powershell
 param (
     [Parameter(Mandatory = $true)]
