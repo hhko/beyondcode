@@ -21,7 +21,6 @@ function Run-Step {
 
 # Allure 관련 패키지 이름 키워드
 $allurePackageKeywords = @(
-    "Allure.Commons",
     "Allure.Xunit",
     "Allure.Reqnroll"
 )

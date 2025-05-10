@@ -204,7 +204,6 @@ function Run-Step {
 
 # Allure 관련 패키지 이름 키워드
 $allurePackageKeywords = @(
-    "Allure.Commons",
     "Allure.Xunit",
     "Allure.Reqnroll"
 )
@@ -296,3 +295,6 @@ if ($allureUsed) {
     Write-Host "No test project used Allure packages. Skipping report generation."
 }
 ```
+
+- `<IsTestProject>true</IsTestProject>`: 해당 프로젝트가 테스트 프로젝트임을 나타내는 속성입니다.
+- `Allure.Xunit`, `Allure.Reqnroll`: Allure Report 사용 여부를 판별하기 위해 확인하는 NuGet 패키지입니다.
