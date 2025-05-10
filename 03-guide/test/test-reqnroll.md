@@ -19,7 +19,9 @@
 
 <br/>
 
-## 테스트 시나리오
+## 도메인 규칙 테스트
+- Subscription은 등급이 허용된 개수보다 많은 Gym을 추가할 수 없다.
+
 ```cucumber
 Feature: Subscription
 
