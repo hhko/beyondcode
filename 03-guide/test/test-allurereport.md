@@ -1,4 +1,4 @@
-# 테스트 보고서(Allure Report)
+# 테스트 보고서 (Allure Report)
 
 ## 개요
 - Allure Report는 테스트 실행 결과를 시각적으로 보기 쉽게 정리해주는 리포트 도구입니다.
