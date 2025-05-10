@@ -91,7 +91,7 @@
 - 015 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
 - 016 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
 - 017 | 테스트 | [테스트 보고서 (Allure Report)](./03-guide/test/test-allurereport.md)
-- 018 | 테스트 | [시나리오 테스트 (Reqnroll)](./03-guide/test/test-reqnroll.md)
+- 018 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./03-guide/test/test-reqnroll.md)
 - 019 | 테스트 | [스냅샷 (Snapshot)](./03-guide/test/test-snapshot.md)
 - 020 | 테스트 | 행위 주도 (BDD: Behavior-Driven Development)
 - 021 | 아키텍처 테스트 | 레이어 의존성

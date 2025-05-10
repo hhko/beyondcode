@@ -1,4 +1,4 @@
-# 시나리오 테스트 (Reqnroll)
+# 도메인 규칙 테스트 (BDD: Reqnroll)
 
 ## 개요
 - `Reqnroll`을 사용하여 `BDD(Behavior-Driven Development)` 테스트 시나리오를 작성하여 도메인 회귀 버그를 최소화합니다.
