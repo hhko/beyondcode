@@ -15,9 +15,8 @@
 <br/>
 
 ## Allure Report v2 설치
-- https://github.com/allure-framework/allure2/releases
-  - `allure-*.zip` 최신 버전 다운로드
 
+### Install-AllureReport.bat
 ```bat
 @echo off
 setlocal
@@ -27,13 +26,16 @@ set "ALLURE_VERSION=allure-2.34.0"
 set "INSTALL_DIR=C:\Workspace\Tools"
 
 :: 현재 디렉터리 기준 PowerShell 스크립트 실행
-powershell.exe -ExecutionPolicy Bypass -NoProfile -File "%~dp0install-AllureReport.ps1" -AllureVersion "%ALLURE_VERSION%" -InstallDir "%INSTALL_DIR%"
+powershell.exe -ExecutionPolicy Bypass -NoProfile -File "%~dp0Install-AllureReport.ps1" -AllureVersion "%ALLURE_VERSION%" -InstallDir "%INSTALL_DIR%"
 
 endlocal
 ```
 - `ALLURE_VERSION`에 설치할 allure report 버전을 명시합니다.
+  - https://github.com/allure-framework/allure2/releases
+  - `allure-*.zip` 최신 버전 다운로드
 - `INSTALL_DIR`은 allure report을 설치할 경로입니다.
 
+### Install-AllureReport.ps1
 ```powershell
 param (
     [Parameter(Mandatory = $true)]
@@ -98,7 +100,7 @@ allure --version
 
 <br/>
 
-## 솔루션
+## 솔루션 설정정
 
 ### .runsettings-allurereport
 ```xml
@@ -127,8 +129,8 @@ allure --version
 ## 테스트 프로젝트
 ### Allure.Xunt 패키지
   - Allure.Xunit: `2.12.1`
-  - **System.Text.Json: `9.0.4`** (Allure.Xunit 2.12.1 버전에서 System.Text.Json 8.0.1 버전을 사용하고 있기 때문에 업그레이드합니다)
-  - xunit: `2.9.3
+  - **System.Text.Json: `9.0.4`** (Allure.Xunit 2.12.1 버전에서 System.Text.Json 8.0.1 버전(vulnerability)을 사용하고 있기 때문에 업그레이드합니다)
+  - xunit: `2.9.3`
   - **xunit.runner.visualstudio: `2.8.2`**
     - **.NET 9.0과 Allure.Xunit 2.12.1 버전에서는 xunit.runner.visualstudio 3.x.x 버전일 때는 정상동작하지 않습니다.**
 
@@ -146,7 +148,7 @@ allure --version
   <Content Include="allureConfig.json" CopyToOutputDirectory="PreserveNewest" />
 </ItemGroup>
 ```
-- `allureConfig.json`을 이용하여 Allure Report 생성을 위한 데이터 파일을 생성 경로 `.allure-results` 폴더의 상대 경로를 지정합니다.
+- `allureConfig.json` 파일을 통해 테스트 실행 시 생성되는 Allure 파일의 저장 위치를 `.allure-results` 폴더로 설정합니다.
 
 ### Allure Report 생성
 
@@ -160,7 +162,7 @@ allure open .\.allure-report
 
 <br/>
 
-## 테스트 스크립트
+## 테스트 실행행 스크립트
 ```bat
 @echo off
 setlocal
@@ -176,7 +178,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "%SCRIPT%" -RootPath "%ROOT_
 endlocal
 ```
 
-```poershell
+```powershell
 param (
     [Parameter(Mandatory = $true)]
     [string]$RootPath,  # 예: "./"

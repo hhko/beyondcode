@@ -1,12 +1,11 @@
 @echo off
 setlocal
 
-REM === 설정 ===
-set "SCRIPT=Build-Test.ps1"
+:: 설정
 set "ROOT_PATH=./"
 set "RUNSETTINGS_PATH=.\.runsettings-allurereport"
 
-REM === PowerShell 실행 ===
-powershell -NoProfile -ExecutionPolicy Bypass -File "%SCRIPT%" -RootPath "%ROOT_PATH%" -RunSettingsPath "%RUNSETTINGS_PATH%"
+:: 현재 디렉터리 기준 PowerShell 스크립트 실행
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0Build-Test.ps1" -RootPath "%ROOT_PATH%" -RunSettingsPath "%RUNSETTINGS_PATH%"
 
 endlocal
