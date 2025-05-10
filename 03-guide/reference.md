@@ -1,0 +1,6 @@
+- [x] [Moving IO to the edges of your app: Functional Core, Imperative Shell - Scott Wlaschin](https://www.youtube.com/watch?v=P1vES9AgfC4)
+  - 제목이 함수형 아키텍처의 핵심입니다.
+- [x] [Introducing Bounded Contexts in a monolithic application - Robert Baelde](https://www.youtube.com/watch?v=DhMrqX_qrJE)
+  - Bounded Contexts 적용 절차를 시각적으로 확인할 수 있습니다.
+- [x] [실전! MSA 개발 가이드 (김용욱)](https://www.youtube.com/watch?v=raPJqrtGMxY)
+  - 데이터베이스 분리를 현장 관점에서 이야기합니다.

@@ -405,3 +405,5 @@ FodyWeavers.xsd
 # ------------------------------
 
 .build/
+.allure-results/
+.allure-report/
