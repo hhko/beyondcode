@@ -86,13 +86,13 @@
 - 010 | 프로젝트 | [클래스 기본 접근 제어자 (internal, sealed)](./03-guide/project/project-class-access-modifiers.md)
 - 011 | 프로젝트 | [호스트 옵션](./03-guide/project/project-host-options.md)
 - 012 | 프로젝트 | [소스 생성기](./03-guide/project/project-source-generator.md)
-- 013 | 애플리케이션 레이어 | [CQRS 메시지](./03-guide/layer/application-cqrs-message.md)
-- 014 | 애플리케이션 레이어 | 이벤트 메시지
-- 015 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
-- 016 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
-- 017 | 테스트 | [테스트 보고서 (Allure Report)](./03-guide/test/test-allurereport.md)
-- 018 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./03-guide/test/test-reqnroll.md)
-- 019 | 테스트 | [스냅샷 (Snapshot)](./03-guide/test/test-snapshot.md)
+- 013 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
+- 014 | 테스트 | [테스트 보고서 (Allure Report)](./03-guide/test/test-allurereport.md)
+- 015 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./03-guide/test/test-reqnroll.md)
+- 016 | 테스트 | [스냅샷 (Snapshot)](./03-guide/test/test-snapshot.md)
+- 017 | 애플리케이션 레이어 | [CQRS 메시지](./03-guide/layer/application-cqrs-message.md)
+- 018 | 애플리케이션 레이어 | 이벤트 메시지
+- 019 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
 - 020 | 아키텍처 테스트 | 레이어 의존성
 - 021 | 아키텍처 테스트 | 사용자 정의 규칙
 - 022 | 아키텍처 테스트 | 도메인 타입 규칙 (정적 메서드: Create, Validate, 생성자: private, Parameter less)
