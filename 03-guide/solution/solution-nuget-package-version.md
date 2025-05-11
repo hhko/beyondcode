@@ -50,8 +50,8 @@ upgrade-assistant upgrade
 ![](./solution-nuget-package-version.png)
 
 - 아래는 `xunit.runner.visualstudio`의 버전을 특정 프로젝트(GymManagement.Tests.Scenario)에서만 다르게 지정하는 예입니다.
-  - GymManagement.Tests.Unit: `3.0.2`
-  - GymManagement.Tests.Scenario: `2.8.2`
+  - GymManagement.Tests.Unit: `3.0.2`  <- Directory.Packages.props
+  - GymManagement.Tests.Scenario: `2.8.2` <- 패키지 버전 재정의(오버라이드)
 
 ```xml
 <Project>
@@ -67,4 +67,4 @@ upgrade-assistant upgrade
 ```
 
 - `<Import ...>` 구문은 현재 위치보다 상위에 있는 `Directory.Packages.props` 파일을 자동으로 인지하지 않기 때문에 명시적으로 찾도록 지정합니다.
-- `<PackageVersion Update="..." Version="..." />`는 기존에 정의된 패키지 버전을 해당 프로젝트에서만 덮어쓰는(override) 방식입니다.
+- `<PackageVersion Update="..." Version="..." />`는 기존에 정의된 패키지 버전을 오버라이드합니다.
