@@ -86,7 +86,7 @@ dotnet new packagesprops
 - 예를 들어 테스트용 프로젝트는 새로운 버전의 테스트 러너를 실험적으로 적용하고 싶을 수 있습니다.
 - 이런 경우에는 해당 프로젝트의 `.csproj` 파일에서 아래와 같이 명시적으로 덮어쓸 수 있습니다.
 
-![](solution-package-version.png)
+![](./solution-nuget-package-version.png)
 
 - `xunit.runner.visualstudio` 버전을 특정 프로젝트에서는 다른 버전으로 지정합니다.
   - GymManagement.Tests.Unit: `3.0.2`

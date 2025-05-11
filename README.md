@@ -78,8 +78,8 @@
 - 002 | 솔루션 | [테스트 자동화 (Unit Test, Integration Test)](./03-guide/solution/solution-test-automation.md)
 - 003 | 솔루션 | [폴더 구성](./03-guide/solution/solution-structure-principle.md)
 - 004 | 솔루션 | [.NET SDK 버전 (global.json)](./03-guide/solution/solution-sdk-version.md)
-- 005 | 솔루션 | [NuGet 소스 설정 (nuget.config)](./03-guide/solution/solution-nuget-config.md)
-- 006 | 솔루션 | [NuGet 패키지 버전 중앙 관리 (Directory.Packages.props)](./03-guide/solution/solution-package-version.md)
+- 005 | 솔루션 | [NuGet 저장소 소스 (nuget.config)](./03-guide/solution/solution-nuget-config.md)
+- 006 | 솔루션 | [NuGet 패키지 버전 중앙 관리 (Directory.Packages.props)](./03-guide/solution/solution-nuget-package-version.md)
 - 007 | 솔루션 | 프로젝트 속성 중앙 관리 (Directory.Build.props)
 - 008 | 솔루션 | 전역 버전
 - 009 | 프로젝트 | [어셈블리별 어셈블리 정의 (AssemblyReference.cs)](./03-guide/project/project-assemblyreference.md)
@@ -89,7 +89,7 @@
 - 013 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
 - 014 | 테스트 | [테스트 보고서 (Allure Report)](./03-guide/test/test-allurereport.md)
 - 015 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./03-guide/test/test-reqnroll.md)
-- 016 | 테스트 | [스냅샷 (Snapshot)](./03-guide/test/test-snapshot.md)
+- 016 | 테스트 | [스냅샷 테스트 (Snapshot)](./03-guide/test/test-snapshot.md)
 - 017 | 아키텍처 테스트 | 레이어 의존성
 - 018 | 아키텍처 테스트 | 사용자 정의 규칙
 - 019 | 아키텍처 테스트 | 도메인 타입 규칙 (정적 메서드: Create, Validate, 생성자: private, Parameter less)
