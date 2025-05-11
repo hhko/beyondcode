@@ -4,16 +4,16 @@
 - `FluentValidation`을 활용해 `IOptions<T>`의 유효성 검사를 전용 클래스로 분리하여 구성합니다.
 - 이렇게 하면 설정 검증 로직이 명확해지고, 애플리케이션 시작 시점에 자동으로 검사가 수행되어 잘못된 설정을 조기에 감지할 수 있습니다.
   - `FluentValidation` 기반의 옵션 유효성 검사 구성
-  - **`AddConfigureOptions<TOptions, TValidator>()`** 메서드를 통해 구성 및 등록 간소화
-  - 앱 시작 시 자동으로 `ValidateOnStart()`를 통해 유효성 검사 수행
+  - **`AddConfigureOptions<TOptions, TValidator>()`** 메서드를 통해 의존성 등록 간소화
+  - `ValidateOnStart()`를 통해 앱 시작 시 자동으로 유효성 검사 수행
 
 <br/>
 
 ## 옵션 클래스
 
 - `Options`: 옵션 클래스 접미사
-- `SectionName`: 옵션 섹션 이름(appsettings.json)
-- `Validator`: 옵션 유효성 검사
+- `SectionName`: 옵션 섹션 이름 (appsettings.json)
+- `Validator`: 옵션 유효성 검사 클래스
 
 ### 옵션 클래스 정의
 ```cs
@@ -41,9 +41,9 @@ public class ExampleOptions
 ### 옵션 클래스 의존성 등록
 ```cs
 builder.Services
-    .AddConfigureOptions<
-        ExampleOptions,                         // 옵션
-        ExampleOptions.Validator>(              // 옵션 유효성 검사
+    .AddConfigureOptions<                       // 옵션 유효성 검사를 위한 확장 메서드
+        ExampleOptions,                         // 옵션 클래스
+        ExampleOptions.Validator>(              // 옵션 유효성 검사 클래스
             ExampleOptions.SectionName);        // 옵션 섹션 이름
 ```
 
