@@ -1,4 +1,86 @@
-# TODO
+- Reqnroll xUnit Trait 조정
+- Allure 코드 커버리지
+  {
+    "diagnosticMessages": true,
+    "internalDiagnosticMessages": true
+  }
+
+  # ./TestResults/coverage.cobertura.xml
+  dotnet test <test-project>.csproj `
+    --collect:"XPlat Code Coverage" `
+    --results-directory ./TestResults `
+    --logger "trx"
+
+  dotnet tool install -g dotnet-reportgenerator-globaltool
+
+  reportgenerator `
+    -reports:"TestResults/**/coverage.cobertura.xml" `
+    -targetdir:"CoverageReport" `
+    -reporttypes:"Html;Cobertura"
+
+  dotnet test <test-project>.csproj `
+    --logger:"allure;LogFilePath=allure-results"
+
+  # 설치
+  npm install -g allure-commandline --save-dev
+
+  # 생성
+  allure generate allure-results --clean -o allure-report
+
+  # 열기
+  allure open allure-report
+-----------------------------------------------
+- [ ] Reqnroll 기본 사용법: 도메인 규칙 테스트
+- [ ] DDD 기본 타입 구현
+---
+- [ ] 폴더 정리
+---
+- [ ] 아키텍처 테스트 사용자 정의 규칙 개선
+- [ ] 아키텍처 테스트 프로젝트 분리
+---
+- [ ] MediatR + Fin 통합
+- [ ] LINQ/Task + Fin 통합
+- [ ] 그외 유스케이스
+---
+- [ ] ArchUnitNET 다이어그램
+- [ ] Error + 로그
+---
+- [ ] 파이프라인
+	- 로그/추적/지표
+	- 예외
+	- 유효성 검사
+	- 캐시
+	- 트랜잭션
+- [ ] WebApi 미들웨어
+	- 예외
+	- 타임아웃
+- [ ] 성능 테스트
+---
+- [ ] CQRS (EF Core + Dapper)
+- [ ] EF Core 소스 생성기
+---
+- [ ] IAdapter 소스 생성기
+- [ ] 컨테이너화
+- [ ] FastEndpoints
+- [ ] Aspire
+- [ ] Proxy
+- [ ] Resilience: 다임아웃, 재시도, 스킷브레이커, 벌드헤드, 폴백, ...
+- [ ] RabbitMQ
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```shell
 # 1. .NET SDK
