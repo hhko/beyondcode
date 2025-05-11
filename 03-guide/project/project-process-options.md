@@ -1,4 +1,4 @@
-# 호스트 옵션 (appsettings.json)
+# 프로세스 옵션 (appsettings.json)
 
 ## 개요
 - `FluentValidation`을 활용해 `IOptions<T>`의 유효성 검사를 전용 클래스로 분리하여 구성합니다.
