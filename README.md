@@ -84,7 +84,7 @@
 - 008 | 솔루션 | 전역 버전
 - 009 | 프로젝트 | [어셈블리 정의 (AssemblyReference.cs)](./03-guide/project/project-assemblyreference.md)
 - 010 | 프로젝트 | [클래스 기본 접근 제어자 (internal sealed)](./03-guide/project/project-class-access-modifiers.md)
-- 011 | 프로젝트 | [옵션 유효성 검사 (appsettings.json, IOption<T>)](./03-guide/project/project-options-validation.md)
+- 011 | 프로젝트 | [옵션 유효성 검사 (appsettings.json, IOption&lt;T&gt;)](./03-guide/project/project-options-validation.md)
 - 012 | 프로젝트 | [소스 생성기](./03-guide/project/project-source-generator.md)
 - 013 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
 - 014 | 테스트 | 테스트 설정 (.runsettings)

@@ -1,4 +1,4 @@
-# 옵션 유효성 검사 (appsettings.json, IOption<T>)
+# 옵션 유효성 검사 (appsettings.json, IOption&lt;T&gt;)
 
 ## 개요
 - `FluentValidation`을 활용해 `IOptions<T>`의 유효성 검사를 전용 클래스로 분리하여 구성합니다.
