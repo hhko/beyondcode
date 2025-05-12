@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+
+  <RunConfiguration>
+    <!-- <TargetPlatform>x86</TargetPlatform> -->
+    <!-- <TargetPlatform>x64</TargetPlatform> -->
+
+    <!-- TestCaseFilter expression -->
+    <!-- <TestCaseFilter>(TestCategory != Integration) &amp; (TestCategory != UnfinishedFeature)</TestCaseFilter> -->
+    <ResultsDirectory>.\TestResults</ResultsDirectory>
+  </RunConfiguration>
+
+  <!-- Loggers -->
+  <LoggerRunSettings>
+    <Loggers>
+      <Logger friendlyName="console" enabled="True">
+        <Configuration>
+            <Verbosity>quiet</Verbosity>
+        </Configuration>
+      </Logger>
+      <!-- <Logger friendlyName="trx" enabled="True"> -->
+        <!--
+        <Configuration>
+          <LogFileName>foo.trx</LogFileName>
+        </Configuration>
+        -->
+      <!-- </Logger>
+      <Logger friendlyName="html" enabled="True"> -->
+        <!--
+        <Configuration>
+          <LogFileName>foo.html</LogFileName>
+        </Configuration>
+        -->
+      <!-- </Logger> -->
+      <!-- <Logger friendlyName="blame" enabled="True" /> -->
+    </Loggers>
+  </LoggerRunSettings>
+
+  <!-- Data Collection -->
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Format>cobertura,opencover</Format>
+          <IncludeTestAssembly>False</IncludeTestAssembly>
+          <!-- <Exclude>[*.Tests?]*</Exclude> -->                                <!-- [Assembly-Filter]Type-Filter -->
+          <ExcludeByFile>**/Migrations/*.cs,**/*.g.cs</ExcludeByFile>   <!-- Globbing filter -->
+          <ExcludeByAttribute>Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute</ExcludeByAttribute>
+          <SkipAutoProps>true</SkipAutoProps>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+
+</RunSettings>
