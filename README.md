@@ -84,19 +84,20 @@
 - 008 | 솔루션 | 전역 버전
 - 009 | 프로젝트 | [어셈블리 정의 (AssemblyReference.cs)](./03-guide/project/project-assemblyreference.md)
 - 010 | 프로젝트 | [클래스 기본 접근 제어자 (internal sealed)](./03-guide/project/project-class-access-modifiers.md)
-- 011 | 프로젝트 | [프로세스 옵션 (appsettings.json)](./03-guide/project/project-process-options.md)
+- 011 | 프로젝트 | [옵션 유효성 검사 (appsettings.json, IOption<T>)](./03-guide/project/project-options-validation.md)
 - 012 | 프로젝트 | [소스 생성기](./03-guide/project/project-source-generator.md)
 - 013 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
-- 014 | 테스트 | [테스트 보고서 (Allure Report)](./03-guide/test/test-allurereport.md)
-- 015 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./03-guide/test/test-reqnroll.md)
-- 016 | 테스트 | [스냅샷 테스트 (Snapshot)](./03-guide/test/test-snapshot.md)
-- 017 | 아키텍처 테스트 | 레이어 의존성
-- 018 | 아키텍처 테스트 | 사용자 정의 규칙
-- 019 | 아키텍처 테스트 | 도메인 타입 규칙 (정적 메서드: Create, Validate, 생성자: private, Parameter less)
-- 020 | 아키텍처 테스트 | 중첩 클래스 규칙
-- 021 | 애플리케이션 레이어 | [CQRS 메시지](./03-guide/layer/application-cqrs-message.md)
-- 022 | 애플리케이션 레이어 | 이벤트 메시지
-- 023 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
+- 014 | 테스트 | 테스트 설정 (.runsettings)
+- 015 | 테스트 | [테스트 보고서 (Allure Report)](./03-guide/test/test-allurereport.md)
+- 016 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./03-guide/test/test-reqnroll.md)
+- 017 | 테스트 | [스냅샷 테스트 (Snapshot)](./03-guide/test/test-snapshot.md)
+- 018 | 아키텍처 테스트 | 레이어 의존성
+- 019 | 아키텍처 테스트 | 사용자 정의 규칙
+- 020 | 아키텍처 테스트 | 도메인 타입 규칙 (정적 메서드: Create, Validate, 생성자: private, Parameter less)
+- 021 | 아키텍처 테스트 | 중첩 클래스 규칙
+- 022 | 애플리케이션 레이어 | [CQRS 메시지](./03-guide/layer/application-cqrs-message.md)
+- 023 | 애플리케이션 레이어 | 이벤트 메시지
+- 024 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
 - ...
 
 <br/>
