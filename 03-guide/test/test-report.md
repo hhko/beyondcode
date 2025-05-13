@@ -14,17 +14,17 @@
 
 ```shell
 # 코드 커버리지 보고서
-.coverage-results     : 코드 커버리지 결과
-.coverage-report      : 코드 커버리지 웹사이트 보고서
+.coverage-results           # 코드 커버리지 결과
+.coverage-report            # 코드 커버리지 웹사이트 보고서
 
 # allure 보고서
-.allure-results   : allure 테스트 결과
-.allure-report    : allure 테스트 웹사이트 보고서
+.allure-results             # allure 테스트 결과
+.allure-report              # allure 테스트 웹사이트 보고서
 
 # 스크립트트
-./Build.ps1
-Install-AllureReport.bat
-Install-AllureReport.ps1
+./Build.ps1                 # 빌드 스크립트
+Install-AllureReport.bat    # allure report 설치 스크립트
+Install-AllureReport.ps1    # allure report 설치 스크립트
 
 # 솔루션 파일
 {솔루션}.sln
