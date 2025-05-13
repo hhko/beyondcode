@@ -7,7 +7,7 @@
 
     <!-- TestCaseFilter expression -->
     <!-- <TestCaseFilter>(TestCategory != Integration) &amp; (TestCategory != UnfinishedFeature)</TestCaseFilter> -->
-    <ResultsDirectory>.\TestResults</ResultsDirectory>
+    <ResultsDirectory>.\.coverage-results</ResultsDirectory>
   </RunConfiguration>
 
   <!-- Loggers -->

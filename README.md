@@ -88,7 +88,7 @@
 - 012 | 프로젝트 | [소스 생성기](./03-guide/project/project-source-generator.md)
 - 013 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
 - 014 | 테스트 | 테스트 설정 (.runsettings)
-- 015 | 테스트 | [테스트 보고서 (Allure Report)](./03-guide/test/test-allurereport.md)
+- 015 | 테스트 | [테스트 보고서 (Code Coverage Report, Allure Report)](./03-guide/test/test-report.md)
 - 016 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./03-guide/test/test-reqnroll.md)
 - 017 | 테스트 | [스냅샷 테스트 (Snapshot)](./03-guide/test/test-snapshot.md)
 - 018 | 아키텍처 테스트 | 레이어 의존성

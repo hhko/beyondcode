@@ -1,0 +1,6 @@
+{
+  "$schema": "https://raw.githubusercontent.com/allure-framework/allure-csharp/2.10.0/Allure.XUnit/Schemas/allureConfig.hema.json",
+  "allure": {
+    "directory": "../../../../.allure-results"
+  }
+}

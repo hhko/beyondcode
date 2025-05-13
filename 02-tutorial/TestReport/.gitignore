@@ -488,5 +488,8 @@ $RECYCLE.BIN/
 # 사용자 정의
 #
 
-# 빌드 결과
-.build/
+# 테스트 보고서
+.allure-results/
+.allure-report/
+.coverage-results/
+.coverage-report/
