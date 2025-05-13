@@ -186,7 +186,7 @@ allure --version
 
 <br/>
 
-## xUnit 테스트 프로젝트 설정
+## xUnit 테스트 프로젝트
 ### Allure.Xunt 패키지
 - Allure.Xunit: `2.12.1`
   - **System.Text.Json: `9.0.4`** (Allure.Xunit 2.12.1 버전에서 System.Text.Json vulnerability 버전을 사용하고 있기 때문에 업그레이드합니다)
@@ -194,7 +194,7 @@ allure --version
 - xunit: `2.9.3`
   - **xunit.runner.visualstudio: `2.8.2`** (.NET 9.0과 Allure.Xunit 2.12.1 버전에서는 xunit.runner.visualstudio 3.x.x 버전일 때는 정상동작하지 않습니다)
 
-### Allure Results 생성
+### allureConfig.json
 ```json
 {
   "$schema": "https://raw.githubusercontent.com/allure-framework/allure-csharp/2.10.0/Allure.XUnit/Schemas/allureConfig.hema.json",
@@ -203,16 +203,18 @@ allure --version
   }
 }
  ```
+
+- `.allure-results` 출력 경로를 `allureConfig.json` 파일로 지정합니다.
+
 ```xml
 <ItemGroup>
   <Content Include="allureConfig.json" CopyToOutputDirectory="PreserveNewest" />
 </ItemGroup>
 ```
-- `allureConfig.json` 파일을 통해 테스트 실행 시 생성되는 Allure 파일의 저장 위치를 `.allure-results` 폴더로 설정합니다.
+- `allureConfig.json` 파일을 배포에 포함 시킵니다.
+- `dotnet test`을 수행하면 `.allure-results` 폴더에 테스트 결과를 생성합니다.
 
-## 솔루션 설정
-
-### .runsettings-allurereport
+### 테스트 구성 (.runsettings)
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
