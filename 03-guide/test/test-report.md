@@ -317,7 +317,7 @@ Run-Step "🧪 Run Tests with Code Coverage" {
 # 코드 커버리지 리포트 생성 (reportgenerator 사용)
 Run-Step "📊 Generate Code Coverage Report" {
   reportgenerator `
-    -reports:"./**/TestResults/*/*.cobertura.xml" `
+    -reports:"./**/.coverage-results/*/*.cobertura.xml" `
     -targetdir:"./.coverage-report/" `
     -reporttypes:"Html;TextSummary;MarkdownSummaryGithub;MarkdownAssembliesSummary" `
     -verbosity:Info
@@ -353,3 +353,5 @@ if ($OpenAllure) {
   }
 }
 ```
+
+![](./test-report-build.png)
