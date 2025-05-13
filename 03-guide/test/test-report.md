@@ -12,6 +12,24 @@
 - 테스트 상황(코드 커버리지, 테스트 내용)을 웹 기반 리포트로 공유합니다.
 - 테스트 프로젝트에서는 Allure 관련 NuGet 패키지를 추가하고, `allureConfig.json` 파일을 설정하여 Allure 결과 파일(.allure-results)을 생성합니다.
 
+```shell
+# 코드 커버리지 보고서
+.coverage-results     : 코드 커버리지 결과
+.coverage-report      : 코드 커버리지 웹사이트 보고서
+
+# allure 보고서
+.allure-results   : allure 테스트 결과
+.allure-report    : allure 테스트 웹사이트 보고서
+
+# 스크립트트
+./Build.ps1
+Install-AllureReport.bat
+Install-AllureReport.ps1
+
+# 솔루션 파일
+{솔루션}.sln
+```
+
 <br/>
 
 ## Code Coverage
