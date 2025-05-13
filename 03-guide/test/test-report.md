@@ -4,7 +4,7 @@
 - Allure Report는 테스트 실행 결과를 시각적으로 보기 쉽게 정리해주는 리포트 도구입니다.
 - .NET 프로젝트에서 xUnit, Reqnroll과 함께 사용하면 테스트 결과를 웹 기반 리포트로 확인할 수 있어 매우 유용합니다.
 
-![](./test-allurereport.png)
+![](./test-report-allurereport.png)
 
 <br/>
 
