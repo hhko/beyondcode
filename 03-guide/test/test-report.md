@@ -1,40 +1,45 @@
 # 테스트 보고서 (Code Coverage Report, Allure Report)
 
 ## 개요
-- Allure Report는 테스트 실행 결과를 시각적으로 보기 쉽게 정리해주는 리포트 도구입니다.
-- .NET 프로젝트에서 xUnit, Reqnroll과 함께 사용하면 테스트 결과를 웹 기반 리포트로 확인할 수 있어 매우 유용합니다.
+- Allure Report는 테스트 실행 결과를 웹 기반 리포트로 시각화해주는 도구입니다.
+- 코드 커버리지 리포트는 테스트된 코드의 범위를 분석하고 시각화합니다.
+- `.NET + xUnit + Reqnroll` 기반 테스트 프로젝트에서 Allure 및 코드 커버리지 보고서 생성 방법을 설명합니다.
 
 ![](./test-report-allurereport.png)
 
 <br/>
 
 ## 지침
-- 테스트 상황(코드 커버리지, 테스트 내용)을 웹 기반 리포트로 공유합니다.
-- 테스트 프로젝트에서는 Allure 관련 NuGet 패키지를 추가하고, `allureConfig.json` 파일을 설정하여 Allure 결과 파일(.allure-results)을 생성합니다.
+- 테스트 결과는 웹 기반 리포트 형식으로 생성하여 팀원들과 쉽게 공유할 수 있도록 합니다.
+  - 코드 커버리지: ReportGenerator
+  - 테스트 내용: Allure Report
+- 각 테스트 프로젝트에는 다음 구성을 적용합니다:
+  - `Allure.Xunit` 등 Allure 관련 NuGet 패키지를 추가합니다.
+  - 프로젝트 루트에 `allureConfig.json` 파일을 생성하고, Allure 결과 파일(`.allure-results`)이 지정된 디렉터리에 출력되도록 설정합니다.
+- 테스트 실행 및 리포트 생성을 자동화하기 위해 통합 테스트 스크립트(`Build.ps1`)를 작성하고, 이를 CI/CD 파이프라인에 통합합니다.
 
 ```shell
-# 코드 커버리지 보고서
-.coverage-results           # 코드 커버리지 결과
-.coverage-report            # 코드 커버리지 웹사이트 보고서
-
-# allure 보고서
-.allure-results             # allure 테스트 결과
-.allure-report              # allure 테스트 웹사이트 보고서
-
-# 스크립트트
-./Build.ps1                 # 빌드 스크립트
-Install-AllureReport.bat    # allure report 설치 스크립트
-Install-AllureReport.ps1    # allure report 설치 스크립트
-
-# 솔루션 파일
-{솔루션}.sln
+{솔루션}/
+ ├─ .coverage-results/         # 코드 커버리지 결과 파일
+ ├─ .coverage-report/          # 코드 커버리지 웹 리포트
+ │
+ ├─ .allure-results/           # Allure 테스트 결과 파일
+ ├─ .allure-report/            # Allure 리포트 HTML 결과
+ │
+ ├─ .runsettings               # 테스트 설정 파일
+ ├─ Build.ps1                  # 통합 테스트 리포트 스크립트
+ │
+ ├─ Install-AllureReport.bat   # Allure 설치 스크립트
+ ├─ Install-AllureReport.ps1   # Allure 설치 스크립트
+ │
+ └─ {Solution}.sln
 ```
 
 <br/>
 
-## Code Coverage
+## 코드 커버리지 보고서
 
-### 테스트 구성 (.runsettings)
+### 테스트 설정 파일 (.runsettings)
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
@@ -58,7 +63,7 @@ Install-AllureReport.ps1    # allure report 설치 스크립트
   <!-- Data Collection -->
   <DataCollectionRunSettings>
     <DataCollectors>
-      <DataCollector friendlyName="XPlat code coverage">
+      <DataCollector friendlyName="XPlat 코드 커버리지">
         <Configuration>
           <Format>cobertura,opencover</Format>
           <Exclude>[*.Tests?]*</Exclude>                                <!-- [Assembly-Filter]Type-Filter -->
@@ -73,7 +78,7 @@ Install-AllureReport.ps1    # allure report 설치 스크립트
 </RunSettings>
 ```
 
-### 테스트
+### 테스트 실행
 
 ```shell
 dotnet test --settings .runsettings
@@ -84,10 +89,9 @@ dotnet test --settings .runsettings
 #     coverage.opencover.xml
 ```
 
-- 솔루션 파일이 있는 하위 경로에 `.\.coverage-results` 폴더를 생성하여 테스트 프로젝트 단위로 코드 커버리지 결과 파일을 생성합니다.
+- 프로젝트별로 GUID가 부여된 폴더가 생성되어 `./.coverage-results/`에 코드 커버리지 XML이 저장됩니다.
 
-
-### 코드 커버리지
+### 코드 커버리지 보고서 생성
 ```shell
 reportgenerator `
   -reports:"./**/TestResults/*/*.cobertura.xml" `
@@ -96,13 +100,13 @@ reportgenerator `
   -verbosity:Info
 ```
 
-- `./.coverage-report/` 폴더에 코드 커버리지 웹 사이트 보고서를 생성합니다.
+- `./.coverage-report/`에 코드 커버리지 웹 사이트 보고서를 생성합니다.
 
 <br/>
 
 ## Allure Report v2 설치
 
-### Install-AllureReport.bat
+### 설치 스크립트 (Install-AllureReport.bat)
 ```bat
 @echo off
 setlocal
@@ -121,7 +125,7 @@ endlocal
   - `allure-*.zip` 최신 버전 다운로드
 - `INSTALL_DIR`은 allure report을 설치할 경로입니다.
 
-### Install-AllureReport.ps1
+### 설치 스크립트 (Install-AllureReport.ps1)
 ```powershell
 param (
     [Parameter(Mandatory = $true)]
@@ -186,8 +190,8 @@ allure --version
 
 <br/>
 
-## xUnit 테스트 프로젝트
-### Allure.Xunt 패키지
+## xUnit 테스트 프로젝트 구성
+### NuGet 패키지
 - Allure.Xunit: `2.12.1`
   - **System.Text.Json: `9.0.4`** (Allure.Xunit 2.12.1 버전에서 System.Text.Json vulnerability 버전을 사용하고 있기 때문에 업그레이드합니다)
   - **System.Net.Http: `4.3.4`** (Allure.Xunit 2.12.1 버전에서 System.Net.Http vulnerability 버전을 사용하고 있기 때문에 업그레이드합니다)
@@ -204,7 +208,7 @@ allure --version
 }
  ```
 
-- `.allure-results` 출력 경로를 `allureConfig.json` 파일로 지정합니다.
+- `.allure-results` 출력 경로를 `allureConfig.json` 파일에서 지정합니다.
 
 ```xml
 <ItemGroup>
@@ -214,7 +218,7 @@ allure --version
 - `allureConfig.json` 파일을 배포에 포함 시킵니다.
 - `dotnet test`을 수행하면 `.allure-results` 폴더에 테스트 결과를 생성합니다.
 
-### 테스트 구성 (.runsettings)
+### 테스트 설정 파일 (.runsettings)
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
@@ -228,7 +232,7 @@ allure --version
   - .runsettings-allurereport 대신 `dotnet test -- RunConfiguration.ReporterSwitch=allure` 명령으로 대체할 수 있습니다.
   - https://xunit.net/docs/runsettings#ReporterSwitch
 
-### Allure Report 생성
+### Allure Report 생성 및 열기기
 
 ```shell
 # Allure Report 생성
@@ -240,7 +244,7 @@ allure open .\.allure-report
 
 <br/>
 
-## 테스트 보고서 생성
+## 통합 테스트 보고서
 
 ### .gitignore
 ```.gitignore
@@ -251,7 +255,7 @@ allure open .\.allure-report
 .coverage-report/
 ```
 
-### 테스트 스크립트
+### 통합 테스트 보고서 스크립트
 ```powershell
 # -OpenAllure:$false
 # -OpenCoverage:$false
