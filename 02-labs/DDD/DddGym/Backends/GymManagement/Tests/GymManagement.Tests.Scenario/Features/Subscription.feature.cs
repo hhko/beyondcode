@@ -24,9 +24,8 @@ namespace GymManagement.Tests.Scenario.Features
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Subscription", "Subscription은 허용된 개수보다 많은 Gym을 추가할 수 없다.\r\n- **구독, Subscription**\r\n  - AddGym\r\n   " +
-                " > - 구독은 구독(구독 등급)이 허용된 개수보다 더 많은 헬스장을 가질 수 없다.\r\n    > - A subscription cannot h" +
-                "ave more gyms than the subscription allows", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Subscription", "Subscription은 등급이 허용된 개수보다 많은 Gym을 추가할 수 없다.\r\nA subscription cannot have more gym" +
+                "s than the subscription allows", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
@@ -137,7 +136,7 @@ namespace GymManagement.Tests.Scenario.Features
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Basic 등급 – 최대 2개 Gym 제한", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 10
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -147,22 +146,22 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 await this.ScenarioStartAsync();
-#line 11
+#line 8
  await testRunner.GivenAsync("사용자가 Basic 등급의 Subscription을 가지고 있다.", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 12
+#line 9
     await testRunner.AndAsync("이 구독 등급은 최대 2개의 Gym까지 허용한다.", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 13
+#line 10
     await testRunner.AndAsync("현재 2개의 Gym이 이미 등록되어 있다.", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 15
+#line 12
  await testRunner.WhenAsync("사용자가 새로운 Gym을 Subscription에 추가하려고 시도한다.", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 17
+#line 14
     await testRunner.ThenAsync("시스템은 Gym 추가를 거부한다.", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 18
+#line 15
     await testRunner.AndAsync("사용자에게 \"허용된 Gym 개수를 초과했습니다\"라는 오류 메시지를 표시한다.", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
