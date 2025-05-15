@@ -51,8 +51,8 @@ jobs:
     #  - ${{ github.run_number }}
     #  - ${{ github.run_id }}
     env:
-      solution_dir:       ./02-tutorial/ddd/DddGym
-      build_dir:          ./02-tutorial/ddd/DddGym/.build
+      solution_dir:       ./02-labs/DDD/DddGym
+      build_dir:          ./02-labs/DDD/DddGym/.build
       solution_filename:  DddGym.sln
 
     steps:
@@ -123,7 +123,7 @@ jobs:
             # .runsettings 설정 파일 사용하지 않을 때
             #   --collect "XPlat Code Coverage" \
             #   --logger "trx;LogFileName=logs.trx"
-            
+
       # 코드 커버리지
       #  - https://github.com/danielpalme/ReportGenerator-GitHub-Action
       #

@@ -27,7 +27,7 @@
 - **예측 가능한 동작**
   - 도메인 주도 설계: 명확한 경계 (Bounded Context)
   - 함수형 프로그래밍: 순수 함수 지향
-- **정확한 도메인 표현**
+- **풍부한 도메인 표현**
   - 도메인 주도 설계: 명확한 의미 부여 (Ubiquitous Language)
   - 함수형 프로그래밍: 타입 기반 설계
 
@@ -39,7 +39,7 @@
 ![](./.images/ArchitectureTechMap.png)
 
 ### Internal 아키텍처 (Hexagonal 아키텍처)
-![](./03-guide/solution/solution-separation-of-concerns-hexagonal-architecture.png)
+![](./01-guide/solution/solution-separation-of-concerns-hexagonal-architecture.png)
 
 - 도메인
   - `LanguageExt.Core`: 함수형
@@ -74,30 +74,30 @@
 <br/>
 
 ## 글쓰기 지침
-- 001 | 솔루션 | [관심사의 분리 (Separation of Concerns)](./03-guide/solution/solution-separation-of-concerns.md)
-- 002 | 솔루션 | [테스트 자동화 (Unit Test, Integration Test)](./03-guide/solution/solution-test-automation.md)
-- 003 | 솔루션 | [폴더 구성](./03-guide/solution/solution-structure-principle.md)
-- 004 | 솔루션 | [.NET SDK 버전 (global.json)](./03-guide/solution/solution-sdk-version.md)
-- 005 | 솔루션 | [NuGet 저장소 소스 (nuget.config)](./03-guide/solution/solution-nuget-config.md)
-- 006 | 솔루션 | [NuGet 패키지 버전 중앙 관리 (Directory.Packages.props)](./03-guide/solution/solution-nuget-package-version.md)
+- 001 | 솔루션 | [관심사의 분리 (Separation of Concerns)](./01-guide/solution/solution-separation-of-concerns.md)
+- 002 | 솔루션 | [테스트 자동화 (Unit Test, Integration Test)](./01-guide/solution/solution-test-automation.md)
+- 003 | 솔루션 | [폴더 구성](./01-guide/solution/solution-structure-principle.md)
+- 004 | 솔루션 | [.NET SDK 버전 (global.json)](./01-guide/solution/solution-sdk-version.md)
+- 005 | 솔루션 | [NuGet 저장소 소스 (nuget.config)](./01-guide/solution/solution-nuget-config.md)
+- 006 | 솔루션 | [NuGet 패키지 버전 중앙 관리 (Directory.Packages.props)](./01-guide/solution/solution-nuget-package-version.md)
 - 007 | 솔루션 | 프로젝트 속성 중앙 관리 (Directory.Build.props)
 - 008 | 솔루션 | 전역 버전
-- 009 | 프로젝트 | [어셈블리 정의 (AssemblyReference.cs)](./03-guide/project/project-assemblyreference.md)
-- 010 | 프로젝트 | [클래스 기본 접근 제어자 (internal sealed)](./03-guide/project/project-class-access-modifiers.md)
-- 011 | 프로젝트 | [옵션 유효성 검사 (appsettings.json, IOption&lt;T&gt;)](./03-guide/project/project-options-validation.md)
-- 012 | 프로젝트 | [소스 생성기](./03-guide/project/project-source-generator.md)
-- 013 | 테스트 | [테스트 범주화](./03-guide/test/test-category.md)
+- 009 | 프로젝트 | [어셈블리 정의 (AssemblyReference.cs)](./01-guide/project/project-assemblyreference.md)
+- 010 | 프로젝트 | [클래스 기본 접근 제어자 (internal sealed)](./01-guide/project/project-class-access-modifiers.md)
+- 011 | 프로젝트 | [옵션 유효성 검사 (appsettings.json, IOption&lt;T&gt;)](./01-guide/project/project-options-validation.md)
+- 012 | 프로젝트 | [소스 생성기](./01-guide/project/project-source-generator.md)
+- 013 | 테스트 | [테스트 범주화](./01-guide/test/test-category.md)
 - 014 | 테스트 | 테스트 설정 (.runsettings)
-- 015 | 테스트 | [테스트 보고서 (Code Coverage Report, Allure Report)](./03-guide/test/test-report.md)
-- 016 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./03-guide/test/test-reqnroll.md)
-- 017 | 테스트 | [스냅샷 테스트 (Snapshot)](./03-guide/test/test-snapshot.md)
+- 015 | 테스트 | [테스트 보고서 (Code Coverage Report, Allure Report)](./01-guide/test/test-report.md)
+- 016 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./01-guide/test/test-reqnroll.md)
+- 017 | 테스트 | [스냅샷 테스트 (Snapshot)](./01-guide/test/test-snapshot.md)
 - 018 | 아키텍처 테스트 | 레이어 의존성
 - 019 | 아키텍처 테스트 | 사용자 정의 규칙
 - 020 | 아키텍처 테스트 | 도메인 타입 규칙 (정적 메서드: Create, Validate, 생성자: private, Parameter less)
 - 021 | 아키텍처 테스트 | 중첩 클래스 규칙
-- 022 | 애플리케이션 레이어 | [CQRS 메시지](./03-guide/layer/application-cqrs-message.md)
+- 022 | 애플리케이션 레이어 | [CQRS 메시지](./01-guide/layer/application-cqrs-message.md)
 - 023 | 애플리케이션 레이어 | 이벤트 메시지
-- 024 | 애플리케이션 레이어 | [파이프라인](./03-guide/layer/application-pipelines.md)
+- 024 | 애플리케이션 레이어 | [파이프라인](./01-guide/layer/application-pipelines.md)
 - ...
 
 <br/>

@@ -73,8 +73,8 @@ function nav(): DefaultTheme.NavItem[] {
   return [
     { text: '홈', link: '/' },
     { text: '아키텍처', link: '/01-architecture/part1-overview/ch01-architecture/'},
-    { text: '튜토리얼', link: '/02-tutorial/ddd/ch01-domain-glossary/' },
-    { text: '참고', link: '/04-reference/' },
+    // { text: '튜토리얼', link: '/02-tutorial/ddd/ch01-domain-glossary/' },
+    // { text: '참고', link: '/04-reference/' },
   ];
 }
 
@@ -178,21 +178,21 @@ function sidebar(): DefaultTheme.Sidebar {
         ],
       },
     ],
-    '/02-tutorial/': [
-      {
-        text: '튜토리얼',
-        items: [
-          {
-            text: '도메인 주도 설계', link: '/02-tutorial/ddd/',
-            collapsed: false,
-            items: [
-              { text: '도메인 용어', link: '/02-tutorial/ddd/ch01-domain-glossary/'},
-              { text: '도메인 탐색', link: '/02-tutorial/ddd/ch02-domain-exploration/'},
-            ]
-          }
-        ]
-      }
-    ],
+    // '/02-tutorial/': [
+    //   {
+    //     text: '튜토리얼',
+    //     items: [
+    //       {
+    //         text: '도메인 주도 설계', link: '/02-tutorial/ddd/',
+    //         collapsed: false,
+    //         items: [
+    //           { text: '도메인 용어', link: '/02-tutorial/ddd/ch01-domain-glossary/'},
+    //           { text: '도메인 탐색', link: '/02-tutorial/ddd/ch02-domain-exploration/'},
+    //         ]
+    //       }
+    //     ]
+    //   }
+    // ],
   }
 }
 
