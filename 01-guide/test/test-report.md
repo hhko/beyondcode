@@ -94,7 +94,7 @@ dotnet test --settings .runsettings
 ### 코드 커버리지 보고서 생성
 ```shell
 reportgenerator `
-  -reports:"./**/TestResults/*/*.cobertura.xml" `
+  -reports:"./**/.coverage-results/*/*.cobertura.xml" `
   -targetdir:"./.coverage-report/" `
   -reporttypes:"Html;TextSummary;MarkdownSummaryGithub;MarkdownAssembliesSummary" `
   -verbosity:Info
@@ -255,7 +255,7 @@ allure open .\.allure-report
 .coverage-report/
 ```
 
-### 통합 테스트 보고서 스크립트
+### 통합 테스트 스크립트
 ```powershell
 # -OpenAllure:$false
 # -OpenCoverage:$false
