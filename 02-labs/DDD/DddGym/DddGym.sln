@@ -53,6 +53,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalDdd.SourceGenerat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Tests.Scenario", "Backends\GymManagement\Tests\GymManagement.Tests.Scenario\GymManagement.Tests.Scenario.csproj", "{5AFC0018-B776-4BF1-ACAC-F680276137A5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C1F4594D-388A-4787-B1F8-81241AF7388E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymDdd.Tests.Architecture", "Tests\GymDdd.Tests.Architecture\GymDdd.Tests.Architecture.csproj", "{F2F81799-24FA-4B42-A7D9-EB91D6193310}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +119,10 @@ Global
 		{5AFC0018-B776-4BF1-ACAC-F680276137A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AFC0018-B776-4BF1-ACAC-F680276137A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AFC0018-B776-4BF1-ACAC-F680276137A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F81799-24FA-4B42-A7D9-EB91D6193310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F81799-24FA-4B42-A7D9-EB91D6193310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F81799-24FA-4B42-A7D9-EB91D6193310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F81799-24FA-4B42-A7D9-EB91D6193310}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,5 +151,6 @@ Global
 		{7251B6D7-C0EC-4D20-8703-F7CE8B95F198} = {3B7915A3-0C54-4DA6-B44D-DE2E5BDD2450}
 		{373AD61C-3270-4B3E-A54D-31242CA249F5} = {A2ADC783-004A-496F-926F-C557D71F5FF6}
 		{5AFC0018-B776-4BF1-ACAC-F680276137A5} = {FEB78779-8A86-4409-86B0-02D8E234F4A2}
+		{F2F81799-24FA-4B42-A7D9-EB91D6193310} = {C1F4594D-388A-4787-B1F8-81241AF7388E}
 	EndGlobalSection
 EndGlobal

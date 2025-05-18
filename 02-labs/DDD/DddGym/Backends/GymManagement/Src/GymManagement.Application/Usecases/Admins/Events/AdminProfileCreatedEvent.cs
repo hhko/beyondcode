@@ -7,7 +7,7 @@ namespace GymManagement.Application.Usecases.Admins.Events.AdminProfileCreated;
 
 public static class AdminProfileCreatedEvent
 {
-    internal sealed class Validator 
+    internal sealed class Validator
         : AbstractValidator<UserEvents.AdminProfileCreatedEvent>
     {
 

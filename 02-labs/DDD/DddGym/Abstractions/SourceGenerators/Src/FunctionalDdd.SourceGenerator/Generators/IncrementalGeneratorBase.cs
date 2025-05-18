@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using static FunctionalDdd.SourceGenerator.Abstractions.Constants;
 
 namespace FunctionalDdd.SourceGenerator.Generators;
 
@@ -36,7 +35,7 @@ public abstract class IncrementalGeneratorBase<TValue>(
         IncrementalValuesProvider<TValue> provider = _registerSourceProvider(context)
             //.WithTrackingName(TrackingNames.InitialValues)
             .Where(static m => m is not null);
-            //.WithTrackingName(TrackingNames.NotNullValues);
+        //.WithTrackingName(TrackingNames.NotNullValues);
 
         context.RegisterSourceOutput(provider.Collect(), Execute);
     }

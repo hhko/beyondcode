@@ -57,7 +57,7 @@ public class GenerateEntityIdAttribute : global::System.Attribute;
                 fullyQualifiedMetadataName: GenerateEntityIdAttributeMetadataName,  // System.GenerateEntityIdAttribute
                 predicate: Selectors.IsClass,                                       // 클래스 선언인지 확인 (예: class Foo { })
                 transform: MapToEntityIdToGenerate)                                 // 클래스 → 소스 생성 입력 모델로 변환
-        .   Where(x => x != EntityIdToGenerateEntry.None);                          // 변환 실패 or 무시할 항목은 필터링
+        .Where(x => x != EntityIdToGenerateEntry.None);                          // 변환 실패 or 무시할 항목은 필터링
     }
 
     private static EntityIdToGenerateEntry MapToEntityIdToGenerate(GeneratorAttributeSyntaxContext context, CancellationToken cancellationToken)

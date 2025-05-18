@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Abstractions\Frameworks\Src\FunctionalDdd.Framework.WebApi\FunctionalDdd.Framework.WebApi.csproj" />
+    <ProjectReference Include="..\GymManagement.Adapters.Infrastructure\GymManagement.Adapters.Infrastructure.csproj" />
+    <ProjectReference Include="..\GymManagement.Application\GymManagement.Application.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -17,3 +17,8 @@ public sealed class ExampleOptions
         }
     }
 }
+
+//public sealed class XyzOptions
+//{
+
+//}

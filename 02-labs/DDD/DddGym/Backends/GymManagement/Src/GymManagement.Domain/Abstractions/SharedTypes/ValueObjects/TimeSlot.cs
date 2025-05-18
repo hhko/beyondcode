@@ -6,6 +6,22 @@ using static GymManagement.Domain.SharedTypes.Errors.DomainErrors;
 
 namespace GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 
+//public class xyz1 : ValueObject
+//{
+//    public override IEnumerable<object> GetAtomicValues()
+//    {
+//        throw new NotImplementedException();
+//    }
+//}
+
+//public class xyz2 : ValueObject
+//{
+//    public override IEnumerable<object> GetAtomicValues()
+//    {
+//        throw new NotImplementedException();
+//    }
+//}
+
 public sealed class TimeSlot : ValueObject
 {
     public TimeOnly Start { get; init; }

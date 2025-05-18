@@ -16,7 +16,7 @@ public static class CreateAdminProfileCommand
         Option<Guid> AdminId)
         : IResponse;
 
-    internal sealed class Validator 
+    internal sealed class Validator
         : AbstractValidator<Request>
     {
         public Validator()

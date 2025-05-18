@@ -1,4 +1,3 @@
-using System;
 using Reqnroll;
 
 namespace GymManagement.Tests.Scenario.Features;
