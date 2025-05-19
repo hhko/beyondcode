@@ -18,15 +18,15 @@
 
 <br/>
 
-## 구성 요서
-- `IArchitectureRule` 인터페이스는 `ArchUnitNET과` 함께 동작하며, 여러 설계 규칙을 하나의 논리적 단위로 묶어 테스트 메서드로 구성할 수 있도록 지원합니다.
-- 이를 통해 설계 검증 코드를 보다 명확하고 일관되게 구성할 수 있습니다.
+## 구성 요소
+- `IArchitectureRule` 인터페이스는 `ArchUnitNET과` 함께 동작하며,
+  - 여러 설계 규칙을 하나의 논리적 단위로 묶어 테스트 메서드로 구성할 수 있도록 지원합니다.
+  - 이를 통해 설계 검증 코드를 보다 명확하고 일관되게 구성할 수 있습니다.
 
 구분     | 테스트 메서드 구성 방식
 ----------|--------------------------
 개선 전  | 논리적 설계 규칙 : 테스트 메서드 = 1 : `N`
 개선 후  | 논리적 설계 규칙 : 테스트 메서드 = 1 : `1`
-
 
 ### 주요 클래스
 구성 요소                    | 설명
@@ -60,20 +60,23 @@ Must.HaveConstructorAllMatches(provider, Must.IsPrivateConstructor)
 ```cs
 // Create, Validate 메서드는 public static 이어야 함
 Must.HaveNamedMethodMatches(provider,
-    ("Create", Must.IsPublicStaticMethod),
-    ("Validate", Must.IsPublicStaticMethod)
+  // Create 메서드 이름의 설계 규칙: Must.IsPublicStaticMethod)
+  ("Create", Must.IsPublicStaticMethod),
+
+  // Validate 메서드 이름의 설계 규칙: Must.IsPublicStaticMethod)
+  ("Validate", Must.IsPublicStaticMethod)
 )
 ```
 
 ### ArchUnitNET 규칙 통합
 ```cs
 IList<IArchitectureRule> sut = [
-    provider
-        .Should().BePublic()          // ArchUnitNET
-        .AndShould().BeAbstract()
-        .AndShould().BeSealed()
-        .AndShould().NotBeNested()
-        .ToArchitectureRule()         // IArchitectureRule 변환
+  provider
+    .Should().BePublic()          // ArchUnitNET
+    .AndShould().BeAbstract()
+    .AndShould().BeSealed()
+    .AndShould().NotBeNested()
+    .ToArchitectureRule()         // IArchitectureRule 변환
 ];
 ```
 
@@ -87,35 +90,35 @@ IList<IArchitectureRule> sut = [
 [Fact]
 public void ValueObject_ShouldSatisfy_DesignRules()
 {
-    // 규칙을 적용할 클래스 대상: IValueObject 인터페이스를 구현한 클래스
-    var provider = ArchRuleDefinition
-        .Classes()
-        .That()
-        .ImplementInterface(typeof(IValueObject));
+  // 규칙을 적용할 클래스 대상: IValueObject 인터페이스를 구현한 클래스
+  var provider = ArchRuleDefinition
+      .Classes()
+      .That()
+      .ImplementInterface(typeof(IValueObject));
 
-    // 검사할 규칙 목록
-    List<IArchitectureRule> rules = [
-        // 1. 클래스는 public + sealed
-        provider.Should().BePublic().AndShould().BeSealed().ToArchitectureRule(),
+  // 검사할 규칙 목록
+  List<IArchitectureRule> rules = [
+    // 1. 클래스는 public + sealed
+    provider.Should().BePublic().AndShould().BeSealed().ToArchitectureRule(),
 
-        // 2. 매개변수 없는 private 생성자 하나라도 있어야 함
-        Must.HaveConstructorAnyMatches(provider, Must.IsPrivateParameterlessConstructor),
+    // 2. 매개변수 없는 private 생성자 하나라도 있어야 함
+    Must.HaveConstructorAnyMatches(provider, Must.IsPrivateParameterlessConstructor),
 
-        // 3. 모든 생성자가 private 이어야 함
-        Must.HaveConstructorAllMatches(provider, Must.IsPrivateConstructor),
+    // 3. 모든 생성자가 private 이어야 함
+    Must.HaveConstructorAllMatches(provider, Must.IsPrivateConstructor),
 
-        // 4. Create, Validate 메서드는 public static 이어야 함
-        Must.HaveNamedMethodMatches(provider,
-            ("Create", Must.IsPublicStaticMethod),
-            ("Validate", Must.IsPublicStaticMethod)
-        )
-    ];
+    // 4. Create, Validate 메서드는 public static 이어야 함
+    Must.HaveNamedMethodMatches(provider,
+        ("Create", Must.IsPublicStaticMethod),
+        ("Validate", Must.IsPublicStaticMethod)
+    )
+  ];
 
-    // 규칙을 실제 서비스 어셈블리(ServiceArchitecture)에 적용해서 검사
-    var results = rules.Evaluate(ServiceArchitecture);
+  // 규칙을 실제 서비스 어셈블리(ServiceArchitecture)에 적용해서 검사
+  var results = rules.Evaluate(ServiceArchitecture);
 
-    // 규칙을 어긴 항목이 있으면 테스트 실패 처리
-    results.ShouldHaveNoViolationRules();
+  // 규칙을 어긴 항목이 있으면 테스트 실패 처리
+  results.ShouldHaveNoViolationRules();
 }
 ```
 
