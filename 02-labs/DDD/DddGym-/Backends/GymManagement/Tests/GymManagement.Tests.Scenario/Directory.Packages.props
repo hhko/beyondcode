@@ -1,9 +1,0 @@
-<Project>
-
-  <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Packages.props, $(MSBuildThisFileDirectory)..))" />
-
-  <ItemGroup>
-    <PackageVersion Update="xunit.runner.visualstudio" Version="2.8.2" />
-  </ItemGroup>
-
-</Project>

@@ -1,4 +1,0 @@
-- 1.0.3: `Microsoft.CodeAnalysis.CSharp` 패키지 버전 불일치 해결결
-- 1.0.2: 어셈블리 누락 버그 수정
-- 1.0.1: 최초 버전
-  - `analyzers/dotnet/cs`에 어셈블리 누락

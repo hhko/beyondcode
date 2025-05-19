@@ -87,16 +87,15 @@
 - 011 | 프로젝트 | [옵션 유효성 검사 (appsettings.json, IOption&lt;T&gt;)](./01-guide/project/project-options-validation.md)
 - 012 | 프로젝트 | [소스 생성기](./01-guide/project/project-source-generator.md)
 - 013 | 테스트 | [테스트 범주화](./01-guide/test/test-category.md)
-- 015 | 테스트 | [테스트 보고서 (Code Coverage Report, Allure Report)](./01-guide/test/test-report.md)
-- 016 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./01-guide/test/test-reqnroll.md)
-- 017 | 테스트 | [스냅샷 테스트 (Snapshot)](./01-guide/test/test-snapshot.md)
-- 018 | 아키텍처 테스트 | 레이어 의존성 (ArchUnitNET)
-- 019 | 아키텍처 테스트 | 사용자 정의 규칙 (ArchUnitNET)
-- 020 | 아키텍처 테스트 | 사용자 정의 도메인 규칙 (정적 메서드: Create, Validate, 생성자: private, Parameter less)
-- 021 | 아키텍처 테스트 | 사용자 정의 유스케이스 규칙 (중첩 클래스)
-- 022 | 애플리케이션 레이어 | [CQRS 메시지](./01-guide/layer/application-cqrs-message.md)
-- 023 | 애플리케이션 레이어 | 이벤트 메시지
-- 024 | 애플리케이션 레이어 | [파이프라인](./01-guide/layer/application-pipelines.md)
+- 014 | 테스트 | [테스트 보고서 (Code Coverage Report, Allure Report)](./01-guide/test/test-report.md)
+- 015 | 테스트 | [스냅샷 테스트 (Snapshot)](./01-guide/test/test-snapshot.md)
+- 016 | 테스트 | [설계 규칙 테스트 (ArchUnitNET)](./01-guide/test/test-design-rule.md)
+- 017 | 테스트 | [도메인 규칙 테스트 (BDD: Reqnroll)](./01-guide/test/test-reqnroll.md)
+- 018 | 도메인 레이어 | 값 객체 설계 규칙
+- 019 | 도메인 레이어 | 엔티티 설계 규칙
+- 020 | 애플리케이션 레이어 | [CQRS 메시지](./01-guide/layer/application-cqrs-message.md)
+- 021 | 애플리케이션 레이어 | 이벤트 메시지
+- 022 | 애플리케이션 레이어 | [파이프라인](./01-guide/layer/application-pipelines.md)
 - ...
 
 <br/>
