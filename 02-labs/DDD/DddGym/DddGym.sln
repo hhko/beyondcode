@@ -35,11 +35,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Adapters.Pers
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Tests.Integration", "Backends\GymManagement\Tests\GymManagement.Tests.Integration\GymManagement.Tests.Integration.csproj", "{C34086B5-DF73-47D6-883A-D8959016B7A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalDdd.Framework", "Abstractions\Frameworks\Src\FunctionalDdd.Framework\FunctionalDdd.Framework.csproj", "{9DCF6528-9708-4BC1-89A7-92855755EAE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymDdd.Framework", "Abstractions\Frameworks\Src\GymDdd.Framework\GymDdd.Framework.csproj", "{9DCF6528-9708-4BC1-89A7-92855755EAE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalDdd.Framework.Tests.Unit", "Abstractions\Frameworks\Tests\FunctionalDdd.Framework.Tests.Unit\FunctionalDdd.Framework.Tests.Unit.csproj", "{F87DEAB2-08AA-4C62-88DB-4F1F46876D96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymDdd.Framework.Tests.Unit", "Abstractions\Frameworks\Tests\GymDdd.Framework.Tests.Unit\GymDdd.Framework.Tests.Unit.csproj", "{F87DEAB2-08AA-4C62-88DB-4F1F46876D96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalDdd.Framework.WebApi", "Abstractions\Frameworks\Src\FunctionalDdd.Framework.WebApi\FunctionalDdd.Framework.WebApi.csproj", "{3A825E5B-5E60-44CC-A465-F03598A3BD28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymDdd.Framework.WebApi", "Abstractions\Frameworks\Src\GymDdd.Framework.WebApi\GymDdd.Framework.WebApi.csproj", "{3A825E5B-5E60-44CC-A465-F03598A3BD28}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SourceGenerators", "SourceGenerators", "{F55E7B07-7054-471D-B480-FEE6D4477B59}"
 EndProject
@@ -47,9 +47,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{3B7915A3-0C5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A2ADC783-004A-496F-926F-C557D71F5FF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalDdd.SourceGenerator", "Abstractions\SourceGenerators\Src\FunctionalDdd.SourceGenerator\FunctionalDdd.SourceGenerator.csproj", "{7251B6D7-C0EC-4D20-8703-F7CE8B95F198}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymDdd.SourceGenerator", "Abstractions\SourceGenerators\Src\GymDdd.SourceGenerator\GymDdd.SourceGenerator.csproj", "{7251B6D7-C0EC-4D20-8703-F7CE8B95F198}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalDdd.SourceGenerator.Tests.Unit", "Abstractions\SourceGenerators\Tests\FunctionalDdd.SourceGenerator.Tests.Unit\FunctionalDdd.SourceGenerator.Tests.Unit.csproj", "{373AD61C-3270-4B3E-A54D-31242CA249F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymDdd.SourceGenerator.Tests.Unit", "Abstractions\SourceGenerators\Tests\GymDdd.SourceGenerator.Tests.Unit\GymDdd.SourceGenerator.Tests.Unit.csproj", "{373AD61C-3270-4B3E-A54D-31242CA249F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymManagement.Tests.Scenario", "Backends\GymManagement\Tests\GymManagement.Tests.Scenario\GymManagement.Tests.Scenario.csproj", "{5AFC0018-B776-4BF1-ACAC-F680276137A5}"
 EndProject

@@ -39,7 +39,7 @@
 ![](./.images/ArchitectureTechMap.png)
 
 ### Internal 아키텍처 (Hexagonal 아키텍처)
-![](./01-guide/solution/solution-separation-of-concerns-hexagonal-architecture.png)
+![](./01-guide/solution/solution-hexagonal-architecture-test-automation.png)
 
 - 도메인
   - `LanguageExt.Core`: 함수형

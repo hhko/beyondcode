@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using FunctionalDdd.Framework.BaseTypes.Cqrs;
+using GymDdd.Framework.BaseTypes.Cqrs;
 using GymManagement.Domain.AggregateRoots.Gyms;
 
 namespace GymManagement.Application.Usecases.Gyms.Queries;

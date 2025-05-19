@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Abstractions\Frameworks\Src\FunctionalDdd.Framework\FunctionalDdd.Framework.csproj" />
+    <ProjectReference Include="..\..\..\..\Abstractions\Frameworks\Src\GymDdd.Framework\GymDdd.Framework.csproj" />
     <ProjectReference Include="..\GymManagement.Domain\GymManagement.Domain.csproj" />
   </ItemGroup>
 

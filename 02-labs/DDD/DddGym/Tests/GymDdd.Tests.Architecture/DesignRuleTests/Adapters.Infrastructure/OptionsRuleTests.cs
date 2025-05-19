@@ -29,7 +29,7 @@ namespace GymDdd.Tests.Architecture.DesignRuleTests.Adapters.Infrastructure;
 public class OptionsRuleTests : ArchitectureTestBase
 {
     [Fact]
-    public void OptionsClasses_ShouldHave_SectionName()
+    public void OptionsClasses_ShouldSatisfy_DesignRules()
     {
         // Arrange
         var provider = ArchRuleDefinition

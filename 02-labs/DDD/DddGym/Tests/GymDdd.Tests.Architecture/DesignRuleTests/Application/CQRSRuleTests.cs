@@ -1,5 +1,5 @@
 ﻿using ArchUnitNET.Fluent;
-using FunctionalDdd.Framework.BaseTypes.Cqrs;
+using GymDdd.Framework.BaseTypes.Cqrs;
 using GymDdd.Tests.Architecture.Abstractions.ArchitectureRules;
 using GymDdd.Tests.Architecture.Abstractions.ArchitectureRules.Musts;
 using GymDdd.Tests.Architecture.Abstractions.ArchitectureRules.SyntaxLevelRules.Utilities;

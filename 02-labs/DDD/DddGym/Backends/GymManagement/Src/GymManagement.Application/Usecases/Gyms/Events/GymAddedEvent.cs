@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using FunctionalDdd.Framework.BaseTypes.Events;
+using GymDdd.Framework.BaseTypes.Events;
 using GymManagement.Domain.AggregateRoots.Gyms;
 using static GymManagement.Domain.AggregateRoots.Subscriptions.Events.DomainEvents;
 

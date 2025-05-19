@@ -1,4 +1,4 @@
-﻿using FunctionalDdd.Framework.BaseTypes.Events;
+﻿using GymDdd.Framework.BaseTypes.Events;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
 
 namespace GymManagement.Domain.AggregateRoots.Admins.Events;

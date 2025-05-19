@@ -1,1 +1,1 @@
-dotnet pack .\Abstractions\SourceGenerators\Src\FunctionalDdd.SourceGenerator\FunctionalDdd.SourceGenerator.csproj -c Release -o ./Abstractions
+dotnet pack .\Abstractions\SourceGenerators\Src\GymDdd.SourceGenerator\GymDdd.SourceGenerator.csproj -c Release -o ./Abstractions

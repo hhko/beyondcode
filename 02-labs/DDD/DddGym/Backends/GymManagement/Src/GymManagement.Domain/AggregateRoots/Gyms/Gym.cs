@@ -1,4 +1,4 @@
-﻿using FunctionalDdd.Framework.BaseTypes;
+﻿using GymDdd.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Rooms;
 using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Gyms.Errors.DomainErrors;

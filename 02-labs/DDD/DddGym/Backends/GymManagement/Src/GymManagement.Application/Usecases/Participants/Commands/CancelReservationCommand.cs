@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using FunctionalDdd.Framework.BaseTypes.Cqrs;
+using GymDdd.Framework.BaseTypes.Cqrs;
 
 namespace GymManagement.Application.Usecases.Participants.Commands;
 

@@ -1,4 +1,4 @@
-﻿using FunctionalDdd.Framework.Pipelines;
+﻿using GymDdd.Framework.Pipelines;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GymManagement.Application.Abstractions.Registrations;

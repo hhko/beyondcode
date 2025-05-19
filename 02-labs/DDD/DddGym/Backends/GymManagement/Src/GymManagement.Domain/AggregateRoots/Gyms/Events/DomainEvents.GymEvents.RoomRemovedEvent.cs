@@ -1,4 +1,4 @@
-﻿using FunctionalDdd.Framework.BaseTypes.Events;
+﻿using GymDdd.Framework.BaseTypes.Events;
 
 namespace GymManagement.Domain.AggregateRoots.Gyms.Events;
 public static partial class DomainEvents

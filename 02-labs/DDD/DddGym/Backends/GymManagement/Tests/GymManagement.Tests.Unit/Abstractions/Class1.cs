@@ -1,4 +1,4 @@
-﻿using FunctionalDdd.Framework.BaseTypes;
+﻿using GymDdd.Framework.BaseTypes;
 using LanguageExt;
 using LanguageExt.Common;
 

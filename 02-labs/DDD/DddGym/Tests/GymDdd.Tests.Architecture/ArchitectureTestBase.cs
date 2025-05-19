@@ -17,11 +17,11 @@ public abstract class ArchitectureTestBase
         {
             assemblies.AddRange([
                 // Framework
-                FunctionalDdd.Framework.AssemblyReference.Assembly,
-                FunctionalDdd.Framework.WebApi.AssemblyReference.Assembly,
+                GymDdd.Framework.AssemblyReference.Assembly,
+                GymDdd.Framework.WebApi.AssemblyReference.Assembly,
 
                 // SourceGenerator
-                FunctionalDdd.SourceGenerator.AssemblyReference.Assembly
+                GymDdd.SourceGenerator.AssemblyReference.Assembly
             ]);
         }
 

@@ -1,4 +1,4 @@
-﻿using FunctionalDdd.Framework.WebApi.Utilities;
+﻿using GymDdd.Framework.WebApi.Utilities;
 using GymManagement.Adapters.Presentation.Abstractions;
 using GymManagement.Application.Usecases.Profiles.Commands;
 using GymManagement.Application.Usecases.Profiles.Queries;

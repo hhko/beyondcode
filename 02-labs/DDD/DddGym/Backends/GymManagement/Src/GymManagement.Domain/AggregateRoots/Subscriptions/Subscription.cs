@@ -1,4 +1,4 @@
-﻿using FunctionalDdd.Framework.BaseTypes;
+﻿using GymDdd.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;
 using LanguageExt;

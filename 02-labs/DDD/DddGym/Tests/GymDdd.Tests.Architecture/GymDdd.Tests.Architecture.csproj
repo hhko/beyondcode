@@ -23,9 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Abstractions\Frameworks\Src\FunctionalDdd.Framework.WebApi\FunctionalDdd.Framework.WebApi.csproj" />
-    <ProjectReference Include="..\..\Abstractions\Frameworks\Src\FunctionalDdd.Framework\FunctionalDdd.Framework.csproj" />
-    <ProjectReference Include="..\..\Abstractions\SourceGenerators\Src\FunctionalDdd.SourceGenerator\FunctionalDdd.SourceGenerator.csproj" />
+    <ProjectReference Include="..\..\Abstractions\Frameworks\Src\GymDdd.Framework.WebApi\GymDdd.Framework.WebApi.csproj" />
+    <ProjectReference Include="..\..\Abstractions\Frameworks\Src\GymDdd.Framework\GymDdd.Framework.csproj" />
+    <ProjectReference Include="..\..\Abstractions\SourceGenerators\Src\GymDdd.SourceGenerator\GymDdd.SourceGenerator.csproj" />
     <ProjectReference Include="..\..\Backends\GymManagement\Src\GymManagement.Adapters.Infrastructure\GymManagement.Adapters.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Backends\GymManagement\Src\GymManagement.Adapters.Persistence\GymManagement.Adapters.Persistence.csproj" />
     <ProjectReference Include="..\..\Backends\GymManagement\Src\GymManagement.Adapters.Presentation\GymManagement.Adapters.Presentation.csproj" />

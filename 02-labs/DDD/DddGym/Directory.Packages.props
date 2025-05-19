@@ -10,7 +10,7 @@
     <PackageVersion Include="Ardalis.SmartEnum" Version="8.2.0" />
     <PackageVersion Include="FluentValidation" Version="11.11.0" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
-    <PackageVersion Include="FunctionalDdd.SourceGenerator" Version="1.0.3" />
+    <PackageVersion Include="GymDdd.SourceGenerator" Version="1.0.3" />
     <PackageVersion Include="LanguageExt.Core" Version="5.0.0-beta-51" />
     <PackageVersion Include="MediatR" Version="12.4.1" />
     <PackageVersion Include="MediatR.Contracts" Version="2.0.1" />

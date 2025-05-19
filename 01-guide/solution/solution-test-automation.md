@@ -7,7 +7,7 @@
   - 단위 테스트 (Unit Test): 내부 로직의 정확성 검증
   - 통합 테스트 (Integration Test): 시스템 구성 요소 간 상호작용 검증
 
-![](./solution-test-automation.png)
+![](./solution-hexagonal-architecture-test-automation.png)
 
 <br/>
 

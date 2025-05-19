@@ -1,3 +1,28 @@
+- [ ] Fin<T> Pipeline 통합: 실패 처리
+- [ ] Fin<T> async/await LINQ 통합
+---
+- [ ] 도메인 리팩토링
+- [ ] 유스케이스 리팩토링
+---
+- [ ] Observability 시스템
+- [ ] Observability 로그
+- [ ] Observability 지표
+- [ ] Observability 추적
+---
+- [ ] IAdapter 소스 생성기
+- [ ] IAdapter 관찰 가능성
+- [ ] IAdapter 사용자 정의
+----
+
+
+
+
+
+
+
+
+
+
 ## 규칙
 - [ ] 전역 버전(docker 이미지 버전 포함)
 - [x] global.json
