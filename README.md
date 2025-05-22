@@ -42,14 +42,14 @@
 ![](./01-guide/solution/solution-hexagonal-architecture-test-automation.png)
 
 - 도메인
-  - `LanguageExt.Core`: 함수형
+  - **`LanguageExt.Core`: 함수형**
   - `MediatR`: 기술 관심사와 도메인 관심사 간의 느슨한 결합 (Mediator 패턴)
   - `FluentValidation`: 유효성 검사
   - `Ardalis.SmartEnum`: 열거형 도메인 타입
   - `Ulid`: 고유 ID
 - 테스트
   - `xUnit`: 테스트
-  - `TngTech.ArchUnitNET`: 아키텍처 테스트
+  - **`TngTech.ArchUnitNET`: 아키텍처 테스트**
   - `Reqnroll`: BDD (Behavior-Driven Development) 테스트
   - `Verify`: 스냅샷 테스트
   - `Testcontainers`: 컨테이너 테스트
@@ -60,7 +60,7 @@
   - `Bogus`: Fake 데이터 생성기
   - `Allure Report`: 테스트 보고서
 - 기술
-  - `OpenTelemetry`: 관찰 가능성 (Observability)
+  - **`OpenTelemetry`: 관찰 가능성 (Observability)**
   - `FastEndpoints`: Web API
   - `ZiggyCreatures.FusionCache`: 메모리 캐시
   - `MassTransit`: RabbitMQ
