@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using GymManagement.Domain.AggregateRoots.Users;
 using LanguageExt;
+//using static LanguageExt.Prelude;
 
 namespace GymManagement.Adapters.Persistence.Repositories;
 
@@ -49,3 +50,21 @@ public class UsersRepository : IUsersRepository
         await Task.CompletedTask;
     }
 }
+
+//public class UsersRepositoryIO : IUsersRepositoryIO
+//{
+//    public IO<User> GetByIdAsync(Guid userId)
+//    {
+//        return lift(() =>
+//        {
+//            var userFaker = new Faker<User>()
+//                        .CustomInstantiator(f => User.Create(
+//                            firstName: f.Name.FirstName(),
+//                            lastName: f.Name.LastName(),
+//                            email: f.Internet.Email(),
+//                            passwordHash: f.Internet.Password()));
+
+//            return userFaker.Generate();
+//        });
+//    }
+//}

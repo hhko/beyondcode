@@ -11,7 +11,7 @@
     <PackageVersion Include="FluentValidation" Version="11.11.0" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageVersion Include="GymDdd.SourceGenerator" Version="1.0.3" />
-    <PackageVersion Include="LanguageExt.Core" Version="5.0.0-beta-51" />
+    <PackageVersion Include="LanguageExt.Core" Version="5.0.0-beta-54" />
     <PackageVersion Include="MediatR" Version="12.4.1" />
     <PackageVersion Include="MediatR.Contracts" Version="2.0.1" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
@@ -30,7 +30,6 @@
     <PackageVersion Include="Ulid" Version="1.3.4" />
     <PackageVersion Include="ZiggyCreatures.FusionCache" Version="2.2.0" />
   </ItemGroup>
-
   <ItemGroup Label="Test">
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageVersion Include="xunit" Version="2.9.3" />
@@ -45,5 +44,4 @@
     <PackageVersion Include="Allure.Xunit" Version="2.12.1" />
     <PackageVersion Include="Allure.Reqnroll" Version="2.12.1" />
   </ItemGroup>
-
 </Project>

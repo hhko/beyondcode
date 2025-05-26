@@ -14,3 +14,8 @@ public interface IUsersRepository
 
     Fin<User> Test();
 }
+
+public interface IUsersRepositoryIO
+{
+    IO<User> GetByIdAsync(Guid userId);
+}
