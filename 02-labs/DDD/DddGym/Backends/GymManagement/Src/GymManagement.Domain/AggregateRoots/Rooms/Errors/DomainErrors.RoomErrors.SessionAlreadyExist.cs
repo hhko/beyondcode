@@ -1,5 +1,4 @@
 ﻿using GymDdd.Framework.BaseTypes;
-using LanguageExt.Common;
 
 namespace GymManagement.Domain.AggregateRoots.Rooms.Errors;
 

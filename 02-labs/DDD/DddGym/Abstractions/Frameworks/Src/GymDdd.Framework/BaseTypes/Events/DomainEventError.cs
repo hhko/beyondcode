@@ -1,7 +1,4 @@
-﻿
-using LanguageExt.Common;
-
-namespace GymDdd.Framework.BaseTypes.Events;
+﻿namespace GymDdd.Framework.BaseTypes.Events;
 
 // TODO: DomainError            100
 // DONE: DomainEventError       101

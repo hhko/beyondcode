@@ -1,10 +1,8 @@
 ﻿using GymDdd.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;
-using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Subscriptions.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Subscriptions.Events.DomainEvents;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Subscriptions;
 

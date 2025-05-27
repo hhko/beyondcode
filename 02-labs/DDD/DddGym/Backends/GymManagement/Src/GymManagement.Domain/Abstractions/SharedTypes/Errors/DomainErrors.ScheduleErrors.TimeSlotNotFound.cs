@@ -1,6 +1,5 @@
 ﻿using GymDdd.Framework.BaseTypes;
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
-using LanguageExt.Common;
 
 namespace GymManagement.Domain.SharedTypes.Errors;
 

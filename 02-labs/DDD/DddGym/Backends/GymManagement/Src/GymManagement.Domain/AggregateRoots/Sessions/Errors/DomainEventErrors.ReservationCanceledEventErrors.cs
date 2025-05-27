@@ -1,5 +1,4 @@
 ﻿using GymDdd.Framework.BaseTypes.Events;
-using LanguageExt.Common;
 
 
 namespace GymManagement.Domain.AggregateRoots.Sessions.Errors;

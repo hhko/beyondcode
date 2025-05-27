@@ -1,5 +1,4 @@
 ﻿using GymManagement.Application.Usecases.Sessions.Ports;
-using LanguageExt;
 
 namespace GymManagement.Tests.Unit.Abstractions.Providers;
 

@@ -1,5 +1,4 @@
 ﻿using GymDdd.Framework.BaseTypes.Cqrs;
-using LanguageExt;
 using MediatR;
 
 namespace GymDdd.Framework.Pipelines;

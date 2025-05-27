@@ -1,9 +1,7 @@
 ﻿using GymDdd.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Sessions;
-using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Rooms.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Rooms.Events.DomainEvents.RoomEvents;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Rooms;
 

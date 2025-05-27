@@ -1,7 +1,6 @@
 ﻿using GymManagement.Application.Usecases.Profiles.Commands;
 using GymManagement.Application.Usecases.Profiles.Queries;
 using GymManagement.Domain.AggregateRoots.Users;
-using LanguageExt;
 
 namespace GymManagement.Application.Usecases.Profiles;
 

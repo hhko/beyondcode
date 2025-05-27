@@ -1,7 +1,6 @@
 ﻿using ArchUnitNET.Domain;
 using ArchUnitNET.Domain.Extensions;
 using GymDdd.Tests.Architecture.Abstractions.ArchitectureRules.Conditions;
-using GymDdd.Tests.Architecture.Abstractions.ArchitectureRules.SyntaxLevelRules;
 using System.Text.RegularExpressions;
 
 namespace GymDdd.Tests.Architecture.Abstractions.ArchitectureRules.Musts;

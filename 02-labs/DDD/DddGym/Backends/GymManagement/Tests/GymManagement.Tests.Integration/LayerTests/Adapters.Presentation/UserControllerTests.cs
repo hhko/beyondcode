@@ -5,14 +5,12 @@ using GymManagement.Application.Usecases.Profiles.Queries;
 using GymManagement.Domain.AggregateRoots.Users;
 using GymManagement.Tests.Integration.Abstractions;
 using GymManagement.Tests.Integration.Abstractions.Fixtures;
-using LanguageExt;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Json;
 using System.Text.Json;
 using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Tests.Integration.LayerTests.Adapters.Presentation;
 

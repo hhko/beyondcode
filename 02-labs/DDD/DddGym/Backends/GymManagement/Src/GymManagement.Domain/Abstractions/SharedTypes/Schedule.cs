@@ -1,9 +1,6 @@
 ﻿using GymDdd.Framework.BaseTypes;
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
-using LanguageExt;
-using System.Globalization;
 using static GymManagement.Domain.SharedTypes.Errors.DomainErrors;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.Abstractions.SharedTypes;
 
@@ -15,7 +12,7 @@ public sealed partial class Schedule : Entity
     (
         Option<Dictionary<DateOnly, List<TimeSlot>>> calendar,
         Option<Guid> id = default
-    ) 
+    )
         : base(id.IfNone(Guid.NewGuid()))
     {
         _calendar = calendar.IfNone([]);

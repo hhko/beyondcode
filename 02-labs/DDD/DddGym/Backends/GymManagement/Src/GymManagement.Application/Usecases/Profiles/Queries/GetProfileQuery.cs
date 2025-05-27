@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using GymDdd.Framework.BaseTypes.Cqrs;
 using GymManagement.Domain.AggregateRoots.Users;
-using LanguageExt;
 
 namespace GymManagement.Application.Usecases.Profiles.Queries;
 

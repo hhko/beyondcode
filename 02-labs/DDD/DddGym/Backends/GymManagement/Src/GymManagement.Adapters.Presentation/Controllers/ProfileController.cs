@@ -2,7 +2,6 @@
 using GymManagement.Adapters.Presentation.Abstractions;
 using GymManagement.Application.Usecases.Profiles.Commands;
 using GymManagement.Application.Usecases.Profiles.Queries;
-using LanguageExt;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

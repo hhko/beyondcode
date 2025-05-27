@@ -2,7 +2,6 @@
 using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
-using LanguageExt;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain.Factories;
 

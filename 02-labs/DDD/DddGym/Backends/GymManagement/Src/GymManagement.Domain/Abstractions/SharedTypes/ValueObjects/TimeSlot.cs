@@ -1,6 +1,4 @@
 ﻿using GymDdd.Framework.BaseTypes;
-using LanguageExt;
-using LanguageExt.Common;
 using Throw;
 using static GymManagement.Domain.SharedTypes.Errors.DomainErrors;
 

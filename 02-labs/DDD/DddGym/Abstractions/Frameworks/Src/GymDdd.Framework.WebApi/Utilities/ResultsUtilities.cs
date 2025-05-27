@@ -1,6 +1,4 @@
 ﻿using GymDdd.Framework.BaseTypes;
-using LanguageExt;
-using LanguageExt.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

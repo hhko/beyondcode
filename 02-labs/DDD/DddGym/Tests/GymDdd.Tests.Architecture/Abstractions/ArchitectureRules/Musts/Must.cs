@@ -4,8 +4,8 @@ namespace GymDdd.Tests.Architecture.Abstractions.ArchitectureRules.Musts;
 
 public static partial class Must
 {
-    public static bool IsNestedPublicSealed(Type t) => 
-        t.IsNestedPublic 
+    public static bool IsNestedPublicSealed(Type t) =>
+        t.IsNestedPublic
         && t.IsSealed;
 
     public static bool IsNestedInternalSealed(Type t) =>

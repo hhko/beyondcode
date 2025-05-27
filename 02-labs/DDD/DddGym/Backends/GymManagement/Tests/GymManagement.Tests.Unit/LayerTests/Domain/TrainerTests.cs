@@ -6,8 +6,6 @@ using GymManagement.Domain.SharedTypes.Errors;
 using GymManagement.Tests.Unit.Abstractions;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
 using GymManagement.Tests.Unit.LayerTests.Domain.Factories;
-using LanguageExt;
-using LanguageExt.Traits;
 using static GymManagement.Domain.AggregateRoots.Trainers.Errors.DomainErrors;
 using static GymManagement.Domain.SharedTypes.Errors.DomainErrors;
 using static GymManagement.Tests.Unit.Abstractions.Constants.Constants;

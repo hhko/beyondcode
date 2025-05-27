@@ -6,7 +6,6 @@ using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
 using GymManagement.Domain.AggregateRoots.Trainers;
 using GymManagement.Domain.AggregateRoots.Users;
-using LanguageExt;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GymManagement.Adapters.Persistence.Abstractions.Registrations;

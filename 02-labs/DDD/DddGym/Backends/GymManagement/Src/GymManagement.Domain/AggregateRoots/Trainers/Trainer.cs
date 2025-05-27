@@ -1,9 +1,7 @@
 ﻿using GymDdd.Framework.BaseTypes;
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Sessions;
-using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Trainers.Errors.DomainErrors;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Trainers;
 

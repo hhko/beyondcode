@@ -1,5 +1,4 @@
 ﻿using GymDdd.Framework.BaseTypes;
-using LanguageExt.Common;
 
 namespace GymDdd.Framework.Pipelines.Errors;
 

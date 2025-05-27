@@ -1,12 +1,8 @@
-﻿
-
-using LanguageExt;
-
-namespace GymManagement.Domain.AggregateRoots.Users;
+﻿namespace GymManagement.Domain.AggregateRoots.Users;
 
 public interface IPasswordHasher
 {
-    public Fin<string> HashPassword(string password);
+    FinT<IO, string> HashPassword(string password);
 
-    bool IsCorrectPassword(string password, string bash);
+    FinT<IO, bool> IsCorrectPassword(string password, string bash);
 }

@@ -1,5 +1,4 @@
-﻿using LanguageExt;
-using MediatR;
+﻿using MediatR;
 
 namespace GymDdd.Framework.BaseTypes.Cqrs;
 

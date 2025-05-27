@@ -1,7 +1,5 @@
 ﻿using ArchUnitNET.Domain;
-using FluentValidation;
 using GymDdd.Tests.Architecture.Abstractions.ArchitectureRules.Conditions;
-using GymDdd.Tests.Architecture.Abstractions.ArchitectureRules.SyntaxLevelRules;
 using System.Reflection;
 
 namespace GymDdd.Tests.Architecture.Abstractions.ArchitectureRules.Musts;

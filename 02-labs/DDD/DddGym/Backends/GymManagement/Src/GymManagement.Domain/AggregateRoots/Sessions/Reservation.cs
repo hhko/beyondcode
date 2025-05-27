@@ -1,5 +1,4 @@
 ﻿using GymDdd.Framework.BaseTypes;
-using LanguageExt;
 
 namespace GymManagement.Domain.AggregateRoots.Sessions;
 

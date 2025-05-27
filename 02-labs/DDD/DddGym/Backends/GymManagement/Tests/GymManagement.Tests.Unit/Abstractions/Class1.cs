@@ -1,6 +1,4 @@
 ﻿using GymDdd.Framework.BaseTypes;
-using LanguageExt;
-using LanguageExt.Common;
 
 namespace GymManagement.Tests.Unit.Abstractions;
 

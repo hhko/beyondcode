@@ -2,10 +2,8 @@
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
-using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Sessions.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Sessions.Events.DomainEvents.SessionEvents;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Sessions;
 

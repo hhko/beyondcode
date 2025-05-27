@@ -1,7 +1,5 @@
 ﻿using Bogus;
 using GymManagement.Domain.AggregateRoots.Users;
-using LanguageExt;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Adapters.Persistence.Repositories;
 
@@ -40,19 +38,19 @@ namespace GymManagement.Adapters.Persistence.Repositories;
 
 public class UsersRepository : IUsersRepository
 {
-    public Task AddUserAsync(User user)
+    public FinT<IO, Unit> AddUserAsync(User user)
     {
-        throw new NotImplementedException();
+        return lift(() => unit);
     }
 
-    public Task<bool> ExistsByEmailAsync(string email)
+    public FinT<IO, bool> ExistsByEmailAsync(string email)
     {
-        throw new NotImplementedException();
+        return lift(() => true);
     }
 
-    public Task<User?> GetByEmailAsync(string email)
+    public FinT<IO, Option<User>> GetByEmailAsync(string email)
     {
-        throw new NotImplementedException();
+        return lift(() => Option<User>.None);
     }
 
     public FinT<IO, User> GetByIdAsync(Guid userId)

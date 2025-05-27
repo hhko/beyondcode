@@ -1,11 +1,8 @@
-﻿using LanguageExt;
-
-namespace GymManagement.Domain.AggregateRoots.Trainers;
+﻿namespace GymManagement.Domain.AggregateRoots.Trainers;
 
 public interface ITrainersRepository
 {
-    Task AddTrainerAsync(Trainer participant);
-    //Task<Trainer?> GetByIdAsync(Guid trainerId);
-    Task<Fin<Trainer>> GetByIdAsync(Guid trainerId);
-    Task UpdateAsync(Trainer trainer);
+    FinT<IO, Unit> AddTrainerAsync(Trainer participant);
+    FinT<IO, Trainer> GetByIdAsync(Guid trainerId);
+    FinT<IO, Unit> UpdateAsync(Trainer trainer);
 }

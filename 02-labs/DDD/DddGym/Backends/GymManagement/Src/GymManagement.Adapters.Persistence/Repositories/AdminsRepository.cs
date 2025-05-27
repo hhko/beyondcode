@@ -4,18 +4,18 @@ namespace GymManagement.Adapters.Persistence.Repositories;
 
 public class AdminsRepository : IAdminsRepository
 {
-    public Task AddAdminAsync(Admin participant)
+    public FinT<IO, Unit> AddAdminAsync(Admin participant)
     {
-        throw new NotImplementedException();
+        return lift(() => unit);
     }
 
-    public Task<Admin?> GetByIdAsync(Guid adminId)
+    public FinT<IO, Option<Admin>> GetByIdAsync(Guid adminId)
     {
-        throw new NotImplementedException();
+        return lift(() => Option<Admin>.None);
     }
 
-    public Task UpdateAsync(Admin admin)
+    public FinT<IO, Unit> UpdateAsync(Admin admin)
     {
-        throw new NotImplementedException();
+        return lift(() => unit);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using GymDdd.Framework.Pipelines.Errors;
 using GymDdd.Framework.Utilites;
-using LanguageExt.Common;
 using MediatR;
 
 namespace GymDdd.Framework.Pipelines;

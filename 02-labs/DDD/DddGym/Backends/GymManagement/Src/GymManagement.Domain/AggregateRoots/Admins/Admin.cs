@@ -1,9 +1,7 @@
 ﻿using GymDdd.Framework.BaseTypes;
 using GymManagement.Domain.AggregateRoots.Subscriptions;
-using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Admins.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Admins.Events.DomainEvents;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Admins;
 

@@ -1,7 +1,6 @@
 ﻿using GymManagement.Domain.AggregateRoots.Subscriptions;
 using GymManagement.Domain.AggregateRoots.Subscriptions.Enumerations;
 using GymManagement.Tests.Unit.LayerTests.Domain.Constants;
-using LanguageExt;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain.Factories;
 

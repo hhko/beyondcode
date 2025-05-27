@@ -26,7 +26,7 @@ public sealed class CompositeCondition<T>
                 {
                     if (!result.Pass)
                         yield return result;
-                        //yield return new ConditionResult(obj, false, $"{condition.Description}: {result.FailDescription}"); // 실패 정보 구체화
+                    //yield return new ConditionResult(obj, false, $"{condition.Description}: {result.FailDescription}"); // 실패 정보 구체화
                 }
             }
         }

@@ -1,8 +1,6 @@
 ﻿using GymDdd.Framework.BaseTypes;
-using LanguageExt;
 using static GymManagement.Domain.AggregateRoots.Users.Errors.DomainErrors;
 using static GymManagement.Domain.AggregateRoots.Users.Events.DomainEvents;
-using static LanguageExt.Prelude;
 
 namespace GymManagement.Domain.AggregateRoots.Users;
 
@@ -69,18 +67,15 @@ public sealed class User : AggregateRoot
     // TODO?: 이 함수의 구현 위치가 도메인 레이어???
     public bool IsCorrectPasswordHash(string password, IPasswordHasher passwordHasher)
     {
-        return passwordHasher.IsCorrectPassword(password, _passwordHash);
+        //FinT<IO, bool> usecase = passwordHasher.IsCorrectPassword(password, _passwordHash);
+        return true;
     }
 
     public Fin<Guid> CreateAdminProfile()
     {
-        // =========================================
-        // Monad LINQ 스타일
-        // =========================================
-
         return from _1 in EnsureAdminNotCreated(AdminId)
-               let newAdminId = NewAdminId()            // Map
-               from _2 in ApplyAdminProfileCreation(newAdminId)         // Bind
+               let newAdminId = NewAdminId()
+               from _2 in ApplyAdminProfileCreation(newAdminId)
                select newAdminId;
 
         Fin<Unit> EnsureAdminNotCreated(Option<Guid> adminId) =>

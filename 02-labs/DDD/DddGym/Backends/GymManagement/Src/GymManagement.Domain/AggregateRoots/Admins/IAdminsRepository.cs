@@ -2,10 +2,10 @@
 
 public interface IAdminsRepository
 {
-    Task AddAdminAsync(Admin participant);
+    FinT<IO, Unit> AddAdminAsync(Admin participant);
 
     //Task<Profile?> GetProfileByUserIdAsync(Guid userId);
-    Task<Admin?> GetByIdAsync(Guid adminId);
+    FinT<IO, Option<Admin>> GetByIdAsync(Guid adminId);
 
-    Task UpdateAsync(Admin admin);
+    FinT<IO, Unit> UpdateAsync(Admin admin);
 }

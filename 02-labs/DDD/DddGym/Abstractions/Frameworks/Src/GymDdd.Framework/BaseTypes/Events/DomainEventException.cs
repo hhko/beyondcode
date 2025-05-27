@@ -1,8 +1,4 @@
-﻿
-using LanguageExt;
-using LanguageExt.Common;
-
-namespace GymDdd.Framework.BaseTypes.Events;
+﻿namespace GymDdd.Framework.BaseTypes.Events;
 
 // DONE: DomainEventException 필요성 이해
 //  - 이벤트 핸들러에서는 실패일 때 예외를 throw해야 합니다.

@@ -7,12 +7,6 @@ namespace GymManagement.Application.Usecases.Admins.Events.AdminProfileCreated;
 
 public static class AdminProfileCreatedEvent
 {
-    internal sealed class Validator
-        : AbstractValidator<UserEvents.AdminProfileCreatedEvent>
-    {
-
-    }
-
     internal sealed class Usecase
         : IDomainEventUsecase<UserEvents.AdminProfileCreatedEvent>
     {
@@ -31,7 +25,11 @@ public static class AdminProfileCreatedEvent
                 userId: domainEvent.UserId,
                 id: domainEvent.AdminId);
 
-            await _adminsRepository.AddAdminAsync(admin);
+            FinT<IO, Unit> usecase = _adminsRepository.AddAdminAsync(admin);
+
+            await usecase
+                .Run()
+                .RunAsync();
         }
     }
 }
