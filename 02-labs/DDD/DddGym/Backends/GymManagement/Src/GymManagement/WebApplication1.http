@@ -13,6 +13,11 @@ Accept: application/json
 POST {{WebApplication1_HostAddress}}/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles/admin
 Accept: application/json
 
+### LanguageExt
+
+POST {{WebApplication1_HostAddress}}/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles/admin4
+Accept: application/json
+
 ###
 
 POST {{WebApplication1_HostAddress}}/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles/trainer

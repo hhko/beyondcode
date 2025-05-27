@@ -48,14 +48,18 @@ public static class GetProfileQuery
 
         public async Task<Fin<Response>> Handle(Request request, CancellationToken cancellationToken)
         {
-            Fin<User> result = await _usersRepository.GetByIdAsync(request.UserId);
-            return result.ToGetProfileResponse();
-
             //return await 
             //(
             //    from user in liftIO(env => _usersRepository.GetByIdAsync(request.UserId))
             //    select user.ToResponse()
             //).RunAsync();
+
+            FinT<IO, User> usecase = _usersRepository.GetByIdAsync(request.UserId);
+
+            return await usecase
+                .Run()
+                .RunAsync()
+                .ToGetProfileResponse();
         }
     }
 }

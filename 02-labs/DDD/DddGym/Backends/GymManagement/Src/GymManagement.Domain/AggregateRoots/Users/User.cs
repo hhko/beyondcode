@@ -80,7 +80,7 @@ public sealed class User : AggregateRoot
 
         return from _1 in EnsureAdminNotCreated(AdminId)
                let newAdminId = NewAdminId()            // Map
-               from _2 in ApplyAdminProfile(newAdminId)         // Bind
+               from _2 in ApplyAdminProfileCreation(newAdminId)         // Bind
                select newAdminId;
 
         Fin<Unit> EnsureAdminNotCreated(Option<Guid> adminId) =>
@@ -91,7 +91,7 @@ public sealed class User : AggregateRoot
         Guid NewAdminId() =>
             Guid.NewGuid();
 
-        Fin<Guid> ApplyAdminProfile(Guid newAdminId)
+        Fin<Guid> ApplyAdminProfileCreation(Guid newAdminId)
         {
             AdminId = newAdminId;
             _domainEvents.Add(new UserEvents.AdminProfileCreatedEvent(Id, newAdminId));

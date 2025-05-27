@@ -31,27 +31,40 @@ public static class CreateParticipantProfileCommand
 
         public async Task<Fin<Response>> Handle(Request request, CancellationToken cancellationToken)
         {
+            // Case 1.
             //return from user in await _usersRepository.GetByIdAsync(request.UserId)
             //       from participantId in user.CreateParticipantProfile()
             //       select new CreateParticipantProfileResponse(participantId);
 
-            Fin<User> userResult = await _usersRepository.GetByIdAsync(request.UserId);
-            if (userResult.IsFail)
-            {
-                return (Error)userResult;
-            }
-            User user = (User)userResult;
+            // Case 2.
+            //Fin<User> userResult = await _usersRepository.GetByIdAsync(request.UserId);
+            //if (userResult.IsFail)
+            //{
+            //    return (Error)userResult;
+            //}
+            //User user = (User)userResult;
 
-            Fin<Guid> participantResult = user.CreateParticipantProfile();
-            if (participantResult.IsFail)
-            {
-                return (Error)participantResult;
-            }
-            Guid participantId = (Guid)participantResult;
+            //Fin<Guid> participantResult = user.CreateParticipantProfile();
+            //if (participantResult.IsFail)
+            //{
+            //    return (Error)participantResult;
+            //}
+            //Guid participantId = (Guid)participantResult;
 
-            await _usersRepository.UpdateAsync(user);
+            //await _usersRepository.UpdateAsync(user);
 
-            return new Response(participantId);
+            //return new Response(participantId);
+
+            // Case 3.
+            FinT<IO, Guid> usecase = from user in _usersRepository.GetByIdAsync(request.UserId)
+                                     from participantId in user.CreateParticipantProfile()
+                                     from _ in _usersRepository.UpdateAsync(user)
+                                     select participantId;
+
+            return await usecase
+                .Run()
+                .RunAsync()
+                .ToCreateParticipantProfileResponse();
         }
 
         //public async Task<IErrorOr> Handle(CreateParticipantProfileCommand command, CancellationToken cancellationToken)

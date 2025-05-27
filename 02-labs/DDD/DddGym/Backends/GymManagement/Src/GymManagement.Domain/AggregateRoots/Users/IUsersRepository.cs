@@ -8,14 +8,11 @@ public interface IUsersRepository
     Task<bool> ExistsByEmailAsync(string email);
     Task<User?> GetByEmailAsync(string email);
     //Task<User?> GetByIdAsync(Guid userId);
-    Task<Fin<User>> GetByIdAsync(Guid userId);
+    //Task<Fin<User>> GetByIdAsync(Guid userId);
 
-    Task UpdateAsync(User user);
+    //Task UpdateAsync(User user);
+    FinT<IO, User> GetByIdAsync(Guid userId);
+    FinT<IO, Unit> UpdateAsync(User user);
 
     Fin<User> Test();
-}
-
-public interface IUsersRepositoryIO
-{
-    IO<User> GetByIdAsync(Guid userId);
 }

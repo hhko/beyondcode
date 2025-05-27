@@ -1,5 +1,4 @@
-﻿using GymManagement.Adapters.Persistence.Repositories;
-using GymManagement.Domain.AggregateRoots.Admins;
+﻿using GymManagement.Domain.AggregateRoots.Admins;
 using GymManagement.Domain.AggregateRoots.Gyms;
 using GymManagement.Domain.AggregateRoots.Participants;
 using GymManagement.Domain.AggregateRoots.Rooms;
@@ -39,6 +38,10 @@ internal static class RepositoryRegistration
         //services.AddScoped<ITrainersRepository, TrainersRepository>();
         //services.AddScoped<IUsersRepository, UsersRepository>();
         ////services.AddScoped<IUsersRepositoryIO, UsersRepositoryIO>();
+        ///
+
+        //services.AddSingleton<RepositoriesRuntimeEnv>();
+        //services.AddSingleton<RepositoriesRuntime>();
 
         return services;
     }

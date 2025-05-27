@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using GymDdd.Framework.BaseTypes.Cqrs;
+using GymManagement.Domain.AggregateRoots.Trainers;
 using GymManagement.Domain.AggregateRoots.Users;
 using LanguageExt;
 using LanguageExt.Common;
@@ -33,6 +34,7 @@ public static class CreateTrainerProfileCommand
 
         public async Task<Fin<Response>> Handle(Request request, CancellationToken cancellationToken)
         {
+            // Case 1.
             //return from user in await _usersRepository.GetByIdAsync(request.UserId)
             //       from trainerId in user.CreateTrainerProfile()
             //       //from _ in Pure(await _usersRepository.UpdateAsync(user))
@@ -41,23 +43,36 @@ public static class CreateTrainerProfileCommand
             //(await _usersRepository.GetByIdAsync(request.UserId))
             //    .Bind(user => user.CreateTrainerProfile())
 
-            Fin<User> userResult = await _usersRepository.GetByIdAsync(request.UserId);
-            if (userResult.IsFail)
-            {
-                return (Error)userResult;
-            }
-            User user = (User)userResult;
+            // Case 2.
+            //Fin<User> userResult = await _usersRepository.GetByIdAsync(request.UserId);
+            //if (userResult.IsFail)
+            //{
+            //    return (Error)userResult;
+            //}
+            //User user = (User)userResult;
 
-            Fin<Guid> trainerResult = user.CreateTrainerProfile();
-            if (trainerResult.IsFail)
-            {
-                return (Error)trainerResult;
-            }
-            Guid trainerId = (Guid)trainerResult;
+            //Fin<Guid> trainerResult = user.CreateTrainerProfile();
+            //if (trainerResult.IsFail)
+            //{
+            //    return (Error)trainerResult;
+            //}
+            //Guid trainerId = (Guid)trainerResult;
 
-            await _usersRepository.UpdateAsync(user);
+            //await _usersRepository.UpdateAsync(user);
 
-            return new Response(trainerId);
+            //return new Response(trainerId);
+
+            // Case 3.
+
+            FinT<IO, Guid> usecase = from user in _usersRepository.GetByIdAsync(request.UserId)
+                                     from trainerId in user.CreateTrainerProfile()
+                                     from _ in _usersRepository.UpdateAsync(user)
+                                     select trainerId;
+
+            return await usecase
+                .Run()
+                .RunAsync()
+                .ToCreateTrainerProfileResponse();
         }
 
         //public async Task<IErrorOr> Handle(CreateTrainerProfileCommand command, CancellationToken cancellationToken)

@@ -116,7 +116,11 @@ public static class ErrorCodeFactory
 }
 
 [DataContract]
-public record ExpectedErrorCode(string ErrorCode, int Code, string Message, Option<Error> Inner = default) : Error
+public record ExpectedErrorCode(
+    string ErrorCode,
+    int ErrorCodeIndex,
+    string Message,
+    Option<Error> Inner = default) : Error
 {
     [Pure]
     [DataMember]
@@ -126,7 +130,7 @@ public record ExpectedErrorCode(string ErrorCode, int Code, string Message, Opti
     [Pure]
     [DataMember]
     public override int Code { get; } =
-        Code;
+        ErrorCodeIndex;
 
     [Pure]
     [DataMember]

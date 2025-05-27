@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Json;
 using System.Text.Json;
 using static GymManagement.Tests.Unit.Abstractions.Constants.AssemblyConstants;
+using static LanguageExt.Prelude;
 
 namespace GymManagement.Tests.Integration.LayerTests.Adapters.Presentation;
 
@@ -44,7 +45,7 @@ public class UserControllerTests : ControllerTestsBase
 
                     IUsersRepository usersRepository = Substitute.For<IUsersRepository>();
                     usersRepository.GetByIdAsync(Arg.Any<Guid>())
-                        .Returns(fakeUser);
+                        .Returns(lift(() => fakeUser));
 
                     services.AddScoped(_ => usersRepository);
                 });

@@ -1,6 +1,7 @@
 ﻿using GymDdd.Framework.BaseTypes;
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using LanguageExt;
+using System.Globalization;
 using static GymManagement.Domain.SharedTypes.Errors.DomainErrors;
 using static LanguageExt.Prelude;
 
@@ -10,9 +11,12 @@ public sealed partial class Schedule : Entity
 {
     private readonly Dictionary<DateOnly, List<TimeSlot>> _calendar = [];
 
-    private Schedule(
-        Option<Dictionary<DateOnly, List<TimeSlot>>> calendar = default,
-        Option<Guid> id = default) : base(id.IfNone(Guid.NewGuid()))
+    private Schedule
+    (
+        Option<Dictionary<DateOnly, List<TimeSlot>>> calendar,
+        Option<Guid> id = default
+    ) 
+        : base(id.IfNone(Guid.NewGuid()))
     {
         _calendar = calendar.IfNone([]);
     }
@@ -23,7 +27,9 @@ public sealed partial class Schedule : Entity
 
     public static Schedule Create()
     {
-        return new Schedule(id: Guid.NewGuid());
+        return new Schedule(
+            calendar: default,
+            id: Guid.NewGuid());
     }
 
     public static Schedule Empty()
@@ -45,7 +51,7 @@ public sealed partial class Schedule : Entity
     {
         return from timeSlots in GetOrCreateTimeSlots(date)
                from _1 in EnsureTimeSlotNotOverlapped(date, timeSlots, newTimeSlot)
-               from _2 in ApplyTimeSlotAddition(timeSlots, newTimeSlot)
+               from _2 in ApplyTimeSlotBooking(timeSlots, newTimeSlot)
                select unit;
 
         // 실패 가능성은 없지만, 내부 상태를 변경하는 부수 효과가 있기 때문에 Fin 모나드를 사용
@@ -67,7 +73,7 @@ public sealed partial class Schedule : Entity
                 : unit;
 
         // 실패 가능성은 없지만, 내부 상태를 변경하는 부수 효과가 있기 때문에 Fin 모나드를 사용
-        Fin<Unit> ApplyTimeSlotAddition(List<TimeSlot> timeSlots, TimeSlot newTimeSlot)
+        Fin<Unit> ApplyTimeSlotBooking(List<TimeSlot> timeSlots, TimeSlot newTimeSlot)
         {
             timeSlots.Add(newTimeSlot);
             return unit;
@@ -104,7 +110,7 @@ public sealed partial class Schedule : Entity
     {
         return from _1 in EnsureTimeSlotsAlreadyExit(date, timeRange)
                let timeSlots = GetTimeSlots(date)                     // Map
-               from _2 in ApplyTimeSlotRemoval(timeSlots, timeRange)
+               from _2 in ApplyTimeSlotCancellation(timeSlots, timeRange)
                select unit;
 
         //Fin<Unit> EnsureTimeSlotsAlreadyExit(DateOnly date, TimeSlot timeRange) =>
@@ -122,7 +128,7 @@ public sealed partial class Schedule : Entity
         List<TimeSlot> GetTimeSlots(DateOnly date) =>
             _calendar.GetValueOrDefault(date)!;
 
-        Fin<Unit> ApplyTimeSlotRemoval(List<TimeSlot> timeSlots, TimeSlot timeRange)
+        Fin<Unit> ApplyTimeSlotCancellation(List<TimeSlot> timeSlots, TimeSlot timeRange)
         {
             timeSlots.Remove(timeRange);
             return unit;

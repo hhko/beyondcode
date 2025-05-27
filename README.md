@@ -41,6 +41,8 @@
 ### Internal 아키텍처 (Hexagonal 아키텍처)
 ![](./01-guide/solution/solution-hexagonal-architecture-test-automation.png)
 
+![](./01-guide/solution/solution-hexagonal-architecture-example.png)
+
 - 도메인
   - **`LanguageExt.Core`: 함수형**
   - `MediatR`: 기술 관심사와 도메인 관심사 간의 느슨한 결합 (Mediator 패턴)
