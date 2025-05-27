@@ -41,8 +41,6 @@
 ### Internal 아키텍처 (Hexagonal 아키텍처)
 ![](./01-guide/solution/solution-hexagonal-architecture-test-automation.png)
 
-![](./01-guide/solution/solution-hexagonal-architecture-example.png)
-
 - 도메인
   - **`LanguageExt.Core`: 함수형**
   - `MediatR`: 기술 관심사와 도메인 관심사 간의 느슨한 결합 (Mediator 패턴)
@@ -104,6 +102,11 @@
 
 ## 글쓰기 Hands-on Labs
 "[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)" 강의 예제를 Functional 도메인 주도 설계와 아키텍처로 재구성하는 글입니다.
+
+![](./01-guide/solution/solution-hexagonal-architecture-example.png)
+- `Fin<T>`는 성공(Succ) 또는 실패(Fail) 상태를 나타내는 값입니다.
+- `FinT<M, T>`는 Fin<T>를 다른 모나드 M과 결합하여 복합적인 효과를 처리할 수 있도록 하는 모나드 변환기입니다. 예를 들어, `FinT<IO, T>`는 IO 작업 중 발생할 수 있는 오류를 Fin을 통해 명시적으로 처리할 수 있게 합니다.
+
 
 - **Part 1. Hexagonal 아키텍처 (도메인 레이어)**
   - [ ] Chapter 01. 도메인 탐험
