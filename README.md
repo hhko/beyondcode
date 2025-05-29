@@ -44,8 +44,9 @@
 ### Internal 아키텍처 예제
 ![](./01-guide/solution/solution-hexagonal-architecture-example.png)
 
-- `Fin<T>`는 성공(Succ) 또는 실패(Fail) 상태를 나타내는 값입니다.
-- `FinT<M, T>`는 Fin<T>를 다른 모나드 M과 결합하여 복합적인 효과를 처리할 수 있도록 하는 모나드 변환기입니다. 예를 들어, `FinT<IO, T>`는 IO 작업 중 발생할 수 있는 오류를 Fin을 통해 명시적으로 처리할 수 있게 합니다.
+- `Fin<T>`는 성공(Success) 또는 실패(Failure) 상태를 나타내는 값입니다.
+- `FinT<M, T>`는 Fin<T>를 다른 모나드 `M`과 결합하여 복합적인 효과를 처리할 수 있도록 하는 모나드 변환기입니다.
+- 예를 들어, `FinT<IO, T>`는 `IO` 작업 중 발생할 수 있는 오류를 `Fin<T>`을 통해 명시적으로 처리할 수 있게 합니다.
 
 ### Internal 아키텍처 기술 스택
 - 도메인
@@ -53,7 +54,7 @@
   - `MediatR`: 기술 관심사와 도메인 관심사 간의 느슨한 결합 (Mediator 패턴)
   - `FluentValidation`: 유효성 검사
   - `Ardalis.SmartEnum`: 열거형 도메인 타입
-  - `Ulid`: 고유 ID
+  - `Ulid`: Entity Id
 - 테스트
   - `xUnit`: 테스트
   - **`TngTech.ArchUnitNET`: 아키텍처 테스트**
