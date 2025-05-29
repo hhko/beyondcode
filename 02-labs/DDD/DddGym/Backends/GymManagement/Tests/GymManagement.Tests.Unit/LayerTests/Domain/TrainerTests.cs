@@ -1,4 +1,4 @@
-﻿using GymDdd.Framework.BaseTypes;
+﻿using GymDdd.Framework.BaseTypes.Errors;
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using GymManagement.Domain.AggregateRoots.Trainers;

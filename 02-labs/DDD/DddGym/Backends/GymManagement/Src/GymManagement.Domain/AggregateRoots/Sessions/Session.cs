@@ -58,7 +58,8 @@ public sealed class Session : AggregateRoot
         DateOnly date,
         TimeSlot timeSlot,
 
-        List<SessionCategory> categories,
+        //List<SessionCategory> categories,
+        List<string> categories,
         Option<Guid> id) : base(id.IfNone(Guid.NewGuid()))
     {
         Name = name;
@@ -71,7 +72,8 @@ public sealed class Session : AggregateRoot
         Date = date;
         TimeSlot = timeSlot;
 
-        _categories = categories;
+        _categories = categories.Select(category => SessionCategory.FromName(category))
+                                .ToList();
     }
 
     private Session()
@@ -89,7 +91,8 @@ public sealed class Session : AggregateRoot
         DateOnly date,
         TimeSlot timeSlot,
 
-        List<SessionCategory> categories,
+        //List<SessionCategory> categories,
+        List<string> categories,
         Option<Guid> id = default)
     {
         return new Session(name, description, maxParticipants, roomId, trainerId, date, timeSlot, categories, id);

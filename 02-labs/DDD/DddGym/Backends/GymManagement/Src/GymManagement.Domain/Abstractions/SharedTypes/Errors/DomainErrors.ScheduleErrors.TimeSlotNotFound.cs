@@ -1,4 +1,4 @@
-﻿using GymDdd.Framework.BaseTypes;
+﻿using GymDdd.Framework.BaseTypes.Errors;
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 
 namespace GymManagement.Domain.SharedTypes.Errors;

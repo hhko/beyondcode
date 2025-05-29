@@ -1,5 +1,4 @@
 ﻿using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
-using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
 
 namespace GymManagement.Tests.Unit.LayerTests.Domain.Constants;
 
@@ -18,7 +17,8 @@ public static partial class DomainConstants
             TimeOnly.MinValue.AddHours(8),
             TimeOnly.MinValue.AddHours(9));
 
-        public static readonly List<SessionCategory> Categories = [];
+        //public static readonly List<SessionCategory> Categories = [];
+        public static readonly List<string> Categories = [];
 
         public const int MaxParticipants = 10;
         public const string Name = "Zoomba Session";

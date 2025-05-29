@@ -3,9 +3,7 @@ using GymDdd.Framework.BaseTypes.Cqrs;
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Rooms;
 using GymManagement.Domain.AggregateRoots.Sessions;
-using GymManagement.Domain.AggregateRoots.Sessions.Enumerations;
 using GymManagement.Domain.AggregateRoots.Trainers;
-using LanguageExt;
 
 namespace GymManagement.Application.Usecases.Sessions.Commands;
 
@@ -19,23 +17,14 @@ public static class CreateSessionCommand
         DateTime StartDateTime,
         DateTime EndDateTime,
         Guid TrainerId,
-        List<SessionCategory> Categories)
+        List<string> Categories)
+        //List<SessionCategory> Categories)
         : ICommand<Response>;
-
-    //public sealed record CreateSessionCommand2(
-    //    Guid RoomId,
-    //    string Name,
-    //    string Description,
-    //    int MaxParticipants,
-    //    DateTime StartDateTime,
-    //    DateTime EndDateTime,
-    //    Guid TrainerId,
-    //    List<SessionCategory> Categories) : ICommand<CreateSessionResponse>;
 
     public sealed record Response(Session Session)
         : IResponse;
 
-    internal sealed class Validator 
+    internal sealed class Validator
         : AbstractValidator<Request>
     {
         public Validator()
@@ -63,7 +52,7 @@ public static class CreateSessionCommand
                 from room in _roomsRepository.GetByIdAsync(command.RoomId)
                 from trainer in _trainersRepository.GetByIdAsync(command.TrainerId)
                 from timeSlot in TimeSlot.Create(TimeOnly.FromDateTime(command.StartDateTime), TimeOnly.FromDateTime(command.EndDateTime))
-                //let guard(trainer.IsTimeSlotFree(DateOnly.FromDateTime(command.StartDateTime), timeSlot) == true, Error.New(""))
+                from _1 in Prelude.guardIO(trainer.IsTimeSlotFree(DateOnly.FromDateTime(command.StartDateTime), timeSlot))
                 let session = Session.Create(
                         name: command.Name,
                         description: command.Description,
@@ -73,8 +62,8 @@ public static class CreateSessionCommand
                         date: DateOnly.FromDateTime(command.StartDateTime),
                         timeSlot: timeSlot,
                         categories: command.Categories)
-                from _1 in room.ScheduleSession(session)
-                from _2 in _roomsRepository.UpdateAsync(room)
+                from _2 in room.ScheduleSession(session)
+                from _3 in _roomsRepository.UpdateAsync(room)
                 select session;
 
             Fin<Session> result = await usecase

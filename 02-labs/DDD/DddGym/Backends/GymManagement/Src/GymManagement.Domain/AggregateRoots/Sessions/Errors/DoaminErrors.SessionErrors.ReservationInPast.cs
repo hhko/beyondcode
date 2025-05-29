@@ -1,4 +1,4 @@
-﻿using GymDdd.Framework.BaseTypes;
+﻿using GymDdd.Framework.BaseTypes.Errors;
 
 namespace GymManagement.Domain.AggregateRoots.Sessions.Errors;
 public static partial class DomainErrors

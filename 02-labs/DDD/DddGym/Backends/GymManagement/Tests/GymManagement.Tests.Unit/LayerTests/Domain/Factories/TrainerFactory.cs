@@ -9,7 +9,7 @@ internal static class TrainerFactory
         Option<Guid> userId = default,
         Option<Guid> id = default)
     {
-        return Trainer.Create(
+        return (Trainer)Trainer.Create(
             userId: userId.IfNone(DomainConstants.User.Id),
             id: id.IfNone(DomainConstants.Trainer.Id));
     }

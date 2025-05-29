@@ -1,4 +1,4 @@
-﻿using GymDdd.Framework.BaseTypes;
+﻿using GymDdd.Framework.BaseTypes.Errors;
 
 namespace GymDdd.Framework.Pipelines.Errors;
 

@@ -1,4 +1,5 @@
 ﻿using GymDdd.Framework.BaseTypes;
+using GymDdd.Framework.BaseTypes.Errors;
 using GymManagement.Domain.Abstractions.SharedTypes.ValueObjects;
 using GymManagement.Domain.AggregateRoots.Sessions;
 using static GymManagement.Domain.AggregateRoots.Trainers.Errors.DomainErrors;
@@ -31,7 +32,7 @@ public sealed class Trainer : AggregateRoot
         _schedule = schedule.IfNone(Abstractions.SharedTypes.Schedule.Empty());
     }
 
-    public static Trainer Create(
+    public static Fin<Trainer> Create(
         Guid userId,
         Option<Abstractions.SharedTypes.Schedule> schedule = default,
         Option<Guid> id = default)
@@ -66,38 +67,7 @@ public sealed class Trainer : AggregateRoot
             return unit;
         }
 
-        // =========================================
-        // Monad 스타일
-        // =========================================
 
-        //return EnsureSessionNotScheduled(session.Id)
-        //    .Bind(_ => _schedule.BookTimeSlot(session.Date, session.Time))
-        //    .Bind(_ => RegisterSession(session.Id));
-
-        // =========================================
-        // Imperative Guard 스타일
-        // =========================================
-
-        //if (_sessionIds.Contains(session.Id))
-        //{
-        //    return Error.New("Session already exists in trainer's schedule");
-        //}
-        //
-        // 규칙
-        //  트레이너는 두 개 이상의 겹치는 세션을 가르칠 수 없다.
-        //  A trainer cannot teach two or more overlapping sessions
-        //var bookTimeSlotResult = _schedule.BookTimeSlot(session.Date, session.Time);
-        //if (bookTimeSlotResult.IsFail)
-        //{
-        //    //return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
-        //    //    ? AddSessionToScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions
-        //    //    : bookTimeSlotResult.Errors;
-        //    return (Error)bookTimeSlotResult;
-        //}
-        //
-        //_sessionIds.Add(session.Id);
-        //
-        //return unit;
     }
 
     public Fin<Unit> UnscheduleSession(Session session)
@@ -119,34 +89,6 @@ public sealed class Trainer : AggregateRoot
             _sessionIds.Remove(sessionId);
             return unit;
         }
-
-        // =========================================
-        // Monad 스타일
-        // =========================================
-
-        //return EnsureSessionExists(session.Id)
-        //    .Bind(_ => _schedule.UnbookTimeSlot(session.Date, session.Time))
-        //    .Map(_ => RemoveSessionId(session.Id));
-
-
-        // =========================================
-        // Imperative Guard 스타일
-        // =========================================
-
-        //if (!_sessionIds.Contains(session.Id))
-        //{
-        //    return TrainerErrors.SessionNotFound;
-        //}
-        //
-        //var unbookTimeSlotResult = _schedule.UnbookTimeSlot(session.Date, session.Time);
-        //if (unbookTimeSlotResult.IsFail)
-        //{
-        //    return (Error)unbookTimeSlotResult;
-        //}
-        //
-        //_sessionIds.Remove(session.Id);
-        //
-        //return unit;
     }
 
     public bool IsTimeSlotFree(DateOnly date, TimeSlot timeSlot)
@@ -155,3 +97,73 @@ public sealed class Trainer : AggregateRoot
     }
 }
 
+// public Fin<Unit> ScheduleSession(Session session)
+
+// =========================================
+// Monad 스타일
+// =========================================
+
+//return EnsureSessionNotScheduled(session.Id)
+//    .Bind(_ => _schedule.BookTimeSlot(session.Date, session.Time))
+//    .Bind(_ => RegisterSession(session.Id));
+
+// =========================================
+// Imperative Guard 스타일
+// =========================================
+
+//if (_sessionIds.Contains(session.Id))
+//{
+//    return Error.New("Session already exists in trainer's schedule");
+//}
+//
+// 규칙
+//  트레이너는 두 개 이상의 겹치는 세션을 가르칠 수 없다.
+//  A trainer cannot teach two or more overlapping sessions
+//var bookTimeSlotResult = _schedule.BookTimeSlot(session.Date, session.Time);
+//if (bookTimeSlotResult.IsFail)
+//{
+//    //return bookTimeSlotResult.FirstError.Type == ErrorType.Conflict
+//    //    ? AddSessionToScheduleErrors.CannotHaveTwoOrMoreOverlappingSessions
+//    //    : bookTimeSlotResult.Errors;
+//    return (Error)bookTimeSlotResult;
+//}
+//
+//_sessionIds.Add(session.Id);
+//
+//return unit;
+
+
+
+
+
+
+
+// public Fin<Unit> UnscheduleSession(Session session)
+
+// =========================================
+// Monad 스타일
+// =========================================
+
+//return EnsureSessionExists(session.Id)
+//    .Bind(_ => _schedule.UnbookTimeSlot(session.Date, session.Time))
+//    .Map(_ => RemoveSessionId(session.Id));
+
+
+// =========================================
+// Imperative Guard 스타일
+// =========================================
+
+//if (!_sessionIds.Contains(session.Id))
+//{
+//    return TrainerErrors.SessionNotFound;
+//}
+//
+//var unbookTimeSlotResult = _schedule.UnbookTimeSlot(session.Date, session.Time);
+//if (unbookTimeSlotResult.IsFail)
+//{
+//    return (Error)unbookTimeSlotResult;
+//}
+//
+//_sessionIds.Remove(session.Id);
+//
+//return unit;

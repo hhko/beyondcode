@@ -12,7 +12,7 @@ public class TrainersRepository : ITrainersRepository
     //public Task<Trainer?> GetByIdAsync(Guid trainerId)
     public FinT<IO, Trainer> GetByIdAsync(Guid trainerId)
     {
-        return lift(() => Trainer.Create(Guid.NewGuid()));
+        return Trainer.Create(Guid.NewGuid());
     }
 
     public FinT<IO, Unit> UpdateAsync(Trainer trainer)
