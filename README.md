@@ -51,6 +51,7 @@
 ### Internal 아키텍처 기술 스택
 - 도메인
   - **`LanguageExt.Core`: 함수형**
+  - **`Dapr`: 액터 모델**
   - `MediatR`: 기술 관심사와 도메인 관심사 간의 느슨한 결합 (Mediator 패턴)
   - `FluentValidation`: 유효성 검사
   - `Ardalis.SmartEnum`: 열거형 도메인 타입
@@ -69,6 +70,7 @@
   - `Allure Report`: 테스트 보고서
 - 기술
   - **`OpenTelemetry`: 관찰 가능성 (Observability)**
+  - **`Aspire`: 분산 클라우드 네이티브**
   - `FastEndpoints`: Web API
   - `ZiggyCreatures.FusionCache`: 메모리 캐시
   - `MassTransit`: RabbitMQ

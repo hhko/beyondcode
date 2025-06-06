@@ -4,5 +4,6 @@ public interface IPasswordHasher
 {
     FinT<IO, string> HashPassword(string password);
 
-    FinT<IO, bool> IsCorrectPassword(string password, string bash);
+    FinT<IO, Unit> IsCorrectPassword(string password, string bash);
+    //bool IsCorrectPassword(string password, string bash);
 }

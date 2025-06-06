@@ -8,6 +8,7 @@ public static partial class DomainEvents
     {
         public record AdminProfileCreatedEvent(
             Guid UserId,
-            Guid AdminId) : IDomainEvent;
+            Guid AdminId)
+            : IDomainEvent;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using GymDdd.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Users;
 
 namespace GymManagement.Application.Usecases.Profiles.Commands;
 
@@ -22,11 +21,6 @@ public static class CreateAdminProfileCommand
         }
     }
 
-    internal sealed class Telemetry
-    {
-
-    }
-
     internal sealed class Usecase(IUsersRepository usersRepository)
         : ICommandUsecase<Request, Response>
     {
@@ -34,10 +28,10 @@ public static class CreateAdminProfileCommand
 
         public async Task<Fin<Response>> Handle(Request request, CancellationToken cancellationToken)
         {
-            FinT<IO, Guid> usecase = from user in _usersRepository.GetByIdAsync(request.UserId)
-                                     from adminId in user.CreateAdminProfile()
-                                     from _ in _usersRepository.UpdateAsync(user)
-                                     select adminId;
+            var usecase = from user in _usersRepository.GetByIdAsync(request.UserId)
+                          from newAdminId in user.CreateAdminProfile()
+                          from _ in _usersRepository.UpdateAsync(user)
+                          select newAdminId;
 
             return await usecase
                 .Run()

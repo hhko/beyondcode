@@ -2,7 +2,8 @@
 
 public interface IParticipantsRepository
 {
-    //public Task AddParticipantAsync(Participant participant);
+    public FinT<IO, Unit> AddParticipantAsync(Participant participant);
+
     Task<Participant?> GetByIdAsync(Guid id);
     Task<List<Participant>> ListByIds(List<Guid> ids);
     Task UpdateAsync(Participant participant);

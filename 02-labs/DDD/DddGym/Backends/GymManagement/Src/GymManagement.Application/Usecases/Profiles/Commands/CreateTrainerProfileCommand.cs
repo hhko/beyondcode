@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using GymDdd.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Users;
 
 namespace GymManagement.Application.Usecases.Profiles.Commands;
 
@@ -29,10 +28,10 @@ public static class CreateTrainerProfileCommand
 
         public async Task<Fin<Response>> Handle(Request request, CancellationToken cancellationToken)
         {
-            FinT<IO, Guid> usecase = from user in _usersRepository.GetByIdAsync(request.UserId)
-                                     from trainerId in user.CreateTrainerProfile()
-                                     from _ in _usersRepository.UpdateAsync(user)
-                                     select trainerId;
+            var usecase = from user in _usersRepository.GetByIdAsync(request.UserId)
+                          from newTrainerId in user.CreateTrainerProfile()
+                          from _ in _usersRepository.UpdateAsync(user)
+                          select newTrainerId;
 
             return await usecase
                 .Run()

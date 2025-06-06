@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using GymDdd.Framework.BaseTypes.Cqrs;
-using GymManagement.Domain.AggregateRoots.Users;
 
 namespace GymManagement.Application.Usecases.Profiles.Queries;
 
@@ -35,11 +34,6 @@ public static class GetProfileQuery
         }
     }
 
-    internal sealed class Telemetry
-    {
-
-    }
-
     internal sealed class Usecase(IUsersRepository usersRepository)
         : IQueryUsecase<Request, Response>
     {
@@ -53,7 +47,10 @@ public static class GetProfileQuery
             //    select user.ToResponse()
             //).RunAsync();
 
-            FinT<IO, User> usecase = _usersRepository.GetByIdAsync(request.UserId);
+            //FinT<IO, User> usecase = _usersRepository.GetByIdAsync(request.UserId);
+
+            var usecase = from _ in _usersRepository.GetByIdAsync(request.UserId)
+                          select _;
 
             return await usecase
                 .Run()

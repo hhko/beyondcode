@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using GymDdd.Framework.BaseTypes.Converters;
+using GymManagement.Application.Usecases.Profiles;
 using GymManagement.Application.Usecases.Profiles.Commands;
 using GymManagement.Application.Usecases.Profiles.Queries;
 using GymManagement.Domain.AggregateRoots.Users;

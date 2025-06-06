@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using GymManagement.Application.Usecases.Profiles;
 using GymManagement.Domain.AggregateRoots.Users;
 
 namespace GymManagement.Adapters.Persistence.Repositories;
@@ -43,9 +44,14 @@ public class UsersRepository : IUsersRepository
         return lift(() => unit);
     }
 
-    public FinT<IO, bool> ExistsByEmailAsync(string email)
+    //public FinT<IO, bool> ExistsByEmailAsync(string email)
+    //{
+    //    return lift(() => true);
+    //}
+
+    public FinT<IO, Unit> ExistsByEmailAsync(string email)
     {
-        return lift(() => true);
+        return lift(() => unit);
     }
 
     public FinT<IO, Option<User>> GetByEmailAsync(string email)

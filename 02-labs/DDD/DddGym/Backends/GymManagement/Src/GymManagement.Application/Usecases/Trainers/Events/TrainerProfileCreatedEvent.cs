@@ -4,7 +4,7 @@ using static GymManagement.Domain.AggregateRoots.Users.Events.DomainEvents;
 
 namespace GymManagement.Application.Usecases.Trainers.Events.TrainerProfileCreated;
 
-public static class TrainerProfileCreatedEventHandler
+public static class TrainerProfileCreatedEvent
 {
     internal sealed class Usecase(ITrainersRepository trainersRepository)
         : IDomainEventUsecase<UserEvents.TrainerProfileCreatedEvent>

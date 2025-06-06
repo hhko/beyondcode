@@ -9,8 +9,13 @@ public class PasswordHasher : IPasswordHasher
         return lift(() => string.Empty);
     }
 
-    public FinT<IO, bool> IsCorrectPassword(string password, string bash)
+    //public FinT<IO, bool> IsCorrectPassword(string password, string bash)
+    //{
+    //    return lift(() => true);
+    //}
+
+    public FinT<IO, Unit> IsCorrectPassword(string password, string bash)
     {
-        return lift(() => true);
+        return lift(() => unit);
     }
 }
