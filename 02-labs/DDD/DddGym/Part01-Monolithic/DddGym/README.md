@@ -17,7 +17,7 @@ Trainers        |
 
 ## 2025-06-13(금)
 - Authentication Controller
-  - 외부 입출력
+  - 외부 입출력 -> 내부 입출력
   - Register WebApi 디버깅
   - Login WebApi 디버깅
   - Hash 이해
