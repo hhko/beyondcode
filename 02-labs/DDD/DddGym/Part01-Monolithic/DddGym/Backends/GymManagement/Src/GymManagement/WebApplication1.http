@@ -27,3 +27,27 @@ Accept: application/json
 
 POST {{WebApplication1_HostAddress}}/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles/participant
 Accept: application/json
+
+
+###
+
+#
+# AuthenticationController
+#
+
+POST {{WebApplication1_HostAddress}}/authentication/register
+Content-Type: application/json
+
+{
+    "FirstName": "Lior",
+    "LastName": "Dagan",
+    "Email": "lior@dagan.com",
+    "Password": "Lidagan123!!"
+}
+
+###
+
+GET {{WebApplication1_HostAddress}}/api/authentication/
+Accept: application/json
+
+
