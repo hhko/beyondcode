@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Shouldly" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="TngTech.ArchUnitNET.xUnit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Abstractions\Frameworks\Src\GymDdd.Framework.WebApi\GymDdd.Framework.WebApi.csproj" />
+    <ProjectReference Include="..\..\Abstractions\Frameworks\Src\GymDdd.Framework\GymDdd.Framework.csproj" />
+    <ProjectReference Include="..\..\Abstractions\SourceGenerators\Src\GymDdd.SourceGenerator\GymDdd.SourceGenerator.csproj" />
+    <ProjectReference Include="..\..\Backends\GymManagement\Src\GymManagement.Adapters.Infrastructure\GymManagement.Adapters.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Backends\GymManagement\Src\GymManagement.Adapters.Persistence\GymManagement.Adapters.Persistence.csproj" />
+    <ProjectReference Include="..\..\Backends\GymManagement\Src\GymManagement.Adapters.Presentation\GymManagement.Adapters.Presentation.csproj" />
+    <ProjectReference Include="..\..\Backends\GymManagement\Src\GymManagement.Application\GymManagement.Application.csproj" />
+    <ProjectReference Include="..\..\Backends\GymManagement\Src\GymManagement.Domain\GymManagement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

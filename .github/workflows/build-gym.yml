@@ -51,8 +51,8 @@ jobs:
     #  - ${{ github.run_number }}
     #  - ${{ github.run_id }}
     env:
-      solution_dir:       ./02-labs/DDD/DddGym
-      build_dir:          ./02-labs/DDD/DddGym/.build
+      solution_dir:       ./02-labs/DDD/DddGym/Part01-Monolithic/DddGym
+      build_dir:          ./02-labs/DDD/DddGym/Part01-Monolithic/DddGym/.build
       solution_filename:  DddGym.sln
 
     steps:
