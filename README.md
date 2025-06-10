@@ -124,10 +124,10 @@ int Divide(int x, int y)
 
 이 과정은 **의미 있는 타입 설계, 입력 유효성 보장, 오류 처리의 명확화, 도메인 언어 강화** 등을 아우르며, 유지보수성과 안정성이 높은 코드를 구성하는 기반을 마련합니다.
 
-- [x] 기본 구현: Divide
-- [x] 출력 개선: 예외
-- [x] 출력 개선: Error 값
-- [x] 입력 개선: NonZeroInt 값 객체 생성(Always Valid: Create)
+- [x] [기본 구현: Divide](./02-labs/DDD/01_Divide/Divide/Case1.cs)
+- [x] [출력 개선: 예외](./02-labs/DDD/01_Divide/Divide/Case2_Output_Throw.cs)
+- [x] [출력 개선: Error 값](./02-labs/DDD/01_Divide/Divide/Case3_Output_Error.cs)
+- [ ] 입력 개선: NonZeroInt 값 객체 생성(Always Valid: Create)
 - [ ] 입력 개선: NonZeroInt 값 비교
 - [ ] 입력 개선: NonZeroInt 값 객체 생성 SRP(Create와 Validate 분리)
 - [ ] 입력 개선: NonZeroInt 값 은닉(operator override)
