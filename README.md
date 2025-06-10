@@ -111,6 +111,32 @@
 <br/>
 
 ## 글쓰기 Hands-on Labs
+
+### 도메인 타입 (값 객체)
+단순한 `Divide` 구현을 출발점으로 삼아, 부작용 없이 예측 가능한 **순수 함수(`Pure Function`) 로** 개선하고, 이를 통해 유효한 값만 표현할 수 있는 **도메인 타입(`Value Object`)을** 점진적으로 설계해 나가는 과정을 통해 도메인 주도 설계와 함수형 프로그래밍의 핵심 가치를 함께 익힙니다.
+
+```cs
+int Divide(int x, int y)
+{
+	return x / y;
+}
+```
+
+이 과정은 **의미 있는 타입 설계, 입력 유효성 보장, 오류 처리의 명확화, 도메인 언어 강화** 등을 아우르며, 유지보수성과 안정성이 높은 코드를 구성하는 기반을 마련합니다.
+
+- [x] 기본 구현: Divide
+- [x] 출력 개선: 예외
+- [x] 출력 개선: Error 값
+- [x] 입력 개선: NonZeroInt 값 객체(Always Valid: Create)
+- [ ] 입력 개선: NonZeroInt 값 비교
+- [ ] 입력 개선: NonZeroInt 값 객체 생성 SRP(Create와 Validate 분리)
+- [ ] 입력 개선: NonZeroInt 값 은닉(operator override)
+- [ ] 입력 개선: NonZeroInt EFCore 데이터 저장소(SQLite) 저장/읽기
+
+### 도메인 타입 (엔티티)
+- TODO
+
+### 프로젝트 DddGym
 "[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)" 강의 예제를 Functional 도메인 주도 설계와 아키텍처로 재구성하는 글입니다.
 
 - **Part 1. Hexagonal 아키텍처 (도메인 레이어)**
