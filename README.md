@@ -113,12 +113,12 @@
 ## 글쓰기 Hands-on Labs
 
 ### 도메인 타입 (값 객체)
-단순한 `Divide` 구현을 출발점으로 삼아, 부작용 없이 예측 가능한 **순수 함수(`Pure Function`) 로** 개선하고, 이를 통해 유효한 값만 표현할 수 있는 **도메인 타입(`Value Object`)을** 점진적으로 설계해 나가는 과정을 통해 도메인 주도 설계와 함수형 프로그래밍의 핵심 가치를 함께 익힙니다.
+단순한 `Divide` 구현을 출발점으로 삼아, 부작용 없이 예측 가능한 **순수 함수(Pure Function)로** 개선하고, 이를 통해 유효한 값만 표현할 수 있는 **도메인 타입(Value Object)을** 점진적으로 설계해 나가는 과정을 통해 도메인 주도 설계와 함수형 프로그래밍의 핵심 가치를 함께 익힙니다.
 
 ```cs
 int Divide(int x, int y)
 {
-	return x / y;
+  return x / y;
 }
 ```
 
@@ -127,7 +127,7 @@ int Divide(int x, int y)
 - [x] 기본 구현: Divide
 - [x] 출력 개선: 예외
 - [x] 출력 개선: Error 값
-- [x] 입력 개선: NonZeroInt 값 객체(Always Valid: Create)
+- [x] 입력 개선: NonZeroInt 값 객체 생성(Always Valid: Create)
 - [ ] 입력 개선: NonZeroInt 값 비교
 - [ ] 입력 개선: NonZeroInt 값 객체 생성 SRP(Create와 Validate 분리)
 - [ ] 입력 개선: NonZeroInt 값 은닉(operator override)
