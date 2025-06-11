@@ -141,45 +141,38 @@ public class FluentValidationOptionsIntegrationTests
 
 ```cs
 [Trait(nameof(UnitTest), UnitTest.Architecture)]
-public class OptionsClassTests : ArchitectureTestBase
+public class OptionsRuleTests : ArchitectureTestBase
 {
     [Fact]
-    public void OptionsClasses_ShouldHave_SectionName()
-    {
-        ArchRuleDefinition
-            .Classes()
-            .That()
-            .HaveNameEndingWith(NamingConvention.Options)
-            .And().AreSealed()
-            .And().ArePublic()
-            .Should()
-            .HaveFieldMemberWithName(NamingConvention.SectionName)
-            .WithoutRequiringPositiveResults()
-            .Check(Architecture);
-    }
-
-    [Fact]
-    public void OptionsClass_ShouldHave_NestedValidator()
+    public void OptionsClasses_ShouldSatisfy_DesignRules()
     {
         // Arrange
-        var rules = new[]
-        {
-            new NestedClassRule(
-                NamingConvention.Validator,                 // Validator 클래스 이름
-                (outer, nested) =>
-                    !nested.IsNestedPublic &&               // internal
-                    nested.IsSealed &&                      // sealed
-                    nested.GetInterfaces().Any(i =>
-                        i.IsGenericType &&
-                        i.GetGenericTypeDefinition().Name == typeof(IValidator<>).Name &&   // IValidator<T> 상속
-                        i.GenericTypeArguments[0] == outer)),                               // IValidator<T>의 T 타입
-        };
+        var provider = ArchRuleDefinition
+            .Classes()
+            .That()
+            .HaveNameEndingWith(NamingConvention.Options);
+
+        List<IArchitectureRule> sut = [
+            // public sealed class {옵션}Options
+            provider.Should().BePublic()
+                .AndShould().BeSealed()
+                .AndShould().NotBeNested()
+                .ToArchitectureRule(),
+
+            // public const string SectionName
+            Must.HaveNamedFieldMatches(provider,
+                (NamingConvention.SectionName, field => Must.IsPublicStaticField(field, typeof(string)))
+            ),
+
+            // internal sealed class Validator 중첩 클래스
+            Must.HaveNamedNestedClassMatches(provider, (NamingConvention.Validator, Must.IsNestedInternalSealed))
+        ];
 
         // Act
-        var violations = CheckNestedClassRules(NamingConvention.Options, rules);
+        var actual = sut.Evaluate(ServiceArchitecture);
 
         // Assert
-        violations.ShouldBeEmpty("All Options classes must have required nested classes that fulfill the design rules.");
+        actual.ShouldHaveNoViolationRules();
     }
 }
 ```
