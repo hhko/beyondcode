@@ -123,7 +123,7 @@ int Divide(int x, int y)
 }
 
 // 개선 후
-Fin<int> Divide(int x, NonZeroInt y)
+int Divide(int x, NonZeroInt y)
 {
   return x / y;
 }
@@ -133,14 +133,14 @@ Fin<int> Divide(int x, NonZeroInt y)
 
 - **부작용 없는 순수 함수로 전환**
   - 개선 전의 `Divide(int x, int y)`는 `y == 0`일 때 예외가 발생하는 비결정적이며 예외 유발 가능성이 있는 함수입니다.
-  - 개선 후 `Fin<int> Divide(int x, NonZeroInt y)`는 입력 단계에서 오류 가능성을 제거하고, 함수 자체는 입력에 대해 항상 동일한 결과를 보장하는 **순수 함수(Pure Function)로** 전환되었습니다.
+  - 개선 후 `int Divide(int x, NonZeroInt y)`는 입력 단계에서 오류 가능성을 제거하고, 함수 자체는 입력에 대해 항상 동일한 결과를 보장하는 **순수 함수(Pure Function)로** 전환되었습니다.
 - **도메인 타입(Value Object) 도입**
   - `NonZeroInt`는 단순한 `int`가 아닌, "0이 아님"이라는 비즈니스 규칙을 포함한 의미 있는 타입입니다.
   - 이는 도메인 지식이 코드에 직접 반영되는 형태로, 도메인 주도 설계에서 말하는 **도메인 언어(Ubiquitous Language)를** 구체적으로 구현합니다.
   - `NonZeroInt`를 사용함으로써, 입력 유효성 검사(validate)를 객체 생성 시점으로 위임하여 이후 비즈니스 로직에서의 복잡성을 줄일 수 있습니다.
-- **명확한 오류 처리 (Fin 타입 도입)**
-  - `Fin<int>`는 성공 또는 실패를 표현할 수 있는 타입으로, 예외(Exception) 기반이 아닌 **값 기반의 오류 표현(Value-based error handling)을** 제공합니다.
-  - 이로 인해 에러의 존재가 타입에 명시적으로 드러나며, 호출자 측에서도 이를 컴파일 타임에 인지하고 대응할 수 있습니다.
+- ~~**명확한 오류 처리 (Fin 타입 도입)**~~
+  - ~~`Fin<int>`는 성공 또는 실패를 표현할 수 있는 타입으로, 예외(Exception) 기반이 아닌 **값 기반의 오류 표현(Value-based error handling)을** 제공합니다.~~
+  - ~~이로 인해 에러의 존재가 타입에 명시적으로 드러나며, 호출자 측에서도 이를 컴파일 타임에 인지하고 대응할 수 있습니다.~~
 
 <br/>
 
