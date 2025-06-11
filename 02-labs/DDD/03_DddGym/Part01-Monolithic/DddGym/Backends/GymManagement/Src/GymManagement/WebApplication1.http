@@ -45,6 +45,8 @@ Content-Type: application/json
     "Password": "Lidagan123!!"
 }
 
+
+
 ###
 
 GET {{WebApplication1_HostAddress}}/api/authentication/

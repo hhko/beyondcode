@@ -3,7 +3,6 @@ using GymDdd.Framework.BaseTypes.Cqrs;
 using GymManagement.Application.Abstractions.TokenGenerator;
 using GymManagement.Application.Usecases.Profiles;
 using GymManagement.Domain.AggregateRoots.Users;
-using static GymManagement.Application.Usecases.Authentication.Errors.ApplicationErrors;
 
 namespace GymManagement.Application.Usecases.Authentication.Queries;
 
@@ -41,13 +40,15 @@ public static class LoginQuery
         public async Task<Fin<Response>> Handle(Request request, CancellationToken cancellationToken)
         {
             var usecase = from user in _usersRepository.GetByEmailAsync(request.Email)
-                                                       .ToRequiredOrError(LoginQueryErrors.EmailNotFound(request.Email))
                           from _ in _passwordHasher.IsCorrectPassword(request.Password, user.PasswordHash)
                           from token in _jwtTokenGenerator.GenerateToken(user)
                           select (user, token);
 
-            return await usecase
-                .ToLoginResponse();
+            var result = await usecase
+                .Run()
+                .RunAsync();
+
+            return result.ToLoginResponse();
         }
     }
 }

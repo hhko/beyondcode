@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using GymDdd.Framework.BaseTypes.Cqrs;
-using static GymManagement.Application.Usecases.Profiles.Errors.ApplicationErrors;
 
 namespace GymManagement.Application.Usecases.Profiles.Queries;
 
@@ -42,7 +41,6 @@ public static class GetProfileQuery
         public async Task<Fin<Response>> Handle(Request request, CancellationToken cancellationToken)
         {
             var usecase = from _ in _usersRepository.GetByIdAsync(request.UserId)
-                                                    .ToRequiredOrError(GetProfileErrors.UserIdNotFound(request.UserId))
                           select _;
 
             return await usecase

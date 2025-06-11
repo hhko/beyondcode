@@ -58,6 +58,11 @@ public static partial class Must
         return parentType
             .GetNestedTypes(BindingFlags.Public | BindingFlags.NonPublic)
             .FirstOrDefault(n => n.Name.Equals(nestedClassName, StringComparison.Ordinal));
+
+        //nested.GetInterfaces().Any(i =>
+        //                i.IsGenericType &&
+        //                i.GetGenericTypeDefinition().Name == typeof(IValidator<>).Name &&   // IValidator<T> 상속
+        //                i.GenericTypeArguments[0] == outer)),                               // IValidator<T>의 T 타입
     }
 }
 

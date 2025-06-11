@@ -2,7 +2,7 @@
 using GymManagement.Application.Usecases.Profiles;
 using GymManagement.Domain.AggregateRoots.Users;
 
-namespace GymManagement.Adapters.Persistence.Repositories;
+namespace GymManagement.Adapters.Persistence.Repositories.UsersRepositories;
 
 // -------------------------------------------------------------------------------------------------------
 // Task 0개: lift(() =>                      실패 시 컴파일러 에러             
@@ -54,25 +54,41 @@ public class UsersRepository : IUsersRepository
         return lift(() => unit);
     }
 
-    public FinT<IO, Option<User>> GetByEmailAsync(string email)
+    public FinT<IO, User> GetByEmailAsync(string email)
     {
-        return lift(() => Option<User>.None);
-    }
-
-    public FinT<IO, Option<User>> GetByIdAsync(Guid userId)
-    {
+        // UsersRepositoryErrors.EmailNotFound
         return IO.liftAsync(async () =>
         {
             await Task.CompletedTask;
 
-            var userFaker = new Faker<User>()
+            var userFaker = new Faker<Fin<User>>()
+                            .CustomInstantiator(f => User.Create(
+                                firstName: f.Name.FirstName(),
+                                lastName: f.Name.LastName(),
+                                email: f.Internet.Email(),
+
+                                // Lidagan123!!
+                                passwordHash: "$2a$11$2nDs1sL9NpfZw2/T2rD1lO43Ixw4UYUtmiq.koC19q/TnKcIHT4Je"));
+
+            return userFaker.Generate();
+        });
+    }
+
+    public FinT<IO, User> GetByIdAsync(Guid userId)
+    {
+        // UsersRepositoryErrors.UserIdNotFound
+        return IO.liftAsync(async () =>
+        {
+            await Task.CompletedTask;
+
+            var userFaker = new Faker<Fin<User>>()
                             .CustomInstantiator(f => User.Create(
                                 firstName: f.Name.FirstName(),
                                 lastName: f.Name.LastName(),
                                 email: f.Internet.Email(),
                                 passwordHash: f.Internet.Password()));
 
-            return Option<User>.Some(userFaker.Generate());
+            return userFaker.Generate();
         });
     }
 

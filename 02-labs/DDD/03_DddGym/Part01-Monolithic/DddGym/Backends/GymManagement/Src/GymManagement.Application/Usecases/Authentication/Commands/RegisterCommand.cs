@@ -49,11 +49,10 @@ public static class RegisterCommand
         {
             var usecase = from _1 in _usersRepository.ExistsByEmailAsync(request.Email)
                           from hashPassword in _passwordHasher.HashPassword(request.Password)
-                          let user = User.Create(
-                              request.FirstName,
-                              request.LastName,
-                              request.Email,
-                              hashPassword)
+                          from user in User.Create(request.FirstName,
+                                                   request.LastName,
+                                                   request.Email,
+                                                   hashPassword)
                           from _2 in _usersRepository.AddUserAsync(user)
                           from token in _jwtTokenGenerator.GenerateToken(user)
                           select (user, token);

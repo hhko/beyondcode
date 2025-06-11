@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using GymDdd.Framework.BaseTypes.Cqrs;
-using static GymManagement.Application.Usecases.Profiles.Errors.ApplicationErrors;
 
 namespace GymManagement.Application.Usecases.Profiles.Commands;
 
@@ -27,7 +26,6 @@ public static class CreateParticipantProfileCommand
         public async Task<Fin<Response>> Handle(Request request, CancellationToken cancellationToken)
         {
             var usecase = from user in _usersRepository.GetByIdAsync(request.UserId)
-                                                       .ToRequiredOrError(CreateAdminProfileErrors.UserIdNotFound(request.UserId))
                           from newParticipantId in user.CreateParticipantProfile()
                           from _ in _usersRepository.UpdateAsync(user)
                           select newParticipantId;

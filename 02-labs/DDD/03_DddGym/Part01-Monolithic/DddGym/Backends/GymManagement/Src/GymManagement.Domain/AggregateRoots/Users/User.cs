@@ -40,7 +40,7 @@ public sealed class User : AggregateRoot
     {
     }
 
-    public static User Create(
+    public static Fin<User> Create(
         string firstName,
         string lastName,
         string email,

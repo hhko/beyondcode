@@ -1,0 +1,47 @@
+﻿@WebApplication1_HostAddress = http://localhost:60813
+
+###
+
+#
+# AuthenticationController
+#
+
+### 계정 등록: 성공
+
+POST {{WebApplication1_HostAddress}}/api/authentication/register
+Content-Type: application/json
+
+{
+    "FirstName": "Lior",
+    "LastName": "Dagan",
+    "Email": "lior@dagan.com",
+    "Password": "Lidagan123!!"
+}
+
+
+### 로그인: 성공
+
+POST {{WebApplication1_HostAddress}}/api/authentication/login
+Content-Type: application/json
+
+{
+    "Email": "lior@dagan.com",
+    "Password": "Lidagan123!!"
+}
+
+### 로그인: 실패
+
+POST {{WebApplication1_HostAddress}}/api/authentication/login
+Content-Type: application/json
+
+{
+    "Email": "lior@dagan.com",
+    "Password": "Amiko1234!!"
+}
+
+###
+
+GET {{WebApplication1_HostAddress}}/api/authentication/
+Accept: application/json
+
+

@@ -35,7 +35,7 @@ public class UserControllerTests : ControllerTestsBase
                 builder.ConfigureTestServices(services =>
                 {
                     var userFaker = new Faker<User>()
-                        .CustomInstantiator(f => User.Create(
+                        .CustomInstantiator(f => (User)User.Create(
                             firstName: f.Name.FirstName(),
                             lastName: f.Name.LastName(),
                             email: f.Internet.Email(),
@@ -44,7 +44,7 @@ public class UserControllerTests : ControllerTestsBase
 
                     IUsersRepository usersRepository = Substitute.For<IUsersRepository>();
                     usersRepository.GetByIdAsync(Arg.Any<Guid>())
-                        .Returns(lift(() => Option<User>.Some(fakeUser)));
+                        .Returns(lift(() => fakeUser));
 
                     services.AddScoped(_ => usersRepository);
                 });
