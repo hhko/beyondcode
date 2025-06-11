@@ -116,7 +116,14 @@
 단순한 `Divide` 구현을 출발점으로 삼아, 부작용 없이 예측 가능한 **순수 함수(Pure Function)로** 개선하고, 이를 통해 유효한 값만 표현할 수 있는 **도메인 타입(Value Object)을** 점진적으로 설계해 나가는 과정을 통해 도메인 주도 설계와 함수형 프로그래밍의 핵심 가치를 함께 익힙니다.
 
 ```cs
+// 개선 전
 int Divide(int x, int y)
+{
+  return x / y;
+}
+
+// 개선 후
+Fin<int> Divide(int x, NonZeroInt y)
 {
   return x / y;
 }
@@ -131,7 +138,7 @@ int Divide(int x, int y)
 - [ ] 입력 개선: NonZeroInt 값 비교
 - [ ] 입력 개선: NonZeroInt 값 객체 생성 SRP(Create와 Validate 분리)
 - [ ] 입력 개선: NonZeroInt 값 은닉(operator override)
-- [ ] 입력 개선: NonZeroInt EFCore 데이터 저장소(SQLite) 저장/읽기
+- [ ] 통합 구현: Divide WebApi
 
 ### 도메인 타입 (엔티티)
 - TODO
