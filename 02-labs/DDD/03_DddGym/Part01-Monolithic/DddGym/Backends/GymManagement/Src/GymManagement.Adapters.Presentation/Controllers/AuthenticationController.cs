@@ -3,13 +3,14 @@ using GymManagement.Adapters.Presentation.Abstractions;
 using GymManagement.Application.Usecases.Authentication.Commands;
 using GymManagement.Application.Usecases.Authentication.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymManagement.Adapters.Presentation.Controllers;
 
 [Route("api/[controller]")]
-//[AllowAnonymous]
+[AllowAnonymous]
 public class AuthenticationController : ApiController
 {
     public AuthenticationController(ISender sender)

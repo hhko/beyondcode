@@ -1,10 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymManagement.Adapters.Presentation.Abstractions;
 
 [ApiController]
-//[Authorize]
+[Authorize]
 //[Route("api/[controller]")]
 [Produces("application/json")]
 public abstract class ApiController(ISender sender) : ControllerBase
