@@ -33,17 +33,6 @@ public sealed class ProfileController : ApiController
         CreateAdminProfileCommand.Request command = new(userId);
         Fin<CreateAdminProfileCommand.Response> response = await Sender.Send(command);
         return response.ToResult();
-
-        //var x = Pure(userId)
-        //    .Map(id => new CreateAdminProfileCommand(id))
-        //    .Bind(command => liftIO(() => Sender.Send(command)))
-        //    .Map(Ok);
-
-        //var x = from command in Pure(new CreateAdminProfileCommand(userId))
-        //        from response in liftIO(() => Sender.Send(command))
-        //        select OK(response);
-
-        //return await x.RunAsync();
     }
 
     [HttpPost("trainer")]

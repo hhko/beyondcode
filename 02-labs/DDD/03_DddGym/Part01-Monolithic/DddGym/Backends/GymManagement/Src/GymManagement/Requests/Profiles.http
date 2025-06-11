@@ -1,0 +1,21 @@
+﻿@WebApplication1_HostAddress = http://localhost:60813
+
+### 조회
+
+GET {{WebApplication1_HostAddress}}/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles
+Accept: application/json
+
+### admin
+
+POST {{WebApplication1_HostAddress}}/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles/admin
+Accept: application/json
+
+### trainer
+
+POST {{WebApplication1_HostAddress}}/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles/trainer
+Accept: application/json
+
+### participant
+
+POST {{WebApplication1_HostAddress}}/users/0d47d5e2-04b3-4c89-a792-5fcae1e5b8fc/profiles/participant
+Accept: application/json

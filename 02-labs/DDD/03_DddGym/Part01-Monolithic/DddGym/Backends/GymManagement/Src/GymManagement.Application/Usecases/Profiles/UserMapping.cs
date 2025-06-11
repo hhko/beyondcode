@@ -20,12 +20,8 @@ public static class UserMapping
             Fail: Fin<GetProfileQuery.Response>.Fail);
     }
 
-    public static async ValueTask<Fin<CreateAdminProfileCommand.Response>> ToCreateAdminProfileResponse(this FinT<IO, Guid> usecase)
+    public static Fin<CreateAdminProfileCommand.Response> ToCreateAdminProfileResponse(this Fin<Guid> result)
     {
-        var result = await usecase
-            .Run()
-            .RunAsync();
-
         return result.Match(
             Succ: adminId => new CreateAdminProfileCommand.Response(adminId),
             Fail: Fin<CreateAdminProfileCommand.Response>.Fail);

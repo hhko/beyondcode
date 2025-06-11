@@ -25,7 +25,7 @@ public class UserControllerTests : ControllerTestsBase
     public UserControllerTests(WebAppFactoryFixture fixture)
         : base(fixture)
     {
-        _options = new();
+        _options = new JsonSerializerOptions();
         _options.Converters.Add(new OptionJsonConverterFactory());
         _options.PropertyNameCaseInsensitive = true;
 
@@ -45,6 +45,9 @@ public class UserControllerTests : ControllerTestsBase
                     IUsersRepository usersRepository = Substitute.For<IUsersRepository>();
                     usersRepository.GetByIdAsync(Arg.Any<Guid>())
                         .Returns(lift(() => fakeUser));
+
+                    usersRepository.UpdateAsync(Arg.Any<User>())
+                        .Returns(lift(() => unit));
 
                     services.AddScoped(_ => usersRepository);
                 });

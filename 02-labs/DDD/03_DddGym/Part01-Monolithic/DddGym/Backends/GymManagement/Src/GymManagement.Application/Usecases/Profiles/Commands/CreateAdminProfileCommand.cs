@@ -5,14 +5,13 @@ namespace GymManagement.Application.Usecases.Profiles.Commands;
 
 public static class CreateAdminProfileCommand
 {
-    public sealed record Request(Guid UserId)
-        : ICommandReqeust<Response>;
+    public sealed record Request(
+        Guid UserId) : ICommandReqeust<Response>;
 
-    public sealed record Response(Option<Guid> AdminId)
-        : IResponse;
+    public sealed record Response(
+        Option<Guid> AdminId) : IResponse;
 
-    internal sealed class Validator
-        : AbstractValidator<Request>
+    internal sealed class Validator : AbstractValidator<Request>
     {
         public Validator()
         {
@@ -21,8 +20,8 @@ public static class CreateAdminProfileCommand
         }
     }
 
-    internal sealed class Usecase(IUsersRepository usersRepository)
-        : ICommandUsecase<Request, Response>
+    internal sealed class Usecase(
+        IUsersRepository usersRepository) : ICommandUsecase<Request, Response>
     {
         private readonly IUsersRepository _usersRepository = usersRepository;
 
@@ -33,8 +32,11 @@ public static class CreateAdminProfileCommand
                           from _ in _usersRepository.UpdateAsync(user)
                           select newAdminId;
 
-            return await usecase
-                .ToCreateAdminProfileResponse();
+            var result = await usecase
+                .Run()
+                .RunAsync();
+
+            return result.ToCreateAdminProfileResponse();
         }
     }
 }

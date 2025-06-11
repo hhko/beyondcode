@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GymManagement.Adapters.Presentation.Controllers;
 
-//[Route("[controller]")]
 [Route("api/[controller]")]
 //[AllowAnonymous]
 public class AuthenticationController : ApiController
@@ -44,16 +43,4 @@ public class AuthenticationController : ApiController
         Fin<LoginQuery.Response> response = await Sender.Send(request);
         return response.ToResult();
     }
-
-    [HttpGet]
-    public IActionResult Register()
-    {
-        return Ok();
-    }
 }
-
-//public record RegisterRequest(
-//    string FirstName,
-//    string LastName,
-//    string Email,
-//    string Password);
