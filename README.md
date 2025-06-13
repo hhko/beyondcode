@@ -122,19 +122,40 @@ int Divide(int x, int y)
   return x / y;
 }
 
-// 개선 후: 출력 타입 Fin<int>
-Fin<int> Divide(int x, int y)
-{
-  if (y == 0)
-    return Error.New("분모가 0입니다");
-
-  return x / y;
-}
-
 // 개선 후: 입력 타입 NonZeroInt
 int Divide(int x, NonZeroInt y)
 {
   return x / y;
+}
+
+public sealed class NonZeroInt
+  : IEquatable<NonZeroInt>
+  , IValueObject
+{
+  private int Value { get; init; }
+
+  private NonZeroInt(int value)
+  {
+    Value = value;
+  }
+
+  public static Fin<NonZeroInt8> Create(int value)
+  {
+    return Validate(value)
+      .CreateValueObject(() => new NonZeroInt8(value));
+  }
+
+  public static Error Validate(int value)
+  {
+    return Error
+      .Empty
+      .If(value == 0, NonZeroInt8Errors.Invalid());
+  }
+
+  public static explicit operator int(NonZeroInt8 x) =>
+    x.Value;
+
+  // ...
 }
 ```
 
@@ -150,9 +171,8 @@ int Divide(int x, NonZeroInt y)
 - 출력 타입: **명확한 오류 처리 (Fin 타입 도입)**
   - `Fin<int>`는 성공 또는 실패를 표현할 수 있는 타입으로, 예외(Exception) 기반이 아닌 **값 기반의 오류 표현(Value-based error handling)을** 제공합니다.
   - 이로 인해 에러의 존재가 타입에 명시적으로 드러나며, 호출자 측에서도 이를 컴파일 타임에 인지하고 대응할 수 있습니다.
-
-<br/>
-
+  
+  
 - [x] 1. 기본 구현: Divide
 - [x] 2. 출력 개선: 예외
 - [x] 3. 출력 개선: Error 값
