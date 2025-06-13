@@ -153,14 +153,15 @@ int Divide(int x, NonZeroInt y)
 
 <br/>
 
-- [x] [기본 구현: Divide](./02-labs/DDD/01_Divide/Divide/Case1.cs)
-- [x] [출력 개선: 예외](./02-labs/DDD/01_Divide/Divide/Case2_Output_Throw.cs)
-- [x] [출력 개선: Error 값](./02-labs/DDD/01_Divide/Divide/Case3_Output_Error.cs)
-- [ ] 입력 개선: NonZeroInt 값 객체 생성(Always Valid: Create)
-- [ ] 입력 개선: NonZeroInt 값 비교
-- [ ] 입력 개선: NonZeroInt 값 객체 생성 SRP(Create와 Validate 분리)
-- [ ] 입력 개선: NonZeroInt 값 은닉(operator override)
-- [ ] 통합 구현: Divide WebApi
+- [x] 1. 기본 구현: Divide
+- [x] 2. 출력 개선: 예외
+- [x] 3. 출력 개선: Error 값
+- [x] 4. 입력 개선: NonZeroInt 값 객체 생성 (Always Valid: Create)
+- [x] 5. 입력 개선: NonZeroInt 값 은닉 (Information Hiding: operator loading)
+- [x] 6. 입력 개선: NonZeroInt 값 비교 (동등성: Equality)
+- [x] 7. 입력 개선: NonZeroInt 값 객체 SRP (Create, Validate, Error)
+- [x] 8. 타입 테스트: NonZeroInt 아키텍처 테스트
+- [ ] 9. 통합 구현: WebApi
 
 ### 도메인 타입 (엔티티)
 - TODO
