@@ -172,7 +172,7 @@ public sealed class NonZeroInt
   - `Fin<int>`는 성공 또는 실패를 표현할 수 있는 타입으로, 예외(Exception) 기반이 아닌 **값 기반의 오류 표현(Value-based error handling)을** 제공합니다.
   - 이로 인해 에러의 존재가 타입에 명시적으로 드러나며, 호출자 측에서도 이를 컴파일 타임에 인지하고 대응할 수 있습니다.
   
-  
+#### 목차
 - [x] 1. 기본 구현: Divide
 - [x] 2. 출력 개선: 예외
 - [x] 3. 출력 개선: Error 값
