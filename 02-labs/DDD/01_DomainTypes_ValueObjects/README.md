@@ -237,6 +237,49 @@ public readonly partial struct NonZeroInt7
 - `private constructor`인가?
 - `Create`, `Validate` 메서드를 가졌는가?
 
+```cs
+[Trait(nameof(UnitTest), UnitTest.Architecture)]
+public sealed class DomainTypeRuleTests : ArchitectureTestBase
+{
+    [Fact]
+    public void ValueObject_ShouldSatisfy_DesignRules()
+    {
+        // Arrange
+        var provider = ArchRuleDefinition
+            .Classes()
+            .That()
+            .ImplementInterface(typeof(IValueObject8));
+
+        // 설계 규칙
+        List<IArchitectureRule> sut = [
+            // public sealed class {ValueObject}
+            provider
+                .Should().BePublic()
+                .AndShould().BeSealed()
+                .ToArchitectureRule(),
+
+            // private {생성자}
+            Must.HaveConstructorAllMatches(provider, Must.IsPrivateConstructor),
+
+            // public static {ValueObject} Create
+            // public static {ValueObject} Validate
+            Must.HaveNamedMethodMatches(provider,
+                (IValueObject8.CreateMethodName, Must.IsPublicStaticMethod),
+                (IValueObject8.ValidateMethodName, Must.IsPublicStaticMethod)
+            )
+
+            // TODO: Immutable 규칙 추가 (필드 Readonly, 컬렉션 방어적 복사 등)
+        ];
+
+        // Act
+        var actual = sut.Evaluate(Architectures);
+
+        // Assert
+        actual.ShouldHaveNoViolationRules();
+    }
+}
+```
+
 이런 방식으로 설계 일관성을 유지할 수 있으며, 실수가 생길 여지를 줄일 수 있습니다.
 
 <br/>

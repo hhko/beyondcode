@@ -29,9 +29,6 @@ public sealed class DomainTypeRuleTests : ArchitectureTestBase
                 .AndShould().BeSealed()
                 .ToArchitectureRule(),
 
-            // private {생성자}()
-            Must.HaveConstructorAnyMatches(provider, Must.IsPrivateParameterlessConstructor),
-
             // private {생성자}
             Must.HaveConstructorAllMatches(provider, Must.IsPrivateConstructor),
 
