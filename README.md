@@ -132,13 +132,6 @@ public sealed class NonZeroInt    // 도메인 언어(Ubiquitous Language)
   : IEquatable<NonZeroInt>
   , IValueObject
 {
-  private int Value { get; init; }
-
-  private NonZeroInt(int value)
-  {
-    Value = value;
-  }
-
   public static Fin<NonZeroInt8> Create(int value)    // SRP(객체 생성)
   {
     return Validate(value)
@@ -172,15 +165,15 @@ public sealed class NonZeroInt    // 도메인 언어(Ubiquitous Language)
   - 이로 인해 에러의 존재가 타입에 명시적으로 드러나며, 호출자 측에서도 이를 컴파일 타임에 인지하고 대응할 수 있습니다.
 
 #### 목차
-- [x] 1. 기본 구현: Divide
-- [x] 2. 출력 개선: 예외
-- [x] 3. 출력 개선: Error 값
-- [x] 4. 입력 개선: NonZeroInt 값 객체 생성 (Always Valid: Create)
-- [x] 5. 입력 개선: NonZeroInt 값 은닉 (Information Hiding: operator loading)
-- [x] 6. 입력 개선: NonZeroInt 값 비교 (동등성: Equality)
-- [x] 7. 입력 개선: NonZeroInt 값 객체 SRP (Create, Validate, Error)
-- [x] 8. 타입 테스트: NonZeroInt 아키텍처 테스트
-- [ ] 9. 통합 구현: WebApi
+- [x] 1. [시작은 단순한 나눗셈에서](./02-labs/DDD/01_DomainTypes_ValueObjects/README.md#1-시작은-단순한-나눗셈에서)
+- [x] 2. [예외를 예방하려는 우리의 첫 시도](./02-labs/DDD/01_DomainTypes_ValueObjects/README.md#2-예외를-예방하려는-우리의-첫-시도)
+- [x] 3. [실패도 값이다](./02-labs/DDD/01_DomainTypes_ValueObjects/README.md#3-실패도-값이다)
+- [x] 4. [그 값이 문제라면, 애초에 들어오지 못하게 하자 (Always Valid)](./02-labs/DDD/01_DomainTypes_ValueObjects/README.md#4-그-값이-문제라면-애초에-들어오지-못하게-하자-always-valid)
+- [x] 5. [코드의 표현력을 더 풍부하게 (연산자 오버로딩)](./02-labs/DDD/01_DomainTypes_ValueObjects/README.md#5-코드의-표현력을-더-풍부하게-연산자-오버로딩)
+- [x] 6. [값이 같다면 객체도 같아야 한다 (값의 동등성)](./02-labs/DDD/01_DomainTypes_ValueObjects/README.md#6-값이-같다면-객체도-같아야-한다-값의-동등성)
+- [x] 7. [객체의 책임을 분리하자 (단일 책임 원칙: SRP)](./02-labs/DDD/01_DomainTypes_ValueObjects/README.md#7-객체의-책임을-분리하자-단일-책임-원칙-srp)
+- [x] 8. [설계 규칙을 자동으로 검증하기](./02-labs/DDD/01_DomainTypes_ValueObjects/README.md#8-설계-규칙을-자동으로-검증하기)
+- [x] 9. [타입으로 말하는 도메인](./02-labs/DDD/01_DomainTypes_ValueObjects/README.md#9-타입으로-말하는-도메인)
 
 ### 도메인 타입 (엔티티)
 - TODO
@@ -188,13 +181,13 @@ public sealed class NonZeroInt    // 도메인 언어(Ubiquitous Language)
 ### 프로젝트 DddGym
 "[Getting Started: Domain-Driven Design](https://dometrain.com/course/getting-started-domain-driven-design-ddd/?ref=dometrain-github&promo=getting-started-domain-driven-design)" 강의 예제를 Functional 도메인 주도 설계와 아키텍처로 재구성하는 글입니다.
 
-- **Part 1. Hexagonal 아키텍처 (도메인 레이어)**
+- **Part 1. Hexagonal 아키텍처 (도메인 레이어: 도메인 타입)**
   - [ ] Chapter 01. 도메인 탐험
   - [ ] Chapter 02. 도메인 구조화
   - [ ] Chapter 03. 도메인 함수형화
   - [ ] Chapter 04. 도메인 Entity Id 소스 생성기
   - [ ] Chapter 05. 도메인 시나리오 테스트 (BDD: Cucumber)
-- **Part 2. Hexagonal 아키텍처 (애플리케이션 레이어)**
+- **Part 2. Hexagonal 아키텍처 (애플리케이션 레이어: 유스케이스)**
   - [ ] Chapter 06. 유스케이스 CQRS & Event
   - [ ] Chapter 07. 유스케이스 미들웨어
   - [ ] Chapter 08. 유스케이스 시나리오 테스트 (BDD: Cucumber)
@@ -216,3 +209,7 @@ public sealed class NonZeroInt    // 도메인 언어(Ubiquitous Language)
   - [ ] Chapter 21. OpenSearch (Observability 시스템)
   - [ ] Chapter 22. Ansible (Infrastructure as Code)
   - [ ] Chapter 23. Backstage (Building Developer Portals)
+
+### 프로젝트 eShop
+- "[eShop](https://github.com/dotnet/eShop)"을 Functional 도메인 주도 설계와 아키텍처로 재구성하는 글입니다.
+- TODO
