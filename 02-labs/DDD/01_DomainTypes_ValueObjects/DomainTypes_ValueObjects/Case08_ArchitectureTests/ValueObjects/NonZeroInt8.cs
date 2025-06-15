@@ -19,15 +19,6 @@ public sealed class NonZeroInt8
 
     }
 
-    // 개선 전
-    //public static Fin<NonZeroInt> Create(int value) =>
-    //    value == 0
-    //        ? Error.New("0은 허용되지 않습니다")
-    //        : new NonZeroInt(value);
-
-    // 개선 후
-    //  - 유효성 검사: Validate
-    //  - 값 객체 생성: Create
     public static Fin<NonZeroInt8> Create(int value)
     {
         return Validate(value)
@@ -36,8 +27,7 @@ public sealed class NonZeroInt8
 
     public static Error Validate(int value)
     {
-        return Error
-            .Empty
+        return Error.Empty
             .If(value == 0, NonZeroInt8Errors.Invalid());
     }
 

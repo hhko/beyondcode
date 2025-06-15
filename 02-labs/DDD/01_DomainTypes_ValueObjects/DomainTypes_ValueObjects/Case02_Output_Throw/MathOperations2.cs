@@ -1,6 +1,6 @@
 ﻿namespace DomainTypes_ValueObjects.Case02_Output_Throw;
 
-// Case 2. 출력 개선: 명시적 예외로 출력
+// Case 2. 출력 개선: 예외
 internal class MathOperations2
 {
     public int Divide(int numerator, int denominator)

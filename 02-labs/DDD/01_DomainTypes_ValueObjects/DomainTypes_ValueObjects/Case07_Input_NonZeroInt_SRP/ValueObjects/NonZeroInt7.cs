@@ -23,17 +23,16 @@ public readonly partial struct NonZeroInt7
     // 개선 후
     //  - 유효성 검사: Validate
     //  - 값 객체 생성: Create
-    public static Fin<NonZeroInt7> Create(int value)
+    public static Fin<NonZeroInt7> Create(int value)        // SRP: 객체 생성
     {
         return Validate(value)
             .CreateValueObject(() => new NonZeroInt7(value));
     }
 
-    public static Error Validate(int value)
+    public static Error Validate(int value)                 // SRP: 유소성 검사
     {
-        return Error
-            .Empty
-            .If(value == 0, NonZeroInt7Errors.Invalid());
+        return Error.Empty
+            .If(value == 0, NonZeroInt7Errors.Invalid());   // SRP: 유효성 검사 규칙
     }
 
     public static explicit operator int(NonZeroInt7 x) =>

@@ -1,6 +1,7 @@
 ﻿namespace DomainTypes_ValueObjects.Case06_Input_NonZeroInt_Equality.ValueObjects;
 
-public readonly struct NonZeroInt6 : IEquatable<NonZeroInt6>
+public readonly struct NonZeroInt6
+    : IEquatable<NonZeroInt6>
 {
     private int Value { get; init; }
 

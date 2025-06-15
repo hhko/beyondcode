@@ -139,17 +139,16 @@ public sealed class NonZeroInt    // 도메인 언어(Ubiquitous Language)
     Value = value;
   }
 
-  public static Fin<NonZeroInt8> Create(int value)
+  public static Fin<NonZeroInt8> Create(int value)    // SRP(객체 생성)
   {
     return Validate(value)
       .CreateValueObject(() => new NonZeroInt8(value));
   }
 
-  public static Error Validate(int value)
+  public static Error Validate(int value)             // SRP(유효성 검사)
   {
-    return Error
-      .Empty
-      .If(value == 0, NonZeroInt8Errors.Invalid());
+    return Error.Empty
+      .If(value == 0, NonZeroInt8Errors.Invalid());   // SRP(유효성 검사 규칙)
   }
 
   public static explicit operator int(NonZeroInt8 x) =>
